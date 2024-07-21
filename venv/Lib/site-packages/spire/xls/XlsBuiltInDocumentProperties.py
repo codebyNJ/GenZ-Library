@@ -1,0 +1,639 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsBuiltInDocumentProperties (  CollectionBase[DocumentProperty], IBuiltInDocumentProperties) :
+    """
+
+    """
+    @dispatch
+
+    def get_Item(self ,index:BuiltInPropertyType)->IDocumentProperty:
+        """
+
+        """
+        enumindex:c_int = index.value
+
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_Item, self.Ptr, enumindex)
+        ret = None if intPtr==None else DocumentProperty(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,iIndex:int)->IDocumentProperty:
+        """
+
+        """
+        
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_ItemI.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_ItemI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_ItemI, self.Ptr, iIndex)
+        ret = None if intPtr==None else DocumentProperty(intPtr)
+        return ret
+
+
+
+    def Contains(self ,index:'BuiltInPropertyType')->bool:
+        """
+    <summary>
+        Indicates whether collection contains specified property.
+    </summary>
+    <param name="index">Property id.</param>
+    <returns>True if collection contains specified property.</returns>
+        """
+        enumindex:c_int = index.value
+
+        GetDllLibXls().XlsBuiltInDocumentProperties_Contains.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsBuiltInDocumentProperties_Contains.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_Contains, self.Ptr, enumindex)
+        return ret
+
+    @property
+
+    def Title(self)->str:
+        """
+    <summary>
+        Gets/Sets title document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Title.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Title.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_Title, self.Ptr))
+        return ret
+
+
+    @Title.setter
+    def Title(self, value:str):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_Title.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_Title, self.Ptr, value)
+
+    @property
+
+    def DocumentVersion(self)->str:
+        """
+    <summary>
+        Gets/Sets version of the file.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_DocumentVersion.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_DocumentVersion.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_DocumentVersion, self.Ptr))
+        return ret
+
+
+    @DocumentVersion.setter
+    def DocumentVersion(self, value:str):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_DocumentVersion.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_DocumentVersion, self.Ptr, value)
+
+    @property
+    def Version(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Version.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Version.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_Version, self.Ptr)
+        return ret
+
+    @Version.setter
+    def Version(self, value:int):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_Version.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_Version, self.Ptr, value)
+
+    @property
+
+    def Subject(self)->str:
+        """
+    <summary>
+        Gets/Sets subject document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Subject.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Subject.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_Subject, self.Ptr))
+        return ret
+
+
+    @Subject.setter
+    def Subject(self, value:str):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_Subject.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_Subject, self.Ptr, value)
+
+    @property
+
+    def Author(self)->str:
+        """
+    <summary>
+        Gets/Sets author document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Author.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Author.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_Author, self.Ptr))
+        return ret
+
+
+    @Author.setter
+    def Author(self, value:str):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_Author.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_Author, self.Ptr, value)
+
+    @property
+
+    def Keywords(self)->str:
+        """
+    <summary>
+        Gets/Sets keywords document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Keywords.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Keywords.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_Keywords, self.Ptr))
+        return ret
+
+
+    @Keywords.setter
+    def Keywords(self, value:str):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_Keywords.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_Keywords, self.Ptr, value)
+
+    @property
+
+    def Comments(self)->str:
+        """
+    <summary>
+        Gets/Sets comments document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Comments.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Comments.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_Comments, self.Ptr))
+        return ret
+
+
+    @Comments.setter
+    def Comments(self, value:str):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_Comments.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_Comments, self.Ptr, value)
+
+    @property
+
+    def Template(self)->str:
+        """
+    <summary>
+        Gets/Sets template document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Template.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Template.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_Template, self.Ptr))
+        return ret
+
+
+    @Template.setter
+    def Template(self, value:str):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_Template.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_Template, self.Ptr, value)
+
+    @property
+
+    def LastAuthor(self)->str:
+        """
+    <summary>
+        Gets/Sets LastAuthor document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_LastAuthor.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_LastAuthor.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_LastAuthor, self.Ptr))
+        return ret
+
+
+    @LastAuthor.setter
+    def LastAuthor(self, value:str):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_LastAuthor.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_LastAuthor, self.Ptr, value)
+
+    @property
+
+    def RevisionNumber(self)->str:
+        """
+    <summary>
+        Gets/Sets revision number document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_RevisionNumber.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_RevisionNumber.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_RevisionNumber, self.Ptr))
+        return ret
+
+
+    @RevisionNumber.setter
+    def RevisionNumber(self, value:str):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_RevisionNumber.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_RevisionNumber, self.Ptr, value)
+
+    @property
+
+    def EditTime(self)->'TimeSpan':
+        """
+    <summary>
+        Gets/Sets EditTime document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_EditTime.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_EditTime.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_EditTime, self.Ptr)
+        ret = None if intPtr==None else TimeSpan(intPtr)
+        return ret
+
+
+    @EditTime.setter
+    def EditTime(self, value:'TimeSpan'):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_EditTime.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_EditTime, self.Ptr, value.Ptr)
+
+    @property
+
+    def LastPrinted(self)->'DateTime':
+        """
+    <summary>
+        Gets/Sets LastPrinted document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_LastPrinted.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_LastPrinted.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_LastPrinted, self.Ptr)
+        ret = None if intPtr==None else DateTime(intPtr)
+        return ret
+
+
+    @LastPrinted.setter
+    def LastPrinted(self, value:'DateTime'):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_LastPrinted.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_LastPrinted, self.Ptr, value.Ptr)
+
+    @property
+
+    def CreatedTime(self)->'DateTime':
+        """
+    <summary>
+        Gets/Sets CreationDate document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_CreatedTime.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_CreatedTime.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_CreatedTime, self.Ptr)
+        ret = None if intPtr==None else DateTime(intPtr)
+        return ret
+
+
+    @CreatedTime.setter
+    def CreatedTime(self, value:'DateTime'):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_CreatedTime.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_CreatedTime, self.Ptr, value.Ptr)
+
+    @property
+
+    def LastSaveTime(self)->'DateTime':
+        """
+    <summary>
+        Gets/Sets LastSaveDate document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_LastSaveTime.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_LastSaveTime.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_LastSaveTime, self.Ptr)
+        ret = None if intPtr==None else DateTime(intPtr)
+        return ret
+
+
+    @LastSaveTime.setter
+    def LastSaveTime(self, value:'DateTime'):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_LastSaveTime.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_LastSaveTime, self.Ptr, value.Ptr)
+
+    @property
+    def PageCount(self)->int:
+        """
+    <summary>
+        Gets/Sets PageCount document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_PageCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_PageCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_PageCount, self.Ptr)
+        return ret
+
+    @PageCount.setter
+    def PageCount(self, value:int):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_PageCount.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_PageCount, self.Ptr, value)
+
+    @property
+    def WordCount(self)->int:
+        """
+    <summary>
+        Gets/Sets WordCount document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_WordCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_WordCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_WordCount, self.Ptr)
+        return ret
+
+    @WordCount.setter
+    def WordCount(self, value:int):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_WordCount.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_WordCount, self.Ptr, value)
+
+    @property
+    def Characters(self)->int:
+        """
+    <summary>
+        Gets/Sets CharCount document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Characters.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Characters.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_Characters, self.Ptr)
+        return ret
+
+    @Characters.setter
+    def Characters(self, value:int):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_Characters.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_Characters, self.Ptr, value)
+
+    @property
+
+    def ApplicationName(self)->str:
+        """
+    <summary>
+        Gets/Sets ApplicationName document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_ApplicationName.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_ApplicationName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_ApplicationName, self.Ptr))
+        return ret
+
+
+    @ApplicationName.setter
+    def ApplicationName(self, value:str):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_ApplicationName.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_ApplicationName, self.Ptr, value)
+
+    @property
+    def Security(self)->int:
+        """
+    <summary>
+        Gets/Sets Security document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Security.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Security.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_Security, self.Ptr)
+        return ret
+
+    @Security.setter
+    def Security(self, value:int):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_Security.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_Security, self.Ptr, value)
+
+    @property
+
+    def Category(self)->str:
+        """
+    <summary>
+        Gets/Sets Category document proerty.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Category.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Category.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_Category, self.Ptr))
+        return ret
+
+
+    @Category.setter
+    def Category(self, value:str):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_Category.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_Category, self.Ptr, value)
+
+    @property
+
+    def PresentationTarget(self)->str:
+        """
+    <summary>
+        Gets/Sets Target format document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_PresentationTarget.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_PresentationTarget.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_PresentationTarget, self.Ptr))
+        return ret
+
+
+    @PresentationTarget.setter
+    def PresentationTarget(self, value:str):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_PresentationTarget.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_PresentationTarget, self.Ptr, value)
+
+    @property
+    def Bytes(self)->int:
+        """
+    <summary>
+        Gets/Sets ByteCount document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Bytes.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Bytes.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_Bytes, self.Ptr)
+        return ret
+
+    @Bytes.setter
+    def Bytes(self, value:int):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_Bytes.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_Bytes, self.Ptr, value)
+
+    @property
+    def LineCount(self)->int:
+        """
+    <summary>
+        Gets/Sets LineCount document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_LineCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_LineCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_LineCount, self.Ptr)
+        return ret
+
+    @LineCount.setter
+    def LineCount(self, value:int):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_LineCount.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_LineCount, self.Ptr, value)
+
+    @property
+    def ParagraphCount(self)->int:
+        """
+    <summary>
+        Gets/Sets ParagrahpCount document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_ParagraphCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_ParagraphCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_ParagraphCount, self.Ptr)
+        return ret
+
+    @ParagraphCount.setter
+    def ParagraphCount(self, value:int):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_ParagraphCount.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_ParagraphCount, self.Ptr, value)
+
+    @property
+    def SlideCount(self)->int:
+        """
+    <summary>
+        Gets/Sets SlideCount document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_SlideCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_SlideCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_SlideCount, self.Ptr)
+        return ret
+
+    @SlideCount.setter
+    def SlideCount(self, value:int):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_SlideCount.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_SlideCount, self.Ptr, value)
+
+    @property
+    def NoteCount(self)->int:
+        """
+    <summary>
+        Gets/Sets NoteCount document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_NoteCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_NoteCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_NoteCount, self.Ptr)
+        return ret
+
+    @NoteCount.setter
+    def NoteCount(self, value:int):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_NoteCount.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_NoteCount, self.Ptr, value)
+
+    @property
+    def HiddenCount(self)->int:
+        """
+    <summary>
+        Gets/Sets HiddenCount document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_HiddenCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_HiddenCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_HiddenCount, self.Ptr)
+        return ret
+
+    @HiddenCount.setter
+    def HiddenCount(self, value:int):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_HiddenCount.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_HiddenCount, self.Ptr, value)
+
+    @property
+    def MultimediaClipCount(self)->int:
+        """
+    <summary>
+        Gets/Sets MmclipCount document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_MultimediaClipCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_MultimediaClipCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_MultimediaClipCount, self.Ptr)
+        return ret
+
+    @MultimediaClipCount.setter
+    def MultimediaClipCount(self, value:int):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_MultimediaClipCount.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_MultimediaClipCount, self.Ptr, value)
+
+    @property
+    def ScaleCrop(self)->bool:
+        """
+    <summary>
+        Gets/Sets SacleCrop document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_ScaleCrop.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_ScaleCrop.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_ScaleCrop, self.Ptr)
+        return ret
+
+    @ScaleCrop.setter
+    def ScaleCrop(self, value:bool):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_ScaleCrop.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_ScaleCrop, self.Ptr, value)
+
+    @property
+
+    def Manager(self)->str:
+        """
+    <summary>
+        Gets/Sets Manager document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Manager.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Manager.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_Manager, self.Ptr))
+        return ret
+
+
+    @Manager.setter
+    def Manager(self, value:str):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_Manager.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_Manager, self.Ptr, value)
+
+    @property
+
+    def Company(self)->str:
+        """
+    <summary>
+        Gets/Sets Company document property.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Company.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_Company.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_Company, self.Ptr))
+        return ret
+
+
+    @Company.setter
+    def Company(self, value:str):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_Company.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_Company, self.Ptr, value)
+
+    @property
+    def LinksDirty(self)->bool:
+        """
+    <summary>
+        Indicate whether the custom links are hampered.
+    </summary>
+        """
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_LinksDirty.argtypes=[c_void_p]
+        GetDllLibXls().XlsBuiltInDocumentProperties_get_LinksDirty.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_get_LinksDirty, self.Ptr)
+        return ret
+
+    @LinksDirty.setter
+    def LinksDirty(self, value:bool):
+        GetDllLibXls().XlsBuiltInDocumentProperties_set_LinksDirty.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsBuiltInDocumentProperties_set_LinksDirty, self.Ptr, value)
+

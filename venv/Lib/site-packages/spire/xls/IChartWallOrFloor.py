@@ -1,0 +1,32 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IChartWallOrFloor (  IChartFillBorder) :
+    """
+    <summary>
+        Interface that represents chart wall or floor.
+    </summary>
+    """
+    @property
+
+    @abc.abstractmethod
+    def Border(self)->'ChartBorder':
+        """
+
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Delete(self):
+        """
+
+        """
+        pass
+
+

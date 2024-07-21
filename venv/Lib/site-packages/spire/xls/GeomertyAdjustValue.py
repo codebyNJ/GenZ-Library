@@ -1,0 +1,63 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class GeomertyAdjustValue (SpireObject) :
+    """
+
+    """
+    @property
+
+    def Name(self)->str:
+        """
+
+        """
+        GetDllLibXls().GeomertyAdjustValue_get_Name.argtypes=[c_void_p]
+        GetDllLibXls().GeomertyAdjustValue_get_Name.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().GeomertyAdjustValue_get_Name, self.Ptr))
+        return ret
+
+
+    @property
+
+    def Formula(self)->str:
+        """
+
+        """
+        GetDllLibXls().GeomertyAdjustValue_get_Formula.argtypes=[c_void_p]
+        GetDllLibXls().GeomertyAdjustValue_get_Formula.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().GeomertyAdjustValue_get_Formula, self.Ptr))
+        return ret
+
+
+
+    def SetFormulaParameter(self ,args:List[float]):
+        """
+
+        """
+        #arrayargs:ArrayTypeargs = ""
+        countargs = len(args)
+        ArrayTypeargs = c_double * countargs
+        arrayargs = ArrayTypeargs()
+        for i in range(0, countargs):
+            arrayargs[i] = args[i]
+
+
+        GetDllLibXls().GeomertyAdjustValue_SetFormulaParameter.argtypes=[c_void_p ,ArrayTypeargs,c_int]
+        CallCFunction(GetDllLibXls().GeomertyAdjustValue_SetFormulaParameter, self.Ptr, arrayargs,countargs)
+
+
+    def FormulaType(self)->'GeomertyAdjustValueFormulaType':
+        """
+
+        """
+        GetDllLibXls().GeomertyAdjustValue_FormulaType.argtypes=[c_void_p]
+        GetDllLibXls().GeomertyAdjustValue_FormulaType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().GeomertyAdjustValue_FormulaType, self.Ptr)
+        objwraped = GeomertyAdjustValueFormulaType(ret)
+        return objwraped
+

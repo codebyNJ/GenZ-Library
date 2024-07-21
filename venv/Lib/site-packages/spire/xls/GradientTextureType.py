@@ -1,0 +1,40 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class GradientTextureType(Enum):
+    """
+    <summary>
+        Represents gradient texture.
+    </summary>
+    """
+    Newsprint = 13
+    Recycled_Paper = 14
+    Parchment = 15
+    Stationery = 16
+    GreenMarble = 9
+    WhiteMarble = 10
+    BrownMarble = 11
+    Granite = 12
+    BlueTissuePaper = 17
+    PinkTissuePaper = 18
+    PurpleMesh = 19
+    Bouquet = 20
+    Papyrus = 1
+    Canvas = 2
+    Denim = 3
+    WovenMat = 4
+    WaterDroplets = 5
+    PaperBag = 6
+    FishFossil = 7
+    Sand = 8
+    Cork = 21
+    Walnut = 22
+    Oak = 23
+    MediumWood = 24
+    UserDefined = -1
+

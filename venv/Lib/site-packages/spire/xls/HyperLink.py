@@ -1,0 +1,32 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class HyperLink (  XlsHyperLink) :
+    """
+
+    """
+    @property
+
+    def Range(self)->'CellRange':
+        """
+    <summary>
+        Returns a Range object that represents the range the specified hyperlink is attached to.
+    </summary>
+        """
+        GetDllLibXls().HyperLink_get_Range.argtypes=[c_void_p]
+        GetDllLibXls().HyperLink_get_Range.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().HyperLink_get_Range, self.Ptr)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @Range.setter
+    def Range(self, value:'CellRange'):
+        GetDllLibXls().HyperLink_set_Range.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().HyperLink_set_Range, self.Ptr, value.Ptr)
+

@@ -1,0 +1,19 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class TextVerticalValue(Enum):
+    """
+
+    """
+    Horizontal = 0
+    Vertical = 1
+    RotateAllText90 = 2
+    RotateAllText270 = 3
+    StackedLeftToRight = 4
+    StackedRightToLeft = 5
+

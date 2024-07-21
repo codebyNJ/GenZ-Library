@@ -1,0 +1,21 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class MsoPathType(Enum):
+    """
+
+    """
+    MsopathLineTo = 0
+    MsopathCurveTo = 1
+    MsopathMoveTo = 2
+    MsopathClose = 3
+    MsopathEnd = 4
+    MsopathEscape = 5
+    MsopathArcTo = 6
+    Unknown = 7
+

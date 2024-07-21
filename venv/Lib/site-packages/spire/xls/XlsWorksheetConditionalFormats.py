@@ -1,0 +1,215 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsWorksheetConditionalFormats (CollectionBase[XlsConditionalFormats],  SpireObject,ICloneParent, IConditionalFormatsCollection) :
+    """
+
+    """
+
+    def Find(self ,arrRanges:List['Rectangle'])->'XlsConditionalFormats':
+        """
+
+        """
+        #arrayarrRanges:ArrayTypearrRanges = ""
+        countarrRanges = len(arrRanges)
+        ArrayTypearrRanges = c_void_p * countarrRanges
+        arrayarrRanges = ArrayTypearrRanges()
+        for i in range(0, countarrRanges):
+            arrayarrRanges[i] = arrRanges[i].Ptr
+
+
+        GetDllLibXls().XlsWorksheetConditionalFormats_Find.argtypes=[c_void_p ,ArrayTypearrRanges,c_int]
+        GetDllLibXls().XlsWorksheetConditionalFormats_Find.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetConditionalFormats_Find, self.Ptr, arrayarrRanges,countarrRanges)
+        ret = None if intPtr==None else XlsConditionalFormats(intPtr)
+        return ret
+
+
+
+
+    def FindAll(self ,arrRanges:List['Rectangle'])->List['XlsConditionalFormats']:
+        """
+
+        """
+        #arrayarrRanges:ArrayTypearrRanges = ""
+        countarrRanges = len(arrRanges)
+        ArrayTypearrRanges = c_void_p * countarrRanges
+        arrayarrRanges = ArrayTypearrRanges()
+        for i in range(0, countarrRanges):
+            arrayarrRanges[i] = arrRanges[i].Ptr
+
+
+        GetDllLibXls().XlsWorksheetConditionalFormats_FindAll.argtypes=[c_void_p ,ArrayTypearrRanges,c_int]
+        GetDllLibXls().XlsWorksheetConditionalFormats_FindAll.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().XlsWorksheetConditionalFormats_FindAll, self.Ptr, arrayarrRanges,countarrRanges)
+        ret = GetObjVectorFromArray(intPtrArray, XlsConditionalFormats)
+        return ret
+
+
+
+    def Contains(self ,formats:'XlsConditionalFormats')->'XlsConditionalFormats':
+        """
+
+        """
+        intPtrformats:c_void_p = formats.Ptr
+
+        GetDllLibXls().XlsWorksheetConditionalFormats_Contains.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorksheetConditionalFormats_Contains.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetConditionalFormats_Contains, self.Ptr, intPtrformats)
+        ret = None if intPtr==None else XlsConditionalFormats(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self)->XlsConditionalFormats:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheetConditionalFormats_Add.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheetConditionalFormats_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetConditionalFormats_Add, self.Ptr)
+        ret = None if intPtr==None else XlsConditionalFormats(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,formats:XlsConditionalFormats)->XlsConditionalFormats:
+        """
+
+        """
+        intPtrformats:c_void_p = formats.Ptr
+
+        GetDllLibXls().XlsWorksheetConditionalFormats_AddF.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorksheetConditionalFormats_AddF.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetConditionalFormats_AddF, self.Ptr, intPtrformats)
+        ret = None if intPtr==None else XlsConditionalFormats(intPtr)
+        return ret
+
+
+#
+#    def Remove(self ,arrRanges:'Rectangle[]'):
+#        """
+#
+#        """
+#        #arrayarrRanges:ArrayTypearrRanges = ""
+#        countarrRanges = len(arrRanges)
+#        ArrayTypearrRanges = c_void_p * countarrRanges
+#        arrayarrRanges = ArrayTypearrRanges()
+#        for i in range(0, countarrRanges):
+#            arrayarrRanges[i] = arrRanges[i].Ptr
+#
+#
+#        GetDllLibXls().XlsWorksheetConditionalFormats_Remove.argtypes=[c_void_p ,ArrayTypearrRanges]
+#        CallCFunction(GetDllLibXls().XlsWorksheetConditionalFormats_Remove, self.Ptr, arrayarrRanges)
+
+
+
+    def CopyFrom(self ,srcFormats:'XlsWorksheetConditionalFormats'):
+        """
+
+        """
+        intPtrsrcFormats:c_void_p = srcFormats.Ptr
+
+        GetDllLibXls().XlsWorksheetConditionalFormats_CopyFrom.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheetConditionalFormats_CopyFrom, self.Ptr, intPtrsrcFormats)
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsWorksheetConditionalFormats_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorksheetConditionalFormats_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetConditionalFormats_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+
+    def RemoveAt(self ,index:int):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheetConditionalFormats_RemoveAt.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheetConditionalFormats_RemoveAt, self.Ptr, index)
+
+
+    def GetByIndex(self ,index:int)->'XlsConditionalFormats':
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheetConditionalFormats_GetByIndex.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorksheetConditionalFormats_GetByIndex.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetConditionalFormats_GetByIndex, self.Ptr, index)
+        ret = None if intPtr==None else XlsConditionalFormats(intPtr)
+        return ret
+
+
+
+    def get_Item(self ,fieldIndex:int)->'XlsConditionalFormats':
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheetConditionalFormats_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorksheetConditionalFormats_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetConditionalFormats_get_Item, self.Ptr, fieldIndex)
+        ret = None if intPtr==None else XlsConditionalFormats(intPtr)
+        return ret
+
+
+
+    def GetEnumerator(self)->'IEnumerator':
+        """
+
+        """
+        GetDllLibXls().XlsWorksheetConditionalFormats_GetEnumerator.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheetConditionalFormats_GetEnumerator.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetConditionalFormats_GetEnumerator, self.Ptr)
+        ret = None if intPtr==None else IEnumerator(intPtr)
+        return ret
+
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().XlsWorksheetConditionalFormats_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheetConditionalFormats_Clear, self.Ptr)
+
+    @property
+    def Capacity(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheetConditionalFormats_get_Capacity.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheetConditionalFormats_get_Capacity.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheetConditionalFormats_get_Capacity, self.Ptr)
+        return ret
+
+    @Capacity.setter
+    def Capacity(self, value:int):
+        GetDllLibXls().XlsWorksheetConditionalFormats_set_Capacity.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheetConditionalFormats_set_Capacity, self.Ptr, value)
+
+    @property
+    def Count(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheetConditionalFormats_get_Count.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheetConditionalFormats_get_Count.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheetConditionalFormats_get_Count, self.Ptr)
+        return ret
+

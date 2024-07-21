@@ -1,0 +1,105 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IRadioButton (  IShape, IExcelApplication) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def CheckState(self)->'CheckState':
+        """
+
+        """
+        pass
+
+
+    @CheckState.setter
+    @abc.abstractmethod
+    def CheckState(self, value:'CheckState'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsFirstButton(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Display3DShading(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @Display3DShading.setter
+    @abc.abstractmethod
+    def Display3DShading(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Line(self)->'IShapeLineFormat':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Text(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Text.setter
+    @abc.abstractmethod
+    def Text(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsTextLocked(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsTextLocked.setter
+    @abc.abstractmethod
+    def IsTextLocked(self, value:bool):
+        """
+
+        """
+        pass
+
+

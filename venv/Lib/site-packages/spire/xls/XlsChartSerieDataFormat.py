@@ -1,0 +1,1008 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from spire.xls.ChartBorder import *
+from ctypes import *
+import abc
+
+class XlsChartSerieDataFormat (  XlsObject, IChartSerieDataFormat, IChartFillBorder) :
+    """
+
+    """
+    @property
+    def ShowMeanMarkers(self)->bool:
+        """
+    <summary>
+        Gets or sets a boolean value indicating whether to display
+            Mean Marker in Box and Whisker chart
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowMeanMarkers.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowMeanMarkers.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_ShowMeanMarkers, self.Ptr)
+        return ret
+
+    @ShowMeanMarkers.setter
+    def ShowMeanMarkers(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_ShowMeanMarkers.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_ShowMeanMarkers, self.Ptr, value)
+
+    @property
+    def ShowInnerPoints(self)->bool:
+        """
+    <summary>
+        Gets or sets a boolean value indicating whether to display
+            Inner Points in Box and Whisker chart
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowInnerPoints.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowInnerPoints.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_ShowInnerPoints, self.Ptr)
+        return ret
+
+    @ShowInnerPoints.setter
+    def ShowInnerPoints(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_ShowInnerPoints.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_ShowInnerPoints, self.Ptr, value)
+
+    @property
+    def ShowOutlierPoints(self)->bool:
+        """
+    <summary>
+        Gets or sets a boolean value indicating whether to display
+            Outlier Points in Box and Whisker chart
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowOutlierPoints.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowOutlierPoints.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_ShowOutlierPoints, self.Ptr)
+        return ret
+
+    @ShowOutlierPoints.setter
+    def ShowOutlierPoints(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_ShowOutlierPoints.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_ShowOutlierPoints, self.Ptr, value)
+
+    @property
+
+    def QuartileCalculationType(self)->'ExcelQuartileCalculation':
+        """
+    <summary>
+         Gets / Sets whether the Quartile calculation is Exclusive or Inclusive
+    </summary>
+<remarks>Applies only to Box and Whisker Charts</remarks>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_QuartileCalculationType.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_QuartileCalculationType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_QuartileCalculationType, self.Ptr)
+        objwraped = ExcelQuartileCalculation(ret)
+        return objwraped
+
+    @QuartileCalculationType.setter
+    def QuartileCalculationType(self, value:'ExcelQuartileCalculation'):
+        GetDllLibXls().XlsChartSerieDataFormat_set_QuartileCalculationType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_QuartileCalculationType, self.Ptr, value.value)
+
+    @property
+
+    def MarkerBackColorObject(self)->'OColor':
+        """
+    <summary>
+        Gets object that holds marker background color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerBackColorObject.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerBackColorObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_MarkerBackColorObject, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def MarkerForeColorObject(self)->'OColor':
+        """
+    <summary>
+        Gets object that holds marker foreground color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerForeColorObject.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerForeColorObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_MarkerForeColorObject, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def AreaProperties(self)->'IChartInterior':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_AreaProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_AreaProperties.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_AreaProperties, self.Ptr)
+        ret = None if intPtr==None else IChartInterior(intPtr)
+        return ret
+
+
+    @property
+
+    def BarType(self)->'BaseFormatType':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_BarType.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_BarType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_BarType, self.Ptr)
+        objwraped = BaseFormatType(ret)
+        return objwraped
+
+    @BarType.setter
+    def BarType(self, value:'BaseFormatType'):
+        GetDllLibXls().XlsChartSerieDataFormat_set_BarType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_BarType, self.Ptr, value.value)
+
+    @property
+
+    def BarTopType(self)->'TopFormatType':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_BarTopType.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_BarTopType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_BarTopType, self.Ptr)
+        objwraped = TopFormatType(ret)
+        return objwraped
+
+    @BarTopType.setter
+    def BarTopType(self, value:'TopFormatType'):
+        GetDllLibXls().XlsChartSerieDataFormat_set_BarTopType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_BarTopType, self.Ptr, value.value)
+
+    @property
+
+    def MarkerBackgroundColor(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerBackgroundColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerBackgroundColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_MarkerBackgroundColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @MarkerBackgroundColor.setter
+    def MarkerBackgroundColor(self, value:'Color'):
+        GetDllLibXls().XlsChartSerieDataFormat_set_MarkerBackgroundColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_MarkerBackgroundColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def MarkerForegroundColor(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerForegroundColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerForegroundColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_MarkerForegroundColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @MarkerForegroundColor.setter
+    def MarkerForegroundColor(self, value:'Color'):
+        GetDllLibXls().XlsChartSerieDataFormat_set_MarkerForegroundColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_MarkerForegroundColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def MarkerStyle(self)->'ChartMarkerType':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerStyle.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerStyle.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_MarkerStyle, self.Ptr)
+        objwraped = ChartMarkerType(ret)
+        return objwraped
+
+    @MarkerStyle.setter
+    def MarkerStyle(self, value:'ChartMarkerType'):
+        GetDllLibXls().XlsChartSerieDataFormat_set_MarkerStyle.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_MarkerStyle, self.Ptr, value.value)
+
+    @property
+
+    def MarkerForegroundKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerForegroundKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerForegroundKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_MarkerForegroundKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @MarkerForegroundKnownColor.setter
+    def MarkerForegroundKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsChartSerieDataFormat_set_MarkerForegroundKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_MarkerForegroundKnownColor, self.Ptr, value.value)
+
+    @property
+
+    def MarkerBackgroundKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerBackgroundKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerBackgroundKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_MarkerBackgroundKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @MarkerBackgroundKnownColor.setter
+    def MarkerBackgroundKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsChartSerieDataFormat_set_MarkerBackgroundKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_MarkerBackgroundKnownColor, self.Ptr, value.value)
+
+    @property
+    def MarkerSize(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerSize.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerSize.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_MarkerSize, self.Ptr)
+        return ret
+
+    @MarkerSize.setter
+    def MarkerSize(self, value:int):
+        GetDllLibXls().XlsChartSerieDataFormat_set_MarkerSize.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_MarkerSize, self.Ptr, value)
+
+    @property
+    def IsAutoMarker(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsAutoMarker.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsAutoMarker.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_IsAutoMarker, self.Ptr)
+        return ret
+
+    @IsAutoMarker.setter
+    def IsAutoMarker(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_IsAutoMarker.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_IsAutoMarker, self.Ptr, value)
+
+    @property
+    def Percent(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_Percent.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_Percent.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_Percent, self.Ptr)
+        return ret
+
+    @Percent.setter
+    def Percent(self, value:int):
+        GetDllLibXls().XlsChartSerieDataFormat_set_Percent.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_Percent, self.Ptr, value)
+
+    @property
+    def Is3DBubbles(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_Is3DBubbles.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_Is3DBubbles.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_Is3DBubbles, self.Ptr)
+        return ret
+
+    @Is3DBubbles.setter
+    def Is3DBubbles(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_Is3DBubbles.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_Is3DBubbles, self.Ptr, value)
+
+    @property
+
+    def Options(self)->'IChartFormat':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_Options.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_Options.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_Options, self.Ptr)
+        ret = None if intPtr==None else XlsChartFormat(intPtr)
+        return ret
+
+
+    @property
+    def IsMarkerSupported(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsMarkerSupported.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsMarkerSupported.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_IsMarkerSupported, self.Ptr)
+        return ret
+
+    @property
+    def IsShadow(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsShadow.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsShadow.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_IsShadow, self.Ptr)
+        return ret
+
+    @IsShadow.setter
+    def IsShadow(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_IsShadow.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_IsShadow, self.Ptr, value)
+
+    @property
+    def IsShowBackground(self)->bool:
+        """
+    <summary>
+        True = "background = none".
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsShowBackground.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsShowBackground.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_IsShowBackground, self.Ptr)
+        return ret
+
+    @property
+    def IsShowForeground(self)->bool:
+        """
+    <summary>
+        True = "foreground = none".
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsShowForeground.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsShowForeground.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_IsShowForeground, self.Ptr)
+        return ret
+
+    @property
+    def IsSmoothed(self)->bool:
+        """
+    <summary>
+        If true - format has smothed line; otherwise false. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsSmoothed.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsSmoothed.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_IsSmoothed, self.Ptr)
+        return ret
+
+    @property
+    def IsSmoothedLine(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsSmoothedLine.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsSmoothedLine.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_IsSmoothedLine, self.Ptr)
+        return ret
+
+    @IsSmoothedLine.setter
+    def IsSmoothedLine(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_IsSmoothedLine.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_IsSmoothedLine, self.Ptr, value)
+
+    @property
+    def IsSupportFill(self)->bool:
+        """
+    <summary>
+        Indicats whether chart supports transparency.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsSupportFill.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsSupportFill.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_IsSupportFill, self.Ptr)
+        return ret
+
+    @property
+    def HasInterior(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_HasInterior.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_HasInterior.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_HasInterior, self.Ptr)
+        return ret
+
+    @property
+    def HasLineProperties(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_HasLineProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_HasLineProperties.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_HasLineProperties, self.Ptr)
+        return ret
+
+    @property
+    def HasFormat3D(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_HasFormat3D.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_HasFormat3D.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_HasFormat3D, self.Ptr)
+        return ret
+
+    @property
+    def HasShadow(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_HasShadow.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_HasShadow.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_HasShadow, self.Ptr)
+        return ret
+
+    @property
+
+    def LineProperties(self)->'ChartBorder':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_LineProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_LineProperties.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_LineProperties, self.Ptr)
+        ret = None if intPtr==None else ChartBorder(intPtr)
+        return ret
+
+
+    @property
+
+    def Interior(self)->'IChartInterior':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_Interior.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_Interior.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_Interior, self.Ptr)
+        ret = None if intPtr==None else IChartInterior(intPtr)
+        return ret
+
+
+    @property
+
+    def Fill(self)->'IShapeFill':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_Fill.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_Fill.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_Fill, self.Ptr)
+        ret = None if intPtr==None else XlsShapeFill(intPtr)
+        return ret
+
+
+    @property
+
+    def MarkerFill(self)->'IShapeFill':
+        """
+    <summary>
+        Get fill object of the marker.
+            <example><para>The following code illustrates how to fill a marker . </para><code>
+        var markerFill = chart.Series[0].Format.MarkerFill;
+        //fill by defined Texture
+        markerFill.Texture = GradientTextureType.GreenMarble;
+        
+        //fill by defined Pattern
+        markerFill.Pattern = GradientPatternType.PatLargeCheckerBoard;
+        //Pattern need set fore/background color
+        markerFill.ForeColor = Color.Blue;
+        markerFill.BackColor = Color.Red;
+        //fill by a picture
+        markerFill.CustomPicture("type1.png")
+        //set transparency: value from 0.0 (Clear) through 1.0(Opaque)
+        markerFill.Transparency = 0.5;
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerFill.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerFill.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_MarkerFill, self.Ptr)
+        ret = None if intPtr==None else XlsShapeFill(intPtr)
+        return ret
+
+
+    @property
+
+    def Format3D(self)->'Format3D':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_Format3D.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_Format3D.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_Format3D, self.Ptr)
+        ret = None if intPtr==None else Format3D(intPtr)
+        return ret
+
+
+    @property
+
+    def Shadow(self)->'ChartShadow':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_Shadow.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_Shadow.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_Shadow, self.Ptr)
+        ret = None if intPtr==None else ChartShadow(intPtr)
+        return ret
+
+
+    @property
+
+    def ForeGroundColor(self)->'Color':
+        """
+    <summary>
+        Represents foreground color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_ForeGroundColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_ForeGroundColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_ForeGroundColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @ForeGroundColor.setter
+    def ForeGroundColor(self, value:'Color'):
+        GetDllLibXls().XlsChartSerieDataFormat_set_ForeGroundColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_ForeGroundColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def ForeGroundKnownColor(self)->'ExcelColors':
+        """
+    <summary>
+        Represents foreground color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_ForeGroundKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_ForeGroundKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_ForeGroundKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @ForeGroundKnownColor.setter
+    def ForeGroundKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsChartSerieDataFormat_set_ForeGroundKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_ForeGroundKnownColor, self.Ptr, value.value)
+
+    @property
+    def MarkerTransparencyValue(self)->float:
+        """
+    <summary>
+        Gets or sets the transparency of the line marker.
+    </summary>
+<value>The transparency.</value>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerTransparencyValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerTransparencyValue.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_MarkerTransparencyValue, self.Ptr)
+        return ret
+
+    @MarkerTransparencyValue.setter
+    def MarkerTransparencyValue(self, value:float):
+        GetDllLibXls().XlsChartSerieDataFormat_set_MarkerTransparencyValue.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_MarkerTransparencyValue, self.Ptr, value)
+
+    @property
+
+    def ForeGroundColorObject(self)->'OColor':
+        """
+    <summary>
+        Represents foreground color object.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_ForeGroundColorObject.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_ForeGroundColorObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_ForeGroundColorObject, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def BackGroundKnownColor(self)->'ExcelColors':
+        """
+    <summary>
+        Represents background excel color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_BackGroundKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_BackGroundKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_BackGroundKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @BackGroundKnownColor.setter
+    def BackGroundKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsChartSerieDataFormat_set_BackGroundKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_BackGroundKnownColor, self.Ptr, value.value)
+
+    @property
+
+    def BackGroundColor(self)->'Color':
+        """
+    <summary>
+        Represents background color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_BackGroundColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_BackGroundColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_BackGroundColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @BackGroundColor.setter
+    def BackGroundColor(self, value:'Color'):
+        GetDllLibXls().XlsChartSerieDataFormat_set_BackGroundColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_BackGroundColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def BackGroundColorObject(self)->'OColor':
+        """
+    <summary>
+        Represents background color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_BackGroundColorObject.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_BackGroundColorObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_BackGroundColorObject, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def Pattern(self)->'ExcelPatternType':
+        """
+    <summary>
+        Represents pattern.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_Pattern.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_Pattern.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_Pattern, self.Ptr)
+        objwraped = ExcelPatternType(ret)
+        return objwraped
+
+    @Pattern.setter
+    def Pattern(self, value:'ExcelPatternType'):
+        GetDllLibXls().XlsChartSerieDataFormat_set_Pattern.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_Pattern, self.Ptr, value.value)
+
+    @property
+    def IsAutomaticFormat(self)->bool:
+        """
+    <summary>
+        Indicates, if automatic format is used.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsAutomaticFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsAutomaticFormat.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_IsAutomaticFormat, self.Ptr)
+        return ret
+
+    @IsAutomaticFormat.setter
+    def IsAutomaticFormat(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_IsAutomaticFormat.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_IsAutomaticFormat, self.Ptr, value)
+
+    @property
+    def Visible(self)->bool:
+        """
+    <summary>
+        Represents visiblity.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_Visible.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_Visible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_Visible, self.Ptr)
+        return ret
+
+    @Visible.setter
+    def Visible(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_Visible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_Visible, self.Ptr, value)
+
+    @property
+    def ShowActiveValue(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowActiveValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowActiveValue.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_ShowActiveValue, self.Ptr)
+        return ret
+
+    @ShowActiveValue.setter
+    def ShowActiveValue(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_ShowActiveValue.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_ShowActiveValue, self.Ptr, value)
+
+    @property
+    def Has_dPtPieExplosion(self)->bool:
+        """
+    <summary>
+        Indicates whether dataformat has PieExplosion.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_Has_dPtPieExplosion.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_Has_dPtPieExplosion.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_Has_dPtPieExplosion, self.Ptr)
+        return ret
+
+    @Has_dPtPieExplosion.setter
+    def Has_dPtPieExplosion(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_Has_dPtPieExplosion.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_Has_dPtPieExplosion, self.Ptr, value)
+
+    @property
+    def HasBorder(self)->bool:
+        """
+    <summary>
+        Indicates whether chart has border.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_HasBorder.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_HasBorder.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_HasBorder, self.Ptr)
+        return ret
+
+    @property
+    def HasBorderLine(self)->bool:
+        """
+    <summary>
+        Indicates whethers chart has border line.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_HasBorderLine.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_HasBorderLine.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_HasBorderLine, self.Ptr)
+        return ret
+
+    @property
+    def IsBorderSupported(self)->bool:
+        """
+    <summary>
+        Indicates whether border object is supported. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsBorderSupported.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsBorderSupported.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_IsBorderSupported, self.Ptr)
+        return ret
+
+    @property
+    def IsFormatted(self)->bool:
+        """
+    <summary>
+        Indicate if data format is formatted.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsFormatted.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsFormatted.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_IsFormatted, self.Ptr)
+        return ret
+
+    @property
+    def IsInteriorSupported(self)->bool:
+        """
+    <summary>
+        Indicates whether interior object is supported. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsInteriorSupported.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsInteriorSupported.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_IsInteriorSupported, self.Ptr)
+        return ret
+
+    @property
+    def IsMarker(self)->bool:
+        """
+    <summary>
+        If true - format has marker; otherwise false. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsMarker.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_IsMarker.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_IsMarker, self.Ptr)
+        return ret
+
+    @property
+
+    def ParentSerie(self)->'XlsChartSerie':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_ParentSerie.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_ParentSerie.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_ParentSerie, self.Ptr)
+        ret = None if intPtr==None else XlsChartSerie(intPtr)
+        return ret
+
+
+    @property
+    def SeriesNumber(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_SeriesNumber.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_SeriesNumber.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_SeriesNumber, self.Ptr)
+        return ret
+
+    @SeriesNumber.setter
+    def SeriesNumber(self, value:int):
+        GetDllLibXls().XlsChartSerieDataFormat_set_SeriesNumber.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_SeriesNumber, self.Ptr, value)
+
+    @property
+    def ShowBubble(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowBubble.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowBubble.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_ShowBubble, self.Ptr)
+        return ret
+
+    @ShowBubble.setter
+    def ShowBubble(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_ShowBubble.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_ShowBubble, self.Ptr, value)
+
+    @property
+    def ShowCategoryLabel(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowCategoryLabel.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowCategoryLabel.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_ShowCategoryLabel, self.Ptr)
+        return ret
+
+    @ShowCategoryLabel.setter
+    def ShowCategoryLabel(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_ShowCategoryLabel.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_ShowCategoryLabel, self.Ptr, value)
+
+    @property
+    def ShowPieInPercents(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowPieInPercents.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowPieInPercents.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_ShowPieInPercents, self.Ptr)
+        return ret
+
+    @ShowPieInPercents.setter
+    def ShowPieInPercents(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_ShowPieInPercents.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_ShowPieInPercents, self.Ptr, value)
+
+    @property
+    def ShowPieCategoryLabel(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowPieCategoryLabel.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowPieCategoryLabel.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_ShowPieCategoryLabel, self.Ptr)
+        return ret
+
+    @ShowPieCategoryLabel.setter
+    def ShowPieCategoryLabel(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_ShowPieCategoryLabel.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_ShowPieCategoryLabel, self.Ptr, value)
+
+    @property
+    def SmoothLine(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_SmoothLine.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_SmoothLine.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_SmoothLine, self.Ptr)
+        return ret
+
+    @SmoothLine.setter
+    def SmoothLine(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_SmoothLine.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_SmoothLine, self.Ptr, value)
+
+    @property
+    def MarkerBorderWidth(self)->float:
+        """
+    <summary>
+        Marker border weight(unit pt).
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerBorderWidth.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_MarkerBorderWidth.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_MarkerBorderWidth, self.Ptr)
+        return ret
+
+    @MarkerBorderWidth.setter
+    def MarkerBorderWidth(self, value:float):
+        GetDllLibXls().XlsChartSerieDataFormat_set_MarkerBorderWidth.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_MarkerBorderWidth, self.Ptr, value)
+
+    @property
+    def ShowConnectorLines(self)->bool:
+        """
+    <summary>
+        Gets or sets a boolean value indicating whether to display 
+            Connector Lines between data points
+    </summary>
+<remarks>Applies only to Waterfall Charts</remarks>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowConnectorLines.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowConnectorLines.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_ShowConnectorLines, self.Ptr)
+        return ret
+
+    @ShowConnectorLines.setter
+    def ShowConnectorLines(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_ShowConnectorLines.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_ShowConnectorLines, self.Ptr, value)
+
+    @property
+
+    def TreeMapLabelOption(self)->'ExcelTreeMapLabelOption':
+        """
+    <summary>
+        Gets / Sets the Display label position in Tree map chart
+    </summary>
+<remarks>By Default the Label is overlapped</remarks>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_TreeMapLabelOption.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_TreeMapLabelOption.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_TreeMapLabelOption, self.Ptr)
+        objwraped = ExcelTreeMapLabelOption(ret)
+        return objwraped
+
+    @TreeMapLabelOption.setter
+    def TreeMapLabelOption(self, value:'ExcelTreeMapLabelOption'):
+        GetDllLibXls().XlsChartSerieDataFormat_set_TreeMapLabelOption.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_TreeMapLabelOption, self.Ptr, value.value)
+
+    @property
+    def ShowMeanLine(self)->bool:
+        """
+    <summary>
+        Gets or sets a boolean value indicating whether to display
+            Mean Line in Box and Whisker chart
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowMeanLine.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerieDataFormat_get_ShowMeanLine.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_get_ShowMeanLine, self.Ptr)
+        return ret
+
+    @ShowMeanLine.setter
+    def ShowMeanLine(self, value:bool):
+        GetDllLibXls().XlsChartSerieDataFormat_set_ShowMeanLine.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerieDataFormat_set_ShowMeanLine, self.Ptr, value)
+

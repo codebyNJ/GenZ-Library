@@ -1,0 +1,113 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IMarkersDesigner (abc.ABC) :
+    """
+
+    """
+    @dispatch
+    @abc.abstractmethod
+    def ApplyMarkers(self):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def ApplyMarkers(self ,action:UnknownVariableAction):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def AddVariable(self ,strName:str,variable:'SpireObject',rowCount:int):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def RemoveVariable(self ,strName:str):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def ContainsVariable(self ,strName:str)->bool:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def MarkerPrefix(self)->str:
+        """
+
+        """
+        pass
+
+
+    @MarkerPrefix.setter
+    @abc.abstractmethod
+    def MarkerPrefix(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ArgumentSeparator(self)->int:
+        """
+
+        """
+        pass
+
+
+    @ArgumentSeparator.setter
+    @abc.abstractmethod
+    def ArgumentSeparator(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsDetectDataTypes(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsDetectDataTypes.setter
+    @abc.abstractmethod
+    def IsDetectDataTypes(self, value:bool):
+        """
+
+        """
+        pass
+
+

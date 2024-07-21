@@ -1,0 +1,20 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ExcelSheetType(Enum):
+    """
+    <summary>
+        Sheet types.
+    </summary>
+    """
+    ChartSheet = 2
+    DialogSheet = 3
+    Excel4IntlMacroSheet = 4
+    Excel4MacroSheet = 5
+    NormalWorksheet = 0
+

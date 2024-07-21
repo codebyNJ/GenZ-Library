@@ -1,0 +1,530 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IExtendedFormat (  IExcelApplication) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def Borders(self)->'IBorders':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def FillPattern(self)->'ExcelPatternType':
+        """
+
+        """
+        pass
+
+
+    @FillPattern.setter
+    @abc.abstractmethod
+    def FillPattern(self, value:'ExcelPatternType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Font(self)->'IFont':
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def FormulaHidden(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @FormulaHidden.setter
+    @abc.abstractmethod
+    def FormulaHidden(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def HorizontalAlignment(self)->'HorizontalAlignType':
+        """
+
+        """
+        pass
+
+
+    @HorizontalAlignment.setter
+    @abc.abstractmethod
+    def HorizontalAlignment(self, value:'HorizontalAlignType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IncludeAlignment(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IncludeAlignment.setter
+    @abc.abstractmethod
+    def IncludeAlignment(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IncludeBorder(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IncludeBorder.setter
+    @abc.abstractmethod
+    def IncludeBorder(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IncludeFont(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IncludeFont.setter
+    @abc.abstractmethod
+    def IncludeFont(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IncludeNumberFormat(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IncludeNumberFormat.setter
+    @abc.abstractmethod
+    def IncludeNumberFormat(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IncludePatterns(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IncludePatterns.setter
+    @abc.abstractmethod
+    def IncludePatterns(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IncludeProtection(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IncludeProtection.setter
+    @abc.abstractmethod
+    def IncludeProtection(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IndentLevel(self)->int:
+        """
+
+        """
+        pass
+
+
+    @IndentLevel.setter
+    @abc.abstractmethod
+    def IndentLevel(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsFirstSymbolApostrophe(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsFirstSymbolApostrophe.setter
+    @abc.abstractmethod
+    def IsFirstSymbolApostrophe(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Locked(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @Locked.setter
+    @abc.abstractmethod
+    def Locked(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def JustifyLast(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @JustifyLast.setter
+    @abc.abstractmethod
+    def JustifyLast(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def NumberFormat(self)->str:
+        """
+
+        """
+        pass
+
+
+    @NumberFormat.setter
+    @abc.abstractmethod
+    def NumberFormat(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def NumberFormatIndex(self)->int:
+        """
+
+        """
+        pass
+
+
+    @NumberFormatIndex.setter
+    @abc.abstractmethod
+    def NumberFormatIndex(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def NumberFormatLocal(self)->str:
+        """
+
+        """
+        pass
+
+
+    @NumberFormatLocal.setter
+    @abc.abstractmethod
+    def NumberFormatLocal(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def NumberFormatSettings(self)->'INumberFormat':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ReadingOrder(self)->'ReadingOrderType':
+        """
+
+        """
+        pass
+
+
+    @ReadingOrder.setter
+    @abc.abstractmethod
+    def ReadingOrder(self, value:'ReadingOrderType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Rotation(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Rotation.setter
+    @abc.abstractmethod
+    def Rotation(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShrinkToFit(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShrinkToFit.setter
+    @abc.abstractmethod
+    def ShrinkToFit(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def VerticalAlignment(self)->'VerticalAlignType':
+        """
+
+        """
+        pass
+
+
+    @VerticalAlignment.setter
+    @abc.abstractmethod
+    def VerticalAlignment(self, value:'VerticalAlignType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def WrapText(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @WrapText.setter
+    @abc.abstractmethod
+    def WrapText(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PatternKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @PatternKnownColor.setter
+    @abc.abstractmethod
+    def PatternKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PatternColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @PatternColor.setter
+    @abc.abstractmethod
+    def PatternColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def KnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @KnownColor.setter
+    @abc.abstractmethod
+    def KnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Color(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @Color.setter
+    @abc.abstractmethod
+    def Color(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsModified(self)->bool:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetThemeColor(self ,type:'ThemeColorType',tint:float):
+        """
+
+        """
+        pass
+
+
+#
+#    @abc.abstractmethod
+#    def GetThemeColor(self ,type:'ThemeColorType&',tint:'Double&')->bool:
+#        """
+#
+#        """
+#        pass
+#
+
+

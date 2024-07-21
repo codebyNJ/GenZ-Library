@@ -1,0 +1,30 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class GeomertyAdjustValueFormulaType(Enum):
+    """
+
+    """
+    MultiplyDivide = 0
+    AddSubtract = 1
+    AddDivide = 2
+    IfElse = 3
+    AbsoluteValue = 4
+    ArcTanFormula = 5
+    CosineArcTan = 6
+    Cosine = 7
+    MaximumValue = 8
+    MinimumValue = 9
+    Modulo = 10
+    PinTo = 11
+    SineArcTan = 12
+    Sine = 13
+    SquareRoot = 14
+    Tangent = 15
+    LiteralValue = 16
+

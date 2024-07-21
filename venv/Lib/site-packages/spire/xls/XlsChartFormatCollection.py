@@ -1,0 +1,162 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsChartFormatCollection (  ICloneParent) :
+    """
+
+    """
+
+    def get_Item(self ,index:int)->'XlsChartFormat':
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartFormatCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsChartFormatCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFormatCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsChartFormat(intPtr)
+        return ret
+
+
+    @property
+    def IsPrimary(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartFormatCollection_get_IsPrimary.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFormatCollection_get_IsPrimary.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFormatCollection_get_IsPrimary, self.Ptr)
+        return ret
+
+    @property
+    def NeedSecondaryAxis(self)->bool:
+        """
+    <summary>
+        Returns true if this collection is primary and contain series that need
+            secondary axis.
+    </summary>
+        """
+        GetDllLibXls().XlsChartFormatCollection_get_NeedSecondaryAxis.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFormatCollection_get_NeedSecondaryAxis.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFormatCollection_get_NeedSecondaryAxis, self.Ptr)
+        return ret
+
+    @dispatch
+
+    def Add(self ,format:XlsChartFormat)->XlsChartFormat:
+        """
+
+        """
+        intPtrformat:c_void_p = format.Ptr
+
+        GetDllLibXls().XlsChartFormatCollection_Add.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsChartFormatCollection_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFormatCollection_Add, self.Ptr, intPtrformat)
+        ret = None if intPtr==None else XlsChartFormat(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,format:XlsChartFormat,bCanReplace:bool)->XlsChartFormat:
+        """
+
+        """
+        intPtrformat:c_void_p = format.Ptr
+
+        GetDllLibXls().XlsChartFormatCollection_AddFB.argtypes=[c_void_p ,c_void_p,c_bool]
+        GetDllLibXls().XlsChartFormatCollection_AddFB.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFormatCollection_AddFB, self.Ptr, intPtrformat,bCanReplace)
+        ret = None if intPtr==None else XlsChartFormat(intPtr)
+        return ret
+
+
+
+    def FindOrAdd(self ,formatToAdd:'XlsChartFormat')->'XlsChartFormat':
+        """
+
+        """
+        intPtrformatToAdd:c_void_p = formatToAdd.Ptr
+
+        GetDllLibXls().XlsChartFormatCollection_FindOrAdd.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsChartFormatCollection_FindOrAdd.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFormatCollection_FindOrAdd, self.Ptr, intPtrformatToAdd)
+        ret = None if intPtr==None else XlsChartFormat(intPtr)
+        return ret
+
+
+
+    def ContainsIndex(self ,index:int)->bool:
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartFormatCollection_ContainsIndex.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsChartFormatCollection_ContainsIndex.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFormatCollection_ContainsIndex, self.Ptr, index)
+        return ret
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsChartFormatCollection_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsChartFormatCollection_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFormatCollection_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+
+    def SetIndex(self ,index:int,Value:int):
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartFormatCollection_SetIndex.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsChartFormatCollection_SetIndex, self.Ptr, index,Value)
+
+
+    def UpdateIndexesAfterRemove(self ,removeIndex:int):
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartFormatCollection_UpdateIndexesAfterRemove.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsChartFormatCollection_UpdateIndexesAfterRemove, self.Ptr, removeIndex)
+
+
+    def UpdateSeriesByChartGroup(self ,newIndex:int,OldIndex:int):
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartFormatCollection_UpdateSeriesByChartGroup.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsChartFormatCollection_UpdateSeriesByChartGroup, self.Ptr, newIndex,OldIndex)
+
+
+    def UpdateFormatsOnAdding(self ,index:int):
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartFormatCollection_UpdateFormatsOnAdding.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsChartFormatCollection_UpdateFormatsOnAdding, self.Ptr, index)
+
+
+    def UpdateFormatsOnRemoving(self ,index:int):
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartFormatCollection_UpdateFormatsOnRemoving.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsChartFormatCollection_UpdateFormatsOnRemoving, self.Ptr, index)
+

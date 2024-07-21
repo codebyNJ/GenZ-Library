@@ -1,0 +1,87 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ICombinedRange (  IXLSRange) :
+    """
+
+    """
+#
+#    @abc.abstractmethod
+#    def GetNewRangeLocation(self ,names:'Dictionary2',strSheetName:'String&')->str:
+#        """
+#
+#        """
+#        pass
+#
+
+
+#
+#    @abc.abstractmethod
+#    def Clone(self ,parent:'SpireObject',hashNewNames:'Dictionary2',book:'XlsWorkbook')->'IXLSRange':
+#        """
+#
+#        """
+#        pass
+#
+
+
+    @abc.abstractmethod
+    def ClearConditionalFormats(self):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetRectangles(self)->List['Rectangle']:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetRectanglesCount(self)->int:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def CellsCount(self)->int:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RangeGlobalAddress2007(self)->str:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def WorksheetName(self)->str:
+        """
+
+        """
+        pass
+
+

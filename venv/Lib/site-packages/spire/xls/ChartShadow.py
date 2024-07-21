@@ -1,0 +1,235 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartShadow (  XlsObject, IShadow, ICloneParent) :
+    """
+
+    """
+    @property
+
+    def ShadowOuterType(self)->'XLSXChartShadowOuterType':
+        """
+
+        """
+        GetDllLibXls().ChartShadow_get_ShadowOuterType.argtypes=[c_void_p]
+        GetDllLibXls().ChartShadow_get_ShadowOuterType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartShadow_get_ShadowOuterType, self.Ptr)
+        objwraped = XLSXChartShadowOuterType(ret)
+        return objwraped
+
+    @ShadowOuterType.setter
+    def ShadowOuterType(self, value:'XLSXChartShadowOuterType'):
+        GetDllLibXls().ChartShadow_set_ShadowOuterType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartShadow_set_ShadowOuterType, self.Ptr, value.value)
+
+    @property
+
+    def ShadowInnerType(self)->'XLSXChartShadowInnerType':
+        """
+
+        """
+        GetDllLibXls().ChartShadow_get_ShadowInnerType.argtypes=[c_void_p]
+        GetDllLibXls().ChartShadow_get_ShadowInnerType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartShadow_get_ShadowInnerType, self.Ptr)
+        objwraped = XLSXChartShadowInnerType(ret)
+        return objwraped
+
+    @ShadowInnerType.setter
+    def ShadowInnerType(self, value:'XLSXChartShadowInnerType'):
+        GetDllLibXls().ChartShadow_set_ShadowInnerType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartShadow_set_ShadowInnerType, self.Ptr, value.value)
+
+    @property
+
+    def ShadowPrespectiveType(self)->'XLSXChartPrespectiveType':
+        """
+
+        """
+        GetDllLibXls().ChartShadow_get_ShadowPrespectiveType.argtypes=[c_void_p]
+        GetDllLibXls().ChartShadow_get_ShadowPrespectiveType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartShadow_get_ShadowPrespectiveType, self.Ptr)
+        objwraped = XLSXChartPrespectiveType(ret)
+        return objwraped
+
+    @ShadowPrespectiveType.setter
+    def ShadowPrespectiveType(self, value:'XLSXChartPrespectiveType'):
+        GetDllLibXls().ChartShadow_set_ShadowPrespectiveType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartShadow_set_ShadowPrespectiveType, self.Ptr, value.value)
+
+    @property
+    def HasCustomStyle(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ChartShadow_get_HasCustomStyle.argtypes=[c_void_p]
+        GetDllLibXls().ChartShadow_get_HasCustomStyle.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartShadow_get_HasCustomStyle, self.Ptr)
+        return ret
+
+    @HasCustomStyle.setter
+    def HasCustomStyle(self, value:bool):
+        GetDllLibXls().ChartShadow_set_HasCustomStyle.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartShadow_set_HasCustomStyle, self.Ptr, value)
+
+    @property
+    def Transparency(self)->int:
+        """
+
+        """
+        GetDllLibXls().ChartShadow_get_Transparency.argtypes=[c_void_p]
+        GetDllLibXls().ChartShadow_get_Transparency.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartShadow_get_Transparency, self.Ptr)
+        return ret
+
+    @Transparency.setter
+    def Transparency(self, value:int):
+        GetDllLibXls().ChartShadow_set_Transparency.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartShadow_set_Transparency, self.Ptr, value)
+
+    @property
+    def Size(self)->int:
+        """
+
+        """
+        GetDllLibXls().ChartShadow_get_Size.argtypes=[c_void_p]
+        GetDllLibXls().ChartShadow_get_Size.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartShadow_get_Size, self.Ptr)
+        return ret
+
+    @Size.setter
+    def Size(self, value:int):
+        GetDllLibXls().ChartShadow_set_Size.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartShadow_set_Size, self.Ptr, value)
+
+    @property
+    def Blur(self)->int:
+        """
+
+        """
+        GetDllLibXls().ChartShadow_get_Blur.argtypes=[c_void_p]
+        GetDllLibXls().ChartShadow_get_Blur.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartShadow_get_Blur, self.Ptr)
+        return ret
+
+    @Blur.setter
+    def Blur(self, value:int):
+        GetDllLibXls().ChartShadow_set_Blur.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartShadow_set_Blur, self.Ptr, value)
+
+    @property
+    def Angle(self)->int:
+        """
+
+        """
+        GetDllLibXls().ChartShadow_get_Angle.argtypes=[c_void_p]
+        GetDllLibXls().ChartShadow_get_Angle.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartShadow_get_Angle, self.Ptr)
+        return ret
+
+    @Angle.setter
+    def Angle(self, value:int):
+        GetDllLibXls().ChartShadow_set_Angle.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartShadow_set_Angle, self.Ptr, value)
+
+    @property
+    def Distance(self)->int:
+        """
+
+        """
+        GetDllLibXls().ChartShadow_get_Distance.argtypes=[c_void_p]
+        GetDllLibXls().ChartShadow_get_Distance.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartShadow_get_Distance, self.Ptr)
+        return ret
+
+    @Distance.setter
+    def Distance(self, value:int):
+        GetDllLibXls().ChartShadow_set_Distance.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartShadow_set_Distance, self.Ptr, value)
+
+    @property
+
+    def Color(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().ChartShadow_get_Color.argtypes=[c_void_p]
+        GetDllLibXls().ChartShadow_get_Color.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartShadow_get_Color, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @Color.setter
+    def Color(self, value:'Color'):
+        GetDllLibXls().ChartShadow_set_Color.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().ChartShadow_set_Color, self.Ptr, value.Ptr)
+
+    @property
+    def SoftEdge(self)->int:
+        """
+    <summary>
+        Gets or sets the radio of soft edge.
+    </summary>
+        """
+        GetDllLibXls().ChartShadow_get_SoftEdge.argtypes=[c_void_p]
+        GetDllLibXls().ChartShadow_get_SoftEdge.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartShadow_get_SoftEdge, self.Ptr)
+        return ret
+
+    @SoftEdge.setter
+    def SoftEdge(self, value:int):
+        GetDllLibXls().ChartShadow_set_SoftEdge.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartShadow_set_SoftEdge, self.Ptr, value)
+
+    @dispatch
+
+    def CustomShadowStyles(self ,iOuter:XLSXChartShadowOuterType,iTransparency:int,iSize:int,iBlur:int,iAngle:int,iDistance:int,iCustomShadowStyle:bool):
+        """
+
+        """
+        enumiOuter:c_int = iOuter.value
+
+        GetDllLibXls().ChartShadow_CustomShadowStyles.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_int,c_int,c_bool]
+        CallCFunction(GetDllLibXls().ChartShadow_CustomShadowStyles, self.Ptr, enumiOuter,iTransparency,iSize,iBlur,iAngle,iDistance,iCustomShadowStyle)
+
+    @dispatch
+
+    def CustomShadowStyles(self ,iInner:XLSXChartShadowInnerType,iTransparency:int,iBlur:int,iAngle:int,iDistance:int,iCustomShadowStyle:bool):
+        """
+
+        """
+        enumiInner:c_int = iInner.value
+
+        GetDllLibXls().ChartShadow_CustomShadowStylesIIIIII.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_int,c_bool]
+        CallCFunction(GetDllLibXls().ChartShadow_CustomShadowStylesIIIIII, self.Ptr, enumiInner,iTransparency,iBlur,iAngle,iDistance,iCustomShadowStyle)
+
+    @dispatch
+
+    def CustomShadowStyles(self ,iPerspective:XLSXChartPrespectiveType,iTransparency:int,iSize:int,iBlur:int,iAngle:int,iDistance:int,iCustomShadowStyle:bool):
+        """
+
+        """
+        enumiPerspective:c_int = iPerspective.value
+
+        GetDllLibXls().ChartShadow_CustomShadowStylesIIIIIII.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_int,c_int,c_bool]
+        CallCFunction(GetDllLibXls().ChartShadow_CustomShadowStylesIIIIIII, self.Ptr, enumiPerspective,iTransparency,iSize,iBlur,iAngle,iDistance,iCustomShadowStyle)
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().ChartShadow_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ChartShadow_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartShadow_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+

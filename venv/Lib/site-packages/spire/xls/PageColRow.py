@@ -1,0 +1,48 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class PageColRow (SpireObject) :
+    """
+
+    """
+    def StartRow(self)->int:
+        """
+
+        """
+        GetDllLibXls().PageColRow_StartRow.argtypes=[c_void_p]
+        GetDllLibXls().PageColRow_StartRow.restype=c_int
+        ret = CallCFunction(GetDllLibXls().PageColRow_StartRow, self.Ptr)
+        return ret
+
+    def EndRow(self)->int:
+        """
+
+        """
+        GetDllLibXls().PageColRow_EndRow.argtypes=[c_void_p]
+        GetDllLibXls().PageColRow_EndRow.restype=c_int
+        ret = CallCFunction(GetDllLibXls().PageColRow_EndRow, self.Ptr)
+        return ret
+
+    def StartCol(self)->int:
+        """
+
+        """
+        GetDllLibXls().PageColRow_StartCol.argtypes=[c_void_p]
+        GetDllLibXls().PageColRow_StartCol.restype=c_int
+        ret = CallCFunction(GetDllLibXls().PageColRow_StartCol, self.Ptr)
+        return ret
+
+    def EndCol(self)->int:
+        """
+
+        """
+        GetDllLibXls().PageColRow_EndCol.argtypes=[c_void_p]
+        GetDllLibXls().PageColRow_EndCol.restype=c_int
+        ret = CallCFunction(GetDllLibXls().PageColRow_EndCol, self.Ptr)
+        return ret
+

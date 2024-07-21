@@ -1,0 +1,27 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ExcelComment (  ExcelCommentObject) :
+    """
+
+    """
+    @property
+
+    def RichText(self)->'RichText':
+        """
+    <summary>
+        Comment rich text.
+    </summary>
+        """
+        GetDllLibXls().ExcelComment_get_RichText.argtypes=[c_void_p]
+        GetDllLibXls().ExcelComment_get_RichText.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ExcelComment_get_RichText, self.Ptr)
+        ret = None if intPtr==None else RichText(intPtr)
+        return ret
+
+

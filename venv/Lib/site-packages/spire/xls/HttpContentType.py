@@ -1,0 +1,18 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class HttpContentType(Enum):
+    """
+
+    """
+    Excel97 = 0
+    Excel2000 = 1
+    Excel2007 = 2
+    Excel2010 = 3
+    CSV = 4
+

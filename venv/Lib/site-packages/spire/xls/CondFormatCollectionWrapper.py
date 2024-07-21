@@ -1,0 +1,125 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CondFormatCollectionWrapper (  CommonWrapper, IConditionalFormats) :
+    """
+
+    """
+
+    def GetEnumerator(self)->'IEnumerator':
+        """
+
+        """
+        GetDllLibXls().CondFormatCollectionWrapper_GetEnumerator.argtypes=[c_void_p]
+        GetDllLibXls().CondFormatCollectionWrapper_GetEnumerator.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CondFormatCollectionWrapper_GetEnumerator, self.Ptr)
+        ret = None if intPtr==None else IEnumerator(intPtr)
+        return ret
+
+
+    def BeginUpdate(self):
+        """
+
+        """
+        GetDllLibXls().CondFormatCollectionWrapper_BeginUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().CondFormatCollectionWrapper_BeginUpdate, self.Ptr)
+
+    def EndUpdate(self):
+        """
+
+        """
+        GetDllLibXls().CondFormatCollectionWrapper_EndUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().CondFormatCollectionWrapper_EndUpdate, self.Ptr)
+
+    @property
+    def Count(self)->int:
+        """
+
+        """
+        GetDllLibXls().CondFormatCollectionWrapper_get_Count.argtypes=[c_void_p]
+        GetDllLibXls().CondFormatCollectionWrapper_get_Count.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CondFormatCollectionWrapper_get_Count, self.Ptr)
+        return ret
+
+
+    def get_Item(self ,index:int)->'IConditionalFormat':
+        """
+
+        """
+        
+        GetDllLibXls().CondFormatCollectionWrapper_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().CondFormatCollectionWrapper_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CondFormatCollectionWrapper_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsConditionalFormat(intPtr)
+        return ret
+
+
+
+    def AddCondition(self)->'IConditionalFormat':
+        """
+
+        """
+        GetDllLibXls().CondFormatCollectionWrapper_AddCondition.argtypes=[c_void_p]
+        GetDllLibXls().CondFormatCollectionWrapper_AddCondition.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CondFormatCollectionWrapper_AddCondition, self.Ptr)
+        ret = None if intPtr==None else XlsConditionalFormat(intPtr)
+        return ret
+
+
+    def Remove(self):
+        """
+
+        """
+        GetDllLibXls().CondFormatCollectionWrapper_Remove.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().CondFormatCollectionWrapper_Remove, self.Ptr)
+
+
+    def RemoveAt(self ,index:int):
+        """
+
+        """
+        
+        GetDllLibXls().CondFormatCollectionWrapper_RemoveAt.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().CondFormatCollectionWrapper_RemoveAt, self.Ptr, index)
+
+    @property
+
+    def Parent(self)->'SpireObject':
+        """
+
+        """
+        GetDllLibXls().CondFormatCollectionWrapper_get_Parent.argtypes=[c_void_p]
+        GetDllLibXls().CondFormatCollectionWrapper_get_Parent.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CondFormatCollectionWrapper_get_Parent, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+
+    def GetCondition(self ,iCondition:int)->'XlsConditionalFormat':
+        """
+
+        """
+        
+        GetDllLibXls().CondFormatCollectionWrapper_GetCondition.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().CondFormatCollectionWrapper_GetCondition.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CondFormatCollectionWrapper_GetCondition, self.Ptr, iCondition)
+        ret = None if intPtr==None else XlsConditionalFormat(intPtr)
+        return ret
+
+
+
+    def AddRange(self ,range:'IXLSRange'):
+        """
+
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().CondFormatCollectionWrapper_AddRange.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().CondFormatCollectionWrapper_AddRange, self.Ptr, intPtrrange)
+

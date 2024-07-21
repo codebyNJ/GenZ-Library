@@ -1,0 +1,317 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsChartValueAxis (  XlsChartAxis, IChartValueAxis) :
+    """
+
+    """
+    @property
+    def LogBase(self)->float:
+        """
+    <summary>
+        Represents the logarithmic base. 
+    </summary>
+        """
+        GetDllLibXls().XlsChartValueAxis_get_LogBase.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_LogBase.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_LogBase, self.Ptr)
+        return ret
+
+    @LogBase.setter
+    def LogBase(self, value:float):
+        GetDllLibXls().XlsChartValueAxis_set_LogBase.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChartValueAxis_set_LogBase, self.Ptr, value)
+
+    @property
+    def MinValue(self)->float:
+        """
+    <summary>
+        Minimum value on axis.
+    </summary>
+        """
+        GetDllLibXls().XlsChartValueAxis_get_MinValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_MinValue.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_MinValue, self.Ptr)
+        return ret
+
+    @MinValue.setter
+    def MinValue(self, value:float):
+        GetDllLibXls().XlsChartValueAxis_set_MinValue.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChartValueAxis_set_MinValue, self.Ptr, value)
+
+    @property
+    def MaxValue(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsChartValueAxis_get_MaxValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_MaxValue.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_MaxValue, self.Ptr)
+        return ret
+
+    @MaxValue.setter
+    def MaxValue(self, value:float):
+        GetDllLibXls().XlsChartValueAxis_set_MaxValue.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChartValueAxis_set_MaxValue, self.Ptr, value)
+
+    @property
+    def MajorUnit(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsChartValueAxis_get_MajorUnit.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_MajorUnit.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_MajorUnit, self.Ptr)
+        return ret
+
+    @MajorUnit.setter
+    def MajorUnit(self, value:float):
+        GetDllLibXls().XlsChartValueAxis_set_MajorUnit.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChartValueAxis_set_MajorUnit, self.Ptr, value)
+
+    @property
+    def MinorUnit(self)->float:
+        """
+    <summary>
+        Value of minor increment.
+    </summary>
+        """
+        GetDllLibXls().XlsChartValueAxis_get_MinorUnit.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_MinorUnit.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_MinorUnit, self.Ptr)
+        return ret
+
+    @MinorUnit.setter
+    def MinorUnit(self, value:float):
+        GetDllLibXls().XlsChartValueAxis_set_MinorUnit.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChartValueAxis_set_MinorUnit, self.Ptr, value)
+
+    @property
+    def CrossValue(self)->float:
+        """
+    <summary>
+        Value of category axis crosses.
+    </summary>
+        """
+        GetDllLibXls().XlsChartValueAxis_get_CrossValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_CrossValue.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_CrossValue, self.Ptr)
+        return ret
+
+    @CrossValue.setter
+    def CrossValue(self, value:float):
+        GetDllLibXls().XlsChartValueAxis_set_CrossValue.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChartValueAxis_set_CrossValue, self.Ptr, value)
+
+    @property
+    def CrossesAt(self)->float:
+        """
+    <summary>
+        Represents the point on the axis another axis crosses it.
+    </summary>
+        """
+        GetDllLibXls().XlsChartValueAxis_get_CrossesAt.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_CrossesAt.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_CrossesAt, self.Ptr)
+        return ret
+
+    @CrossesAt.setter
+    def CrossesAt(self, value:float):
+        GetDllLibXls().XlsChartValueAxis_set_CrossesAt.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChartValueAxis_set_CrossesAt, self.Ptr, value)
+
+    @property
+    def IsAutoMin(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartValueAxis_get_IsAutoMin.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_IsAutoMin.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_IsAutoMin, self.Ptr)
+        return ret
+
+    @IsAutoMin.setter
+    def IsAutoMin(self, value:bool):
+        GetDllLibXls().XlsChartValueAxis_set_IsAutoMin.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartValueAxis_set_IsAutoMin, self.Ptr, value)
+
+    @property
+    def IsAutoMax(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartValueAxis_get_IsAutoMax.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_IsAutoMax.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_IsAutoMax, self.Ptr)
+        return ret
+
+    @IsAutoMax.setter
+    def IsAutoMax(self, value:bool):
+        GetDllLibXls().XlsChartValueAxis_set_IsAutoMax.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartValueAxis_set_IsAutoMax, self.Ptr, value)
+
+    @property
+    def IsAutoMajor(self)->bool:
+        """
+    <summary>
+        Automatic major selected.
+    </summary>
+        """
+        GetDllLibXls().XlsChartValueAxis_get_IsAutoMajor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_IsAutoMajor.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_IsAutoMajor, self.Ptr)
+        return ret
+
+    @IsAutoMajor.setter
+    def IsAutoMajor(self, value:bool):
+        GetDllLibXls().XlsChartValueAxis_set_IsAutoMajor.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartValueAxis_set_IsAutoMajor, self.Ptr, value)
+
+    @property
+    def IsAutoMinor(self)->bool:
+        """
+    <summary>
+        Automatic minor selected.
+    </summary>
+        """
+        GetDllLibXls().XlsChartValueAxis_get_IsAutoMinor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_IsAutoMinor.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_IsAutoMinor, self.Ptr)
+        return ret
+
+    @IsAutoMinor.setter
+    def IsAutoMinor(self, value:bool):
+        GetDllLibXls().XlsChartValueAxis_set_IsAutoMinor.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartValueAxis_set_IsAutoMinor, self.Ptr, value)
+
+    @property
+    def IsAutoCross(self)->bool:
+        """
+    <summary>
+        Automatic category crossing point selected.
+    </summary>
+        """
+        GetDllLibXls().XlsChartValueAxis_get_IsAutoCross.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_IsAutoCross.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_IsAutoCross, self.Ptr)
+        return ret
+
+    @property
+    def IsLogScale(self)->bool:
+        """
+    <summary>
+        Logarithmic scale.
+    </summary>
+        """
+        GetDllLibXls().XlsChartValueAxis_get_IsLogScale.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_IsLogScale.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_IsLogScale, self.Ptr)
+        return ret
+
+    @IsLogScale.setter
+    def IsLogScale(self, value:bool):
+        GetDllLibXls().XlsChartValueAxis_set_IsLogScale.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartValueAxis_set_IsLogScale, self.Ptr, value)
+
+    @property
+    def IsReverseOrder(self)->bool:
+        """
+    <summary>
+        Values in reverse order.
+    </summary>
+        """
+        GetDllLibXls().XlsChartValueAxis_get_IsReverseOrder.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_IsReverseOrder.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_IsReverseOrder, self.Ptr)
+        return ret
+
+    @IsReverseOrder.setter
+    def IsReverseOrder(self, value:bool):
+        GetDllLibXls().XlsChartValueAxis_set_IsReverseOrder.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartValueAxis_set_IsReverseOrder, self.Ptr, value)
+
+    @property
+    def IsMaxCross(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartValueAxis_get_IsMaxCross.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_IsMaxCross.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_IsMaxCross, self.Ptr)
+        return ret
+
+    @property
+    def DisplayUnitCustom(self)->float:
+        """
+    <summary>
+        Represents custom unit to display.
+    </summary>
+        """
+        GetDllLibXls().XlsChartValueAxis_get_DisplayUnitCustom.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_DisplayUnitCustom.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_DisplayUnitCustom, self.Ptr)
+        return ret
+
+    @DisplayUnitCustom.setter
+    def DisplayUnitCustom(self, value:float):
+        GetDllLibXls().XlsChartValueAxis_set_DisplayUnitCustom.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChartValueAxis_set_DisplayUnitCustom, self.Ptr, value)
+
+    @property
+
+    def DisplayUnit(self)->'ChartDisplayUnitType':
+        """
+    <summary>
+        Returns or sets the unit label for the specified axis.
+    </summary>
+        """
+        GetDllLibXls().XlsChartValueAxis_get_DisplayUnit.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_DisplayUnit.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_DisplayUnit, self.Ptr)
+        objwraped = ChartDisplayUnitType(ret)
+        return objwraped
+
+    @DisplayUnit.setter
+    def DisplayUnit(self, value:'ChartDisplayUnitType'):
+        GetDllLibXls().XlsChartValueAxis_set_DisplayUnit.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartValueAxis_set_DisplayUnit, self.Ptr, value.value)
+
+    @property
+    def HasDisplayUnitLabel(self)->bool:
+        """
+    <summary>
+        True if the label is displayed on the specified axis.
+    </summary>
+        """
+        GetDllLibXls().XlsChartValueAxis_get_HasDisplayUnitLabel.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartValueAxis_get_HasDisplayUnitLabel.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartValueAxis_get_HasDisplayUnitLabel, self.Ptr)
+        return ret
+
+    @HasDisplayUnitLabel.setter
+    def HasDisplayUnitLabel(self, value:bool):
+        GetDllLibXls().XlsChartValueAxis_set_HasDisplayUnitLabel.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartValueAxis_set_HasDisplayUnitLabel, self.Ptr, value)
+
+#
+#    def Clone(self ,parent:'SpireObject',dicFontIndexes:'Dictionary2',dicNewSheetNames:'Dictionary2')->'XlsChartAxis':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrdicFontIndexes:c_void_p = dicFontIndexes.Ptr
+#        intPtrdicNewSheetNames:c_void_p = dicNewSheetNames.Ptr
+#
+#        GetDllLibXls().XlsChartValueAxis_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+#        GetDllLibXls().XlsChartValueAxis_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsChartValueAxis_Clone, self.Ptr, intPtrparent,intPtrdicFontIndexes,intPtrdicNewSheetNames)
+#        ret = None if intPtr==None else XlsChartAxis(intPtr)
+#        return ret
+#
+
+

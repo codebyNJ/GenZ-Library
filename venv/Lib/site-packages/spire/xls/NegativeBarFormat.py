@@ -1,0 +1,82 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class NegativeBarFormat (SpireObject) :
+    """
+
+    """
+    @property
+
+    def BorderColor(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().NegativeBarFormat_get_BorderColor.argtypes=[c_void_p]
+        GetDllLibXls().NegativeBarFormat_get_BorderColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().NegativeBarFormat_get_BorderColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @BorderColor.setter
+    def BorderColor(self, value:'Color'):
+        GetDllLibXls().NegativeBarFormat_set_BorderColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().NegativeBarFormat_set_BorderColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def BorderColorType(self)->'DataBarNegativeColorType':
+        """
+
+        """
+        GetDllLibXls().NegativeBarFormat_get_BorderColorType.argtypes=[c_void_p]
+        GetDllLibXls().NegativeBarFormat_get_BorderColorType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().NegativeBarFormat_get_BorderColorType, self.Ptr)
+        objwraped = DataBarNegativeColorType(ret)
+        return objwraped
+
+    @BorderColorType.setter
+    def BorderColorType(self, value:'DataBarNegativeColorType'):
+        GetDllLibXls().NegativeBarFormat_set_BorderColorType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().NegativeBarFormat_set_BorderColorType, self.Ptr, value.value)
+
+    @property
+
+    def Color(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().NegativeBarFormat_get_Color.argtypes=[c_void_p]
+        GetDllLibXls().NegativeBarFormat_get_Color.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().NegativeBarFormat_get_Color, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @Color.setter
+    def Color(self, value:'Color'):
+        GetDllLibXls().NegativeBarFormat_set_Color.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().NegativeBarFormat_set_Color, self.Ptr, value.Ptr)
+
+    @property
+
+    def ColorType(self)->'DataBarNegativeColorType':
+        """
+
+        """
+        GetDllLibXls().NegativeBarFormat_get_ColorType.argtypes=[c_void_p]
+        GetDllLibXls().NegativeBarFormat_get_ColorType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().NegativeBarFormat_get_ColorType, self.Ptr)
+        objwraped = DataBarNegativeColorType(ret)
+        return objwraped
+
+    @ColorType.setter
+    def ColorType(self, value:'DataBarNegativeColorType'):
+        GetDllLibXls().NegativeBarFormat_set_ColorType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().NegativeBarFormat_set_ColorType, self.Ptr, value.value)
+

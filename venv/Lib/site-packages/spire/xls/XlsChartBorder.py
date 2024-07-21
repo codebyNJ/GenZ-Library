@@ -1,0 +1,165 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsChartBorder (  XlsObject, IChartBorder, ICloneParent) :
+    """
+
+    """
+    @property
+
+    def Color(self)->'Color':
+        """
+    <summary>
+        Color of line.
+    </summary>
+        """
+        GetDllLibXls().XlsChartBorder_get_Color.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartBorder_get_Color.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartBorder_get_Color, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @Color.setter
+    def Color(self, value:'Color'):
+        GetDllLibXls().XlsChartBorder_set_Color.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartBorder_set_Color, self.Ptr, value.Ptr)
+
+    @property
+
+    def Pattern(self)->'ChartLinePatternType':
+        """
+    <summary>
+        Line pattern.
+    </summary>
+        """
+        GetDllLibXls().XlsChartBorder_get_Pattern.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartBorder_get_Pattern.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartBorder_get_Pattern, self.Ptr)
+        objwraped = ChartLinePatternType(ret)
+        return objwraped
+
+    @Pattern.setter
+    def Pattern(self, value:'ChartLinePatternType'):
+        GetDllLibXls().XlsChartBorder_set_Pattern.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartBorder_set_Pattern, self.Ptr, value.value)
+
+    @property
+
+    def Weight(self)->'ChartLineWeightType':
+        """
+    <summary>
+        Weight of line.
+    </summary>
+        """
+        GetDllLibXls().XlsChartBorder_get_Weight.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartBorder_get_Weight.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartBorder_get_Weight, self.Ptr)
+        objwraped = ChartLineWeightType(ret)
+        return objwraped
+
+    @Weight.setter
+    def Weight(self, value:'ChartLineWeightType'):
+        GetDllLibXls().XlsChartBorder_set_Weight.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartBorder_set_Weight, self.Ptr, value.value)
+
+    @property
+    def UseDefaultFormat(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartBorder_get_UseDefaultFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartBorder_get_UseDefaultFormat.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartBorder_get_UseDefaultFormat, self.Ptr)
+        return ret
+
+    @UseDefaultFormat.setter
+    def UseDefaultFormat(self, value:bool):
+        GetDllLibXls().XlsChartBorder_set_UseDefaultFormat.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartBorder_set_UseDefaultFormat, self.Ptr, value)
+
+    @property
+    def UseDefaultLineColor(self)->bool:
+        """
+    <summary>
+        Indicates if custom line color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartBorder_get_UseDefaultLineColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartBorder_get_UseDefaultLineColor.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartBorder_get_UseDefaultLineColor, self.Ptr)
+        return ret
+
+    @UseDefaultLineColor.setter
+    def UseDefaultLineColor(self, value:bool):
+        GetDllLibXls().XlsChartBorder_set_UseDefaultLineColor.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartBorder_set_UseDefaultLineColor, self.Ptr, value)
+
+    @property
+
+    def KnownColor(self)->'ExcelColors':
+        """
+    <summary>
+        Line  excel color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartBorder_get_KnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartBorder_get_KnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartBorder_get_KnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @KnownColor.setter
+    def KnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsChartBorder_set_KnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartBorder_set_KnownColor, self.Ptr, value.value)
+
+    @property
+    def Transparency(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsChartBorder_get_Transparency.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartBorder_get_Transparency.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChartBorder_get_Transparency, self.Ptr)
+        return ret
+
+    @Transparency.setter
+    def Transparency(self, value:float):
+        GetDllLibXls().XlsChartBorder_set_Transparency.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChartBorder_set_Transparency, self.Ptr, value)
+
+    @property
+    def CustomLineWeight(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsChartBorder_get_CustomLineWeight.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartBorder_get_CustomLineWeight.restype=c_float
+        ret = CallCFunction(GetDllLibXls().XlsChartBorder_get_CustomLineWeight, self.Ptr)
+        return ret
+
+    @CustomLineWeight.setter
+    def CustomLineWeight(self, value:float):
+        GetDllLibXls().XlsChartBorder_set_CustomLineWeight.argtypes=[c_void_p, c_float]
+        CallCFunction(GetDllLibXls().XlsChartBorder_set_CustomLineWeight, self.Ptr, value)
+
+
+    def Clone(self ,parent:'SpireObject')->'XlsChartBorder':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsChartBorder_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsChartBorder_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartBorder_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else XlsChartBorder(intPtr)
+        return ret
+
+

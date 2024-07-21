@@ -1,0 +1,112 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IGeomPathInfo (abc.ABC) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def ShowStroke(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowStroke.setter
+    @abc.abstractmethod
+    def ShowStroke(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ExtrusionOk(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ExtrusionOk.setter
+    @abc.abstractmethod
+    def ExtrusionOk(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Height(self)->int:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Width(self)->int:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def FillMode(self)->'PathFillMode':
+        """
+
+        """
+        pass
+
+
+    @FillMode.setter
+    @abc.abstractmethod
+    def FillMode(self, value:'PathFillMode'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def MsoLstCount(self)->int:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def get_Item(self ,index:int)->'MsoPathInfo':
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def AddMso(self ,type:'MsoPathType')->'MsoPathInfo':
+        """
+
+        """
+        pass
+
+

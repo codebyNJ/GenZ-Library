@@ -1,0 +1,915 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CellRange (  XlsRange) :
+    """
+
+    """
+
+    def Activate(self)->'CellRange':
+        """
+    <summary>
+        Active single cell in the worksheet
+    </summary>
+    <returns></returns>
+        """
+        GetDllLibXls().CellRange_Activate.argtypes=[c_void_p]
+        GetDllLibXls().CellRange_Activate.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_Activate, self.Ptr)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddComment(self ,comment:ExcelComment):
+        """
+    <summary>
+        Adds a comment to the range.
+    </summary>
+    <param name="comment">Comment to add</param>
+        """
+        intPtrcomment:c_void_p = comment.Ptr
+
+        GetDllLibXls().CellRange_AddComment.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().CellRange_AddComment, self.Ptr, intPtrcomment)
+
+    @dispatch
+
+    def AddComment(self)->ExcelComment:
+        """
+    <summary>
+         Adds a comment to the range.
+        <example>The following code illustrates how to insert Comments in the Range:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Adding comments to a cell
+        ICommentShape comment = worksheet.Range["A1"].AddComment();
+        comment.Text= "Comments";
+        //Save to file
+        workbook.SaveToFile("AddComment.xlsx");
+        </code>
+        </example>
+    </summary>
+    <returns>Created comment or exists one.</returns>
+        """
+        GetDllLibXls().CellRange_AddComment1.argtypes=[c_void_p]
+        GetDllLibXls().CellRange_AddComment1.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_AddComment1, self.Ptr)
+        ret = None if intPtr==None else ExcelComment(intPtr)
+        return ret
+
+
+#
+#    def Clone(self ,parent:'SpireObject',rangeNames:'Dictionary2',book:'Workbook')->'CellRange':
+#        """
+#    <summary>
+#        Clones current IXLSRange.
+#    </summary>
+#    <param name="parent">Parent object.</param>
+#    <param name="rangeNames">new names.</param>
+#    <param name="book">Parent workbook.</param>
+#    <returns>Cloned instance.</returns>
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrrangeNames:c_void_p = rangeNames.Ptr
+#        intPtrbook:c_void_p = book.Ptr
+#
+#        GetDllLibXls().CellRange_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+#        GetDllLibXls().CellRange_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().CellRange_Clone, self.Ptr, intPtrparent,intPtrrangeNames,intPtrbook)
+#        ret = None if intPtr==None else CellRange(intPtr)
+#        return ret
+#
+
+
+    @dispatch
+
+    def Move(self ,destRange:'CellRange'):
+        """
+    <summary>
+        Moves the cells to the specified Range.
+    </summary>
+    <param name="destination">Destnation Range.</param>
+        """
+        intPtrdestRange:c_void_p = destRange.Ptr
+
+        GetDllLibXls().CellRange_Move.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().CellRange_Move, self.Ptr, intPtrdestRange)
+
+    @dispatch
+
+    def Move(self ,destRange:'CellRange',copyStyle:bool,updateReference:bool):
+        """
+    <summary>
+        Moves the cells to the specified Range.
+    </summary>
+    <param name="destination">Destination Range.</param>
+    <param name="updateReference">Indicates whether to update reference range.</param>
+        """
+        intPtrdestRange:c_void_p = destRange.Ptr
+
+        GetDllLibXls().CellRange_MoveDCU.argtypes=[c_void_p ,c_void_p,c_bool,c_bool]
+        CallCFunction(GetDllLibXls().CellRange_MoveDCU, self.Ptr, intPtrdestRange,copyStyle,updateReference)
+
+    @dispatch
+
+    def Copy(self ,destRange:'CellRange')->'CellRange':
+        """
+    <summary>
+        Copies the range to the specified range.
+    </summary>
+    <param name="destRange">Destination range</param>
+    <returns>Destination range</returns>
+        """
+        intPtrdestRange:c_void_p = destRange.Ptr
+
+        GetDllLibXls().CellRange_Copy.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().CellRange_Copy.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_Copy, self.Ptr, intPtrdestRange)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Copy(self ,destRange:'CellRange',updateReference:bool)->'CellRange':
+        """
+    <summary>
+        Copies the range to the specified range.
+    </summary>
+    <param name="destination">Destination range.</param>
+    <param name="updateReference">Indicates whether to update reference cells.</param>
+        """
+        intPtrdestRange:c_void_p = destRange.Ptr
+
+        GetDllLibXls().CellRange_CopyDU.argtypes=[c_void_p ,c_void_p,c_bool]
+        GetDllLibXls().CellRange_CopyDU.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_CopyDU, self.Ptr, intPtrdestRange,updateReference)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Copy(self ,destRange:'CellRange',updateReference:bool,copyStyles:bool)->'CellRange':
+        """
+    <summary>
+        Copies the range to the specified range.
+    </summary>
+    <param name="destRange">Destination range.</param>
+    <param name="updateReference">Indicates whether to update reference cells.</param>
+    <param name="copyStyles">Indicates whether to copy styles.</param>
+    <returns>Destination range</returns>
+        """
+        intPtrdestRange:c_void_p = destRange.Ptr
+
+        GetDllLibXls().CellRange_CopyDUC.argtypes=[c_void_p ,c_void_p,c_bool,c_bool]
+        GetDllLibXls().CellRange_CopyDUC.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_CopyDUC, self.Ptr, intPtrdestRange,updateReference,copyStyles)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Copy(self ,destRange:'CellRange',copyOptions:CopyRangeOptions)->'CellRange':
+        """
+    <summary>
+        Copies the range to the specified range.
+    </summary>
+    <param name="destRange">Destination range.</param>
+    <param name="copyOptions">Copy options.</param>
+        """
+        intPtrdestRange:c_void_p = destRange.Ptr
+        enumcopyOptions:c_int = copyOptions.value
+
+        GetDllLibXls().CellRange_CopyDC.argtypes=[c_void_p ,c_void_p,c_int]
+        GetDllLibXls().CellRange_CopyDC.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_CopyDC, self.Ptr, intPtrdestRange,enumcopyOptions)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    def FindAllNumber(self ,doubleValue:float,formulaValue:bool)->'ListCellRanges':
+        """
+    <summary>
+        Finds the cell with the input double.
+    </summary>
+    <param name="doubleValue">Double value to search for</param>
+    <param name="formulaValue">Indicates whether to find formula value</param>
+    <returns>Found ranges</returns>
+        """
+        
+        GetDllLibXls().CellRange_FindAllNumber.argtypes=[c_void_p ,c_double,c_bool]
+        GetDllLibXls().CellRange_FindAllNumber.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_FindAllNumber, self.Ptr, doubleValue,formulaValue)
+        ret = None if intPtr==None else ListCellRanges(intPtr)
+        return ret
+
+
+
+    def FindAllString(self ,stringValue:str,formula:bool,formulaValue:bool)->'ListCellRanges':
+        """
+    <summary>
+        Finds the cell with the input string.
+    </summary>
+    <param name="stringValue">String value to search for</param>
+    <param name="formula">Indicates whether include formula</param>
+    <param name="formulaValue">Indicates whether include formula value</param>
+    <returns>Found ranges</returns>
+        """
+        
+        GetDllLibXls().CellRange_FindAllString.argtypes=[c_void_p ,c_void_p,c_bool,c_bool]
+        GetDllLibXls().CellRange_FindAllString.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_FindAllString, self.Ptr, stringValue,formula,formulaValue)
+        ret = None if intPtr==None else ListCellRanges(intPtr)
+        return ret
+
+
+
+    def FindAllDateTime(self ,dateTimeValue:'DateTime')->'ListCellRanges':
+        """
+    <summary>
+        Finds the cell with the input datetime.
+    </summary>
+    <param name="dateTimeValue">DateTime value to search for</param>
+    <returns>Found ranges</returns>
+        """
+        intPtrdateTimeValue:c_void_p = dateTimeValue.Ptr
+
+        GetDllLibXls().CellRange_FindAllDateTime.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().CellRange_FindAllDateTime.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_FindAllDateTime, self.Ptr, intPtrdateTimeValue)
+        ret = None if intPtr==None else ListCellRanges(intPtr)
+        return ret
+
+
+
+    def FindAllTimeSpan(self ,timeSpanValue:'TimeSpan')->'ListCellRanges':
+        """
+    <summary>
+        Finds the cell with input timespan
+    </summary>
+    <param name="timeSpanValue">time span value to search for</param>
+    <returns>Found ranges</returns>
+        """
+        intPtrtimeSpanValue:c_void_p = timeSpanValue.Ptr
+
+        GetDllLibXls().CellRange_FindAllTimeSpan.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().CellRange_FindAllTimeSpan.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_FindAllTimeSpan, self.Ptr, intPtrtimeSpanValue)
+        ret = None if intPtr==None else ListCellRanges(intPtr)
+        return ret
+
+
+
+    def FindAllBool(self ,boolValue:bool)->'ListCellRanges':
+        """
+    <summary>
+        Finds the cell with the input bool. 
+    </summary>
+    <param name="boolValue">Bool value to search for</param>
+    <returns>Found ranges</returns>
+        """
+        
+        GetDllLibXls().CellRange_FindAllBool.argtypes=[c_void_p ,c_bool]
+        GetDllLibXls().CellRange_FindAllBool.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_FindAllBool, self.Ptr, boolValue)
+        ret = None if intPtr==None else ListCellRanges(intPtr)
+        return ret
+
+
+
+    def FindBool(self ,boolValue:bool)->'CellRange':
+        """
+    <summary>
+        Finds the cell with the input bool. 
+    </summary>
+    <param name="boolValue">Bool value to search for</param>
+    <returns>Found range</returns>
+        """
+        
+        GetDllLibXls().CellRange_FindBool.argtypes=[c_void_p ,c_bool]
+        GetDllLibXls().CellRange_FindBool.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_FindBool, self.Ptr, boolValue)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+
+    def FindNumber(self ,doubleValue:float,formulaValue:bool)->'CellRange':
+        """
+    <summary>
+        Finds the cell with the input double. 
+    </summary>
+    <param name="doubleValue">Double value to search for</param>
+    <param name="formulaValue">Indicates whether includes formula value to search for</param>
+    <returns>Found range</returns>
+        """
+        
+        GetDllLibXls().CellRange_FindNumber.argtypes=[c_void_p ,c_double,c_bool]
+        GetDllLibXls().CellRange_FindNumber.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_FindNumber, self.Ptr, doubleValue,formulaValue)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+
+    def FindString(self ,stringValue:str,formula:bool,formulaValue:bool)->'CellRange':
+        """
+    <summary>
+        Finds the cell with the input string. 
+    </summary>
+    <param name="stringValue">String value to search for</param>
+    <param name="formula">Indicates whether includes formula to search for</param>
+    <param name="formulaValue">Indicates whether includes formula value to search for</param>
+    <returns>Found range</returns>
+        """
+        
+        GetDllLibXls().CellRange_FindString.argtypes=[c_void_p ,c_void_p,c_bool,c_bool]
+        GetDllLibXls().CellRange_FindString.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_FindString, self.Ptr, stringValue,formula,formulaValue)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+
+    def FindDateTime(self ,dateTimeValue:'DateTime')->'CellRange':
+        """
+    <summary>
+        Finds the cell with the input datetime. 
+    </summary>
+    <param name="dateTimeValue">Datetime value to search for</param>
+    <returns>Found range</returns>
+        """
+        intPtrdateTimeValue:c_void_p = dateTimeValue.Ptr
+
+        GetDllLibXls().CellRange_FindDateTime.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().CellRange_FindDateTime.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_FindDateTime, self.Ptr, intPtrdateTimeValue)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+
+    def FindTimeSpan(self ,timeSpanValue:'TimeSpan')->'CellRange':
+        """
+    <summary>
+        Finds the cell with the input time span. 
+    </summary>
+    <param name="timeSpanValue">Time span value to search for.</param>
+    <returns>Found range.</returns>
+        """
+        intPtrtimeSpanValue:c_void_p = timeSpanValue.Ptr
+
+        GetDllLibXls().CellRange_FindTimeSpan.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().CellRange_FindTimeSpan.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_FindTimeSpan, self.Ptr, intPtrtimeSpanValue)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    def FindAll(self ,findValue:str,flags:'FindType',findOptions:'ExcelFindOptions')->'ListCellRanges':
+        """
+    <summary>
+        Finds the all cells with specified string value.
+    </summary>
+    <param name="findValue">Value to search.</param>
+    <param name="flags">Type of value to search.</param>
+    <param name="findOptions">Way to search.</param>
+    <returns>All found cells, or Null if value was not found.</returns>
+        """
+        enumflags:c_int = flags.value
+        enumfindOptions:c_int = findOptions.value
+
+        GetDllLibXls().CellRange_FindAll.argtypes=[c_void_p ,c_void_p,c_int,c_int]
+        GetDllLibXls().CellRange_FindAll.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_FindAll, self.Ptr, findValue,enumflags,enumfindOptions)
+        ret = None if intPtr==None else ListCellRanges(intPtr)
+        return ret
+
+
+    def Intersect(self ,range:'CellRange')->'CellRange':
+        """
+    <summary>
+        Get intersection range with the specified range.
+    </summary>
+    <param name="range">Range which to intersect.</param>
+    <returns>Range intersection.</returns>
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().CellRange_Intersect.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().CellRange_Intersect.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_Intersect, self.Ptr, intPtrrange)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+
+    @dispatch
+    def Merge(self ,range:'CellRange')->'CellRange':
+        """
+    <summary>
+         Creates a merged cell from the specified Range object.
+        <example>The following code illustrates how to check whether two ranges are mergable or not:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Merge range
+        worksheet["A2:B2"].Merge();
+        //Get mergable range
+        IXLSRange mergableRange = worksheet["A2"].MergeArea.Merge(worksheet["C2"]);
+        //Check mergable Area
+        Console.Write(mergableRange.RangeAddressLocal);
+        //Save to file
+        workbook.SaveToFile("Intersect.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="range">The Range to merge with.</param>
+    <returns>Merged ranges.</returns>
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().CellRange_Merge.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().CellRange_Merge.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_Merge, self.Ptr, intPtrrange)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+
+    def SetDataValidation(self ,dataValidation:'Validation'):
+        """
+    <summary>
+        Sets data validation for the range.
+    </summary>
+    <param name="dv">Data validation to set.</param>
+        """
+        intPtrdataValidation:c_void_p = dataValidation.Ptr
+
+        GetDllLibXls().CellRange_SetDataValidation.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().CellRange_SetDataValidation, self.Ptr, intPtrdataValidation)
+
+    @property
+
+    def Borders(self)->'BordersCollection':
+        """
+    <summary>
+         Returns a Borders collection that represents the borders of a style or a range of cells (including a range defined as part of a conditional format).
+        <example>The following code illustrates how to access Borders property of the Range:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet["C2"].Text = "Sample";
+        //Set borders
+        IBorders borders = worksheet["C2"].Borders;
+        //Set line style
+        borders[BordersLineType.EdgeTop].LineStyle = LineStyleType.Thin;
+        borders[BordersLineType.EdgeBottom].LineStyle = LineStyleType.Thin;
+        //Set border color
+        borders[BordersLineType.EdgeTop].Color = Color.Red;
+        borders[BordersLineType.EdgeBottom].Color = Color.Red;
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().CellRange_get_Borders.argtypes=[c_void_p]
+        GetDllLibXls().CellRange_get_Borders.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_get_Borders, self.Ptr)
+        ret = None if intPtr==None else BordersCollection(intPtr)
+        return ret
+
+
+    @property
+
+    def Style(self)->'CellStyle':
+        """
+    <summary>
+         Returns a Style object that represents the style of the specified range.
+        <example>The following code illustrates how to the style of the specified range:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet["C2"].Text = "Sample";
+        //Add and set style
+        CellStyle style = workbook.Styles.Add("BorderStyle");
+        style.Color = Color.Red;
+        worksheet["C2"].Style = style;
+        //Save to file
+        workbook.SaveToFile("Style.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().CellRange_get_Style.argtypes=[c_void_p]
+        GetDllLibXls().CellRange_get_Style.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_get_Style, self.Ptr)
+        ret = None if intPtr==None else CellStyle(intPtr)
+        return ret
+
+
+    @Style.setter
+    def Style(self, value:'CellStyle'):
+        GetDllLibXls().CellRange_set_Style.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().CellRange_set_Style, self.Ptr, value.Ptr)
+
+#    @property
+#
+#    def Cells(self)->'ListCellRanges':
+#        """
+#    <summary>
+#        Returns a Range object that represents the cells in the specified range.
+#    </summary>
+#        """
+#        GetDllLibXls().CellRange_get_Cells.argtypes=[c_void_p]
+#        GetDllLibXls().CellRange_get_Cells.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().CellRange_get_Cells, self.Ptr)
+#        ret = None if intPtr==None else ListCellRanges(intPtr)
+#        return ret
+
+
+#    @property
+#
+#    def CellList(self)->'List1':
+#        """
+#    <summary>
+#         Returns a Range object that represents the cells in the specified range.
+#        <example>The following code illustrates how to access CellList property of the Range:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Set text. The content contained by ![CDATA] will be expressed as plain text
+#        ListCellRange cells = worksheet["A1:E8"].CellList;
+#        //Do some manipulations
+#        foreach (CellRange Range in cells)
+#            Range.Text = Range.RangeAddressLocal;
+#        //Save to file
+#        workbook.SaveToFile("CellList.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#        """
+#        GetDllLibXls().CellRange_get_CellList.argtypes=[c_void_p]
+#        GetDllLibXls().CellRange_get_CellList.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().CellRange_get_CellList, self.Ptr)
+#        ret = None if intPtr==None else List1(intPtr)
+#        return ret
+#
+
+
+#    @property
+#
+#    def Columns(self)->'ListCellRanges':
+#        """
+#    <summary>
+#         Returns a Range object that represents the columns in the specified range.
+#        <example>The following code illustrates how to access columns:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Set columns
+#        IXLSRange[] columns = worksheet["A1:E8"].Columns;
+#        //Do some manipulations
+#        foreach (IXLSRange column in columns)
+#          column.Text = column.RangeAddressLocal;
+#        //Save to file
+#        workbook.SaveToFile("Columns.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#        """
+#        GetDllLibXls().CellRange_get_Columns.argtypes=[c_void_p]
+#        GetDllLibXls().CellRange_get_Columns.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().CellRange_get_Columns, self.Ptr)
+#        ret = None if intPtr==None else ListCellRanges(intPtr)
+#        return ret
+
+
+#    @property
+#
+#    def Rows(self)->'ListCellRanges':
+#        """
+#    <summary>
+#         Returns the number of the first row of the first area in the range.
+#        <example>The following code illustrates how to access rows:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Set rows
+#        IXLSRange[] rows = worksheet["A1:E8"].Rows;
+#        //Do some manipulations
+#        foreach (IXLSRange row in rows)
+#          row.Text = row.RangeAddressLocal;
+#        //Save to file
+#        workbook.SaveToFile("Rows.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#        """
+#        GetDllLibXls().CellRange_get_Rows.argtypes=[c_void_p]
+#        GetDllLibXls().CellRange_get_Rows.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().CellRange_get_Rows, self.Ptr)
+#        ret = None if intPtr==None else ListCellRanges(intPtr)
+#        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,row:int,column:int)->'CellRange':
+        """
+    <summary>
+        Gets cell range. Row and column indexes are one-based.
+    </summary>
+    <param name="row"></param>
+    <param name="column"></param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().CellRange_get_Item.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().CellRange_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_get_Item, self.Ptr, row,column)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+
+    def set_Item(self ,row:int,column:int,value:'CellRange'):
+        """
+
+        """
+        intPtrvalue:c_void_p = value.Ptr
+
+        GetDllLibXls().CellRange_set_Item.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().CellRange_set_Item, self.Ptr, row,column,intPtrvalue)
+
+    @dispatch
+
+    def get_Item(self ,row:int,column:int,lastRow:int,lastColumn:int)->'CellRange':
+        """
+    <summary>
+        Gets cell range. Row and column indexes are one-based.
+    </summary>
+    <param name="row"></param>
+    <param name="column"></param>
+    <param name="lastRow"></param>
+    <param name="lastColumn"></param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().CellRange_get_ItemRCLL.argtypes=[c_void_p ,c_int,c_int,c_int,c_int]
+        GetDllLibXls().CellRange_get_ItemRCLL.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_get_ItemRCLL, self.Ptr, row,column,lastRow,lastColumn)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->'CellRange':
+        """
+    <summary>
+        Gets cell range.
+    </summary>
+    <param name="name"></param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().CellRange_get_ItemN.argtypes=[c_void_p ,c_wchar_p]
+        GetDllLibXls().CellRange_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str,IsR1C1Notation:bool)->'CellRange':
+        """
+    <summary>
+        Gets cell range
+    </summary>
+    <param name="name"></param>
+    <param name="IsR1C1Notation"></param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().CellRange_get_ItemNI.argtypes=[c_void_p ,c_void_p,c_bool]
+        GetDllLibXls().CellRange_get_ItemNI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_get_ItemNI, self.Ptr, name,IsR1C1Notation)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @property
+
+    def Comment(self)->'ExcelComment':
+        """
+    <summary>
+         Returns a Comment object that represents the comment associated with the cell in the upper-left corner of the range.
+        <example>The following code illustrates how to access Comments property of the Range:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Adding comments to a cell
+        worksheet.Range["A1"].AddComment().Text = "Comments";
+        //Add Rich Text Comments
+        CellRange range = worksheet.Range["A6"];
+        range.AddComment().RichText.Text = "RichText";
+        IRichTextString rtf = range.Comment.RichText;
+        //Formatting first 4 characters
+        IFont redFont = workbook.CreateFont();
+        redFont.IsBold = true;
+        redFont.Color = Color.Red;
+        rtf.SetFont(0, 3, redFont);
+        //Save to file
+        workbook.SaveToFile("DataValidation.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().CellRange_get_Comment.argtypes=[c_void_p]
+        GetDllLibXls().CellRange_get_Comment.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_get_Comment, self.Ptr)
+        ret = None if intPtr==None else ExcelComment(intPtr)
+        return ret
+
+
+    @property
+
+    def Worksheet(self)->'Worksheet':
+        """
+    <summary>
+        Returns a worksheet object that represents the worksheet 
+            containing the specified range.
+    </summary>
+        """
+        GetDllLibXls().CellRange_get_Worksheet.argtypes=[c_void_p]
+        GetDllLibXls().CellRange_get_Worksheet.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_get_Worksheet, self.Ptr)
+        ret = None if intPtr==None else Worksheet(intPtr)
+        return ret
+
+
+    @property
+
+    def RichText(self)->'RichText':
+        """
+    <summary>
+         Returns a RichTextString object that represents the rich text style.
+        <example>The following code illustrates how to set rich text formatting in the range:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create style
+        IStyle style = workbook.Styles.Add("CustomStyle");
+        //Set rich text
+        IRichTextString richText = worksheet["C2"].RichText;
+        richText.Text = "Sample text";
+        //Set rich text font
+        IFont font = style.Font;
+        font.IsBold = true;
+        richText.SetFont(0, 5, font);
+        //Save to file
+        workbook.SaveToFile("RichText.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().CellRange_get_RichText.argtypes=[c_void_p]
+        GetDllLibXls().CellRange_get_RichText.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_get_RichText, self.Ptr)
+        ret = None if intPtr==None else RichText(intPtr)
+        return ret
+
+
+    @property
+
+    def EntireColumn(self)->'CellRange':
+        """
+    <summary>
+        Returns a Range object that represents the entire column (or 
+            columns) that contains the specified range.
+    </summary>
+        """
+        GetDllLibXls().CellRange_get_EntireColumn.argtypes=[c_void_p]
+        GetDllLibXls().CellRange_get_EntireColumn.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_get_EntireColumn, self.Ptr)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @property
+
+    def EndCell(self)->'CellRange':
+        """
+    <summary>
+        Returns a Range object that represents the cell at the end of the 
+            region that contains the source range.
+    </summary>
+        """
+        GetDllLibXls().CellRange_get_EndCell.argtypes=[c_void_p]
+        GetDllLibXls().CellRange_get_EndCell.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_get_EndCell, self.Ptr)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @property
+
+    def MergeArea(self)->'CellRange':
+        """
+    <summary>
+         Returns a Range object that represents the merged range containing the specified cell.
+        <example>The following code illustrates how to access MergeArea property:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet["C2"].Text = "Sample text in cell";
+        //Set merge
+        worksheet["C2:D3"].Merge();
+        //Check merge area
+        Console.Write(worksheet["C2"].MergeArea.AddressLocal);
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().CellRange_get_MergeArea.argtypes=[c_void_p]
+        GetDllLibXls().CellRange_get_MergeArea.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_get_MergeArea, self.Ptr)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @property
+
+    def EntireRow(self)->'CellRange':
+        """
+    <summary>
+        Returns a Range object that represents the entire row (or rows) that contains the specified range.
+    </summary>
+        """
+        GetDllLibXls().CellRange_get_EntireRow.argtypes=[c_void_p]
+        GetDllLibXls().CellRange_get_EntireRow.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_get_EntireRow, self.Ptr)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+
+    def GetDependentRanges(self ,isAll:bool)->'ListCellRanges':
+        """
+
+        """
+        
+        GetDllLibXls().CellRange_GetDependentRanges.argtypes=[c_void_p ,c_bool]
+        GetDllLibXls().CellRange_GetDependentRanges.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_GetDependentRanges, self.Ptr, isAll)
+        ret = None if intPtr==None else ListCellRanges(intPtr)
+        return ret
+
+
+
+    def GetReferRanges(self)->'ListReferRangeAreas':
+        """
+
+        """
+        GetDllLibXls().CellRange_GetReferRanges.argtypes=[c_void_p]
+        GetDllLibXls().CellRange_GetReferRanges.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellRange_GetReferRanges, self.Ptr)
+        ret = None if intPtr==None else ListReferRangeAreas(intPtr)
+        return ret
+
+
+class ListCellRanges (IList[CellRange]):
+    def GetEnumerator(self)->'IEnumerator':
+        """
+
+        """
+        ret = super(ListCellRanges, self).GetEnumerator()
+        ret._gtype = XlsRange
+        #ret = None if enumerator==None else EnumeratorXlsRange(enumerator.Ptr)
+        return ret

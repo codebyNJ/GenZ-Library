@@ -1,0 +1,1368 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IChart (abc.ABC) :
+    """
+    <summary>
+        Represents a chart sheet in the workbook.
+    </summary>
+    """
+    @property
+
+    @abc.abstractmethod
+    def ChartType(self)->'ExcelChartType':
+        """
+    <summary>
+         Type of the chart.
+        <example>The following code illustrates how to set  ExcelChartType.PyramidBarStacked to ChartType property:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and set chart type
+        IChart chart = workbook.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        chart.ChartType = ExcelChartType.PyramidBarStacked;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @ChartType.setter
+    @abc.abstractmethod
+    def ChartType(self, value:'ExcelChartType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def DataRange(self)->'IXLSRange':
+        """
+    <summary>
+         DataRange for the chart series.
+        <example>The following code illustrates how to set the data range for the chart:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and set range
+        IChart chart = workbook.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @DataRange.setter
+    @abc.abstractmethod
+    def DataRange(self, value:'IXLSRange'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def SeriesDataFromRange(self)->bool:
+        """
+    <summary>
+         True if series are in rows in DataRange;False otherwise.
+        <example>The following code illustrates how to set SeriesDataFromRange property for charts:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and set SeriesDataFromRange
+        IChart chart = workbook.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        chart.SeriesDataFromRange = false;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @SeriesDataFromRange.setter
+    @abc.abstractmethod
+    def SeriesDataFromRange(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PageSetup(self)->'IChartPageSetup':
+        """
+    <summary>
+         Page setup for the chart. Read-only.
+        <example>The following code illustrates how to set paper size:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        IChart chart = workbook.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart page setup and paper size
+        IChartPageSetup pageSetup = chart.PageSetup;
+        pageSetup.PaperSize = PaperSizeType.A3TransversePaper;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def XPos(self)->float:
+        """
+    <summary>
+        X coordinate of the upper-left corner of the chart in points (1/72 inch).
+    </summary>
+        """
+        pass
+
+
+    @XPos.setter
+    @abc.abstractmethod
+    def XPos(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def YPos(self)->float:
+        """
+    <summary>
+        Y coordinate of the upper-left corner of the chart in points (1/72 inch).
+    </summary>
+        """
+        pass
+
+
+    @YPos.setter
+    @abc.abstractmethod
+    def YPos(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Width(self)->float:
+        """
+    <summary>
+        Width of the chart in points (1/72 inch).
+    </summary>
+        """
+        pass
+
+
+    @Width.setter
+    @abc.abstractmethod
+    def Width(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Height(self)->float:
+        """
+    <summary>
+        Height of the chart in points (1/72 inch).
+    </summary>
+        """
+        pass
+
+
+    @Height.setter
+    @abc.abstractmethod
+    def Height(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Name(self)->str:
+        """
+    <summary>
+        Name of the chart's worksheet.
+    </summary>
+        """
+        pass
+
+
+    @Name.setter
+    @abc.abstractmethod
+    def Name(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PrimaryCategoryAxis(self)->'IChartCategoryAxis':
+        """
+    <summary>
+         Primary category axis. Read-only.
+        <example>The following code illustrates how to set the visibility of PrimaryCategoryAxis:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        IChart chart = workbook.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Chart category axis
+        IChartCategoryAxis categoryAxis = chart.PrimaryCategoryAxis;
+        //Set visibility
+        categoryAxis.Visible = false;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PrimaryValueAxis(self)->'IChartValueAxis':
+        """
+    <summary>
+         Primary value axis. Read-only.
+        <example>The following code illustrates how to set the visibility of PrimaryValueAxis:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        IChart chart = workbook.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Chart value axis
+        IChartValueAxis valueAxis = chart.PrimaryValueAxis;
+        //Set visibility
+        valueAxis.Visible = false;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PrimarySerieAxis(self)->'IChartSeriesAxis':
+        """
+    <summary>
+         Primary serie axis. Read-only.
+        <example>The following code illustrates how to set the visibility of PrimarySerieAxis:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        IChart chart = workbook.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Surface3D;
+        //Chart series axis
+        IChartSeriesAxis seriesAxis = chart.PrimarySerieAxis;
+        //Set visibility
+        seriesAxis.Visible = false;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def SecondaryCategoryAxis(self)->'IChartCategoryAxis':
+        """
+    <summary>
+         Secondary category axis. Read-only.
+        <example>The following code illustrates how to disable PrimaryCategoryAxis and set 
+             SecondaryCategoryAxis for charts:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+                       worksheet.Range["A3"].Value = "100";
+                       worksheet.Range["B3"].Value = "200";
+                       worksheet.Range["C3"].Value = "300";
+        //Create chart and range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C3"];
+        //Set secondary axis
+        IChartSerie serie = chart.Series[1];
+        serie.UsePrimaryAxis = false;
+        chart.SecondaryCategoryAxis.Visible = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def SecondaryValueAxis(self)->'IChartValueAxis':
+        """
+    <summary>
+         Secondary value axis. Read-only.
+        <example>The following code illustrates how to disable PrimaryValueAxis and set 
+             SecondaryValueAxis for charts:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+                       worksheet.Range["A3"].Value = "100";
+                       worksheet.Range["B3"].Value = "200";
+                       worksheet.Range["C3"].Value = "300";
+        //Create chart and range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C3"];
+        //Set secondary axis
+        IChartSerie serie = chart.Series[1];
+        serie.UsePrimaryAxis = false;
+        chart.SecondaryValueAxis.Visible = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ChartArea(self)->'IChartFrameFormat':
+        """
+    <summary>
+         Returns an object that represents the complete chart area for the chart. Read-only.
+        <example>The following code illustrates how to access IChartFrameFormat using ChartArea 
+             property and set foreground color for the ChartArea:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart frame format
+        IChartFrameFormat frameFormat = chart.ChartArea;
+        //Set color
+        frameFormat.Fill.ForeColor = System.Drawing.Color.Red;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PlotArea(self)->'IChartFrameFormat':
+        """
+    <summary>
+         Returns plot area frame format. Read-only.
+        <example>The following code illustrates how to access IChartFrameFormat using PlotArea 
+             property and set foreground color for the chart's PlotArea:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart frame format
+        IChartFrameFormat frameFormat = chart.PlotArea;
+        //Set color
+        frameFormat.Fill.ForeColor = System.Drawing.Color.Red;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Walls(self)->'IChartWallOrFloor':
+        """
+    <summary>
+        Represents chart walls. Read-only.
+            <example>The following code illustrates how to access IChartWallOrFloor using Walls 
+            property and set foreground color for the chart's Walls:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Get chart
+        Chart chart = worksheet.Charts[0];
+        //Set chart wall
+        IChartWallOrFloor wall = chart.Walls;
+        //Set color
+        wall.Fill.FillType = ShapeFillType.SolidColor;
+        wall.Fill.ForeColor = System.Drawing.Color.Red;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Floor(self)->'IChartWallOrFloor':
+        """
+    <summary>
+        Represents chart floor. Read-only.
+            <example>The following code illustrates how to access IChartWallOrFloor using Floor 
+            property and set foreground color for the chart's Floor:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Get chart
+        Chart chart = worksheet.Charts[0];
+        //Set chart wall
+        IChartWallOrFloor floor = chart.Floor;
+        //Set color
+        floor.Fill.FillType = ShapeFillType.SolidColor;
+        floor.Fill.ForeColor = System.Drawing.Color.Red;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def DataTable(self)->'IChartDataTable':
+        """
+    <summary>
+         Represents charts dataTable object.
+        <example>The following code illustrates how to set HasDataTable to "true" to enable data table
+             and set IChartDataTable.HasBorders to "false" to hide the borders of data table:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set Chart data table
+        chart.HasDataTable = true;
+        IChartDataTable dataTable = chart.DataTable;
+        //Set border
+        dataTable.HasBorders = false;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HasDataTable(self)->bool:
+        """
+    <summary>
+         True if the chart has a data table.
+        <example>The following code illustrates how data table can be set for charts:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set Chart data table
+        chart.HasDataTable = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @HasDataTable.setter
+    @abc.abstractmethod
+    def HasDataTable(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Legend(self)->'IChartLegend':
+        """
+    <summary>
+         Represents chart legend.
+        <example>The following code illustrates how to access IChartLegend using IChart.Legend 
+             property and set IChartLegend.Position to LegendPositionType.Left:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart legend and legend position
+        IChartLegend legend = chart.Legend;
+        legend.Position = LegendPositionType.Left;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HasLegend(self)->bool:
+        """
+    <summary>
+         True if the chart has a legend object.
+        <example>The following code illustrates how to set HasLegend property:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set hasLegend
+        chart.HasLegend = false;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @HasLegend.setter
+    @abc.abstractmethod
+    def HasLegend(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Rotation(self)->int:
+        """
+    <summary>
+         Returns or sets the rotation of the 3-D chart view
+             (the rotation of the plot area around the z-axis, in degrees).(0 to 360 degrees).
+        <example>The following code illustrates how to set Rotation for 3-D charts:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set Chart rotation
+        chart.ChartType = ExcelChartType.Column3DClustered;
+        chart.Rotation = 50;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @Rotation.setter
+    @abc.abstractmethod
+    def Rotation(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Elevation(self)->int:
+        """
+    <summary>
+         Returns or sets the elevation of the 3-D chart view, in degrees (?0 to +90 degrees).
+        <example>The following code illustrates how to set Rotation for 3-D charts:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set Chart elevation
+        chart.ChartType = ExcelChartType.Column3DClustered;
+        chart.Elevation = 50;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @Elevation.setter
+    @abc.abstractmethod
+    def Elevation(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Perspective(self)->int:
+        """
+    <summary>
+         Returns or sets the perspective for the 3-D chart view (0 to 100).
+        <example>The following code illustrates how to set Perspective for the charts:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set Chart perspective
+        chart.ChartType = ExcelChartType.Column3DClustered;
+        chart.Perspective = 70;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @Perspective.setter
+    @abc.abstractmethod
+    def Perspective(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HeightPercent(self)->int:
+        """
+    <summary>
+        Returns or sets the height of a 3-D chart as a percentage of the chart width
+             (between 5 and 500 percent).
+        <example>The following code illustrates how to set HeightPercent to a Column 3D chart:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set Chart height percent
+        chart.ChartType = ExcelChartType.Column3DClustered;
+        chart.AutoScaling = false;
+        chart.HeightPercent = 50;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @HeightPercent.setter
+    @abc.abstractmethod
+    def HeightPercent(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def DepthPercent(self)->int:
+        """
+    <summary>
+         Returns or sets the depth of a 3-D chart as a percentage of the chart width
+             (between 20 and 2000 percent).
+        <example>The following code illustrates how to set DepthPercent to a Column 3D chart:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set Chart depth percent
+        chart.ChartType = ExcelChartType.Column3DClustered;
+        chart.DepthPercent = 500;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @DepthPercent.setter
+    @abc.abstractmethod
+    def DepthPercent(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def GapDepth(self)->int:
+        """
+    <summary>
+         Returns or sets the distance between the data series in a 3-D chart, as a percentage of 
+             the marker width.( 0 - 500 )
+        <example>The following code illustrates how to set GapDepth to a Column 3D chart:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set gap depth
+        chart.ChartType = ExcelChartType.Column3DClustered;
+        chart.GapDepth = 450;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @GapDepth.setter
+    @abc.abstractmethod
+    def GapDepth(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def RightAngleAxes(self)->bool:
+        """
+    <summary>
+         True if the chart axes are at right angles, independent of chart rotation or elevation.
+        <example>The following code illustrates how RightAngleAxes can be set for charts:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set Chart rotation and RightAngleAxes
+        chart.ChartType = ExcelChartType.Column3DClustered;
+        chart.Rotation = 50;
+        chart.RightAngleAxes = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @RightAngleAxes.setter
+    @abc.abstractmethod
+    def RightAngleAxes(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def AutoScaling(self)->bool:
+        """
+    <summary>
+         True if Microsoft Excel scales a 3-D chart so that it's closer in size to the equivalent 2-D chart.
+        <example>The following code illustrates how to set auto scaling for charts:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Create chart and range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set auto scaling
+        chart.ChartType = ExcelChartType.Column3DClustered;
+        chart.HeightPercent = 50;
+        chart.AutoScaling = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @AutoScaling.setter
+    @abc.abstractmethod
+    def AutoScaling(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def WallsAndGridlines2D(self)->bool:
+        """
+    <summary>
+        True if gridlines are drawn two-dimensionally on a 3-D chart.
+    </summary>
+        """
+        pass
+
+
+    @WallsAndGridlines2D.setter
+    @abc.abstractmethod
+    def WallsAndGridlines2D(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HasPlotArea(self)->bool:
+        """
+    <summary>
+        Indicates whether chart has plot area.
+    </summary>
+        """
+        pass
+
+
+    @HasPlotArea.setter
+    @abc.abstractmethod
+    def HasPlotArea(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def DisplayBlanksAs(self)->'ChartPlotEmptyType':
+        """
+    <summary>
+        Represents the way that blank cells are plotted on a chart.
+    </summary>
+        """
+        pass
+
+
+    @DisplayBlanksAs.setter
+    @abc.abstractmethod
+    def DisplayBlanksAs(self, value:'ChartPlotEmptyType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def PlotVisibleOnly(self)->bool:
+        """
+    <summary>
+         True if only visible cells are plotted. False if both visible and hidden cells are plotted.
+        <example>The following code illustrates how to set PlotVisibleOnly to "true" so that 
+             chart plots all the cells within the chart's DataRange:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Add data
+        worksheet.Range["A1"].Text = "Jan";
+                       worksheet.Range["B1"].Text = "Feb";
+                       worksheet.Range["C1"].Text = "Mar";
+                       worksheet.Range["A2"].Text = "10";
+                       worksheet.Range["B2"].Text = "20";
+                       worksheet.Range["C2"].Text = "30";
+        //Hide column and create chart
+        worksheet.Columns[2].ColumnWidth = 0;
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set Plot visible only
+        chart.PlotVisibleOnly = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @PlotVisibleOnly.setter
+    @abc.abstractmethod
+    def PlotVisibleOnly(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def SizeWithWindow(self)->bool:
+        """
+    <summary>
+        True if Microsoft Excel resizes the chart to match the size of the chart sheet window.
+            False if the chart size isn't attached to the window size. Applies only to chart sheets.
+    </summary>
+        """
+        pass
+
+
+    @SizeWithWindow.setter
+    @abc.abstractmethod
+    def SizeWithWindow(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PivotTable(self)->'PivotTable':
+        """
+    <summary>
+        Gets or sets the pivot source.
+    </summary>
+<value>The pivot source.</value>
+        """
+        pass
+
+
+    @PivotTable.setter
+    @abc.abstractmethod
+    def PivotTable(self, value:'PivotTable'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PivotChartType(self)->'ExcelChartType':
+        """
+    <summary>
+        Gets or sets the type of the pivot chart.
+    </summary>
+<value>The type of the pivot chart.</value>
+        """
+        pass
+
+
+    @PivotChartType.setter
+    @abc.abstractmethod
+    def PivotChartType(self, value:'ExcelChartType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def DisplayEntireFieldButtons(self)->bool:
+        """
+    <summary>
+        Gets or sets a value indicating whether [show all field buttons].
+    </summary>
+<value>
+  <c>true</c> if [show all field buttons]; otherwise, <c>false</c>.
+            </value>
+        """
+        pass
+
+
+    @DisplayEntireFieldButtons.setter
+    @abc.abstractmethod
+    def DisplayEntireFieldButtons(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def DisplayValueFieldButtons(self)->bool:
+        """
+    <summary>
+        Gets or sets a value indicating whether [show value field buttons].
+    </summary>
+<value>
+  <c>true</c> if [show value field buttons]; otherwise, <c>false</c>.
+            </value>
+        """
+        pass
+
+
+    @DisplayValueFieldButtons.setter
+    @abc.abstractmethod
+    def DisplayValueFieldButtons(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def DisplayAxisFieldButtons(self)->bool:
+        """
+    <summary>
+        Gets or sets a value indicating whether [show axis field buttons].
+    </summary>
+<value>
+  <c>true</c> if [show axis field buttons]; otherwise, <c>false</c>.
+            </value>
+        """
+        pass
+
+
+    @DisplayAxisFieldButtons.setter
+    @abc.abstractmethod
+    def DisplayAxisFieldButtons(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def DisplayLegendFieldButtons(self)->bool:
+        """
+    <summary>
+        Gets or sets a value indicating whether [show legend field buttons].
+    </summary>
+<value>
+  <c>true</c> if [show legend field buttons]; otherwise, <c>false</c>.
+            </value>
+        """
+        pass
+
+
+    @DisplayLegendFieldButtons.setter
+    @abc.abstractmethod
+    def DisplayLegendFieldButtons(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowReportFilterFieldButtons(self)->bool:
+        """
+    <summary>
+        Gets or sets a value indicating whether [show report filter field buttons].
+    </summary>
+<value>
+  <c>true</c> if [show report filter field buttons]; otherwise, <c>false</c>.
+            </value>
+        """
+        pass
+
+
+    @ShowReportFilterFieldButtons.setter
+    @abc.abstractmethod
+    def ShowReportFilterFieldButtons(self, value:bool):
+        """
+
+        """
+        pass
+
+

@@ -1,0 +1,24 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartLinePatternType(Enum):
+    """
+    <summary>
+        Chart line patterns.
+    </summary>
+    """
+    Solid = 0
+    Dash = 1
+    Dot = 2
+    DashDot = 3
+    DashDotDot = 4
+    none = 5
+    DarkGray = 6
+    MediumGray = 7
+    LightGray = 8
+

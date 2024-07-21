@@ -1,0 +1,421 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IDataValidation (  IExcelApplication, IOptimizedUpdate) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def InputTitle(self)->str:
+        """
+
+        """
+        pass
+
+
+    @InputTitle.setter
+    @abc.abstractmethod
+    def InputTitle(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def InputMessage(self)->str:
+        """
+
+        """
+        pass
+
+
+    @InputMessage.setter
+    @abc.abstractmethod
+    def InputMessage(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ErrorTitle(self)->str:
+        """
+
+        """
+        pass
+
+
+    @ErrorTitle.setter
+    @abc.abstractmethod
+    def ErrorTitle(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ErrorMessage(self)->str:
+        """
+
+        """
+        pass
+
+
+    @ErrorMessage.setter
+    @abc.abstractmethod
+    def ErrorMessage(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Formula1(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Formula1.setter
+    @abc.abstractmethod
+    def Formula1(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def DateTime1(self)->'DateTime':
+        """
+
+        """
+        pass
+
+
+    @DateTime1.setter
+    @abc.abstractmethod
+    def DateTime1(self, value:'DateTime'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Formula2(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Formula2.setter
+    @abc.abstractmethod
+    def Formula2(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def DateTime2(self)->'DateTime':
+        """
+
+        """
+        pass
+
+
+    @DateTime2.setter
+    @abc.abstractmethod
+    def DateTime2(self, value:'DateTime'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def AllowType(self)->'CellDataType':
+        """
+
+        """
+        pass
+
+
+    @AllowType.setter
+    @abc.abstractmethod
+    def AllowType(self, value:'CellDataType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def CompareOperator(self)->'ValidationComparisonOperator':
+        """
+
+        """
+        pass
+
+
+    @CompareOperator.setter
+    @abc.abstractmethod
+    def CompareOperator(self, value:'ValidationComparisonOperator'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsListInFormula(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsListInFormula.setter
+    @abc.abstractmethod
+    def IsListInFormula(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IgnoreBlank(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IgnoreBlank.setter
+    @abc.abstractmethod
+    def IgnoreBlank(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsSuppressDropDownArrow(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsSuppressDropDownArrow.setter
+    @abc.abstractmethod
+    def IsSuppressDropDownArrow(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowInput(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowInput.setter
+    @abc.abstractmethod
+    def ShowInput(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowError(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowError.setter
+    @abc.abstractmethod
+    def ShowError(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def PromptBoxHPosition(self)->int:
+        """
+
+        """
+        pass
+
+
+    @PromptBoxHPosition.setter
+    @abc.abstractmethod
+    def PromptBoxHPosition(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def PromptBoxVPosition(self)->int:
+        """
+
+        """
+        pass
+
+
+    @PromptBoxVPosition.setter
+    @abc.abstractmethod
+    def PromptBoxVPosition(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsInputVisible(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsInputVisible.setter
+    @abc.abstractmethod
+    def IsInputVisible(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsInputPositionFixed(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsInputPositionFixed.setter
+    @abc.abstractmethod
+    def IsInputPositionFixed(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def AlertStyle(self)->'AlertStyleType':
+        """
+
+        """
+        pass
+
+
+    @AlertStyle.setter
+    @abc.abstractmethod
+    def AlertStyle(self, value:'AlertStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Values(self)->List[str]:
+        """
+
+        """
+        pass
+
+
+    @Values.setter
+    @abc.abstractmethod
+    def Values(self, value:List[str]):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def DataRange(self)->'IXLSRange':
+        """
+
+        """
+        pass
+
+
+    @DataRange.setter
+    @abc.abstractmethod
+    def DataRange(self, value:'IXLSRange'):
+        """
+
+        """
+        pass
+
+

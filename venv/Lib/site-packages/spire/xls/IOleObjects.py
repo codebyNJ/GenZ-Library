@@ -1,0 +1,32 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IOleObjects (  CollectionBase[IOleObject]) :
+    """
+
+    """
+
+    def Add(self ,fileName:str,stream:'Stream',linkType:'OleLinkType')->'IOleObject':
+        """
+    <summary>
+        Adds new ole object to the collection.
+    </summary>
+    <param name="fileName">File name.</param>
+    <param name="image">File image.</param>
+    <param name="linkType">Link type.</param>
+        """
+        intPtrimage:c_void_p = stream.Ptr
+        enumlinkType:c_int = linkType.value
+
+        GetDllLibXls().IOleObjects_Add.argtypes=[c_void_p ,c_void_p,c_void_p,c_int]
+        GetDllLibXls().IOleObjects_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IOleObjects_Add, self.Ptr, fileName,intPtrimage,enumlinkType)
+        ret = None if intPtr==None else IOleObject(intPtr)
+        return ret
+
+

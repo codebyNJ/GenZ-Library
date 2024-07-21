@@ -1,0 +1,70 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ComboBoxCollection (  CollectionBase[XlsComboBoxShape],IComboBoxes) :
+    """
+
+    """
+    @dispatch
+
+    def get_Item(self ,index:int)->IComboBoxShape:
+        """
+
+        """
+        
+        GetDllLibXls().ComboBoxCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ComboBoxCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ComboBoxCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsComboBoxShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->IComboBoxShape:
+        """
+
+        """
+        
+        GetDllLibXls().ComboBoxCollection_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ComboBoxCollection_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ComboBoxCollection_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else XlsComboBoxShape(intPtr)
+        return ret
+
+
+
+    def AddCopy(self ,comboboxsource:'IComboBoxShape'):
+        """
+
+        """
+        intPtrcomboboxsource:c_void_p = comboboxsource.Ptr
+
+        GetDllLibXls().ComboBoxCollection_AddCopy.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().ComboBoxCollection_AddCopy, self.Ptr, intPtrcomboboxsource)
+
+
+    def AddComboBox(self ,row:int,column:int,height:int,width:int)->'IComboBoxShape':
+        """
+
+        """
+        
+        GetDllLibXls().ComboBoxCollection_AddComboBox.argtypes=[c_void_p ,c_int,c_int,c_int,c_int]
+        GetDllLibXls().ComboBoxCollection_AddComboBox.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ComboBoxCollection_AddComboBox, self.Ptr, row,column,height,width)
+        ret = None if intPtr==None else XlsComboBoxShape(intPtr)
+        return ret
+
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().ComboBoxCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().ComboBoxCollection_Clear, self.Ptr)
+

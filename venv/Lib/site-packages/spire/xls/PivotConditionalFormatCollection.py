@@ -1,0 +1,38 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from spire.xls.PivotConditionalFormat import *
+from ctypes import *
+import abc
+
+class PivotConditionalFormatCollection (SpireObject) :
+    """
+
+    """
+
+    def AddPivotConditionalFormat(self)->'PivotConditionalFormat':
+        """
+
+        """
+        GetDllLibXls().PivotConditionalFormatCollection_AddPivotConditionalFormat.argtypes=[c_void_p]
+        GetDllLibXls().PivotConditionalFormatCollection_AddPivotConditionalFormat.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PivotConditionalFormatCollection_AddPivotConditionalFormat, self.Ptr)
+        ret = None if intPtr==None else PivotConditionalFormat(intPtr)
+        return ret
+
+
+
+    def get_Item(self ,index:int)->'PivotConditionalFormat':
+        """
+
+        """
+        
+        GetDllLibXls().PivotConditionalFormatCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().PivotConditionalFormatCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PivotConditionalFormatCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else PivotConditionalFormat(intPtr)
+        return ret
+
+

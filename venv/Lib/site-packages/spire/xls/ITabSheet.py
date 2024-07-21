@@ -1,0 +1,302 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ITabSheet (  IExcelApplication) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def TabKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @TabKnownColor.setter
+    @abc.abstractmethod
+    def TabKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def TabColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @TabColor.setter
+    @abc.abstractmethod
+    def TabColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Pictures(self)->'IPictures':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Workbook(self)->'IWorkbook':
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsRightToLeft(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsRightToLeft.setter
+    @abc.abstractmethod
+    def IsRightToLeft(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsSelected(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def TabIndex(self)->int:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Name(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Name.setter
+    @abc.abstractmethod
+    def Name(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Visibility(self)->'WorksheetVisibility':
+        """
+
+        """
+        pass
+
+
+    @Visibility.setter
+    @abc.abstractmethod
+    def Visibility(self, value:'WorksheetVisibility'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def TextBoxes(self)->'ITextBoxes':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def CheckBoxes(self)->'ICheckBoxes':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ComboBoxes(self)->'IComboBoxes':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RadioButtons(self)->'IRadioButtons':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def CodeName(self)->str:
+        """
+
+        """
+        pass
+
+
+    @CodeName.setter
+    @abc.abstractmethod
+    def CodeName(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ProtectContents(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ProtectDrawingObjects(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ProtectScenarios(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Protection(self)->'SheetProtectionType':
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsPasswordProtected(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Activate(self):
+        """
+
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Select(self):
+        """
+
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Unselect(self):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Protect(self ,password:str):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Protect(self ,password:str,options:SheetProtectionType):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Unprotect(self ,password:str):
+        """
+
+        """
+        pass
+
+

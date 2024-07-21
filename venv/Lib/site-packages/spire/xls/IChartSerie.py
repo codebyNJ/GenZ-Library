@@ -1,0 +1,779 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IChartSerie (  IExcelApplication) :
+    """
+    <summary>
+        Represents a series in the chart.
+    </summary>
+    """
+    @property
+
+    @abc.abstractmethod
+    def Values(self)->'IXLSRange':
+        """
+    <summary>
+        Values range for the series.
+            <example>The following code illustrates how to set values for IChartSerie in charts:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set serie
+        IChartSerie serie = chart.Series.Add();
+        //Set category labels and values
+        serie.CategoryLabels = worksheet.Range["A1:C1"];
+        serie.Values = worksheet.Range["A2:C2"];
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @Values.setter
+    @abc.abstractmethod
+    def Values(self, value:'IXLSRange'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def CategoryLabels(self)->'IXLSRange':
+        """
+    <summary>
+        Category labels for the series.
+            <example>The following code illustrates how to set category labels for IChartSerie in charts:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set serie
+        IChartSerie serie = chart.Series.Add();
+        //Set category labels and values
+        serie.CategoryLabels = worksheet.Range["A1:C1"];
+        serie.Values = worksheet.Range["A2:C2"];
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @CategoryLabels.setter
+    @abc.abstractmethod
+    def CategoryLabels(self, value:'IXLSRange'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Bubbles(self)->'IXLSRange':
+        """
+    <summary>
+        Bubble sizes for the series.
+            <example>The following code illustrates how to set Bubbles for IChartSerie in charts:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set serie
+        IChartSerie serie = chart.Series.Add(ExcelChartType.Bubble);
+        //Set values and bubble chart range
+        serie.Values = worksheet.Range["A1:C1"];;
+        serie.Bubbles = worksheet.Range["A2:C2"];
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @Bubbles.setter
+    @abc.abstractmethod
+    def Bubbles(self, value:'IXLSRange'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Name(self)->str:
+        """
+    <summary>
+        Name of the series.
+            <example>The following code illustrates how to access the name of the IChartSerie:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set serie
+        IChartSerie serie = chart.Series.Add("BarSerie");
+        //Set category labels and values
+        serie.CategoryLabels = worksheet.Range["A1:C1"];
+        serie.Values = worksheet.Range["A2:C2"];
+        //Get Serie name
+        Console.Write(serie.Name);
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @Name.setter
+    @abc.abstractmethod
+    def Name(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def NamedRange(self)->'CellRange':
+        """
+    <summary>
+        Series Name range for the series.
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def UsePrimaryAxis(self)->bool:
+        """
+    <summary>
+        Indicates whether to use primary axis for series drawing.
+            <example>The following code illustrates how the secondary axis can be used by disabling primary axis:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set range
+        chart.DataRange = worksheet["A1:C3"];
+        //Set secondary axis
+        IChartSerie serie = chart.Series[1];
+        serie.UsePrimaryAxis = false;
+        chart.SecondaryCategoryAxis.Visible = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @UsePrimaryAxis.setter
+    @abc.abstractmethod
+    def UsePrimaryAxis(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def DataPoints(self)->'IChartDataPoints':
+        """
+    <summary>
+        Returns collection of data points. Read-only.
+            <example>The following code illustrates how to access the IChartDataPoints collection from IChartSerie:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set range
+        chart.DataRange = worksheet["A1:C3"];
+        //Set data points
+        IChartDataPoints dataPoints = chart.Series[0].DataPoints;
+        //Set data labels value visibility
+        dataPoints.DefaultDataPoint.DataLabels.HasValue = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Format(self)->'IChartSerieDataFormat':
+        """
+    <summary>
+        Returns format of current serie.
+            <example>The following code illustrates how to access the IChartSerieDataFormat from IChartSerie:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set range
+        chart.DataRange = worksheet["A1:C2"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Line;
+        //Set serie format
+        IChartSerieDataFormat format = chart.Series[0].Format;
+        //Set marker style
+        format.MarkerStyle = ChartMarkerType.Star;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def SerieType(self)->'ExcelChartType':
+        """
+    <summary>
+        Represents serie type.
+            <example>The following code illustrates how to set SerieType for charts:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set range
+        chart.DataRange = worksheet["A1:C2"];
+        //Set chart type
+        chart.Series[0].SerieType = ExcelChartType.Line;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @SerieType.setter
+    @abc.abstractmethod
+    def SerieType(self, value:'ExcelChartType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def EnteredDirectlyValues(self)->List['SpireObject']:
+        """
+    <summary>
+        Represents value as entered directly.
+            <example>The following code illustrates how series data can be directly given for charts:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set serie
+        IChartSerie serie = chart.Series.Add(ExcelChartType.Pie);
+        //Set direct values
+        serie.EnteredDirectlyValues = new object[] { 2000, 1000, 1000 };
+        //Set direct category label
+        serie.EnteredDirectlyCategoryLabels = new object[] { "Total Income", "Expenses", "Profit" };
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @EnteredDirectlyValues.setter
+    @abc.abstractmethod
+    def EnteredDirectlyValues(self, value:List['SpireObject']):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def EnteredDirectlyCategoryLabels(self)->List['SpireObject']:
+        """
+    <summary>
+        Represents category values as entered directly.
+            <example>The following code illustrates how series category labels can be directly given for charts:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set serie
+        IChartSerie serie = chart.Series.Add(ExcelChartType.Pie);
+        //Set direct values
+        serie.EnteredDirectlyValues = new object[] { 2000, 1000, 1000 };
+        //Set direct category label
+        serie.EnteredDirectlyCategoryLabels = new object[] { "Total Income", "Expenses", "Profit" };
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @EnteredDirectlyCategoryLabels.setter
+    @abc.abstractmethod
+    def EnteredDirectlyCategoryLabels(self, value:List['SpireObject']):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def EnteredDirectlyBubbles(self)->List['SpireObject']:
+        """
+    <summary>
+        Represents bubble values as entered directly.
+            <example>The following code illustrates how series data for second value axis of 
+            ExcelChartType.Bubble charts can be directly given for charts:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set serie
+        IChartSerie serie = chart.Series.Add(ExcelChartType.Bubble);
+        //Set direct values
+        serie.EnteredDirectlyValues = new object[] { 10, 20, 30 };
+        //Set bubble chart direct values
+        serie.EnteredDirectlyBubbles = new object[] { 1, 4, 2 };
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @EnteredDirectlyBubbles.setter
+    @abc.abstractmethod
+    def EnteredDirectlyBubbles(self, value:List['SpireObject']):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ErrorBarsY(self)->'IChartErrorBars':
+        """
+    <summary>
+        Represents Y error bars. Read only.
+            <example>The following code illustrates how IChartErrorBars on Y-axis can be accessed:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set chart type
+        chart.ChartType = ExcelChartType.ScatterLine;
+        //Set range
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set error bar
+        chart.Series[0].HasErrorBarsY = true;
+        IChartErrorBars errorBar = chart.Series[0].ErrorBarsY;
+        //Set error bar type
+        errorBar.Type = ErrorBarType.Percentage;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HasErrorBarsY(self)->bool:
+        """
+    <summary>
+        Indicates if serie contains Y error bars.
+            <example>The following code illustrates how HasErrorBarsY property can be used:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set chart type
+        chart.ChartType = ExcelChartType.ScatterLine;
+        //Set range
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set error bar
+        chart.Series[0].HasErrorBarsY = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @HasErrorBarsY.setter
+    @abc.abstractmethod
+    def HasErrorBarsY(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ErrorBarsX(self)->'IChartErrorBars':
+        """
+    <summary>
+        Represents X error bars. Read only.
+            <example>The following code illustrates how IChartErrorBars in X-axis can be accessed:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set chart type
+        chart.ChartType = ExcelChartType.ScatterLine;
+        //Set range
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set error bar
+        chart.Series[0].HasErrorBarsX = true;
+        IChartErrorBars errorBar = chart.Series[0].ErrorBarsX;
+        //Set error bar type
+        errorBar.Type = ErrorBarType.Percentage;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HasErrorBarsX(self)->bool:
+        """
+    <summary>
+        Indicates if serie contains X error bars.
+            <example>The following code illustrates how HasErrorBarsX property can be used:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set chart type
+        chart.ChartType = ExcelChartType.ScatterLine;
+        //Set range
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set error bar
+        chart.Series[0].HasErrorBarsX = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @HasErrorBarsX.setter
+    @abc.abstractmethod
+    def HasErrorBarsX(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def TrendLines(self)->'IChartTrendLines':
+        """
+    <summary>
+        Represents serie trend lines collection. Read only.
+            <example>The following code illustrates how IChartTrendLines collection can be accessed 
+            from a particular IChartSerie:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set range
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set trend line
+        IChartTrendLines trendLines = chart.Series[0].TrendLines;
+        IChartTrendLine trendLine = trendLines.Add(TrendLineType.Linear);
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def DataLabels(self)->'IChartDataLabels':
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def ErrorBar(self ,bIsY:bool)->IChartErrorBars:
+        """
+    <summary>
+        Creates error bar object.
+            <example>The following code illustrates how to set IChartErrorBars on Y-axis of a 
+            particular IChartSerie:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set range
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set error bar
+        chart.Series[0].ErrorBar(true);
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="bIsY">If true - on Y axis; otherwise on X axis.</param>
+    <returns>Return error bar objcet.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def ErrorBar(self ,bIsY:bool,include:ErrorBarIncludeType)->IChartErrorBars:
+        """
+    <summary>
+        Creates error bar object.
+            <example>The following code illustrates how to set IChartErrorBars with 
+            ErrorBarIncludeType.Plus on Y-axis of a particular IChartSerie:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set range
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set error bar
+        chart.Series[0].ErrorBar(true, ErrorBarIncludeType.Plus);
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="bIsY">If true - on Y axis; otherwise on X axis.</param>
+    <param name="include">Represents include type.</param>
+    <returns>Return error bar objcet.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def ErrorBar(self ,bIsY:bool,include:ErrorBarIncludeType,type:ErrorBarType)->IChartErrorBars:
+        """
+    <summary>
+        Creates error bar object.
+            <example>The following code illustrates how to set IChartErrorBars with ErrorBarIncludeType.Plus 
+            and ErrorBarType.Percentage on Y-axis of a particular IChartSerie:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set range
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set error bar
+        chart.Series[0].ErrorBar(true, ErrorBarIncludeType.Plus, ErrorBarType.Percentage);
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="bIsY">If true - on Y axis; otherwise on X axis.</param>
+    <param name="include">Represents include type.</param>
+    <param name="type">Represents error bar type.</param>
+    <returns>Return error bar objcet.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def ErrorBar(self ,bIsY:bool,include:ErrorBarIncludeType,type:ErrorBarType,numberValue:float)->IChartErrorBars:
+        """
+    <summary>
+        Creates error bar object.
+            <example>The following code illustrates how to set IChartErrorBars with ErrorBarIncludeType.Plus , 
+            ErrorBarType.Percentage and number value of "50" on Y-axis of a particular IChartSerie:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set range
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set error bar
+        chart.Series[0].ErrorBar(true, ErrorBarIncludeType.Plus, ErrorBarType.Percentage, 50);
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="bIsY">If true - on Y axis; otherwise on X axis.</param>
+    <param name="include">Represents include type.</param>
+    <param name="type">Represents error bar type.</param>
+    <param name="numberValue">Represents number value.</param>
+    <returns>Return error bar objcet.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def ErrorBar(self ,bIsY:bool,plusRange:IXLSRange,minusRange:IXLSRange)->IChartErrorBars:
+        """
+    <summary>
+        Sets custom error bar type.
+            <example>The following code illustrates how an IChartErrorBars can be created on X-axis 
+            with IChartErrorBars.PlusRange and IChartErrorBars.MinusRange:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set chart type
+        chart.ChartType = ExcelChartType.ScatterLine;
+        //Set range
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set error bar
+        chart.Series[0].ErrorBar(false, worksheet.Range["A3"], worksheet.Range["B3"]);
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="bIsY">If true - on Y axis; otherwise on X axis.</param>
+    <param name="plusRange">Represents plus range.</param>
+    <param name="minusRange">Represents minus range.</param>
+    <returns>Returns error bar object.</returns>
+        """
+        pass
+
+

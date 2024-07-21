@@ -1,0 +1,140 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class TextBoxShapeBase (  ITextBoxShape) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def IsWrapText(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsWrapText.setter
+    @abc.abstractmethod
+    def IsWrapText(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def InnerLeftMargin(self)->float:
+        """
+
+        """
+        pass
+
+
+    @InnerLeftMargin.setter
+    @abc.abstractmethod
+    def InnerLeftMargin(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def InnerRightMargin(self)->float:
+        """
+
+        """
+        pass
+
+
+    @InnerRightMargin.setter
+    @abc.abstractmethod
+    def InnerRightMargin(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def InnerTopMargin(self)->float:
+        """
+
+        """
+        pass
+
+
+    @InnerTopMargin.setter
+    @abc.abstractmethod
+    def InnerTopMargin(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def InnerBottomMargin(self)->float:
+        """
+
+        """
+        pass
+
+
+    @InnerBottomMargin.setter
+    @abc.abstractmethod
+    def InnerBottomMargin(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def InsetMode(self)->str:
+        """
+
+        """
+        pass
+
+
+    @InsetMode.setter
+    @abc.abstractmethod
+    def InsetMode(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def FillColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @FillColor.setter
+    @abc.abstractmethod
+    def FillColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+

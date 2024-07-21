@@ -1,0 +1,50 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IAddInFunctions (  IExcelApplication) :
+    """
+
+    """
+
+    @abc.abstractmethod
+    def get_Item(self ,index:int)->'IAddInFunction':
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Count(self)->int:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Add(self ,strFileName:str,strFunctionName:str)->int:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Add(self ,strFunctionName:str)->int:
+        """
+
+        """
+        pass
+
+

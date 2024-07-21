@@ -1,0 +1,38 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class MsoPathInfo (SpireObject) :
+    """
+
+    """
+    @property
+
+    def Type(self)->'MsoPathType':
+        """
+
+        """
+        GetDllLibXls().MsoPathInfo_get_Type.argtypes=[c_void_p]
+        GetDllLibXls().MsoPathInfo_get_Type.restype=c_int
+        ret = CallCFunction(GetDllLibXls().MsoPathInfo_get_Type, self.Ptr)
+        objwraped = MsoPathType(ret)
+        return objwraped
+
+#    @property
+#
+#    def PointList(self)->'ArrayList':
+#        """
+#
+#        """
+#        GetDllLibXls().MsoPathInfo_get_PointList.argtypes=[c_void_p]
+#        GetDllLibXls().MsoPathInfo_get_PointList.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().MsoPathInfo_get_PointList, self.Ptr)
+#        ret = None if intPtr==None else ArrayList(intPtr)
+#        return ret
+#
+
+

@@ -1,0 +1,40 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ITextBoxLinkShape (  ITextBoxShape) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Rotation(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Rotation.setter
+    @abc.abstractmethod
+    def Rotation(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def HyLink(self)->'IHyperLink':
+        """
+
+        """
+        pass
+
+

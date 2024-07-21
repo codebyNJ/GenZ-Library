@@ -1,0 +1,96 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ExcelChartType(Enum):
+    """
+    <summary>
+        Chart types.
+    </summary>
+    """
+    ColumnClustered = 0
+    ColumnStacked = 1
+    Column100PercentStacked = 2
+    Column3DClustered = 3
+    Column3DStacked = 4
+    Column3D100PercentStacked = 5
+    Column3D = 6
+    BarClustered = 7
+    BarStacked = 8
+    Bar100PercentStacked = 9
+    Bar3DClustered = 10
+    Bar3DStacked = 11
+    Bar3D100PercentStacked = 12
+    Line = 13
+    LineStacked = 14
+    Line100PercentStacked = 15
+    LineMarkers = 16
+    LineMarkersStacked = 17
+    LineMarkers100PercentStacked = 18
+    Line3D = 19
+    Pie = 20
+    Pie3D = 21
+    PieOfPie = 22
+    PieExploded = 23
+    Pie3DExploded = 24
+    PieBar = 25
+    ScatterMarkers = 26
+    ScatterSmoothedLineMarkers = 27
+    ScatterSmoothedLine = 28
+    ScatterLineMarkers = 29
+    ScatterLine = 30
+    Area = 31
+    AreaStacked = 32
+    Area100PercentStacked = 33
+    Area3D = 34
+    Area3DStacked = 35
+    Area3D100PercentStacked = 36
+    Doughnut = 37
+    DoughnutExploded = 38
+    Radar = 39
+    RadarMarkers = 40
+    RadarFilled = 41
+    Surface3D = 42
+    Surface3DNoColor = 43
+    SurfaceContour = 44
+    SurfaceContourNoColor = 45
+    Bubble = 46
+    Bubble3D = 47
+    StockHighLowClose = 48
+    StockOpenHighLowClose = 49
+    StockVolumeHighLowClose = 50
+    StockVolumeOpenHighLowClose = 51
+    CylinderClustered = 52
+    CylinderStacked = 53
+    Cylinder100PercentStacked = 54
+    CylinderBarClustered = 55
+    CylinderBarStacked = 56
+    CylinderBar100PercentStacked = 57
+    Cylinder3DClustered = 58
+    ConeClustered = 59
+    ConeStacked = 60
+    Cone100PercentStacked = 61
+    ConeBarClustered = 62
+    ConeBarStacked = 63
+    ConeBar100PercentStacked = 64
+    Cone3DClustered = 65
+    PyramidClustered = 66
+    PyramidStacked = 67
+    Pyramid100PercentStacked = 68
+    PyramidBarClustered = 69
+    PyramidBarStacked = 70
+    PyramidBar100PercentStacked = 71
+    Pyramid3DClustered = 72
+    CombinationChart = 73
+    Funnel = 74
+    WaterFall = 75
+    BoxAndWhisker = 76
+    Histogram = 77
+    Pareto = 78
+    TreeMap = 79
+    SunBurst = 80
+

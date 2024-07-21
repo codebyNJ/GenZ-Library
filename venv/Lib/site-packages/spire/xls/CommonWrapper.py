@@ -1,0 +1,40 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CommonWrapper (  SpireObject, IOptimizedUpdate, ICloneParent) :
+    """
+
+    """
+    def BeginUpdate(self):
+        """
+
+        """
+        GetDllLibXls().CommonWrapper_BeginUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().CommonWrapper_BeginUpdate, self.Ptr)
+
+    def EndUpdate(self):
+        """
+
+        """
+        GetDllLibXls().CommonWrapper_EndUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().CommonWrapper_EndUpdate, self.Ptr)
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().CommonWrapper_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().CommonWrapper_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CommonWrapper_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+

@@ -1,0 +1,168 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class RichTextShape (  SpireObject, IRichTextString) :
+    """
+
+    """
+    @property
+
+    def Text(self)->str:
+        """
+
+        """
+        GetDllLibXls().RichTextShape_get_Text.argtypes=[c_void_p]
+        GetDllLibXls().RichTextShape_get_Text.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().RichTextShape_get_Text, self.Ptr))
+        return ret
+
+
+    @Text.setter
+    def Text(self, value:str):
+        GetDllLibXls().RichTextShape_set_Text.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().RichTextShape_set_Text, self.Ptr, value)
+
+    @property
+
+    def RtfText(self)->str:
+        """
+
+        """
+        GetDllLibXls().RichTextShape_get_RtfText.argtypes=[c_void_p]
+        GetDllLibXls().RichTextShape_get_RtfText.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().RichTextShape_get_RtfText, self.Ptr))
+        return ret
+
+
+    @property
+    def IsFormatted(self)->bool:
+        """
+
+        """
+        GetDllLibXls().RichTextShape_get_IsFormatted.argtypes=[c_void_p]
+        GetDllLibXls().RichTextShape_get_IsFormatted.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().RichTextShape_get_IsFormatted, self.Ptr)
+        return ret
+
+    @property
+
+    def Parent(self)->'SpireObject':
+        """
+
+        """
+        GetDllLibXls().RichTextShape_get_Parent.argtypes=[c_void_p]
+        GetDllLibXls().RichTextShape_get_Parent.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().RichTextShape_get_Parent, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+
+    def GetFont(self ,index:int)->'IFont':
+        """
+
+        """
+        
+        GetDllLibXls().RichTextShape_GetFont.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().RichTextShape_GetFont.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().RichTextShape_GetFont, self.Ptr, index)
+        ret = None if intPtr==None else XlsFont(intPtr)
+        return ret
+
+
+
+    def SetFont(self ,startIndex:int,endIndex:int,font:'IFont'):
+        """
+
+        """
+        intPtrfont:c_void_p = font.Ptr
+
+        GetDllLibXls().RichTextShape_SetFont.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().RichTextShape_SetFont, self.Ptr, startIndex,endIndex,intPtrfont)
+
+    def ClearFormatting(self):
+        """
+
+        """
+        GetDllLibXls().RichTextShape_ClearFormatting.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().RichTextShape_ClearFormatting, self.Ptr)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().RichTextShape_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().RichTextShape_Clear, self.Ptr)
+
+
+    def Append(self ,text:str,font:'IFont'):
+        """
+
+        """
+        intPtrfont:c_void_p = font.Ptr
+
+        GetDllLibXls().RichTextShape_Append.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().RichTextShape_Append, self.Ptr, text,intPtrfont)
+
+    def BeginUpdate(self):
+        """
+
+        """
+        GetDllLibXls().RichTextShape_BeginUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().RichTextShape_BeginUpdate, self.Ptr)
+
+    def EndUpdate(self):
+        """
+
+        """
+        GetDllLibXls().RichTextShape_EndUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().RichTextShape_EndUpdate, self.Ptr)
+
+    @property
+
+    def DefaultFont(self)->'XlsFont':
+        """
+
+        """
+        GetDllLibXls().RichTextShape_get_DefaultFont.argtypes=[c_void_p]
+        GetDllLibXls().RichTextShape_get_DefaultFont.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().RichTextShape_get_DefaultFont, self.Ptr)
+        ret = None if intPtr==None else XlsFont(intPtr)
+        return ret
+
+
+    @property
+    def FormattingRunsCount(self)->int:
+        """
+
+        """
+        GetDllLibXls().RichTextShape_get_FormattingRunsCount.argtypes=[c_void_p]
+        GetDllLibXls().RichTextShape_get_FormattingRunsCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().RichTextShape_get_FormattingRunsCount, self.Ptr)
+        return ret
+
+
+    def GetSpace(self ,FormattingRunsIndex:int)->int:
+        """
+
+        """
+        
+        GetDllLibXls().RichTextShape_GetSpace.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().RichTextShape_GetSpace.restype=c_int
+        ret = CallCFunction(GetDllLibXls().RichTextShape_GetSpace, self.Ptr, FormattingRunsIndex)
+        return ret
+
+
+    def SetSpace(self ,FormattingRunsIndex:int,SpaceValue:int):
+        """
+
+        """
+        
+        GetDllLibXls().RichTextShape_SetSpace.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().RichTextShape_SetSpace, self.Ptr, FormattingRunsIndex,SpaceValue)
+

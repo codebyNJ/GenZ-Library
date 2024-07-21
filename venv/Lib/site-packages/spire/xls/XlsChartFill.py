@@ -1,0 +1,571 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsChartFill (  XlsShapeFill, IShapeFill) :
+    """
+
+    """
+    @property
+
+    def GradientStops(self)->'GradientStops':
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_GradientStops.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_GradientStops.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFill_get_GradientStops, self.Ptr)
+        ret = None if intPtr==None else GradientStops(intPtr)
+        return ret
+
+
+    @property
+
+    def FillType(self)->'ShapeFillType':
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_FillType.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_FillType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFill_get_FillType, self.Ptr)
+        objwraped = ShapeFillType(ret)
+        return objwraped
+
+    @FillType.setter
+    def FillType(self, value:'ShapeFillType'):
+        GetDllLibXls().XlsChartFill_set_FillType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_FillType, self.Ptr, value.value)
+
+    @property
+
+    def GradientStyle(self)->'GradientStyleType':
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_GradientStyle.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_GradientStyle.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFill_get_GradientStyle, self.Ptr)
+        objwraped = GradientStyleType(ret)
+        return objwraped
+
+    @GradientStyle.setter
+    def GradientStyle(self, value:'GradientStyleType'):
+        GetDllLibXls().XlsChartFill_set_GradientStyle.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_GradientStyle, self.Ptr, value.value)
+
+    @property
+
+    def GradientVariant(self)->'GradientVariantsType':
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_GradientVariant.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_GradientVariant.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFill_get_GradientVariant, self.Ptr)
+        objwraped = GradientVariantsType(ret)
+        return objwraped
+
+    @GradientVariant.setter
+    def GradientVariant(self, value:'GradientVariantsType'):
+        GetDllLibXls().XlsChartFill_set_GradientVariant.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_GradientVariant, self.Ptr, value.value)
+
+    @property
+    def TransparencyTo(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_TransparencyTo.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_TransparencyTo.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChartFill_get_TransparencyTo, self.Ptr)
+        return ret
+
+    @TransparencyTo.setter
+    def TransparencyTo(self, value:float):
+        GetDllLibXls().XlsChartFill_set_TransparencyTo.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_TransparencyTo, self.Ptr, value)
+
+    @property
+    def TransparencyFrom(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_TransparencyFrom.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_TransparencyFrom.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChartFill_get_TransparencyFrom, self.Ptr)
+        return ret
+
+    @TransparencyFrom.setter
+    def TransparencyFrom(self, value:float):
+        GetDllLibXls().XlsChartFill_set_TransparencyFrom.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_TransparencyFrom, self.Ptr, value)
+
+    @property
+
+    def GradientColorType(self)->'GradientColorType':
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_GradientColorType.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_GradientColorType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFill_get_GradientColorType, self.Ptr)
+        objwraped = GradientColorType(ret)
+        return objwraped
+
+    @GradientColorType.setter
+    def GradientColorType(self, value:'GradientColorType'):
+        GetDllLibXls().XlsChartFill_set_GradientColorType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_GradientColorType, self.Ptr, value.value)
+
+    @property
+
+    def Pattern(self)->'GradientPatternType':
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_Pattern.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_Pattern.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFill_get_Pattern, self.Ptr)
+        objwraped = GradientPatternType(ret)
+        return objwraped
+
+    @Pattern.setter
+    def Pattern(self, value:'GradientPatternType'):
+        GetDllLibXls().XlsChartFill_set_Pattern.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_Pattern, self.Ptr, value.value)
+
+    @property
+
+    def Texture(self)->'GradientTextureType':
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_Texture.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_Texture.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFill_get_Texture, self.Ptr)
+        objwraped = GradientTextureType(ret)
+        return objwraped
+
+    @Texture.setter
+    def Texture(self, value:'GradientTextureType'):
+        GetDllLibXls().XlsChartFill_set_Texture.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_Texture, self.Ptr, value.value)
+
+    @property
+
+    def BackColorObject(self)->'OColor':
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_BackColorObject.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_BackColorObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFill_get_BackColorObject, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def ForeColorObject(self)->'OColor':
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_ForeColorObject.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_ForeColorObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFill_get_ForeColorObject, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def BackKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_BackKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_BackKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFill_get_BackKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @BackKnownColor.setter
+    def BackKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsChartFill_set_BackKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_BackKnownColor, self.Ptr, value.value)
+
+    @property
+
+    def ForeKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_ForeKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_ForeKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFill_get_ForeKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @ForeKnownColor.setter
+    def ForeKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsChartFill_set_ForeKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_ForeKnownColor, self.Ptr, value.value)
+
+    @property
+
+    def BackColor(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_BackColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_BackColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFill_get_BackColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @BackColor.setter
+    def BackColor(self, value:'Color'):
+        GetDllLibXls().XlsChartFill_set_BackColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_BackColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def ForeColor(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_ForeColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_ForeColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFill_get_ForeColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @ForeColor.setter
+    def ForeColor(self, value:'Color'):
+        GetDllLibXls().XlsChartFill_set_ForeColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_ForeColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def PresetGradientType(self)->'GradientPresetType':
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_PresetGradientType.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_PresetGradientType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFill_get_PresetGradientType, self.Ptr)
+        objwraped = GradientPresetType(ret)
+        return objwraped
+
+    @PresetGradientType.setter
+    def PresetGradientType(self, value:'GradientPresetType'):
+        GetDllLibXls().XlsChartFill_set_PresetGradientType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_PresetGradientType, self.Ptr, value.value)
+
+    @property
+
+    def Picture(self)->'Stream':
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_Picture.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_Picture.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFill_get_Picture, self.Ptr)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @property
+
+    def PictureName(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_PictureName.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_PictureName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsChartFill_get_PictureName, self.Ptr))
+        return ret
+
+
+    @property
+    def Visible(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_Visible.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_Visible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFill_get_Visible, self.Ptr)
+        return ret
+
+    @Visible.setter
+    def Visible(self, value:bool):
+        GetDllLibXls().XlsChartFill_set_Visible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_Visible, self.Ptr, value)
+
+    @property
+    def GradientDegree(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_GradientDegree.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_GradientDegree.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChartFill_get_GradientDegree, self.Ptr)
+        return ret
+
+    @GradientDegree.setter
+    def GradientDegree(self, value:float):
+        GetDllLibXls().XlsChartFill_set_GradientDegree.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_GradientDegree, self.Ptr, value)
+
+    @property
+    def Transparency(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_Transparency.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_Transparency.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChartFill_get_Transparency, self.Ptr)
+        return ret
+
+    @Transparency.setter
+    def Transparency(self, value:float):
+        GetDllLibXls().XlsChartFill_set_Transparency.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_Transparency, self.Ptr, value)
+
+    @dispatch
+
+    def CustomPicture(self ,path:str):
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartFill_CustomPicture.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartFill_CustomPicture, self.Ptr, path)
+
+    @dispatch
+
+    def CustomPicture(self ,im:Stream,name:str):
+        """
+
+        """
+        intPtrim:c_void_p = im.Ptr
+
+        GetDllLibXls().XlsChartFill_CustomPictureIN.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartFill_CustomPictureIN, self.Ptr, intPtrim,name)
+
+    @dispatch
+
+    def CustomTexture(self ,path:str):
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartFill_CustomTexture.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartFill_CustomTexture, self.Ptr, path)
+
+    @dispatch
+
+    def CustomTexture(self ,im:Stream,name:str):
+        """
+
+        """
+        intPtrim:c_void_p = im.Ptr
+
+        GetDllLibXls().XlsChartFill_CustomTextureIN.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartFill_CustomTextureIN, self.Ptr, intPtrim,name)
+
+
+    def Patterned(self ,pattern:'GradientPatternType'):
+        """
+
+        """
+        enumpattern:c_int = pattern.value
+
+        GetDllLibXls().XlsChartFill_Patterned.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_Patterned, self.Ptr, enumpattern)
+
+    @dispatch
+
+    def PresetGradient(self ,grad:GradientPresetType):
+        """
+
+        """
+        enumgrad:c_int = grad.value
+
+        GetDllLibXls().XlsChartFill_PresetGradient.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_PresetGradient, self.Ptr, enumgrad)
+
+    @dispatch
+
+    def PresetGradient(self ,grad:GradientPresetType,shadStyle:GradientStyleType):
+        """
+
+        """
+        enumgrad:c_int = grad.value
+        enumshadStyle:c_int = shadStyle.value
+
+        GetDllLibXls().XlsChartFill_PresetGradientGS.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_PresetGradientGS, self.Ptr, enumgrad,enumshadStyle)
+
+    @dispatch
+
+    def PresetGradient(self ,grad:GradientPresetType,shadStyle:GradientStyleType,shadVar:GradientVariantsType):
+        """
+
+        """
+        enumgrad:c_int = grad.value
+        enumshadStyle:c_int = shadStyle.value
+        enumshadVar:c_int = shadVar.value
+
+        GetDllLibXls().XlsChartFill_PresetGradientGSS.argtypes=[c_void_p ,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_PresetGradientGSS, self.Ptr, enumgrad,enumshadStyle,enumshadVar)
+
+
+    def PresetTextured(self ,texture:'GradientTextureType'):
+        """
+
+        """
+        enumtexture:c_int = texture.value
+
+        GetDllLibXls().XlsChartFill_PresetTextured.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_PresetTextured, self.Ptr, enumtexture)
+
+    @dispatch
+    def TwoColorGradient(self):
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_TwoColorGradient.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartFill_TwoColorGradient, self.Ptr)
+
+    @dispatch
+
+    def TwoColorGradient(self ,style:GradientStyleType):
+        """
+
+        """
+        enumstyle:c_int = style.value
+
+        GetDllLibXls().XlsChartFill_TwoColorGradientS.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_TwoColorGradientS, self.Ptr, enumstyle)
+
+    @dispatch
+
+    def TwoColorGradient(self ,style:GradientStyleType,variant:GradientVariantsType):
+        """
+
+        """
+        enumstyle:c_int = style.value
+        enumvariant:c_int = variant.value
+
+        GetDllLibXls().XlsChartFill_TwoColorGradientSV.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_TwoColorGradientSV, self.Ptr, enumstyle,enumvariant)
+
+    @dispatch
+    def OneColorGradient(self):
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_OneColorGradient.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartFill_OneColorGradient, self.Ptr)
+
+    @dispatch
+
+    def OneColorGradient(self ,style:GradientStyleType):
+        """
+
+        """
+        enumstyle:c_int = style.value
+
+        GetDllLibXls().XlsChartFill_OneColorGradientS.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_OneColorGradientS, self.Ptr, enumstyle)
+
+    @dispatch
+
+    def OneColorGradient(self ,style:GradientStyleType,variant:GradientVariantsType):
+        """
+
+        """
+        enumstyle:c_int = style.value
+        enumvariant:c_int = variant.value
+
+        GetDllLibXls().XlsChartFill_OneColorGradientSV.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsChartFill_OneColorGradientSV, self.Ptr, enumstyle,enumvariant)
+
+    def Solid(self):
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_Solid.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartFill_Solid, self.Ptr)
+
+#    @staticmethod
+#
+#    def GetMetaUnit(unit:'GraphicsUnit')->'MetafileFrameUnit':
+#        """
+#
+#        """
+#        enumunit:c_int = unit.value
+#
+#        GetDllLibXls().XlsChartFill_GetMetaUnit.argtypes=[ c_int]
+#        GetDllLibXls().XlsChartFill_GetMetaUnit.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsChartFill_GetMetaUnit,  enumunit)
+#        objwraped = MetafileFrameUnit(ret)
+#        return objwraped
+
+
+#    @staticmethod
+#
+#    def SerializeMetafile(picture:'Image')->'MemoryStream':
+#        """
+#
+#        """
+#        intPtrpicture:c_void_p = picture.Ptr
+#
+#        GetDllLibXls().XlsChartFill_SerializeMetafile.argtypes=[ c_void_p]
+#        GetDllLibXls().XlsChartFill_SerializeMetafile.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsChartFill_SerializeMetafile,  intPtrpicture)
+#        ret = None if intPtr==None else MemoryStream(intPtr)
+#        return ret
+#
+
+
+    @property
+
+    def PicStretch(self)->'PicStretch':
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_PicStretch.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_PicStretch.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFill_get_PicStretch, self.Ptr)
+        ret = None if intPtr==None else PicStretch(intPtr)
+        return ret
+
+
+    @PicStretch.setter
+    def PicStretch(self, value:'PicStretch'):
+        GetDllLibXls().XlsChartFill_set_PicStretch.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_PicStretch, self.Ptr, value.Ptr)
+
+    @property
+    def Tile(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartFill_get_Tile.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFill_get_Tile.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFill_get_Tile, self.Ptr)
+        return ret
+
+    @Tile.setter
+    def Tile(self, value:bool):
+        GetDllLibXls().XlsChartFill_set_Tile.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartFill_set_Tile, self.Ptr, value)
+

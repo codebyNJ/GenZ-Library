@@ -1,0 +1,70 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ICharts (  IExcelApplication) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Count(self)->int:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,index:int)->IChart:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,name:str)->IChart:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Add(self)->IChart:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Add(self ,name:str)->IChart:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Remove(self ,name:str)->'IChart':
+        """
+
+        """
+        pass
+
+

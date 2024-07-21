@@ -1,0 +1,518 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IChartValueAxis (  IChartAxis) :
+    """
+    <summary>
+        Represents the chart value axis.
+    </summary>
+    """
+    @property
+    @abc.abstractmethod
+    def MinValue(self)->float:
+        """
+    <summary>
+        Maximum value on axis.
+            <example>The following code illustrates how to set MinValue and MaxValue for charts:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart value axis
+        IChartValueAxis valueAxis = chart.PrimaryValueAxis;
+        //Set min and max value
+        valueAxis.MinValue = -20;
+        valueAxis.MaxValue = 60;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @MinValue.setter
+    @abc.abstractmethod
+    def MinValue(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def MaxValue(self)->float:
+        """
+    <summary>
+        Maximum value on axis.
+            <example>The following code illustrates how to set MinValue and MaxValue for charts:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart value axis
+        IChartValueAxis valueAxis = chart.PrimaryValueAxis;
+        //Set min and max value
+        valueAxis.MinValue = -20;
+        valueAxis.MaxValue = 60;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @MaxValue.setter
+    @abc.abstractmethod
+    def MaxValue(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def MajorUnit(self)->float:
+        """
+    <summary>
+        Value of major increment.
+            <example>The following code illustrates how to set major axis increment unit for charts:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart value axis
+        IChartValueAxis valueAxis = chart.PrimaryValueAxis;
+        //Set major unit
+        valueAxis.MajorUnit = 20;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @MajorUnit.setter
+    @abc.abstractmethod
+    def MajorUnit(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def MinorUnit(self)->float:
+        """
+    <summary>
+        Value of minor increment.
+            <example>The following code illustrates how to set minor axis increment unit for charts:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart value axis
+        IChartValueAxis valueAxis = chart.PrimaryValueAxis;
+        //Set major unit
+        valueAxis.MinorUnit = 8;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @MinorUnit.setter
+    @abc.abstractmethod
+    def MinorUnit(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def CrossValue(self)->float:
+        """
+    <summary>
+        Value where category axis crosses.
+            <example>The following code illustrates how to set CrossValue for charts:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart value axis
+        IChartValueAxis valueAxis = chart.PrimaryValueAxis;
+        //Set CrossValue
+        valueAxis.CrossValue = 15;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @CrossValue.setter
+    @abc.abstractmethod
+    def CrossValue(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def CrossesAt(self)->float:
+        """
+    <summary>
+        Represents the point on the axis another axis crosses it.
+            <example>The following code illustrates how to set CrossesAt for charts:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart value axis
+        IChartValueAxis valueAxis = chart.PrimaryValueAxis;
+        //Set CrossAt
+        valueAxis.CrossesAt = 15;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @CrossesAt.setter
+    @abc.abstractmethod
+    def CrossesAt(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsAutoMin(self)->bool:
+        """
+    <summary>
+        Automatic minimum selected.
+            <example>The following code illustrates how to access IsAutoMin:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart value axis
+        IChartValueAxis valueAxis = chart.PrimaryValueAxis;
+        //Check IsAutoMin
+        Console.WriteLine(valueAxis.IsAutoMin);
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @IsAutoMin.setter
+    @abc.abstractmethod
+    def IsAutoMin(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsAutoMax(self)->bool:
+        """
+    <summary>
+        Automatic maximum selected.
+            <example>The following code illustrates how to access IsAutoMax:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart value axis
+        IChartValueAxis valueAxis = chart.PrimaryValueAxis;
+        //Check IsAutoMax
+        Console.WriteLine(valueAxis.IsAutoMax);
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @IsAutoMax.setter
+    @abc.abstractmethod
+    def IsAutoMax(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsAutoMajor(self)->bool:
+        """
+    <summary>
+        Automatic major selected.
+            <example>The following code illustrates how to access IsAutoMajor:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart value axis
+        IChartValueAxis valueAxis = chart.PrimaryValueAxis;
+        //Check IsAutoMajor
+        Console.WriteLine(valueAxis.IsAutoMajor);
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @IsAutoMajor.setter
+    @abc.abstractmethod
+    def IsAutoMajor(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsAutoMinor(self)->bool:
+        """
+    <summary>
+        Automatic minor selected.
+            <example>The following code illustrates how to access IsAutoMinor:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart value axis
+        IChartValueAxis valueAxis = chart.PrimaryValueAxis;
+        //Check IsAutoMinor
+        Console.WriteLine(valueAxis.IsAutoMinor);
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @IsAutoMinor.setter
+    @abc.abstractmethod
+    def IsAutoMinor(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsAutoCross(self)->bool:
+        """
+    <summary>
+        Automatic category crossing point selected.
+            <example>The following code illustrates how to access IsAutoCross:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart value axis
+        IChartValueAxis valueAxis = chart.PrimaryValueAxis;
+        //Set CrossAt
+        valueAxis.CrossesAt = 15;
+        //Check IsAutoCross
+        Console.WriteLine(valueAxis.IsAutoCross);
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsLogScale(self)->bool:
+        """
+    <summary>
+        Logarithmic scale.
+            <example>The following code illustrates how to set IsLogScale for charts:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart value axis
+        IChartValueAxis valueAxis = chart.PrimaryValueAxis;
+        //Set IsLogScale
+        valueAxis.IsLogScale = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @IsLogScale.setter
+    @abc.abstractmethod
+    def IsLogScale(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsReverseOrder(self)->bool:
+        """
+    <summary>
+        Values in reverse order.
+            <example>The following code illustrates how to set IsReverseOrder for charts:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart value axis
+        IChartValueAxis valueAxis = chart.PrimaryValueAxis;
+        //Set IsReverseOrder
+        valueAxis.IsReverseOrder = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @IsReverseOrder.setter
+    @abc.abstractmethod
+    def IsReverseOrder(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsMaxCross(self)->bool:
+        """
+    <summary>
+        Category axis to cross at maximum value.
+            <example>The following code illustrates how to access IsMaxCross:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart value axis
+        IChartValueAxis valueAxis = chart.PrimaryValueAxis;
+        //Get IsMaxCross
+        Console.WriteLine(valueAxis.IsMaxCross);
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+

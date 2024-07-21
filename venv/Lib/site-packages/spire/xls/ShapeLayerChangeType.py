@@ -1,0 +1,19 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ShapeLayerChangeType(Enum):
+    """
+    <summary>
+        Change target type of shape.
+    </summary>
+    """
+    BringToFront = 0
+    SendToBack = 1
+    BringForward = 2
+    SendBackward = 3
+

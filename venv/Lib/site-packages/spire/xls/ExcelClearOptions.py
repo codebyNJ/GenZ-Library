@@ -1,0 +1,18 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ExcelClearOptions(Enum):
+    """
+
+    """
+    ClearFormat = 0
+    ClearContent = 1
+    ClearComment = 2
+    ClearAll = 3
+    ClearConditionalFormats = 4
+

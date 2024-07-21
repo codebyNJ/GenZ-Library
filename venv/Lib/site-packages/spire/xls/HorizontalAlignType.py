@@ -1,0 +1,23 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class HorizontalAlignType(Enum):
+    """
+    <summary>
+        Horizontal alignment type.
+    </summary>
+    """
+    General = 0
+    Left = 1
+    Center = 2
+    Right = 3
+    Fill = 4
+    Justify = 5
+    CenterAcrossSelection = 6
+    Distributed = 7
+

@@ -1,0 +1,614 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsChartFrameFormat (  XlsObject, IChartFrameFormat, IChartFillBorder) :
+    """
+
+    """
+    @property
+    def IsBorderCornersRound(self)->bool:
+        """
+    <summary>
+        Gets or sets if border corners is round.
+    </summary>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_IsBorderCornersRound.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_IsBorderCornersRound.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_IsBorderCornersRound, self.Ptr)
+        return ret
+
+    @IsBorderCornersRound.setter
+    def IsBorderCornersRound(self, value:bool):
+        GetDllLibXls().XlsChartFrameFormat_set_IsBorderCornersRound.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_IsBorderCornersRound, self.Ptr, value)
+
+    @property
+
+    def Border(self)->'IChartBorder':
+        """
+    <summary>
+        Gets chart border. Read only.
+    </summary>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_Border.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_Border.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_Border, self.Ptr)
+        ret = None if intPtr==None else XlsChartBorder(intPtr)
+        return ret
+
+
+    @property
+    def HasInterior(self)->bool:
+        """
+    <summary>
+        Indicates whether interior object was created. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_HasInterior.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_HasInterior.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_HasInterior, self.Ptr)
+        return ret
+
+    @property
+    def HasLineProperties(self)->bool:
+        """
+    <summary>
+        Indicates whether border formatting object was created. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_HasLineProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_HasLineProperties.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_HasLineProperties, self.Ptr)
+        return ret
+
+    @property
+    def HasManualLayout(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_HasManualLayout.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_HasManualLayout.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_HasManualLayout, self.Ptr)
+        return ret
+
+    @property
+    def InnerLayoutTarget(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_InnerLayoutTarget.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_InnerLayoutTarget.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_InnerLayoutTarget, self.Ptr)
+        return ret
+
+    @InnerLayoutTarget.setter
+    def InnerLayoutTarget(self, value:bool):
+        GetDllLibXls().XlsChartFrameFormat_set_InnerLayoutTarget.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_InnerLayoutTarget, self.Ptr, value)
+
+    @property
+
+    def Interior(self)->'IChartInterior':
+        """
+
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_Interior.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_Interior.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_Interior, self.Ptr)
+        ret = None if intPtr==None else IChartInterior(intPtr)
+        return ret
+
+
+    @property
+
+    def Format3D(self)->'Format3D':
+        """
+    <summary>
+        Gets the chart3 D properties.
+            <example>The following code illustrates the use of Shadow property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Column3DClustered;
+        //Gets shadow formatting properties for the chart element
+        ChartShadow shadowChart = chart.ChartArea.Shadow;
+        shadowChart.ShadowPrespectiveType = XLSXChartPrespectiveType.Below;
+        shadowChart.Color = Color.Aqua;
+        shadowChart.Blur = 22;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+<value>The chart3 D properties.</value>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_Format3D.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_Format3D.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_Format3D, self.Ptr)
+        ret = None if intPtr==None else Format3D(intPtr)
+        return ret
+
+
+    @property
+
+    def Fill(self)->'IShapeFill':
+        """
+    <summary>
+        Represents XlsFill gradient format. Read only.
+            <example>The following code illustrates the use of Fill property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Column3DClustered;
+        //Gets fill options for the chart element
+        IShapeFill fillChart = chart.ChartArea.Fill;
+        fillChart.FillType = ShapeFillType.Gradient;
+        fillChart.BackColor = Color.FromArgb(205, 217, 234);
+        fillChart.ForeColor = Color.White;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_Fill.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_Fill.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_Fill, self.Ptr)
+        ret = None if intPtr==None else XlsShapeFill(intPtr)
+        return ret
+
+
+    @property
+    def HasShadow(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_HasShadow.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_HasShadow.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_HasShadow, self.Ptr)
+        return ret
+
+    @property
+    def HasFormat3D(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_HasFormat3D.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_HasFormat3D.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_HasFormat3D, self.Ptr)
+        return ret
+
+    @property
+
+    def Shadow(self)->'ChartShadow':
+        """
+    <summary>
+        Gets the shadow properties.
+            <example>The following code illustrates the use of Shadow property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Column3DClustered;
+        //Gets shadow formatting properties for the chart element
+        ChartShadow shadowChart = chart.ChartArea.Shadow;
+        shadowChart.ShadowPrespectiveType = XLSXChartPrespectiveType.Below;
+        shadowChart.Color = Color.Aqua;
+        shadowChart.Blur = 22;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+<value>The shadow properties.</value>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_Shadow.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_Shadow.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_Shadow, self.Ptr)
+        ret = None if intPtr==None else ChartShadow(intPtr)
+        return ret
+
+
+    @property
+
+    def LineProperties(self)->'XlsChartBorder':
+        """
+    <summary>
+        Gets chart border. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_LineProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_LineProperties.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_LineProperties, self.Ptr)
+        ret = None if intPtr==None else XlsChartBorder(intPtr)
+        return ret
+
+
+    @property
+    def IsAutoSize(self)->bool:
+        """
+    <summary>
+        Calculates size automatically.
+    </summary>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_IsAutoSize.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_IsAutoSize.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_IsAutoSize, self.Ptr)
+        return ret
+
+    @IsAutoSize.setter
+    def IsAutoSize(self, value:bool):
+        GetDllLibXls().XlsChartFrameFormat_set_IsAutoSize.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_IsAutoSize, self.Ptr, value)
+
+    @property
+    def IsAutoPosition(self)->bool:
+        """
+    <summary>
+        Calculates position automatically.
+    </summary>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_IsAutoPosition.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_IsAutoPosition.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_IsAutoPosition, self.Ptr)
+        return ret
+
+    @IsAutoPosition.setter
+    def IsAutoPosition(self, value:bool):
+        GetDllLibXls().XlsChartFrameFormat_set_IsAutoPosition.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_IsAutoPosition, self.Ptr, value)
+
+    @property
+    def X(self)->int:
+        """
+    <summary>
+        X-position of upper-left corner. 1/4000 of chart plot.
+            IsXMode Shall set to True
+    </summary>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_X.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_X.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_X, self.Ptr)
+        return ret
+
+    @X.setter
+    def X(self, value:int):
+        GetDllLibXls().XlsChartFrameFormat_set_X.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_X, self.Ptr, value)
+
+    @property
+    def Y(self)->int:
+        """
+    <summary>
+        Y-position of upper-left corner. 1/4000 of chart plot. 
+            IsYMode Shall set to True
+    </summary>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_Y.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_Y.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_Y, self.Ptr)
+        return ret
+
+    @Y.setter
+    def Y(self, value:int):
+        GetDllLibXls().XlsChartFrameFormat_set_Y.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_Y, self.Ptr, value)
+
+    @property
+    def Width(self)->int:
+        """
+    <summary>
+        X-size. 1/4000 of chart plot. IsWMode Shall set to True
+    </summary>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_Width.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_Width.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_Width, self.Ptr)
+        return ret
+
+    @Width.setter
+    def Width(self, value:int):
+        GetDllLibXls().XlsChartFrameFormat_set_Width.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_Width, self.Ptr, value)
+
+    @property
+    def Height(self)->int:
+        """
+    <summary>
+        Y-size. 1/4000 of chart plot. IsHMode Shall set to True
+    </summary>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_Height.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_Height.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_Height, self.Ptr)
+        return ret
+
+    @Height.setter
+    def Height(self, value:int):
+        GetDllLibXls().XlsChartFrameFormat_set_Height.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_Height, self.Ptr, value)
+
+    @property
+    def IsWMode(self)->bool:
+        """
+    <summary>
+        false value Specifies that the Width shall be interpreted
+            as the Right of the chart element..
+    </summary>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_IsWMode.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_IsWMode.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_IsWMode, self.Ptr)
+        return ret
+
+    @IsWMode.setter
+    def IsWMode(self, value:bool):
+        GetDllLibXls().XlsChartFrameFormat_set_IsWMode.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_IsWMode, self.Ptr, value)
+
+    @property
+    def IsHMode(self)->bool:
+        """
+    <summary>
+        false value Specifies that the Height shall be interpreted
+            as the Bottom of the chart element..
+    </summary>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_IsHMode.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_IsHMode.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_IsHMode, self.Ptr)
+        return ret
+
+    @IsHMode.setter
+    def IsHMode(self, value:bool):
+        GetDllLibXls().XlsChartFrameFormat_set_IsHMode.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_IsHMode, self.Ptr, value)
+
+    @property
+    def IsXMode(self)->bool:
+        """
+    <summary>
+        true value Specifies that the X shall be interpreted
+            as the Left of the chart element..
+    </summary>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_IsXMode.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_IsXMode.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_IsXMode, self.Ptr)
+        return ret
+
+    @IsXMode.setter
+    def IsXMode(self, value:bool):
+        GetDllLibXls().XlsChartFrameFormat_set_IsXMode.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_IsXMode, self.Ptr, value)
+
+    @property
+    def IsYMode(self)->bool:
+        """
+    <summary>
+        true value Specifies that the Y shall be interpreted
+            as the Top of the chart element..
+    </summary>
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_IsYMode.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_IsYMode.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_IsYMode, self.Ptr)
+        return ret
+
+    @IsYMode.setter
+    def IsYMode(self, value:bool):
+        GetDllLibXls().XlsChartFrameFormat_set_IsYMode.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_IsYMode, self.Ptr, value)
+
+    @property
+
+    def ForeGroundKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_ForeGroundKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_ForeGroundKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_ForeGroundKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @ForeGroundKnownColor.setter
+    def ForeGroundKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsChartFrameFormat_set_ForeGroundKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_ForeGroundKnownColor, self.Ptr, value.value)
+
+    @property
+
+    def ForeGroundColor(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_ForeGroundColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_ForeGroundColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_ForeGroundColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @ForeGroundColor.setter
+    def ForeGroundColor(self, value:'Color'):
+        GetDllLibXls().XlsChartFrameFormat_set_ForeGroundColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_ForeGroundColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def ForeGroundColorObject(self)->'OColor':
+        """
+
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_ForeGroundColorObject.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_ForeGroundColorObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_ForeGroundColorObject, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def BackGroundKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_BackGroundKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_BackGroundKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_BackGroundKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @BackGroundKnownColor.setter
+    def BackGroundKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsChartFrameFormat_set_BackGroundKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_BackGroundKnownColor, self.Ptr, value.value)
+
+    @property
+
+    def BackGroundColor(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_BackGroundColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_BackGroundColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_BackGroundColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @BackGroundColor.setter
+    def BackGroundColor(self, value:'Color'):
+        GetDllLibXls().XlsChartFrameFormat_set_BackGroundColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_BackGroundColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def BackGroundColorObject(self)->'OColor':
+        """
+
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_BackGroundColorObject.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_BackGroundColorObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_BackGroundColorObject, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def Pattern(self)->'ExcelPatternType':
+        """
+
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_Pattern.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_Pattern.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_Pattern, self.Ptr)
+        objwraped = ExcelPatternType(ret)
+        return objwraped
+
+    @Pattern.setter
+    def Pattern(self, value:'ExcelPatternType'):
+        GetDllLibXls().XlsChartFrameFormat_set_Pattern.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_Pattern, self.Ptr, value.value)
+
+    @property
+
+    def RectangleStyle(self)->'RectangleStyleType':
+        """
+
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_RectangleStyle.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_RectangleStyle.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_RectangleStyle, self.Ptr)
+        objwraped = RectangleStyleType(ret)
+        return objwraped
+
+    @RectangleStyle.setter
+    def RectangleStyle(self, value:'RectangleStyleType'):
+        GetDllLibXls().XlsChartFrameFormat_set_RectangleStyle.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_RectangleStyle, self.Ptr, value.value)
+
+    @property
+    def IsAutomaticFormat(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_IsAutomaticFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_IsAutomaticFormat.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_IsAutomaticFormat, self.Ptr)
+        return ret
+
+    @IsAutomaticFormat.setter
+    def IsAutomaticFormat(self, value:bool):
+        GetDllLibXls().XlsChartFrameFormat_set_IsAutomaticFormat.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_IsAutomaticFormat, self.Ptr, value)
+
+    @property
+    def Visible(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartFrameFormat_get_Visible.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_get_Visible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartFrameFormat_get_Visible, self.Ptr)
+        return ret
+
+    @Visible.setter
+    def Visible(self, value:bool):
+        GetDllLibXls().XlsChartFrameFormat_set_Visible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_set_Visible, self.Ptr, value)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().XlsChartFrameFormat_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_Clear, self.Ptr)
+
+
+    def Clone(self ,parent:'SpireObject')->'XlsChartFrameFormat':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsChartFrameFormat_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsChartFrameFormat_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartFrameFormat_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else XlsChartFrameFormat(intPtr)
+        return ret
+
+
+
+    def SetDefaultValues(self ,bAutoSize:bool,bIsInteriorGray:bool):
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartFrameFormat_SetDefaultValues.argtypes=[c_void_p ,c_bool,c_bool]
+        CallCFunction(GetDllLibXls().XlsChartFrameFormat_SetDefaultValues, self.Ptr, bAutoSize,bIsInteriorGray)
+

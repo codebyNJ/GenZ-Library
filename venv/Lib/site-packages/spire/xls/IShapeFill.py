@@ -1,0 +1,522 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IShapeFill (abc.ABC) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def FillType(self)->'ShapeFillType':
+        """
+
+        """
+        pass
+
+
+    @FillType.setter
+    @abc.abstractmethod
+    def FillType(self, value:'ShapeFillType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def GradientStyle(self)->'GradientStyleType':
+        """
+
+        """
+        pass
+
+
+    @GradientStyle.setter
+    @abc.abstractmethod
+    def GradientStyle(self, value:'GradientStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def GradientVariant(self)->'GradientVariantsType':
+        """
+
+        """
+        pass
+
+
+    @GradientVariant.setter
+    @abc.abstractmethod
+    def GradientVariant(self, value:'GradientVariantsType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def TransparencyTo(self)->float:
+        """
+
+        """
+        pass
+
+
+    @TransparencyTo.setter
+    @abc.abstractmethod
+    def TransparencyTo(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def TransparencyFrom(self)->float:
+        """
+
+        """
+        pass
+
+
+    @TransparencyFrom.setter
+    @abc.abstractmethod
+    def TransparencyFrom(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def GradientColorType(self)->'GradientColorType':
+        """
+
+        """
+        pass
+
+
+    @GradientColorType.setter
+    @abc.abstractmethod
+    def GradientColorType(self, value:'GradientColorType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Pattern(self)->'GradientPatternType':
+        """
+
+        """
+        pass
+
+
+    @Pattern.setter
+    @abc.abstractmethod
+    def Pattern(self, value:'GradientPatternType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Texture(self)->'GradientTextureType':
+        """
+
+        """
+        pass
+
+
+    @Texture.setter
+    @abc.abstractmethod
+    def Texture(self, value:'GradientTextureType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BackKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @BackKnownColor.setter
+    @abc.abstractmethod
+    def BackKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ForeKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @ForeKnownColor.setter
+    @abc.abstractmethod
+    def ForeKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BackColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @BackColor.setter
+    @abc.abstractmethod
+    def BackColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ForeColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @ForeColor.setter
+    @abc.abstractmethod
+    def ForeColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PresetGradientType(self)->'GradientPresetType':
+        """
+
+        """
+        pass
+
+
+    @PresetGradientType.setter
+    @abc.abstractmethod
+    def PresetGradientType(self, value:'GradientPresetType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Picture(self)->'Stream':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PictureName(self)->str:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Visible(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @Visible.setter
+    @abc.abstractmethod
+    def Visible(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def GradientDegree(self)->float:
+        """
+
+        """
+        pass
+
+
+    @GradientDegree.setter
+    @abc.abstractmethod
+    def GradientDegree(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Transparency(self)->float:
+        """
+
+        """
+        pass
+
+
+    @Transparency.setter
+    @abc.abstractmethod
+    def Transparency(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PicStretch(self)->'PicStretch':
+        """
+
+        """
+        pass
+
+
+    @PicStretch.setter
+    @abc.abstractmethod
+    def PicStretch(self, value:'PicStretch'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Tile(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @Tile.setter
+    @abc.abstractmethod
+    def Tile(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def CustomPicture(self ,path:str):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def CustomPicture(self ,im:Stream,name:str):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def CustomTexture(self ,path:str):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def CustomTexture(self ,im:Stream,name:str):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Patterned(self ,pattern:'GradientPatternType'):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def PresetGradient(self ,grad:GradientPresetType):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def PresetGradient(self ,grad:GradientPresetType,shadStyle:GradientStyleType):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def PresetGradient(self ,grad:GradientPresetType,shadStyle:GradientStyleType,shadVar:GradientVariantsType):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def PresetTextured(self ,texture:'GradientTextureType'):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+    @abc.abstractmethod
+    def TwoColorGradient(self):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def TwoColorGradient(self ,style:GradientStyleType):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def TwoColorGradient(self ,style:GradientStyleType,variant:GradientVariantsType):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+    @abc.abstractmethod
+    def OneColorGradient(self):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def OneColorGradient(self ,style:GradientStyleType):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def OneColorGradient(self ,style:GradientStyleType,variant:GradientVariantsType):
+        """
+
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Solid(self):
+        """
+
+        """
+        pass
+
+

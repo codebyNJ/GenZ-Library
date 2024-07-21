@@ -1,0 +1,87 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ShapeCollectionBase (SpireObject) :
+    """
+
+    """
+    @dispatch
+
+    def get_Item(self ,index:int)->IShape:
+        """
+
+        """
+        
+        GetDllLibXls().ShapeCollectionBase_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ShapeCollectionBase_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ShapeCollectionBase_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else IShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,strShapeName:str)->IShape:
+        """
+
+        """
+        
+        GetDllLibXls().ShapeCollectionBase_get_ItemS.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ShapeCollectionBase_get_ItemS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ShapeCollectionBase_get_ItemS, self.Ptr, strShapeName)
+        ret = None if intPtr==None else IShape(intPtr)
+        return ret
+
+
+#    @dispatch
+#
+#    def AddCopy(self ,sourceShape:IShape,hashNewNames:'Dictionary2',arrFontIndexes:'List1')->IShape:
+#        """
+#
+#        """
+#        intPtrsourceShape:c_void_p = sourceShape.Ptr
+#        intPtrhashNewNames:c_void_p = hashNewNames.Ptr
+#        intPtrarrFontIndexes:c_void_p = arrFontIndexes.Ptr
+#
+#        GetDllLibXls().ShapeCollectionBase_AddCopy.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+#        GetDllLibXls().ShapeCollectionBase_AddCopy.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().ShapeCollectionBase_AddCopy, self.Ptr, intPtrsourceShape,intPtrhashNewNames,intPtrarrFontIndexes)
+#        ret = None if intPtr==None else IShape(intPtr)
+#        return ret
+#
+
+
+    @dispatch
+
+    def AddCopy(self ,sourceShape:IShape)->IShape:
+        """
+
+        """
+        intPtrsourceShape:c_void_p = sourceShape.Ptr
+
+        GetDllLibXls().ShapeCollectionBase_AddCopyS.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ShapeCollectionBase_AddCopyS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ShapeCollectionBase_AddCopyS, self.Ptr, intPtrsourceShape)
+        ret = None if intPtr==None else IShape(intPtr)
+        return ret
+
+
+
+    def AddShape(self ,newXlsShape:'XlsShape')->'XlsShape':
+        """
+
+        """
+        intPtrnewXlsShape:c_void_p = newXlsShape.Ptr
+
+        GetDllLibXls().ShapeCollectionBase_AddShape.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ShapeCollectionBase_AddShape.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ShapeCollectionBase_AddShape, self.Ptr, intPtrnewXlsShape)
+        ret = None if intPtr==None else XlsShape(intPtr)
+        return ret
+
+

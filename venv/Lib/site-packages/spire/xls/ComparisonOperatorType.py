@@ -1,0 +1,24 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ComparisonOperatorType(Enum):
+    """
+    <summary>
+        The Comparison operator for conditional formatting in Excel.
+    </summary>
+    """
+    none = 0
+    Between = 1
+    NotBetween = 2
+    Equal = 3
+    NotEqual = 4
+    Greater = 5
+    Less = 6
+    GreaterOrEqual = 7
+    LessOrEqual = 8
+

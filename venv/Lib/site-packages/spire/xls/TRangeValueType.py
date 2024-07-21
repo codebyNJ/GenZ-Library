@@ -1,0 +1,19 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class TRangeValueType(Enum):
+    """
+
+    """
+    Blank = 0
+    Error = 1
+    Boolean = 2
+    Number = 4
+    Formula = 8
+    String = 16
+

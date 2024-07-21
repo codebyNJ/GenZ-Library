@@ -1,0 +1,25 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class AverageType(Enum):
+    """
+    <summary>
+        Average type.
+    </summary>
+    """
+    Above = 1
+    AboveEqual = 2
+    Below = 3
+    BelowEqual = 4
+    AboveStdDev1 = 5
+    AboveStdDev2 = 6
+    AboveStdDev3 = 7
+    BelowStdDev1 = 8
+    BelowStdDev2 = 9
+    BelowStdDev3 = 10
+

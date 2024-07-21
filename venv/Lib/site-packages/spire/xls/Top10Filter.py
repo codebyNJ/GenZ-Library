@@ -1,0 +1,75 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class Top10Filter (SpireObject) :
+    """
+
+    """
+    @property
+    def IsTop(self)->bool:
+        """
+
+        """
+        GetDllLibXls().Top10Filter_get_IsTop.argtypes=[c_void_p]
+        GetDllLibXls().Top10Filter_get_IsTop.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Top10Filter_get_IsTop, self.Ptr)
+        return ret
+
+    @IsTop.setter
+    def IsTop(self, value:bool):
+        GetDllLibXls().Top10Filter_set_IsTop.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().Top10Filter_set_IsTop, self.Ptr, value)
+
+    @property
+    def IsPercent(self)->bool:
+        """
+
+        """
+        GetDllLibXls().Top10Filter_get_IsPercent.argtypes=[c_void_p]
+        GetDllLibXls().Top10Filter_get_IsPercent.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Top10Filter_get_IsPercent, self.Ptr)
+        return ret
+
+    @IsPercent.setter
+    def IsPercent(self, value:bool):
+        GetDllLibXls().Top10Filter_set_IsPercent.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().Top10Filter_set_IsPercent, self.Ptr, value)
+
+    @property
+    def Items(self)->int:
+        """
+
+        """
+        GetDllLibXls().Top10Filter_get_Items.argtypes=[c_void_p]
+        GetDllLibXls().Top10Filter_get_Items.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Top10Filter_get_Items, self.Ptr)
+        return ret
+
+    @Items.setter
+    def Items(self, value:int):
+        GetDllLibXls().Top10Filter_set_Items.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().Top10Filter_set_Items, self.Ptr, value)
+
+    @property
+
+    def Criteria(self)->'SpireObject':
+        """
+
+        """
+        GetDllLibXls().Top10Filter_get_Criteria.argtypes=[c_void_p]
+        GetDllLibXls().Top10Filter_get_Criteria.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Top10Filter_get_Criteria, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @Criteria.setter
+    def Criteria(self, value:'SpireObject'):
+        GetDllLibXls().Top10Filter_set_Criteria.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().Top10Filter_set_Criteria, self.Ptr, value.Ptr)
+

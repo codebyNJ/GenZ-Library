@@ -1,0 +1,480 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsTextBoxShape (  XlsShape, ITextBoxLinkShape, TextBoxShapeBase) :
+    """
+
+    """
+    @property
+
+    def ShapeType(self)->'ExcelShapeType':
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_ShapeType.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_ShapeType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_ShapeType, self.Ptr)
+        objwraped = ExcelShapeType(ret)
+        return objwraped
+
+    @property
+
+    def Text(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_Text.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_Text.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsTextBoxShape_get_Text, self.Ptr))
+        return ret
+
+
+    @Text.setter
+    def Text(self, value:str):
+        GetDllLibXls().XlsTextBoxShape_set_Text.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_Text, self.Ptr, value)
+
+    @property
+    def IsTextLocked(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_IsTextLocked.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_IsTextLocked.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_IsTextLocked, self.Ptr)
+        return ret
+
+    @IsTextLocked.setter
+    def IsTextLocked(self, value:bool):
+        GetDllLibXls().XlsTextBoxShape_set_IsTextLocked.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_IsTextLocked, self.Ptr, value)
+
+    @property
+    def IsWrapText(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_IsWrapText.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_IsWrapText.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_IsWrapText, self.Ptr)
+        return ret
+
+    @IsWrapText.setter
+    def IsWrapText(self, value:bool):
+        GetDllLibXls().XlsTextBoxShape_set_IsWrapText.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_IsWrapText, self.Ptr, value)
+
+    @property
+
+    def TextRotation(self)->'TextRotationType':
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_TextRotation.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_TextRotation.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_TextRotation, self.Ptr)
+        objwraped = TextRotationType(ret)
+        return objwraped
+
+    @TextRotation.setter
+    def TextRotation(self, value:'TextRotationType'):
+        GetDllLibXls().XlsTextBoxShape_set_TextRotation.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_TextRotation, self.Ptr, value.value)
+
+    @property
+
+    def RichText(self)->'IRichTextString':
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_RichText.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_RichText.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_RichText, self.Ptr)
+        ret = None if intPtr==None else RichTextShape(intPtr)
+        return ret
+
+
+    @property
+
+    def HAlignment(self)->'CommentHAlignType':
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_HAlignment.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_HAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_HAlignment, self.Ptr)
+        objwraped = CommentHAlignType(ret)
+        return objwraped
+
+    @HAlignment.setter
+    def HAlignment(self, value:'CommentHAlignType'):
+        GetDllLibXls().XlsTextBoxShape_set_HAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_HAlignment, self.Ptr, value.value)
+
+    @property
+
+    def VAlignment(self)->'CommentVAlignType':
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_VAlignment.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_VAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_VAlignment, self.Ptr)
+        objwraped = CommentVAlignType(ret)
+        return objwraped
+
+    @VAlignment.setter
+    def VAlignment(self, value:'CommentVAlignType'):
+        GetDllLibXls().XlsTextBoxShape_set_VAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_VAlignment, self.Ptr, value.value)
+
+    @property
+
+    def Coordinates2007(self)->'Rectangle':
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_Coordinates2007.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_Coordinates2007.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_Coordinates2007, self.Ptr)
+        ret = None if intPtr==None else Rectangle(intPtr)
+        return ret
+
+
+    @Coordinates2007.setter
+    def Coordinates2007(self, value:'Rectangle'):
+        GetDllLibXls().XlsTextBoxShape_set_Coordinates2007.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_Coordinates2007, self.Ptr, value.Ptr)
+
+    @property
+    def HasStyleProperties(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_HasStyleProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_HasStyleProperties.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_HasStyleProperties, self.Ptr)
+        return ret
+
+    @property
+
+    def TextFieldId(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_TextFieldId.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_TextFieldId.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsTextBoxShape_get_TextFieldId, self.Ptr))
+        return ret
+
+
+    @TextFieldId.setter
+    def TextFieldId(self, value:str):
+        GetDllLibXls().XlsTextBoxShape_set_TextFieldId.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_TextFieldId, self.Ptr, value)
+
+    @property
+
+    def TextFieldType(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_TextFieldType.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_TextFieldType.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsTextBoxShape_get_TextFieldType, self.Ptr))
+        return ret
+
+
+    @TextFieldType.setter
+    def TextFieldType(self, value:str):
+        GetDllLibXls().XlsTextBoxShape_set_TextFieldType.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_TextFieldType, self.Ptr, value)
+
+    @property
+
+    def FillColor(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_FillColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_FillColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_FillColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @FillColor.setter
+    def FillColor(self, value:'Color'):
+        GetDllLibXls().XlsTextBoxShape_set_FillColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_FillColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def InsetMode(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_InsetMode.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_InsetMode.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsTextBoxShape_get_InsetMode, self.Ptr))
+        return ret
+
+
+    @InsetMode.setter
+    def InsetMode(self, value:str):
+        GetDllLibXls().XlsTextBoxShape_set_InsetMode.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_InsetMode, self.Ptr, value)
+
+    @property
+    def LeftMarginEMU(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_LeftMarginEMU.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_LeftMarginEMU.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_LeftMarginEMU, self.Ptr)
+        return ret
+
+    @LeftMarginEMU.setter
+    def LeftMarginEMU(self, value:int):
+        GetDllLibXls().XlsTextBoxShape_set_LeftMarginEMU.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_LeftMarginEMU, self.Ptr, value)
+
+    @property
+    def TopMarginEMU(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_TopMarginEMU.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_TopMarginEMU.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_TopMarginEMU, self.Ptr)
+        return ret
+
+    @TopMarginEMU.setter
+    def TopMarginEMU(self, value:int):
+        GetDllLibXls().XlsTextBoxShape_set_TopMarginEMU.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_TopMarginEMU, self.Ptr, value)
+
+    @property
+    def RightMarginEMU(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_RightMarginEMU.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_RightMarginEMU.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_RightMarginEMU, self.Ptr)
+        return ret
+
+    @RightMarginEMU.setter
+    def RightMarginEMU(self, value:int):
+        GetDllLibXls().XlsTextBoxShape_set_RightMarginEMU.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_RightMarginEMU, self.Ptr, value)
+
+    @property
+    def BottomMarginEMU(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_BottomMarginEMU.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_BottomMarginEMU.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_BottomMarginEMU, self.Ptr)
+        return ret
+
+    @BottomMarginEMU.setter
+    def BottomMarginEMU(self, value:int):
+        GetDllLibXls().XlsTextBoxShape_set_BottomMarginEMU.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_BottomMarginEMU, self.Ptr, value)
+
+    @property
+    def InnerBottomMargin(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_InnerBottomMargin.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_InnerBottomMargin.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_InnerBottomMargin, self.Ptr)
+        return ret
+
+    @InnerBottomMargin.setter
+    def InnerBottomMargin(self, value:float):
+        GetDllLibXls().XlsTextBoxShape_set_InnerBottomMargin.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_InnerBottomMargin, self.Ptr, value)
+
+    @property
+    def InnerLeftMargin(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_InnerLeftMargin.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_InnerLeftMargin.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_InnerLeftMargin, self.Ptr)
+        return ret
+
+    @InnerLeftMargin.setter
+    def InnerLeftMargin(self, value:float):
+        GetDllLibXls().XlsTextBoxShape_set_InnerLeftMargin.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_InnerLeftMargin, self.Ptr, value)
+
+    @property
+    def InnerRightMargin(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_InnerRightMargin.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_InnerRightMargin.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_InnerRightMargin, self.Ptr)
+        return ret
+
+    @InnerRightMargin.setter
+    def InnerRightMargin(self, value:float):
+        GetDllLibXls().XlsTextBoxShape_set_InnerRightMargin.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_InnerRightMargin, self.Ptr, value)
+
+    @property
+    def InnerTopMargin(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_InnerTopMargin.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_InnerTopMargin.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_InnerTopMargin, self.Ptr)
+        return ret
+
+    @InnerTopMargin.setter
+    def InnerTopMargin(self, value:float):
+        GetDllLibXls().XlsTextBoxShape_set_InnerTopMargin.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_InnerTopMargin, self.Ptr, value)
+
+    @property
+
+    def VertOverflow(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_VertOverflow.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_VertOverflow.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsTextBoxShape_get_VertOverflow, self.Ptr))
+        return ret
+
+
+    @VertOverflow.setter
+    def VertOverflow(self, value:str):
+        GetDllLibXls().XlsTextBoxShape_set_VertOverflow.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_VertOverflow, self.Ptr, value)
+
+    @property
+
+    def HorzOverflow(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_HorzOverflow.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_HorzOverflow.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsTextBoxShape_get_HorzOverflow, self.Ptr))
+        return ret
+
+
+    @HorzOverflow.setter
+    def HorzOverflow(self, value:str):
+        GetDllLibXls().XlsTextBoxShape_set_HorzOverflow.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_HorzOverflow, self.Ptr, value)
+
+    @property
+
+    def Anchor(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_Anchor.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_Anchor.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsTextBoxShape_get_Anchor, self.Ptr))
+        return ret
+
+
+    @Anchor.setter
+    def Anchor(self, value:str):
+        GetDllLibXls().XlsTextBoxShape_set_Anchor.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_Anchor, self.Ptr, value)
+
+    @property
+
+    def Vert(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_Vert.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_Vert.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsTextBoxShape_get_Vert, self.Ptr))
+        return ret
+
+
+    @Vert.setter
+    def Vert(self, value:str):
+        GetDllLibXls().XlsTextBoxShape_set_Vert.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_Vert, self.Ptr, value)
+
+    @property
+    def IsTextWrapped(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_IsTextWrapped.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_IsTextWrapped.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_IsTextWrapped, self.Ptr)
+        return ret
+
+    @IsTextWrapped.setter
+    def IsTextWrapped(self, value:bool):
+        GetDllLibXls().XlsTextBoxShape_set_IsTextWrapped.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_IsTextWrapped, self.Ptr, value)
+
+    @property
+    def UpRight(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_UpRight.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_UpRight.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_UpRight, self.Ptr)
+        return ret
+
+    @UpRight.setter
+    def UpRight(self, value:int):
+        GetDllLibXls().XlsTextBoxShape_set_UpRight.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsTextBoxShape_set_UpRight, self.Ptr, value)
+
+    @property
+
+    def HyLink(self)->'IHyperLink':
+        """
+
+        """
+        GetDllLibXls().XlsTextBoxShape_get_HyLink.argtypes=[c_void_p]
+        GetDllLibXls().XlsTextBoxShape_get_HyLink.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsTextBoxShape_get_HyLink, self.Ptr)
+        ret = None if intPtr==None else HyperLink(intPtr)
+        return ret
+
+
+#
+#    def Clone(self ,parent:'SpireObject',hashNewNames:'Dictionary2',dicFontIndexes:'Dictionary2',addToCollections:bool)->'IShape':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrhashNewNames:c_void_p = hashNewNames.Ptr
+#        intPtrdicFontIndexes:c_void_p = dicFontIndexes.Ptr
+#
+#        GetDllLibXls().XlsTextBoxShape_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p,c_bool]
+#        GetDllLibXls().XlsTextBoxShape_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsTextBoxShape_Clone, self.Ptr, intPtrparent,intPtrhashNewNames,intPtrdicFontIndexes,addToCollections)
+#        ret = None if intPtr==None else IShape(intPtr)
+#        return ret
+#
+
+

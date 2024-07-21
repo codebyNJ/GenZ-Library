@@ -1,0 +1,527 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class AutoFiltersCollection (  XlsAutoFiltersCollection) :
+    """
+
+    """
+    @property
+
+    def Worksheet(self)->'Worksheet':
+        """
+    <summary>
+        Returns parent worksheet. Read-only.
+    </summary>
+        """
+        GetDllLibXls().AutoFiltersCollection_get_Worksheet.argtypes=[c_void_p]
+        GetDllLibXls().AutoFiltersCollection_get_Worksheet.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().AutoFiltersCollection_get_Worksheet, self.Ptr)
+        ret = None if intPtr==None else Worksheet(intPtr)
+        return ret
+
+
+
+    #def get_Item(self ,columnIndex:int)->'IAutoFilter':
+    #    """
+    #<summary>
+    #    Get auto filter item..
+    #</summary>
+    #    """
+        
+    #    GetDllLibXls().AutoFiltersCollection_get_Item.argtypes=[c_void_p ,c_int]
+    #    GetDllLibXls().AutoFiltersCollection_get_Item.restype=c_void_p
+    #    intPtr = CallCFunction(GetDllLibXls().AutoFiltersCollection_get_Item, self.Ptr, columnIndex)
+    #    ret = None if intPtr==None else IAutoFilter(intPtr)
+    #    return ret
+
+
+    @property
+
+    def Range(self)->'CellRange':
+        """
+    <summary>
+        Range to be filtered.
+    </summary>
+        """
+        GetDllLibXls().AutoFiltersCollection_get_Range.argtypes=[c_void_p]
+        GetDllLibXls().AutoFiltersCollection_get_Range.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().AutoFiltersCollection_get_Range, self.Ptr)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @Range.setter
+    def Range(self, value:'CellRange'):
+        GetDllLibXls().AutoFiltersCollection_set_Range.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_set_Range, self.Ptr, value.Ptr)
+
+    @dispatch
+    def Filter(self):
+        """
+    <summary>
+        Filter the data.
+    </summary>
+        """
+        GetDllLibXls().AutoFiltersCollection_Filter.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_Filter, self.Ptr)
+
+    @dispatch
+
+    def Filter(self ,hideRows:bool)->List[int]:
+        """
+    <summary>
+        Gets all hidden rows's indexes. 
+    </summary>
+    <param name="hideRows">If true, hide the filtered rows. </param>
+    <returns>Returns all hidden rows indexes. </returns>
+        """
+        
+        GetDllLibXls().AutoFiltersCollection_FilterH.argtypes=[c_void_p ,c_bool]
+        GetDllLibXls().AutoFiltersCollection_FilterH.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().AutoFiltersCollection_FilterH, self.Ptr, hideRows)
+        ret = GetVectorFromArray(intPtrArray, c_int)
+        return ret
+
+    @dispatch
+
+    def AddFilter(self ,columnIndex:int,criteria:str):
+        """
+    <summary>
+        Adds a filter for a filter column.
+    </summary>
+    <param name="column">The column field on which you want to base the filter . for exapmle: sheet.AutoFilters[0]
+    </param>
+    <param name="criteria">The specified criteria (a string; for example, "hello"). 
+            It only can be null or be one of the cells' value in this column.
+    </param>
+        """
+        
+        GetDllLibXls().AutoFiltersCollection_AddFilter.argtypes=[c_void_p ,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_AddFilter, self.Ptr, columnIndex,criteria)
+
+    @dispatch
+
+    def AddFilter(self ,column:IAutoFilter,criteria:str):
+        """
+
+        """
+        intPtrcolumn:c_void_p = column.Ptr
+
+        GetDllLibXls().AutoFiltersCollection_AddFilterCC.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_AddFilterCC, self.Ptr, intPtrcolumn,criteria)
+
+    @dispatch
+
+    def AddDateFilter(self ,columnIndex:int,dateTimeGroupingType:DateTimeGroupingType,year:int,month:int,day:int,hour:int,minute:int,second:int):
+        """
+    <summary>
+        Adds a date filter for a filter column.
+    </summary>
+    <param name="column">The column field on which you want to base the filter . for exapmle: sheet.AutoFilters[0]
+    </param>
+    <param name="dateTimeGroupingType">
+  <see cref="T:Spire.Xls.Core.Spreadsheet.AutoFilter.DateTimeGroupingType" />
+</param>
+    <param name="year">The year.</param>
+    <param name="month">The month.</param>
+    <param name="day">The day.</param>
+    <param name="hour">The hour.</param>
+    <param name="minute">The minute.</param>
+    <param name="second">The second.</param>
+<remarks>
+            If DateTimeGroupingType is Year, only the param year effects.
+            If DateTiemGroupingType is Month, only the param year and month effect.
+            and so on.
+            </remarks>
+        """
+        enumdateTimeGroupingType:c_int = dateTimeGroupingType.value
+
+        GetDllLibXls().AutoFiltersCollection_AddDateFilter.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_int,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_AddDateFilter, self.Ptr, columnIndex,enumdateTimeGroupingType,year,month,day,hour,minute,second)
+
+
+    def RemoveDateFilter(self ,columnIndex:int,dateTimeGroupingType:'DateTimeGroupingType',year:int,month:int,day:int,hour:int,minute:int,second:int):
+        """
+    <summary>
+        Removes a date filter.
+    </summary>
+    <param name="column">The column field on which you want to base the filter . for exapmle: sheet.AutoFilters[0]
+    </param>
+    <param name="dateTimeGroupingType">
+  <see cref="T:Spire.Xls.Core.Spreadsheet.AutoFilter.DateTimeGroupingType" />
+</param>
+    <param name="year">The year.</param>
+    <param name="month">The month.</param>
+    <param name="day">The day.</param>
+    <param name="hour">The hour.</param>
+    <param name="minute">The minute.</param>
+    <param name="second">The second.</param>
+<remarks>
+            If DateTimeGroupingType is Year, only the param year effects.
+            If DateTiemGroupingType is Month, only the param year and month effect.
+            </remarks>
+        """
+        enumdateTimeGroupingType:c_int = dateTimeGroupingType.value
+
+        GetDllLibXls().AutoFiltersCollection_RemoveDateFilter.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_int,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_RemoveDateFilter, self.Ptr, columnIndex,enumdateTimeGroupingType,year,month,day,hour,minute,second)
+
+
+    def RemoveFilter(self ,columnIndex:int,criteria:str):
+        """
+    <summary>
+        Removes a filter for a filter column.
+    </summary>
+    <param name="column">The column field on which you want to base the filter . for exapmle: sheet.AutoFilters[0]
+    </param>
+    <param name="criteria">The specified criteria (a string; for example, "hello"). 
+            It only can be null or be one of the cells' value in this column.
+    </param>
+        """
+        
+        GetDllLibXls().AutoFiltersCollection_RemoveFilter.argtypes=[c_void_p ,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_RemoveFilter, self.Ptr, columnIndex,criteria)
+
+    @dispatch
+
+    def QuickFilter(self ,columnIndex:int,criteria:str):
+        """
+    <summary>
+        Filters a list with specified criteria.
+    </summary>
+    <param name="column">The column field on which you want to base the filter . for exapmle: sheet.AutoFilters[0]
+    </param>
+    <param name="criteria">The specified criteria (a string; for example, "hello"). </param>
+<remarks>
+            will remove all other filter setting on this field as Ms Excel 97-2003.
+            </remarks>
+        """
+        
+        GetDllLibXls().AutoFiltersCollection_QuickFilter.argtypes=[c_void_p ,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_QuickFilter, self.Ptr, columnIndex,criteria)
+
+    @dispatch
+
+    def QuickFilter(self ,column:IAutoFilter,criteria:str):
+        """
+
+        """
+        intPtrcolumn:c_void_p = column.Ptr
+
+        GetDllLibXls().AutoFiltersCollection_QuickFilterCC.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_QuickFilterCC, self.Ptr, intPtrcolumn,criteria)
+
+    @dispatch
+
+    def DynamicFilter(self ,columnIndex:int,dynamicFilterType:DynamicFilterType):
+        """
+    <summary>
+        Adds a dynamic filter.
+    </summary>
+    <param name="column">The column field on which you want to base the filter. for exapmle: sheet.AutoFilters[0]</param>
+    <param name="dynamicFilterType">Dynamic filter type.</param>
+        """
+        enumdynamicFilterType:c_int = dynamicFilterType.value
+
+        GetDllLibXls().AutoFiltersCollection_DynamicFilter.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_DynamicFilter, self.Ptr, columnIndex,enumdynamicFilterType)
+
+    @dispatch
+
+    def AddFontColorFilter(self ,columnIndex:int,color:Color):
+        """
+    <summary>
+        Adds a font color filter.
+    </summary>
+    <param name="column">The column field on which you want to base the filter. for exapmle: sheet.AutoFilters[0]</param>
+    <param name="color">Font Color.</param>
+        """
+        intPtrcolor:c_void_p = color.Ptr
+
+        GetDllLibXls().AutoFiltersCollection_AddFontColorFilter.argtypes=[c_void_p ,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_AddFontColorFilter, self.Ptr, columnIndex,intPtrcolor)
+
+    @dispatch
+
+    def AddFillColorFilter(self ,columnIndex:int,pattern:ExcelPatternType,foreColor:Color,backColor:Color):
+        """
+    <summary>
+        Adds a fill color filter.
+    </summary>
+    <param name="column">The column field on which you want to base the filter. for exapmle: sheet.AutoFilters[0] </param>
+    <param name="pattern">The background pattern type.</param>
+    <param name="foregroundColor">The foreground color.</param>
+    <param name="backgroundColor">The background color.</param>
+        """
+        enumpattern:c_int = pattern.value
+        intPtrforeColor:c_void_p = foreColor.Ptr
+        intPtrbackColor:c_void_p = backColor.Ptr
+
+        GetDllLibXls().AutoFiltersCollection_AddFillColorFilter.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_AddFillColorFilter, self.Ptr, columnIndex,enumpattern,intPtrforeColor,intPtrbackColor)
+
+    @dispatch
+
+    def AddFillColorFilter(self ,filterColumnIndex:int,color:Color):
+        """
+    <summary>
+        Adds a fill color filter.
+    </summary>
+    <param name="filterColumnIndex">The column field index on which you want to base the filter (from the left of the list; the leftmost field is field 0).</param>
+    <param name="color">Fill Color.</param>
+        """
+        intPtrcolor:c_void_p = color.Ptr
+
+        GetDllLibXls().AutoFiltersCollection_AddFillColorFilterFC.argtypes=[c_void_p ,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_AddFillColorFilterFC, self.Ptr, filterColumnIndex,intPtrcolor)
+
+    @dispatch
+
+    def AddFillColorFilter(self ,column:IAutoFilter,color:Color):
+        """
+
+        """
+        intPtrcolumn:c_void_p = column.Ptr
+        intPtrcolor:c_void_p = color.Ptr
+
+        GetDllLibXls().AutoFiltersCollection_AddFillColorFilterCC.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_AddFillColorFilterCC, self.Ptr, intPtrcolumn,intPtrcolor)
+
+    @dispatch
+
+    def AddFontColorFilter(self ,column:IAutoFilter,color:Color):
+        """
+
+        """
+        intPtrcolumn:c_void_p = column.Ptr
+        intPtrcolor:c_void_p = color.Ptr
+
+        GetDllLibXls().AutoFiltersCollection_AddFontColorFilterCC.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_AddFontColorFilterCC, self.Ptr, intPtrcolumn,intPtrcolor)
+
+
+    def AddIconFilter(self ,columnIndex:int,iconSetType:'IconSetType',iconId:int):
+        """
+
+        """
+        enumiconSetType:c_int = iconSetType.value
+
+        GetDllLibXls().AutoFiltersCollection_AddIconFilter.argtypes=[c_void_p ,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_AddIconFilter, self.Ptr, columnIndex,enumiconSetType,iconId)
+
+    @dispatch
+
+    def MatchBlanks(self ,columnIndex:int):
+        """
+    <summary>
+        Match all blank cell in the list.
+    </summary>
+    <param name="column">The column field on which you want to base the filter . for exapmle: sheet.AutoFilters[0]</param>
+        """
+        
+        GetDllLibXls().AutoFiltersCollection_MatchBlanks.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_MatchBlanks, self.Ptr, columnIndex)
+
+    @dispatch
+
+    def MatchBlanks(self ,column:IAutoFilter):
+        """
+    <summary>
+        Match all blank cell in the list.
+    </summary>
+    <param name="column">The column field on which you want to base the filter . for exapmle: sheet.AutoFilters[0]</param>
+        """
+        intPtrcolumn:c_void_p = column.Ptr
+
+        GetDllLibXls().AutoFiltersCollection_MatchBlanksC.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_MatchBlanksC, self.Ptr, intPtrcolumn)
+
+    @dispatch
+
+    def CustomFilter(self ,columnIndex:int,operatorType:FilterOperatorType,criteria:SpireObject):
+        """
+    <summary>
+        Filters a list with a custom criteria.
+    </summary>
+    <param name="column">The column field on which you want to base the filter . for exapmle: sheet.AutoFilters[0]</param>
+    <param name="operatorType">The filter operator type</param>
+    <param name="criteria">The custom criteria</param>
+        """
+        enumoperatorType:c_int = operatorType.value
+        intPtrcriteria:c_void_p = criteria.Ptr
+
+        GetDllLibXls().AutoFiltersCollection_CustomFilter.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_CustomFilter, self.Ptr, columnIndex,enumoperatorType,intPtrcriteria)
+
+    @dispatch
+
+    def CustomFilter(self ,columnIndex:int,operatorType1:FilterOperatorType,criteria1:SpireObject,isAnd:bool,operatorType2:FilterOperatorType,criteria2:SpireObject):
+        """
+    <summary>
+        Filters a list with custom criterias.
+    </summary>
+    <param name="column">The column field on which you want to base the filter. for exapmle: sheet.AutoFilters[0]</param>
+    <param name="operatorType1">The first filter operator type</param>
+    <param name="criteria1">The first custom criteria</param>
+    <param name="isAnd"></param>
+    <param name="operatorType2">The second filter operator type</param>
+    <param name="criteria2">The second custom criteria</param>
+        """
+        enumoperatorType1:c_int = operatorType1.value
+        intPtrcriteria1:c_void_p = criteria1.Ptr
+        enumoperatorType2:c_int = operatorType2.value
+        intPtrcriteria2:c_void_p = criteria2.Ptr
+
+        GetDllLibXls().AutoFiltersCollection_CustomFilterCOCIOC.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_bool,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_CustomFilterCOCIOC, self.Ptr, columnIndex,enumoperatorType1,intPtrcriteria1,isAnd,enumoperatorType2,intPtrcriteria2)
+
+    @dispatch
+
+    def CustomFilter(self ,column:FilterColumn,operatorType:FilterOperatorType,criteria:SpireObject):
+        """
+
+        """
+        intPtrcolumn:c_void_p = column.Ptr
+        enumoperatorType:c_int = operatorType.value
+        intPtrcriteria:c_void_p = criteria.Ptr
+
+        GetDllLibXls().AutoFiltersCollection_CustomFilterCOC.argtypes=[c_void_p ,c_void_p,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_CustomFilterCOC, self.Ptr, intPtrcolumn,enumoperatorType,intPtrcriteria)
+
+    @dispatch
+
+    def CustomFilter(self ,column:FilterColumn,operatorType1:FilterOperatorType,criteria1:SpireObject,isAnd:bool,operatorType2:FilterOperatorType,criteria2:SpireObject):
+        """
+
+        """
+        intPtrcolumn:c_void_p = column.Ptr
+        enumoperatorType1:c_int = operatorType1.value
+        intPtrcriteria1:c_void_p = criteria1.Ptr
+        enumoperatorType2:c_int = operatorType2.value
+        intPtrcriteria2:c_void_p = criteria2.Ptr
+
+        GetDllLibXls().AutoFiltersCollection_CustomFilterCOCIOC1.argtypes=[c_void_p ,c_void_p,c_int,c_void_p,c_bool,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_CustomFilterCOCIOC1, self.Ptr, intPtrcolumn,enumoperatorType1,intPtrcriteria1,isAnd,enumoperatorType2,intPtrcriteria2)
+
+    @dispatch
+
+    def DynamicFilter(self ,column:IAutoFilter,dynamicFilterType:DynamicFilterType):
+        """
+
+        """
+        intPtrcolumn:c_void_p = column.Ptr
+        enumdynamicFilterType:c_int = dynamicFilterType.value
+
+        GetDllLibXls().AutoFiltersCollection_DynamicFilterCD.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_DynamicFilterCD, self.Ptr, intPtrcolumn,enumdynamicFilterType)
+
+    @dispatch
+
+    def ClearFilter(self ,columnName:str):
+        """
+    <summary>
+        Delete the column filter by column name
+    </summary>
+    <param name="columName">column name</param>
+        """
+        
+        GetDllLibXls().AutoFiltersCollection_ClearFilter.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_ClearFilter, self.Ptr, columnName)
+
+    @dispatch
+
+    def ClearFilter(self ,filterColumnIndex:int):
+        """
+    <summary>
+        Delete the column filter by column index(filters column index not sheet column index)
+    </summary>
+    <param name="columName">column index</param>
+        """
+        
+        GetDllLibXls().AutoFiltersCollection_ClearFilterF.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_ClearFilterF, self.Ptr, filterColumnIndex)
+
+    @dispatch
+
+    def AddDateFilter(self ,column:IAutoFilter,dateTimeGroupingType:DateTimeGroupingType,year:int,month:int,day:int,hour:int,minute:int,second:int):
+        """
+
+        """
+        intPtrcolumn:c_void_p = column.Ptr
+        enumdateTimeGroupingType:c_int = dateTimeGroupingType.value
+
+        GetDllLibXls().AutoFiltersCollection_AddDateFilterCDYMDHMS.argtypes=[c_void_p ,c_void_p,c_int,c_int,c_int,c_int,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_AddDateFilterCDYMDHMS, self.Ptr, intPtrcolumn,enumdateTimeGroupingType,year,month,day,hour,minute,second)
+
+    @dispatch
+
+    def FilterTop10(self ,filterColumnIndex:int,isTop:bool,isPercent:bool,itemCount:int):
+        """
+    <summary>
+        Filter the top 10 item in the list
+    </summary>
+    <param name="filterColumnIndex">The column field index on which you want to base the filter (from the left of the list; the leftmost field is field 0). </param>
+    <param name="isTop">Indicates whether filter from top or bottom</param>
+    <param name="isPercent">Indicates whether the items is percent or count </param>
+    <param name="itemCount">The item count</param>
+        """
+        
+        GetDllLibXls().AutoFiltersCollection_FilterTop10.argtypes=[c_void_p ,c_int,c_bool,c_bool,c_int]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_FilterTop10, self.Ptr, filterColumnIndex,isTop,isPercent,itemCount)
+
+    @dispatch
+
+    def FilterTop10(self ,column:IAutoFilter,isTop:bool,isPercent:bool,itemCount:int):
+        """
+    <summary>
+        Filter the top 10 item in the list
+    </summary>
+    <param name="column">The column field on which you want to base the filter. for exapmle: sheet.AutoFilters[0] </param>
+    <param name="isTop">Indicates whether filter from top or bottom</param>
+    <param name="isPercent">Indicates whether the items is percent or count </param>
+    <param name="itemCount">The item count</param>
+        """
+        intPtrcolumn:c_void_p = column.Ptr
+
+        GetDllLibXls().AutoFiltersCollection_FilterTop10CIII.argtypes=[c_void_p ,c_void_p,c_bool,c_bool,c_int]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_FilterTop10CIII, self.Ptr, intPtrcolumn,isTop,isPercent,itemCount)
+
+    @dispatch
+
+    def MatchNonBlanks(self ,filterColumnIndex:int):
+        """
+    <summary>
+        Match all not blank cell in the list.
+    </summary>
+    <param name="filterColumnIndex">The column field index on which you want to base the filter (from the left of the list; the leftmost field is field 0).</param>
+        """
+        
+        GetDllLibXls().AutoFiltersCollection_MatchNonBlanks.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_MatchNonBlanks, self.Ptr, filterColumnIndex)
+
+    @dispatch
+
+    def MatchNonBlanks(self ,column:FilterColumn):
+        """
+    <summary>
+        Match all not blank cell in the list.
+    </summary>
+    <param name="column">The column field on which you want to base the filter . for exapmle: sheet.AutoFilters[0]</param>
+        """
+        intPtrcolumn:c_void_p = column.Ptr
+
+        GetDllLibXls().AutoFiltersCollection_MatchNonBlanksC.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_MatchNonBlanksC, self.Ptr, intPtrcolumn)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().AutoFiltersCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().AutoFiltersCollection_Clear, self.Ptr)
+

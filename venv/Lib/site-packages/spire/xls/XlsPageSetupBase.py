@@ -1,0 +1,1258 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsPageSetupBase (  XlsObject, IPageSetupBase) :
+    """
+
+    """
+    @property
+    def RightMargin(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_RightMargin.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_RightMargin.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_RightMargin, self.Ptr)
+        return ret
+
+    @RightMargin.setter
+    def RightMargin(self, value:float):
+        GetDllLibXls().XlsPageSetupBase_set_RightMargin.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_RightMargin, self.Ptr, value)
+
+    @property
+    def TopMargin(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_TopMargin.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_TopMargin.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_TopMargin, self.Ptr)
+        return ret
+
+    @TopMargin.setter
+    def TopMargin(self, value:float):
+        GetDllLibXls().XlsPageSetupBase_set_TopMargin.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_TopMargin, self.Ptr, value)
+
+    @property
+    def Zoom(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_Zoom.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_Zoom.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_Zoom, self.Ptr)
+        return ret
+
+    @Zoom.setter
+    def Zoom(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_Zoom.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_Zoom, self.Ptr, value)
+
+    @property
+    def CenterFooterPictureWidth(self)->int:
+        """
+    <summary>
+        Gets or set width of picture for center part of the footer.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_CenterFooterPictureWidth.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_CenterFooterPictureWidth.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_CenterFooterPictureWidth, self.Ptr)
+        return ret
+
+    @CenterFooterPictureWidth.setter
+    def CenterFooterPictureWidth(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_CenterFooterPictureWidth.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_CenterFooterPictureWidth, self.Ptr, value)
+
+    @property
+    def CenterFooterPictureHeight(self)->int:
+        """
+    <summary>
+        Gets or set height of picture for center part of the footer.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_CenterFooterPictureHeight.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_CenterFooterPictureHeight.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_CenterFooterPictureHeight, self.Ptr)
+        return ret
+
+    @CenterFooterPictureHeight.setter
+    def CenterFooterPictureHeight(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_CenterFooterPictureHeight.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_CenterFooterPictureHeight, self.Ptr, value)
+
+    @property
+    def CenterHeaderPictureWidth(self)->int:
+        """
+    <summary>
+        Gets or set width of picture for center part of the header.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_CenterHeaderPictureWidth.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_CenterHeaderPictureWidth.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_CenterHeaderPictureWidth, self.Ptr)
+        return ret
+
+    @CenterHeaderPictureWidth.setter
+    def CenterHeaderPictureWidth(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_CenterHeaderPictureWidth.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_CenterHeaderPictureWidth, self.Ptr, value)
+
+    @property
+    def CenterHeaderPictureHeight(self)->int:
+        """
+    <summary>
+        Gets or set height of picture for center part of the header.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_CenterHeaderPictureHeight.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_CenterHeaderPictureHeight.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_CenterHeaderPictureHeight, self.Ptr)
+        return ret
+
+    @CenterHeaderPictureHeight.setter
+    def CenterHeaderPictureHeight(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_CenterHeaderPictureHeight.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_CenterHeaderPictureHeight, self.Ptr, value)
+
+    @property
+    def LeftFooterPictureWidth(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_LeftFooterPictureWidth.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_LeftFooterPictureWidth.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_LeftFooterPictureWidth, self.Ptr)
+        return ret
+
+    @LeftFooterPictureWidth.setter
+    def LeftFooterPictureWidth(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_LeftFooterPictureWidth.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_LeftFooterPictureWidth, self.Ptr, value)
+
+    @property
+    def LeftFooterPictureHeight(self)->int:
+        """
+    <summary>
+        Gets or set height of picture for left part of the footer.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_LeftFooterPictureHeight.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_LeftFooterPictureHeight.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_LeftFooterPictureHeight, self.Ptr)
+        return ret
+
+    @LeftFooterPictureHeight.setter
+    def LeftFooterPictureHeight(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_LeftFooterPictureHeight.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_LeftFooterPictureHeight, self.Ptr, value)
+
+    @property
+    def LeftHeaderPictureWidth(self)->int:
+        """
+    <summary>
+        Gets or set width of picture for left part of the header.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_LeftHeaderPictureWidth.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_LeftHeaderPictureWidth.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_LeftHeaderPictureWidth, self.Ptr)
+        return ret
+
+    @LeftHeaderPictureWidth.setter
+    def LeftHeaderPictureWidth(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_LeftHeaderPictureWidth.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_LeftHeaderPictureWidth, self.Ptr, value)
+
+    @property
+    def LeftHeaderPictureHeight(self)->int:
+        """
+    <summary>
+        Gets or set height of picture for left part of the header.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_LeftHeaderPictureHeight.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_LeftHeaderPictureHeight.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_LeftHeaderPictureHeight, self.Ptr)
+        return ret
+
+    @LeftHeaderPictureHeight.setter
+    def LeftHeaderPictureHeight(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_LeftHeaderPictureHeight.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_LeftHeaderPictureHeight, self.Ptr, value)
+
+    @property
+    def RightFooterPictureWidth(self)->int:
+        """
+    <summary>
+        Gets or set width of picture for right part of the footer.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_RightFooterPictureWidth.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_RightFooterPictureWidth.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_RightFooterPictureWidth, self.Ptr)
+        return ret
+
+    @RightFooterPictureWidth.setter
+    def RightFooterPictureWidth(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_RightFooterPictureWidth.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_RightFooterPictureWidth, self.Ptr, value)
+
+    @property
+    def RightFooterPictureHeight(self)->int:
+        """
+    <summary>
+        Gets or set height of picture for right part of the footer.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_RightFooterPictureHeight.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_RightFooterPictureHeight.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_RightFooterPictureHeight, self.Ptr)
+        return ret
+
+    @RightFooterPictureHeight.setter
+    def RightFooterPictureHeight(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_RightFooterPictureHeight.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_RightFooterPictureHeight, self.Ptr, value)
+
+    @property
+    def RightHeaderPictureWidth(self)->int:
+        """
+    <summary>
+        Gets or set width of picture for right part of the header.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_RightHeaderPictureWidth.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_RightHeaderPictureWidth.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_RightHeaderPictureWidth, self.Ptr)
+        return ret
+
+    @RightHeaderPictureWidth.setter
+    def RightHeaderPictureWidth(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_RightHeaderPictureWidth.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_RightHeaderPictureWidth, self.Ptr, value)
+
+    @property
+    def RightHeaderPictureHeight(self)->int:
+        """
+    <summary>
+        Gets or set height of picture for right part of the header.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_RightHeaderPictureHeight.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_RightHeaderPictureHeight.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_RightHeaderPictureHeight, self.Ptr)
+        return ret
+
+    @RightHeaderPictureHeight.setter
+    def RightHeaderPictureHeight(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_RightHeaderPictureHeight.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_RightHeaderPictureHeight, self.Ptr, value)
+
+    @property
+
+    def BackgoundImage(self)->'Stream':
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_BackgoundImage.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_BackgoundImage.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_BackgoundImage, self.Ptr)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @BackgoundImage.setter
+    def BackgoundImage(self, value:'Stream'):
+        GetDllLibXls().XlsPageSetupBase_set_BackgoundImage.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_BackgoundImage, self.Ptr, value.Ptr)
+
+    @property
+
+    def ODSPageBackground(self)->'OdsPageBackground':
+        """
+    <summary>
+        Returns ods page background. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_ODSPageBackground.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_ODSPageBackground.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_ODSPageBackground, self.Ptr)
+        ret = None if intPtr==None else OdsPageBackground(intPtr)
+        return ret
+
+
+
+    def GetStoreSize(self ,version:'ExcelVersion')->int:
+        """
+
+        """
+        enumversion:c_int = version.value
+
+        GetDllLibXls().XlsPageSetupBase_GetStoreSize.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsPageSetupBase_GetStoreSize.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_GetStoreSize, self.Ptr, enumversion)
+        return ret
+
+    @property
+    def PageWidth(self)->float:
+        """
+    <summary>
+        Returns page width in points. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_PageWidth.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_PageWidth.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_PageWidth, self.Ptr)
+        return ret
+
+    @property
+    def PageHeight(self)->float:
+        """
+    <summary>
+        Returns page width in points. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_PageHeight.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_PageHeight.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_PageHeight, self.Ptr)
+        return ret
+
+
+    def Copy(self ,source:'PageSetup'):
+        """
+
+        """
+        intPtrsource:c_void_p = source.Ptr
+
+        GetDllLibXls().XlsPageSetupBase_Copy.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_Copy, self.Ptr, intPtrsource)
+
+    @property
+    def IsSettingsNotValid(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_IsSettingsNotValid.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_IsSettingsNotValid.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_IsSettingsNotValid, self.Ptr)
+        return ret
+
+    @IsSettingsNotValid.setter
+    def IsSettingsNotValid(self, value:bool):
+        GetDllLibXls().XlsPageSetupBase_set_IsSettingsNotValid.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_IsSettingsNotValid, self.Ptr, value)
+
+    @property
+    def AutoFirstPageNumber(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_AutoFirstPageNumber.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_AutoFirstPageNumber.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_AutoFirstPageNumber, self.Ptr)
+        return ret
+
+    @AutoFirstPageNumber.setter
+    def AutoFirstPageNumber(self, value:bool):
+        GetDllLibXls().XlsPageSetupBase_set_AutoFirstPageNumber.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_AutoFirstPageNumber, self.Ptr, value)
+
+    @property
+    def BlackAndWhite(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_BlackAndWhite.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_BlackAndWhite.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_BlackAndWhite, self.Ptr)
+        return ret
+
+    @BlackAndWhite.setter
+    def BlackAndWhite(self, value:bool):
+        GetDllLibXls().XlsPageSetupBase_set_BlackAndWhite.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_BlackAndWhite, self.Ptr, value)
+
+    @property
+    def BottomMargin(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_BottomMargin.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_BottomMargin.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_BottomMargin, self.Ptr)
+        return ret
+
+    @BottomMargin.setter
+    def BottomMargin(self, value:float):
+        GetDllLibXls().XlsPageSetupBase_set_BottomMargin.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_BottomMargin, self.Ptr, value)
+
+    @property
+
+    def CenterFooter(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_CenterFooter.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_CenterFooter.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetupBase_get_CenterFooter, self.Ptr))
+        return ret
+
+
+    @CenterFooter.setter
+    def CenterFooter(self, value:str):
+        GetDllLibXls().XlsPageSetupBase_set_CenterFooter.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_CenterFooter, self.Ptr, value)
+
+#    @property
+#
+#    def PrinterSettings(self)->List['Byte']:
+#        """
+#
+#        """
+#        GetDllLibXls().XlsPageSetupBase_get_PrinterSettings.argtypes=[c_void_p]
+#        GetDllLibXls().XlsPageSetupBase_get_PrinterSettings.restype=IntPtrArray
+#        intPtrArray = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_PrinterSettings, self.Ptr)
+#        ret = GetVectorFromArray(intPtrArray, Byte)
+#        return ret
+
+
+#    @PrinterSettings.setter
+#    def PrinterSettings(self, value:List['Byte']):
+#        vCount = len(value)
+#        ArrayType = c_void_p * vCount
+#        vArray = ArrayType()
+#        for i in range(0, vCount):
+#            vArray[i] = value[i].Ptr
+#        GetDllLibXls().XlsPageSetupBase_set_PrinterSettings.argtypes=[c_void_p, ArrayType, c_int]
+#        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_PrinterSettings, self.Ptr, vArray, vCount)
+
+
+    @property
+
+    def CenterFooterImage(self)->'Stream':
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_CenterFooterImage.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_CenterFooterImage.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_CenterFooterImage, self.Ptr)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @CenterFooterImage.setter
+    def CenterFooterImage(self, value:'Stream'):
+        GetDllLibXls().XlsPageSetupBase_set_CenterFooterImage.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_CenterFooterImage, self.Ptr, value.Ptr)
+
+    @property
+
+    def CenterHeader(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_CenterHeader.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_CenterHeader.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetupBase_get_CenterHeader, self.Ptr))
+        return ret
+
+
+    @CenterHeader.setter
+    def CenterHeader(self, value:str):
+        GetDllLibXls().XlsPageSetupBase_set_CenterHeader.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_CenterHeader, self.Ptr, value)
+
+    @property
+
+    def CenterHeaderImage(self)->'Stream':
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_CenterHeaderImage.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_CenterHeaderImage.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_CenterHeaderImage, self.Ptr)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @CenterHeaderImage.setter
+    def CenterHeaderImage(self, value:'Stream'):
+        GetDllLibXls().XlsPageSetupBase_set_CenterHeaderImage.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_CenterHeaderImage, self.Ptr, value.Ptr)
+
+    @property
+    def CenterHorizontally(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_CenterHorizontally.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_CenterHorizontally.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_CenterHorizontally, self.Ptr)
+        return ret
+
+    @CenterHorizontally.setter
+    def CenterHorizontally(self, value:bool):
+        GetDllLibXls().XlsPageSetupBase_set_CenterHorizontally.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_CenterHorizontally, self.Ptr, value)
+
+    @property
+    def CenterVertically(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_CenterVertically.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_CenterVertically.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_CenterVertically, self.Ptr)
+        return ret
+
+    @CenterVertically.setter
+    def CenterVertically(self, value:bool):
+        GetDllLibXls().XlsPageSetupBase_set_CenterVertically.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_CenterVertically, self.Ptr, value)
+
+    @property
+    def Copies(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_Copies.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_Copies.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_Copies, self.Ptr)
+        return ret
+
+    @Copies.setter
+    def Copies(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_Copies.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_Copies, self.Ptr, value)
+
+    @property
+    def Draft(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_Draft.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_Draft.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_Draft, self.Ptr)
+        return ret
+
+    @Draft.setter
+    def Draft(self, value:bool):
+        GetDllLibXls().XlsPageSetupBase_set_Draft.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_Draft, self.Ptr, value)
+
+    @property
+    def FirstPageNumber(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_FirstPageNumber.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_FirstPageNumber.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_FirstPageNumber, self.Ptr)
+        return ret
+
+    @FirstPageNumber.setter
+    def FirstPageNumber(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_FirstPageNumber.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_FirstPageNumber, self.Ptr, value)
+
+    @property
+    def FooterMarginInch(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_FooterMarginInch.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_FooterMarginInch.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_FooterMarginInch, self.Ptr)
+        return ret
+
+    @FooterMarginInch.setter
+    def FooterMarginInch(self, value:float):
+        GetDllLibXls().XlsPageSetupBase_set_FooterMarginInch.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_FooterMarginInch, self.Ptr, value)
+
+    @property
+    def FitToPagesTall(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_FitToPagesTall.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_FitToPagesTall.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_FitToPagesTall, self.Ptr)
+        return ret
+
+    @FitToPagesTall.setter
+    def FitToPagesTall(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_FitToPagesTall.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_FitToPagesTall, self.Ptr, value)
+
+    @property
+    def FitToPagesWide(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_FitToPagesWide.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_FitToPagesWide.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_FitToPagesWide, self.Ptr)
+        return ret
+
+    @FitToPagesWide.setter
+    def FitToPagesWide(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_FitToPagesWide.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_FitToPagesWide, self.Ptr, value)
+
+    @property
+    def HeaderMarginInch(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_HeaderMarginInch.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_HeaderMarginInch.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_HeaderMarginInch, self.Ptr)
+        return ret
+
+    @HeaderMarginInch.setter
+    def HeaderMarginInch(self, value:float):
+        GetDllLibXls().XlsPageSetupBase_set_HeaderMarginInch.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_HeaderMarginInch, self.Ptr, value)
+
+    @property
+    def HResolution(self)->int:
+        """
+    <summary>
+        Gets or sets horizontal resolution in dpi.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_HResolution.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_HResolution.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_HResolution, self.Ptr)
+        return ret
+
+    @HResolution.setter
+    def HResolution(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_HResolution.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_HResolution, self.Ptr, value)
+
+    @property
+
+    def FullHeaderString(self)->str:
+        """
+    <summary>
+        Represents full header string. Read only.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_FullHeaderString.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_FullHeaderString.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetupBase_get_FullHeaderString, self.Ptr))
+        return ret
+
+
+    @FullHeaderString.setter
+    def FullHeaderString(self, value:str):
+        GetDllLibXls().XlsPageSetupBase_set_FullHeaderString.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_FullHeaderString, self.Ptr, value)
+
+    @property
+
+    def FullFooterString(self)->str:
+        """
+    <summary>
+        Gets footer full string. Read only.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_FullFooterString.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_FullFooterString.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetupBase_get_FullFooterString, self.Ptr))
+        return ret
+
+
+    @FullFooterString.setter
+    def FullFooterString(self, value:str):
+        GetDllLibXls().XlsPageSetupBase_set_FullFooterString.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_FullFooterString, self.Ptr, value)
+
+    @property
+
+    def FirstHeaderString(self)->str:
+        """
+    <summary>
+        Represents first page header string. Read only.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_FirstHeaderString.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_FirstHeaderString.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetupBase_get_FirstHeaderString, self.Ptr))
+        return ret
+
+
+    @FirstHeaderString.setter
+    def FirstHeaderString(self, value:str):
+        GetDllLibXls().XlsPageSetupBase_set_FirstHeaderString.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_FirstHeaderString, self.Ptr, value)
+
+    @property
+
+    def FirstFooterString(self)->str:
+        """
+    <summary>
+        Gets first page footer string. Read only.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_FirstFooterString.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_FirstFooterString.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetupBase_get_FirstFooterString, self.Ptr))
+        return ret
+
+
+    @FirstFooterString.setter
+    def FirstFooterString(self, value:str):
+        GetDllLibXls().XlsPageSetupBase_set_FirstFooterString.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_FirstFooterString, self.Ptr, value)
+
+    @property
+
+    def OddHeaderString(self)->str:
+        """
+    <summary>
+        Gets Odd page header string. Read only.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_OddHeaderString.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_OddHeaderString.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetupBase_get_OddHeaderString, self.Ptr))
+        return ret
+
+
+    @OddHeaderString.setter
+    def OddHeaderString(self, value:str):
+        GetDllLibXls().XlsPageSetupBase_set_OddHeaderString.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_OddHeaderString, self.Ptr, value)
+
+    @property
+
+    def OddFooterString(self)->str:
+        """
+    <summary>
+        Gets Odd page footer string. Read only.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_OddFooterString.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_OddFooterString.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetupBase_get_OddFooterString, self.Ptr))
+        return ret
+
+
+    @OddFooterString.setter
+    def OddFooterString(self, value:str):
+        GetDllLibXls().XlsPageSetupBase_set_OddFooterString.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_OddFooterString, self.Ptr, value)
+
+    @property
+
+    def EvenHeaderString(self)->str:
+        """
+    <summary>
+        Gets Even page header string. Read only.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_EvenHeaderString.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_EvenHeaderString.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetupBase_get_EvenHeaderString, self.Ptr))
+        return ret
+
+
+    @EvenHeaderString.setter
+    def EvenHeaderString(self, value:str):
+        GetDllLibXls().XlsPageSetupBase_set_EvenHeaderString.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_EvenHeaderString, self.Ptr, value)
+
+    @property
+
+    def EvenFooterString(self)->str:
+        """
+    <summary>
+        Gets OddEven page footer string. Read only.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_EvenFooterString.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_EvenFooterString.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetupBase_get_EvenFooterString, self.Ptr))
+        return ret
+
+
+    @EvenFooterString.setter
+    def EvenFooterString(self, value:str):
+        GetDllLibXls().XlsPageSetupBase_set_EvenFooterString.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_EvenFooterString, self.Ptr, value)
+
+    @property
+    def AlignWithMargins(self)->int:
+        """
+    <summary>
+        Indicates whether align header footer margins with page margins.default is 1
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_AlignWithMargins.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_AlignWithMargins.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_AlignWithMargins, self.Ptr)
+        return ret
+
+    @AlignWithMargins.setter
+    def AlignWithMargins(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_AlignWithMargins.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_AlignWithMargins, self.Ptr, value)
+
+    @property
+    def DifferentOddEven(self)->int:
+        """
+    <summary>
+        Indicates whether different odd and even page headers and footers.default is 0
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_DifferentOddEven.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_DifferentOddEven.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_DifferentOddEven, self.Ptr)
+        return ret
+
+    @DifferentOddEven.setter
+    def DifferentOddEven(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_DifferentOddEven.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_DifferentOddEven, self.Ptr, value)
+
+    @property
+    def ScaleWithDoc(self)->int:
+        """
+    <summary>
+        Indicates whether scale header and footer with document scaling.default is 1
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_ScaleWithDoc.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_ScaleWithDoc.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_ScaleWithDoc, self.Ptr)
+        return ret
+
+    @ScaleWithDoc.setter
+    def ScaleWithDoc(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_ScaleWithDoc.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_ScaleWithDoc, self.Ptr, value)
+
+    @property
+    def DifferentFirst(self)->int:
+        """
+    <summary>
+        Indicates whether different first page header and footer.default is 0
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_DifferentFirst.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_DifferentFirst.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_DifferentFirst, self.Ptr)
+        return ret
+
+    @DifferentFirst.setter
+    def DifferentFirst(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_DifferentFirst.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_DifferentFirst, self.Ptr, value)
+
+    @property
+    def VResolution(self)->int:
+        """
+    <summary>
+        Gets or sets vertical resolution in dpi.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_VResolution.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_VResolution.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_VResolution, self.Ptr)
+        return ret
+
+    @VResolution.setter
+    def VResolution(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_VResolution.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_VResolution, self.Ptr, value)
+
+    @property
+
+    def LeftFooter(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_LeftFooter.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_LeftFooter.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetupBase_get_LeftFooter, self.Ptr))
+        return ret
+
+
+    @LeftFooter.setter
+    def LeftFooter(self, value:str):
+        GetDllLibXls().XlsPageSetupBase_set_LeftFooter.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_LeftFooter, self.Ptr, value)
+
+    @property
+
+    def LeftFooterImage(self)->'Stream':
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_LeftFooterImage.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_LeftFooterImage.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_LeftFooterImage, self.Ptr)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @LeftFooterImage.setter
+    def LeftFooterImage(self, value:'Stream'):
+        GetDllLibXls().XlsPageSetupBase_set_LeftFooterImage.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_LeftFooterImage, self.Ptr, value.Ptr)
+
+    @property
+
+    def LeftHeader(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_LeftHeader.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_LeftHeader.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetupBase_get_LeftHeader, self.Ptr))
+        return ret
+
+
+    @LeftHeader.setter
+    def LeftHeader(self, value:str):
+        GetDllLibXls().XlsPageSetupBase_set_LeftHeader.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_LeftHeader, self.Ptr, value)
+
+    @property
+
+    def LeftHeaderImage(self)->'Stream':
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_LeftHeaderImage.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_LeftHeaderImage.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_LeftHeaderImage, self.Ptr)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @LeftHeaderImage.setter
+    def LeftHeaderImage(self, value:'Stream'):
+        GetDllLibXls().XlsPageSetupBase_set_LeftHeaderImage.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_LeftHeaderImage, self.Ptr, value.Ptr)
+
+    @property
+    def LeftMargin(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_LeftMargin.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_LeftMargin.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_LeftMargin, self.Ptr)
+        return ret
+
+    @LeftMargin.setter
+    def LeftMargin(self, value:float):
+        GetDllLibXls().XlsPageSetupBase_set_LeftMargin.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_LeftMargin, self.Ptr, value)
+
+    @property
+
+    def Order(self)->'OrderType':
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_Order.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_Order.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_Order, self.Ptr)
+        objwraped = OrderType(ret)
+        return objwraped
+
+    @Order.setter
+    def Order(self, value:'OrderType'):
+        GetDllLibXls().XlsPageSetupBase_set_Order.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_Order, self.Ptr, value.value)
+
+    @property
+
+    def Orientation(self)->'PageOrientationType':
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_Orientation.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_Orientation.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_Orientation, self.Ptr)
+        objwraped = PageOrientationType(ret)
+        return objwraped
+
+    @Orientation.setter
+    def Orientation(self, value:'PageOrientationType'):
+        GetDllLibXls().XlsPageSetupBase_set_Orientation.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_Orientation, self.Ptr, value.value)
+
+    @property
+
+    def PaperSize(self)->'PaperSizeType':
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_PaperSize.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_PaperSize.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_PaperSize, self.Ptr)
+        objwraped = PaperSizeType(ret)
+        return objwraped
+
+    @PaperSize.setter
+    def PaperSize(self, value:'PaperSizeType'):
+        GetDllLibXls().XlsPageSetupBase_set_PaperSize.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_PaperSize, self.Ptr, value.value)
+
+
+    def SetCustomPaperSize(self ,width:float,height:float):
+        """
+    <summary>
+        Sets the custom paper size. Unit mm.
+    </summary>
+        """
+        
+        GetDllLibXls().XlsPageSetupBase_SetCustomPaperSize.argtypes=[c_void_p ,c_float,c_float]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_SetCustomPaperSize, self.Ptr, width,height)
+
+    @property
+
+    def CustomPaperSizeName(self)->str:
+        """
+    <summary>
+        Returns or sets the name of custom paper that is from printer.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_CustomPaperSizeName.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_CustomPaperSizeName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetupBase_get_CustomPaperSizeName, self.Ptr))
+        return ret
+
+
+    @CustomPaperSizeName.setter
+    def CustomPaperSizeName(self, value:str):
+        GetDllLibXls().XlsPageSetupBase_set_CustomPaperSizeName.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_CustomPaperSizeName, self.Ptr, value)
+
+    @property
+    def IsAutoPaperSize(self)->bool:
+        """
+    <summary>
+        Returns whether paper size is automatic. Read only.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetupBase_get_IsAutoPaperSize.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_IsAutoPaperSize.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_IsAutoPaperSize, self.Ptr)
+        return ret
+
+    @property
+
+    def PrintComments(self)->'PrintCommentType':
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_PrintComments.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_PrintComments.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_PrintComments, self.Ptr)
+        objwraped = PrintCommentType(ret)
+        return objwraped
+
+    @PrintComments.setter
+    def PrintComments(self, value:'PrintCommentType'):
+        GetDllLibXls().XlsPageSetupBase_set_PrintComments.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_PrintComments, self.Ptr, value.value)
+
+    @property
+
+    def PrintErrors(self)->'PrintErrorsType':
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_PrintErrors.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_PrintErrors.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_PrintErrors, self.Ptr)
+        objwraped = PrintErrorsType(ret)
+        return objwraped
+
+    @PrintErrors.setter
+    def PrintErrors(self, value:'PrintErrorsType'):
+        GetDllLibXls().XlsPageSetupBase_set_PrintErrors.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_PrintErrors, self.Ptr, value.value)
+
+    @property
+    def PrintNotes(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_PrintNotes.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_PrintNotes.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_PrintNotes, self.Ptr)
+        return ret
+
+    @PrintNotes.setter
+    def PrintNotes(self, value:bool):
+        GetDllLibXls().XlsPageSetupBase_set_PrintNotes.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_PrintNotes, self.Ptr, value)
+
+    @property
+    def PrintQuality(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_PrintQuality.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_PrintQuality.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_PrintQuality, self.Ptr)
+        return ret
+
+    @PrintQuality.setter
+    def PrintQuality(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_PrintQuality.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_PrintQuality, self.Ptr, value)
+
+    @property
+    def RecordCode(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_RecordCode.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_RecordCode.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_RecordCode, self.Ptr)
+        return ret
+
+    @property
+    def StreamPos(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_StreamPos.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_StreamPos.restype=c_long
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_StreamPos, self.Ptr)
+        return ret
+
+    @StreamPos.setter
+    def StreamPos(self, value:int):
+        GetDllLibXls().XlsPageSetupBase_set_StreamPos.argtypes=[c_void_p, c_long]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_StreamPos, self.Ptr, value)
+
+    @property
+
+    def RightFooter(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_RightFooter.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_RightFooter.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetupBase_get_RightFooter, self.Ptr))
+        return ret
+
+
+    @RightFooter.setter
+    def RightFooter(self, value:str):
+        GetDllLibXls().XlsPageSetupBase_set_RightFooter.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_RightFooter, self.Ptr, value)
+
+    @property
+
+    def RightFooterImage(self)->'Stream':
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_RightFooterImage.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_RightFooterImage.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_RightFooterImage, self.Ptr)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @RightFooterImage.setter
+    def RightFooterImage(self, value:'Stream'):
+        GetDllLibXls().XlsPageSetupBase_set_RightFooterImage.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_RightFooterImage, self.Ptr, value.Ptr)
+
+    @property
+
+    def RightHeader(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_RightHeader.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_RightHeader.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetupBase_get_RightHeader, self.Ptr))
+        return ret
+
+
+    @RightHeader.setter
+    def RightHeader(self, value:str):
+        GetDllLibXls().XlsPageSetupBase_set_RightHeader.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_RightHeader, self.Ptr, value)
+
+    @property
+
+    def RightHeaderImage(self)->'Stream':
+        """
+
+        """
+        GetDllLibXls().XlsPageSetupBase_get_RightHeaderImage.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetupBase_get_RightHeaderImage.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPageSetupBase_get_RightHeaderImage, self.Ptr)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @RightHeaderImage.setter
+    def RightHeaderImage(self, value:'Stream'):
+        GetDllLibXls().XlsPageSetupBase_set_RightHeaderImage.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsPageSetupBase_set_RightHeaderImage, self.Ptr, value.Ptr)
+
+    @staticmethod
+    def DEFAULT_TOP_MARGIN()->float:
+        """
+
+        """
+        #GetDllLibXls().XlsPageSetupBase_DEFAULT_TOP_MARGIN.argtypes=[]
+        GetDllLibXls().XlsPageSetupBase_DEFAULT_TOP_MARGIN.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_DEFAULT_TOP_MARGIN)
+        return ret
+
+    @staticmethod
+    def DEFAULT_BOTTOM_MARGIN()->float:
+        """
+
+        """
+        #GetDllLibXls().XlsPageSetupBase_DEFAULT_BOTTOM_MARGIN.argtypes=[]
+        GetDllLibXls().XlsPageSetupBase_DEFAULT_BOTTOM_MARGIN.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_DEFAULT_BOTTOM_MARGIN)
+        return ret
+
+    @staticmethod
+    def DEFAULT_LEFT_MARGIN()->float:
+        """
+
+        """
+        #GetDllLibXls().XlsPageSetupBase_DEFAULT_LEFT_MARGIN.argtypes=[]
+        GetDllLibXls().XlsPageSetupBase_DEFAULT_LEFT_MARGIN.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_DEFAULT_LEFT_MARGIN)
+        return ret
+
+    @staticmethod
+    def DEFAULT_RIGHT_MARGIN()->float:
+        """
+
+        """
+        #GetDllLibXls().XlsPageSetupBase_DEFAULT_RIGHT_MARGIN.argtypes=[]
+        GetDllLibXls().XlsPageSetupBase_DEFAULT_RIGHT_MARGIN.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsPageSetupBase_DEFAULT_RIGHT_MARGIN)
+        return ret
+

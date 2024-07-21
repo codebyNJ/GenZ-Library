@@ -1,0 +1,26 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ShapeSegmentPath (SpireObject) :
+    """
+
+    """
+#    @property
+#
+#    def ShapePathPoints(self)->'CollectionExtended1':
+#        """
+#
+#        """
+#        GetDllLibXls().ShapeSegmentPath_get_ShapePathPoints.argtypes=[c_void_p]
+#        GetDllLibXls().ShapeSegmentPath_get_ShapePathPoints.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().ShapeSegmentPath_get_ShapePathPoints, self.Ptr)
+#        ret = None if intPtr==None else CollectionExtended1(intPtr)
+#        return ret
+#
+
+

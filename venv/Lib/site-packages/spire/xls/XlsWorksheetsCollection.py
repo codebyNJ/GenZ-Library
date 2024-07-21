@@ -1,0 +1,416 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsWorksheetsCollection (  CollectionBase[XlsWorksheet], IWorksheets) :
+    """
+
+    """
+    #@dispatch
+
+    #def get_Item(self ,Index:int)->IWorksheet:
+    #    """
+
+    #    """
+        
+    #    GetDllLibXls().XlsWorksheetsCollection_get_Item.argtypes=[c_void_p ,c_int]
+    #    GetDllLibXls().XlsWorksheetsCollection_get_Item.restype=c_void_p
+    #    intPtr = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_get_Item, self.Ptr, Index)
+    #    ret = None if intPtr==None else XlsWorksheet(intPtr)
+    #    return ret
+
+
+    #@dispatch
+
+    #def get_Item(self ,sheetName:str)->IWorksheet:
+    #    """
+
+    #    """
+        
+    #    GetDllLibXls().XlsWorksheetsCollection_get_ItemS.argtypes=[c_void_p ,c_void_p]
+    #    GetDllLibXls().XlsWorksheetsCollection_get_ItemS.restype=c_void_p
+    #    intPtr = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_get_ItemS, self.Ptr, sheetName)
+    #    ret = None if intPtr==None else XlsWorksheet(intPtr)
+    #    return ret
+
+
+    @property
+    def UseRangesCache(self)->bool:
+        """
+    <summary>
+        Indicates whether all created range objects should be cached.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheetsCollection_get_UseRangesCache.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheetsCollection_get_UseRangesCache.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_get_UseRangesCache, self.Ptr)
+        return ret
+
+    @UseRangesCache.setter
+    def UseRangesCache(self, value:bool):
+        GetDllLibXls().XlsWorksheetsCollection_set_UseRangesCache.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheetsCollection_set_UseRangesCache, self.Ptr, value)
+
+    @property
+    def UseHashForWorksheetLookup(self)->bool:
+        """
+    <summary>
+        Toggles worksheet search algorithm when searching worksheet by name.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheetsCollection_get_UseHashForWorksheetLookup.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheetsCollection_get_UseHashForWorksheetLookup.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_get_UseHashForWorksheetLookup, self.Ptr)
+        return ret
+
+    @UseHashForWorksheetLookup.setter
+    def UseHashForWorksheetLookup(self, value:bool):
+        GetDllLibXls().XlsWorksheetsCollection_set_UseHashForWorksheetLookup.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheetsCollection_set_UseHashForWorksheetLookup, self.Ptr, value)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().XlsWorksheetsCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheetsCollection_Clear, self.Ptr)
+
+    @dispatch
+
+    def Create(self)->IWorksheet:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheetsCollection_Create.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheetsCollection_Create.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_Create, self.Ptr)
+        ret = None if intPtr==None else XlsWorksheet(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Create(self ,name:str)->IWorksheet:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheetsCollection_CreateN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorksheetsCollection_CreateN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_CreateN, self.Ptr, name)
+        ret = None if intPtr==None else XlsWorksheet(intPtr)
+        return ret
+
+
+#
+#    def FindAll(self ,findValue:str,flags:'FindType',findOptions:'ExcelFindOptions')->'ListCellRanges':
+#        """
+#
+#        """
+#        enumflags:c_int = flags.value
+#        enumfindOptions:c_int = findOptions.value
+#
+#        GetDllLibXls().XlsWorksheetsCollection_FindAll.argtypes=[c_void_p ,c_void_p,c_int,c_int]
+#        GetDllLibXls().XlsWorksheetsCollection_FindAll.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_FindAll, self.Ptr, findValue,enumflags,enumfindOptions)
+#        ret = None if intPtr==None else ListCellRanges(intPtr)
+#        return ret
+
+
+
+    def FindFirst(self ,findValue:str,flags:'FindType',findOptions:'ExcelFindOptions')->'IXLSRange':
+        """
+
+        """
+        enumflags:c_int = flags.value
+        enumfindOptions:c_int = findOptions.value
+
+        GetDllLibXls().XlsWorksheetsCollection_FindFirst.argtypes=[c_void_p ,c_void_p,c_int,c_int]
+        GetDllLibXls().XlsWorksheetsCollection_FindFirst.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_FindFirst, self.Ptr, findValue,enumflags,enumfindOptions)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Remove(self ,sheet:IWorksheet):
+        """
+
+        """
+        intPtrsheet:c_void_p = sheet.Ptr
+
+        GetDllLibXls().XlsWorksheetsCollection_Remove.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheetsCollection_Remove, self.Ptr, intPtrsheet)
+
+    @dispatch
+
+    def Remove(self ,sheetName:str):
+        """
+    <summary>
+        Removes specified worksheet from the collection.
+    </summary>
+    <param name="sheetName">Name of the sheet to remove.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheetsCollection_RemoveS.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheetsCollection_RemoveS, self.Ptr, sheetName)
+
+    @dispatch
+
+    def Remove(self ,index:int):
+        """
+    <summary>
+        Removes specified worksheet from the collection.
+    </summary>
+    <param name="index">Index of the sheet to remove.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheetsCollection_RemoveI.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheetsCollection_RemoveI, self.Ptr, index)
+
+
+    def RemoveAt(self ,index:int):
+        """
+    <summary>
+        Removes specified worksheet from the collection.
+    </summary>
+    <param name="index">Index of the sheet to remove.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheetsCollection_RemoveAt.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheetsCollection_RemoveAt, self.Ptr, index)
+
+    @dispatch
+
+    def AddCopyBefore(self ,toCopy:IWorksheet)->IWorksheet:
+        """
+
+        """
+        intPtrtoCopy:c_void_p = toCopy.Ptr
+
+        GetDllLibXls().XlsWorksheetsCollection_AddCopyBefore.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorksheetsCollection_AddCopyBefore.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_AddCopyBefore, self.Ptr, intPtrtoCopy)
+        ret = None if intPtr==None else XlsWorksheet(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddCopyBefore(self ,toCopy:IWorksheet,sheetAfter:IWorksheet)->IWorksheet:
+        """
+
+        """
+        intPtrtoCopy:c_void_p = toCopy.Ptr
+        intPtrsheetAfter:c_void_p = sheetAfter.Ptr
+
+        GetDllLibXls().XlsWorksheetsCollection_AddCopyBeforeTS.argtypes=[c_void_p ,c_void_p,c_void_p]
+        GetDllLibXls().XlsWorksheetsCollection_AddCopyBeforeTS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_AddCopyBeforeTS, self.Ptr, intPtrtoCopy,intPtrsheetAfter)
+        ret = None if intPtr==None else XlsWorksheet(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddCopyAfter(self ,toCopy:IWorksheet)->IWorksheet:
+        """
+
+        """
+        intPtrtoCopy:c_void_p = toCopy.Ptr
+
+        GetDllLibXls().XlsWorksheetsCollection_AddCopyAfter.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorksheetsCollection_AddCopyAfter.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_AddCopyAfter, self.Ptr, intPtrtoCopy)
+        ret = None if intPtr==None else XlsWorksheet(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddCopyAfter(self ,toCopy:IWorksheet,sheetBefore:IWorksheet)->IWorksheet:
+        """
+
+        """
+        intPtrtoCopy:c_void_p = toCopy.Ptr
+        intPtrsheetBefore:c_void_p = sheetBefore.Ptr
+
+        GetDllLibXls().XlsWorksheetsCollection_AddCopyAfterTS.argtypes=[c_void_p ,c_void_p,c_void_p]
+        GetDllLibXls().XlsWorksheetsCollection_AddCopyAfterTS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_AddCopyAfterTS, self.Ptr, intPtrtoCopy,intPtrsheetBefore)
+        ret = None if intPtr==None else XlsWorksheet(intPtr)
+        return ret
+
+
+    @property
+    def IsRightToLeft(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheetsCollection_get_IsRightToLeft.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheetsCollection_get_IsRightToLeft.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_get_IsRightToLeft, self.Ptr)
+        return ret
+
+    @IsRightToLeft.setter
+    def IsRightToLeft(self, value:bool):
+        GetDllLibXls().XlsWorksheetsCollection_set_IsRightToLeft.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheetsCollection_set_IsRightToLeft, self.Ptr, value)
+
+
+    def InnerAdd(self ,sheet:'IWorksheet'):
+        """
+
+        """
+        intPtrsheet:c_void_p = sheet.Ptr
+
+        GetDllLibXls().XlsWorksheetsCollection_InnerAdd.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheetsCollection_InnerAdd, self.Ptr, intPtrsheet)
+
+
+    def Move(self ,oldIndex:int,newIndex:int):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheetsCollection_Move.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheetsCollection_Move, self.Ptr, oldIndex,newIndex)
+
+
+    def UpdateSheetIndex(self ,sheet:'XlsWorksheet',iOldRealIndex:int):
+        """
+
+        """
+        intPtrsheet:c_void_p = sheet.Ptr
+
+        GetDllLibXls().XlsWorksheetsCollection_UpdateSheetIndex.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheetsCollection_UpdateSheetIndex, self.Ptr, intPtrsheet,iOldRealIndex)
+
+#
+#    def UpdateStringIndexes(self ,newIndexes:'List1'):
+#        """
+#
+#        """
+#        intPtrnewIndexes:c_void_p = newIndexes.Ptr
+#
+#        GetDllLibXls().XlsWorksheetsCollection_UpdateStringIndexes.argtypes=[c_void_p ,c_void_p]
+#        CallCFunction(GetDllLibXls().XlsWorksheetsCollection_UpdateStringIndexes, self.Ptr, intPtrnewIndexes)
+
+
+
+    def Add(self ,sheetName:str)->'IWorksheet':
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheetsCollection_Add.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorksheetsCollection_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_Add, self.Ptr, sheetName)
+        ret = None if intPtr==None else XlsWorksheet(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddCopy(self ,sheetIndex:int)->IWorksheet:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheetsCollection_AddCopy.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorksheetsCollection_AddCopy.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_AddCopy, self.Ptr, sheetIndex)
+        ret = None if intPtr==None else XlsWorksheet(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddCopy(self ,sheet:IWorksheet)->IWorksheet:
+        """
+    <summary>
+        Adds copy of worksheet.
+    </summary>
+    <param name="sheet">Worksheet to copy.</param>
+    <returns>Copy of worksheet that was added.</returns>
+        """
+        intPtrsheet:c_void_p = sheet.Ptr
+
+        GetDllLibXls().XlsWorksheetsCollection_AddCopyS.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorksheetsCollection_AddCopyS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_AddCopyS, self.Ptr, intPtrsheet)
+        ret = None if intPtr==None else XlsWorksheet(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddCopy(self ,sheet:IWorksheet,flags:WorksheetCopyType)->IWorksheet:
+        """
+
+        """
+        intPtrsheet:c_void_p = sheet.Ptr
+        enumflags:c_int = flags.value
+
+        GetDllLibXls().XlsWorksheetsCollection_AddCopySF.argtypes=[c_void_p ,c_void_p,c_int]
+        GetDllLibXls().XlsWorksheetsCollection_AddCopySF.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_AddCopySF, self.Ptr, intPtrsheet,enumflags)
+        ret = None if intPtr==None else XlsWorksheet(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddCopy(self ,worksheets:IWorksheets):
+        """
+
+        """
+        intPtrworksheets:c_void_p = worksheets.Ptr
+
+        GetDllLibXls().XlsWorksheetsCollection_AddCopyW.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheetsCollection_AddCopyW, self.Ptr, intPtrworksheets)
+
+    @dispatch
+
+    def AddCopy(self ,worksheets:IWorksheets,flags:WorksheetCopyType):
+        """
+
+        """
+        intPtrworksheets:c_void_p = worksheets.Ptr
+        enumflags:c_int = flags.value
+
+        GetDllLibXls().XlsWorksheetsCollection_AddCopyWF.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheetsCollection_AddCopyWF, self.Ptr, intPtrworksheets,enumflags)
+
+    @dispatch
+
+    def AddCopy(self ,sheetIndex:int,flags:WorksheetCopyType)->IWorksheet:
+        """
+    <summary>
+        Add a copy of the specified worksheet to the worksheet collection.
+    </summary>
+    <param name="sheetIndex">Index of the workbook that should be copied</param>
+    <param name="flags">Represents copy options flags.</param>
+    <returns>Returns copied sheet.</returns>
+        """
+        enumflags:c_int = flags.value
+
+        GetDllLibXls().XlsWorksheetsCollection_AddCopySF1.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheetsCollection_AddCopySF1.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheetsCollection_AddCopySF1, self.Ptr, sheetIndex,enumflags)
+        ret = None if intPtr==None else XlsWorksheet(intPtr)
+        return ret
+
+    def GetEnumerator(self)->'IEnumerator':
+        """
+
+        """
+        ret = super(XlsWorksheetsCollection, self).GetEnumerator()
+        ret._gtype = XlsWorksheet
+        return ret
+

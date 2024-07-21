@@ -1,0 +1,117 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IInterior (abc.ABC) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def PatternKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @PatternKnownColor.setter
+    @abc.abstractmethod
+    def PatternKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PatternColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @PatternColor.setter
+    @abc.abstractmethod
+    def PatternColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def KnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @KnownColor.setter
+    @abc.abstractmethod
+    def KnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Color(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @Color.setter
+    @abc.abstractmethod
+    def Color(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Gradient(self)->'ExcelGradient':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def FillPattern(self)->'ExcelPatternType':
+        """
+
+        """
+        pass
+
+
+    @FillPattern.setter
+    @abc.abstractmethod
+    def FillPattern(self, value:'ExcelPatternType'):
+        """
+
+        """
+        pass
+
+

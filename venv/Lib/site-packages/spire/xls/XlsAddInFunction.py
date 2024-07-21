@@ -1,0 +1,78 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsAddInFunction (  XlsObject, IAddInFunction, ICloneParent) :
+    """
+
+    """
+    @property
+    def BookIndex(self)->int:
+        """
+    <summary>
+        Gets or sets book index.
+    </summary>
+        """
+        GetDllLibXls().XlsAddInFunction_get_BookIndex.argtypes=[c_void_p]
+        GetDllLibXls().XlsAddInFunction_get_BookIndex.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsAddInFunction_get_BookIndex, self.Ptr)
+        return ret
+
+    @BookIndex.setter
+    def BookIndex(self, value:int):
+        GetDllLibXls().XlsAddInFunction_set_BookIndex.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsAddInFunction_set_BookIndex, self.Ptr, value)
+
+    @property
+    def NameIndex(self)->int:
+        """
+    <summary>
+        Name index.
+    </summary>
+        """
+        GetDllLibXls().XlsAddInFunction_get_NameIndex.argtypes=[c_void_p]
+        GetDllLibXls().XlsAddInFunction_get_NameIndex.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsAddInFunction_get_NameIndex, self.Ptr)
+        return ret
+
+    @NameIndex.setter
+    def NameIndex(self, value:int):
+        GetDllLibXls().XlsAddInFunction_set_NameIndex.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsAddInFunction_set_NameIndex, self.Ptr, value)
+
+    @property
+
+    def Name(self)->str:
+        """
+    <summary>
+        Name of add-in function.
+    </summary>
+        """
+        GetDllLibXls().XlsAddInFunction_get_Name.argtypes=[c_void_p]
+        GetDllLibXls().XlsAddInFunction_get_Name.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsAddInFunction_get_Name, self.Ptr))
+        return ret
+
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+    <summary>
+        Creates a new object that is a copy of the current instance.
+    </summary>
+    <param name="parent">Parent object for a copy of this instance.</param>
+    <returns>A new object that is a copy of this instance.</returns>
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsAddInFunction_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsAddInFunction_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsAddInFunction_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+

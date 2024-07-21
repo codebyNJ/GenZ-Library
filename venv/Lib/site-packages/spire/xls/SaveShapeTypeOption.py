@@ -1,0 +1,303 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class SaveShapeTypeOption (SpireObject) :
+    """
+    <summary>
+        Specifies the shape type that needs to be converted to a picture, and defaults to all types
+    </summary>
+    """
+    @property
+    def SaveGroupShape(self)->bool:
+        """
+    <summary>
+        Identifies whether Group shape converted to a picture.(Child of this group shape will not convert)
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SaveGroupShape.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SaveGroupShape.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SaveGroupShape, self.Ptr)
+        return ret
+
+    @SaveGroupShape.setter
+    def SaveGroupShape(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SaveGroupShape.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SaveGroupShape, self.Ptr, value)
+
+    @property
+    def SavePicture(self)->bool:
+        """
+    <summary>
+        Identifies whether Picture shape converted to a picture
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SavePicture.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SavePicture.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SavePicture, self.Ptr)
+        return ret
+
+    @SavePicture.setter
+    def SavePicture(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SavePicture.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SavePicture, self.Ptr, value)
+
+    @property
+    def SaveTextBox(self)->bool:
+        """
+    <summary>
+        Identifies whether TextBox shape converted to a picture
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SaveTextBox.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SaveTextBox.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SaveTextBox, self.Ptr)
+        return ret
+
+    @SaveTextBox.setter
+    def SaveTextBox(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SaveTextBox.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SaveTextBox, self.Ptr, value)
+
+    @property
+    def SaveButton(self)->bool:
+        """
+    <summary>
+        Identifies whether Button shape converted to a picture
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SaveButton.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SaveButton.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SaveButton, self.Ptr)
+        return ret
+
+    @SaveButton.setter
+    def SaveButton(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SaveButton.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SaveButton, self.Ptr, value)
+
+    @property
+    def SaveCheckBox(self)->bool:
+        """
+    <summary>
+        Identifies whether CheckBox shape converted to a picture
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SaveCheckBox.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SaveCheckBox.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SaveCheckBox, self.Ptr)
+        return ret
+
+    @SaveCheckBox.setter
+    def SaveCheckBox(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SaveCheckBox.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SaveCheckBox, self.Ptr, value)
+
+    @property
+    def SaveRadioButton(self)->bool:
+        """
+    <summary>
+        Identifies whether RadioButton shape converted to a picture
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SaveRadioButton.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SaveRadioButton.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SaveRadioButton, self.Ptr)
+        return ret
+
+    @SaveRadioButton.setter
+    def SaveRadioButton(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SaveRadioButton.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SaveRadioButton, self.Ptr, value)
+
+    @property
+    def SaveGroupBox(self)->bool:
+        """
+    <summary>
+        Identifies whether GroupBox shape converted to a picture
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SaveGroupBox.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SaveGroupBox.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SaveGroupBox, self.Ptr)
+        return ret
+
+    @SaveGroupBox.setter
+    def SaveGroupBox(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SaveGroupBox.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SaveGroupBox, self.Ptr, value)
+
+    @property
+    def SaveLabel(self)->bool:
+        """
+    <summary>
+        Identifies whether Label shape converted to a picture
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SaveLabel.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SaveLabel.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SaveLabel, self.Ptr)
+        return ret
+
+    @SaveLabel.setter
+    def SaveLabel(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SaveLabel.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SaveLabel, self.Ptr, value)
+
+    @property
+    def SaveListBox(self)->bool:
+        """
+    <summary>
+        Identifies whether ListBox shape converted to a picture
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SaveListBox.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SaveListBox.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SaveListBox, self.Ptr)
+        return ret
+
+    @SaveListBox.setter
+    def SaveListBox(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SaveListBox.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SaveListBox, self.Ptr, value)
+
+    @property
+    def SaveComboBox(self)->bool:
+        """
+    <summary>
+        Identifies whether ComboBox shape converted to a picture
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SaveComboBox.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SaveComboBox.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SaveComboBox, self.Ptr)
+        return ret
+
+    @SaveComboBox.setter
+    def SaveComboBox(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SaveComboBox.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SaveComboBox, self.Ptr, value)
+
+    @property
+    def SaveArc(self)->bool:
+        """
+    <summary>
+        Identifies whether Arc shape converted to a picture
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SaveArc.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SaveArc.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SaveArc, self.Ptr)
+        return ret
+
+    @SaveArc.setter
+    def SaveArc(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SaveArc.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SaveArc, self.Ptr, value)
+
+    @property
+    def SaveLine(self)->bool:
+        """
+    <summary>
+        Identifies whether Line shape converted to a picture
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SaveLine.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SaveLine.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SaveLine, self.Ptr)
+        return ret
+
+    @SaveLine.setter
+    def SaveLine(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SaveLine.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SaveLine, self.Ptr, value)
+
+    @property
+    def SaveOval(self)->bool:
+        """
+    <summary>
+        Identifies whether eOval shape converted to a picture
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SaveOval.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SaveOval.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SaveOval, self.Ptr)
+        return ret
+
+    @SaveOval.setter
+    def SaveOval(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SaveOval.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SaveOval, self.Ptr, value)
+
+    @property
+    def SaveRectangle(self)->bool:
+        """
+    <summary>
+        Identifies whether Rectangle shape converted to a picture
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SaveRectangle.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SaveRectangle.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SaveRectangle, self.Ptr)
+        return ret
+
+    @SaveRectangle.setter
+    def SaveRectangle(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SaveRectangle.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SaveRectangle, self.Ptr, value)
+
+    @property
+    def SavePrstGomShape(self)->bool:
+        """
+    <summary>
+        Identifies whether PrstGomShape shape converted to a picture
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SavePrstGomShape.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SavePrstGomShape.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SavePrstGomShape, self.Ptr)
+        return ret
+
+    @SavePrstGomShape.setter
+    def SavePrstGomShape(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SavePrstGomShape.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SavePrstGomShape, self.Ptr, value)
+
+    @property
+    def SaveDml(self)->bool:
+        """
+    <summary>
+        Identifies whether Dml shape converted to a picture
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SaveDml.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SaveDml.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SaveDml, self.Ptr)
+        return ret
+
+    @SaveDml.setter
+    def SaveDml(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SaveDml.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SaveDml, self.Ptr, value)
+
+    @property
+    def SaveAll(self)->bool:
+        """
+    <summary>
+        Identifies whether All shape converted to a picture
+    </summary>
+        """
+        GetDllLibXls().SaveShapeTypeOption_get_SaveAll.argtypes=[c_void_p]
+        GetDllLibXls().SaveShapeTypeOption_get_SaveAll.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SaveShapeTypeOption_get_SaveAll, self.Ptr)
+        return ret
+
+    @SaveAll.setter
+    def SaveAll(self, value:bool):
+        GetDllLibXls().SaveShapeTypeOption_set_SaveAll.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SaveShapeTypeOption_set_SaveAll, self.Ptr, value)
+

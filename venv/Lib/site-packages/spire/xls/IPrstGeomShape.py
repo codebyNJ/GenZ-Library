@@ -1,0 +1,71 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IPrstGeomShape (  IShape, IExcelApplication) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def PrstShapeType(self)->'PrstGeomShapeType':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Text(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Text.setter
+    @abc.abstractmethod
+    def Text(self, value:str):
+        """
+
+        """
+        pass
+
+
+#    @property
+#
+#    @abc.abstractmethod
+#    def GeomPaths(self)->'CollectionExtended1':
+#        """
+#
+#        """
+#        pass
+#
+
+
+    @property
+
+    @abc.abstractmethod
+    def TextVerticalAlignment(self)->'ExcelVerticalAlignment':
+        """
+
+        """
+        pass
+
+
+    @TextVerticalAlignment.setter
+    @abc.abstractmethod
+    def TextVerticalAlignment(self, value:'ExcelVerticalAlignment'):
+        """
+
+        """
+        pass
+
+

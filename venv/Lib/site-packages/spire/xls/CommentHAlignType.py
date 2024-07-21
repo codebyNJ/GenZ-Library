@@ -1,0 +1,21 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CommentHAlignType(Enum):
+    """
+    <summary>
+        Comment horizontally align.
+    </summary>
+    """
+    Left = 1
+    Center = 2
+    Right = 3
+    Justified = 4
+    Justify = 4
+    Distributed = 7
+

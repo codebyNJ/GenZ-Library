@@ -1,0 +1,28 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XLSXPivotItemType(Enum):
+    """
+
+    """
+    avg = 0
+    blank = 1
+    count = 2
+    countA = 3
+    data = 4
+    defaults = 5
+    grand = 6
+    max = 7
+    min = 8
+    product = 9
+    stdDev = 10
+    stdDevP = 11
+    sum = 12
+    var = 13
+    varP = 14
+

@@ -1,0 +1,75 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class TableBuiltInStyles(Enum):
+    """
+
+    """
+    none = 0
+    TableStyleMedium28 = 1
+    TableStyleMedium27 = 2
+    TableStyleMedium26 = 3
+    TableStyleMedium25 = 4
+    TableStyleMedium24 = 5
+    TableStyleMedium23 = 6
+    TableStyleMedium22 = 7
+    TableStyleMedium21 = 8
+    TableStyleMedium20 = 9
+    TableStyleMedium19 = 10
+    TableStyleMedium18 = 11
+    TableStyleMedium17 = 12
+    TableStyleMedium16 = 13
+    TableStyleMedium15 = 14
+    TableStyleMedium14 = 15
+    TableStyleMedium13 = 16
+    TableStyleMedium12 = 17
+    TableStyleMedium11 = 18
+    TableStyleMedium10 = 19
+    TableStyleMedium9 = 20
+    TableStyleMedium8 = 21
+    TableStyleMedium7 = 22
+    TableStyleMedium6 = 23
+    TableStyleMedium5 = 24
+    TableStyleMedium4 = 25
+    TableStyleMedium3 = 26
+    TableStyleMedium2 = 27
+    TableStyleMedium1 = 28
+    TableStyleLight21 = 29
+    TableStyleLight20 = 30
+    TableStyleLight19 = 31
+    TableStyleLight18 = 32
+    TableStyleLight17 = 33
+    TableStyleLight16 = 34
+    TableStyleLight15 = 35
+    TableStyleLight14 = 36
+    TableStyleLight13 = 37
+    TableStyleLight12 = 38
+    TableStyleLight11 = 39
+    TableStyleLight10 = 40
+    TableStyleLight9 = 41
+    TableStyleLight8 = 42
+    TableStyleLight7 = 43
+    TableStyleLight6 = 44
+    TableStyleLight5 = 45
+    TableStyleLight4 = 46
+    TableStyleLight3 = 47
+    TableStyleLight2 = 48
+    TableStyleLight1 = 49
+    TableStyleDark11 = 50
+    TableStyleDark10 = 51
+    TableStyleDark9 = 52
+    TableStyleDark8 = 53
+    TableStyleDark7 = 54
+    TableStyleDark6 = 55
+    TableStyleDark5 = 56
+    TableStyleDark4 = 57
+    TableStyleDark3 = 58
+    TableStyleDark2 = 59
+    TableStyleDark1 = 60
+    Custom = 61
+

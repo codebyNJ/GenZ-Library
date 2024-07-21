@@ -1,0 +1,579 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IBuiltInDocumentProperties (abc.ABC) :
+    """
+
+    """
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,index:BuiltInPropertyType)->IDocumentProperty:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,iIndex:int)->IDocumentProperty:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Count(self)->int:
+        """
+
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Clear(self):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Contains(self ,index:'BuiltInPropertyType')->bool:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Title(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Title.setter
+    @abc.abstractmethod
+    def Title(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Subject(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Subject.setter
+    @abc.abstractmethod
+    def Subject(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Author(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Author.setter
+    @abc.abstractmethod
+    def Author(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Keywords(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Keywords.setter
+    @abc.abstractmethod
+    def Keywords(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Comments(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Comments.setter
+    @abc.abstractmethod
+    def Comments(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Template(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Template.setter
+    @abc.abstractmethod
+    def Template(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LastAuthor(self)->str:
+        """
+
+        """
+        pass
+
+
+    @LastAuthor.setter
+    @abc.abstractmethod
+    def LastAuthor(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RevisionNumber(self)->str:
+        """
+
+        """
+        pass
+
+
+    @RevisionNumber.setter
+    @abc.abstractmethod
+    def RevisionNumber(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def EditTime(self)->'TimeSpan':
+        """
+
+        """
+        pass
+
+
+    @EditTime.setter
+    @abc.abstractmethod
+    def EditTime(self, value:'TimeSpan'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LastPrinted(self)->'DateTime':
+        """
+
+        """
+        pass
+
+
+    @LastPrinted.setter
+    @abc.abstractmethod
+    def LastPrinted(self, value:'DateTime'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def CreatedTime(self)->'DateTime':
+        """
+
+        """
+        pass
+
+
+    @CreatedTime.setter
+    @abc.abstractmethod
+    def CreatedTime(self, value:'DateTime'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LastSaveTime(self)->'DateTime':
+        """
+
+        """
+        pass
+
+
+    @LastSaveTime.setter
+    @abc.abstractmethod
+    def LastSaveTime(self, value:'DateTime'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def PageCount(self)->int:
+        """
+
+        """
+        pass
+
+
+    @PageCount.setter
+    @abc.abstractmethod
+    def PageCount(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def WordCount(self)->int:
+        """
+
+        """
+        pass
+
+
+    @WordCount.setter
+    @abc.abstractmethod
+    def WordCount(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Characters(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Characters.setter
+    @abc.abstractmethod
+    def Characters(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ApplicationName(self)->str:
+        """
+
+        """
+        pass
+
+
+    @ApplicationName.setter
+    @abc.abstractmethod
+    def ApplicationName(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Category(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Category.setter
+    @abc.abstractmethod
+    def Category(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PresentationTarget(self)->str:
+        """
+
+        """
+        pass
+
+
+    @PresentationTarget.setter
+    @abc.abstractmethod
+    def PresentationTarget(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Bytes(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Bytes.setter
+    @abc.abstractmethod
+    def Bytes(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def LineCount(self)->int:
+        """
+
+        """
+        pass
+
+
+    @LineCount.setter
+    @abc.abstractmethod
+    def LineCount(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ParagraphCount(self)->int:
+        """
+
+        """
+        pass
+
+
+    @ParagraphCount.setter
+    @abc.abstractmethod
+    def ParagraphCount(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def SlideCount(self)->int:
+        """
+
+        """
+        pass
+
+
+    @SlideCount.setter
+    @abc.abstractmethod
+    def SlideCount(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def NoteCount(self)->int:
+        """
+
+        """
+        pass
+
+
+    @NoteCount.setter
+    @abc.abstractmethod
+    def NoteCount(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HiddenCount(self)->int:
+        """
+
+        """
+        pass
+
+
+    @HiddenCount.setter
+    @abc.abstractmethod
+    def HiddenCount(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def MultimediaClipCount(self)->int:
+        """
+
+        """
+        pass
+
+
+    @MultimediaClipCount.setter
+    @abc.abstractmethod
+    def MultimediaClipCount(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Manager(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Manager.setter
+    @abc.abstractmethod
+    def Manager(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Company(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Company.setter
+    @abc.abstractmethod
+    def Company(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def LinksDirty(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @LinksDirty.setter
+    @abc.abstractmethod
+    def LinksDirty(self, value:bool):
+        """
+
+        """
+        pass
+
+

@@ -1,0 +1,83 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class WorksheetChartsCollection (  XlsWorksheetChartsCollection) :
+    """
+
+    """
+    @dispatch
+
+    def Add(self)->Chart:
+        """
+
+        """
+        GetDllLibXls().WorksheetChartsCollection_Add.argtypes=[c_void_p]
+        GetDllLibXls().WorksheetChartsCollection_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().WorksheetChartsCollection_Add, self.Ptr)
+        ret = None if intPtr==None else Chart(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,chartType:ExcelChartType)->Chart:
+        """
+
+        """
+        enumchartType:c_int = chartType.value
+
+        GetDllLibXls().WorksheetChartsCollection_AddC.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().WorksheetChartsCollection_AddC.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().WorksheetChartsCollection_AddC, self.Ptr, enumchartType)
+        ret = None if intPtr==None else Chart(intPtr)
+        return ret
+
+
+
+    def AddCopy(self ,chart:'Chart',upperLeftRow:int,upperLeftColumn:int,lowerRightRow:int,lowerRightColumn:int)->'Chart':
+        """
+
+        """
+        intPtrchart:c_void_p = chart.Ptr
+
+        GetDllLibXls().WorksheetChartsCollection_AddCopy.argtypes=[c_void_p ,c_void_p,c_int,c_int,c_int,c_int]
+        GetDllLibXls().WorksheetChartsCollection_AddCopy.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().WorksheetChartsCollection_AddCopy, self.Ptr, intPtrchart,upperLeftRow,upperLeftColumn,lowerRightRow,lowerRightColumn)
+        ret = None if intPtr==None else Chart(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,pivotChartType:ExcelChartType,pivotTable:IPivotTable)->Chart:
+        """
+
+        """
+        enumpivotChartType:c_int = pivotChartType.value
+        intPtrpivotTable:c_void_p = pivotTable.Ptr
+
+        GetDllLibXls().WorksheetChartsCollection_AddPP.argtypes=[c_void_p ,c_int,c_void_p]
+        GetDllLibXls().WorksheetChartsCollection_AddPP.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().WorksheetChartsCollection_AddPP, self.Ptr, enumpivotChartType,intPtrpivotTable)
+        ret = None if intPtr==None else Chart(intPtr)
+        return ret
+
+
+
+    def get_Item(self ,index:int)->'Chart':
+        """
+
+        """
+        
+        GetDllLibXls().WorksheetChartsCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().WorksheetChartsCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().WorksheetChartsCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else Chart(intPtr)
+        return ret
+
+

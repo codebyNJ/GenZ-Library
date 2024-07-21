@@ -1,0 +1,23 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CellDataType(Enum):
+    """
+    <summary>
+        Cell data types:
+    </summary>
+    """
+    Any = 0
+    Integer = 1
+    Decimal = 2
+    User = 3
+    Date = 4
+    Time = 5
+    TextLength = 6
+    Formula = 7
+

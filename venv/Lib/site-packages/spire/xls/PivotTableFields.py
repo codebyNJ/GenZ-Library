@@ -1,0 +1,85 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class PivotTableFields (  CollectionBase[XlsPivotField], ICloneParent, IPivotFields) :
+    """
+
+    """
+    @dispatch
+    def get_Item(self ,name:str)->IPivotField:
+        """
+
+        """
+        
+        GetDllLibXls().PivotTableFields_get_Item.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().PivotTableFields_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PivotTableFields_get_Item, self.Ptr, name)
+        ret = None if intPtr==None else XlsPivotField(intPtr)
+        return ret
+
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().PivotTableFields_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().PivotTableFields_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PivotTableFields_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+
+    def RemoveAt(self ,index:int):
+        """
+
+        """
+        
+        GetDllLibXls().PivotTableFields_RemoveAt.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().PivotTableFields_RemoveAt, self.Ptr, index)
+
+
+    def Remove(self ,item:'PivotField')->bool:
+        """
+
+        """
+        intPtritem:c_void_p = item.Ptr
+
+        GetDllLibXls().PivotTableFields_Remove.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().PivotTableFields_Remove.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().PivotTableFields_Remove, self.Ptr, intPtritem)
+        return ret
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().PivotTableFields_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().PivotTableFields_Clear, self.Ptr)
+
+
+    def Add(self ,item:'PivotField'):
+        """
+
+        """
+        intPtritem:c_void_p = item.Ptr
+
+        GetDllLibXls().PivotTableFields_Add.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().PivotTableFields_Add, self.Ptr, intPtritem)
+
+    def GetEnumerator(self)->'IEnumerator':
+        """
+
+        """
+        ret = super(PivotTableFields, self).GetEnumerator()
+        ret._gtype = XlsPivotField
+        return ret
+

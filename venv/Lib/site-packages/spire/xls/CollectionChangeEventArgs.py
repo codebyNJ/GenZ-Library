@@ -1,0 +1,36 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CollectionChangeEventArgs (SpireObject) :
+    """
+
+    """
+    @property
+    def Index(self)->int:
+        """
+
+        """
+        GetDllLibXls().CollectionChangeEventArgs_get_Index.argtypes=[c_void_p]
+        GetDllLibXls().CollectionChangeEventArgs_get_Index.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CollectionChangeEventArgs_get_Index, self.Ptr)
+        return ret
+
+#    @property
+#
+#    def Value(self)->'T':
+#        """
+#
+#        """
+#        GetDllLibXls().CollectionChangeEventArgs_get_Value.argtypes=[c_void_p]
+#        GetDllLibXls().CollectionChangeEventArgs_get_Value.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().CollectionChangeEventArgs_get_Value, self.Ptr)
+#        ret = None if intPtr==None else T(intPtr)
+#        return ret
+#
+
+

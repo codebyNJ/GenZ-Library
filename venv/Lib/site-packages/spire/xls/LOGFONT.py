@@ -1,0 +1,140 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class LOGFONT (SpireObject) :
+    """
+
+    """
+    def lfHeight(self)->int:
+        """
+
+        """
+        GetDllLibXls().LOGFONT_lfHeight.argtypes=[c_void_p]
+        GetDllLibXls().LOGFONT_lfHeight.restype=c_int
+        ret = CallCFunction(GetDllLibXls().LOGFONT_lfHeight, self.Ptr)
+        return ret
+
+    def lfWidth(self)->int:
+        """
+
+        """
+        GetDllLibXls().LOGFONT_lfWidth.argtypes=[c_void_p]
+        GetDllLibXls().LOGFONT_lfWidth.restype=c_int
+        ret = CallCFunction(GetDllLibXls().LOGFONT_lfWidth, self.Ptr)
+        return ret
+
+    def lfEscapement(self)->int:
+        """
+
+        """
+        GetDllLibXls().LOGFONT_lfEscapement.argtypes=[c_void_p]
+        GetDllLibXls().LOGFONT_lfEscapement.restype=c_int
+        ret = CallCFunction(GetDllLibXls().LOGFONT_lfEscapement, self.Ptr)
+        return ret
+
+    def lfOrientation(self)->int:
+        """
+
+        """
+        GetDllLibXls().LOGFONT_lfOrientation.argtypes=[c_void_p]
+        GetDllLibXls().LOGFONT_lfOrientation.restype=c_int
+        ret = CallCFunction(GetDllLibXls().LOGFONT_lfOrientation, self.Ptr)
+        return ret
+
+    def lfWeight(self)->int:
+        """
+
+        """
+        GetDllLibXls().LOGFONT_lfWeight.argtypes=[c_void_p]
+        GetDllLibXls().LOGFONT_lfWeight.restype=c_int
+        ret = CallCFunction(GetDllLibXls().LOGFONT_lfWeight, self.Ptr)
+        return ret
+
+    def lfItalic(self)->int:
+        """
+
+        """
+        GetDllLibXls().LOGFONT_lfItalic.argtypes=[c_void_p]
+        GetDllLibXls().LOGFONT_lfItalic.restype=c_int
+        ret = CallCFunction(GetDllLibXls().LOGFONT_lfItalic, self.Ptr)
+        return ret
+
+    def lfUnderline(self)->int:
+        """
+
+        """
+        GetDllLibXls().LOGFONT_lfUnderline.argtypes=[c_void_p]
+        GetDllLibXls().LOGFONT_lfUnderline.restype=c_int
+        ret = CallCFunction(GetDllLibXls().LOGFONT_lfUnderline, self.Ptr)
+        return ret
+
+    def lfStrikeOut(self)->int:
+        """
+
+        """
+        GetDllLibXls().LOGFONT_lfStrikeOut.argtypes=[c_void_p]
+        GetDllLibXls().LOGFONT_lfStrikeOut.restype=c_int
+        ret = CallCFunction(GetDllLibXls().LOGFONT_lfStrikeOut, self.Ptr)
+        return ret
+
+    def lfCharSet(self)->int:
+        """
+
+        """
+        GetDllLibXls().LOGFONT_lfCharSet.argtypes=[c_void_p]
+        GetDllLibXls().LOGFONT_lfCharSet.restype=c_int
+        ret = CallCFunction(GetDllLibXls().LOGFONT_lfCharSet, self.Ptr)
+        return ret
+
+    def lfOutPrecision(self)->int:
+        """
+
+        """
+        GetDllLibXls().LOGFONT_lfOutPrecision.argtypes=[c_void_p]
+        GetDllLibXls().LOGFONT_lfOutPrecision.restype=c_int
+        ret = CallCFunction(GetDllLibXls().LOGFONT_lfOutPrecision, self.Ptr)
+        return ret
+
+    def lfClipPrecision(self)->int:
+        """
+
+        """
+        GetDllLibXls().LOGFONT_lfClipPrecision.argtypes=[c_void_p]
+        GetDllLibXls().LOGFONT_lfClipPrecision.restype=c_int
+        ret = CallCFunction(GetDllLibXls().LOGFONT_lfClipPrecision, self.Ptr)
+        return ret
+
+    def lfQuality(self)->int:
+        """
+
+        """
+        GetDllLibXls().LOGFONT_lfQuality.argtypes=[c_void_p]
+        GetDllLibXls().LOGFONT_lfQuality.restype=c_int
+        ret = CallCFunction(GetDllLibXls().LOGFONT_lfQuality, self.Ptr)
+        return ret
+
+    def lfPitchAndFamily(self)->int:
+        """
+
+        """
+        GetDllLibXls().LOGFONT_lfPitchAndFamily.argtypes=[c_void_p]
+        GetDllLibXls().LOGFONT_lfPitchAndFamily.restype=c_int
+        ret = CallCFunction(GetDllLibXls().LOGFONT_lfPitchAndFamily, self.Ptr)
+        return ret
+
+
+    def lfFaceName(self)->str:
+        """
+
+        """
+        GetDllLibXls().LOGFONT_lfFaceName.argtypes=[c_void_p]
+        GetDllLibXls().LOGFONT_lfFaceName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().LOGFONT_lfFaceName, self.Ptr))
+        return ret
+
+

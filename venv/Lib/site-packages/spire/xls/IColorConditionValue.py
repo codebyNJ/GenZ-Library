@@ -1,0 +1,31 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IColorConditionValue (  IConditionValue) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def FormatColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @FormatColor.setter
+    @abc.abstractmethod
+    def FormatColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+

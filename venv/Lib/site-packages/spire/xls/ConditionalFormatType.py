@@ -1,0 +1,33 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ConditionalFormatType(Enum):
+    """
+    <summary>
+        Conditional formatting type.
+    </summary>
+    """
+    CellValue = 1
+    Formula = 2
+    DataBar = 3
+    IconSet = 4
+    ColorScale = 5
+    BeginsWith = 6
+    ContainsText = 7
+    EndsWith = 8
+    NotContainsText = 9
+    TopBottom = 10
+    Average = 11
+    ContainsBlanks = 12
+    ContainsErrors = 13
+    DuplicateValues = 14
+    NotContainsBlanks = 15
+    NotContainsErrors = 16
+    TimePeriod = 17
+    UniqueValues = 18
+

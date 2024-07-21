@@ -1,0 +1,31 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IInternalFont (  IFont, IExcelApplication, IOptimizedUpdate) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Index(self)->int:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Font(self)->'XlsFont':
+        """
+
+        """
+        pass
+
+

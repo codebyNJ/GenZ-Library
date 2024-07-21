@@ -1,0 +1,70 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class OvalShapeCollection (  CollectionBase[XlsOvalShape], IOvalShapes) :
+    """
+
+    """
+    @dispatch
+
+    def get_Item(self ,index:int)->IOvalShape:
+        """
+
+        """
+        
+        GetDllLibXls().OvalShapeCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().OvalShapeCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().OvalShapeCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsOvalShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->IOvalShape:
+        """
+
+        """
+        
+        GetDllLibXls().OvalShapeCollection_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().OvalShapeCollection_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().OvalShapeCollection_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else XlsOvalShape(intPtr)
+        return ret
+
+
+
+    def AddOval(self ,row:int,column:int,height:int,width:int)->'IOvalShape':
+        """
+
+        """
+        
+        GetDllLibXls().OvalShapeCollection_AddOval.argtypes=[c_void_p ,c_int,c_int,c_int,c_int]
+        GetDllLibXls().OvalShapeCollection_AddOval.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().OvalShapeCollection_AddOval, self.Ptr, row,column,height,width)
+        ret = None if intPtr==None else XlsOvalShape(intPtr)
+        return ret
+
+
+
+    def AddCopy(self ,source:'IOvalShape'):
+        """
+
+        """
+        intPtrsource:c_void_p = source.Ptr
+
+        GetDllLibXls().OvalShapeCollection_AddCopy.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().OvalShapeCollection_AddCopy, self.Ptr, intPtrsource)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().OvalShapeCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().OvalShapeCollection_Clear, self.Ptr)
+

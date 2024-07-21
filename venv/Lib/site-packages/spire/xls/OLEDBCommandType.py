@@ -1,0 +1,19 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class OLEDBCommandType(Enum):
+    """
+
+    """
+    none = 0
+    CubeName = 1
+    SqlStatement = 2
+    TableName = 3
+    DefaultInformation = 4
+    WebBasedList = 5
+

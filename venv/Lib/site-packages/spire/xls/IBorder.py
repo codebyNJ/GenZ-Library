@@ -1,0 +1,116 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IBorder (  IExcelApplication) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def KnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @KnownColor.setter
+    @abc.abstractmethod
+    def KnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def OColor(self)->'OColor':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Color(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @Color.setter
+    @abc.abstractmethod
+    def Color(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LineStyle(self)->'LineStyleType':
+        """
+
+        """
+        pass
+
+
+    @LineStyle.setter
+    @abc.abstractmethod
+    def LineStyle(self, value:'LineStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowDiagonalLine(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowDiagonalLine.setter
+    @abc.abstractmethod
+    def ShowDiagonalLine(self, value:bool):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetThemeColor(self ,type:'ThemeColorType',tint:float):
+        """
+
+        """
+        pass
+
+
+#
+#    @abc.abstractmethod
+#    def GetThemeColor(self ,type:'ThemeColorType&',tint:'Double&')->bool:
+#        """
+#
+#        """
+#        pass
+#
+
+

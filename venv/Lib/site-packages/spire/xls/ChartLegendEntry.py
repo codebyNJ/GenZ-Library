@@ -1,0 +1,27 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartLegendEntry (  XlsChartLegendEntry) :
+    """
+
+    """
+    @property
+
+    def TextArea(self)->'ChartTextArea':
+        """
+    <summary>
+        Returns text area. Read-only.
+    </summary>
+        """
+        GetDllLibXls().ChartLegendEntry_get_TextArea.argtypes=[c_void_p]
+        GetDllLibXls().ChartLegendEntry_get_TextArea.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartLegendEntry_get_TextArea, self.Ptr)
+        ret = None if intPtr==None else ChartTextArea(intPtr)
+        return ret
+
+

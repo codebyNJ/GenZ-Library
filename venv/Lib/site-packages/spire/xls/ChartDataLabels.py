@@ -1,0 +1,42 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartDataLabels (  XlsChartDataLabels) :
+    """
+
+    """
+    @property
+
+    def Format(self)->'ChartSerieDataFormat':
+        """
+    <summary>
+        Gets data format. Read-only.
+    </summary>
+        """
+        GetDllLibXls().ChartDataLabels_get_Format.argtypes=[c_void_p]
+        GetDllLibXls().ChartDataLabels_get_Format.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartDataLabels_get_Format, self.Ptr)
+        ret = None if intPtr==None else ChartSerieDataFormat(intPtr)
+        return ret
+
+
+    @property
+
+    def TextArea(self)->'ChartTextArea':
+        """
+    <summary>
+        Gets or sets text area.
+    </summary>
+        """
+        GetDllLibXls().ChartDataLabels_get_TextArea.argtypes=[c_void_p]
+        GetDllLibXls().ChartDataLabels_get_TextArea.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartDataLabels_get_TextArea, self.Ptr)
+        ret = None if intPtr==None else ChartTextArea(intPtr)
+        return ret
+
+

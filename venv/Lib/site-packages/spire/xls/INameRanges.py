@@ -1,0 +1,162 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class INameRanges (  IEnumerable[XlsName]) :
+    """
+
+    """
+    @property
+    def Count(self)->int:
+        """
+
+        """
+        GetDllLibXls().INameRanges_get_Count.argtypes=[c_void_p]
+        GetDllLibXls().INameRanges_get_Count.restype=c_int
+        ret = CallCFunction(GetDllLibXls().INameRanges_get_Count, self.Ptr)
+        return ret
+
+    @property
+
+    def Parent(self)->'SpireObject':
+        """
+
+        """
+        GetDllLibXls().INameRanges_get_Parent.argtypes=[c_void_p]
+        GetDllLibXls().INameRanges_get_Parent.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().INameRanges_get_Parent, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,index:int)->INamedRange:
+        """
+
+        """
+        
+        GetDllLibXls().INameRanges_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().INameRanges_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().INameRanges_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsName(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->INamedRange:
+        """
+
+        """
+        
+        GetDllLibXls().INameRanges_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().INameRanges_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().INameRanges_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else XlsName(intPtr)
+        return ret
+
+
+
+    def GetByName(self ,name:str)->'INamedRange':
+        """
+
+        """
+        
+        GetDllLibXls().INameRanges_GetByName.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().INameRanges_GetByName.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().INameRanges_GetByName, self.Ptr, name)
+        ret = None if intPtr==None else XlsName(intPtr)
+        return ret
+
+
+    @property
+
+    def ParentWorksheet(self)->'IWorksheet':
+        """
+
+        """
+        GetDllLibXls().INameRanges_get_ParentWorksheet.argtypes=[c_void_p]
+        GetDllLibXls().INameRanges_get_ParentWorksheet.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().INameRanges_get_ParentWorksheet, self.Ptr)
+        ret = None if intPtr==None else XlsWorksheet(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,name:str)->INamedRange:
+        """
+
+        """
+        
+        GetDllLibXls().INameRanges_Add.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().INameRanges_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().INameRanges_Add, self.Ptr, name)
+        ret = None if intPtr==None else XlsName(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,name:str,namedObject:IXLSRange)->INamedRange:
+        """
+
+        """
+        intPtrnamedObject:c_void_p = namedObject.Ptr
+
+        GetDllLibXls().INameRanges_AddNN.argtypes=[c_void_p ,c_void_p,c_void_p]
+        GetDllLibXls().INameRanges_AddNN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().INameRanges_AddNN, self.Ptr, name,intPtrnamedObject)
+        ret = None if intPtr==None else XlsName(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,name:INamedRange)->INamedRange:
+        """
+
+        """
+        intPtrname:c_void_p = name.Ptr
+
+        GetDllLibXls().INameRanges_AddN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().INameRanges_AddN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().INameRanges_AddN, self.Ptr, intPtrname)
+        ret = None if intPtr==None else XlsName(intPtr)
+        return ret
+
+
+
+    def Remove(self ,name:str):
+        """
+
+        """
+        
+        GetDllLibXls().INameRanges_Remove.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().INameRanges_Remove, self.Ptr, name)
+
+
+    def RemoveAt(self ,index:int):
+        """
+
+        """
+        
+        GetDllLibXls().INameRanges_RemoveAt.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().INameRanges_RemoveAt, self.Ptr, index)
+
+
+    def Contains(self ,name:str)->bool:
+        """
+
+        """
+        
+        GetDllLibXls().INameRanges_Contains.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().INameRanges_Contains.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().INameRanges_Contains, self.Ptr, name)
+        return ret
+

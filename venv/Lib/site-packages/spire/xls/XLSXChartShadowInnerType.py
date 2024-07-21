@@ -1,0 +1,25 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XLSXChartShadowInnerType(Enum):
+    """
+    <summary>
+        Indicates the Inner Shadow Values
+    </summary>
+    """
+    none = 0
+    InsideDiagonalBottomLeft = 1
+    InsideTop = 2
+    InsideRight = 3
+    InsideLeft = 4
+    InsideDiagonalTopRight = 5
+    InsideDiagonalBottomRight = 6
+    InsideCenter = 7
+    InsideBottom = 8
+    InsideDiagonalTopLeft = 9
+

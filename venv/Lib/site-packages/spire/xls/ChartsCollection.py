@@ -1,0 +1,113 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartsCollection (  XlsChartsCollection) :
+    """
+
+    """
+    @dispatch
+
+    def get_Item(self ,index:int)->Chart:
+        """
+    <summary>
+        Gets a chart object by item index.
+    </summary>
+        """
+        
+        GetDllLibXls().ChartsCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ChartsCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartsCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else Chart(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->Chart:
+        """
+    <summary>
+        Get a chart object by name.
+    </summary>
+        """
+        
+        GetDllLibXls().ChartsCollection_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ChartsCollection_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartsCollection_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else Chart(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self)->ChartSheet:
+        """
+    <summary>
+        Adds a new chart.
+    </summary>
+    <returns>Created chart object.</returns>
+        """
+        GetDllLibXls().ChartsCollection_Add.argtypes=[c_void_p]
+        GetDllLibXls().ChartsCollection_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartsCollection_Add, self.Ptr)
+        ret = None if intPtr==None else ChartSheet(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,name:str)->ChartSheet:
+        """
+    <summary>
+        Add a new chart with name.
+    </summary>
+    <param name="name">chart name.</param>
+    <returns>Created chart object.</returns>
+        """
+        
+        GetDllLibXls().ChartsCollection_AddN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ChartsCollection_AddN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartsCollection_AddN, self.Ptr, name)
+        ret = None if intPtr==None else ChartSheet(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,chart:ChartSheet)->ChartSheet:
+        """
+    <summary>
+        Adds chart to the collection.
+    </summary>
+    <param name="chart">Chart to add.</param>
+    <returns>Added chart object.</returns>
+        """
+        intPtrchart:c_void_p = chart.Ptr
+
+        GetDllLibXls().ChartsCollection_AddC.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ChartsCollection_AddC.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartsCollection_AddC, self.Ptr, intPtrchart)
+        ret = None if intPtr==None else ChartSheet(intPtr)
+        return ret
+
+
+
+    def Remove(self ,name:str)->'ChartSheet':
+        """
+    <summary>
+        Removes chart object from the collection.
+    </summary>
+    <param name="name">Name of the chart to remove.</param>
+        """
+        
+        GetDllLibXls().ChartsCollection_Remove.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ChartsCollection_Remove.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartsCollection_Remove, self.Ptr, name)
+        ret = None if intPtr==None else ChartSheet(intPtr)
+        return ret
+
+

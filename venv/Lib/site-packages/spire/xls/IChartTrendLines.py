@@ -1,0 +1,79 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IChartTrendLines (SpireObject) :
+    """
+
+    """
+
+    def get_Item(self ,iIndex:int)->'IChartTrendLine':
+        """
+
+        """
+        
+        GetDllLibXls().IChartTrendLines_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().IChartTrendLines_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IChartTrendLines_get_Item, self.Ptr, iIndex)
+        ret = None if intPtr==None else IChartTrendLine(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self)->IChartTrendLine:
+        """
+
+        """
+        GetDllLibXls().IChartTrendLines_Add.argtypes=[c_void_p]
+        GetDllLibXls().IChartTrendLines_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IChartTrendLines_Add, self.Ptr)
+        ret = None if intPtr==None else IChartTrendLine(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,type:TrendLineType)->IChartTrendLine:
+        """
+
+        """
+        enumtype:c_int = type.value
+
+        GetDllLibXls().IChartTrendLines_AddT.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().IChartTrendLines_AddT.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IChartTrendLines_AddT, self.Ptr, enumtype)
+        ret = None if intPtr==None else IChartTrendLine(intPtr)
+        return ret
+
+
+
+    def RemoveAt(self ,index:int):
+        """
+
+        """
+        
+        GetDllLibXls().IChartTrendLines_RemoveAt.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().IChartTrendLines_RemoveAt, self.Ptr, index)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().IChartTrendLines_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().IChartTrendLines_Clear, self.Ptr)
+
+    @property
+    def Count(self)->int:
+        """
+
+        """
+        GetDllLibXls().IChartTrendLines_get_Count.argtypes=[c_void_p]
+        GetDllLibXls().IChartTrendLines_get_Count.restype=c_int
+        ret = CallCFunction(GetDllLibXls().IChartTrendLines_get_Count, self.Ptr)
+        return ret
+

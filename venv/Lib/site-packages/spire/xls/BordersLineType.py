@@ -1,0 +1,23 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class BordersLineType(Enum):
+    """
+    <summary>
+        Specifies border and diagonal line types in Excel.
+     </summary>
+    """
+    DiagonalDown = 5
+    DiagonalUp = 6
+    EdgeBottom = 9
+    EdgeLeft = 7
+    EdgeRight = 10
+    EdgeTop = 8
+    horizontal = 11
+    vertical = 12
+

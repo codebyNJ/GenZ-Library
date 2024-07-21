@@ -1,0 +1,93 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from spire.xls.ChartGridLine import *
+from ctypes import *
+import abc
+
+class ChartCategoryAxis (  XlsChartCategoryAxis) :
+    """
+
+    """
+    @property
+
+    def CategoryLabels(self)->'CellRange':
+        """
+    <summary>
+        Category labels for the chart.
+    </summary>
+        """
+        GetDllLibXls().ChartCategoryAxis_get_CategoryLabels.argtypes=[c_void_p]
+        GetDllLibXls().ChartCategoryAxis_get_CategoryLabels.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartCategoryAxis_get_CategoryLabels, self.Ptr)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @CategoryLabels.setter
+    def CategoryLabels(self, value:'CellRange'):
+        GetDllLibXls().ChartCategoryAxis_set_CategoryLabels.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().ChartCategoryAxis_set_CategoryLabels, self.Ptr, value.Ptr)
+
+    @property
+
+    def Font(self)->'ExcelFont':
+        """
+    <summary>
+        Gets font used for axis text displaying.
+    </summary>
+        """
+        GetDllLibXls().ChartCategoryAxis_get_Font.argtypes=[c_void_p]
+        GetDllLibXls().ChartCategoryAxis_get_Font.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartCategoryAxis_get_Font, self.Ptr)
+        ret = None if intPtr==None else ExcelFont(intPtr)
+        return ret
+
+
+    @property
+
+    def TitleArea(self)->'ChartTextArea':
+        """
+    <summary>
+        Returns text area for the axis title. Read-only.
+    </summary>
+        """
+        GetDllLibXls().ChartCategoryAxis_get_TitleArea.argtypes=[c_void_p]
+        GetDllLibXls().ChartCategoryAxis_get_TitleArea.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartCategoryAxis_get_TitleArea, self.Ptr)
+        ret = None if intPtr==None else ChartTextArea(intPtr)
+        return ret
+
+
+    @property
+
+    def MajorGridLines(self)->'ChartGridLine':
+        """
+    <summary>
+        Returns a ChartGridLine object that represents the major gridlines for the specified axis. Only axes in the primary axis group can have gridlines
+    </summary>
+        """
+        GetDllLibXls().ChartCategoryAxis_get_MajorGridLines.argtypes=[c_void_p]
+        GetDllLibXls().ChartCategoryAxis_get_MajorGridLines.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartCategoryAxis_get_MajorGridLines, self.Ptr)
+        ret = None if intPtr==None else ChartGridLine(intPtr)
+        return ret
+
+
+    @property
+
+    def MinorGridLines(self)->'ChartGridLine':
+        """
+    <summary>
+        Returns a ChartGridLine object that represents the minor gridlines for the specified axis. Only axes in the primary axis group can have gridlines.
+    </summary>
+        """
+        GetDllLibXls().ChartCategoryAxis_get_MinorGridLines.argtypes=[c_void_p]
+        GetDllLibXls().ChartCategoryAxis_get_MinorGridLines.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartCategoryAxis_get_MinorGridLines, self.Ptr)
+        ret = None if intPtr==None else ChartGridLine(intPtr)
+        return ret
+
+

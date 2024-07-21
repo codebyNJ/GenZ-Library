@@ -1,0 +1,20 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class FilterType(Enum):
+    """
+
+    """
+    ColorFilter = 0
+    CustomFilters = 1
+    DynamicFilter = 2
+    MultipleFilters = 3
+    IconFilter = 4
+    Top10 = 5
+    none = 6
+

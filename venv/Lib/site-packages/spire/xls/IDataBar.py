@@ -1,0 +1,105 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IDataBar (abc.ABC) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def MinPoint(self)->'IConditionValue':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def MaxPoint(self)->'IConditionValue':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BarColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @BarColor.setter
+    @abc.abstractmethod
+    def BarColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def PercentMax(self)->int:
+        """
+
+        """
+        pass
+
+
+    @PercentMax.setter
+    @abc.abstractmethod
+    def PercentMax(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def PercentMin(self)->int:
+        """
+
+        """
+        pass
+
+
+    @PercentMin.setter
+    @abc.abstractmethod
+    def PercentMin(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowValue(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowValue.setter
+    @abc.abstractmethod
+    def ShowValue(self, value:bool):
+        """
+
+        """
+        pass
+
+

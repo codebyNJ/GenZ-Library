@@ -1,0 +1,22 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ShapeFillType(Enum):
+    """
+    <summary>
+        Represents shape XlsFill type.
+    </summary>
+    """
+    SolidColor = 0
+    Pattern = 1
+    Texture = 2
+    Picture = 3
+    UnknownGradient = 4
+    Gradient = 7
+    NoFill = 8
+

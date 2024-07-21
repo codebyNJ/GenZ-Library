@@ -1,0 +1,45 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ListObjectCollection (CollectionBase[IListObject],  IListObjects) :
+    """
+
+    """
+
+    def Create(self ,name:str,range:'IXLSRange')->'IListObject':
+        """
+    <summary>
+        Creates new list object and adds it to the collection.
+    </summary>
+    <param name="name">Name of the new list object.</param>
+    <param name="range">Destination range.</param>
+    <returns>Newly created object.</returns>
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().ListObjectCollection_Create.argtypes=[c_void_p ,c_void_p,c_void_p]
+        GetDllLibXls().ListObjectCollection_Create.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ListObjectCollection_Create, self.Ptr, name,intPtrrange)
+        ret = None if intPtr==None else IListObject(intPtr)
+        return ret
+
+
+
+    @dispatch
+    def get_Item(self ,name:str)->IListObject:
+        """
+
+        """
+        
+        GetDllLibXls().ListObjectCollection_get_Item.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ListObjectCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ListObjectCollection_get_Item, self.Ptr, name)
+        ret = None if intPtr==None else IListObject(intPtr)
+        return ret
+
+

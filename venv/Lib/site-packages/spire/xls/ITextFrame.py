@@ -1,0 +1,120 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ITextFrame (abc.ABC) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def AutoSize(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @AutoSize.setter
+    @abc.abstractmethod
+    def AutoSize(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsAutoMargin(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsAutoMargin.setter
+    @abc.abstractmethod
+    def IsAutoMargin(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def LeftMarginPt(self)->float:
+        """
+
+        """
+        pass
+
+
+    @LeftMarginPt.setter
+    @abc.abstractmethod
+    def LeftMarginPt(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def RightMarginPt(self)->float:
+        """
+
+        """
+        pass
+
+
+    @RightMarginPt.setter
+    @abc.abstractmethod
+    def RightMarginPt(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def TopMarginPt(self)->float:
+        """
+
+        """
+        pass
+
+
+    @TopMarginPt.setter
+    @abc.abstractmethod
+    def TopMarginPt(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def BottomMarginPt(self)->float:
+        """
+
+        """
+        pass
+
+
+    @BottomMarginPt.setter
+    @abc.abstractmethod
+    def BottomMarginPt(self, value:float):
+        """
+
+        """
+        pass
+
+

@@ -1,0 +1,70 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ButtonShapeCollection (  IButtonShapes) :
+    """
+
+    """
+    @dispatch
+
+    def get_Item(self ,index:int)->IButtonShape:
+        """
+
+        """
+        
+        GetDllLibXls().ButtonShapeCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ButtonShapeCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ButtonShapeCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else IButtonShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->IButtonShape:
+        """
+
+        """
+        
+        GetDllLibXls().ButtonShapeCollection_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ButtonShapeCollection_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ButtonShapeCollection_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else IButtonShape(intPtr)
+        return ret
+
+
+
+    def AddButton(self ,row:int,column:int,height:int,width:int)->'IButtonShape':
+        """
+
+        """
+        
+        GetDllLibXls().ButtonShapeCollection_AddButton.argtypes=[c_void_p ,c_int,c_int,c_int,c_int]
+        GetDllLibXls().ButtonShapeCollection_AddButton.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ButtonShapeCollection_AddButton, self.Ptr, row,column,height,width)
+        ret = None if intPtr==None else IButtonShape(intPtr)
+        return ret
+
+
+
+    def AddCopy(self ,source:'IButtonShape'):
+        """
+
+        """
+        intPtrsource:c_void_p = source.Ptr
+
+        GetDllLibXls().ButtonShapeCollection_AddCopy.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().ButtonShapeCollection_AddCopy, self.Ptr, intPtrsource)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().ButtonShapeCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().ButtonShapeCollection_Clear, self.Ptr)
+

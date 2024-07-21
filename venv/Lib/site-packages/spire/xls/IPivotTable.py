@@ -1,0 +1,393 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IPivotTable (abc.ABC) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def Name(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Name.setter
+    @abc.abstractmethod
+    def Name(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PivotFields(self)->'PivotTableFields':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def DataFields(self)->'PivotDataFields':
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsRowGrand(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsRowGrand.setter
+    @abc.abstractmethod
+    def IsRowGrand(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsColumnGrand(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsColumnGrand.setter
+    @abc.abstractmethod
+    def IsColumnGrand(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowDrillIndicators(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowDrillIndicators.setter
+    @abc.abstractmethod
+    def ShowDrillIndicators(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def DisplayFieldCaptions(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @DisplayFieldCaptions.setter
+    @abc.abstractmethod
+    def DisplayFieldCaptions(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def RepeatItemsOnEachPrintedPage(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @RepeatItemsOnEachPrintedPage.setter
+    @abc.abstractmethod
+    def RepeatItemsOnEachPrintedPage(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BuiltInStyle(self)->BuiltInStyles:
+        """
+
+        """
+        pass
+
+
+
+    @BuiltInStyle.setter
+    @abc.abstractmethod
+    def BuiltInStyle(self, value:BuiltInStyles):
+        """
+
+        """
+        pass
+
+
+
+    @property
+    @abc.abstractmethod
+    def ShowRowGrand(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowRowGrand.setter
+    @abc.abstractmethod
+    def ShowRowGrand(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowColumnGrand(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowColumnGrand.setter
+    @abc.abstractmethod
+    def ShowColumnGrand(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def CacheIndex(self)->int:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Location(self)->'CellRange':
+        """
+
+        """
+        pass
+
+
+    @Location.setter
+    @abc.abstractmethod
+    def Location(self, value:'CellRange'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Options(self)->'IPivotTableOptions':
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def RowsPerPage(self)->int:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ColumnsPerPage(self)->int:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def CalculatedFields(self)->'IPivotCalculatedFields':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PageFields(self)->'IPivotFields':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RowFields(self)->'IPivotFields':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ColumnFields(self)->'IPivotFields':
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowDataFieldInRow(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowDataFieldInRow.setter
+    @abc.abstractmethod
+    def ShowDataFieldInRow(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def AutoFormatType(self)->'PivotAutoFomatTypes':
+        """
+
+        """
+        pass
+
+
+    @AutoFormatType.setter
+    @abc.abstractmethod
+    def AutoFormatType(self, value:'PivotAutoFomatTypes'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsCompatibleWithExcel2003(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsCompatibleWithExcel2003.setter
+    @abc.abstractmethod
+    def IsCompatibleWithExcel2003(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Clear(self):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def ClearRowFieldFilter(self ,fieldName:str):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def ClearColumnFieldFilter(self ,fieldName:str):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def ClearFilter(self ,fieldName:str):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def ChangeDataSource(self ,dataSource:'IXLSRange'):
+        """
+
+        """
+        pass
+
+

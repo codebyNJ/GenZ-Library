@@ -1,0 +1,129 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class OdsPageBackground (SpireObject) :
+    """
+
+    """
+    @property
+
+    def Type(self)->'OdsPageBackgroundType':
+        """
+    <summary>
+        Gets the type of background. Read-only.
+    </summary>
+        """
+        GetDllLibXls().OdsPageBackground_get_Type.argtypes=[c_void_p]
+        GetDllLibXls().OdsPageBackground_get_Type.restype=c_int
+        ret = CallCFunction(GetDllLibXls().OdsPageBackground_get_Type, self.Ptr)
+        objwraped = OdsPageBackgroundType(ret)
+        return objwraped
+
+    @property
+
+    def Color(self)->'Color':
+        """
+    <summary>
+        Gets/sets the color of background.
+    </summary>
+        """
+        GetDllLibXls().OdsPageBackground_get_Color.argtypes=[c_void_p]
+        GetDllLibXls().OdsPageBackground_get_Color.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().OdsPageBackground_get_Color, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @Color.setter
+    def Color(self, value:'Color'):
+        GetDllLibXls().OdsPageBackground_set_Color.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().OdsPageBackground_set_Color, self.Ptr, value.Ptr)
+
+#    @property
+#
+#    def ImageData(self)->List['Byte']:
+#        """
+#    <summary>
+#        Gets/sets the image data of image background.
+#    </summary>
+#        """
+#        GetDllLibXls().OdsPageBackground_get_ImageData.argtypes=[c_void_p]
+#        GetDllLibXls().OdsPageBackground_get_ImageData.restype=IntPtrArray
+#        intPtrArray = CallCFunction(GetDllLibXls().OdsPageBackground_get_ImageData, self.Ptr)
+#        ret = GetVectorFromArray(intPtrArray, Byte)
+#        return ret
+
+
+#    @ImageData.setter
+#    def ImageData(self, value:List['Byte']):
+#        vCount = len(value)
+#        ArrayType = c_void_p * vCount
+#        vArray = ArrayType()
+#        for i in range(0, vCount):
+#            vArray[i] = value[i].Ptr
+#        GetDllLibXls().OdsPageBackground_set_ImageData.argtypes=[c_void_p, ArrayType, c_int]
+#        CallCFunction(GetDllLibXls().OdsPageBackground_set_ImageData, self.Ptr, vArray, vCount)
+
+
+    @property
+
+    def ImageLink(self)->str:
+        """
+    <summary>
+        Gets/sets the link file path of image.
+    </summary>
+        """
+        GetDllLibXls().OdsPageBackground_get_ImageLink.argtypes=[c_void_p]
+        GetDllLibXls().OdsPageBackground_get_ImageLink.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().OdsPageBackground_get_ImageLink, self.Ptr))
+        return ret
+
+
+    @ImageLink.setter
+    def ImageLink(self, value:str):
+        GetDllLibXls().OdsPageBackground_set_ImageLink.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().OdsPageBackground_set_ImageLink, self.Ptr, value)
+
+    @property
+
+    def ImageType(self)->'OdsPageBackgroundImageType':
+        """
+    <summary>
+        Gets/sets the image type of image background.
+    </summary>
+        """
+        GetDllLibXls().OdsPageBackground_get_ImageType.argtypes=[c_void_p]
+        GetDllLibXls().OdsPageBackground_get_ImageType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().OdsPageBackground_get_ImageType, self.Ptr)
+        objwraped = OdsPageBackgroundImageType(ret)
+        return objwraped
+
+    @ImageType.setter
+    def ImageType(self, value:'OdsPageBackgroundImageType'):
+        GetDllLibXls().OdsPageBackground_set_ImageType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().OdsPageBackground_set_ImageType, self.Ptr, value.value)
+
+    @property
+
+    def ImagePositonType(self)->'OdsPageBackgroundImagePositionType':
+        """
+    <summary>
+        Gets/sets the position type of image background.
+    </summary>
+        """
+        GetDllLibXls().OdsPageBackground_get_ImagePositonType.argtypes=[c_void_p]
+        GetDllLibXls().OdsPageBackground_get_ImagePositonType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().OdsPageBackground_get_ImagePositonType, self.Ptr)
+        objwraped = OdsPageBackgroundImagePositionType(ret)
+        return objwraped
+
+    @ImagePositonType.setter
+    def ImagePositonType(self, value:'OdsPageBackgroundImagePositionType'):
+        GetDllLibXls().OdsPageBackground_set_ImagePositonType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().OdsPageBackground_set_ImagePositonType, self.Ptr, value.value)
+

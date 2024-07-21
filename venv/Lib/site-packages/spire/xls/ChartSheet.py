@@ -1,0 +1,285 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartSheet (  XlsChart) :
+    """
+
+    """
+    @property
+
+    def Series(self)->'ChartSeries':
+        """
+    <summary>
+        Returns an object that represents either a single series (a Series object) or a collection of all the series (a SeriesCollection collection) in the chart or chart group. 
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_Series.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_Series.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_Series, self.Ptr)
+        ret = None if intPtr==None else ChartSeries(intPtr)
+        return ret
+
+
+    @property
+
+    def ChartTitleArea(self)->'ChartTextArea':
+        """
+    <summary>
+        Gets title text area. Read-only.
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_ChartTitleArea.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_ChartTitleArea.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_ChartTitleArea, self.Ptr)
+        ret = None if intPtr==None else ChartTextArea(intPtr)
+        return ret
+
+
+    @property
+
+    def ChartArea(self)->'ChartArea':
+        """
+    <summary>
+        Returns an object that represents the complete chart area for the chart.
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_ChartArea.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_ChartArea.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_ChartArea, self.Ptr)
+        ret = None if intPtr==None else ChartArea(intPtr)
+        return ret
+
+
+    @property
+
+    def DataRange(self)->'CellRange':
+        """
+    <summary>
+        DataRange for the chart series.
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_DataRange.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_DataRange.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_DataRange, self.Ptr)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @DataRange.setter
+    def DataRange(self, value:'CellRange'):
+        GetDllLibXls().ChartSheet_set_DataRange.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().ChartSheet_set_DataRange, self.Ptr, value.Ptr)
+
+    @property
+
+    def DataTable(self)->'ChartDataTable':
+        """
+    <summary>
+        Returns a DataTable object that represents the chart data table.
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_DataTable.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_DataTable.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_DataTable, self.Ptr)
+        ret = None if intPtr==None else ChartDataTable(intPtr)
+        return ret
+
+
+    @property
+
+    def Floor(self)->'ChartWallOrFloor':
+        """
+    <summary>
+        Returns a Floor object that represents the floor of the 3-D chart
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_Floor.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_Floor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_Floor, self.Ptr)
+        ret = None if intPtr==None else ChartWallOrFloor(intPtr)
+        return ret
+
+
+    @property
+
+    def Legend(self)->'ChartLegend':
+        """
+    <summary>
+        Represents chart legend.
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_Legend.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_Legend.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_Legend, self.Ptr)
+        ret = None if intPtr==None else ChartLegend(intPtr)
+        return ret
+
+
+    @property
+
+    def PageSetup(self)->'ChartPageSetup':
+        """
+    <summary>
+        Page setup for the chart.
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_PageSetup.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_PageSetup.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_PageSetup, self.Ptr)
+        ret = None if intPtr==None else ChartPageSetup(intPtr)
+        return ret
+
+
+    @property
+
+    def PlotArea(self)->'ChartPlotArea':
+        """
+    <summary>
+        Returns a PlotArea object that represents the plot area of a chart.
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_PlotArea.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_PlotArea.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_PlotArea, self.Ptr)
+        ret = None if intPtr==None else ChartPlotArea(intPtr)
+        return ret
+
+
+    @property
+
+    def PrimaryCategoryAxis(self)->'ChartCategoryAxis':
+        """
+    <summary>
+        Returns primary category axis.
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_PrimaryCategoryAxis.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_PrimaryCategoryAxis.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_PrimaryCategoryAxis, self.Ptr)
+        ret = None if intPtr==None else ChartCategoryAxis(intPtr)
+        return ret
+
+
+    @property
+
+    def PrimaryValueAxis(self)->'ChartValueAxis':
+        """
+    <summary>
+        Returns primary value axis.
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_PrimaryValueAxis.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_PrimaryValueAxis.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_PrimaryValueAxis, self.Ptr)
+        ret = None if intPtr==None else ChartValueAxis(intPtr)
+        return ret
+
+
+    @property
+
+    def PrimarySerieAxis(self)->'ChartSeriesAxis':
+        """
+    <summary>
+        Returns primary series axis.
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_PrimarySerieAxis.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_PrimarySerieAxis.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_PrimarySerieAxis, self.Ptr)
+        ret = None if intPtr==None else ChartSeriesAxis(intPtr)
+        return ret
+
+
+    @property
+
+    def SecondaryCategoryAxis(self)->'ChartCategoryAxis':
+        """
+    <summary>
+        Returns secondary category axis.
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_SecondaryCategoryAxis.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_SecondaryCategoryAxis.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_SecondaryCategoryAxis, self.Ptr)
+        ret = None if intPtr==None else ChartCategoryAxis(intPtr)
+        return ret
+
+
+    @property
+
+    def SecondaryValueAxis(self)->'ChartValueAxis':
+        """
+    <summary>
+        Returns secondary value axis.
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_SecondaryValueAxis.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_SecondaryValueAxis.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_SecondaryValueAxis, self.Ptr)
+        ret = None if intPtr==None else ChartValueAxis(intPtr)
+        return ret
+
+
+    @property
+
+    def Workbook(self)->'Workbook':
+        """
+    <summary>
+        Workbook which contains the chart.
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_Workbook.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_Workbook.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_Workbook, self.Ptr)
+        ret = None if intPtr==None else Workbook(intPtr)
+        return ret
+
+
+    @property
+
+    def Walls(self)->'ChartWallOrFloor':
+        """
+    <summary>
+        Represents chart walls.
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_Walls.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_Walls.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_Walls, self.Ptr)
+        ret = None if intPtr==None else ChartWallOrFloor(intPtr)
+        return ret
+
+
+    @property
+
+    def Comments(self)->'CommentsCollection':
+        """
+    <summary>
+        Represents comments collection for the worksheet. Read-only.
+    </summary>
+        """
+        GetDllLibXls().ChartSheet_get_Comments.argtypes=[c_void_p]
+        GetDllLibXls().ChartSheet_get_Comments.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSheet_get_Comments, self.Ptr)
+        ret = None if intPtr==None else CommentsCollection(intPtr)
+        return ret
+
+
+
+    def ToSVGStream(self ,stream:'Stream'):
+        """
+    <summary>
+        Convert chart to Svg stream
+    </summary>
+    <param name="stream">stream.</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().ChartSheet_ToSVGStream.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().ChartSheet_ToSVGStream, self.Ptr, intPtrstream)
+

@@ -1,0 +1,128 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsComboBoxShape (  XlsShape, IComboBoxShape) :
+    """
+
+    """
+    @property
+
+    def ComboType(self)->'ExcelComboType':
+        """
+
+        """
+        GetDllLibXls().XlsComboBoxShape_get_ComboType.argtypes=[c_void_p]
+        GetDllLibXls().XlsComboBoxShape_get_ComboType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsComboBoxShape_get_ComboType, self.Ptr)
+        objwraped = ExcelComboType(ret)
+        return objwraped
+
+    @property
+
+    def SelectedValue(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsComboBoxShape_get_SelectedValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsComboBoxShape_get_SelectedValue.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsComboBoxShape_get_SelectedValue, self.Ptr))
+        return ret
+
+
+    @property
+    def Display3DShading(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsComboBoxShape_get_Display3DShading.argtypes=[c_void_p]
+        GetDllLibXls().XlsComboBoxShape_get_Display3DShading.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsComboBoxShape_get_Display3DShading, self.Ptr)
+        return ret
+
+    @Display3DShading.setter
+    def Display3DShading(self, value:bool):
+        GetDllLibXls().XlsComboBoxShape_set_Display3DShading.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsComboBoxShape_set_Display3DShading, self.Ptr, value)
+
+    @property
+    def DropDownLines(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsComboBoxShape_get_DropDownLines.argtypes=[c_void_p]
+        GetDllLibXls().XlsComboBoxShape_get_DropDownLines.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsComboBoxShape_get_DropDownLines, self.Ptr)
+        return ret
+
+    @DropDownLines.setter
+    def DropDownLines(self, value:int):
+        GetDllLibXls().XlsComboBoxShape_set_DropDownLines.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsComboBoxShape_set_DropDownLines, self.Ptr, value)
+
+    @property
+    def SelectedIndex(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsComboBoxShape_get_SelectedIndex.argtypes=[c_void_p]
+        GetDllLibXls().XlsComboBoxShape_get_SelectedIndex.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsComboBoxShape_get_SelectedIndex, self.Ptr)
+        return ret
+
+    @SelectedIndex.setter
+    def SelectedIndex(self, value:int):
+        GetDllLibXls().XlsComboBoxShape_set_SelectedIndex.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsComboBoxShape_set_SelectedIndex, self.Ptr, value)
+
+    @property
+
+    def ListFillRange(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().XlsComboBoxShape_get_ListFillRange.argtypes=[c_void_p]
+        GetDllLibXls().XlsComboBoxShape_get_ListFillRange.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsComboBoxShape_get_ListFillRange, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @ListFillRange.setter
+    def ListFillRange(self, value:'IXLSRange'):
+        GetDllLibXls().XlsComboBoxShape_set_ListFillRange.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsComboBoxShape_set_ListFillRange, self.Ptr, value.Ptr)
+
+    @property
+
+    def ShapeType(self)->'ExcelShapeType':
+        """
+
+        """
+        GetDllLibXls().XlsComboBoxShape_get_ShapeType.argtypes=[c_void_p]
+        GetDllLibXls().XlsComboBoxShape_get_ShapeType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsComboBoxShape_get_ShapeType, self.Ptr)
+        objwraped = ExcelShapeType(ret)
+        return objwraped
+
+#
+#    def Clone(self ,parent:'SpireObject',hashNewNames:'Dictionary2',dicFontIndexes:'Dictionary2',addToCollections:bool)->'IShape':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrhashNewNames:c_void_p = hashNewNames.Ptr
+#        intPtrdicFontIndexes:c_void_p = dicFontIndexes.Ptr
+#
+#        GetDllLibXls().XlsComboBoxShape_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p,c_bool]
+#        GetDllLibXls().XlsComboBoxShape_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsComboBoxShape_Clone, self.Ptr, intPtrparent,intPtrhashNewNames,intPtrdicFontIndexes,addToCollections)
+#        ret = None if intPtr==None else IShape(intPtr)
+#        return ret
+#
+
+

@@ -1,0 +1,85 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IComment (  ITextBoxShape, ITextBox, IShape) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def Author(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Author.setter
+    @abc.abstractmethod
+    def Author(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsVisible(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsVisible.setter
+    @abc.abstractmethod
+    def IsVisible(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Row(self)->int:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Column(self)->int:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def AutoSize(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @AutoSize.setter
+    @abc.abstractmethod
+    def AutoSize(self, value:bool):
+        """
+
+        """
+        pass
+
+

@@ -1,0 +1,96 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IIconSet (abc.ABC) :
+    """
+
+    """
+#    @property
+#
+#    @abc.abstractmethod
+#    def IconCriteria(self)->'IList1':
+#        """
+#
+#        """
+#        pass
+#
+
+
+    @property
+
+    @abc.abstractmethod
+    def IconSet(self)->'IconSetType':
+        """
+
+        """
+        pass
+
+
+    @IconSet.setter
+    @abc.abstractmethod
+    def IconSet(self, value:'IconSetType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def PercentileValues(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @PercentileValues.setter
+    @abc.abstractmethod
+    def PercentileValues(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsReverseOrder(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsReverseOrder.setter
+    @abc.abstractmethod
+    def IsReverseOrder(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowIconOnly(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowIconOnly.setter
+    @abc.abstractmethod
+    def ShowIconOnly(self, value:bool):
+        """
+
+        """
+        pass
+
+

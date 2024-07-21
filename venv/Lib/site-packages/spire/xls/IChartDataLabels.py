@@ -1,0 +1,457 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IChartDataLabels (  IChartTextArea) :
+    """
+    <summary>
+        Represents a collection of chart data labels.
+    </summary>
+    """
+    @property
+    @abc.abstractmethod
+    def HasSeriesName(self)->bool:
+        """
+    <summary>
+        Indicates whether series name is in data labels.
+            <example>The following code illustrates how to access the IChartDataLabels and set to 
+            shows the serie name:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C3"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.ColumnClustered;
+        //Get the chart serie
+        IChartSerie serie = chart.Series[0];
+        //Get serie data labels
+        IChartDataLabels dataLabels = serie.DataPoints.DefaultDataPoint.DataLabels;
+        //Set the data label to show the serie name
+        dataLabels.HasSeriesName = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @HasSeriesName.setter
+    @abc.abstractmethod
+    def HasSeriesName(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HasCategoryName(self)->bool:
+        """
+    <summary>
+        Indicates whether category name is in data labels.
+            <example>The following code illustrates how to access the IChartDataLabels and set to 
+            shows the categories:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C3"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.ColumnClustered;
+        //Get the chart serie
+        IChartSerie serie = chart.Series[0];
+        //Get serie data labels
+        IChartDataLabels dataLabels = serie.DataPoints.DefaultDataPoint.DataLabels;
+        //Set the data label to show the category names
+        dataLabels.HasCategoryName = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @HasCategoryName.setter
+    @abc.abstractmethod
+    def HasCategoryName(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HasValue(self)->bool:
+        """
+    <summary>
+        Indicates whether value is in data labels.
+            <example>The following code illustrates how to access the IChartDataLabels and set to 
+            shows the values:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C3"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.ColumnClustered;
+        //Get the chart serie
+        IChartSerie serie = chart.Series[0];
+        //Get serie data labels
+        IChartDataLabels dataLabels = serie.DataPoints.DefaultDataPoint.DataLabels;
+        //Set the data label to show the values
+        dataLabels.HasValue = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @HasValue.setter
+    @abc.abstractmethod
+    def HasValue(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HasPercentage(self)->bool:
+        """
+    <summary>
+        Indicates whether percentage is in data labels.
+            <example>The following code illustrates how to access the IChartDataLabels and set to 
+            shows the percentage values:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Pie;
+        //Get the chart serie
+        IChartSerie serie = chart.Series[0];
+        //Get serie data labels
+        IChartDataLabels dataLabels = serie.DataPoints.DefaultDataPoint.DataLabels;
+        //Set the data label to show the percentage values
+        dataLabels.HasPercentage = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @HasPercentage.setter
+    @abc.abstractmethod
+    def HasPercentage(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HasBubbleSize(self)->bool:
+        """
+    <summary>
+        Indicates whether bubble size is in data labels.
+            <example>The following code illustrates how to access the IChartDataLabels and set to 
+            shows the bubble sizes:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C3"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Bubble;
+        //Get the chart serie
+        IChartSerie serie = chart.Series[0];
+        //Get serie data labels
+        IChartDataLabels dataLabels = serie.DataPoints.DefaultDataPoint.DataLabels;
+        //Set the data label to show the bubble sizes
+        dataLabels.HasBubbleSize = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @HasBubbleSize.setter
+    @abc.abstractmethod
+    def HasBubbleSize(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Delimiter(self)->str:
+        """
+    <summary>
+        Delimeter.
+            <example>The following code illustrates how to access the IChartDataLabels and set 
+            delimiter for data labels:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C3"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.ColumnClustered;
+        //Get the chart serie
+        IChartSerie serie = chart.Series[0];
+        //Get serie data labels
+        IChartDataLabels dataLabels = serie.DataPoints.DefaultDataPoint.DataLabels;
+        //Set ' ' symbol as separator for data labels
+        dataLabels.HasValue = true;
+        dataLabels.HasSeriesName = true;
+        dataLabels.Delimiter =" ";
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @Delimiter.setter
+    @abc.abstractmethod
+    def Delimiter(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HasLegendKey(self)->bool:
+        """
+    <summary>
+        Indicates whether legend key is in data labels.
+            <example>The following code illustrates how to access the IChartDataLabels and set to 
+            shows the legend keys:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C3"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.ColumnClustered;
+        //Get the chart serie
+        IChartSerie serie = chart.Series[0];
+        //Get serie data labels
+        IChartDataLabels dataLabels = serie.DataPoints.DefaultDataPoint.DataLabels;
+        //Set the data label to show the legend key
+        dataLabels.HasValue = true;
+        dataLabels.HasLegendKey = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @HasLegendKey.setter
+    @abc.abstractmethod
+    def HasLegendKey(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Position(self)->'DataLabelPositionType':
+        """
+    <summary>
+        Represents data labels position.
+            <example>The following code illustrates how to access the IChartDataLabels and set to 
+            the position for labels:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Pie;
+        //Get the chart serie
+        IChartSerie serie = chart.Series[0];
+        //Get serie data labels
+        IChartDataLabels dataLabels = serie.DataPoints.DefaultDataPoint.DataLabels;
+        //Set the data label to show the leader lines
+        dataLabels.HasValue = true;
+        dataLabels.Position = DataLabelPositionType.Outside;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @Position.setter
+    @abc.abstractmethod
+    def Position(self, value:'DataLabelPositionType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowLeaderLines(self)->bool:
+        """
+    <summary>
+        Indicates whether Leader Lines is in data labels.
+            <example>The following code illustrates how to access the IChartDataLabels and set to 
+            leader lines to show:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Pie;
+        //Get the chart serie
+        IChartSerie serie = chart.Series[0];
+        //Get serie data labels
+        IChartDataLabels dataLabels = serie.DataPoints.DefaultDataPoint.DataLabels;
+        //Set the data label to show the leader lines
+        dataLabels.HasValue = true;
+        dataLabels.Position = DataLabelPositionType.Outside;
+        dataLabels.ShowLeaderLines = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @ShowLeaderLines.setter
+    @abc.abstractmethod
+    def ShowLeaderLines(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def NumberFormat(self)->str:
+        """
+    <summary>
+        Represents trend line label number format.
+    </summary>
+        """
+        pass
+
+
+    @NumberFormat.setter
+    @abc.abstractmethod
+    def NumberFormat(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsTextWrapped(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsTextWrapped.setter
+    @abc.abstractmethod
+    def IsTextWrapped(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsResizeShapeToFitText(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsResizeShapeToFitText.setter
+    @abc.abstractmethod
+    def IsResizeShapeToFitText(self, value:bool):
+        """
+
+        """
+        pass
+
+

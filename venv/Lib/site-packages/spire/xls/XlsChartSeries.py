@@ -1,0 +1,111 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class EnumeratorXlsChartSerie(IEnumerator[XlsChartSerie]):
+    pass
+
+class XlsChartSeries (  CollectionBase[XlsChartSerie],ICloneParent, IChartSeries) :
+    """
+
+    """
+    def GetEnumerator(self)->'EnumeratorXlsChartSerie':
+        """
+
+        """
+        GetDllLibXls().CollectionBase_GetEnumerator.argtypes=[c_void_p]
+        GetDllLibXls().CollectionBase_GetEnumerator.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CollectionBase_GetEnumerator, self.Ptr)
+        ret = None if intPtr==None else EnumeratorXlsChartSerie(intPtr)
+        return ret
+
+    def AssignTrendDataLabel(self ,area:'ChartTextArea'):
+        """
+
+        """
+        intPtrarea:c_void_p = area.Ptr
+
+        GetDllLibXls().XlsChartSeries_AssignTrendDataLabel.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartSeries_AssignTrendDataLabel, self.Ptr, intPtrarea)
+
+
+    def Remove(self ,serieName:str):
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartSeries_Remove.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartSeries_Remove, self.Ptr, serieName)
+
+    @dispatch
+
+    def Clone(self ,parent:SpireObject)->SpireObject:
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsChartSeries_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsChartSeries_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSeries_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+#    @dispatch
+#
+#    def Clone(self ,parent:SpireObject,hashNewNames:'Dictionary2',fontIndexes:'Dictionary2')->'XlsChartSeries':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrhashNewNames:c_void_p = hashNewNames.Ptr
+#        intPtrfontIndexes:c_void_p = fontIndexes.Ptr
+#
+#        GetDllLibXls().XlsChartSeries_ClonePHF.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+#        GetDllLibXls().XlsChartSeries_ClonePHF.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsChartSeries_ClonePHF, self.Ptr, intPtrparent,intPtrhashNewNames,intPtrfontIndexes)
+#        ret = None if intPtr==None else XlsChartSeries(intPtr)
+#        return ret
+#
+
+
+
+    def FindOrderByType(self ,type:'ExcelChartType')->int:
+        """
+
+        """
+        enumtype:c_int = type.value
+
+        GetDllLibXls().XlsChartSeries_FindOrderByType.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsChartSeries_FindOrderByType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSeries_FindOrderByType, self.Ptr, enumtype)
+        return ret
+
+
+    def GetLegendEntryOffset(self ,iSerIndex:int)->int:
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartSeries_GetLegendEntryOffset.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsChartSeries_GetLegendEntryOffset.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSeries_GetLegendEntryOffset, self.Ptr, iSerIndex)
+        return ret
+
+
+    def GetTypeByOrder(self ,order:int)->'ExcelChartType':
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartSeries_GetTypeByOrder.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsChartSeries_GetTypeByOrder.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSeries_GetTypeByOrder, self.Ptr, order)
+        objwraped = ExcelChartType(ret)
+        return objwraped
+

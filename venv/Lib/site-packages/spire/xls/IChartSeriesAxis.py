@@ -1,0 +1,128 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IChartSeriesAxis (  IChartAxis) :
+    """
+    <summary>
+        Represents the chart series Axis.
+    </summary>
+    """
+    @property
+    @abc.abstractmethod
+    def LabelsFrequency(self)->int:
+        """
+    <summary>
+        Frequency of labels.
+            <example>The following code illustrates how to set LabelsFrequency for IChartSeriesAxis:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set range
+        chart.DataRange = worksheet.Range["A1:C3"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Column3D;
+        //Set LabelsFrequency
+        chart.PrimarySerieAxis.LabelsFrequency = 2;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @LabelsFrequency.setter
+    @abc.abstractmethod
+    def LabelsFrequency(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def TickLabelSpacing(self)->int:
+        """
+    <summary>
+        Represents the number of categories or series between tick-mark labels.
+            <example>The following code illustrates how to set TickLabelSpacing for IChartSeriesAxis:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set range
+        chart.DataRange = worksheet.Range["A1:C3"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Column3D;
+        //Set tick label spacing
+        chart.PrimarySerieAxis.TickLabelSpacing = 2;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @TickLabelSpacing.setter
+    @abc.abstractmethod
+    def TickLabelSpacing(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def TickMarksFrequency(self)->int:
+        """
+    <summary>
+        Frequency of tick marks.
+            <example>The following code illustrates how to set TickMarksFrequency for IChartSeriesAxis:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart
+        IChart chart = worksheet.Charts.Add();
+        //Set range
+        chart.DataRange = worksheet.Range["A1:C3"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Column3D;
+        //Set tick mark frequency
+        chart.PrimarySerieAxis.TickMarksFrequency = 2;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @TickMarksFrequency.setter
+    @abc.abstractmethod
+    def TickMarksFrequency(self, value:int):
+        """
+
+        """
+        pass
+
+

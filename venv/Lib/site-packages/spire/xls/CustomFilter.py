@@ -1,0 +1,147 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CustomFilter (  IAutoFilterCondition) :
+    """
+
+    """
+    @property
+
+    def FilterOperatorType(self)->'FilterOperatorType':
+        """
+    <summary>
+        Gets and sets the filter operator type.
+    </summary>
+        """
+        GetDllLibXls().CustomFilter_get_FilterOperatorType.argtypes=[c_void_p]
+        GetDllLibXls().CustomFilter_get_FilterOperatorType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CustomFilter_get_FilterOperatorType, self.Ptr)
+        objwraped = FilterOperatorType(ret)
+        return objwraped
+
+    @FilterOperatorType.setter
+    def FilterOperatorType(self, value:'FilterOperatorType'):
+        GetDllLibXls().CustomFilter_set_FilterOperatorType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CustomFilter_set_FilterOperatorType, self.Ptr, value.value)
+
+    @property
+
+    def Criteria(self)->'SpireObject':
+        """
+    <summary>
+        Gets and sets the criteria.
+    </summary>
+        """
+        GetDllLibXls().CustomFilter_get_Criteria.argtypes=[c_void_p]
+        GetDllLibXls().CustomFilter_get_Criteria.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CustomFilter_get_Criteria, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @Criteria.setter
+    def Criteria(self, value:'SpireObject'):
+        GetDllLibXls().CustomFilter_set_Criteria.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().CustomFilter_set_Criteria, self.Ptr, value.Ptr)
+
+    @property
+
+    def DataType(self)->'FilterDataType':
+        """
+
+        """
+        GetDllLibXls().CustomFilter_get_DataType.argtypes=[c_void_p]
+        GetDllLibXls().CustomFilter_get_DataType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CustomFilter_get_DataType, self.Ptr)
+        objwraped = FilterDataType(ret)
+        return objwraped
+
+    @DataType.setter
+    def DataType(self, value:'FilterDataType'):
+        GetDllLibXls().CustomFilter_set_DataType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CustomFilter_set_DataType, self.Ptr, value.value)
+
+    @property
+
+    def ConditionOperator(self)->'FilterConditionType':
+        """
+
+        """
+        GetDllLibXls().CustomFilter_get_ConditionOperator.argtypes=[c_void_p]
+        GetDllLibXls().CustomFilter_get_ConditionOperator.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CustomFilter_get_ConditionOperator, self.Ptr)
+        objwraped = FilterConditionType(ret)
+        return objwraped
+
+    @ConditionOperator.setter
+    def ConditionOperator(self, value:'FilterConditionType'):
+        GetDllLibXls().CustomFilter_set_ConditionOperator.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CustomFilter_set_ConditionOperator, self.Ptr, value.value)
+
+    @property
+
+    def String(self)->str:
+        """
+
+        """
+        GetDllLibXls().CustomFilter_get_String.argtypes=[c_void_p]
+        GetDllLibXls().CustomFilter_get_String.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().CustomFilter_get_String, self.Ptr))
+        return ret
+
+
+    @String.setter
+    def String(self, value:str):
+        GetDllLibXls().CustomFilter_set_String.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().CustomFilter_set_String, self.Ptr, value)
+
+    @property
+    def Boolean(self)->bool:
+        """
+
+        """
+        GetDllLibXls().CustomFilter_get_Boolean.argtypes=[c_void_p]
+        GetDllLibXls().CustomFilter_get_Boolean.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CustomFilter_get_Boolean, self.Ptr)
+        return ret
+
+    @Boolean.setter
+    def Boolean(self, value:bool):
+        GetDllLibXls().CustomFilter_set_Boolean.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CustomFilter_set_Boolean, self.Ptr, value)
+
+    @property
+    def ErrorCode(self)->int:
+        """
+
+        """
+        GetDllLibXls().CustomFilter_get_ErrorCode.argtypes=[c_void_p]
+        GetDllLibXls().CustomFilter_get_ErrorCode.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CustomFilter_get_ErrorCode, self.Ptr)
+        return ret
+
+    @ErrorCode.setter
+    def ErrorCode(self, value:int):
+        GetDllLibXls().CustomFilter_set_ErrorCode.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CustomFilter_set_ErrorCode, self.Ptr, value)
+
+    @property
+    def Double(self)->float:
+        """
+
+        """
+        GetDllLibXls().CustomFilter_get_Double.argtypes=[c_void_p]
+        GetDllLibXls().CustomFilter_get_Double.restype=c_double
+        ret = CallCFunction(GetDllLibXls().CustomFilter_get_Double, self.Ptr)
+        return ret
+
+    @Double.setter
+    def Double(self, value:float):
+        GetDllLibXls().CustomFilter_set_Double.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().CustomFilter_set_Double, self.Ptr, value)
+

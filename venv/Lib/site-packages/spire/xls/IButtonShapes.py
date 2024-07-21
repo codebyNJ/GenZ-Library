@@ -1,0 +1,50 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IButtonShapes (abc.ABC) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Count(self)->int:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,index:int)->IButtonShape:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,name:str)->IButtonShape:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def AddButton(self ,row:int,column:int,height:int,width:int)->'IButtonShape':
+        """
+
+        """
+        pass
+
+

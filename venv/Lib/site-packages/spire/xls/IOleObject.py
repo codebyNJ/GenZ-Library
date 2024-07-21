@@ -1,0 +1,163 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IOleObject (SpireObject) :
+    """
+
+    """
+    @property
+
+    def Location(self)->'IXLSRange':
+        """
+    <summary>
+        Gets or sets the location.
+    </summary>
+<value>The location.</value>
+        """
+        GetDllLibXls().IOleObject_get_Location.argtypes=[c_void_p]
+        GetDllLibXls().IOleObject_get_Location.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IOleObject_get_Location, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @Location.setter
+    def Location(self, value:'IXLSRange'):
+        GetDllLibXls().IOleObject_set_Location.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().IOleObject_set_Location, self.Ptr, value.Ptr)
+
+    @property
+
+    def Size(self)->'Size':
+        """
+    <summary>
+        Gets or sets the size.
+    </summary>
+<value>The size.</value>
+        """
+        GetDllLibXls().IOleObject_get_Size.argtypes=[c_void_p]
+        GetDllLibXls().IOleObject_get_Size.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IOleObject_get_Size, self.Ptr)
+        ret = None if intPtr==None else Size(intPtr)
+        return ret
+
+
+    @Size.setter
+    def Size(self, value:'Size'):
+        GetDllLibXls().IOleObject_set_Size.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().IOleObject_set_Size, self.Ptr, value.Ptr)
+
+    @property
+
+    def Picture(self)->'Stream':
+        """
+    <summary>
+        Gets or sets the picture.
+    </summary>
+<value>The picture.</value>
+        """
+        GetDllLibXls().IOleObject_get_Picture.argtypes=[c_void_p]
+        GetDllLibXls().IOleObject_get_Picture.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IOleObject_get_Picture, self.Ptr)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @property
+
+    def Shape(self)->'IPictureShape':
+        """
+    <summary>
+        Gets or sets picture shape object that defines look and position of the OleObject inside parent worksheet.
+    </summary>
+        """
+        GetDllLibXls().IOleObject_get_Shape.argtypes=[c_void_p]
+        GetDllLibXls().IOleObject_get_Shape.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IOleObject_get_Shape, self.Ptr)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @property
+    def DisplayAsIcon(self)->bool:
+        """
+    <summary>
+        Gets or sets a value indicating whether [display as icon].
+    </summary>
+<value>
+  <c>true</c> if [display as icon]; otherwise, <c>false</c>.</value>
+        """
+        GetDllLibXls().IOleObject_get_DisplayAsIcon.argtypes=[c_void_p]
+        GetDllLibXls().IOleObject_get_DisplayAsIcon.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().IOleObject_get_DisplayAsIcon, self.Ptr)
+        return ret
+
+    @DisplayAsIcon.setter
+    def DisplayAsIcon(self, value:bool):
+        GetDllLibXls().IOleObject_set_DisplayAsIcon.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().IOleObject_set_DisplayAsIcon, self.Ptr, value)
+
+    @property
+
+    def ObjectType(self)->'OleObjectType':
+        """
+    <summary>
+        Gets or sets the type of the object.
+    </summary>
+        """
+        GetDllLibXls().IOleObject_get_ObjectType.argtypes=[c_void_p]
+        GetDllLibXls().IOleObject_get_ObjectType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().IOleObject_get_ObjectType, self.Ptr)
+        objwraped = OleObjectType(ret)
+        return objwraped
+
+    @ObjectType.setter
+    def ObjectType(self, value:'OleObjectType'):
+        GetDllLibXls().IOleObject_set_ObjectType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().IOleObject_set_ObjectType, self.Ptr, value.value)
+
+    @property
+
+    def OleData(self)->List[c_char]:
+        """
+    <summary>
+        Gets or sets the  native data.
+    </summary>
+        """
+        GetDllLibXls().IOleObject_get_OleData.argtypes=[c_void_p]
+        GetDllLibXls().IOleObject_get_OleData.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().IOleObject_get_OleData, self.Ptr)
+        ret = GetVectorFromArray(intPtrArray, c_char)
+        return ret
+
+
+#    @OleData.setter
+#    def OleData(self, value:List['Byte']):
+#        vCount = len(value)
+#        ArrayType = c_void_p * vCount
+#        vArray = ArrayType()
+#        for i in range(0, vCount):
+#            vArray[i] = value[i].Ptr
+#        GetDllLibXls().IOleObject_set_OleData.argtypes=[c_void_p, ArrayType, c_int]
+#        CallCFunction(GetDllLibXls().IOleObject_set_OleData, self.Ptr, vArray, vCount)
+
+
+#    @property
+#
+#    def OleObjectGuid(self)->'Guid':
+#        """
+#
+#        """
+#        GetDllLibXls().IOleObject_get_OleObjectGuid.argtypes=[c_void_p]
+#        GetDllLibXls().IOleObject_get_OleObjectGuid.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().IOleObject_get_OleObjectGuid, self.Ptr)
+#        ret = None if intPtr==None else Guid(intPtr)
+#        return ret
+#
+
+

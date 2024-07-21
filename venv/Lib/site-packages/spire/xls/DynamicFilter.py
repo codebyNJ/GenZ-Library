@@ -1,0 +1,71 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class DynamicFilter (SpireObject) :
+    """
+
+    """
+    @property
+
+    def DynamicFilterType(self)->'DynamicFilterType':
+        """
+    <summary>
+        Gets and sets the dynamic filter type.
+    </summary>
+        """
+        GetDllLibXls().DynamicFilter_get_DynamicFilterType.argtypes=[c_void_p]
+        GetDllLibXls().DynamicFilter_get_DynamicFilterType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().DynamicFilter_get_DynamicFilterType, self.Ptr)
+        objwraped = DynamicFilterType(ret)
+        return objwraped
+
+    @DynamicFilterType.setter
+    def DynamicFilterType(self, value:'DynamicFilterType'):
+        GetDllLibXls().DynamicFilter_set_DynamicFilterType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().DynamicFilter_set_DynamicFilterType, self.Ptr, value.value)
+
+    @property
+
+    def Value(self)->'SpireObject':
+        """
+    <summary>
+        Gets and sets the dynamic filter value.
+    </summary>
+        """
+        GetDllLibXls().DynamicFilter_get_Value.argtypes=[c_void_p]
+        GetDllLibXls().DynamicFilter_get_Value.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().DynamicFilter_get_Value, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @Value.setter
+    def Value(self, value:'SpireObject'):
+        GetDllLibXls().DynamicFilter_set_Value.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().DynamicFilter_set_Value, self.Ptr, value.Ptr)
+
+    @property
+
+    def MaxValue(self)->'SpireObject':
+        """
+    <summary>
+        Gets and sets the dynamic filter max value.
+    </summary>
+        """
+        GetDllLibXls().DynamicFilter_get_MaxValue.argtypes=[c_void_p]
+        GetDllLibXls().DynamicFilter_get_MaxValue.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().DynamicFilter_get_MaxValue, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @MaxValue.setter
+    def MaxValue(self, value:'SpireObject'):
+        GetDllLibXls().DynamicFilter_set_MaxValue.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().DynamicFilter_set_MaxValue, self.Ptr, value.Ptr)
+

@@ -1,0 +1,370 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsDocumentProperty (  IDocumentProperty) :
+    """
+
+    """
+    @property
+    def IsBuiltIn(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_IsBuiltIn.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_IsBuiltIn.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsDocumentProperty_get_IsBuiltIn, self.Ptr)
+        return ret
+
+    @property
+
+    def PropertyId(self)->'BuiltInPropertyType':
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_PropertyId.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_PropertyId.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsDocumentProperty_get_PropertyId, self.Ptr)
+        objwraped = BuiltInPropertyType(ret)
+        return objwraped
+
+    @PropertyId.setter
+    def PropertyId(self, value:'BuiltInPropertyType'):
+        GetDllLibXls().XlsDocumentProperty_set_PropertyId.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsDocumentProperty_set_PropertyId, self.Ptr, value.value)
+
+    @property
+
+    def Name(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_Name.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_Name.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsDocumentProperty_get_Name, self.Ptr))
+        return ret
+
+
+    @property
+
+    def Value(self)->'SpireObject':
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_Value.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_Value.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsDocumentProperty_get_Value, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @Value.setter
+    def Value(self, value:'SpireObject'):
+        GetDllLibXls().XlsDocumentProperty_set_Value.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsDocumentProperty_set_Value, self.Ptr, value.Ptr)
+
+    @property
+    def Boolean(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_Boolean.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_Boolean.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsDocumentProperty_get_Boolean, self.Ptr)
+        return ret
+
+    @Boolean.setter
+    def Boolean(self, value:bool):
+        GetDllLibXls().XlsDocumentProperty_set_Boolean.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsDocumentProperty_set_Boolean, self.Ptr, value)
+
+    @property
+    def Integer(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_Integer.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_Integer.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsDocumentProperty_get_Integer, self.Ptr)
+        return ret
+
+    @Integer.setter
+    def Integer(self, value:int):
+        GetDllLibXls().XlsDocumentProperty_set_Integer.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsDocumentProperty_set_Integer, self.Ptr, value)
+
+    @property
+    def Int32(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_Int32.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_Int32.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsDocumentProperty_get_Int32, self.Ptr)
+        return ret
+
+    @Int32.setter
+    def Int32(self, value:int):
+        GetDllLibXls().XlsDocumentProperty_set_Int32.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsDocumentProperty_set_Int32, self.Ptr, value)
+
+    @property
+    def Double(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_Double.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_Double.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsDocumentProperty_get_Double, self.Ptr)
+        return ret
+
+    @Double.setter
+    def Double(self, value:float):
+        GetDllLibXls().XlsDocumentProperty_set_Double.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsDocumentProperty_set_Double, self.Ptr, value)
+
+    @property
+
+    def Text(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_Text.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_Text.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsDocumentProperty_get_Text, self.Ptr))
+        return ret
+
+
+    @Text.setter
+    def Text(self, value:str):
+        GetDllLibXls().XlsDocumentProperty_set_Text.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsDocumentProperty_set_Text, self.Ptr, value)
+
+    @property
+
+    def DateTime(self)->'DateTime':
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_DateTime.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_DateTime.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsDocumentProperty_get_DateTime, self.Ptr)
+        ret = None if intPtr==None else DateTime(intPtr)
+        return ret
+
+
+    @DateTime.setter
+    def DateTime(self, value:'DateTime'):
+        GetDllLibXls().XlsDocumentProperty_set_DateTime.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsDocumentProperty_set_DateTime, self.Ptr, value.Ptr)
+
+    @property
+
+    def TimeSpan(self)->'TimeSpan':
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_TimeSpan.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_TimeSpan.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsDocumentProperty_get_TimeSpan, self.Ptr)
+        ret = None if intPtr==None else TimeSpan(intPtr)
+        return ret
+
+
+    @TimeSpan.setter
+    def TimeSpan(self, value:'TimeSpan'):
+        GetDllLibXls().XlsDocumentProperty_set_TimeSpan.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsDocumentProperty_set_TimeSpan, self.Ptr, value.Ptr)
+
+    #@property
+
+    #def Blob(self)->List['Byte']:
+    #    """
+
+    #    """
+    #    GetDllLibXls().XlsDocumentProperty_get_Blob.argtypes=[c_void_p]
+    #    GetDllLibXls().XlsDocumentProperty_get_Blob.restype=IntPtrArray
+    #    intPtrArray = CallCFunction(GetDllLibXls().XlsDocumentProperty_get_Blob, self.Ptr)
+    #    ret = GetVectorFromArray(intPtrArray, Byte)
+    #    return ret
+
+
+#    @Blob.setter
+#    def Blob(self, value:List['Byte']):
+#        vCount = len(value)
+#        ArrayType = c_void_p * vCount
+#        vArray = ArrayType()
+#        for i in range(0, vCount):
+#            vArray[i] = value[i].Ptr
+#        GetDllLibXls().XlsDocumentProperty_set_Blob.argtypes=[c_void_p, ArrayType, c_int]
+#        CallCFunction(GetDllLibXls().XlsDocumentProperty_set_Blob, self.Ptr, vArray, vCount)
+
+
+    @property
+
+    def StringArray(self)->List[str]:
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_StringArray.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_StringArray.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().XlsDocumentProperty_get_StringArray, self.Ptr)
+        ret = GetVectorFromArray(intPtrArray, c_wchar_p)
+        return ret
+
+    @StringArray.setter
+    def StringArray(self, value:List[str]):
+        vCount = len(value)
+        ArrayType = c_wchar_p * vCount
+        vArray = ArrayType()
+        for i in range(0, vCount):
+            vArray[i] = value[i]
+        GetDllLibXls().XlsDocumentProperty_set_StringArray.argtypes=[c_void_p, ArrayType, c_int]
+        CallCFunction(GetDllLibXls().XlsDocumentProperty_set_StringArray, self.Ptr, vArray, vCount)
+
+    @property
+
+    def ObjectArray(self)->List['SpireObject']:
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_ObjectArray.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_ObjectArray.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().XlsDocumentProperty_get_ObjectArray, self.Ptr)
+        ret = GetVectorFromArray(intPtrArray, SpireObject)
+        return ret
+
+    @ObjectArray.setter
+    def ObjectArray(self, value:List['SpireObject']):
+        vCount = len(value)
+        ArrayType = c_void_p * vCount
+        vArray = ArrayType()
+        for i in range(0, vCount):
+            vArray[i] = value[i].Ptr
+        GetDllLibXls().XlsDocumentProperty_set_ObjectArray.argtypes=[c_void_p, ArrayType, c_int]
+        CallCFunction(GetDllLibXls().XlsDocumentProperty_set_ObjectArray, self.Ptr, vArray, vCount)
+
+    @property
+
+    def PropertyType(self)->'PropertyType':
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_PropertyType.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_PropertyType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsDocumentProperty_get_PropertyType, self.Ptr)
+        objwraped = PropertyType(ret)
+        return objwraped
+
+    @PropertyType.setter
+    def PropertyType(self, value:'PropertyType'):
+        GetDllLibXls().XlsDocumentProperty_set_PropertyType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsDocumentProperty_set_PropertyType, self.Ptr, value.value)
+
+    @property
+
+    def LinkSource(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_LinkSource.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_LinkSource.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsDocumentProperty_get_LinkSource, self.Ptr))
+        return ret
+
+
+    @LinkSource.setter
+    def LinkSource(self, value:str):
+        GetDllLibXls().XlsDocumentProperty_set_LinkSource.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsDocumentProperty_set_LinkSource, self.Ptr, value)
+
+    @property
+    def LinkToContent(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_LinkToContent.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_LinkToContent.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsDocumentProperty_get_LinkToContent, self.Ptr)
+        return ret
+
+    @LinkToContent.setter
+    def LinkToContent(self, value:bool):
+        GetDllLibXls().XlsDocumentProperty_set_LinkToContent.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsDocumentProperty_set_LinkToContent, self.Ptr, value)
+
+    @property
+
+    def InternalName(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_get_InternalName.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_get_InternalName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsDocumentProperty_get_InternalName, self.Ptr))
+        return ret
+
+
+
+    def FillPropVariant(self ,variant:'IPropertyData',iPropertyId:int)->bool:
+        """
+
+        """
+        intPtrvariant:c_void_p = variant.Ptr
+
+        GetDllLibXls().XlsDocumentProperty_FillPropVariant.argtypes=[c_void_p ,c_void_p,c_int]
+        GetDllLibXls().XlsDocumentProperty_FillPropVariant.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsDocumentProperty_FillPropVariant, self.Ptr, intPtrvariant,iPropertyId)
+        return ret
+
+#    @staticmethod
+#
+#    def CorrectIndex(propertyId:'BuiltInPropertyType',bSummary:'Boolean&')->int:
+#        """
+#
+#        """
+#        enumpropertyId:c_int = propertyId.value
+#        intPtrbSummary:c_void_p = bSummary.Ptr
+#
+#        GetDllLibXls().XlsDocumentProperty_CorrectIndex.argtypes=[ c_int,c_void_p]
+#        GetDllLibXls().XlsDocumentProperty_CorrectIndex.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsDocumentProperty_CorrectIndex,  enumpropertyId,intPtrbSummary)
+#        return ret
+
+
+
+    def SetLinkSource(self ,variant:'IPropertyData'):
+        """
+
+        """
+        intPtrvariant:c_void_p = variant.Ptr
+
+        GetDllLibXls().XlsDocumentProperty_SetLinkSource.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsDocumentProperty_SetLinkSource, self.Ptr, intPtrvariant)
+
+
+    def Clone(self)->'SpireObject':
+        """
+
+        """
+        GetDllLibXls().XlsDocumentProperty_Clone.argtypes=[c_void_p]
+        GetDllLibXls().XlsDocumentProperty_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsDocumentProperty_Clone, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @staticmethod
+    def DEF_FILE_TIME_START_YEAR()->int:
+        """
+
+        """
+        #GetDllLibXls().XlsDocumentProperty_DEF_FILE_TIME_START_YEAR.argtypes=[]
+        GetDllLibXls().XlsDocumentProperty_DEF_FILE_TIME_START_YEAR.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsDocumentProperty_DEF_FILE_TIME_START_YEAR)
+        return ret
+

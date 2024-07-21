@@ -1,0 +1,124 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsPivotCachesCollection (  CollectionBase[XlsPivotCache], IPivotCaches) :
+    """
+
+    """
+    @property
+
+    def Parent(self)->'XlsWorkbook':
+        """
+
+        """
+        GetDllLibXls().XlsPivotCachesCollection_get_Parent.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCachesCollection_get_Parent.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotCachesCollection_get_Parent, self.Ptr)
+        ret = None if intPtr==None else XlsWorkbook(intPtr)
+        return ret
+
+
+    @property
+
+    def Workbook(self)->'XlsWorkbook':
+        """
+
+        """
+        GetDllLibXls().XlsPivotCachesCollection_get_Workbook.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCachesCollection_get_Workbook.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotCachesCollection_get_Workbook, self.Ptr)
+        ret = None if intPtr==None else XlsWorkbook(intPtr)
+        return ret
+
+
+    @property
+    def Count(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsPivotCachesCollection_get_Count.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCachesCollection_get_Count.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPivotCachesCollection_get_Count, self.Ptr)
+        return ret
+
+    @dispatch
+
+    def Add(self ,range:XlsRange)->XlsPivotCache:
+        """
+
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().XlsPivotCachesCollection_Add.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsPivotCachesCollection_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotCachesCollection_Add, self.Ptr, intPtrrange)
+        ret = None if intPtr==None else XlsPivotCache(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,cache:XlsPivotCache):
+        """
+
+        """
+        intPtrcache:c_void_p = cache.Ptr
+
+        GetDllLibXls().XlsPivotCachesCollection_AddC.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsPivotCachesCollection_AddC, self.Ptr, intPtrcache)
+
+    def Clear(self):
+        """
+    <summary>
+        Clears collection
+    </summary>
+        """
+        GetDllLibXls().XlsPivotCachesCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsPivotCachesCollection_Clear, self.Ptr)
+
+
+    def RemoveAt(self ,index:int):
+        """
+
+        """
+        
+        GetDllLibXls().XlsPivotCachesCollection_RemoveAt.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsPivotCachesCollection_RemoveAt, self.Ptr, index)
+
+
+    def Remove(self ,pivotCache:'IPivotCache'):
+        """
+
+        """
+        intPtrpivotCache:c_void_p = pivotCache.Ptr
+
+        GetDllLibXls().XlsPivotCachesCollection_Remove.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsPivotCachesCollection_Remove, self.Ptr, intPtrpivotCache)
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsPivotCachesCollection_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsPivotCachesCollection_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotCachesCollection_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+    def GetEnumerator(self)->'IEnumerator':
+        """
+
+        """
+        ret = super(XlsPivotCachesCollection, self).GetEnumerator()
+        ret._gtype = XlsPivotCache
+        return ret
+
+

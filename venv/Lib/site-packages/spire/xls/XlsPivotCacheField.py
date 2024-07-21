@@ -1,0 +1,209 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsPivotCacheField (SpireObject) :
+    """
+
+    """
+    @property
+
+    def Formula(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsPivotCacheField_get_Formula.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCacheField_get_Formula.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPivotCacheField_get_Formula, self.Ptr))
+        return ret
+
+
+    @Formula.setter
+    def Formula(self, value:str):
+        GetDllLibXls().XlsPivotCacheField_set_Formula.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPivotCacheField_set_Formula, self.Ptr, value)
+
+    @property
+    def IsDataBaseField(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPivotCacheField_get_IsDataBaseField.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCacheField_get_IsDataBaseField.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCacheField_get_IsDataBaseField, self.Ptr)
+        return ret
+
+    @IsDataBaseField.setter
+    def IsDataBaseField(self, value:bool):
+        GetDllLibXls().XlsPivotCacheField_set_IsDataBaseField.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotCacheField_set_IsDataBaseField, self.Ptr, value)
+
+    @property
+    def IsDouble(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPivotCacheField_get_IsDouble.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCacheField_get_IsDouble.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCacheField_get_IsDouble, self.Ptr)
+        return ret
+
+    @IsDouble.setter
+    def IsDouble(self, value:bool):
+        GetDllLibXls().XlsPivotCacheField_set_IsDouble.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotCacheField_set_IsDouble, self.Ptr, value)
+
+    @property
+    def IsDoubleInt(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPivotCacheField_get_IsDoubleInt.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCacheField_get_IsDoubleInt.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCacheField_get_IsDoubleInt, self.Ptr)
+        return ret
+
+    @IsDoubleInt.setter
+    def IsDoubleInt(self, value:bool):
+        GetDllLibXls().XlsPivotCacheField_set_IsDoubleInt.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotCacheField_set_IsDoubleInt, self.Ptr, value)
+
+    @property
+    def IsString(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPivotCacheField_get_IsString.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCacheField_get_IsString.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCacheField_get_IsString, self.Ptr)
+        return ret
+
+    @IsString.setter
+    def IsString(self, value:bool):
+        GetDllLibXls().XlsPivotCacheField_set_IsString.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotCacheField_set_IsString, self.Ptr, value)
+
+    @property
+    def IsDate(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPivotCacheField_get_IsDate.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCacheField_get_IsDate.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCacheField_get_IsDate, self.Ptr)
+        return ret
+
+    @property
+    def ItemCount(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsPivotCacheField_get_ItemCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCacheField_get_ItemCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPivotCacheField_get_ItemCount, self.Ptr)
+        return ret
+
+    @property
+
+    def Name(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsPivotCacheField_get_Name.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCacheField_get_Name.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPivotCacheField_get_Name, self.Ptr))
+        return ret
+
+
+    @Name.setter
+    def Name(self, value:str):
+        GetDllLibXls().XlsPivotCacheField_set_Name.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPivotCacheField_set_Name, self.Ptr, value)
+
+    @property
+    def Index(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsPivotCacheField_get_Index.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCacheField_get_Index.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPivotCacheField_get_Index, self.Ptr)
+        return ret
+
+    @Index.setter
+    def Index(self, value:int):
+        GetDllLibXls().XlsPivotCacheField_set_Index.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPivotCacheField_set_Index, self.Ptr, value)
+
+    @property
+
+    def DataType(self)->'PivotDataType':
+        """
+
+        """
+        GetDllLibXls().XlsPivotCacheField_get_DataType.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCacheField_get_DataType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPivotCacheField_get_DataType, self.Ptr)
+        objwraped = PivotDataType(ret)
+        return objwraped
+
+    @property
+    def IsFormulaField(self)->bool:
+        """
+    <summary>
+        Indicates the field is formula field
+    </summary>
+        """
+        GetDllLibXls().XlsPivotCacheField_get_IsFormulaField.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCacheField_get_IsFormulaField.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCacheField_get_IsFormulaField, self.Ptr)
+        return ret
+
+    @property
+
+    def Caption(self)->str:
+        """
+    <summary>
+        Specifies the caption of the cache field
+    </summary>
+        """
+        GetDllLibXls().XlsPivotCacheField_get_Caption.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCacheField_get_Caption.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPivotCacheField_get_Caption, self.Ptr))
+        return ret
+
+
+    @Caption.setter
+    def Caption(self, value:str):
+        GetDllLibXls().XlsPivotCacheField_set_Caption.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPivotCacheField_set_Caption, self.Ptr, value)
+
+    @property
+    def isfieldgroup(self)->bool:
+        """
+    <summary>
+        Represents the cache field is Field group
+    </summary>
+        """
+        GetDllLibXls().XlsPivotCacheField_get_isfieldgroup.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCacheField_get_isfieldgroup.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCacheField_get_isfieldgroup, self.Ptr)
+        return ret
+
+
+    def GetValue(self ,index:int)->'SpireObject':
+        """
+
+        """
+        
+        GetDllLibXls().XlsPivotCacheField_GetValue.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsPivotCacheField_GetValue.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotCacheField_GetValue, self.Ptr, index)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+

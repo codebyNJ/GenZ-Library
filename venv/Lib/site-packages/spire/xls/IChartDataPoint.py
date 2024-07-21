@@ -1,0 +1,131 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IChartDataPoint (  IExcelApplication) :
+    """
+    <summary>
+        Represents data point in the chart.
+    </summary>
+    """
+    @property
+
+    @abc.abstractmethod
+    def DataLabels(self)->'IChartDataLabels':
+        """
+    <summary>
+        Returns data labels object for the data point. Read-only.
+            <example>The following code illustrates how to access the IChartDataLabels for a 
+            particular IChartDataPoint:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Get the chart serie
+        IChartSerie serie = chart.Series[0];
+        //Set data labels value visibility
+        serie.DataPoints.DefaultDataPoint.DataLabels.HasValue = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Index(self)->int:
+        """
+    <summary>
+        Gets index of the point in the points collection.
+            <example>The following code illustrates how to access the Index of a IChartDataPoint in 
+            the IChartDataPoints collection:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set serie
+        IChartSerie serie = chart.Series[0];
+        //Get index
+        Console.WriteLine(serie.DataPoints[0].Index);
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def DataFormat(self)->'IChartSerieDataFormat':
+        """
+    <summary>
+        Gets / sets data format.
+            <example>The following code illustrates how to access DataFormat and set ChartMarkerType.star 
+            to IChartSerieDataFormat.MarkerStyle:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Line;
+        //Set serie format
+        IChartSerieDataFormat format = chart.Series[0].DataFormat;
+        //Set marker style
+        format.MarkerStyle = ChartMarkerType.Star;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsDefault(self)->bool:
+        """
+    <summary>
+        Indicates whether this data point is default data point. Read-only.
+            <example>The following code illustrates how to access the IChartDataLabels for a 
+            particular IChartDataPoint:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        Chart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set serie format
+        IChartDataPoints dataPoints = chart.Series[0].DataPoints;
+        //Check default Datapoint
+        Console.WriteLine(dataPoints.DefaultDataPoint.IsDefault);
+        Console.WriteLine(dataPoints[0].IsDefault);
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+

@@ -1,0 +1,20 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class FontVertialAlignmentType(Enum):
+    """
+    <summary>
+        Defines the possible settings for vertical alignment of a run of text.
+            This is used to get superscript or subscript text without altering the
+            font size properties of the rest of the text run.
+    </summary>
+    """
+    Baseline = 0
+    Superscript = 1
+    Subscript = 2
+

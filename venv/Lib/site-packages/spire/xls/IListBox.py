@@ -1,0 +1,86 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IListBox (  IShape, IExcelApplication) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Display3DShading(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @Display3DShading.setter
+    @abc.abstractmethod
+    def Display3DShading(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ListFillRange(self)->'IXLSRange':
+        """
+
+        """
+        pass
+
+
+    @ListFillRange.setter
+    @abc.abstractmethod
+    def ListFillRange(self, value:'IXLSRange'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def SelectedIndex(self)->int:
+        """
+
+        """
+        pass
+
+
+    @SelectedIndex.setter
+    @abc.abstractmethod
+    def SelectedIndex(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def SelectionType(self)->'SelectionType':
+        """
+
+        """
+        pass
+
+
+    @SelectionType.setter
+    @abc.abstractmethod
+    def SelectionType(self, value:'SelectionType'):
+        """
+
+        """
+        pass
+
+

@@ -1,0 +1,44 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class TopBottom (SpireObject) :
+    """
+
+    """
+    @property
+    def Rank(self)->int:
+        """
+
+        """
+        GetDllLibXls().TopBottom_get_Rank.argtypes=[c_void_p]
+        GetDllLibXls().TopBottom_get_Rank.restype=c_int
+        ret = CallCFunction(GetDllLibXls().TopBottom_get_Rank, self.Ptr)
+        return ret
+
+    @Rank.setter
+    def Rank(self, value:int):
+        GetDllLibXls().TopBottom_set_Rank.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().TopBottom_set_Rank, self.Ptr, value)
+
+    @property
+
+    def Type(self)->'TopBottomType':
+        """
+
+        """
+        GetDllLibXls().TopBottom_get_Type.argtypes=[c_void_p]
+        GetDllLibXls().TopBottom_get_Type.restype=c_int
+        ret = CallCFunction(GetDllLibXls().TopBottom_get_Type, self.Ptr)
+        objwraped = TopBottomType(ret)
+        return objwraped
+
+    @Type.setter
+    def Type(self, value:'TopBottomType'):
+        GetDllLibXls().TopBottom_set_Type.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().TopBottom_set_Type, self.Ptr, value.value)
+

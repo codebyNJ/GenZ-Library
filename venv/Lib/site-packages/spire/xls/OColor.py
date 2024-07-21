@@ -1,0 +1,165 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class OColor (SpireObject) :
+    """
+    <summary>
+        This object used to store, convert colors.
+    </summary>
+    """
+    @property
+    def Value(self)->int:
+        """
+    <summary>
+        Returns color value (it can be index, rgb color, etc.)
+    </summary>
+        """
+        GetDllLibXls().OColor_get_Value.argtypes=[c_void_p]
+        GetDllLibXls().OColor_get_Value.restype=c_int
+        ret = CallCFunction(GetDllLibXls().OColor_get_Value, self.Ptr)
+        return ret
+
+    @property
+    def Tint(self)->float:
+        """
+    <summary>
+        Gets or sets Tint.
+    </summary>
+        """
+        GetDllLibXls().OColor_get_Tint.argtypes=[c_void_p]
+        GetDllLibXls().OColor_get_Tint.restype=c_double
+        ret = CallCFunction(GetDllLibXls().OColor_get_Tint, self.Ptr)
+        return ret
+
+    @Tint.setter
+    def Tint(self, value:float):
+        GetDllLibXls().OColor_set_Tint.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().OColor_set_Tint, self.Ptr, value)
+
+    @property
+
+    def ColorType(self)->'ColorType':
+        """
+    <summary>
+        Returns type of the stored color.
+    </summary>
+        """
+        GetDllLibXls().OColor_get_ColorType.argtypes=[c_void_p]
+        GetDllLibXls().OColor_get_ColorType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().OColor_get_ColorType, self.Ptr)
+        objwraped = ColorType(ret)
+        return objwraped
+
+    def GetHashCode(self)->int:
+        """
+    <summary>
+        Returns the hash code for this instance.
+    </summary>
+    <returns>A 32-bit signed integer hash code.</returns>
+        """
+        GetDllLibXls().OColor_GetHashCode.argtypes=[c_void_p]
+        GetDllLibXls().OColor_GetHashCode.restype=c_int
+        ret = CallCFunction(GetDllLibXls().OColor_GetHashCode, self.Ptr)
+        return ret
+
+    @dispatch
+
+    def SetTheme(self ,themeIndex:int,book:IWorkbook):
+        """
+
+        """
+        intPtrbook:c_void_p = book.Ptr
+
+        GetDllLibXls().OColor_SetTheme.argtypes=[c_void_p ,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().OColor_SetTheme, self.Ptr, themeIndex,intPtrbook)
+
+    @dispatch
+
+    def SetTheme(self ,themeIndex:int,book:IWorkbook,dTintValue:float):
+        """
+
+        """
+        intPtrbook:c_void_p = book.Ptr
+
+        GetDllLibXls().OColor_SetThemeTBD.argtypes=[c_void_p ,c_int,c_void_p,c_double]
+        CallCFunction(GetDllLibXls().OColor_SetThemeTBD, self.Ptr, themeIndex,intPtrbook,dTintValue)
+
+#
+#    def GetThemeColor(self ,themeIndex:'Int32&',tint:'Double&')->bool:
+#        """
+#
+#        """
+#        intPtrthemeIndex:c_void_p = themeIndex.Ptr
+#        intPtrtint:c_void_p = tint.Ptr
+#
+#        GetDllLibXls().OColor_GetThemeColor.argtypes=[c_void_p ,c_void_p,c_void_p]
+#        GetDllLibXls().OColor_GetThemeColor.restype=c_bool
+#        ret = CallCFunction(GetDllLibXls().OColor_GetThemeColor, self.Ptr, intPtrthemeIndex,intPtrtint)
+#        return ret
+
+
+
+    def SetRGB(self ,rgb:'Color',book:'IWorkbook',dTintValue:float):
+        """
+
+        """
+        intPtrrgb:c_void_p = rgb.Ptr
+        intPtrbook:c_void_p = book.Ptr
+
+        GetDllLibXls().OColor_SetRGB.argtypes=[c_void_p ,c_void_p,c_void_p,c_double]
+        CallCFunction(GetDllLibXls().OColor_SetRGB, self.Ptr, intPtrrgb,intPtrbook,dTintValue)
+
+
+    def SetKnownColor(self ,value:'ExcelColors'):
+        """
+    <summary>
+        Sets known color.
+    </summary>
+    <param name="value">Excel color to set.</param>
+        """
+        enumvalue:c_int = value.value
+
+        GetDllLibXls().OColor_SetKnownColor.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().OColor_SetKnownColor, self.Ptr, enumvalue)
+
+
+    def GetKnownColor(self ,book:'Workbook')->'ExcelColors':
+        """
+
+        """
+        intPtrbook:c_void_p = book.Ptr
+
+        GetDllLibXls().OColor_GetKnownColor.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().OColor_GetKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().OColor_GetKnownColor, self.Ptr, intPtrbook)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    def Dispose(self):
+        """
+
+        """
+        GetDllLibXls().OColor_Dispose.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().OColor_Dispose, self.Ptr)
+
+
+    def Equals(self ,obj:'SpireObject')->bool:
+        """
+    <summary>
+        Determines whether the specified Object is equal to the current Object.
+    </summary>
+    <param name="obj">The Object to compare with the current Object.</param>
+    <returns>true if the specified Object is equal to the current Object; otherwise, false.</returns>
+        """
+        intPtrobj:c_void_p = obj.Ptr
+
+        GetDllLibXls().OColor_Equals.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().OColor_Equals.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().OColor_Equals, self.Ptr, intPtrobj)
+        return ret
+

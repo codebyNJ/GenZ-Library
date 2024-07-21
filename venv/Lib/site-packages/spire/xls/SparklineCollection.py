@@ -1,0 +1,112 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class SparklineCollection (  SpireObject, ISparklines) :
+    """
+    <summary>
+        Represents the SparklineCollection.
+    </summary>
+    """
+    @dispatch
+
+    def Add(self)->Sparkline:
+        """
+    <summary>
+        Adds Sparkline instance.
+    </summary>
+        """
+        GetDllLibXls().SparklineCollection_Add.argtypes=[c_void_p]
+        GetDllLibXls().SparklineCollection_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SparklineCollection_Add, self.Ptr)
+        ret = None if intPtr==None else Sparkline(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,dataRange:str,row:int,column:int)->Sparkline:
+        """
+
+        """
+        
+        GetDllLibXls().SparklineCollection_AddDRC.argtypes=[c_void_p ,c_void_p,c_int,c_int]
+        GetDllLibXls().SparklineCollection_AddDRC.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SparklineCollection_AddDRC, self.Ptr, dataRange,row,column)
+        ret = None if intPtr==None else Sparkline(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,dataRange:CellRange,referenceRange:CellRange):
+        """
+    <summary>
+        Adds the sparkline.
+    </summary>
+        """
+        intPtrdataRange:c_void_p = dataRange.Ptr
+        intPtrreferenceRange:c_void_p = referenceRange.Ptr
+
+        GetDllLibXls().SparklineCollection_AddDR.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().SparklineCollection_AddDR, self.Ptr, intPtrdataRange,intPtrreferenceRange)
+
+    @dispatch
+
+    def Add(self ,dataRange:CellRange,referenceRange:CellRange,isVertical:bool):
+        """
+    <summary>
+        Adds the sparkline.
+    </summary>
+        """
+        intPtrdataRange:c_void_p = dataRange.Ptr
+        intPtrreferenceRange:c_void_p = referenceRange.Ptr
+
+        GetDllLibXls().SparklineCollection_AddDRI.argtypes=[c_void_p ,c_void_p,c_void_p,c_bool]
+        CallCFunction(GetDllLibXls().SparklineCollection_AddDRI, self.Ptr, intPtrdataRange,intPtrreferenceRange,isVertical)
+
+    @dispatch
+
+    def RefreshRanges(self ,dataRange:CellRange,referenceRange:CellRange):
+        """
+    <summary>
+        Adds the sparkline.
+    </summary>
+        """
+        intPtrdataRange:c_void_p = dataRange.Ptr
+        intPtrreferenceRange:c_void_p = referenceRange.Ptr
+
+        GetDllLibXls().SparklineCollection_RefreshRanges.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().SparklineCollection_RefreshRanges, self.Ptr, intPtrdataRange,intPtrreferenceRange)
+
+    @dispatch
+
+    def RefreshRanges(self ,dataRange:CellRange,referenceRange:CellRange,isVertical:bool):
+        """
+    <summary>
+        Refresh data range of the sparkline.
+    </summary>
+        """
+        intPtrdataRange:c_void_p = dataRange.Ptr
+        intPtrreferenceRange:c_void_p = referenceRange.Ptr
+
+        GetDllLibXls().SparklineCollection_RefreshRangesDRI.argtypes=[c_void_p ,c_void_p,c_void_p,c_bool]
+        CallCFunction(GetDllLibXls().SparklineCollection_RefreshRangesDRI, self.Ptr, intPtrdataRange,intPtrreferenceRange,isVertical)
+
+
+    def Clear(self ,sparkline:'Sparkline'):
+        """
+    <summary>
+        Clears the sparkline.
+    </summary>
+    <param name="sparklineRange">The sparkline range.<see cref="!: IRange" /></param>
+        """
+        intPtrsparkline:c_void_p = sparkline.Ptr
+
+        GetDllLibXls().SparklineCollection_Clear.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().SparklineCollection_Clear, self.Ptr, intPtrsparkline)
+

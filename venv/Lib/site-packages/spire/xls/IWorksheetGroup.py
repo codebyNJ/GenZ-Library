@@ -1,0 +1,48 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IWorksheetGroup (  IWorksheet, ITabSheet, IExcelApplication) :
+    """
+
+    """
+
+    @abc.abstractmethod
+    def get_Item(self ,index:int)->'IWorksheet':
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsEmpty(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Count(self)->int:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Add(self ,sheet:'ITabSheet')->int:
+        """
+
+        """
+        pass
+
+

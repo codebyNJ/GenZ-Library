@@ -1,0 +1,21 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ExcelVerticalAlignment(Enum):
+    """
+    <summary>
+        Represents different vertical alignments
+    </summary>
+    """
+    Top = 0
+    Middle = 1
+    Bottom = 2
+    TopCentered = 3
+    MiddleCentered = 4
+    BottomCentered = 5
+

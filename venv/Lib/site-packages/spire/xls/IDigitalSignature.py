@@ -1,0 +1,99 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IDigitalSignature (abc.ABC) :
+    """
+    <summary>
+        Represents a DigitalSignature in Excel.
+    </summary>
+    """
+#    @property
+#
+#    @abc.abstractmethod
+#    def Certificate(self)->'X509Certificate2':
+#        """
+#    <summary>
+#        Certificate object that was used to sign.
+#    </summary>
+#        """
+#        pass
+#
+
+
+#    @Certificate.setter
+#    @abc.abstractmethod
+#    def Certificate(self, value:'X509Certificate2'):
+#        """
+#
+#        """
+#        pass
+#
+
+
+    @property
+
+    @abc.abstractmethod
+    def Comments(self)->str:
+        """
+    <summary>
+        Signature Comments.
+    </summary>
+        """
+        pass
+
+
+    @Comments.setter
+    @abc.abstractmethod
+    def Comments(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def SignTime(self)->'DateTime':
+        """
+    <summary>
+        Sign Time.
+    </summary>
+        """
+        pass
+
+
+    @SignTime.setter
+    @abc.abstractmethod
+    def SignTime(self, value:'DateTime'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsValid(self)->bool:
+        """
+    <summary>
+        Indicates whether this digital signature is valid.
+    </summary>
+        """
+        pass
+
+
+    @IsValid.setter
+    @abc.abstractmethod
+    def IsValid(self, value:bool):
+        """
+
+        """
+        pass
+
+

@@ -1,0 +1,20 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ConditionValueType(Enum):
+    """
+
+    """
+    Max = 2
+    Min = 1
+    none = -1
+    Number = 0
+    Percent = 3
+    Formula = 4
+    Percentile = 5
+

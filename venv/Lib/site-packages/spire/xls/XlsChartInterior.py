@@ -1,0 +1,240 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsChartInterior (  XlsObject, IChartInterior, ICloneParent) :
+    """
+
+    """
+    @property
+
+    def ForegroundColorObject(self)->'OColor':
+        """
+    <summary>
+        Foreground color (RGB).
+    </summary>
+        """
+        GetDllLibXls().XlsChartInterior_get_ForegroundColorObject.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartInterior_get_ForegroundColorObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartInterior_get_ForegroundColorObject, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def BackgroundColorObject(self)->'OColor':
+        """
+    <summary>
+        Background color (RGB).
+    </summary>
+        """
+        GetDllLibXls().XlsChartInterior_get_BackgroundColorObject.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartInterior_get_BackgroundColorObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartInterior_get_BackgroundColorObject, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def ForegroundColor(self)->'Color':
+        """
+    <summary>
+        Foreground color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartInterior_get_ForegroundColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartInterior_get_ForegroundColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartInterior_get_ForegroundColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @ForegroundColor.setter
+    def ForegroundColor(self, value:'Color'):
+        GetDllLibXls().XlsChartInterior_set_ForegroundColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartInterior_set_ForegroundColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def BackgroundColor(self)->'Color':
+        """
+    <summary>
+        Background color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartInterior_get_BackgroundColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartInterior_get_BackgroundColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartInterior_get_BackgroundColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @BackgroundColor.setter
+    def BackgroundColor(self, value:'Color'):
+        GetDllLibXls().XlsChartInterior_set_BackgroundColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartInterior_set_BackgroundColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def Pattern(self)->'ExcelPatternType':
+        """
+    <summary>
+        Area pattern.
+            <example>The following code illustrates the use of Pattern property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //Set the pattern of the chart
+        chart.ChartArea.Interior.Pattern = ExcelPatternType.Angle;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().XlsChartInterior_get_Pattern.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartInterior_get_Pattern.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartInterior_get_Pattern, self.Ptr)
+        objwraped = ExcelPatternType(ret)
+        return objwraped
+
+    @Pattern.setter
+    def Pattern(self, value:'ExcelPatternType'):
+        GetDllLibXls().XlsChartInterior_set_Pattern.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartInterior_set_Pattern, self.Ptr, value.value)
+
+    @property
+
+    def ForegroundKnownColor(self)->'ExcelColors':
+        """
+    <summary>
+        Foreground excel color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartInterior_get_ForegroundKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartInterior_get_ForegroundKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartInterior_get_ForegroundKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @ForegroundKnownColor.setter
+    def ForegroundKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsChartInterior_set_ForegroundKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartInterior_set_ForegroundKnownColor, self.Ptr, value.value)
+
+    @property
+
+    def BackgroundKnownColor(self)->'ExcelColors':
+        """
+    <summary>
+        Background excel color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartInterior_get_BackgroundKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartInterior_get_BackgroundKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartInterior_get_BackgroundKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @BackgroundKnownColor.setter
+    def BackgroundKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsChartInterior_set_BackgroundKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartInterior_set_BackgroundKnownColor, self.Ptr, value.value)
+
+    @property
+    def UseDefaultFormat(self)->bool:
+        """
+    <summary>
+        Indicates whether use default format.
+    </summary>
+        """
+        GetDllLibXls().XlsChartInterior_get_UseDefaultFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartInterior_get_UseDefaultFormat.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartInterior_get_UseDefaultFormat, self.Ptr)
+        return ret
+
+    @UseDefaultFormat.setter
+    def UseDefaultFormat(self, value:bool):
+        GetDllLibXls().XlsChartInterior_set_UseDefaultFormat.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartInterior_set_UseDefaultFormat, self.Ptr, value)
+
+    @property
+    def SwapColorsOnNegative(self)->bool:
+        """
+    <summary>
+        Foreground and background are swapped when the data value is negative.
+    </summary>
+        """
+        GetDllLibXls().XlsChartInterior_get_SwapColorsOnNegative.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartInterior_get_SwapColorsOnNegative.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartInterior_get_SwapColorsOnNegative, self.Ptr)
+        return ret
+
+    @SwapColorsOnNegative.setter
+    def SwapColorsOnNegative(self, value:bool):
+        GetDllLibXls().XlsChartInterior_set_SwapColorsOnNegative.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartInterior_set_SwapColorsOnNegative, self.Ptr, value)
+
+    @dispatch
+
+    def Clone(self ,parent:SpireObject,isFrameClone:bool)->'XlsChartInterior':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsChartInterior_Clone.argtypes=[c_void_p ,c_void_p,c_bool]
+        GetDllLibXls().XlsChartInterior_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartInterior_Clone, self.Ptr, intPtrparent,isFrameClone)
+        ret = None if intPtr==None else XlsChartInterior(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Clone(self ,parent:SpireObject)->'XlsChartInterior':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsChartInterior_CloneP.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsChartInterior_CloneP.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartInterior_CloneP, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else XlsChartInterior(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def InitForFrameFormat(self ,bIsAutoSize:bool,bIs3DChart:bool,bIsInteriorGray:bool):
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartInterior_InitForFrameFormat.argtypes=[c_void_p ,c_bool,c_bool,c_bool]
+        CallCFunction(GetDllLibXls().XlsChartInterior_InitForFrameFormat, self.Ptr, bIsAutoSize,bIs3DChart,bIsInteriorGray)
+
+    @dispatch
+
+    def InitForFrameFormat(self ,bIsAutoSize:bool,bIs3DChart:bool,bIsInteriorGray:bool,bIsGray50:bool):
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartInterior_InitForFrameFormatBBBB.argtypes=[c_void_p ,c_bool,c_bool,c_bool,c_bool]
+        CallCFunction(GetDllLibXls().XlsChartInterior_InitForFrameFormatBBBB, self.Ptr, bIsAutoSize,bIs3DChart,bIsInteriorGray,bIsGray50)
+

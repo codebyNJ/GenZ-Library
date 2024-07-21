@@ -1,0 +1,50 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IPivotDataFields (abc.ABC) :
+    """
+
+    """
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,index:int)->IPivotDataField:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,name:str)->IPivotDataField:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Add(self ,field:'IPivotField',name:str,subtotal:'SubtotalTypes')->'IPivotDataField':
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Count(self)->int:
+        """
+
+        """
+        pass
+
+

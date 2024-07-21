@@ -1,0 +1,85 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CellStyle (  CellStyleObject) :
+    """
+
+    """
+    @property
+
+    def Borders(self)->'BordersCollection':
+        """
+    <summary>
+        Returns a Borders collection that represents the borders of a style.
+    </summary>
+        """
+        GetDllLibXls().CellStyle_get_Borders.argtypes=[c_void_p]
+        GetDllLibXls().CellStyle_get_Borders.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellStyle_get_Borders, self.Ptr)
+        ret = None if intPtr==None else BordersCollection(intPtr)
+        return ret
+
+
+    @property
+
+    def Font(self)->'ExcelFont':
+        """
+    <summary>
+        Returns a Font object that represents the font of the specified object.
+    </summary>
+        """
+        GetDllLibXls().CellStyle_get_Font.argtypes=[c_void_p]
+        GetDllLibXls().CellStyle_get_Font.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellStyle_get_Font, self.Ptr)
+        ret = None if intPtr==None else ExcelFont(intPtr)
+        return ret
+
+
+    @property
+
+    def Interior(self)->'ExcelInterior':
+        """
+    <summary>
+        Returns interior object for extended format.
+    </summary>
+        """
+        GetDllLibXls().CellStyle_get_Interior.argtypes=[c_void_p]
+        GetDllLibXls().CellStyle_get_Interior.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellStyle_get_Interior, self.Ptr)
+        ret = None if intPtr==None else ExcelInterior(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def clone(self)->'CellStyle':
+        """
+
+        """
+        GetDllLibXls().CellStyle_clone.argtypes=[c_void_p]
+        GetDllLibXls().CellStyle_clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellStyle_clone, self.Ptr)
+        ret = None if intPtr==None else CellStyle(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def clone(self ,book)->'CellStyle':
+        """
+
+        """
+        intPtrbook:c_void_p = book.Ptr
+
+        GetDllLibXls().CellStyle_cloneB.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().CellStyle_cloneB.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellStyle_cloneB, self.Ptr, intPtrbook)
+        ret = None if intPtr==None else CellStyle(intPtr)
+        return ret
+
+

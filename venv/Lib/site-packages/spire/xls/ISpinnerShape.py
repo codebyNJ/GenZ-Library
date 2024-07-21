@@ -1,0 +1,102 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ISpinnerShape (  IShape, IExcelApplication) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Display3DShading(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @Display3DShading.setter
+    @abc.abstractmethod
+    def Display3DShading(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def CurrentValue(self)->int:
+        """
+
+        """
+        pass
+
+
+    @CurrentValue.setter
+    @abc.abstractmethod
+    def CurrentValue(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Min(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Min.setter
+    @abc.abstractmethod
+    def Min(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Max(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Max.setter
+    @abc.abstractmethod
+    def Max(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IncrementalChange(self)->int:
+        """
+
+        """
+        pass
+
+
+    @IncrementalChange.setter
+    @abc.abstractmethod
+    def IncrementalChange(self, value:int):
+        """
+
+        """
+        pass
+
+

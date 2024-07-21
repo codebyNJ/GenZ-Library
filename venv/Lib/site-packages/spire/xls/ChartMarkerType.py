@@ -1,0 +1,27 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartMarkerType(Enum):
+    """
+    <summary>
+        Chart marker types.
+    </summary>
+    """
+    none = 0
+    Square = 1
+    Diamond = 2
+    Triangle = 3
+    X = 4
+    Star = 5
+    DowJones = 6
+    StandardDeviation = 7
+    Circle = 8
+    PlusSign = 9
+    Auto = 10
+    Picture = 11
+

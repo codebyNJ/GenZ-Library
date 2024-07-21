@@ -1,0 +1,71 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+from spire.xls.XlsListBoxShape import *
+
+class ListBoxCollection (  CollectionBase[XlsListBoxShape], IListBoxes) :
+    """
+
+    """
+    @dispatch
+
+    def get_Item(self ,index:int)->IListBox:
+        """
+
+        """
+        
+        GetDllLibXls().ListBoxCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ListBoxCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ListBoxCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsListBoxShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->IListBox:
+        """
+
+        """
+        
+        GetDllLibXls().ListBoxCollection_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ListBoxCollection_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ListBoxCollection_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else XlsListBoxShape(intPtr)
+        return ret
+
+
+
+    def AddListBox(self ,row:int,column:int,height:int,width:int)->'IListBox':
+        """
+
+        """
+        
+        GetDllLibXls().ListBoxCollection_AddListBox.argtypes=[c_void_p ,c_int,c_int,c_int,c_int]
+        GetDllLibXls().ListBoxCollection_AddListBox.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ListBoxCollection_AddListBox, self.Ptr, row,column,height,width)
+        ret = None if intPtr==None else XlsListBoxShape(intPtr)
+        return ret
+
+
+
+    def AddCopy(self ,source:'IListBox'):
+        """
+
+        """
+        intPtrsource:c_void_p = source.Ptr
+
+        GetDllLibXls().ListBoxCollection_AddCopy.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().ListBoxCollection_AddCopy, self.Ptr, intPtrsource)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().ListBoxCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().ListBoxCollection_Clear, self.Ptr)
+

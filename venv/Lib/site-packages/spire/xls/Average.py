@@ -1,0 +1,29 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class Average (SpireObject) :
+    """
+
+    """
+    @property
+
+    def Type(self)->'AverageType':
+        """
+
+        """
+        GetDllLibXls().Average_get_Type.argtypes=[c_void_p]
+        GetDllLibXls().Average_get_Type.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Average_get_Type, self.Ptr)
+        objwraped = AverageType(ret)
+        return objwraped
+
+    @Type.setter
+    def Type(self, value:'AverageType'):
+        GetDllLibXls().Average_set_Type.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().Average_set_Type, self.Ptr, value.value)
+

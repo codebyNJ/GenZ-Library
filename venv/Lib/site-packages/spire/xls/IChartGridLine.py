@@ -1,0 +1,107 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IChartGridLine (abc.ABC) :
+    """
+    <summary>
+        Represent grid lines of the chart.
+    </summary>
+    """
+    @property
+
+    @abc.abstractmethod
+    def Border(self)->'ChartBorder':
+        """
+    <summary>
+        Gets line border. Read only.
+            <example>The following code illustrates use of Border property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set value axis minor gridLines to visible
+        chart.PrimaryValueAxis.HasMinorGridLines = true;
+        //Get value axis minor gridlines
+        IChartGridLine gridLine = chart.PrimaryValueAxis.MinorGridLines;
+        Set minor gridlines broder properties
+        gridLine.Border.Color = Color.Red;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Format3D(self)->'Format3D':
+        """
+    <summary>
+        Gets the chart3 D properties.
+    </summary>
+<value>The chart3 D properties.</value>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Shadow(self)->'ChartShadow':
+        """
+    <summary>
+        Gets the shadow properties.
+    </summary>
+<value>The shadow properties.</value>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LineProperties(self)->'ChartBorder':
+        """
+    <summary>
+        Returns object, that represents line properties. Read-only.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Interior(self)->'IChartInterior':
+        """
+    <summary>
+        Returns object, that represents area properties. Read-only.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Fill(self)->'IShapeFill':
+        """
+    <summary>
+        Represents XlsFill options. Read-only.
+    </summary>
+        """
+        pass
+
+

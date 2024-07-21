@@ -1,0 +1,18 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ExcelTreeMapLabelOption(Enum):
+    """
+    <summary>
+        It represents the Label position in Tree Map chart
+     </summary>
+    """
+    none = 0
+    Banner = 1
+    Overlapping = 2
+

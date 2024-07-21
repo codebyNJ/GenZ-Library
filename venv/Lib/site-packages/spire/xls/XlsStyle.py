@@ -1,0 +1,106 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsStyle (  AddtionalFormatWrapper, INamedObject) :
+    """
+
+    """
+    @property
+
+    def Name(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsStyle_get_Name.argtypes=[c_void_p]
+        GetDllLibXls().XlsStyle_get_Name.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsStyle_get_Name, self.Ptr))
+        return ret
+
+
+    @property
+    def IsInitialized(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsStyle_get_IsInitialized.argtypes=[c_void_p]
+        GetDllLibXls().XlsStyle_get_IsInitialized.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsStyle_get_IsInitialized, self.Ptr)
+        return ret
+
+    @property
+    def BuiltIn(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsStyle_get_BuiltIn.argtypes=[c_void_p]
+        GetDllLibXls().XlsStyle_get_BuiltIn.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsStyle_get_BuiltIn, self.Ptr)
+        return ret
+
+    @property
+    def Index(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsStyle_get_Index.argtypes=[c_void_p]
+        GetDllLibXls().XlsStyle_get_Index.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsStyle_get_Index, self.Ptr)
+        return ret
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsStyle_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsStyle_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsStyle_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+
+    def CompareTo(self ,obj:'SpireObject')->int:
+        """
+
+        """
+        intPtrobj:c_void_p = obj.Ptr
+
+        GetDllLibXls().XlsStyle_CompareTo.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsStyle_CompareTo.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsStyle_CompareTo, self.Ptr, intPtrobj)
+        return ret
+
+    def BeginUpdate(self):
+        """
+
+        """
+        GetDllLibXls().XlsStyle_BeginUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsStyle_BeginUpdate, self.Ptr)
+
+    def EndUpdate(self):
+        """
+
+        """
+        GetDllLibXls().XlsStyle_EndUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsStyle_EndUpdate, self.Ptr)
+
+    @staticmethod
+
+    def DEF_DEFAULT_STYLES()->List[str]:
+        """
+
+        """
+        #GetDllLibXls().XlsStyle_DEF_DEFAULT_STYLES.argtypes=[]
+        GetDllLibXls().XlsStyle_DEF_DEFAULT_STYLES.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().XlsStyle_DEF_DEFAULT_STYLES)
+        ret = GetVectorFromArray(intPtrArray, c_wchar_p)
+        return ret
+

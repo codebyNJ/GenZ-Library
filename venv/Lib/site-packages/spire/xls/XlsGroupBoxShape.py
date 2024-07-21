@@ -1,0 +1,88 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsGroupBoxShape (  XlsShape, IGroupBox) :
+    """
+
+    """
+    @property
+    def Display3DShading(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsGroupBoxShape_get_Display3DShading.argtypes=[c_void_p]
+        GetDllLibXls().XlsGroupBoxShape_get_Display3DShading.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsGroupBoxShape_get_Display3DShading, self.Ptr)
+        return ret
+
+    @Display3DShading.setter
+    def Display3DShading(self, value:bool):
+        GetDllLibXls().XlsGroupBoxShape_set_Display3DShading.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsGroupBoxShape_set_Display3DShading, self.Ptr, value)
+
+    @property
+
+    def Text(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsGroupBoxShape_get_Text.argtypes=[c_void_p]
+        GetDllLibXls().XlsGroupBoxShape_get_Text.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsGroupBoxShape_get_Text, self.Ptr))
+        return ret
+
+
+    @Text.setter
+    def Text(self, value:str):
+        GetDllLibXls().XlsGroupBoxShape_set_Text.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsGroupBoxShape_set_Text, self.Ptr, value)
+
+    @property
+    def IsTextLocked(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsGroupBoxShape_get_IsTextLocked.argtypes=[c_void_p]
+        GetDllLibXls().XlsGroupBoxShape_get_IsTextLocked.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsGroupBoxShape_get_IsTextLocked, self.Ptr)
+        return ret
+
+    @IsTextLocked.setter
+    def IsTextLocked(self, value:bool):
+        GetDllLibXls().XlsGroupBoxShape_set_IsTextLocked.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsGroupBoxShape_set_IsTextLocked, self.Ptr, value)
+
+    @property
+
+    def ShapeType(self)->'ExcelShapeType':
+        """
+
+        """
+        GetDllLibXls().XlsGroupBoxShape_get_ShapeType.argtypes=[c_void_p]
+        GetDllLibXls().XlsGroupBoxShape_get_ShapeType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsGroupBoxShape_get_ShapeType, self.Ptr)
+        objwraped = ExcelShapeType(ret)
+        return objwraped
+
+#
+#    def Clone(self ,parent:'SpireObject',hashNewNames:'Dictionary2',dicFontIndexes:'Dictionary2',addToCollections:bool)->'IShape':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrhashNewNames:c_void_p = hashNewNames.Ptr
+#        intPtrdicFontIndexes:c_void_p = dicFontIndexes.Ptr
+#
+#        GetDllLibXls().XlsGroupBoxShape_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p,c_bool]
+#        GetDllLibXls().XlsGroupBoxShape_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsGroupBoxShape_Clone, self.Ptr, intPtrparent,intPtrhashNewNames,intPtrdicFontIndexes,addToCollections)
+#        ret = None if intPtr==None else IShape(intPtr)
+#        return ret
+#
+
+

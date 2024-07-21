@@ -1,0 +1,89 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsChartsCollection (CollectionBase[IChart],  ICharts) :
+    """
+
+    """
+
+    def get_Item(self ,name:str)->'IChart':
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartsCollection_get_Item.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsChartsCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartsCollection_get_Item, self.Ptr, name)
+        ret = None if intPtr==None else IChart(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self)->IChart:
+        """
+
+        """
+        GetDllLibXls().XlsChartsCollection_Add.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartsCollection_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartsCollection_Add, self.Ptr)
+        ret = None if intPtr==None else IChart(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,name:str)->IChart:
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartsCollection_AddN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsChartsCollection_AddN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartsCollection_AddN, self.Ptr, name)
+        ret = None if intPtr==None else IChart(intPtr)
+        return ret
+
+
+
+    def Remove(self ,name:str)->'IChart':
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartsCollection_Remove.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsChartsCollection_Remove.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartsCollection_Remove, self.Ptr, name)
+        ret = None if intPtr==None else IChart(intPtr)
+        return ret
+
+
+
+    def Move(self ,oldIndex:int,newIndex:int):
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartsCollection_Move.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsChartsCollection_Move, self.Ptr, oldIndex,newIndex)
+
+    @dispatch
+
+    def Add(self ,chartToAdd:IChart)->IChart:
+        """
+
+        """
+        intPtrchartToAdd:c_void_p = chartToAdd.Ptr
+
+        GetDllLibXls().XlsChartsCollection_AddC.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsChartsCollection_AddC.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartsCollection_AddC, self.Ptr, intPtrchartToAdd)
+        ret = None if intPtr==None else IChart(intPtr)
+        return ret
+
+

@@ -1,0 +1,3081 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+from spire.xls.common import dlllib
+from spire.xls.common import dlllibXls
+
+class Workbook (SpireObject) :
+    """
+
+    """
+    @dispatch
+    def __init__(self):
+        GetDllLibXls().Workbook_CreateWorkbook.restype = c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_CreateWorkbook)
+
+        super(Workbook, self).__init__(intPtr)
+    #def __del__(self):
+    #    GetDllLibXls().Workbook_Dispose.argtypes = [c_void_p]
+    #    CallCFunction(GetDllLibXls().Workbook_Dispose, self.Ptr)
+    #    super(Workbook, self).__del__()
+
+    @dispatch
+
+    def SaveAsImage(self ,sheetIndex:int,dpiX:float,dpiY:float)->Stream:
+        """
+    <summary>
+        Save workbook to image.
+    </summary>
+    <param name="sheetIndex">sheet Index</param>
+    <param name="dpiX">Dpi X</param>
+    <param name="dpiY">Dpi Y</param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().Workbook_SaveAsImageIDD.argtypes=[c_void_p ,c_int,c_float,c_float]
+        GetDllLibXls().Workbook_SaveAsImageIDD.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_SaveAsImageIDD, self.Ptr, sheetIndex,dpiX,dpiY)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def SaveAsXml(self ,fileName:str):
+        """
+    <summary>
+        Save workbook to an XML data file. 
+    </summary>
+    <param name="fileName">XML file name.</param>
+        """
+        
+        GetDllLibXls().Workbook_SaveAsXml.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_SaveAsXml, self.Ptr, fileName)
+
+    @dispatch
+
+    def SaveAsXml(self ,stream:Stream):
+        """
+    <summary>
+        Save workbook as XML format to stream. 
+    </summary>
+    <param name="stream">Stream object.</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().Workbook_SaveAsXmlS.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_SaveAsXmlS, self.Ptr, intPtrstream)
+
+#    @dispatch
+#
+#    def SaveChartAsEmfImage(self ,worksheet:Worksheet)->List[Image]:
+#        """
+#    <summary>
+#        Save chart to vector images.
+#    </summary>
+#    <param name="worksheet">worksheet instance</param>
+#        """
+#        intPtrworksheet:c_void_p = worksheet.Ptr
+#
+#        GetDllLibXls().Workbook_SaveChartAsEmfImage.argtypes=[c_void_p ,c_void_p]
+#        GetDllLibXls().Workbook_SaveChartAsEmfImage.restype=IntPtrArray
+#        intPtrArray = CallCFunction(GetDllLibXls().Workbook_SaveChartAsEmfImage, self.Ptr, intPtrworksheet)
+#        ret = GetObjVectorFromArray(intPtrArray, Image)
+#        return ret
+
+
+    @dispatch
+
+    def SaveChartAsEmfImage(self ,worksheet:Worksheet,chartIndex:int)->Stream:
+        """
+    <summary>
+        Save chart to vector image.
+    </summary>
+    <param name="worksheet">work sheet</param>
+    <param name="chartIndex">chart index</param>
+        """
+        intPtrworksheet:c_void_p = worksheet.Ptr
+
+        GetDllLibXls().Workbook_SaveChartAsEmfImageWC.argtypes=[c_void_p ,c_void_p,c_int]
+        GetDllLibXls().Workbook_SaveChartAsEmfImageWC.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_SaveChartAsEmfImageWC, self.Ptr, intPtrworksheet,chartIndex)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def SaveChartAsEmfImage(self ,worksheet:Worksheet,chartIndex:int,emfStream:Stream)->Stream:
+        """
+    <summary>
+        Save chart to vector image.
+    </summary>
+    <param name="worksheet">work sheet</param>
+    <param name="chartIndex">chart index</param>
+    <param name="emfStream">output stream</param>
+        """
+        intPtrworksheet:c_void_p = worksheet.Ptr
+        intPtremfStream:c_void_p = emfStream.Ptr
+
+        GetDllLibXls().Workbook_SaveChartAsEmfImageWCE.argtypes=[c_void_p ,c_void_p,c_int,c_void_p]
+        GetDllLibXls().Workbook_SaveChartAsEmfImageWCE.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_SaveChartAsEmfImageWCE, self.Ptr, intPtrworksheet,chartIndex,intPtremfStream)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def SaveChartAsImage(self ,chartSheet:ChartSheet)->Stream:
+        """
+    <summary>
+        Save chart to image.
+    </summary>
+    <param name="worksheet">chart sheet</param>
+        """
+        intPtrchartSheet:c_void_p = chartSheet.Ptr
+
+        GetDllLibXls().Workbook_SaveChartAsImage.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().Workbook_SaveChartAsImage.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_SaveChartAsImage, self.Ptr, intPtrchartSheet)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def SaveChartAsImage(self ,worksheet:Worksheet)->List[Stream]:
+        """
+    <summary>
+        Save chart to images.
+    </summary>
+    <param name="worksheet">worksheet instance</param>
+        """
+        intPtrworksheet:c_void_p = worksheet.Ptr
+
+        GetDllLibXls().Workbook_SaveChartAsImageW.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().Workbook_SaveChartAsImageW.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().Workbook_SaveChartAsImageW, self.Ptr, intPtrworksheet)
+        ret = GetObjVectorFromArray(intPtrArray, Stream)
+        return ret
+
+
+    @dispatch
+
+    def SaveChartAsImage(self ,worksheet:Worksheet,chartIndex:int)->Stream:
+        """
+    <summary>
+        Save chart to image.
+    </summary>
+    <param name="worksheet">work sheet</param>
+    <param name="chartIndex">chart index</param>
+        """
+        intPtrworksheet:c_void_p = worksheet.Ptr
+
+        GetDllLibXls().Workbook_SaveChartAsImageWC.argtypes=[c_void_p ,c_void_p,c_int]
+        GetDllLibXls().Workbook_SaveChartAsImageWC.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_SaveChartAsImageWC, self.Ptr, intPtrworksheet,chartIndex)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def SaveAsTemplate(self ,fileName:str):
+        """
+    <summary>
+        Save workbook as template to file.
+    </summary>
+    <param name="fileName">File name.</param>
+        """
+        
+        GetDllLibXls().Workbook_SaveAsTemplate.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_SaveAsTemplate, self.Ptr, fileName)
+
+#    @dispatch
+#
+#    def SaveAsTemplate(self ,fileName:str,response:'HttpResponse'):
+#        """
+#    <summary>
+#        Save workbook as template to response.
+#    </summary>
+#    <param name="fileName">File name.</param>
+#    <param name="response">Http response.</param>
+#        """
+#        intPtrresponse:c_void_p = response.Ptr
+#
+#        GetDllLibXls().Workbook_SaveAsTemplateFR.argtypes=[c_void_p ,c_void_p,c_void_p]
+#        CallCFunction(GetDllLibXls().Workbook_SaveAsTemplateFR, self.Ptr, fileName,intPtrresponse)
+
+
+#    @dispatch
+#
+#    def SaveToHttpResponse(self ,FileName:str,response:'HttpResponse'):
+#        """
+#    <summary>
+#        Save workbook to the http response.
+#    </summary>
+#    <param name="FileName">File Name</param>
+#    <param name="response">Http response</param>
+#    <param name="saveType">Save type : attachment or inline mode</param>
+#        """
+#        intPtrresponse:c_void_p = response.Ptr
+#
+#        GetDllLibXls().Workbook_SaveToHttpResponse.argtypes=[c_void_p ,c_void_p,c_void_p]
+#        CallCFunction(GetDllLibXls().Workbook_SaveToHttpResponse, self.Ptr, FileName,intPtrresponse)
+
+
+#    @dispatch
+#
+#    def SaveToHttpResponse(self ,FileName:str,response:'HttpResponse',isInlineMode:bool):
+#        """
+#    <summary>
+#        Save workbook to the http response.
+#    </summary>
+#    <param name="FileName">File name</param>
+#    <param name="response">Http response.</param>
+#    <param name="isInlineMode">True - inline mode, False - Attachment mode.</param>
+#        """
+#        intPtrresponse:c_void_p = response.Ptr
+#
+#        GetDllLibXls().Workbook_SaveToHttpResponseFRI.argtypes=[c_void_p ,c_void_p,c_void_p,c_bool]
+#        CallCFunction(GetDllLibXls().Workbook_SaveToHttpResponseFRI, self.Ptr, FileName,intPtrresponse,isInlineMode)
+
+
+#    @dispatch
+#
+#    def SaveToHttpResponse(self ,FileName:str,response:'HttpResponse',httpContextType:HttpContentType):
+#        """
+#    <summary>
+#        Save workbook to the http response.
+#    </summary>
+#    <param name="FileName">File Name</param>
+#    <param name="response">Http response</param>
+#    <param name="httpContextType">Http context type</param>
+#        """
+#        intPtrresponse:c_void_p = response.Ptr
+#        enumhttpContextType:c_int = httpContextType.value
+#
+#        GetDllLibXls().Workbook_SaveToHttpResponseFRH.argtypes=[c_void_p ,c_void_p,c_void_p,c_int]
+#        CallCFunction(GetDllLibXls().Workbook_SaveToHttpResponseFRH, self.Ptr, FileName,intPtrresponse,enumhttpContextType)
+
+
+#    @dispatch
+#
+#    def SaveToHttpResponse(self ,FileName:str,response:'HttpResponse',httpContextType:HttpContentType,fileFormat:FileFormat):
+#        """
+#    <summary>
+#        Save workbook to the http response.
+#    </summary>
+#    <param name="FileName">File Name</param>
+#    <param name="response">Http response</param>
+#    <param name="httpContextType">Http context type</param>
+#        """
+#        intPtrresponse:c_void_p = response.Ptr
+#        enumhttpContextType:c_int = httpContextType.value
+#        enumfileFormat:c_int = fileFormat.value
+#
+#        GetDllLibXls().Workbook_SaveToHttpResponseFRHF.argtypes=[c_void_p ,c_void_p,c_void_p,c_int,c_int]
+#        CallCFunction(GetDllLibXls().Workbook_SaveToHttpResponseFRHF, self.Ptr, FileName,intPtrresponse,enumhttpContextType,enumfileFormat)
+
+
+    @dispatch
+
+    def SaveToStream(self ,Stream:Stream):
+        """
+    <summary>
+        Save workbook the stream
+    </summary>
+    <param name="Stream">Stream object</param>
+        """
+        intPtrStream:c_void_p = Stream.Ptr
+
+        GetDllLibXls().Workbook_SaveToStream.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_SaveToStream, self.Ptr, intPtrStream)
+
+    @dispatch
+
+    def SaveToStream(self ,Stream:Stream,fileFormat:FileFormat):
+        """
+    <summary>
+        Save workbook to stream.
+    </summary>
+    <param name="Stream"></param>
+    <param name="fileFormat"></param>
+        """
+        intPtrStream:c_void_p = Stream.Ptr
+        enumfileFormat:c_int = fileFormat.value
+
+        GetDllLibXls().Workbook_SaveToStreamByFileFormat.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().Workbook_SaveToStreamByFileFormat, self.Ptr, intPtrStream,enumfileFormat)
+
+    @dispatch
+
+    def SaveToStream(self ,stream:Stream,separator:str):
+        """
+    <summary>
+         Save workbook the stream.
+        <example>The following code illustrates how to saves the active worksheet as stream with separator:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Save to stream
+        Stream stream = new MemoryStream();
+        workbook.SaveToFile(stream , ",");
+        </code>
+        </example>
+    </summary>
+    <param name="stream">Stream object.</param>
+    <param name="separator">Separator.</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().Workbook_SaveToStreamBySeparator.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_SaveToStreamBySeparator, self.Ptr, intPtrstream,separator)
+
+
+    def SetMaxDigitWidth(self ,w:int):
+        """
+
+        """
+        
+        GetDllLibXls().Workbook_SetMaxDigitWidth.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().Workbook_SetMaxDigitWidth, self.Ptr, w)
+
+
+    def SetOleSize(self ,firstRow:int,firstColumn:int,lastRow:int,lastColumn:int):
+        """
+    <summary>
+        set the size of the visible range of cells when this workbook is displyed as an embedded obect in another document;
+    </summary>
+    <param name="firstRow">the visible range's first row index</param>
+    <param name="firstColumn">the visible range's first column index</param>
+    <param name="lastRow">the visible range's last row index</param>
+    <param name="lastColumn">the visible range's last column index</param>
+        """
+        
+        GetDllLibXls().Workbook_SetOleSize.argtypes=[c_void_p ,c_int,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().Workbook_SetOleSize, self.Ptr, firstRow,firstColumn,lastRow,lastColumn)
+
+
+    def SetWriteProtectionPassword(self ,password:str):
+        """
+    <summary>
+        Sets write protection password.
+    </summary>
+    <param name="password">Password to set</param>
+        """
+        
+        GetDllLibXls().Workbook_SetWriteProtectionPassword.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_SetWriteProtectionPassword, self.Ptr, password)
+
+    @dispatch
+    def UnProtect(self):
+        """
+    <summary>
+        unprotect file
+            also upprotect workbook window and structure
+    </summary>
+        """
+        GetDllLibXls().Workbook_UnProtect.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_UnProtect, self.Ptr)
+
+    @dispatch
+
+    def UnProtect(self ,bookWindowAndStructurePassword:str):
+        """
+    <summary>
+        unprotect file
+            also upprotect workbook window and structure
+    </summary>
+    <param name="bookWindowAndStructurePassword">password for protect workbook window and structure</param>
+        """
+        
+        GetDllLibXls().Workbook_UnProtectB.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_UnProtectB, self.Ptr, bookWindowAndStructurePassword)
+
+
+    def UnProtectWorkbook(self ,password:str):
+        """
+    <summary>
+        unprotect workbook window and structure
+    </summary>
+    <param name="password">password</param>
+        """
+        
+        GetDllLibXls().Workbook_UnProtectWorkbook.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_UnProtectWorkbook, self.Ptr, password)
+
+
+    def GetChartSheetByName(self ,name:str)->'ChartSheet':
+        """
+
+        """
+        
+        GetDllLibXls().Workbook_GetChartSheetByName.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().Workbook_GetChartSheetByName.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_GetChartSheetByName, self.Ptr, name)
+        ret = None if intPtr==None else ChartSheet(intPtr)
+        return ret
+
+
+
+    def GetOleSize(self)->'IXLSRange':
+        """
+    <summary>
+        get the size of the visible range of cells when this workbook is displyed as an embedded obect in another document;
+    </summary>
+    <returns>if there does not set the size ,return null</returns>
+        """
+        GetDllLibXls().Workbook_GetOleSize.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_GetOleSize.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_GetOleSize, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @property
+    def HasTrackedChanges(self)->bool:
+        """
+    <summary>
+        Indicates whether the workbook has any tracked changes
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_HasTrackedChanges.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_HasTrackedChanges.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_HasTrackedChanges, self.Ptr)
+        return ret
+
+    def RejectAllTrackedChanges(self):
+        """
+    <summary>
+        Reject all tracked changes in the workbook. 
+    </summary>
+        """
+        GetDllLibXls().Workbook_RejectAllTrackedChanges.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_RejectAllTrackedChanges, self.Ptr)
+
+    def AcceptAllTrackedChanges(self):
+        """
+    <summary>
+        Accept all tracked changes in the workbook. 
+    </summary>
+        """
+        GetDllLibXls().Workbook_AcceptAllTrackedChanges.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_AcceptAllTrackedChanges, self.Ptr)
+
+#
+#    def AddDigitalSignature(self ,certificate:'X509Certificate2',comments:str,signTime:'DateTime')->'IDigitalSignatures':
+#        """
+#    <summary>
+#        Add a DigitalSignature.
+#    </summary>
+#    <param name="certificate">Certificate object that was used to sign</param>
+#    <param name="comments">Signature Comments</param>
+#    <param name="signTime">Sign Time</param>
+#    <returns>Collection of DigitalSignature</returns>
+#        """
+#        intPtrcertificate:c_void_p = certificate.Ptr
+#        intPtrsignTime:c_void_p = signTime.Ptr
+#
+#        GetDllLibXls().Workbook_AddDigitalSignature.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+#        GetDllLibXls().Workbook_AddDigitalSignature.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().Workbook_AddDigitalSignature, self.Ptr, intPtrcertificate,comments,intPtrsignTime)
+#        ret = None if intPtr==None else IDigitalSignatures(intPtr)
+#        return ret
+#
+
+
+
+    def GetDigitalSignatures(self)->'IDigitalSignatures':
+        """
+    <summary>
+        Get collection of DigitalSignature in this file.
+    </summary>
+    <returns>Collection of DigitalSignature</returns>
+        """
+        GetDllLibXls().Workbook_GetDigitalSignatures.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_GetDigitalSignatures.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_GetDigitalSignatures, self.Ptr)
+        ret = None if intPtr==None else IDigitalSignatures(intPtr)
+        return ret
+
+
+    def RemoveAllDigitalSignatures(self):
+        """
+    <summary>
+        Remove all DigitalSignature in this file.
+    </summary>
+        """
+        GetDllLibXls().Workbook_RemoveAllDigitalSignatures.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_RemoveAllDigitalSignatures, self.Ptr)
+
+    @property
+    def IsDigitallySigned(self)->bool:
+        """
+    <summary>
+        Indicates whether this spreadsheet is digitally signed.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_IsDigitallySigned.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_IsDigitallySigned.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_IsDigitallySigned, self.Ptr)
+        return ret
+
+
+    def GetThemeColor(self ,type:'ThemeColorType')->'Color':
+        """
+    <summary>
+        Gets theme color.
+    </summary>
+    <param name="type">The theme color type.</param>
+    <returns>The theme color.</returns>
+        """
+        enumtype:c_int = type.value
+
+        GetDllLibXls().Workbook_GetThemeColor.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().Workbook_GetThemeColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_GetThemeColor, self.Ptr, enumtype)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+
+    def SetThemeColor(self ,type:'ThemeColorType',color:'Color'):
+        """
+    <summary>
+        Sets the theme color
+    </summary>
+    <param name="type">The theme color type.</param>
+    <param name="color">the theme color</param>
+        """
+        enumtype:c_int = type.value
+        intPtrcolor:c_void_p = color.Ptr
+
+        GetDllLibXls().Workbook_SetThemeColor.argtypes=[c_void_p ,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_SetThemeColor, self.Ptr, enumtype,intPtrcolor)
+
+
+    def CopyTheme(self ,srcWorkbook:'Workbook'):
+        """
+    <summary>
+        Copy the theme from source workbook
+    </summary>
+    <param name="srcWorkbook">source workbook.</param>
+        """
+        intPtrsrcWorkbook:c_void_p = srcWorkbook.Ptr
+
+        GetDllLibXls().Workbook_CopyTheme.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_CopyTheme, self.Ptr, intPtrsrcWorkbook)
+
+
+    def CopyThemeColor(self ,srcWorkbook:'Workbook'):
+        """
+    <summary>
+        Copy the theme color from source workbook
+    </summary>
+    <param name="srcWorkbook">source workbook.</param>
+        """
+        intPtrsrcWorkbook:c_void_p = srcWorkbook.Ptr
+
+        GetDllLibXls().Workbook_CopyThemeColor.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_CopyThemeColor, self.Ptr, intPtrsrcWorkbook)
+
+    @dispatch
+
+    def LoadFromFile(self ,fileName:str):
+        """
+    <summary>
+        Loads a file and imports its data. 
+    </summary>
+    <param name="FileName">File name.</param>
+        """
+        
+        GetDllLibXls().Workbook_LoadFromFile.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromFile, self.Ptr, fileName)
+
+    @dispatch
+
+    def LoadFromFile(self ,fileName:str,preserveMode:bool):
+        """
+    <summary>
+        Loads a file and imports its data. 
+    </summary>
+    <param name="fileName">File name</param>
+    <param name="preserveMode">Preserve mode</param>
+        """
+        
+        GetDllLibXls().Workbook_LoadFromFileByMode.argtypes=[c_void_p ,c_void_p,c_bool]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromFileByMode, self.Ptr, fileName,preserveMode)
+
+    @dispatch
+
+    def LoadFromFile(self ,fileName:str,version:ExcelVersion):
+        """
+    <summary>
+        Loads a file and imports its data. 
+    </summary>
+    <param name="fileName">File name</param>
+    <param name="version">Excel version</param>
+        """
+        enumversion:c_int = version.value
+
+        GetDllLibXls().Workbook_LoadFromFileByVersion.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromFileByVersion, self.Ptr, fileName,enumversion)
+
+    @dispatch
+
+    def LoadFromFile(self ,fileName:str,separator:str):
+        """
+    <summary>
+        Loads text files stream with user defined separator. 
+    </summary>
+    <param name="fileName">File name</param>
+    <param name="separator">Delimiter of text file. </param>
+        """
+        
+        GetDllLibXls().Workbook_LoadFromFileBySeparator.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromFileBySeparator, self.Ptr, fileName,separator)
+
+    @dispatch
+
+    def LoadFromFile(self ,fileName:str,separator:str,row:int,column:int):
+        """
+    <summary>
+        Loads text files with user defined separator.
+    </summary>
+    <param name="fileName">File name.</param>
+    <param name="separator">Delimiter of text file.</param>
+    <param name="row">Start row.</param>
+    <param name="column">Start column.</param>
+        """
+        
+        GetDllLibXls().Workbook_LoadFromFileBySRC.argtypes=[c_void_p ,c_void_p,c_void_p,c_int,c_int]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromFileBySRC, self.Ptr, fileName,separator,row,column)
+
+    @dispatch
+
+    def LoadFromFile(self ,fileName:str,separator:str,row:int,column:int,version:ExcelVersion):
+        """
+    <summary>
+        Loads text files with user defined separator.
+    </summary>
+    <param name="fileName">File name.</param>
+    <param name="separator">Delimiter of text file.</param>
+    <param name="row">Start row.</param>
+    <param name="column">Start column.</param>
+    <param name="version">workbook version</param>
+        """
+        enumversion:c_int = version.value
+
+        GetDllLibXls().Workbook_LoadFromFileBySRCV.argtypes=[c_void_p ,c_void_p,c_void_p,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromFileBySRCV, self.Ptr, fileName,separator,row,column,enumversion)
+
+    @dispatch
+
+    def LoadFromFile(self ,fileName:str,separator:str,row:int,column:int,version:ExcelVersion,encoding:Encoding):
+        """
+    <summary>
+        Loads text files with user defined separator.
+    </summary>
+    <param name="fileName">File name.</param>
+    <param name="separator">Delimiter of text file.</param>
+    <param name="row">Start row.</param>
+    <param name="column">Start column.</param>
+    <param name="version">workbook version</param>
+    <param name="encoding">Text Encoding</param>
+        """
+        enumversion:c_int = version.value
+        intPtrencoding:c_void_p = encoding.Ptr
+
+        GetDllLibXls().Workbook_LoadFromFileSRCVE.argtypes=[c_void_p ,c_void_p,c_void_p,c_int,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromFileSRCVE, self.Ptr, fileName,separator,row,column,enumversion,intPtrencoding)
+
+    @dispatch
+
+    def LoadFromStream(self ,stream:Stream):
+        """
+    <summary>
+        Load workbook from the stream.
+    </summary>
+    <param name="stream">Stream contains data.</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().Workbook_LoadFromStream.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromStream, self.Ptr, intPtrstream)
+
+    @dispatch
+
+    def LoadFromStream(self ,stream:Stream,loadStyles:bool):
+        """
+    <summary>
+        Load workbook from the stream.
+    </summary>
+    <param name="stream">Stream contains data.</param>
+    <param name="loadStyles">Indicates whether loads styles.</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().Workbook_LoadFromStreamByL.argtypes=[c_void_p ,c_void_p,c_bool]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromStreamByL, self.Ptr, intPtrstream,loadStyles)
+
+    @dispatch
+
+    def LoadFromStream(self ,stream:Stream,version:ExcelVersion):
+        """
+    <summary>
+        Load workbook from the stream.
+    </summary>
+    <param name="stream">Stream contains data</param>
+    <param name="version">Excel version</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        enumversion:c_int = version.value
+
+        GetDllLibXls().Workbook_LoadFromStreamV.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromStreamV, self.Ptr, intPtrstream,enumversion)
+
+    @dispatch
+
+    def LoadFromStream(self ,stream:Stream,separator:str,row:int,column:int):
+        """
+    <summary>
+        Loads text files stream with user defined separator.max row 60000.
+    </summary>
+    <param name="stream">File stream.</param>
+    <param name="separator">Delimiter of text file.</param>
+    <param name="row">Start row.</param>
+    <param name="column">Start column.</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().Workbook_LoadFromStreamSRC.argtypes=[c_void_p ,c_void_p,c_void_p,c_int,c_int]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromStreamSRC, self.Ptr, intPtrstream,separator,row,column)
+
+    @dispatch
+
+    def LoadFromStream(self ,stream:Stream,separator:str,row:int,column:int,version:ExcelVersion):
+        """
+    <summary>
+        Loads text files stream with user defined separator. Version2007 support 60000+ row 
+    </summary>
+    <param name="stream">File stream.</param>
+    <param name="separator">Delimiter of text file.</param>
+    <param name="row">Start row.</param>
+    <param name="column">Start column.</param>
+    <param name="version">Excel version.</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        enumversion:c_int = version.value
+
+        GetDllLibXls().Workbook_LoadFromStreamSRCV.argtypes=[c_void_p ,c_void_p,c_void_p,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromStreamSRCV, self.Ptr, intPtrstream,separator,row,column,enumversion)
+
+    @dispatch
+
+    def LoadFromXml(self ,fileName:str):
+        """
+    <summary>
+        Loads a xml file and imports its data. 
+    </summary>
+    <param name="fileName">File name.</param>
+        """
+        
+        GetDllLibXls().Workbook_LoadFromXml.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromXml, self.Ptr, fileName)
+
+    @dispatch
+
+    def LoadFromXml(self ,stream:Stream):
+        """
+    <summary>
+        Loads a xml file and imports its data. 
+    </summary>
+    <param name="stream">Stream contains data.</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().Workbook_LoadFromXmlStream.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromXmlStream, self.Ptr, intPtrstream)
+
+    @dispatch
+
+    def LoadFromHtml(self ,fileName:str):
+        """
+    <summary>
+        Loads a html file and imports its data. 
+    </summary>
+    <param name="fileName">File name.</param>
+        """
+        
+        GetDllLibXls().Workbook_LoadFromHtml.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromHtml, self.Ptr, fileName)
+
+    @dispatch
+
+    def LoadFromHtml(self ,stream:Stream):
+        """
+    <summary>
+        Loads a html file and imports its data. 
+    </summary>
+    <param name="stream">Stream contains data.</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().Workbook_LoadFromHtmlStream.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromHtmlStream, self.Ptr, intPtrstream)
+
+    @dispatch
+
+    def LoadFromMHtml(self ,fileName:str):
+        """
+    <summary>
+        Loads a Mhtml file and imports its data. 
+    </summary>
+    <param name="fileName">File name.</param>
+        """
+        
+        GetDllLibXls().Workbook_LoadFromMHtml.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromMHtml, self.Ptr, fileName)
+
+    @dispatch
+
+    def LoadFromMHtml(self ,stream:Stream):
+        """
+    <summary>
+        Loads a Mhtml file and imports its data. 
+    </summary>
+    <param name="stream">Stream contains data.</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().Workbook_LoadFromMHtmlStream.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_LoadFromMHtmlStream, self.Ptr, intPtrstream)
+
+    @dispatch
+
+    def LoadTemplateFromFile(self ,fileName:str):
+        """
+    <summary>
+        Load workbook from the excel template.
+    </summary>
+    <param name="fileName">File name</param>
+        """
+        
+        GetDllLibXls().Workbook_LoadTemplateFromFile.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_LoadTemplateFromFile, self.Ptr, fileName)
+
+    @dispatch
+
+    def LoadTemplateFromFile(self ,fileName:str,loadStyles:bool):
+        """
+    <summary>
+        Load workbook from the excel template.
+    </summary>
+    <param name="fileName">File name</param>
+    <param name="loadStyles">Indicates whehter load styles.</param>
+        """
+        
+        GetDllLibXls().Workbook_LoadTemplateFromFileFL.argtypes=[c_void_p ,c_void_p,c_bool]
+        CallCFunction(GetDllLibXls().Workbook_LoadTemplateFromFileFL, self.Ptr, fileName,loadStyles)
+
+    @dispatch
+
+    def SaveToHtml(self ,fileName:str):
+        """
+    <summary>
+        Saves the workbook to html
+    </summary>
+    <param name="fileName">File name.</param>
+        """
+        
+        GetDllLibXls().Workbook_SaveToHtml.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_SaveToHtml, self.Ptr, fileName)
+
+    @dispatch
+
+    def SaveToHtml(self ,fileName:str,skipHideSheet:bool):
+        """
+    <summary>
+        Saves the workbook to html
+    </summary>
+    <param name="fileName">File name.</param>
+    <param name="skipHideSheet">Whether skip hidden sheet.</param>
+        """
+        
+        GetDllLibXls().Workbook_SaveToHtmlS.argtypes=[c_void_p ,c_void_p,c_bool]
+        CallCFunction(GetDllLibXls().Workbook_SaveToHtmlS, self.Ptr, fileName,skipHideSheet)
+
+    @dispatch
+
+    def SaveToFile(self ,fileName:str):
+        """
+    <summary>
+        Saves changes to the workbook in a different file
+    </summary>
+    <param name="fileName">File name.</param>
+        """
+        
+        GetDllLibXls().Workbook_SaveToFile.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_SaveToFile, self.Ptr, fileName)
+
+    @dispatch
+
+    def SaveToFile(self ,fileName:str,fileFormat:FileFormat):
+        """
+    <summary>
+        Saves changes to the workbook in a different file
+    </summary>
+    <param name="fileName">File name</param>
+    <param name="fileFormat">File format</param>
+        """
+        enumfileFormat:c_int = fileFormat.value
+
+        GetDllLibXls().Workbook_SaveToFileF.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().Workbook_SaveToFileF, self.Ptr, fileName,enumfileFormat)
+
+    @dispatch
+
+    def SaveToFile(self ,fileName:str,separator:str):
+        """
+    <summary>
+         Saves changes to the workbook in a different file.
+        <example>The following code illustrates how to save the active worksheet in a different file with separator:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Save to file
+        workbook.SaveToFile("Result.csv" , ",");
+        </code>
+        </example>
+    </summary>
+    <param name="fileName">File name.</param>
+    <param name="separator">Current separator.</param>
+        """
+        
+        GetDllLibXls().Workbook_SaveToFileS.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_SaveToFileS, self.Ptr, fileName,separator)
+
+    @dispatch
+
+    def SaveToFile(self ,fileName:str,fileFormat:FileFormat,retainHiddenDataToCSV:bool):
+        """
+    <summary>
+        Saves changes to the workbook in a different file
+    </summary>
+    <param name="fileName">File name</param>
+    <param name="fileFormat">File format</param>
+    <param name="retainHiddenDataToCSV">Retain hidden data when save to csv.</param>
+        """
+        enumfileFormat:c_int = fileFormat.value
+
+        GetDllLibXls().Workbook_SaveToFileFR.argtypes=[c_void_p ,c_void_p,c_int,c_bool]
+        CallCFunction(GetDllLibXls().Workbook_SaveToFileFR, self.Ptr, fileName,enumfileFormat,retainHiddenDataToCSV)
+
+    @dispatch
+
+    def SaveToFile(self ,fileName:str,textSaveOptions:TextSaveOptions):
+        """
+    <summary>
+        Saves changes to the workbook in a different file
+    </summary>
+    <param name="fileName">File name</param>
+    <param name="textSaveOptions">Text save options.</param>
+        """
+        intPtrtextSaveOptions:c_void_p = textSaveOptions.Ptr
+
+        GetDllLibXls().Workbook_SaveToFileByTextSaveOptions.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_SaveToFileByTextSaveOptions, self.Ptr, fileName,intPtrtextSaveOptions)
+
+    @dispatch
+
+    def SaveToFile(self ,fileName:str,version:ExcelVersion):
+        """
+    <summary>
+        Saves changes to the workbook in a different file
+    </summary>
+    <param name="fileName">File name</param>
+    <param name="version">Excel version</param>
+        """
+        enumversion:c_int = version.value
+
+        GetDllLibXls().Workbook_SaveToFileByVersion.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().Workbook_SaveToFileByVersion, self.Ptr, fileName,enumversion)
+
+    def Dispose(self):
+        """
+
+        """
+        GetDllLibXls().Workbook_Dispose.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_Dispose, self.Ptr)
+
+
+    def AddPivotTableStyle(self ,pts:'PivotTableStyle'):
+        """
+
+        """
+        intPtrpts:c_void_p = pts.Ptr
+
+        GetDllLibXls().Workbook_AddPivotTableStyle.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_AddPivotTableStyle, self.Ptr, intPtrpts)
+
+
+    def CaculateFormulaValue(self ,text:str)->'str':
+        """
+    <summary>
+        Computes the string formula
+    </summary>
+    <param name="text"></param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().Workbook_CaculateFormulaValue.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().Workbook_CaculateFormulaValue.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_CaculateFormulaValue, self.Ptr, text)
+        ret = None if intPtr==None else PtrToStr(intPtr)
+        return ret
+
+
+    def CalculateAllValue(self):
+        """
+    <summary>
+        Caculate all formula for the workbook
+    </summary>
+        """
+        GetDllLibXls().Workbook_CalculateAllValue.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_CalculateAllValue, self.Ptr)
+
+
+    def ChangePaletteColor(self ,color:'Color',index:int):
+        """
+    <summary>
+         Changes the palette for the spreadsheet in the specified index. 
+        <example>The following code snippet illustrates how to set palette color:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set palette color
+        workbook.ChangePaletteColor(System.Drawing.Color.Red , 10);
+        //Set color
+        worksheet["B2"].Style.Color = workbook.Colors[10];
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="color">Color structure</param>
+    <param name="index">Palette index,Value should be from 0 to 55</param>
+        """
+        intPtrcolor:c_void_p = color.Ptr
+
+        GetDllLibXls().Workbook_ChangePaletteColor.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().Workbook_ChangePaletteColor, self.Ptr, intPtrcolor,index)
+
+
+    def ColumnWidthToPixels(self ,columnWidth:float)->float:
+        """
+    <summary>
+        onverts column width in characters into column width in pixels.
+    </summary>
+    <param name="columnWidth">Column width in characters.</param>
+    <returns>Column width in pixels.</returns>
+        """
+        
+        GetDllLibXls().Workbook_ColumnWidthToPixels.argtypes=[c_void_p ,c_double]
+        GetDllLibXls().Workbook_ColumnWidthToPixels.restype=c_double
+        ret = CallCFunction(GetDllLibXls().Workbook_ColumnWidthToPixels, self.Ptr, columnWidth)
+        return ret
+
+
+    def ContainsFont(self ,font:'ExcelFont')->bool:
+        """
+    <summary>
+        Indicates whether the workbook contains specified font.
+    </summary>
+    <param name="font"></param>
+    <returns></returns>
+        """
+        intPtrfont:c_void_p = font.Ptr
+
+        GetDllLibXls().Workbook_ContainsFont.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().Workbook_ContainsFont.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_ContainsFont, self.Ptr, intPtrfont)
+        return ret
+
+    @dispatch
+    def CopyToClipboard(self):
+        """
+    <summary>
+        Copies whole workbook to the clipboard.
+    </summary>
+        """
+        GetDllLibXls().Workbook_CopyToClipboard.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_CopyToClipboard, self.Ptr)
+
+    @dispatch
+
+    def CopyToClipboard(self ,worksheet:Worksheet):
+        """
+    <summary>
+        Copies the selected worksheet to clipboard.
+    </summary>
+    <param name="worksheet"></param>
+        """
+        intPtrworksheet:c_void_p = worksheet.Ptr
+
+        GetDllLibXls().Workbook_CopyToClipboardW.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_CopyToClipboardW, self.Ptr, intPtrworksheet)
+
+    @dispatch
+
+    def CreateEmptySheet(self)->Worksheet:
+        """
+    <summary>
+        Create a new worksheet.
+    </summary>
+    <returns></returns>
+        """
+        GetDllLibXls().Workbook_CreateEmptySheet.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_CreateEmptySheet.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_CreateEmptySheet, self.Ptr)
+        ret = None if intPtr==None else Worksheet(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def CreateEmptySheet(self ,name:str)->Worksheet:
+        """
+    <summary>
+         Create a new worksheet.
+    </summary>
+    <param name="name">Sheet name.</param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().Workbook_CreateEmptySheetN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().Workbook_CreateEmptySheetN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_CreateEmptySheetN, self.Ptr, name)
+        ret = None if intPtr==None else Worksheet(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def CreateEmptySheets(self ,sheetCount:int):
+        """
+    <summary>
+        Create workbook with specified number of worksheets.
+    </summary>
+    <param name="sheetCount"></param>
+        """
+        
+        GetDllLibXls().Workbook_CreateEmptySheets.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().Workbook_CreateEmptySheets, self.Ptr, sheetCount)
+
+    @dispatch
+
+    def CreateEmptySheets(self ,sheetNames:List[str]):
+        """
+    <summary>
+        Create workbook with specified names of worksheets.
+    </summary>
+    <param name="sheetNames"></param>
+        """
+        #arraysheetNames:ArrayTypesheetNames = ""
+        countsheetNames = len(sheetNames)
+        ArrayTypesheetNames = c_wchar_p * countsheetNames
+        arraysheetNames = ArrayTypesheetNames()
+        for i in range(0, countsheetNames):
+            arraysheetNames[i] = sheetNames[i]
+
+
+        GetDllLibXls().Workbook_CreateEmptySheetsN.argtypes=[c_void_p ,ArrayTypesheetNames,c_int]
+        CallCFunction(GetDllLibXls().Workbook_CreateEmptySheetsN, self.Ptr, arraysheetNames,countsheetNames)
+
+    @dispatch
+
+    def CreateFont(self)->ExcelFont:
+        """
+    <summary>
+         Creates a font object and add it to the workbook.
+        <example>The following code illustrates how to create IFont object:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        IRichTextString richText = worksheet["B2"].RichText;
+        //Create font
+        IFont font = workbook.CreateFont();
+        //Set color
+        font.Color = Color.Red;
+        //Set text
+        richText.Text = "Sample";
+        //Set font
+        richText.SetFont(0, 5, font);
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+    <returns></returns>
+        """
+        GetDllLibXls().Workbook_CreateFont.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_CreateFont.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_CreateFont, self.Ptr)
+        ret = None if intPtr==None else ExcelFont(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def CreateFont(self ,font:Font)->ExcelFont:
+        """
+
+        """
+        intPtrfont:c_void_p = font.Ptr
+
+        GetDllLibXls().Workbook_CreateFontF.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().Workbook_CreateFontF.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_CreateFontF, self.Ptr, intPtrfont)
+        ret = None if intPtr==None else ExcelFont(intPtr)
+        return ret
+
+
+
+    def CreatePivotStyle(self)->'PivotStyle':
+        """
+
+        """
+        GetDllLibXls().Workbook_CreatePivotStyle.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_CreatePivotStyle.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_CreatePivotStyle, self.Ptr)
+        ret = None if intPtr==None else PivotStyle(intPtr)
+        return ret
+
+
+#
+#    def FindAllBool(self ,boolValue:bool)->'ListCellRanges':
+#        """
+#    <summary>
+#         Finds the cell with the input bool.
+#        <example>This sample shows how to find all cells with specified bool value:
+#        <code>
+#        //Create workbook
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        //Find cells with specified bool value
+#        CellRange[] result = workbook.FindAllBool(true);
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="boolValue">Bool value to search for</param>
+#    <returns>Found ranges</returns>
+#        """
+#        
+#        GetDllLibXls().Workbook_FindAllBool.argtypes=[c_void_p ,c_bool]
+#        GetDllLibXls().Workbook_FindAllBool.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().Workbook_FindAllBool, self.Ptr, boolValue)
+#        ret = None if intPtr==None else ListCellRanges(intPtr)
+#        return ret
+
+
+#
+#    def FindAllNumber(self ,doubleValue:float,formulaValue:bool)->'ListCellRanges':
+#        """
+#    <summary>
+#         Finds the cell with the input double.
+#        <example>This sample shows how to find all cells with specified doulbe value:
+#        <code>
+#        //Create workbook
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        //Find cells with specified double value
+#        CellRange[] result = workbook.FindAllNumber(100.32 , false);
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="doubleValue">Double value to search for.</param>
+#    <param name="formulaValue">Indicates whether includes formula value to search for.</param>
+#    <returns>Found ranges.</returns>
+#        """
+#        
+#        GetDllLibXls().Workbook_FindAllNumber.argtypes=[c_void_p ,c_double,c_bool]
+#        GetDllLibXls().Workbook_FindAllNumber.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().Workbook_FindAllNumber, self.Ptr, doubleValue,formulaValue)
+#        ret = None if intPtr==None else ListCellRanges(intPtr)
+#        return ret
+
+
+#
+#    def FindAllString(self ,stringValue:str,formula:bool,formulaValue:bool)->'ListCellRanges':
+#        """
+#    <summary>
+#         Finds the cell with the input string.
+#        <example>This sample shows how to find all cells with specified string value:
+#        <code>
+#        //Create workbook
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        //Find cells with specified string value
+#        string value = "value";
+#        CellRange[] result = workbook.FindAllString(value , false , false);
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="stringValue">String value to search for</param>
+#    <param name="formula">Indicates whether includes formula to search for.</param>
+#    <param name="formulaValue">Indicates whether includes formula value to search for.</param>
+#    <returns>Found ranges.</returns>
+#        """
+#        
+#        GetDllLibXls().Workbook_FindAllString.argtypes=[c_void_p ,c_void_p,c_bool,c_bool]
+#        GetDllLibXls().Workbook_FindAllString.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().Workbook_FindAllString, self.Ptr, stringValue,formula,formulaValue)
+#        ret = None if intPtr==None else ListCellRanges(intPtr)
+#        return ret
+
+
+#
+#    def FindAllDateTime(self ,dateTimeValue:'DateTime')->'ListCellRanges':
+#        """
+#    <summary>
+#         Finds the cell with the input datetime.
+#        <example>This sample shows how to find all cells with specified DateTime value:
+#        <code>
+#        //Create workbook
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        //Find cells with specified DateTime value
+#        CellRange[] result = workbook.FindAllDateTime(DateTime.Now);
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dateTimeValue">Datetime value to search for.</param>
+#    <returns>Found ranges.</returns>
+#        """
+#        intPtrdateTimeValue:c_void_p = dateTimeValue.Ptr
+#
+#        GetDllLibXls().Workbook_FindAllDateTime.argtypes=[c_void_p ,c_void_p]
+#        GetDllLibXls().Workbook_FindAllDateTime.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().Workbook_FindAllDateTime, self.Ptr, intPtrdateTimeValue)
+#        ret = None if intPtr==None else ListCellRanges(intPtr)
+#        return ret
+
+
+#
+#    def FindAllTimeSpan(self ,timeSpanValue:'TimeSpan')->'ListCellRanges':
+#        """
+#    <summary>
+#         Finds the cell with the input time span.
+#        <example>This sample shows how to find all cells with specified TimeSpan value:
+#        <code>
+#        //Create workbook
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        //Find cells with specified TimeSpan value
+#        TimeSpan value = new TimeSpan(2, 30, 30);
+#        CellRange[] result = workbook.FindAllTimeSpan(value);
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="timeSpanValue"></param>
+#    <returns>Found ranges.</returns>
+#        """
+#        intPtrtimeSpanValue:c_void_p = timeSpanValue.Ptr
+#
+#        GetDllLibXls().Workbook_FindAllTimeSpan.argtypes=[c_void_p ,c_void_p]
+#        GetDllLibXls().Workbook_FindAllTimeSpan.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().Workbook_FindAllTimeSpan, self.Ptr, intPtrtimeSpanValue)
+#        ret = None if intPtr==None else ListCellRanges(intPtr)
+#        return ret
+
+
+
+    def FindBool(self ,boolValue:bool)->'CellRange':
+        """
+    <summary>
+         Finds the cell with the input bool.
+        <example>This sample shows how to find the first cell with specified bool value:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Find cell with specified bool value
+        IXLSRange result = workbook.FindBool(true);
+        </code>
+        </example>
+    </summary>
+    <param name="boolValue">Bool value to search for.</param>
+    <returns>Found range.</returns>
+        """
+        
+        GetDllLibXls().Workbook_FindBool.argtypes=[c_void_p ,c_bool]
+        GetDllLibXls().Workbook_FindBool.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_FindBool, self.Ptr, boolValue)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+
+    def FindNumber(self ,doubleValue:float,formulaValue:bool)->'CellRange':
+        """
+    <summary>
+         Finds the cell with the input number.
+        <example>This sample shows how to find the first cell with specified double value:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Find cell with specified double value
+        double value = 9.00;
+        IXLSRange result = workbook.FindNumber(value, false);
+        </code>
+        </example>
+    </summary>
+    <param name="doubleValue">Double value to search for.</param>
+    <param name="formulaValue">Indicates whether includes formula value to search for.</param>
+    <returns>Found range.</returns>
+        """
+        
+        GetDllLibXls().Workbook_FindNumber.argtypes=[c_void_p ,c_double,c_bool]
+        GetDllLibXls().Workbook_FindNumber.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_FindNumber, self.Ptr, doubleValue,formulaValue)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+
+    def FindString(self ,stringValue:str,formula:bool,formulaValue:bool)->'CellRange':
+        """
+    <summary>
+         Finds the cell with the input string.
+        <example>This sample shows how to find the first cell with specified string value:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Find cell with specified string value
+        string value = "value";
+        IXLSRange result = workbook.FindString(value, false, false);
+        </code>
+        </example>
+    </summary>
+    <param name="stringValue">String value to search for.</param>
+    <param name="formula">Indicates whether includes formula to search for.</param>
+    <param name="formulaValue">Indicates whether includes formula value to search for.</param>
+    <returns>Found range.</returns>
+        """
+        
+        GetDllLibXls().Workbook_FindString.argtypes=[c_void_p ,c_void_p,c_bool,c_bool]
+        GetDllLibXls().Workbook_FindString.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_FindString, self.Ptr, stringValue,formula,formulaValue)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+
+    def FindDateTime(self ,dateTimeValue:'DateTime')->'CellRange':
+        """
+    <summary>
+         Finds the cell with the input datetime.
+        <example>This sample shows how to find the first cell with specified DataTime value:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Find cell with specified DataTime value
+        DateTime dateTime = DateTime.Now;
+        IXLSRange result = workbook.FindDateTime(dateTime);
+        </code>
+        </example>
+    </summary>
+    <param name="dateTimeValue">Datetime value to search for.</param>
+    <returns>Found range.</returns>
+        """
+        intPtrdateTimeValue:c_void_p = dateTimeValue.Ptr
+
+        GetDllLibXls().Workbook_FindDateTime.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().Workbook_FindDateTime.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_FindDateTime, self.Ptr, intPtrdateTimeValue)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+
+    def FindTimeSpan(self ,timeSpanValue:'TimeSpan')->'CellRange':
+        """
+    <summary>
+         Finds the cell with the input time span.
+        <example>This sample shows how to find the first cell with specified TimeSpan value:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Find cell with specified TimeSpan value
+        TimeSpan timeSpan = new TimeSpan(2, 30, 30);
+        IXLSRange result = workbook.FindTimeSpan(timeSpan);
+        </code>
+        </example>
+    </summary>
+    <param name="timeSpanValue">Time span value to search for.</param>
+    <returns>Found range.</returns>
+        """
+        intPtrtimeSpanValue:c_void_p = timeSpanValue.Ptr
+
+        GetDllLibXls().Workbook_FindTimeSpan.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().Workbook_FindTimeSpan.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_FindTimeSpan, self.Ptr, intPtrtimeSpanValue)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def GetMatchingColor(self ,color:Color)->ExcelColors:
+        """
+    <summary>
+         Find best matching Color in workbook palette. 
+        <example>The following code illustrates how to get the indexed color from ExcelColors for the given color from Color structure:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Get color
+        ExcelColors color = workbook.GetMatchingColor(System.Drawing.Color.Red);
+        //Set color
+        worksheet["B2"].Style.KnownColor = color;
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="color">Color to search for.</param>
+    <returns>Workbook palette color.</returns>
+        """
+        intPtrcolor:c_void_p = color.Ptr
+
+        GetDllLibXls().Workbook_GetMatchingColor.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().Workbook_GetMatchingColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Workbook_GetMatchingColor, self.Ptr, intPtrcolor)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @dispatch
+
+    def GetMatchingColor(self ,r:int,g:int,b:int)->ExcelColors:
+        """
+    <summary>
+         Find best matching Color in workbook palette.
+        <example>The following code illustrates how to get the indexed color from ExcelColors for the given color from Color structure:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Get color
+        ExcelColors color = workbook.GetMatchingColor(255, 0, 0);
+        //Set color
+        worksheet["B2"].Style.KnownColor = color;
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="r">Red color.</param>
+    <param name="g">Green color.</param>
+    <param name="b">Blue color.</param>
+    <returns>Workbook palette color.</returns>
+        """
+        
+        GetDllLibXls().Workbook_GetMatchingColorRGB.argtypes=[c_void_p ,c_int,c_int,c_int]
+        GetDllLibXls().Workbook_GetMatchingColorRGB.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Workbook_GetMatchingColorRGB, self.Ptr, r,g,b)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+
+    def GetPaletteColor(self ,color:'ExcelColors')->'Color':
+        """
+    <summary>
+         Gets excel color from workbook palette.
+        <example>The following code illustrates how to get the RGB color value for the specified color from ExcelColors enumeration:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Get color
+        System.Drawing.Color color = workbook.GetPaletteColor(ExcelColors.Red);
+        //Set color
+        worksheet["B2"].Style.Color = workbook.Colors[10];
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="color">Index from palette array.</param>
+    <returns>RGB Color.</returns>
+        """
+        enumcolor:c_int = color.value
+
+        GetDllLibXls().Workbook_GetPaletteColor.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().Workbook_GetPaletteColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_GetPaletteColor, self.Ptr, enumcolor)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+#
+#    def GetSplitPageInfo(self)->'List1':
+#        """
+#
+#        """
+#        GetDllLibXls().Workbook_GetSplitPageInfo.argtypes=[c_void_p]
+#        GetDllLibXls().Workbook_GetSplitPageInfo.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().Workbook_GetSplitPageInfo, self.Ptr)
+#        ret = None if intPtr==None else List1(intPtr)
+#        return ret
+#
+
+
+#
+#    def GetSplitPageTable(self ,wb:'Workbook')->'DataTable':
+#        """
+#
+#        """
+#        intPtrwb:c_void_p = wb.Ptr
+#
+#        GetDllLibXls().Workbook_GetSplitPageTable.argtypes=[c_void_p ,c_void_p]
+#        GetDllLibXls().Workbook_GetSplitPageTable.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().Workbook_GetSplitPageTable, self.Ptr, intPtrwb)
+#        ret = None if intPtr==None else DataTable(intPtr)
+#        return ret
+#
+
+
+    def InitCalcEngine(self):
+        """
+    <summary>
+        Initilize Calc engine
+    </summary>
+        """
+        GetDllLibXls().Workbook_InitCalcEngine.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_InitCalcEngine, self.Ptr)
+
+    @staticmethod
+    @dispatch
+
+    def IsPasswordProtected(fileName:str)->bool:
+        """
+    <summary>
+        check file is password protect
+    </summary>
+    <param name="fileName"></param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().Workbook_IsPasswordProtected.argtypes=[ c_void_p]
+        GetDllLibXls().Workbook_IsPasswordProtected.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_IsPasswordProtected,  fileName)
+        return ret
+
+    @staticmethod
+    @dispatch
+
+    def IsPasswordProtected(stream:Stream)->bool:
+        """
+
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().Workbook_IsPasswordProtectedByStream.argtypes=[ c_void_p]
+        GetDllLibXls().Workbook_IsPasswordProtectedByStream.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_IsPasswordProtectedByStream,  intPtrstream)
+        return ret
+
+    def PasteFromClipboard(self):
+        """
+    <summary>
+        Copies workbook and all its worksheets from the clipboard.
+    </summary>
+        """
+        GetDllLibXls().Workbook_PasteFromClipboard.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_PasteFromClipboard, self.Ptr)
+
+
+    def PixelsToColumnWidth(self ,pixels:float)->float:
+        """
+    <summary>
+        Converts column width in pixels into column width in characters.
+    </summary>
+    <param name="pixels">Column width in pixels.</param>
+    <returns>Column width in characters.</returns>
+        """
+        
+        GetDllLibXls().Workbook_PixelsToColumnWidth.argtypes=[c_void_p ,c_double]
+        GetDllLibXls().Workbook_PixelsToColumnWidth.restype=c_double
+        ret = CallCFunction(GetDllLibXls().Workbook_PixelsToColumnWidth, self.Ptr, pixels)
+        return ret
+
+    @dispatch
+
+    def Protect(self ,passwordToOpen:str):
+        """
+    <summary>
+        protect file also protect workbook window and structure.
+    </summary>
+    <param name="passwordToOpen">password to open file.</param>
+        """
+        
+        GetDllLibXls().Workbook_Protect.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_Protect, self.Ptr, passwordToOpen)
+
+    @dispatch
+
+    def Protect(self ,passwordToOpen:str,bIsProtectWindow:bool,bIsProtectContent:bool):
+        """
+    <summary>
+        protect file,also Indicates whether protect workbook window and structure or not
+    </summary>
+    <param name="passwordToOpen">password to open file.</param>
+    <param name="bIsProtectWindow">Indicates if protect workbook window.</param>
+    <param name="bIsProtectContent">Indicates if protect workbook content.</param>
+        """
+        
+        GetDllLibXls().Workbook_ProtectB.argtypes=[c_void_p ,c_void_p,c_bool,c_bool]
+        CallCFunction(GetDllLibXls().Workbook_ProtectB, self.Ptr, passwordToOpen,bIsProtectWindow,bIsProtectContent)
+
+
+    def ProtectWorkbook(self ,bIsProtectWindow:bool,bIsProtectContent:bool,password:str):
+        """
+    <summary>
+        Sets protection for workbook.
+    </summary>
+    <param name="bIsProtectWindow">Indicates if protect workbook window.</param>
+    <param name="bIsProtectContent">Indicates if protect workbook content.</param>
+    <param name="password">password</param>
+        """
+        
+        GetDllLibXls().Workbook_ProtectWorkbook.argtypes=[c_void_p ,c_bool,c_bool,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_ProtectWorkbook, self.Ptr, bIsProtectWindow,bIsProtectContent,password)
+
+#    @dispatch
+#
+#    def Replace(self ,oldValue:str,newValues:'DataColumn',includeColumnName:bool):
+#        """
+#    <summary>
+#         Replaces cell's value from data column values.
+#        <example>The following code snippet illustrates how to replace the string value with data column:
+#        <code>
+#        //Create workbook
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        //Replace the oldValue by data column
+#        string oldValue = "Find";
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("Dosage", typeof(int));
+#        table.Rows.Add(1);
+#        System.Data.DataColumn dataColumn = table.Columns[0];
+#        workbook.Replace(oldValue, dataColumn, true);
+#        //Save to file
+#        workbook.SaveToFile("Replace.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="oldValue">Value to replace.</param>
+#    <param name="newValues">New data.</param>
+#    <param name="includeColumnName">Indicates whether includes column name.</param>
+#        """
+#        intPtrnewValues:c_void_p = newValues.Ptr
+#
+#        GetDllLibXls().Workbook_Replace.argtypes=[c_void_p ,c_void_p,c_void_p,c_bool]
+#        CallCFunction(GetDllLibXls().Workbook_Replace, self.Ptr, oldValue,intPtrnewValues,includeColumnName)
+
+
+#    @dispatch
+#
+#    def Replace(self ,oldValue:str,newValues:'DataTable',includeColumnName:bool):
+#        """
+#    <summary>
+#         Replaces cell's value from data table values.
+#        <example>The following code snippet illustrates how to replace the string value with data table:
+#        <code>
+#        //Create workbook
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        //Replace the oldValue by data table
+#        string oldValue = "Find";
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("Dosage", typeof(int));
+#        table.Rows.Add(1);
+#        workbook.Replace(oldValue, table, true);
+#        //Save to file
+#        workbook.SaveToFile("Replace.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="oldValue">Value to replace.</param>
+#    <param name="newValues">New data.</param>
+#    <param name="includeColumnName">Indicates whether includes column name.</param>
+#        """
+#        intPtrnewValues:c_void_p = newValues.Ptr
+#
+#        GetDllLibXls().Workbook_ReplaceONI.argtypes=[c_void_p ,c_void_p,c_void_p,c_bool]
+#        CallCFunction(GetDllLibXls().Workbook_ReplaceONI, self.Ptr, oldValue,intPtrnewValues,includeColumnName)
+
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValue:DateTime):
+        """
+    <summary>
+         Replaces cell's value by specified value.
+        <example>The following code illustrates how to replace the string value with datetime:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Replace the oldValue by dateTime
+        string oldValue = "Find";
+        DateTime dateTime = DateTime.Now;
+        workbook.Replace(oldValue, dateTime);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">Value to replace.</param>
+    <param name="newValue">New value</param>
+        """
+        intPtrnewValue:c_void_p = newValue.Ptr
+
+        GetDllLibXls().Workbook_ReplaceDT.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_ReplaceDT, self.Ptr, oldValue,intPtrnewValue)
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValue:float):
+        """
+    <summary>
+         Replaces cell's value by specified value.
+        <example>The following code snippet illustrates how to replace the string with double:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Replace the oldValue by double
+        string oldValue = "Ten";
+        workbook.Replace(oldValue, 10.0);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">Value to replace.</param>
+    <param name="newValue">New value.</param>
+        """
+        
+        GetDllLibXls().Workbook_ReplaceD.argtypes=[c_void_p ,c_void_p,c_double]
+        CallCFunction(GetDllLibXls().Workbook_ReplaceD, self.Ptr, oldValue,newValue)
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValues:List[float],isVertical:bool):
+        """
+    <summary>
+         Replaces cell's value from array.
+        <example>The following code snippet illustrates how to replace the string with array of double values:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Replace the oldValue by array of double values
+        string oldValue = "Find";
+        double[] newValues = { 1.0, 2.0 };
+        workbook.Replace(oldValue, newValues, true);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">Value to replace.</param>
+    <param name="newValues">New values.</param>
+    <param name="isVertical">Indicates whether new values should be inserted vertically.</param>
+        """
+        #arraynewValues:ArrayTypenewValues = ""
+        countnewValues = len(newValues)
+        ArrayTypenewValues = c_double * countnewValues
+        arraynewValues = ArrayTypenewValues()
+        for i in range(0, countnewValues):
+            arraynewValues[i] = newValues[i]
+
+
+        GetDllLibXls().Workbook_ReplaceVD.argtypes=[c_void_p ,c_void_p,ArrayTypenewValues,c_int,c_bool]
+        CallCFunction(GetDllLibXls().Workbook_ReplaceVD, self.Ptr, oldValue,arraynewValues,countnewValues,isVertical)
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValues:List[int],isVertical:bool):
+        """
+    <summary>
+         Replaces cell's value from array.
+        <example>The following code snippet illustrates how to replace the string with array of int values:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Replace the oldValue by array of int values
+        string oldValue = "Find";
+        int[] newValues = { 1, 2 };
+        workbook.Replace(oldValue, newValues, true);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">Value to replace.</param>
+    <param name="newValues">New values.</param>
+    <param name="isVertical">Indicates whether new values should be inserted vertically.</param>
+        """
+        #arraynewValues:ArrayTypenewValues = ""
+        countnewValues = len(newValues)
+        ArrayTypenewValues = c_int * countnewValues
+        arraynewValues = ArrayTypenewValues()
+        for i in range(0, countnewValues):
+            arraynewValues[i] = newValues[i]
+
+
+        GetDllLibXls().Workbook_ReplaceVI.argtypes=[c_void_p ,c_void_p,ArrayTypenewValues,c_int,c_bool]
+        CallCFunction(GetDllLibXls().Workbook_ReplaceVI, self.Ptr, oldValue,arraynewValues,countnewValues,isVertical)
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValue:str):
+        """
+    <summary>
+         Replaces cell's value by specified value.
+        <example>The following code snippet illustrates how to replace the string with another string:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Replace the oldValue by newValue
+        string oldValue = "Find";
+        string newValue = "NewValue";
+        workbook.Replace(oldValue, newValue);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">Value to replace.</param>
+    <param name="newValue">New value</param>
+        """
+        
+        GetDllLibXls().Workbook_ReplaceS.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_ReplaceS, self.Ptr, oldValue,newValue)
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValues:List[str],isVertical:bool):
+        """
+    <summary>
+         Replaces cell's value from array.
+        <example>The following code snippet illustrates how to replace the string with array of string values:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Replace the oldValue by array of string values
+        string oldValue = "Find";
+        string[] newValues = { "X values", "Y values" };
+        workbook.Replace(oldValue, newValues , true);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">Value to replace.</param>
+    <param name="newValues">New values.</param>
+    <param name="isVertical">Indicates whether new values should be inserted vertically.</param>
+        """
+        #arraynewValues:ArrayTypenewValues = ""
+        countnewValues = len(newValues)
+        ArrayTypenewValues = c_wchar_p * countnewValues
+        arraynewValues = ArrayTypenewValues()
+        for i in range(0, countnewValues):
+            arraynewValues[i] = newValues[i]
+
+
+        GetDllLibXls().Workbook_ReplaceVS.argtypes=[c_void_p ,c_void_p,ArrayTypenewValues,c_int,c_bool]
+        CallCFunction(GetDllLibXls().Workbook_ReplaceVS, self.Ptr, oldValue,arraynewValues,countnewValues,isVertical)
+
+    def ResetPalette(self):
+        """
+    <summary>
+         Resets the color palette to the default colors. 
+        <example>The following code snippets illustrates how to reset the palette:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Get colors
+        System.Drawing.Color[] colors = workbook.Colors;
+        //Check color
+        Console.WriteLine(colors[2].Name);
+        //Set color
+        colors[2] = System.Drawing.Color.Yellow;
+        //Reset palette
+        workbook.ResetPalette();
+        //Check color
+        Console.WriteLine(workbook.Colors[2].Name);
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().Workbook_ResetPalette.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_ResetPalette, self.Ptr)
+
+    def Save(self):
+        """
+    <summary>
+        Saves changes to the specified workbook
+    </summary>
+        """
+        GetDllLibXls().Workbook_Save.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_Save, self.Ptr)
+
+    @dispatch
+    def SaveAsImage(self ,dpiX:float,dpiY:float)->List[Stream]:
+        """
+
+        """
+        
+        GetDllLibXls().Workbook_SaveAsImage.argtypes=[c_void_p ,c_float,c_float]
+        GetDllLibXls().Workbook_SaveAsImage.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().Workbook_SaveAsImage, self.Ptr, dpiX,dpiY)
+        ret = GetObjVectorFromArray(intPtrArray, Stream)
+        return ret
+
+
+    @property
+
+    def Worksheets(self)->'WorksheetsCollection':
+        """
+    <summary>
+        Returns a Sheets collection that represents all the worksheets in the specified workbook. Read-only Sheets object.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_Worksheets.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_Worksheets.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_get_Worksheets, self.Ptr)
+        ret = None if intPtr==None else WorksheetsCollection(intPtr)
+        return ret
+
+
+    @property
+
+    def NameRanges(self)->'INameRanges':
+        """
+    <summary>
+         Gets Names collection that represents all the names in the specified
+             workbook.
+        <example>The following code snippet illustrates how to get names:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Get names
+        INameRanges names = workbook.NameRanges;
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_NameRanges.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_NameRanges.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_get_NameRanges, self.Ptr)
+        ret = None if intPtr==None else INameRanges(intPtr)
+        return ret
+
+
+    @property
+    def CheckComptiliblity(self)->bool:
+        """
+
+        """
+        GetDllLibXls().Workbook_get_CheckComptiliblity.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_CheckComptiliblity.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_CheckComptiliblity, self.Ptr)
+        return ret
+
+    @CheckComptiliblity.setter
+    def CheckComptiliblity(self, value:bool):
+        GetDllLibXls().Workbook_set_CheckComptiliblityB.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().Workbook_set_CheckComptiliblityB, self.Ptr, value)
+
+    @property
+
+    def DataConns(self)->'DataConnections':
+        """
+
+        """
+        GetDllLibXls().Workbook_get_DataConns.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_DataConns.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_get_DataConns, self.Ptr)
+        ret = None if intPtr==None else DataConnections(intPtr)
+        return ret
+
+
+    @property
+
+    def CultureInfo(self)->'CultureInfo':
+        """
+
+        """
+        GetDllLibXls().Workbook_get_CultureInfo.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_CultureInfo.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_get_CultureInfo, self.Ptr)
+        ret = None if intPtr==None else CultureInfo(intPtr)
+        return ret
+
+
+    @CultureInfo.setter
+    def CultureInfo(self, value:'CultureInfo'):
+        GetDllLibXls().Workbook_set_CultureInfo.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_set_CultureInfo, self.Ptr, value.Ptr)
+
+    @property
+
+    def ExternalLinks(self)->'ExternalLinkCollection':
+        """
+
+        """
+        GetDllLibXls().Workbook_get_ExternalLinks.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_ExternalLinks.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_get_ExternalLinks, self.Ptr)
+        ret = None if intPtr==None else ExternalLinkCollection(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def GetSafeSheetName(self ,inputName:str)->str:
+        """
+
+        """
+        
+        GetDllLibXls().Workbook_GetSafeSheetName.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().Workbook_GetSafeSheetName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().Workbook_GetSafeSheetName, self.Ptr, inputName))
+        return ret
+
+
+    @dispatch
+
+    def GetSafeSheetName(self ,inputName:str,replaceChar:int)->str:
+        """
+
+        """
+        
+        GetDllLibXls().Workbook_GetSafeSheetNameIR.argtypes=[c_void_p ,c_void_p,c_void_p]
+        GetDllLibXls().Workbook_GetSafeSheetNameIR.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().Workbook_GetSafeSheetNameIR, self.Ptr, inputName,replaceChar))
+        return ret
+
+
+    @property
+
+    def ActiveSheet(self)->'Worksheet':
+        """
+    <summary>
+        Returns an object that represents the active sheet (the sheet 
+            on top) in the active workbook or in the specified window or 
+            workbook. Returns Nothing if no sheet is active. Read-only.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_ActiveSheet.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_ActiveSheet.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_get_ActiveSheet, self.Ptr)
+        ret = None if intPtr==None else Worksheet(intPtr)
+        return ret
+
+
+    @property
+    def Allow3DRangesInDataValidation(self)->bool:
+        """
+
+        """
+        GetDllLibXls().Workbook_get_Allow3DRangesInDataValidation.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_Allow3DRangesInDataValidation.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_Allow3DRangesInDataValidation, self.Ptr)
+        return ret
+
+    @Allow3DRangesInDataValidation.setter
+    def Allow3DRangesInDataValidation(self, value:bool):
+        GetDllLibXls().Workbook_set_Allow3DRangesInDataValidationV.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().Workbook_set_Allow3DRangesInDataValidationV, self.Ptr, value)
+
+    @property
+    def ActiveSheetIndex(self)->int:
+        """
+    <summary>
+        Gets or sets index of the active worksheet.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_ActiveSheetIndex.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_ActiveSheetIndex.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Workbook_get_ActiveSheetIndex, self.Ptr)
+        return ret
+
+    @ActiveSheetIndex.setter
+    def ActiveSheetIndex(self, value:int):
+        GetDllLibXls().Workbook_set_ActiveSheetIndex.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().Workbook_set_ActiveSheetIndex, self.Ptr, value)
+
+    @property
+
+    def AddInFunctions(self)->'AddInFunctionsCollection':
+        """
+    <summary>
+        Returns collection of add-in functions. 
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_AddInFunctions.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_AddInFunctions.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_get_AddInFunctions, self.Ptr)
+        ret = None if intPtr==None else AddInFunctionsCollection(intPtr)
+        return ret
+
+
+    @property
+
+    def CalculationMode(self)->'ExcelCalculationMode':
+        """
+    <summary>
+        Get or set calculation mode.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_CalculationMode.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_CalculationMode.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Workbook_get_CalculationMode, self.Ptr)
+        objwraped = ExcelCalculationMode(ret)
+        return objwraped
+
+    @CalculationMode.setter
+    def CalculationMode(self, value:'ExcelCalculationMode'):
+        GetDllLibXls().Workbook_set_CalculationMode.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().Workbook_set_CalculationMode, self.Ptr, value.value)
+
+    @property
+
+    def DataSorter(self)->'DataSorter':
+        """
+    <summary>
+        Gets Data sorter to sort the data..
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_DataSorter.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_DataSorter.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_get_DataSorter, self.Ptr)
+        ret = None if intPtr==None else DataSorter(intPtr)
+        return ret
+
+
+    @property
+    def MaxColumnCount(self)->int:
+        """
+
+        """
+        GetDllLibXls().Workbook_get_MaxColumnCount.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_MaxColumnCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Workbook_get_MaxColumnCount, self.Ptr)
+        return ret
+
+    @property
+    def MaxRowCount(self)->int:
+        """
+
+        """
+        GetDllLibXls().Workbook_get_MaxRowCount.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_MaxRowCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Workbook_get_MaxRowCount, self.Ptr)
+        return ret
+
+    @property
+
+    def CodeName(self)->str:
+        """
+    <summary>
+        Name which used by macros to access to workbook items.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_CodeName.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_CodeName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().Workbook_get_CodeName, self.Ptr))
+        return ret
+
+
+    @CodeName.setter
+    def CodeName(self, value:str):
+        GetDllLibXls().Workbook_set_CodeName.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().Workbook_set_CodeName, self.Ptr, value)
+
+    @property
+
+    def Colors(self)->List['Color']:
+        """
+    <summary>
+         Returns colors in the palette for the workbook. The palette has 56 entries, each represented by an RGB value. Read/write Object.
+        <example>The following code illustrates how to access the default colors of excel color palette:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Get colors
+        System.Drawing.Color[] colors = workbook.Colors;
+        //Get color
+        System.Drawing.Color color = colors[2];
+        //Set color
+        worksheet["B2"].Style.Color = color;
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_Colors.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_Colors.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().Workbook_get_Colors, self.Ptr)
+        ret = GetVectorFromArray(intPtrArray, Color)
+        return ret
+
+
+    @property
+
+    def ConverterSetting(self)->'ConverterSetting':
+        """
+
+        """
+        GetDllLibXls().Workbook_get_ConverterSetting.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_ConverterSetting.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_get_ConverterSetting, self.Ptr)
+        ret = None if intPtr==None else ConverterSetting(intPtr)
+        return ret
+
+
+    @ConverterSetting.setter
+    def ConverterSetting(self, value:'ConverterSetting'):
+        GetDllLibXls().Workbook_set_ConverterSetting.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().Workbook_set_ConverterSetting, self.Ptr, value.Ptr)
+
+    @property
+    def Date1904(self)->bool:
+        """
+    <summary>
+        True if the workbook uses the 1904 date system. Read/write Boolean.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_Date1904.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_Date1904.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_Date1904, self.Ptr)
+        return ret
+
+    @Date1904.setter
+    def Date1904(self, value:bool):
+        GetDllLibXls().Workbook_set_Date1904.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().Workbook_set_Date1904, self.Ptr, value)
+
+    @property
+    def MaxRowsOfSharedFormula(self)->int:
+        """
+
+        """
+        GetDllLibXls().Workbook_get_MaxRowsOfSharedFormula.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_MaxRowsOfSharedFormula.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Workbook_get_MaxRowsOfSharedFormula, self.Ptr)
+        return ret
+
+    @MaxRowsOfSharedFormula.setter
+    def MaxRowsOfSharedFormula(self, value:int):
+        GetDllLibXls().Workbook_set_MaxRowsOfSharedFormula.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().Workbook_set_MaxRowsOfSharedFormula, self.Ptr, value)
+
+    @property
+
+    def DefaultFontName(self)->str:
+        """
+    <summary>
+         Returns or sets the name of the default font.
+        <example>The following code illustrates how to set the standard font for the workbook:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet["B2"].Text = "Text";
+        //Set standard font
+        workbook.DefaultFontName = "Arial";
+        //Set standard font size
+        workbook.DefaultFontSize = 18;
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_DefaultFontName.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_DefaultFontName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().Workbook_get_DefaultFontName, self.Ptr))
+        return ret
+
+
+    @DefaultFontName.setter
+    def DefaultFontName(self, value:str):
+        GetDllLibXls().Workbook_set_DefaultFontName.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().Workbook_set_DefaultFontName, self.Ptr, value)
+
+    @property
+    def DefaultFontSize(self)->float:
+        """
+    <summary>
+         Returns or sets the default font size.
+        <example>The following code illustrates how to set the standard font size for the workbook:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet["B2"].Text = "Text";
+        //Set standard font
+        workbook.DefaultFontName = "Arial";
+        //Set standard font size
+        workbook.DefaultFontSize = 18;
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_DefaultFontSize.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_DefaultFontSize.restype=c_double
+        ret = CallCFunction(GetDllLibXls().Workbook_get_DefaultFontSize, self.Ptr)
+        return ret
+
+    @DefaultFontSize.setter
+    def DefaultFontSize(self, value:float):
+        GetDllLibXls().Workbook_set_DefaultFontSize.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().Workbook_set_DefaultFontSize, self.Ptr, value)
+
+    @property
+
+    def CustomFontFilePaths(self)->List[str]:
+        """
+    <summary>
+        Returns or sets the custom path of font files.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_CustomFontFilePaths.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_CustomFontFilePaths.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().Workbook_get_CustomFontFilePaths, self.Ptr)
+        ret = GetStrVectorFromArray(intPtrArray, c_void_p)
+        return ret
+
+    @CustomFontFilePaths.setter
+    def CustomFontFilePaths(self, value:List[str]):
+        vCount = len(value)
+        ArrayType = c_wchar_p * vCount
+        vArray = ArrayType()
+        for i in range(0, vCount):
+            vArray[i] = value[i]
+        GetDllLibXls().Workbook_set_CustomFontFilePaths.argtypes=[c_void_p, ArrayType, c_int]
+        CallCFunction(GetDllLibXls().Workbook_set_CustomFontFilePaths, self.Ptr, vArray, vCount)
+
+#
+#    def GetCustomFontParsedResult(self)->'Hashtable':
+#        """
+#    <summary>
+#        Get result that parse the custom path of font files 
+#    </summary>
+#        """
+#        GetDllLibXls().Workbook_GetCustomFontParsedResult.argtypes=[c_void_p]
+#        GetDllLibXls().Workbook_GetCustomFontParsedResult.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().Workbook_GetCustomFontParsedResult, self.Ptr)
+#        ret = None if intPtr==None else Hashtable(intPtr)
+#        return ret
+#
+
+
+    @property
+
+    def CustomFontFileDirectory(self)->List[str]:
+        """
+    <summary>
+        Sets the custom directory of font files.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_CustomFontFileDirectory.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_CustomFontFileDirectory.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().Workbook_get_CustomFontFileDirectory, self.Ptr)
+        ret = GetStrVectorFromArray(intPtrArray, c_void_p)
+        return ret
+
+    @CustomFontFileDirectory.setter
+    def CustomFontFileDirectory(self, value:List[str]):
+        vCount = len(value)
+        ArrayType = c_wchar_p * vCount
+        vArray = ArrayType()
+        for i in range(0, vCount):
+            vArray[i] = value[i]
+        GetDllLibXls().Workbook_set_CustomFontFileDirectory.argtypes=[c_void_p, ArrayType, c_int]
+        CallCFunction(GetDllLibXls().Workbook_set_CustomFontFileDirectory, self.Ptr, vArray, vCount)
+
+    @property
+    def DisableMacrosStart(self)->bool:
+        """
+    <summary>
+        Allows users to disable load of macros from document.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_DisableMacrosStart.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_DisableMacrosStart.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_DisableMacrosStart, self.Ptr)
+        return ret
+
+    @DisableMacrosStart.setter
+    def DisableMacrosStart(self, value:bool):
+        GetDllLibXls().Workbook_set_DisableMacrosStart.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().Workbook_set_DisableMacrosStart, self.Ptr, value)
+
+    @property
+
+    def FileName(self)->str:
+        """
+    <summary>
+        Gets file name.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_FileName.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_FileName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().Workbook_get_FileName, self.Ptr))
+        return ret
+
+
+    @property
+    def HasMacros(self)->bool:
+        """
+    <summary>
+        Indicates whether contains VBA macros.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_HasMacros.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_HasMacros.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_HasMacros, self.Ptr)
+        return ret
+
+    @HasMacros.setter
+    def HasMacros(self, value:bool):
+        GetDllLibXls().Workbook_set_HasMacros.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().Workbook_set_HasMacros, self.Ptr, value)
+
+    @property
+    def IsCellProtection(self)->bool:
+        """
+    <summary>
+        Indicates whether cells are protected.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_IsCellProtection.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_IsCellProtection.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_IsCellProtection, self.Ptr)
+        return ret
+
+    @property
+    def IsRightToLeft(self)->bool:
+        """
+    <summary>
+        Indicates whether worksheet is displayed right to left.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_IsRightToLeft.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_IsRightToLeft.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_IsRightToLeft, self.Ptr)
+        return ret
+
+    @IsRightToLeft.setter
+    def IsRightToLeft(self, value:bool):
+        GetDllLibXls().Workbook_set_IsRightToLeft.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().Workbook_set_IsRightToLeft, self.Ptr, value)
+
+    @property
+    def IsSaved(self)->bool:
+        """
+    <summary>
+        Indicates whether workbook changes have been saved. 
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_IsSaved.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_IsSaved.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_IsSaved, self.Ptr)
+        return ret
+
+    @IsSaved.setter
+    def IsSaved(self, value:bool):
+        GetDllLibXls().Workbook_set_IsSaved.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().Workbook_set_IsSaved, self.Ptr, value)
+
+    @property
+    def IsWindowProtection(self)->bool:
+        """
+    <summary>
+        Indicates window is protected.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_IsWindowProtection.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_IsWindowProtection.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_IsWindowProtection, self.Ptr)
+        return ret
+
+    @property
+
+    def MarkerDesigner(self)->'MarkerDesigner':
+        """
+
+        """
+        GetDllLibXls().Workbook_get_MarkerDesigner.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_MarkerDesigner.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_get_MarkerDesigner, self.Ptr)
+        ret = None if intPtr==None else MarkerDesigner(intPtr)
+        return ret
+
+
+    @property
+    def MaxDigitWidth(self)->int:
+        """
+
+        """
+        GetDllLibXls().Workbook_get_MaxDigitWidth.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_MaxDigitWidth.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Workbook_get_MaxDigitWidth, self.Ptr)
+        return ret
+
+    @property
+
+    def OpenPassword(self)->str:
+        """
+    <summary>
+        Returns or sets password to encrypt document.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_OpenPassword.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_OpenPassword.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().Workbook_get_OpenPassword, self.Ptr))
+        return ret
+
+
+    @OpenPassword.setter
+    def OpenPassword(self, value:str):
+        GetDllLibXls().Workbook_set_OpenPassword.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().Workbook_set_OpenPassword, self.Ptr, value)
+
+    @property
+
+    def WriteProtection(self)->'WriteProtection':
+        """
+    <summary>
+        Returns options of the workbook write protection.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_WriteProtection.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_WriteProtection.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_get_WriteProtection, self.Ptr)
+        ret = None if intPtr==None else WriteProtection(intPtr)
+        return ret
+
+
+    @property
+    def IsVScrollBarVisible(self)->bool:
+        """
+    <summary>
+         Returns or sets whether show vertical scroll bar.
+        <example>This sample shows how to hide vertical scroll bar:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        //Hide vertical scroll bar
+        workbook.IsVScrollBarVisible = false;
+        //Save to file
+        workbook.SaveToFile("IsVScrollBarVisible.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_IsVScrollBarVisible.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_IsVScrollBarVisible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_IsVScrollBarVisible, self.Ptr)
+        return ret
+
+    @IsVScrollBarVisible.setter
+    def IsVScrollBarVisible(self, value:bool):
+        GetDllLibXls().Workbook_set_IsVScrollBarVisible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().Workbook_set_IsVScrollBarVisible, self.Ptr, value)
+
+    @property
+    def IsHScrollBarVisible(self)->bool:
+        """
+    <summary>
+         Returns or sets whether show horizontal scroll bar.
+        <example>This sample shows how to hide horizontal scroll bar:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        //Hide horizontal scroll bar
+        workbook.IsHScrollBarVisible = false;
+        //Save to file
+        workbook.SaveToFile("IsHScrollBarVisible.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_IsHScrollBarVisible.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_IsHScrollBarVisible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_IsHScrollBarVisible, self.Ptr)
+        return ret
+
+    @IsHScrollBarVisible.setter
+    def IsHScrollBarVisible(self, value:bool):
+        GetDllLibXls().Workbook_set_IsHScrollBarVisible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().Workbook_set_IsHScrollBarVisible, self.Ptr, value)
+
+    @property
+    def SheetTabBarWidth(self)->int:
+        """
+    <summary>
+        Returns or sets the width of worksheet tab bar. 1/1000 of window width.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_SheetTabBarWidth.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_SheetTabBarWidth.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Workbook_get_SheetTabBarWidth, self.Ptr)
+        return ret
+
+    @SheetTabBarWidth.setter
+    def SheetTabBarWidth(self, value:int):
+        GetDllLibXls().Workbook_set_SheetTabBarWidth.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().Workbook_set_SheetTabBarWidth, self.Ptr, value)
+
+    @property
+    def OptimizeImport(self)->bool:
+        """
+    <summary>
+        Indicates whether to optimize Import data. This option will
+            take effect only on Import methods that are available with the worksheet
+            WARNING: Setting this property to True can decrease memory significantly,
+            but will increase the performance of data import .
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_OptimizeImport.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_OptimizeImport.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_OptimizeImport, self.Ptr)
+        return ret
+
+    @OptimizeImport.setter
+    def OptimizeImport(self, value:bool):
+        GetDllLibXls().Workbook_set_OptimizeImport.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().Workbook_set_OptimizeImport, self.Ptr, value)
+
+    @property
+
+    def PivotCaches(self)->'PivotCachesCollection':
+        """
+    <summary>
+        Returns pivot caches collection. Read-only.
+            <example>The following code snippet illustrates how to get pivot caches:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Gets pivot caches collection
+        IPivotCaches pivotCaches = workbook.PivotCaches;
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_PivotCaches.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_PivotCaches.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_get_PivotCaches, self.Ptr)
+        ret = None if intPtr==None else PivotCachesCollection(intPtr)
+        return ret
+
+
+#    @PrintDialog.setter
+#    def PrintDialog(self, value:'PrintDialog'):
+#        GetDllLibXls().Workbook_set_PrintDialog.argtypes=[c_void_p, c_void_p]
+#        CallCFunction(GetDllLibXls().Workbook_set_PrintDialog, self.Ptr, value.Ptr)
+
+
+#    @property
+#
+#    def PrintDocument(self)->'PrintDocument':
+#        """
+#    <summary>
+#        Gets the PrintDocument
+#    </summary>
+#        """
+#        GetDllLibXls().Workbook_get_PrintDocument.argtypes=[c_void_p]
+#        GetDllLibXls().Workbook_get_PrintDocument.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().Workbook_get_PrintDocument, self.Ptr)
+#        ret = None if intPtr==None else PrintDocument(intPtr)
+#        return ret
+#
+
+
+    @property
+    def ReadOnly(self)->bool:
+        """
+    <summary>
+        Indicates whether the workbook has been opened as Read-only.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_ReadOnly.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_ReadOnly.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_ReadOnly, self.Ptr)
+        return ret
+
+    @property
+    def SelectedTab(self)->int:
+        """
+    <summary>
+        Gets or sets tab index of selected.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_SelectedTab.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_SelectedTab.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Workbook_get_SelectedTab, self.Ptr)
+        return ret
+
+    @SelectedTab.setter
+    def SelectedTab(self, value:int):
+        GetDllLibXls().Workbook_set_SelectedTab.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().Workbook_set_SelectedTab, self.Ptr, value)
+
+    @property
+    def ShowTabs(self)->bool:
+        """
+    <summary>
+        Get or sets a value whether the Workbook tabs are displayed.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_ShowTabs.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_ShowTabs.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_ShowTabs, self.Ptr)
+        return ret
+
+    @ShowTabs.setter
+    def ShowTabs(self, value:bool):
+        GetDllLibXls().Workbook_set_ShowTabs.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().Workbook_set_ShowTabs, self.Ptr, value)
+
+    @property
+
+    def Styles(self)->'StylesCollection':
+        """
+    <summary>
+         Returns a Styles collection that represents all the styles in the specified workbook. Read-only.
+        <example>The following code snippet illustrates how to get the Styles:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set styles
+        IStyles styles = workbook.Styles;
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_Styles.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_Styles.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_get_Styles, self.Ptr)
+        ret = None if intPtr==None else StylesCollection(intPtr)
+        return ret
+
+
+    @property
+    def UseStorageMode(self)->bool:
+        """
+    <summary>
+        User Compound storage mode
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_UseStorageMode.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_UseStorageMode.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_UseStorageMode, self.Ptr)
+        return ret
+
+    @UseStorageMode.setter
+    def UseStorageMode(self, value:bool):
+        GetDllLibXls().Workbook_set_UseStorageMode.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().Workbook_set_UseStorageMode, self.Ptr, value)
+
+    @property
+
+    def Version(self)->'ExcelVersion':
+        """
+
+        """
+        GetDllLibXls().Workbook_get_Version.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_Version.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Workbook_get_Version, self.Ptr)
+        objwraped = ExcelVersion(ret)
+        return objwraped
+
+    @Version.setter
+    def Version(self, value:'ExcelVersion'):
+        GetDllLibXls().Workbook_set_Version.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().Workbook_set_Version, self.Ptr, value.value)
+
+    @property
+    def IsHideWindow(self)->bool:
+        """
+    <summary>
+        Hide window
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_IsHideWindow.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_IsHideWindow.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().Workbook_get_IsHideWindow, self.Ptr)
+        return ret
+
+    @IsHideWindow.setter
+    def IsHideWindow(self, value:bool):
+        GetDllLibXls().Workbook_set_IsHideWindow.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().Workbook_set_IsHideWindow, self.Ptr, value)
+
+    @property
+
+    def Charts(self)->'ChartsCollection':
+        """
+    <summary>
+        Returns a Sheets collection that represents all the chart sheets in the specified workbook. Read-only.
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_Charts.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_Charts.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_get_Charts, self.Ptr)
+        ret = None if intPtr==None else ChartsCollection(intPtr)
+        return ret
+
+
+#    @property
+#
+#    def Chartsheets(self)->'List1':
+#        """
+#
+#        """
+#        GetDllLibXls().Workbook_get_Chartsheets.argtypes=[c_void_p]
+#        GetDllLibXls().Workbook_get_Chartsheets.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().Workbook_get_Chartsheets, self.Ptr)
+#        ret = None if intPtr==None else List1(intPtr)
+#        return ret
+#
+
+
+    @property
+
+    def CustomDocumentProperties(self)->'ICustomDocumentProperties':
+        """
+    <summary>
+         Returns collection that represents all the custom document properties
+             for the specified workbook. Read-only.
+        <example>The following code snippet illustrates how to get the custom document properties:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Get the document properties
+        ICustomDocumentProperties documentProperties = workbook.CustomDocumentProperties;
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_CustomDocumentProperties.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_CustomDocumentProperties.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_get_CustomDocumentProperties, self.Ptr)
+        ret = None if intPtr==None else ICustomDocumentProperties(intPtr)
+        return ret
+
+
+#    @property
+#
+#    def CustomTableStyles(self)->'Dictionary2':
+#        """
+#
+#        """
+#        GetDllLibXls().Workbook_get_CustomTableStyles.argtypes=[c_void_p]
+#        GetDllLibXls().Workbook_get_CustomTableStyles.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().Workbook_get_CustomTableStyles, self.Ptr)
+#        ret = None if intPtr==None else Dictionary2(intPtr)
+#        return ret
+#
+
+
+    @property
+
+    def DocumentProperties(self)->'BuiltInDocumentProperties':
+        """
+    <summary>
+         Returns a BuiltInDocumentProperties collection that represents all the built-in document properties for the specified workbook. Read-only.
+        <example>The following code snippet illustrates how to get the built in document properties:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Get the built in document properties
+        IBuiltInDocumentProperties builtInDocumentProperties = workbook.DocumentProperties;
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().Workbook_get_DocumentProperties.argtypes=[c_void_p]
+        GetDllLibXls().Workbook_get_DocumentProperties.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_get_DocumentProperties, self.Ptr)
+        ret = None if intPtr==None else BuiltInDocumentProperties(intPtr)
+        return ret
+
+
+    @staticmethod
+
+    def FixDateTimeNow()->'DateTime':
+        """
+
+        """
+        #GetDllLibXls().Workbook_FixDateTimeNow.argtypes=[]
+        GetDllLibXls().Workbook_FixDateTimeNow.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_FixDateTimeNow)
+        ret = None if intPtr==None else DateTime(intPtr)
+        return ret
+
+
+    @staticmethod
+
+    def FixDateTimeToday()->'DateTime':
+        """
+
+        """
+        #GetDllLibXls().Workbook_FixDateTimeToday.argtypes=[]
+        GetDllLibXls().Workbook_FixDateTimeToday.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Workbook_FixDateTimeToday)
+        ret = None if intPtr==None else DateTime(intPtr)
+        return ret
+
+

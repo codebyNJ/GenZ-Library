@@ -1,0 +1,118 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IHyperLink (  IExcelApplication) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def Address(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Address.setter
+    @abc.abstractmethod
+    def Address(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Name(self)->str:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Range(self)->'IXLSRange':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ScreenTip(self)->str:
+        """
+
+        """
+        pass
+
+
+    @ScreenTip.setter
+    @abc.abstractmethod
+    def ScreenTip(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def SubAddress(self)->str:
+        """
+
+        """
+        pass
+
+
+    @SubAddress.setter
+    @abc.abstractmethod
+    def SubAddress(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def TextToDisplay(self)->str:
+        """
+
+        """
+        pass
+
+
+    @TextToDisplay.setter
+    @abc.abstractmethod
+    def TextToDisplay(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Type(self)->'HyperLinkType':
+        """
+
+        """
+        pass
+
+

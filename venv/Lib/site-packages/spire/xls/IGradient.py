@@ -1,0 +1,174 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IGradient (abc.ABC) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def BackColorObject(self)->'OColor':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ForeColorObject(self)->'OColor':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BackColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @BackColor.setter
+    @abc.abstractmethod
+    def BackColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BackKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @BackKnownColor.setter
+    @abc.abstractmethod
+    def BackKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ForeColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @ForeColor.setter
+    @abc.abstractmethod
+    def ForeColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ForeKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @ForeKnownColor.setter
+    @abc.abstractmethod
+    def ForeKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def GradientStyle(self)->'GradientStyleType':
+        """
+
+        """
+        pass
+
+
+    @GradientStyle.setter
+    @abc.abstractmethod
+    def GradientStyle(self, value:'GradientStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def GradientVariant(self)->'GradientVariantsType':
+        """
+
+        """
+        pass
+
+
+    @GradientVariant.setter
+    @abc.abstractmethod
+    def GradientVariant(self, value:'GradientVariantsType'):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def CompareTo(self ,gradient:'IGradient')->int:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+    @abc.abstractmethod
+    def TwoColorGradient(self):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def TwoColorGradient(self ,style:GradientStyleType,variant:GradientVariantsType):
+        """
+
+        """
+        pass
+
+

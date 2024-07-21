@@ -1,0 +1,38 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class PivotCalculatedFieldsCollection (CollectionBase[XlsPivotField],  IPivotCalculatedFields) :
+    """
+
+    """
+    @property
+
+    def Parent(self)->'XlsPivotTable':
+        """
+
+        """
+        GetDllLibXls().PivotCalculatedFieldsCollection_get_Parent.argtypes=[c_void_p]
+        GetDllLibXls().PivotCalculatedFieldsCollection_get_Parent.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PivotCalculatedFieldsCollection_get_Parent, self.Ptr)
+        ret = None if intPtr==None else XlsPivotTable(intPtr)
+        return ret
+
+
+
+    def Add(self ,name:str,formula:str)->'IPivotField':
+        """
+
+        """
+        
+        GetDllLibXls().PivotCalculatedFieldsCollection_Add.argtypes=[c_void_p ,c_void_p,c_void_p]
+        GetDllLibXls().PivotCalculatedFieldsCollection_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PivotCalculatedFieldsCollection_Add, self.Ptr, name,formula)
+        ret = None if intPtr==None else XlsPivotField(intPtr)
+        return ret
+
+

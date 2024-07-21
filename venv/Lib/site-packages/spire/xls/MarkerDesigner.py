@@ -1,0 +1,172 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class MarkerDesigner (SpireObject) :
+    """
+    <summary>
+        WorkbookDesignerused for template markers to the workbook and worksheet.
+    </summary>
+    """
+#    @dispatch
+#
+#    def AddDataTable(self ,paraName:str,dataTable:'DataTable'):
+#        """
+#    <summary>
+#        Add datatable to template markers(Match column name automatically).
+#    </summary>
+#    <param name="paraName">Parameter Name</param>
+#    <param name="dataTable">Datatable object</param>
+#        """
+#        intPtrdataTable:c_void_p = dataTable.Ptr
+#
+#        GetDllLibXls().MarkerDesigner_AddDataTable.argtypes=[c_void_p ,c_void_p,c_void_p]
+#        CallCFunction(GetDllLibXls().MarkerDesigner_AddDataTable, self.Ptr, paraName,intPtrdataTable)
+
+
+#    @dispatch
+#
+#    def AddDataTable(self ,paraName:str,dataTable:'DataTable',rowCount:int):
+#        """
+#    <summary>
+#        Add datatable to template markers(Match column name automatically).
+#    </summary>
+#    <param name="paraName">Parameter Name</param>
+#    <param name="dataTable">Datatable object</param>
+#    <param name="rowCount">Number of data rows used per apply</param>
+#        """
+#        intPtrdataTable:c_void_p = dataTable.Ptr
+#
+#        GetDllLibXls().MarkerDesigner_AddDataTablePDR.argtypes=[c_void_p ,c_void_p,c_void_p,c_int]
+#        CallCFunction(GetDllLibXls().MarkerDesigner_AddDataTablePDR, self.Ptr, paraName,intPtrdataTable,rowCount)
+
+
+#
+#    def AddDataView(self ,paraName:str,dataView:'DataView'):
+#        """
+#    <summary>
+#        Add dataview to template markers(Match column name automatically).
+#    </summary>
+#    <param name="paraName">Parameter Name</param>
+#    <param name="dataTable">Datatable object</param>
+#        """
+#        intPtrdataView:c_void_p = dataView.Ptr
+#
+#        GetDllLibXls().MarkerDesigner_AddDataView.argtypes=[c_void_p ,c_void_p,c_void_p]
+#        CallCFunction(GetDllLibXls().MarkerDesigner_AddDataView, self.Ptr, paraName,intPtrdataView)
+
+
+
+    def AddArray(self ,paraName:str,paramValues:List['SpireObject']):
+        """
+
+        """
+        #arrayparamValues:ArrayTypeparamValues = ""
+        countparamValues = len(paramValues)
+        ArrayTypeparamValues = c_void_p * countparamValues
+        arrayparamValues = ArrayTypeparamValues()
+        for i in range(0, countparamValues):
+            arrayparamValues[i] = paramValues[i].Ptr
+
+
+        GetDllLibXls().MarkerDesigner_AddArray.argtypes=[c_void_p ,c_void_p,ArrayTypeparamValues,c_int]
+        CallCFunction(GetDllLibXls().MarkerDesigner_AddArray, self.Ptr, paraName,arrayparamValues,countparamValues)
+
+#
+#    def AddDataColumn(self ,paramName:str,paramValue:'DataColumn'):
+#        """
+#
+#        """
+#        intPtrparamValue:c_void_p = paramValue.Ptr
+#
+#        GetDllLibXls().MarkerDesigner_AddDataColumn.argtypes=[c_void_p ,c_void_p,c_void_p]
+#        CallCFunction(GetDllLibXls().MarkerDesigner_AddDataColumn, self.Ptr, paramName,intPtrparamValue)
+
+
+
+    def AddParameter(self ,paraName:str,paramValue:'SpireObject'):
+        """
+    <summary>
+        Adds parameter to template markers.
+    </summary>
+    <param name="paraName">Parameter Name</param>
+    <param name="paramValue">Parameter Value</param>
+        """
+        intPtrparamValue:c_void_p = paramValue.Ptr
+
+        GetDllLibXls().MarkerDesigner_AddParameter.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().MarkerDesigner_AddParameter, self.Ptr, paraName,intPtrparamValue)
+
+
+    def RemoveParameter(self ,paraName:str):
+        """
+    <summary>
+        Removes parameter from template marker.
+    </summary>
+    <param name="paraName"></param>
+        """
+        
+        GetDllLibXls().MarkerDesigner_RemoveParameter.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().MarkerDesigner_RemoveParameter, self.Ptr, paraName)
+
+
+    def Contains(self ,paramName:str):
+        """
+    <summary>
+        Checks parameter is exist.
+    </summary>
+    <param name="paramName"></param>
+        """
+        
+        GetDllLibXls().MarkerDesigner_Contains.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().MarkerDesigner_Contains, self.Ptr, paramName)
+
+    def Apply(self):
+        """
+    <summary>
+        Apply templates markers
+    </summary>
+        """
+        GetDllLibXls().MarkerDesigner_Apply.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().MarkerDesigner_Apply, self.Ptr)
+
+    @property
+
+    def Prefix(self)->str:
+        """
+    <summary>
+        Prefix of Marker
+    </summary>
+        """
+        GetDllLibXls().MarkerDesigner_get_Prefix.argtypes=[c_void_p]
+        GetDllLibXls().MarkerDesigner_get_Prefix.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().MarkerDesigner_get_Prefix, self.Ptr))
+        return ret
+
+
+    @Prefix.setter
+    def Prefix(self, value:str):
+        GetDllLibXls().MarkerDesigner_set_Prefix.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().MarkerDesigner_set_Prefix, self.Ptr, value)
+
+    @property
+    def IsDetectDataTypes(self)->bool:
+        """
+    <summary>
+        Whether detect the dataTypes when apply marker
+    </summary>
+        """
+        GetDllLibXls().MarkerDesigner_get_IsDetectDataTypes.argtypes=[c_void_p]
+        GetDllLibXls().MarkerDesigner_get_IsDetectDataTypes.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().MarkerDesigner_get_IsDetectDataTypes, self.Ptr)
+        return ret
+
+    @IsDetectDataTypes.setter
+    def IsDetectDataTypes(self, value:bool):
+        GetDllLibXls().MarkerDesigner_set_IsDetectDataTypes.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().MarkerDesigner_set_IsDetectDataTypes, self.Ptr, value)
+

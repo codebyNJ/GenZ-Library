@@ -1,0 +1,57 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsHeaderFooterShapeCollection (  ShapeCollectionBase) :
+    """
+
+    """
+    @dispatch
+
+    def SetPicture(self ,strShapeName:str,image:Stream)->XlsShape:
+        """
+
+        """
+        intPtrimage:c_void_p = image.Ptr
+
+        GetDllLibXls().XlsHeaderFooterShapeCollection_SetPicture.argtypes=[c_void_p ,c_void_p,c_void_p]
+        GetDllLibXls().XlsHeaderFooterShapeCollection_SetPicture.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsHeaderFooterShapeCollection_SetPicture, self.Ptr, strShapeName,intPtrimage)
+        ret = None if intPtr==None else XlsShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def SetPicture(self ,strShapeName:str,image:Stream,index:int)->XlsShape:
+        """
+
+        """
+        intPtrimage:c_void_p = image.Ptr
+
+        GetDllLibXls().XlsHeaderFooterShapeCollection_SetPictureSII.argtypes=[c_void_p ,c_void_p,c_void_p,c_int]
+        GetDllLibXls().XlsHeaderFooterShapeCollection_SetPictureSII.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsHeaderFooterShapeCollection_SetPictureSII, self.Ptr, strShapeName,intPtrimage,index)
+        ret = None if intPtr==None else XlsShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def SetPicture(self ,strShapeName:str,image:Stream,iIndex:int,bIncludeOptions:bool)->XlsShape:
+        """
+
+        """
+        intPtrimage:c_void_p = image.Ptr
+
+        GetDllLibXls().XlsHeaderFooterShapeCollection_SetPictureSIIB.argtypes=[c_void_p ,c_void_p,c_void_p,c_int,c_bool]
+        GetDllLibXls().XlsHeaderFooterShapeCollection_SetPictureSIIB.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsHeaderFooterShapeCollection_SetPictureSIIB, self.Ptr, strShapeName,intPtrimage,iIndex,bIncludeOptions)
+        ret = None if intPtr==None else XlsShape(intPtr)
+        return ret
+
+

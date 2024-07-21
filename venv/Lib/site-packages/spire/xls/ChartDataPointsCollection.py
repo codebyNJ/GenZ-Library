@@ -1,0 +1,75 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartDataPointsCollection (  XlsChartDataPointsCollection) :
+    """
+
+    """
+
+    def Add(self ,point:'ChartDataPoint'):
+        """
+
+        """
+        intPtrpoint:c_void_p = point.Ptr
+
+        GetDllLibXls().ChartDataPointsCollection_Add.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().ChartDataPointsCollection_Add, self.Ptr, intPtrpoint)
+
+
+    def ClearDataFormats(self ,format:'ChartSerieDataFormat'):
+        """
+
+        """
+        intPtrformat:c_void_p = format.Ptr
+
+        GetDllLibXls().ChartDataPointsCollection_ClearDataFormats.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().ChartDataPointsCollection_ClearDataFormats, self.Ptr, intPtrformat)
+
+    @property
+
+    def DefaultDataPoint(self)->'ChartDataPoint':
+        """
+    <summary>
+        Returns default data point. Read-only.
+    </summary>
+        """
+        GetDllLibXls().ChartDataPointsCollection_get_DefaultDataPoint.argtypes=[c_void_p]
+        GetDllLibXls().ChartDataPointsCollection_get_DefaultDataPoint.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartDataPointsCollection_get_DefaultDataPoint, self.Ptr)
+        ret = None if intPtr==None else ChartDataPoint(intPtr)
+        return ret
+
+
+    @property
+
+    def DefaultPointFormat(self)->'ChartSerieDataFormat':
+        """
+    <summary>
+        Gets default data format .
+    </summary>
+        """
+        GetDllLibXls().ChartDataPointsCollection_get_DefaultPointFormat.argtypes=[c_void_p]
+        GetDllLibXls().ChartDataPointsCollection_get_DefaultPointFormat.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartDataPointsCollection_get_DefaultPointFormat, self.Ptr)
+        ret = None if intPtr==None else ChartSerieDataFormat(intPtr)
+        return ret
+
+
+    def get_Item(self ,index:int)->'ChartDataPoint':
+        """
+    <summary>
+        Gets chart point.
+    </summary>
+        """
+        GetDllLibXls().ChartDataPointsCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ChartDataPointsCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartDataPointsCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else ChartDataPoint(intPtr)
+        return ret
+
+

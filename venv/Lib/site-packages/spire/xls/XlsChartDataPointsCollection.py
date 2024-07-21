@@ -1,0 +1,120 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class EnumeratorChartDataPoint(IEnumerator[XlsChartDataPoint]):
+    pass
+
+class XlsChartDataPointsCollection (  XlsObject, IChartDataPoints, IEnumerable[XlsChartDataPoint]) :
+    """
+
+    """
+
+    def get_Item(self ,index:int)->'IChartDataPoint':
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartDataPointsCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsChartDataPointsCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartDataPointsCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsChartDataPoint(intPtr)
+        return ret
+
+
+    @property
+
+    def DefaultDataPoint(self)->'IChartDataPoint':
+        """
+
+        """
+        GetDllLibXls().XlsChartDataPointsCollection_get_DefaultDataPoint.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDataPointsCollection_get_DefaultDataPoint.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartDataPointsCollection_get_DefaultDataPoint, self.Ptr)
+        ret = None if intPtr==None else XlsChartDataPoint(intPtr)
+        return ret
+
+
+
+    def GetEnumerator(self)->EnumeratorChartDataPoint:
+        """
+
+        """
+        GetDllLibXls().XlsChartDataPointsCollection_GetEnumerator.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDataPointsCollection_GetEnumerator.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartDataPointsCollection_GetEnumerator, self.Ptr)
+        ret = None if intPtr==None else EnumeratorChartDataPoint(intPtr)
+        return ret
+
+
+
+    def Add(self ,point:'XlsChartDataPoint'):
+        """
+
+        """
+        intPtrpoint:c_void_p = point.Ptr
+
+        GetDllLibXls().XlsChartDataPointsCollection_Add.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartDataPointsCollection_Add, self.Ptr, intPtrpoint)
+
+    def Clear(self):
+        """
+    <summary>
+        Removes all elements from the collection.
+    </summary>
+        """
+        GetDllLibXls().XlsChartDataPointsCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartDataPointsCollection_Clear, self.Ptr)
+
+
+    def ClearDataFormats(self ,format:'XlsChartSerieDataFormat'):
+        """
+
+        """
+        intPtrformat:c_void_p = format.Ptr
+
+        GetDllLibXls().XlsChartDataPointsCollection_ClearDataFormats.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartDataPointsCollection_ClearDataFormats, self.Ptr, intPtrformat)
+
+    @property
+
+    def DefaultPointFormat(self)->'XlsChartSerieDataFormat':
+        """
+
+        """
+        GetDllLibXls().XlsChartDataPointsCollection_get_DefaultPointFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDataPointsCollection_get_DefaultPointFormat.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartDataPointsCollection_get_DefaultPointFormat, self.Ptr)
+        ret = None if intPtr==None else XlsChartSerieDataFormat(intPtr)
+        return ret
+
+
+#
+#    def Clone(self ,parent:'SpireObject',book:'XlsWorkbook',fontIndexes:'Dictionary2',dicNewSheetNames:'Dictionary2')->'SpireObject':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrbook:c_void_p = book.Ptr
+#        intPtrfontIndexes:c_void_p = fontIndexes.Ptr
+#        intPtrdicNewSheetNames:c_void_p = dicNewSheetNames.Ptr
+#
+#        GetDllLibXls().XlsChartDataPointsCollection_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p,c_void_p]
+#        GetDllLibXls().XlsChartDataPointsCollection_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsChartDataPointsCollection_Clone, self.Ptr, intPtrparent,intPtrbook,intPtrfontIndexes,intPtrdicNewSheetNames)
+#        ret = None if intPtr==None else SpireObject(intPtr)
+#        return ret
+#
+
+
+    def UpdateSerieIndex(self):
+        """
+
+        """
+        GetDllLibXls().XlsChartDataPointsCollection_UpdateSerieIndex.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartDataPointsCollection_UpdateSerieIndex, self.Ptr)
+

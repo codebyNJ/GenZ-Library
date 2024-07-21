@@ -1,0 +1,131 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsPivotTablesCollection (CollectionBase[XlsPivotTable],IPivotTables) :
+    """
+
+    """
+    @property
+    def Count(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsPivotTablesCollection_get_Count.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotTablesCollection_get_Count.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPivotTablesCollection_get_Count, self.Ptr)
+        return ret
+
+    @dispatch
+
+    def get_Item(self ,index:int)->IPivotTable:
+        """
+
+        """
+        
+        GetDllLibXls().XlsPivotTablesCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsPivotTablesCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotTablesCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsPivotTable(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->IPivotTable:
+        """
+
+        """
+        
+        GetDllLibXls().XlsPivotTablesCollection_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsPivotTablesCollection_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotTablesCollection_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else XlsPivotTable(intPtr)
+        return ret
+
+
+
+    def Add(self ,name:str,location:'CellRange',cache:'PivotCache')->'XlsPivotTable':
+        """
+
+        """
+        intPtrlocation:c_void_p = location.Ptr
+        intPtrcache:c_void_p = cache.Ptr
+
+        GetDllLibXls().XlsPivotTablesCollection_Add.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+        GetDllLibXls().XlsPivotTablesCollection_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotTablesCollection_Add, self.Ptr, name,intPtrlocation,intPtrcache)
+        ret = None if intPtr==None else XlsPivotTable(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Remove(self ,name:str):
+        """
+
+        """
+        
+        GetDllLibXls().XlsPivotTablesCollection_Remove.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsPivotTablesCollection_Remove, self.Ptr, name)
+
+
+    def RemoveAt(self ,index:int):
+        """
+
+        """
+        
+        GetDllLibXls().XlsPivotTablesCollection_RemoveAt.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsPivotTablesCollection_RemoveAt, self.Ptr, index)
+
+    @dispatch
+
+    def Remove(self ,pivotTable:IPivotTable):
+        """
+
+        """
+        intPtrpivotTable:c_void_p = pivotTable.Ptr
+
+        GetDllLibXls().XlsPivotTablesCollection_RemoveP.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsPivotTablesCollection_RemoveP, self.Ptr, intPtrpivotTable)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().XlsPivotTablesCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsPivotTablesCollection_Clear, self.Ptr)
+
+    @property
+
+    def ParentWorksheet(self)->'XlsWorksheetBase':
+        """
+
+        """
+        GetDllLibXls().XlsPivotTablesCollection_get_ParentWorksheet.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotTablesCollection_get_ParentWorksheet.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotTablesCollection_get_ParentWorksheet, self.Ptr)
+        ret = None if intPtr==None else XlsWorksheetBase(intPtr)
+        return ret
+
+
+#
+#    def Clone(self ,worksheet:'XlsWorksheet',hashWorksheetNames:'Dictionary2')->'PivotTablesCollection':
+#        """
+#
+#        """
+#        intPtrworksheet:c_void_p = worksheet.Ptr
+#        intPtrhashWorksheetNames:c_void_p = hashWorksheetNames.Ptr
+#
+#        GetDllLibXls().XlsPivotTablesCollection_Clone.argtypes=[c_void_p ,c_void_p,c_void_p]
+#        GetDllLibXls().XlsPivotTablesCollection_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsPivotTablesCollection_Clone, self.Ptr, intPtrworksheet,intPtrhashWorksheetNames)
+#        ret = None if intPtr==None else PivotTablesCollection(intPtr)
+#        return ret
+#
+
+

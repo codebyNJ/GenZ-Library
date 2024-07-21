@@ -1,0 +1,23 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ExcelTotalsCalculation(Enum):
+    """
+
+    """
+    none = 0
+    Sum = 109
+    Average = 101
+    Count = 103
+    CountNums = 102
+    Min = 105
+    StdDev = 107
+    Var = 110
+    Max = 104
+    Custom = 108
+

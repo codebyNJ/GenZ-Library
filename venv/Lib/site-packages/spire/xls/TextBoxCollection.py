@@ -1,0 +1,70 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class TextBoxCollection (  CollectionBase[XlsTextBoxShape], ITextBoxes) :
+    """
+
+    """
+    @dispatch
+
+    def get_Item(self ,index:int)->ITextBoxLinkShape:
+        """
+
+        """
+        
+        GetDllLibXls().TextBoxCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().TextBoxCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().TextBoxCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsTextBoxShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->ITextBoxLinkShape:
+        """
+
+        """
+        
+        GetDllLibXls().TextBoxCollection_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().TextBoxCollection_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().TextBoxCollection_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else XlsTextBoxShape(intPtr)
+        return ret
+
+
+
+    def AddCopy(self ,textboxsource:'ITextBoxLinkShape'):
+        """
+
+        """
+        intPtrtextboxsource:c_void_p = textboxsource.Ptr
+
+        GetDllLibXls().TextBoxCollection_AddCopy.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().TextBoxCollection_AddCopy, self.Ptr, intPtrtextboxsource)
+
+
+    def AddTextBox(self ,row:int,column:int,height:int,width:int)->'ITextBoxLinkShape':
+        """
+
+        """
+        
+        GetDllLibXls().TextBoxCollection_AddTextBox.argtypes=[c_void_p ,c_int,c_int,c_int,c_int]
+        GetDllLibXls().TextBoxCollection_AddTextBox.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().TextBoxCollection_AddTextBox, self.Ptr, row,column,height,width)
+        ret = None if intPtr==None else XlsTextBoxShape(intPtr)
+        return ret
+
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().TextBoxCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().TextBoxCollection_Clear, self.Ptr)
+

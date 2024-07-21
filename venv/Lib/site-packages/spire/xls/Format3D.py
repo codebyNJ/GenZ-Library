@@ -1,0 +1,235 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class Format3D (  XlsObject, IFormat3D, ICloneParent) :
+    """
+
+    """
+    @property
+
+    def BevelTopType(self)->'XLSXChartBevelType':
+        """
+
+        """
+        GetDllLibXls().Format3D_get_BevelTopType.argtypes=[c_void_p]
+        GetDllLibXls().Format3D_get_BevelTopType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Format3D_get_BevelTopType, self.Ptr)
+        objwraped = XLSXChartBevelType(ret)
+        return objwraped
+
+    @BevelTopType.setter
+    def BevelTopType(self, value:'XLSXChartBevelType'):
+        GetDllLibXls().Format3D_set_BevelTopType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().Format3D_set_BevelTopType, self.Ptr, value.value)
+
+    @property
+
+    def BevelBottomType(self)->'XLSXChartBevelType':
+        """
+
+        """
+        GetDllLibXls().Format3D_get_BevelBottomType.argtypes=[c_void_p]
+        GetDllLibXls().Format3D_get_BevelBottomType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Format3D_get_BevelBottomType, self.Ptr)
+        objwraped = XLSXChartBevelType(ret)
+        return objwraped
+
+    @BevelBottomType.setter
+    def BevelBottomType(self, value:'XLSXChartBevelType'):
+        GetDllLibXls().Format3D_set_BevelBottomType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().Format3D_set_BevelBottomType, self.Ptr, value.value)
+
+    @property
+
+    def MaterialType(self)->'XLSXChartMaterialType':
+        """
+
+        """
+        GetDllLibXls().Format3D_get_MaterialType.argtypes=[c_void_p]
+        GetDllLibXls().Format3D_get_MaterialType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Format3D_get_MaterialType, self.Ptr)
+        objwraped = XLSXChartMaterialType(ret)
+        return objwraped
+
+    @MaterialType.setter
+    def MaterialType(self, value:'XLSXChartMaterialType'):
+        GetDllLibXls().Format3D_set_MaterialType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().Format3D_set_MaterialType, self.Ptr, value.value)
+
+    @property
+
+    def LightingType(self)->'XLSXChartLightingType':
+        """
+
+        """
+        GetDllLibXls().Format3D_get_LightingType.argtypes=[c_void_p]
+        GetDllLibXls().Format3D_get_LightingType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().Format3D_get_LightingType, self.Ptr)
+        objwraped = XLSXChartLightingType(ret)
+        return objwraped
+
+    @LightingType.setter
+    def LightingType(self, value:'XLSXChartLightingType'):
+        GetDllLibXls().Format3D_set_LightingType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().Format3D_set_LightingType, self.Ptr, value.value)
+
+    @property
+    def BevelTopWidth(self)->float:
+        """
+
+        """
+        GetDllLibXls().Format3D_get_BevelTopWidth.argtypes=[c_void_p]
+        GetDllLibXls().Format3D_get_BevelTopWidth.restype=c_double
+        ret = CallCFunction(GetDllLibXls().Format3D_get_BevelTopWidth, self.Ptr)
+        return ret
+
+    @BevelTopWidth.setter
+    def BevelTopWidth(self, value:float):
+        GetDllLibXls().Format3D_set_BevelTopWidth.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().Format3D_set_BevelTopWidth, self.Ptr, value)
+
+    @property
+    def BevelTopHeight(self)->float:
+        """
+
+        """
+        GetDllLibXls().Format3D_get_BevelTopHeight.argtypes=[c_void_p]
+        GetDllLibXls().Format3D_get_BevelTopHeight.restype=c_double
+        ret = CallCFunction(GetDllLibXls().Format3D_get_BevelTopHeight, self.Ptr)
+        return ret
+
+    @BevelTopHeight.setter
+    def BevelTopHeight(self, value:float):
+        GetDllLibXls().Format3D_set_BevelTopHeight.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().Format3D_set_BevelTopHeight, self.Ptr, value)
+
+    @property
+    def BevelBottomWidth(self)->float:
+        """
+
+        """
+        GetDllLibXls().Format3D_get_BevelBottomWidth.argtypes=[c_void_p]
+        GetDllLibXls().Format3D_get_BevelBottomWidth.restype=c_double
+        ret = CallCFunction(GetDllLibXls().Format3D_get_BevelBottomWidth, self.Ptr)
+        return ret
+
+    @BevelBottomWidth.setter
+    def BevelBottomWidth(self, value:float):
+        GetDllLibXls().Format3D_set_BevelBottomWidth.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().Format3D_set_BevelBottomWidth, self.Ptr, value)
+
+    @property
+    def BevelBottomHeight(self)->float:
+        """
+
+        """
+        GetDllLibXls().Format3D_get_BevelBottomHeight.argtypes=[c_void_p]
+        GetDllLibXls().Format3D_get_BevelBottomHeight.restype=c_double
+        ret = CallCFunction(GetDllLibXls().Format3D_get_BevelBottomHeight, self.Ptr)
+        return ret
+
+    @BevelBottomHeight.setter
+    def BevelBottomHeight(self, value:float):
+        GetDllLibXls().Format3D_set_BevelBottomHeight.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().Format3D_set_BevelBottomHeight, self.Ptr, value)
+
+    @property
+    def ExtrusionHeight(self)->float:
+        """
+
+        """
+        GetDllLibXls().Format3D_get_ExtrusionHeight.argtypes=[c_void_p]
+        GetDllLibXls().Format3D_get_ExtrusionHeight.restype=c_double
+        ret = CallCFunction(GetDllLibXls().Format3D_get_ExtrusionHeight, self.Ptr)
+        return ret
+
+    @ExtrusionHeight.setter
+    def ExtrusionHeight(self, value:float):
+        GetDllLibXls().Format3D_set_ExtrusionHeight.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().Format3D_set_ExtrusionHeight, self.Ptr, value)
+
+    @property
+
+    def ExtrusionColor(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().Format3D_get_ExtrusionColor.argtypes=[c_void_p]
+        GetDllLibXls().Format3D_get_ExtrusionColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Format3D_get_ExtrusionColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @ExtrusionColor.setter
+    def ExtrusionColor(self, value:'Color'):
+        GetDllLibXls().Format3D_set_ExtrusionColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().Format3D_set_ExtrusionColor, self.Ptr, value.Ptr)
+
+    @property
+    def ContourWidth(self)->float:
+        """
+
+        """
+        GetDllLibXls().Format3D_get_ContourWidth.argtypes=[c_void_p]
+        GetDllLibXls().Format3D_get_ContourWidth.restype=c_double
+        ret = CallCFunction(GetDllLibXls().Format3D_get_ContourWidth, self.Ptr)
+        return ret
+
+    @ContourWidth.setter
+    def ContourWidth(self, value:float):
+        GetDllLibXls().Format3D_set_ContourWidth.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().Format3D_set_ContourWidth, self.Ptr, value)
+
+    @property
+
+    def ContourColor(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().Format3D_get_ContourColor.argtypes=[c_void_p]
+        GetDllLibXls().Format3D_get_ContourColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Format3D_get_ContourColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @ContourColor.setter
+    def ContourColor(self, value:'Color'):
+        GetDllLibXls().Format3D_set_ContourColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().Format3D_set_ContourColor, self.Ptr, value.Ptr)
+
+    @property
+    def LightingAngle(self)->float:
+        """
+
+        """
+        GetDllLibXls().Format3D_get_LightingAngle.argtypes=[c_void_p]
+        GetDllLibXls().Format3D_get_LightingAngle.restype=c_double
+        ret = CallCFunction(GetDllLibXls().Format3D_get_LightingAngle, self.Ptr)
+        return ret
+
+    @LightingAngle.setter
+    def LightingAngle(self, value:float):
+        GetDllLibXls().Format3D_set_LightingAngle.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().Format3D_set_LightingAngle, self.Ptr, value)
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().Format3D_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().Format3D_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Format3D_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+

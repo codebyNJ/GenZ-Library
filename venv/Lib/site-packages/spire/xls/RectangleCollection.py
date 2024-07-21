@@ -1,0 +1,71 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class RectangleCollection (  CollectionBase[XlsRectangleShape], IRectangleShapes) :
+    """
+
+    """
+    @dispatch
+
+    def get_Item(self ,index:int)->IRectangleShape:
+        """
+
+        """
+        
+        GetDllLibXls().RectangleCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().RectangleCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().RectangleCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsRectangleShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->IRectangleShape:
+        """
+
+        """
+        
+        GetDllLibXls().RectangleCollection_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().RectangleCollection_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().RectangleCollection_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else XlsRectangleShape(intPtr)
+        return ret
+
+
+
+    def AddRectangle(self ,row:int,column:int,height:int,width:int,rectShapeType:'RectangleShapeType')->'IRectangleShape':
+        """
+
+        """
+        enumrectShapeType:c_int = rectShapeType.value
+
+        GetDllLibXls().RectangleCollection_AddRectangle.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_int]
+        GetDllLibXls().RectangleCollection_AddRectangle.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().RectangleCollection_AddRectangle, self.Ptr, row,column,height,width,enumrectShapeType)
+        ret = None if intPtr==None else XlsRectangleShape(intPtr)
+        return ret
+
+
+
+    def AddCopy(self ,source:'IRectangleShape'):
+        """
+
+        """
+        intPtrsource:c_void_p = source.Ptr
+
+        GetDllLibXls().RectangleCollection_AddCopy.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().RectangleCollection_AddCopy, self.Ptr, intPtrsource)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().RectangleCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().RectangleCollection_Clear, self.Ptr)
+

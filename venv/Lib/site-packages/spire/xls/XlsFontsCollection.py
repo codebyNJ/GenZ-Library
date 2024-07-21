@@ -1,0 +1,51 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsFontsCollection (SpireObject) :
+    """
+
+    """
+
+    def get_Item(self ,index:int)->'IFont':
+        """
+
+        """
+        
+        GetDllLibXls().XlsFontsCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsFontsCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsFontsCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsFont(intPtr)
+        return ret
+
+
+
+    def Contains(self ,font:'XlsFont')->bool:
+        """
+
+        """
+        intPtrfont:c_void_p = font.Ptr
+
+        GetDllLibXls().XlsFontsCollection_Contains.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsFontsCollection_Contains.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsFontsCollection_Contains, self.Ptr, intPtrfont)
+        return ret
+
+
+    def Clone(self ,parent:'XlsWorkbook')->'XlsFontsCollection':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsFontsCollection_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsFontsCollection_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsFontsCollection_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else XlsFontsCollection(intPtr)
+        return ret
+
+

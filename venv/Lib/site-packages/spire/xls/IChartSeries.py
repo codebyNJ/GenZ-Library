@@ -1,0 +1,39 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IChartSeries (  IExcelApplication) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Count(self)->int:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def RemoveAt(self ,index:int):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Remove(self ,serieName:str):
+        """
+
+        """
+        pass
+
+

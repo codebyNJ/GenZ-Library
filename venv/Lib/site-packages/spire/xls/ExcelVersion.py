@@ -1,0 +1,24 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ExcelVersion(Enum):
+    """
+    <summary>
+        Represents possible excel versions.
+    </summary>
+    """
+    Xlsb2007 = 0
+    Xlsb2010 = 1
+    ODS = 2
+    UOS = 3
+    Version97to2003 = 4
+    Version2007 = 5
+    Version2010 = 6
+    Version2013 = 7
+    Version2016 = 8
+

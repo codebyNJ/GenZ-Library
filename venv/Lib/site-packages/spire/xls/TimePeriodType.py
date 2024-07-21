@@ -1,0 +1,23 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class TimePeriodType(Enum):
+    """
+
+    """
+    Today = 0
+    Yesterday = 1
+    Tomorrow = 2
+    Last7Days = 3
+    ThisMonth = 4
+    LastMonth = 5
+    NextMonth = 6
+    ThisWeek = 7
+    LastWeek = 8
+    NextWeek = 9
+

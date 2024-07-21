@@ -1,0 +1,19 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartLineWeightType(Enum):
+    """
+    <summary>
+        Chart line weight values type. 
+    </summary>
+    """
+    Hairline = 65535
+    Narrow = 0
+    Medium = 1
+    Wide = 2
+

@@ -1,0 +1,154 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartSeries (  XlsChartSeries) :
+    """
+
+    """
+    @dispatch
+
+    def Add(self ,serieToAdd:ChartSerie)->ChartSerie:
+        """
+
+        """
+        intPtrserieToAdd:c_void_p = serieToAdd.Ptr
+
+        GetDllLibXls().ChartSeries_Add.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ChartSeries_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSeries_Add, self.Ptr, intPtrserieToAdd)
+        ret = None if intPtr==None else ChartSerie(intPtr)
+        return ret
+
+
+
+    def ClearDataFormats(self ,format:'ChartSerieDataFormat'):
+        """
+
+        """
+        intPtrformat:c_void_p = format.Ptr
+
+        GetDllLibXls().ChartSeries_ClearDataFormats.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().ChartSeries_ClearDataFormats, self.Ptr, intPtrformat)
+
+    @dispatch
+
+    def get_Item(self ,index:int)->ChartSerie:
+        """
+    <summary>
+        Returns a single Name object from a Names collection.
+    </summary>
+        """
+        GetDllLibXls().ChartSeries_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ChartSeries_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSeries_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else ChartSerie(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->ChartSerie:
+        """
+    <summary>
+        Returns a single Name object from a Names collection.
+    </summary>
+        """
+        
+        GetDllLibXls().ChartSeries_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ChartSeries_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSeries_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else ChartSerie(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self)->ChartSerie:
+        """
+
+        """
+        GetDllLibXls().ChartSeries_Add1.argtypes=[c_void_p]
+        GetDllLibXls().ChartSeries_Add1.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSeries_Add1, self.Ptr)
+        ret = None if intPtr==None else ChartSerie(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,name:str)->ChartSerie:
+        """
+
+        """
+        
+        GetDllLibXls().ChartSeries_AddN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ChartSeries_AddN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSeries_AddN, self.Ptr, name)
+        ret = None if intPtr==None else ChartSerie(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,serieType:ExcelChartType)->ChartSerie:
+        """
+
+        """
+        enumserieType:c_int = serieType.value
+
+        GetDllLibXls().ChartSeries_AddS.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ChartSeries_AddS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSeries_AddS, self.Ptr, enumserieType)
+        ret = None if intPtr==None else ChartSerie(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,name:str,serieType:ExcelChartType)->ChartSerie:
+        """
+
+        """
+        enumserieType:c_int = serieType.value
+
+        GetDllLibXls().ChartSeries_AddNS.argtypes=[c_void_p ,c_void_p,c_int]
+        GetDllLibXls().ChartSeries_AddNS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSeries_AddNS, self.Ptr, name,enumserieType)
+        ret = None if intPtr==None else ChartSerie(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,area:str,isVertical:bool)->int:
+        """
+
+        """
+        
+        GetDllLibXls().ChartSeries_AddAI.argtypes=[c_void_p ,c_void_p,c_bool]
+        GetDllLibXls().ChartSeries_AddAI.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartSeries_AddAI, self.Ptr, area,isVertical)
+        return ret
+
+    @property
+
+    def CategoryData(self)->str:
+        """
+
+        """
+        GetDllLibXls().ChartSeries_get_CategoryData.argtypes=[c_void_p]
+        GetDllLibXls().ChartSeries_get_CategoryData.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ChartSeries_get_CategoryData, self.Ptr))
+        return ret
+
+
+    @CategoryData.setter
+    def CategoryData(self, value:str):
+        GetDllLibXls().ChartSeries_set_CategoryData.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ChartSeries_set_CategoryData, self.Ptr, value)
+

@@ -1,0 +1,50 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IComments (  abc.ABC) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Count(self)->int:
+        """
+
+        """
+        pass
+
+
+    #@property
+    #@abc.abstractmethod
+    #def Parent(self)->'SpireObject':
+    #    """
+
+    #    """
+    #    pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,Index:int)->'ICommentShape':
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,iRow:int,iColumn:int)->'ICommentShape':
+        """
+
+        """
+        pass
+
+

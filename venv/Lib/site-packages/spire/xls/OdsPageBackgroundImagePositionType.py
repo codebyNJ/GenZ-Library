@@ -1,0 +1,22 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class OdsPageBackgroundImagePositionType(Enum):
+    """
+
+    """
+    TopLeft = 0
+    TopCenter = 1
+    TopRight = 2
+    CenterLeft = 3
+    CenterCenter = 4
+    CenterRight = 5
+    BottomLeft = 6
+    BottomCenter = 7
+    BottomRight = 8
+

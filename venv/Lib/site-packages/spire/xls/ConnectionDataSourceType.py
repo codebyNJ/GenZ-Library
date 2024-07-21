@@ -1,0 +1,26 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ConnectionDataSourceType(Enum):
+    """
+
+    """
+    ODBCBasedSource = 1
+    DAOBasedSource = 2
+    FileBasedDataBaseSource = 3
+    WebQuery = 4
+    OLEDBBasedSource = 5
+    TextBasedSource = 6
+    ADORecordSet = 7
+    DSP = 8
+    OLEDBDataModel = 100
+    DataFeedDataModel = 101
+    WorksheetDataModel = 102
+    TextDataModel = 103
+    Unknown = 255
+

@@ -1,0 +1,134 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IConditionalFormatsCollection (abc.ABC) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Capacity(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Capacity.setter
+    @abc.abstractmethod
+    def Capacity(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Count(self)->int:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def get_Item(self ,fieldIndex:int)->'IConditionalFormats':
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Add(self)->IConditionalFormats:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Add(self ,formats:IConditionalFormats)->IConditionalFormats:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def CopyFrom(self ,srcFormats:'XlsWorksheetConditionalFormats'):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Find(self ,arrRanges:List['Rectangle'])->'XlsConditionalFormats':
+        """
+
+        """
+        pass
+
+
+
+
+    @abc.abstractmethod
+    def FindAll(self ,arrRanges:List['Rectangle'])->List['XlsConditionalFormats']:
+        """
+
+        """
+        pass
+
+
+
+
+    @abc.abstractmethod
+    def GetByIndex(self ,index:int)->'XlsConditionalFormats':
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetEnumerator(self)->'IEnumerator':
+        """
+
+        """
+        pass
+
+
+#
+#    @abc.abstractmethod
+#    def Remove(self ,arrRanges:'Rectangle[]'):
+#        """
+#
+#        """
+#        pass
+#
+
+
+
+    @abc.abstractmethod
+    def RemoveAt(self ,index:int):
+        """
+
+        """
+        pass
+
+

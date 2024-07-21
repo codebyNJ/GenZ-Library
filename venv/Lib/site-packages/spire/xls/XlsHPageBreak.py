@@ -1,0 +1,105 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsHPageBreak (  XlsObject) :
+    """
+
+    """
+    @property
+    def Row(self)->int:
+        """
+    <summary>
+        Gets the row index. 
+    </summary>
+        """
+        GetDllLibXls().XlsHPageBreak_get_Row.argtypes=[c_void_p]
+        GetDllLibXls().XlsHPageBreak_get_Row.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsHPageBreak_get_Row, self.Ptr)
+        return ret
+
+    @property
+
+    def Type(self)->'PageBreakType':
+        """
+    <summary>
+        Type of the page break.
+    </summary>
+        """
+        GetDllLibXls().XlsHPageBreak_get_Type.argtypes=[c_void_p]
+        GetDllLibXls().XlsHPageBreak_get_Type.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsHPageBreak_get_Type, self.Ptr)
+        objwraped = PageBreakType(ret)
+        return objwraped
+
+    @Type.setter
+    def Type(self, value:'PageBreakType'):
+        GetDllLibXls().XlsHPageBreak_set_Type.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsHPageBreak_set_Type, self.Ptr, value.value)
+
+    @property
+    def StartColumn(self)->int:
+        """
+    <summary>
+        Gets the start column index of this horizontal page break
+    </summary>
+        """
+        GetDllLibXls().XlsHPageBreak_get_StartColumn.argtypes=[c_void_p]
+        GetDllLibXls().XlsHPageBreak_get_StartColumn.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsHPageBreak_get_StartColumn, self.Ptr)
+        return ret
+
+    @StartColumn.setter
+    def StartColumn(self, value:int):
+        GetDllLibXls().XlsHPageBreak_set_StartColumn.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsHPageBreak_set_StartColumn, self.Ptr, value)
+
+    @property
+    def EndColumn(self)->int:
+        """
+    <summary>
+        Gets the end column index of this horizontal page break. 
+    </summary>
+        """
+        GetDllLibXls().XlsHPageBreak_get_EndColumn.argtypes=[c_void_p]
+        GetDllLibXls().XlsHPageBreak_get_EndColumn.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsHPageBreak_get_EndColumn, self.Ptr)
+        return ret
+
+    @EndColumn.setter
+    def EndColumn(self, value:int):
+        GetDllLibXls().XlsHPageBreak_set_EndColumn.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsHPageBreak_set_EndColumn, self.Ptr, value)
+
+    @property
+
+    def Extent(self)->'PageBreakExtentType':
+        """
+    <summary>
+        Returns page break extent.
+    </summary>
+        """
+        GetDllLibXls().XlsHPageBreak_get_Extent.argtypes=[c_void_p]
+        GetDllLibXls().XlsHPageBreak_get_Extent.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsHPageBreak_get_Extent, self.Ptr)
+        objwraped = PageBreakExtentType(ret)
+        return objwraped
+
+
+    def Clone(self ,parent:'SpireObject')->'XlsHPageBreak':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsHPageBreak_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsHPageBreak_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsHPageBreak_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else XlsHPageBreak(intPtr)
+        return ret
+
+

@@ -1,0 +1,174 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsRectangleShape (  XlsPrstGeomShape, IRectangleShape) :
+    """
+
+    """
+    @property
+
+    def ShapeType(self)->'ExcelShapeType':
+        """
+
+        """
+        GetDllLibXls().XlsRectangleShape_get_ShapeType.argtypes=[c_void_p]
+        GetDllLibXls().XlsRectangleShape_get_ShapeType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRectangleShape_get_ShapeType, self.Ptr)
+        objwraped = ExcelShapeType(ret)
+        return objwraped
+
+    @property
+
+    def RectShapeType(self)->'RectangleShapeType':
+        """
+
+        """
+        GetDllLibXls().XlsRectangleShape_get_RectShapeType.argtypes=[c_void_p]
+        GetDllLibXls().XlsRectangleShape_get_RectShapeType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRectangleShape_get_RectShapeType, self.Ptr)
+        objwraped = RectangleShapeType(ret)
+        return objwraped
+
+    @property
+
+    def Text(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRectangleShape_get_Text.argtypes=[c_void_p]
+        GetDllLibXls().XlsRectangleShape_get_Text.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRectangleShape_get_Text, self.Ptr))
+        return ret
+
+
+    @Text.setter
+    def Text(self, value:str):
+        GetDllLibXls().XlsRectangleShape_set_Text.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsRectangleShape_set_Text, self.Ptr, value)
+
+    @property
+    def IsTextLocked(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRectangleShape_get_IsTextLocked.argtypes=[c_void_p]
+        GetDllLibXls().XlsRectangleShape_get_IsTextLocked.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRectangleShape_get_IsTextLocked, self.Ptr)
+        return ret
+
+    @IsTextLocked.setter
+    def IsTextLocked(self, value:bool):
+        GetDllLibXls().XlsRectangleShape_set_IsTextLocked.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsRectangleShape_set_IsTextLocked, self.Ptr, value)
+
+    @property
+
+    def TextRotation(self)->'TextRotationType':
+        """
+
+        """
+        GetDllLibXls().XlsRectangleShape_get_TextRotation.argtypes=[c_void_p]
+        GetDllLibXls().XlsRectangleShape_get_TextRotation.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRectangleShape_get_TextRotation, self.Ptr)
+        objwraped = TextRotationType(ret)
+        return objwraped
+
+    @TextRotation.setter
+    def TextRotation(self, value:'TextRotationType'):
+        GetDllLibXls().XlsRectangleShape_set_TextRotation.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsRectangleShape_set_TextRotation, self.Ptr, value.value)
+
+    @property
+
+    def RichText(self)->'IRichTextString':
+        """
+
+        """
+        GetDllLibXls().XlsRectangleShape_get_RichText.argtypes=[c_void_p]
+        GetDllLibXls().XlsRectangleShape_get_RichText.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRectangleShape_get_RichText, self.Ptr)
+        ret = None if intPtr==None else RichTextObject(intPtr)
+        return ret
+
+
+    @property
+
+    def HAlignment(self)->'CommentHAlignType':
+        """
+
+        """
+        GetDllLibXls().XlsRectangleShape_get_HAlignment.argtypes=[c_void_p]
+        GetDllLibXls().XlsRectangleShape_get_HAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRectangleShape_get_HAlignment, self.Ptr)
+        objwraped = CommentHAlignType(ret)
+        return objwraped
+
+    @HAlignment.setter
+    def HAlignment(self, value:'CommentHAlignType'):
+        GetDllLibXls().XlsRectangleShape_set_HAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsRectangleShape_set_HAlignment, self.Ptr, value.value)
+
+    @property
+
+    def VAlignment(self)->'CommentVAlignType':
+        """
+
+        """
+        GetDllLibXls().XlsRectangleShape_get_VAlignment.argtypes=[c_void_p]
+        GetDllLibXls().XlsRectangleShape_get_VAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRectangleShape_get_VAlignment, self.Ptr)
+        objwraped = CommentVAlignType(ret)
+        return objwraped
+
+    @VAlignment.setter
+    def VAlignment(self, value:'CommentVAlignType'):
+        GetDllLibXls().XlsRectangleShape_set_VAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsRectangleShape_set_VAlignment, self.Ptr, value.value)
+
+    @property
+
+    def HyLink(self)->'IHyperLink':
+        """
+
+        """
+        GetDllLibXls().XlsRectangleShape_get_HyLink.argtypes=[c_void_p]
+        GetDllLibXls().XlsRectangleShape_get_HyLink.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRectangleShape_get_HyLink, self.Ptr)
+        ret = None if intPtr==None else HyperLink(intPtr)
+        return ret
+
+
+    @property
+
+    def PrstShapeType(self)->'PrstGeomShapeType':
+        """
+
+        """
+        GetDllLibXls().XlsRectangleShape_get_PrstShapeType.argtypes=[c_void_p]
+        GetDllLibXls().XlsRectangleShape_get_PrstShapeType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRectangleShape_get_PrstShapeType, self.Ptr)
+        objwraped = PrstGeomShapeType(ret)
+        return objwraped
+
+#
+#    def Clone(self ,parent:'SpireObject',hashNewNames:'Dictionary2',dicFontIndexes:'Dictionary2',addToCollections:bool)->'IShape':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrhashNewNames:c_void_p = hashNewNames.Ptr
+#        intPtrdicFontIndexes:c_void_p = dicFontIndexes.Ptr
+#
+#        GetDllLibXls().XlsRectangleShape_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p,c_bool]
+#        GetDllLibXls().XlsRectangleShape_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsRectangleShape_Clone, self.Ptr, intPtrparent,intPtrhashNewNames,intPtrdicFontIndexes,addToCollections)
+#        ret = None if intPtr==None else IShape(intPtr)
+#        return ret
+#
+
+

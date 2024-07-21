@@ -1,0 +1,85 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class LineCollection (  CollectionBase[XlsLineShape], ILines) :
+    """
+
+    """
+    @dispatch
+
+    def AddLine(self)->ILineShape:
+        """
+
+        """
+        GetDllLibXls().LineCollection_AddLine.argtypes=[c_void_p]
+        GetDllLibXls().LineCollection_AddLine.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().LineCollection_AddLine, self.Ptr)
+        ret = None if intPtr==None else XlsLineShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddLine(self ,row:int,column:int,width:int,height:int,lineShapeType:LineShapeType)->ILineShape:
+        """
+
+        """
+        enumlineShapeType:c_int = lineShapeType.value
+
+        GetDllLibXls().LineCollection_AddLineRCWHL.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_int]
+        GetDllLibXls().LineCollection_AddLineRCWHL.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().LineCollection_AddLineRCWHL, self.Ptr, row,column,width,height,enumlineShapeType)
+        ret = None if intPtr==None else XlsLineShape(intPtr)
+        return ret
+
+
+
+    def AddCopy(self ,source:'ILineShape'):
+        """
+
+        """
+        intPtrsource:c_void_p = source.Ptr
+
+        GetDllLibXls().LineCollection_AddCopy.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().LineCollection_AddCopy, self.Ptr, intPtrsource)
+
+    @dispatch
+
+    def get_Item(self ,index:int)->ILineShape:
+        """
+
+        """
+        
+        GetDllLibXls().LineCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().LineCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().LineCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsLineShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->ILineShape:
+        """
+
+        """
+        
+        GetDllLibXls().LineCollection_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().LineCollection_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().LineCollection_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else XlsLineShape(intPtr)
+        return ret
+
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().LineCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().LineCollection_Clear, self.Ptr)
+

@@ -1,0 +1,94 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsWorkbookObjectsCollection (  ITabSheets) :
+    """
+
+    """
+    @property
+
+    def Workbook(self)->'IWorkbook':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbookObjectsCollection_get_Workbook.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbookObjectsCollection_get_Workbook.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbookObjectsCollection_get_Workbook, self.Ptr)
+        ret = None if intPtr==None else IWorkbook(intPtr)
+        return ret
+
+
+    @property
+    def Count(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbookObjectsCollection_get_Count.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbookObjectsCollection_get_Count.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbookObjectsCollection_get_Count, self.Ptr)
+        return ret
+
+    @dispatch
+
+    def get_Item(self ,index:int)->ITabSheet:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbookObjectsCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorkbookObjectsCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbookObjectsCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else ITabSheet(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->INamedObject:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbookObjectsCollection_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorkbookObjectsCollection_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbookObjectsCollection_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else INamedObject(intPtr)
+        return ret
+
+
+
+    def Move(self ,iOldIndex:int,iNewIndex:int):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbookObjectsCollection_Move.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbookObjectsCollection_Move, self.Ptr, iOldIndex,iNewIndex)
+
+
+    def MoveBefore(self ,sheetToMove:'ITabSheet',sheetForPlacement:'ITabSheet'):
+        """
+
+        """
+        intPtrsheetToMove:c_void_p = sheetToMove.Ptr
+        intPtrsheetForPlacement:c_void_p = sheetForPlacement.Ptr
+
+        GetDllLibXls().XlsWorkbookObjectsCollection_MoveBefore.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbookObjectsCollection_MoveBefore, self.Ptr, intPtrsheetToMove,intPtrsheetForPlacement)
+
+
+    def MoveAfter(self ,sheetToMove:'ITabSheet',sheetForPlacement:'ITabSheet'):
+        """
+
+        """
+        intPtrsheetToMove:c_void_p = sheetToMove.Ptr
+        intPtrsheetForPlacement:c_void_p = sheetForPlacement.Ptr
+
+        GetDllLibXls().XlsWorkbookObjectsCollection_MoveAfter.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbookObjectsCollection_MoveAfter, self.Ptr, intPtrsheetToMove,intPtrsheetForPlacement)
+

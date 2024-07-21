@@ -1,0 +1,1947 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsWorkbook (  XlsObject, IWorkbook) :
+    """
+
+    """
+
+    def CreateTemplateMarkersProcessor(self)->'IMarkersDesigner':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_CreateTemplateMarkersProcessor.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_CreateTemplateMarkersProcessor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_CreateTemplateMarkersProcessor, self.Ptr)
+        ret = None if intPtr==None else IMarkersDesigner(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Close(self ,Filename:str):
+        """
+    <summary>
+        Closes the object and saves changes into specified file.
+    </summary>
+    <param name="Filename">
+            File name in which workbook will be saved if SaveChanges is true.
+    </param>
+        """
+        
+        GetDllLibXls().XlsWorkbook_Close.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_Close, self.Ptr, Filename)
+
+    @dispatch
+
+    def Close(self ,SaveChanges:bool,Filename:str):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_CloseSF.argtypes=[c_void_p ,c_bool,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_CloseSF, self.Ptr, SaveChanges,Filename)
+
+    @dispatch
+
+    def Close(self ,saveChanges:bool):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_CloseS.argtypes=[c_void_p ,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_CloseS, self.Ptr, saveChanges)
+
+    @dispatch
+    def Close(self):
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_Close1.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_Close1, self.Ptr)
+
+
+    def AddFont(self ,fontToAdd:'IFont')->'IFont':
+        """
+
+        """
+        intPtrfontToAdd:c_void_p = fontToAdd.Ptr
+
+        GetDllLibXls().XlsWorkbook_AddFont.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorkbook_AddFont.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_AddFont, self.Ptr, intPtrfontToAdd)
+        ret = None if intPtr==None else XlsFont(intPtr)
+        return ret
+
+
+    def Activate(self):
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_Activate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_Activate, self.Ptr)
+
+#
+#    def SplitPageInfo(self ,converterSetting:'ConverterSetting')->'List1':
+#        """
+#
+#        """
+#        intPtrconverterSetting:c_void_p = converterSetting.Ptr
+#
+#        GetDllLibXls().XlsWorkbook_SplitPageInfo.argtypes=[c_void_p ,c_void_p]
+#        GetDllLibXls().XlsWorkbook_SplitPageInfo.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_SplitPageInfo, self.Ptr, intPtrconverterSetting)
+#        ret = None if intPtr==None else List1(intPtr)
+#        return ret
+#
+
+
+
+    def PixelsToWidth(self ,pixels:float)->float:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_PixelsToWidth.argtypes=[c_void_p ,c_double]
+        GetDllLibXls().XlsWorkbook_PixelsToWidth.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_PixelsToWidth, self.Ptr, pixels)
+        return ret
+
+
+    #def ConvertUnits(self ,value:float,from:MeasureUnits,to:MeasureUnits)->float:
+    #    """
+
+    #    """
+    #    enumfrom:c_int = from.value
+    #    enumto:c_int = to.value
+
+    #    GetDllLibXls().XlsWorkbook_ConvertUnits.argtypes=[c_void_p ,c_double,c_int,c_int]
+    #    GetDllLibXls().XlsWorkbook_ConvertUnits.restype=c_double
+    #    ret = CallCFunction(GetDllLibXls().XlsWorkbook_ConvertUnits, self.Ptr, value,enumfrom,enumto)
+    #    return ret
+
+
+    def DecodeName(self ,name:str)->str:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_DecodeName.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorkbook_DecodeName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorkbook_DecodeName, self.Ptr, name))
+        return ret
+
+
+
+    def EncodeName(self ,strName:str)->str:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_EncodeName.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorkbook_EncodeName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorkbook_EncodeName, self.Ptr, strName))
+        return ret
+
+
+
+    def GetBookIndex(self ,referenceIndex:int)->int:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_GetBookIndex.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorkbook_GetBookIndex.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_GetBookIndex, self.Ptr, referenceIndex)
+        return ret
+
+
+    def IsExternalReference(self ,reference:int)->bool:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_IsExternalReference.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorkbook_IsExternalReference.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_IsExternalReference, self.Ptr, reference)
+        return ret
+
+
+    def IsFormatted(self ,xfIndex:int)->bool:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_IsFormatted.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorkbook_IsFormatted.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_IsFormatted, self.Ptr, xfIndex)
+        return ret
+
+    def GetMaxDigitWidth(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_GetMaxDigitWidth.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_GetMaxDigitWidth.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_GetMaxDigitWidth, self.Ptr)
+        return ret
+
+    def Dispose(self):
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_Dispose.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_Dispose, self.Ptr)
+
+    @property
+    def IsVScrollBarVisible(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_IsVScrollBarVisible.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_IsVScrollBarVisible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_IsVScrollBarVisible, self.Ptr)
+        return ret
+
+    @IsVScrollBarVisible.setter
+    def IsVScrollBarVisible(self, value:bool):
+        GetDllLibXls().XlsWorkbook_set_IsVScrollBarVisible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_IsVScrollBarVisible, self.Ptr, value)
+
+    @property
+    def Loading(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_Loading.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_Loading.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_Loading, self.Ptr)
+        return ret
+
+    @property
+    def IsWindowProtection(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_IsWindowProtection.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_IsWindowProtection.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_IsWindowProtection, self.Ptr)
+        return ret
+
+    @property
+    def MaxColumnCount(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_MaxColumnCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_MaxColumnCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_MaxColumnCount, self.Ptr)
+        return ret
+
+    @property
+    def MaxRowCount(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_MaxRowCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_MaxRowCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_MaxRowCount, self.Ptr)
+        return ret
+
+    @property
+    def MaxDigitWidth(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_MaxDigitWidth.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_MaxDigitWidth.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_MaxDigitWidth, self.Ptr)
+        return ret
+
+    @property
+
+    def PasswordToOpen(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_PasswordToOpen.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_PasswordToOpen.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorkbook_get_PasswordToOpen, self.Ptr))
+        return ret
+
+
+    @PasswordToOpen.setter
+    def PasswordToOpen(self, value:str):
+        GetDllLibXls().XlsWorkbook_set_PasswordToOpen.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_PasswordToOpen, self.Ptr, value)
+
+    @property
+    def ReadOnly(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_ReadOnly.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_ReadOnly.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_ReadOnly, self.Ptr)
+        return ret
+
+    @property
+    def ReadOnlyRecommended(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_ReadOnlyRecommended.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_ReadOnlyRecommended.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_ReadOnlyRecommended, self.Ptr)
+        return ret
+
+    @ReadOnlyRecommended.setter
+    def ReadOnlyRecommended(self, value:bool):
+        GetDllLibXls().XlsWorkbook_set_ReadOnlyRecommended.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_ReadOnlyRecommended, self.Ptr, value)
+
+    @property
+
+    def RowSeparator(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_RowSeparator.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_RowSeparator.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorkbook_get_RowSeparator, self.Ptr))
+        return ret
+
+
+    @property
+
+    def Styles(self)->'IStyles':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_Styles.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_Styles.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_Styles, self.Ptr)
+        ret = None if intPtr==None else IStyles(intPtr)
+        return ret
+
+
+    @property
+
+    def TabSheets(self)->'ITabSheets':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_TabSheets.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_TabSheets.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_TabSheets, self.Ptr)
+        ret = None if intPtr==None else ITabSheets(intPtr)
+        return ret
+
+
+    @property
+    def ThrowOnUnknownNames(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_ThrowOnUnknownNames.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_ThrowOnUnknownNames.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_ThrowOnUnknownNames, self.Ptr)
+        return ret
+
+    @ThrowOnUnknownNames.setter
+    def ThrowOnUnknownNames(self, value:bool):
+        GetDllLibXls().XlsWorkbook_set_ThrowOnUnknownNames.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_ThrowOnUnknownNames, self.Ptr, value)
+
+
+    def ContainsFont(self ,font:'XlsFont')->bool:
+        """
+
+        """
+        intPtrfont:c_void_p = font.Ptr
+
+        GetDllLibXls().XlsWorkbook_ContainsFont.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorkbook_ContainsFont.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_ContainsFont, self.Ptr, intPtrfont)
+        return ret
+
+
+    def FileWidthToPixels(self ,fileWidth:float)->float:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_FileWidthToPixels.argtypes=[c_void_p ,c_double]
+        GetDllLibXls().XlsWorkbook_FileWidthToPixels.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_FileWidthToPixels, self.Ptr, fileWidth)
+        return ret
+
+
+    def WidthToFileWidth(self ,width:float)->float:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_WidthToFileWidth.argtypes=[c_void_p ,c_double]
+        GetDllLibXls().XlsWorkbook_WidthToFileWidth.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_WidthToFileWidth, self.Ptr, width)
+        return ret
+
+    def CopyToClipboard(self):
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_CopyToClipboard.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_CopyToClipboard, self.Ptr)
+
+
+    def SetWriteProtectionPassword(self ,password:str):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_SetWriteProtectionPassword.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SetWriteProtectionPassword, self.Ptr, password)
+
+
+    def Clone(self)->'IWorkbook':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_Clone.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_Clone, self.Ptr)
+        ret = None if intPtr==None else IWorkbook(intPtr)
+        return ret
+
+
+    @dispatch
+    def Unprotect(self):
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_Unprotect.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_Unprotect, self.Ptr)
+
+    @dispatch
+
+    def Unprotect(self ,password:str):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_UnprotectP.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_UnprotectP, self.Ptr, password)
+
+    @dispatch
+
+    def Protect(self ,bIsProtectWindow:bool,bIsProtectContent:bool):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_Protect.argtypes=[c_void_p ,c_bool,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_Protect, self.Ptr, bIsProtectWindow,bIsProtectContent)
+
+    @dispatch
+
+    def Protect(self ,bIsProtectWindow:bool,bIsProtectContent:bool,password:str):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_ProtectBBP.argtypes=[c_void_p ,c_bool,c_bool,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_ProtectBBP, self.Ptr, bIsProtectWindow,bIsProtectContent,password)
+
+
+    def SetSeparators(self ,argumentsSeparator:int,arrayRowsSeparator:int):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_SetSeparators.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SetSeparators, self.Ptr, argumentsSeparator,arrayRowsSeparator)
+
+    @dispatch
+
+    def SaveAs(self ,stream:Stream,separator:str):
+        """
+
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().XlsWorkbook_SaveAs.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SaveAs, self.Ptr, intPtrstream,separator)
+
+    @dispatch
+
+    def SaveAs(self ,fileName:str,separator:str):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_SaveAsFS.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SaveAsFS, self.Ptr, fileName,separator)
+
+    @dispatch
+
+    def SaveAsImages(self ,dpiX:float,dpiY:float)->List[Stream]:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_SaveAsImages.argtypes=[c_void_p ,c_float,c_float]
+        GetDllLibXls().XlsWorkbook_SaveAsImages.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().XlsWorkbook_SaveAsImages, self.Ptr, dpiX,dpiY)
+        ret = GetObjVectorFromArray(intPtrArray, Stream)
+        return ret
+
+
+    @dispatch
+
+    def SaveAsImages(self ,sheetIndex:int,dpiX:float,dpiY:float)->Stream:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_SaveAsImagesSDD.argtypes=[c_void_p ,c_int,c_float,c_float]
+        GetDllLibXls().XlsWorkbook_SaveAsImagesSDD.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_SaveAsImagesSDD, self.Ptr, sheetIndex,dpiX,dpiY)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def SaveAsImages(self ,sheetIndex:int,firstRow:int,firstColumn:int,lastRow:int,lastColumn:int,dpiX:float,dpiY:float)->Stream:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_SaveAsImagesSFFLLDD.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_int,c_float,c_float]
+        GetDllLibXls().XlsWorkbook_SaveAsImagesSFFLLDD.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_SaveAsImagesSFFLLDD, self.Ptr, sheetIndex,firstRow,firstColumn,lastRow,lastColumn,dpiX,dpiY)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+
+    def SaveAsEmfStream(self ,sheetIndex:int,EmfStream:'Stream',firstRow:int,firstColumn:int,lastRow:int,lastColumn:int):
+        """
+
+        """
+        intPtrEmfStream:c_void_p = EmfStream.Ptr
+
+        GetDllLibXls().XlsWorkbook_SaveAsEmfStream.argtypes=[c_void_p ,c_int,c_void_p,c_int,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SaveAsEmfStream, self.Ptr, sheetIndex,intPtrEmfStream,firstRow,firstColumn,lastRow,lastColumn)
+
+
+    def SaveChartAsEmfImage(self ,worksheet:'Worksheet',chartIndex:int,imageOrPrintOptions:'ConverterSetting',emfStream:'Stream')->'Stream':
+        """
+
+        """
+        intPtrworksheet:c_void_p = worksheet.Ptr
+        intPtrimageOrPrintOptions:c_void_p = imageOrPrintOptions.Ptr
+        intPtremfStream:c_void_p = emfStream.Ptr
+
+        GetDllLibXls().XlsWorkbook_SaveChartAsEmfImage.argtypes=[c_void_p ,c_void_p,c_int,c_void_p,c_void_p]
+        GetDllLibXls().XlsWorkbook_SaveChartAsEmfImage.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_SaveChartAsEmfImage, self.Ptr, intPtrworksheet,chartIndex,intPtrimageOrPrintOptions,intPtremfStream)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def SaveChartAsImage(self ,worksheet:Worksheet,imageOrPrintOptions:ConverterSetting)->List[Stream]:
+        """
+
+        """
+        intPtrworksheet:c_void_p = worksheet.Ptr
+        intPtrimageOrPrintOptions:c_void_p = imageOrPrintOptions.Ptr
+
+        GetDllLibXls().XlsWorkbook_SaveChartAsImage.argtypes=[c_void_p ,c_void_p,c_void_p]
+        GetDllLibXls().XlsWorkbook_SaveChartAsImage.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().XlsWorkbook_SaveChartAsImage, self.Ptr, intPtrworksheet,intPtrimageOrPrintOptions)
+        ret = GetObjVectorFromArray(intPtrArray, Stream)
+        return ret
+
+
+    @dispatch
+
+    def SaveChartAsImage(self ,chartSheet:ChartSheet,imageOrPrintOptions:ConverterSetting)->Stream:
+        """
+
+        """
+        intPtrchartSheet:c_void_p = chartSheet.Ptr
+        intPtrimageOrPrintOptions:c_void_p = imageOrPrintOptions.Ptr
+
+        GetDllLibXls().XlsWorkbook_SaveChartAsImageCI.argtypes=[c_void_p ,c_void_p,c_void_p]
+        GetDllLibXls().XlsWorkbook_SaveChartAsImageCI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_SaveChartAsImageCI, self.Ptr, intPtrchartSheet,intPtrimageOrPrintOptions)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def SaveChartAsImage(self ,worksheet:Worksheet,charIndex:int,imageOrPrintOptions:ConverterSetting)->Stream:
+        """
+
+        """
+        intPtrworksheet:c_void_p = worksheet.Ptr
+        intPtrimageOrPrintOptions:c_void_p = imageOrPrintOptions.Ptr
+
+        GetDllLibXls().XlsWorkbook_SaveChartAsImageWCI.argtypes=[c_void_p ,c_void_p,c_int,c_void_p]
+        GetDllLibXls().XlsWorkbook_SaveChartAsImageWCI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_SaveChartAsImageWCI, self.Ptr, intPtrworksheet,charIndex,intPtrimageOrPrintOptions)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def FindOne(self ,findValue:float,flags:FindType)->IXLSRange:
+        """
+
+        """
+        enumflags:c_int = flags.value
+
+        GetDllLibXls().XlsWorkbook_FindOne.argtypes=[c_void_p ,c_double,c_int]
+        GetDllLibXls().XlsWorkbook_FindOne.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_FindOne, self.Ptr, findValue,enumflags)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def FindOne(self ,findValue:str,flags:FindType)->IXLSRange:
+        """
+
+        """
+        enumflags:c_int = flags.value
+
+        GetDllLibXls().XlsWorkbook_FindOneFF.argtypes=[c_void_p ,c_void_p,c_int]
+        GetDllLibXls().XlsWorkbook_FindOneFF.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_FindOneFF, self.Ptr, findValue,enumflags)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def FindOne(self ,findValue:bool)->IXLSRange:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_FindOneF.argtypes=[c_void_p ,c_bool]
+        GetDllLibXls().XlsWorkbook_FindOneF.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_FindOneF, self.Ptr, findValue)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def FindOne(self ,findValue:DateTime)->IXLSRange:
+        """
+
+        """
+        intPtrfindValue:c_void_p = findValue.Ptr
+
+        GetDllLibXls().XlsWorkbook_FindOneF1.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorkbook_FindOneF1.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_FindOneF1, self.Ptr, intPtrfindValue)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def FindOne(self ,findValue:TimeSpan)->IXLSRange:
+        """
+
+        """
+        intPtrfindValue:c_void_p = findValue.Ptr
+
+        GetDllLibXls().XlsWorkbook_FindOneF11.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorkbook_FindOneF11.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_FindOneF11, self.Ptr, intPtrfindValue)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+#    @dispatch
+#
+#    def FindAll(self ,findValue:str,flags:FindType)->ListCellRanges:
+#        """
+#
+#        """
+#        enumflags:c_int = flags.value
+#
+#        GetDllLibXls().XlsWorkbook_FindAll.argtypes=[c_void_p ,c_void_p,c_int]
+#        GetDllLibXls().XlsWorkbook_FindAll.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_FindAll, self.Ptr, findValue,enumflags)
+#        ret = None if intPtr==None else ListCellRanges(intPtr)
+#        return ret
+
+
+#    @dispatch
+#
+#    def FindAll(self ,findValue:float,flags:FindType)->ListCellRanges:
+#        """
+#
+#        """
+#        enumflags:c_int = flags.value
+#
+#        GetDllLibXls().XlsWorkbook_FindAllFF.argtypes=[c_void_p ,c_double,c_int]
+#        GetDllLibXls().XlsWorkbook_FindAllFF.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_FindAllFF, self.Ptr, findValue,enumflags)
+#        ret = None if intPtr==None else ListCellRanges(intPtr)
+#        return ret
+
+
+#    @dispatch
+#
+#    def FindAll(self ,findValue:bool)->ListCellRanges:
+#        """
+#
+#        """
+#        
+#        GetDllLibXls().XlsWorkbook_FindAllF.argtypes=[c_void_p ,c_bool]
+#        GetDllLibXls().XlsWorkbook_FindAllF.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_FindAllF, self.Ptr, findValue)
+#        ret = None if intPtr==None else ListCellRanges(intPtr)
+#        return ret
+
+
+#    @dispatch
+#
+#    def FindAll(self ,findValue:DateTime)->ListCellRanges:
+#        """
+#
+#        """
+#        intPtrfindValue:c_void_p = findValue.Ptr
+#
+#        GetDllLibXls().XlsWorkbook_FindAllF1.argtypes=[c_void_p ,c_void_p]
+#        GetDllLibXls().XlsWorkbook_FindAllF1.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_FindAllF1, self.Ptr, intPtrfindValue)
+#        ret = None if intPtr==None else ListCellRanges(intPtr)
+#        return ret
+
+
+#    @dispatch
+#
+#    def FindAll(self ,findValue:TimeSpan)->ListCellRanges:
+#        """
+#
+#        """
+#        intPtrfindValue:c_void_p = findValue.Ptr
+#
+#        GetDllLibXls().XlsWorkbook_FindAllF11.argtypes=[c_void_p ,c_void_p]
+#        GetDllLibXls().XlsWorkbook_FindAllF11.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_FindAllF11, self.Ptr, intPtrfindValue)
+#        ret = None if intPtr==None else ListCellRanges(intPtr)
+#        return ret
+
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValue:str):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_Replace.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_Replace, self.Ptr, oldValue,newValue)
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValue:DateTime):
+        """
+
+        """
+        intPtrnewValue:c_void_p = newValue.Ptr
+
+        GetDllLibXls().XlsWorkbook_ReplaceON.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_ReplaceON, self.Ptr, oldValue,intPtrnewValue)
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValue:float):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_ReplaceON1.argtypes=[c_void_p ,c_void_p,c_double]
+        CallCFunction(GetDllLibXls().XlsWorkbook_ReplaceON1, self.Ptr, oldValue,newValue)
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValues:List[str],isVertical:bool):
+        """
+
+        """
+        #arraynewValues:ArrayTypenewValues = ""
+        countnewValues = len(newValues)
+        ArrayTypenewValues = c_wchar_p * countnewValues
+        arraynewValues = ArrayTypenewValues()
+        for i in range(0, countnewValues):
+            arraynewValues[i] = newValues[i]
+
+
+        GetDllLibXls().XlsWorkbook_ReplaceONI.argtypes=[c_void_p ,c_void_p,ArrayTypenewValues,c_int,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_ReplaceONI, self.Ptr, oldValue,arraynewValues,countnewValues,isVertical)
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValues:List[int],isVertical:bool):
+        """
+
+        """
+        #arraynewValues:ArrayTypenewValues = ""
+        countnewValues = len(newValues)
+        ArrayTypenewValues = c_int * countnewValues
+        arraynewValues = ArrayTypenewValues()
+        for i in range(0, countnewValues):
+            arraynewValues[i] = newValues[i]
+
+
+        GetDllLibXls().XlsWorkbook_ReplaceONI1.argtypes=[c_void_p ,c_void_p,ArrayTypenewValues,c_int,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_ReplaceONI1, self.Ptr, oldValue,arraynewValues,countnewValues,isVertical)
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValues:List[float],isVertical:bool):
+        """
+
+        """
+        #arraynewValues:ArrayTypenewValues = ""
+        countnewValues = len(newValues)
+        ArrayTypenewValues = c_double * countnewValues
+        arraynewValues = ArrayTypenewValues()
+        for i in range(0, countnewValues):
+            arraynewValues[i] = newValues[i]
+
+
+        GetDllLibXls().XlsWorkbook_ReplaceONI11.argtypes=[c_void_p ,c_void_p,ArrayTypenewValues,c_int,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_ReplaceONI11, self.Ptr, oldValue,arraynewValues,countnewValues,isVertical)
+
+#    @dispatch
+#
+#    def Replace(self ,oldValue:str,newValues:'DataTable',isFieldNamesShown:bool):
+#        """
+#
+#        """
+#        intPtrnewValues:c_void_p = newValues.Ptr
+#
+#        GetDllLibXls().XlsWorkbook_ReplaceONI111.argtypes=[c_void_p ,c_void_p,c_void_p,c_bool]
+#        CallCFunction(GetDllLibXls().XlsWorkbook_ReplaceONI111, self.Ptr, oldValue,intPtrnewValues,isFieldNamesShown)
+
+
+#    @dispatch
+#
+#    def Replace(self ,oldValue:str,newValues:'DataColumn',isFieldNamesShown:bool):
+#        """
+#
+#        """
+#        intPtrnewValues:c_void_p = newValues.Ptr
+#
+#        GetDllLibXls().XlsWorkbook_ReplaceONI1111.argtypes=[c_void_p ,c_void_p,c_void_p,c_bool]
+#        CallCFunction(GetDllLibXls().XlsWorkbook_ReplaceONI1111, self.Ptr, oldValue,intPtrnewValues,isFieldNamesShown)
+
+
+    @dispatch
+
+    def CreateFont(self)->IFont:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_CreateFont.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_CreateFont.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_CreateFont, self.Ptr)
+        ret = None if intPtr==None else XlsFont(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def CreateFont(self ,nativeFont:Font)->IFont:
+        """
+
+        """
+        intPtrnativeFont:c_void_p = nativeFont.Ptr
+
+        GetDllLibXls().XlsWorkbook_CreateFontN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorkbook_CreateFontN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_CreateFontN, self.Ptr, intPtrnativeFont)
+        ret = None if intPtr==None else XlsFont(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def CreateFont(self ,baseFont:IFont)->IFont:
+        """
+
+        """
+        intPtrbaseFont:c_void_p = baseFont.Ptr
+
+        GetDllLibXls().XlsWorkbook_CreateFontB.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorkbook_CreateFontB.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_CreateFontB, self.Ptr, intPtrbaseFont)
+        ret = None if intPtr==None else XlsFont(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def CreateFont(self ,baseFont:IFont,bAddToCollection:bool)->IFont:
+        """
+
+        """
+        intPtrbaseFont:c_void_p = baseFont.Ptr
+
+        GetDllLibXls().XlsWorkbook_CreateFontBB.argtypes=[c_void_p ,c_void_p,c_bool]
+        GetDllLibXls().XlsWorkbook_CreateFontBB.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_CreateFontBB, self.Ptr, intPtrbaseFont,bAddToCollection)
+        ret = None if intPtr==None else XlsFont(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def SetColorOrGetNearest(self ,color:Color)->ExcelColors:
+        """
+
+        """
+        intPtrcolor:c_void_p = color.Ptr
+
+        GetDllLibXls().XlsWorkbook_SetColorOrGetNearest.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorkbook_SetColorOrGetNearest.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_SetColorOrGetNearest, self.Ptr, intPtrcolor)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+
+    def SetActiveWorksheet(self ,sheet:'XlsWorksheetBase'):
+        """
+
+        """
+        intPtrsheet:c_void_p = sheet.Ptr
+
+        GetDllLibXls().XlsWorkbook_SetActiveWorksheet.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SetActiveWorksheet, self.Ptr, intPtrsheet)
+
+    def SetChanged(self):
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_SetChanged.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SetChanged, self.Ptr)
+
+    @dispatch
+
+    def SetColorOrGetNearest(self ,r:int,g:int,b:int)->ExcelColors:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_SetColorOrGetNearestRGB.argtypes=[c_void_p ,c_int,c_int,c_int]
+        GetDllLibXls().XlsWorkbook_SetColorOrGetNearestRGB.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_SetColorOrGetNearestRGB, self.Ptr, r,g,b)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+
+    def SetMaxDigitWidth(self ,w:int):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_SetMaxDigitWidth.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SetMaxDigitWidth, self.Ptr, w)
+
+    @dispatch
+
+    def GetNearestColor(self ,color:Color)->ExcelColors:
+        """
+
+        """
+        intPtrcolor:c_void_p = color.Ptr
+
+        GetDllLibXls().XlsWorkbook_GetNearestColor.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorkbook_GetNearestColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_GetNearestColor, self.Ptr, intPtrcolor)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @dispatch
+
+    def GetNearestColor(self ,color:Color,iStartIndex:int)->ExcelColors:
+        """
+
+        """
+        intPtrcolor:c_void_p = color.Ptr
+
+        GetDllLibXls().XlsWorkbook_GetNearestColorCI.argtypes=[c_void_p ,c_void_p,c_int]
+        GetDllLibXls().XlsWorkbook_GetNearestColorCI.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_GetNearestColorCI, self.Ptr, intPtrcolor,iStartIndex)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @dispatch
+
+    def GetNearestColor(self ,r:int,g:int,b:int)->ExcelColors:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_GetNearestColorRGB.argtypes=[c_void_p ,c_int,c_int,c_int]
+        GetDllLibXls().XlsWorkbook_GetNearestColorRGB.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_GetNearestColorRGB, self.Ptr, r,g,b)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+
+    def GetPaletteColor(self ,color:'ExcelColors')->'Color':
+        """
+
+        """
+        enumcolor:c_int = color.value
+
+        GetDllLibXls().XlsWorkbook_GetPaletteColor.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorkbook_GetPaletteColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_GetPaletteColor, self.Ptr, enumcolor)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    def ResetPalette(self):
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_ResetPalette.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_ResetPalette, self.Ptr)
+
+
+    def SetPaletteColor(self ,index:int,color:'Color'):
+        """
+
+        """
+        intPtrcolor:c_void_p = color.Ptr
+
+        GetDllLibXls().XlsWorkbook_SetPaletteColor.argtypes=[c_void_p ,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SetPaletteColor, self.Ptr, index,intPtrcolor)
+
+#    @dispatch
+#
+#    def SaveAs(self ,fileName:str,response:'HttpResponse'):
+#        """
+#
+#        """
+#        intPtrresponse:c_void_p = response.Ptr
+#
+#        GetDllLibXls().XlsWorkbook_SaveAsFR.argtypes=[c_void_p ,c_void_p,c_void_p]
+#        CallCFunction(GetDllLibXls().XlsWorkbook_SaveAsFR, self.Ptr, fileName,intPtrresponse)
+
+
+#    @dispatch
+#
+#    def SaveAs(self ,fileName:str,saveType:ExcelSaveType,response:'HttpResponse'):
+#        """
+#
+#        """
+#        enumsaveType:c_int = saveType.value
+#        intPtrresponse:c_void_p = response.Ptr
+#
+#        GetDllLibXls().XlsWorkbook_SaveAsFSR.argtypes=[c_void_p ,c_void_p,c_int,c_void_p]
+#        CallCFunction(GetDllLibXls().XlsWorkbook_SaveAsFSR, self.Ptr, fileName,enumsaveType,intPtrresponse)
+
+
+    @dispatch
+
+    def SaveAs(self ,stream:Stream,saveType:ExcelSaveType):
+        """
+
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        enumsaveType:c_int = saveType.value
+
+        GetDllLibXls().XlsWorkbook_SaveAsSS.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SaveAsSS, self.Ptr, intPtrstream,enumsaveType)
+
+    @dispatch
+
+    def SaveAs(self ,stream:Stream,saveType:ExcelSaveType,version:ExcelVersion):
+        """
+
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        enumsaveType:c_int = saveType.value
+        enumversion:c_int = version.value
+
+        GetDllLibXls().XlsWorkbook_SaveAsSSV.argtypes=[c_void_p ,c_void_p,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SaveAsSSV, self.Ptr, intPtrstream,enumsaveType,enumversion)
+
+    @dispatch
+
+    def SaveAs(self ,stream:Stream):
+        """
+
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().XlsWorkbook_SaveAsS.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SaveAsS, self.Ptr, intPtrstream)
+
+    @dispatch
+
+    def SaveAs(self ,fileName:str,saveType:ExcelSaveType):
+        """
+
+        """
+        enumsaveType:c_int = saveType.value
+
+        GetDllLibXls().XlsWorkbook_SaveAsFS1.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SaveAsFS1, self.Ptr, fileName,enumsaveType)
+
+    @dispatch
+
+    def SaveAs(self ,fileName:str,saveType:ExcelSaveType,version:ExcelVersion):
+        """
+
+        """
+        enumsaveType:c_int = saveType.value
+        enumversion:c_int = version.value
+
+        GetDllLibXls().XlsWorkbook_SaveAsFSV.argtypes=[c_void_p ,c_void_p,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SaveAsFSV, self.Ptr, fileName,enumsaveType,enumversion)
+
+    @dispatch
+
+    def SaveToXlsm(self ,fileName:str):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_SaveToXlsm.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SaveToXlsm, self.Ptr, fileName)
+
+    @dispatch
+
+    def SaveToXlsm(self ,stream:Stream):
+        """
+
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().XlsWorkbook_SaveToXlsmS.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SaveToXlsmS, self.Ptr, intPtrstream)
+
+    @dispatch
+
+    def SaveToPdf(self ,stream:Stream):
+        """
+
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().XlsWorkbook_SaveToPdf.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SaveToPdf, self.Ptr, intPtrstream)
+
+    @dispatch
+
+    def SaveToPdf(self ,fileName:str):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_SaveToPdfF.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SaveToPdfF, self.Ptr, fileName)
+
+    @dispatch
+
+    def SaveAsImageOrXps(self ,stream:Stream,fileFormat:FileFormat):
+        """
+
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        enumfileFormat:c_int = fileFormat.value
+
+        GetDllLibXls().XlsWorkbook_SaveAsImageOrXps.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SaveAsImageOrXps, self.Ptr, intPtrstream,enumfileFormat)
+
+    @dispatch
+
+    def SaveAsImageOrXps(self ,fileName:str,fileFormat:FileFormat):
+        """
+
+        """
+        enumfileFormat:c_int = fileFormat.value
+
+        GetDllLibXls().XlsWorkbook_SaveAsImageOrXpsFF.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SaveAsImageOrXpsFF, self.Ptr, fileName,enumfileFormat)
+
+
+    def SaveAsHtml(self ,fileName:str,saveOption:'HTMLOptions'):
+        """
+
+        """
+        intPtrsaveOption:c_void_p = saveOption.Ptr
+
+        GetDllLibXls().XlsWorkbook_SaveAsHtml.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SaveAsHtml, self.Ptr, fileName,intPtrsaveOption)
+
+    @dispatch
+
+    def SaveAs(self ,FileName:str):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorkbook_SaveAsF.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_SaveAsF, self.Ptr, FileName)
+
+    def Save(self):
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_Save.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_Save, self.Ptr)
+
+    @property
+    def StandardRowHeight(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_StandardRowHeight.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_StandardRowHeight.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_StandardRowHeight, self.Ptr)
+        return ret
+
+    @StandardRowHeight.setter
+    def StandardRowHeight(self, value:float):
+        GetDllLibXls().XlsWorkbook_set_StandardRowHeight.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_StandardRowHeight, self.Ptr, value)
+
+    @property
+    def StandardRowHeightInPixels(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_StandardRowHeightInPixels.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_StandardRowHeightInPixels.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_StandardRowHeightInPixels, self.Ptr)
+        return ret
+
+    @StandardRowHeightInPixels.setter
+    def StandardRowHeightInPixels(self, value:int):
+        GetDllLibXls().XlsWorkbook_set_StandardRowHeightInPixels.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_StandardRowHeightInPixels, self.Ptr, value)
+
+    @property
+    def MaxXFCount(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_MaxXFCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_MaxXFCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_MaxXFCount, self.Ptr)
+        return ret
+
+    @property
+    def MaxIndent(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_MaxIndent.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_MaxIndent.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_MaxIndent, self.Ptr)
+        return ret
+
+    @property
+
+    def Version(self)->'ExcelVersion':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_Version.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_Version.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_Version, self.Ptr)
+        objwraped = ExcelVersion(ret)
+        return objwraped
+
+    @Version.setter
+    def Version(self, value:'ExcelVersion'):
+        GetDllLibXls().XlsWorkbook_set_Version.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_Version, self.Ptr, value.value)
+
+    @property
+
+    def Worksheets(self)->'IWorksheets':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_Worksheets.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_Worksheets.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_Worksheets, self.Ptr)
+        ret = None if intPtr==None else IWorksheets(intPtr)
+        return ret
+
+
+    @property
+
+    def InnerAddInFunctions(self)->'XlsAddInFunctionsCollection':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_InnerAddInFunctions.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_InnerAddInFunctions.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_InnerAddInFunctions, self.Ptr)
+        ret = None if intPtr==None else XlsAddInFunctionsCollection(intPtr)
+        return ret
+
+
+    @property
+
+    def InnerFonts(self)->'XlsFontsCollection':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_InnerFonts.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_InnerFonts.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_InnerFonts, self.Ptr)
+        ret = None if intPtr==None else XlsFontsCollection(intPtr)
+        return ret
+
+
+#    @property
+#
+#    def InnerGraphics(self)->'Graphics':
+#        """
+#
+#        """
+#        GetDllLibXls().XlsWorkbook_get_InnerGraphics.argtypes=[c_void_p]
+#        GetDllLibXls().XlsWorkbook_get_InnerGraphics.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_InnerGraphics, self.Ptr)
+#        ret = None if intPtr==None else Graphics(intPtr)
+#        return ret
+#
+
+
+#    @property
+#
+#    def InnerPalette(self)->'List1':
+#        """
+#
+#        """
+#        GetDllLibXls().XlsWorkbook_get_InnerPalette.argtypes=[c_void_p]
+#        GetDllLibXls().XlsWorkbook_get_InnerPalette.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_InnerPalette, self.Ptr)
+#        ret = None if intPtr==None else List1(intPtr)
+#        return ret
+#
+
+
+    @property
+
+    def Names(self)->'INameRanges':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_Names.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_Names.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_Names, self.Ptr)
+        ret = None if intPtr==None else INameRanges(intPtr)
+        return ret
+
+
+    @property
+
+    def DataConns(self)->'DataConnections':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_DataConns.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_DataConns.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_DataConns, self.Ptr)
+        ret = None if intPtr==None else DataConnections(intPtr)
+        return ret
+
+
+    @property
+
+    def ExternalLinks(self)->'ExternalLinkCollection':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_ExternalLinks.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_ExternalLinks.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_ExternalLinks, self.Ptr)
+        ret = None if intPtr==None else ExternalLinkCollection(intPtr)
+        return ret
+
+
+    @property
+    def ObjectCount(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_ObjectCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_ObjectCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_ObjectCount, self.Ptr)
+        return ret
+
+    @property
+
+    def OleSize(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_OleSize.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_OleSize.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_OleSize, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @OleSize.setter
+    def OleSize(self, value:'IXLSRange'):
+        GetDllLibXls().XlsWorkbook_set_OleSize.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_OleSize, self.Ptr, value.Ptr)
+
+    @property
+
+    def ActiveSheet(self)->'IWorksheet':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_ActiveSheet.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_ActiveSheet.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_ActiveSheet, self.Ptr)
+        ret = None if intPtr==None else XlsWorksheet(intPtr)
+        return ret
+
+
+    @property
+    def ActiveSheetIndex(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_ActiveSheetIndex.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_ActiveSheetIndex.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_ActiveSheetIndex, self.Ptr)
+        return ret
+
+    @ActiveSheetIndex.setter
+    def ActiveSheetIndex(self, value:int):
+        GetDllLibXls().XlsWorkbook_set_ActiveSheetIndex.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_ActiveSheetIndex, self.Ptr, value)
+
+    @property
+
+    def CodeName(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_CodeName.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_CodeName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorkbook_get_CodeName, self.Ptr))
+        return ret
+
+
+    @CodeName.setter
+    def CodeName(self, value:str):
+        GetDllLibXls().XlsWorkbook_set_CodeName.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_CodeName, self.Ptr, value)
+
+    @property
+
+    def Palette(self)->List['Color']:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_Palette.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_Palette.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().XlsWorkbook_get_Palette, self.Ptr)
+        ret = GetVectorFromArray(intPtrArray, Color)
+        return ret
+
+
+    @property
+    def Date1904(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_Date1904.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_Date1904.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_Date1904, self.Ptr)
+        return ret
+
+    @Date1904.setter
+    def Date1904(self, value:bool):
+        GetDllLibXls().XlsWorkbook_set_Date1904.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_Date1904, self.Ptr, value)
+
+    @property
+
+    def StandardFont(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_StandardFont.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_StandardFont.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorkbook_get_StandardFont, self.Ptr))
+        return ret
+
+
+    @StandardFont.setter
+    def StandardFont(self, value:str):
+        GetDllLibXls().XlsWorkbook_set_StandardFont.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_StandardFont, self.Ptr, value)
+
+    @property
+    def StandardFontSize(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_StandardFontSize.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_StandardFontSize.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_StandardFontSize, self.Ptr)
+        return ret
+
+    @StandardFontSize.setter
+    def StandardFontSize(self, value:float):
+        GetDllLibXls().XlsWorkbook_set_StandardFontSize.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_StandardFontSize, self.Ptr, value)
+
+    @property
+    def DisableMacrosStart(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_DisableMacrosStart.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_DisableMacrosStart.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_DisableMacrosStart, self.Ptr)
+        return ret
+
+    @DisableMacrosStart.setter
+    def DisableMacrosStart(self, value:bool):
+        GetDllLibXls().XlsWorkbook_set_DisableMacrosStart.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_DisableMacrosStart, self.Ptr, value)
+
+    @property
+    def FirstCharSize(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_FirstCharSize.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_FirstCharSize.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_FirstCharSize, self.Ptr)
+        return ret
+
+    @FirstCharSize.setter
+    def FirstCharSize(self, value:int):
+        GetDllLibXls().XlsWorkbook_set_FirstCharSize.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_FirstCharSize, self.Ptr, value)
+
+    @property
+    def SecondCharSize(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_SecondCharSize.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_SecondCharSize.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_SecondCharSize, self.Ptr)
+        return ret
+
+    @SecondCharSize.setter
+    def SecondCharSize(self, value:int):
+        GetDllLibXls().XlsWorkbook_set_SecondCharSize.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_SecondCharSize, self.Ptr, value)
+
+    @property
+
+    def FullFileName(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_FullFileName.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_FullFileName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorkbook_get_FullFileName, self.Ptr))
+        return ret
+
+
+    @property
+    def HasDuplicatedNames(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_HasDuplicatedNames.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_HasDuplicatedNames.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_HasDuplicatedNames, self.Ptr)
+        return ret
+
+    @HasDuplicatedNames.setter
+    def HasDuplicatedNames(self, value:bool):
+        GetDllLibXls().XlsWorkbook_set_HasDuplicatedNames.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_HasDuplicatedNames, self.Ptr, value)
+
+    @property
+    def HasMacros(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_HasMacros.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_HasMacros.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_HasMacros, self.Ptr)
+        return ret
+
+    @property
+    def Saved(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_Saved.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_Saved.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_Saved, self.Ptr)
+        return ret
+
+    @Saved.setter
+    def Saved(self, value:bool):
+        GetDllLibXls().XlsWorkbook_set_Saved.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_Saved, self.Ptr, value)
+
+    @property
+    def Saving(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_Saving.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_Saving.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_Saving, self.Ptr)
+        return ret
+
+    @property
+
+    def Author(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_Author.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_Author.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorkbook_get_Author, self.Ptr))
+        return ret
+
+
+    @Author.setter
+    def Author(self, value:str):
+        GetDllLibXls().XlsWorkbook_set_Author.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_Author, self.Ptr, value)
+
+    @property
+
+    def AddInFunctions(self)->'IAddInFunctions':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_AddInFunctions.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_AddInFunctions.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_AddInFunctions, self.Ptr)
+        ret = None if intPtr==None else IAddInFunctions(intPtr)
+        return ret
+
+
+    @property
+    def Allow3DRangesInDataValidation(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_Allow3DRangesInDataValidation.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_Allow3DRangesInDataValidation.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_Allow3DRangesInDataValidation, self.Ptr)
+        return ret
+
+    @Allow3DRangesInDataValidation.setter
+    def Allow3DRangesInDataValidation(self, value:bool):
+        GetDllLibXls().XlsWorkbook_set_Allow3DRangesInDataValidation.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_Allow3DRangesInDataValidation, self.Ptr, value)
+
+    @property
+
+    def ArgumentsSeparator(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_ArgumentsSeparator.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_ArgumentsSeparator.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorkbook_get_ArgumentsSeparator, self.Ptr))
+        return ret
+
+
+    @property
+
+    def BuiltInDocumentProperties(self)->'IBuiltInDocumentProperties':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_BuiltInDocumentProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_BuiltInDocumentProperties.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_BuiltInDocumentProperties, self.Ptr)
+        ret = None if intPtr==None else IBuiltInDocumentProperties(intPtr)
+        return ret
+
+
+    @property
+
+    def Charts(self)->'ICharts':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_Charts.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_Charts.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_Charts, self.Ptr)
+        ret = None if intPtr==None else ICharts(intPtr)
+        return ret
+
+
+#    @property
+#
+#    def Chartsheets(self)->'List1':
+#        """
+#
+#        """
+#        GetDllLibXls().XlsWorkbook_get_Chartsheets.argtypes=[c_void_p]
+#        GetDllLibXls().XlsWorkbook_get_Chartsheets.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_Chartsheets, self.Ptr)
+#        ret = None if intPtr==None else List1(intPtr)
+#        return ret
+#
+
+
+    @property
+
+    def CustomDocumentProperties(self)->'ICustomDocumentProperties':
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_CustomDocumentProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_CustomDocumentProperties.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_get_CustomDocumentProperties, self.Ptr)
+        ret = None if intPtr==None else ICustomDocumentProperties(intPtr)
+        return ret
+
+
+    @property
+    def CurrentObjectId(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_CurrentObjectId.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_CurrentObjectId.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_CurrentObjectId, self.Ptr)
+        return ret
+
+    @CurrentObjectId.setter
+    def CurrentObjectId(self, value:int):
+        GetDllLibXls().XlsWorkbook_set_CurrentObjectId.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_CurrentObjectId, self.Ptr, value)
+
+    @property
+    def CurrentShapeId(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_CurrentShapeId.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_CurrentShapeId.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_CurrentShapeId, self.Ptr)
+        return ret
+
+    @CurrentShapeId.setter
+    def CurrentShapeId(self, value:int):
+        GetDllLibXls().XlsWorkbook_set_CurrentShapeId.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_CurrentShapeId, self.Ptr, value)
+
+    @property
+    def CurrentHeaderId(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_CurrentHeaderId.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_CurrentHeaderId.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_CurrentHeaderId, self.Ptr)
+        return ret
+
+    @CurrentHeaderId.setter
+    def CurrentHeaderId(self, value:int):
+        GetDllLibXls().XlsWorkbook_set_CurrentHeaderId.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_CurrentHeaderId, self.Ptr, value)
+
+    @property
+    def DefaultXFIndex(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_DefaultXFIndex.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_DefaultXFIndex.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_DefaultXFIndex, self.Ptr)
+        return ret
+
+    @DefaultXFIndex.setter
+    def DefaultXFIndex(self, value:int):
+        GetDllLibXls().XlsWorkbook_set_DefaultXFIndex.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_DefaultXFIndex, self.Ptr, value)
+
+    @property
+    def DetectDateTimeInValue(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_DetectDateTimeInValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_DetectDateTimeInValue.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_DetectDateTimeInValue, self.Ptr)
+        return ret
+
+    @DetectDateTimeInValue.setter
+    def DetectDateTimeInValue(self, value:bool):
+        GetDllLibXls().XlsWorkbook_set_DetectDateTimeInValue.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_DetectDateTimeInValue, self.Ptr, value)
+
+    @property
+    def DisplayedTab(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_DisplayedTab.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_DisplayedTab.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_DisplayedTab, self.Ptr)
+        return ret
+
+    @DisplayedTab.setter
+    def DisplayedTab(self, value:int):
+        GetDllLibXls().XlsWorkbook_set_DisplayedTab.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_DisplayedTab, self.Ptr, value)
+
+    @property
+    def DisplayWorkbookTabs(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_DisplayWorkbookTabs.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_DisplayWorkbookTabs.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_DisplayWorkbookTabs, self.Ptr)
+        return ret
+
+    @DisplayWorkbookTabs.setter
+    def DisplayWorkbookTabs(self, value:bool):
+        GetDllLibXls().XlsWorkbook_set_DisplayWorkbookTabs.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_DisplayWorkbookTabs, self.Ptr, value)
+
+    @property
+    def IsCellProtection(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_IsCellProtection.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_IsCellProtection.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_IsCellProtection, self.Ptr)
+        return ret
+
+    @property
+    def IsDisplayPrecision(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_IsDisplayPrecision.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_IsDisplayPrecision.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_IsDisplayPrecision, self.Ptr)
+        return ret
+
+    @IsDisplayPrecision.setter
+    def IsDisplayPrecision(self, value:bool):
+        GetDllLibXls().XlsWorkbook_set_IsDisplayPrecision.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_IsDisplayPrecision, self.Ptr, value)
+
+    @property
+    def IsHScrollBarVisible(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_IsHScrollBarVisible.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_IsHScrollBarVisible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_IsHScrollBarVisible, self.Ptr)
+        return ret
+
+    @IsHScrollBarVisible.setter
+    def IsHScrollBarVisible(self, value:bool):
+        GetDllLibXls().XlsWorkbook_set_IsHScrollBarVisible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_IsHScrollBarVisible, self.Ptr, value)
+
+    @property
+    def IsLoaded(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_IsLoaded.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_IsLoaded.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_IsLoaded, self.Ptr)
+        return ret
+
+    @property
+    def IsRightToLeft(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorkbook_get_IsRightToLeft.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorkbook_get_IsRightToLeft.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_get_IsRightToLeft, self.Ptr)
+        return ret
+
+    @IsRightToLeft.setter
+    def IsRightToLeft(self, value:bool):
+        GetDllLibXls().XlsWorkbook_set_IsRightToLeft.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorkbook_set_IsRightToLeft, self.Ptr, value)
+
+    @staticmethod
+
+    def DEF_COMENT_PARSE_COLOR()->'Color':
+        """
+
+        """
+        #GetDllLibXls().XlsWorkbook_DEF_COMENT_PARSE_COLOR.argtypes=[]
+        GetDllLibXls().XlsWorkbook_DEF_COMENT_PARSE_COLOR.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorkbook_DEF_COMENT_PARSE_COLOR)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @staticmethod
+    def DEF_FIRST_USER_COLOR()->int:
+        """
+
+        """
+        #GetDllLibXls().XlsWorkbook_DEF_FIRST_USER_COLOR.argtypes=[]
+        GetDllLibXls().XlsWorkbook_DEF_FIRST_USER_COLOR.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorkbook_DEF_FIRST_USER_COLOR)
+        return ret
+
+    @staticmethod
+
+    def DEF_BAD_SHEET_NAME()->str:
+        """
+
+        """
+        #GetDllLibXls().XlsWorkbook_DEF_BAD_SHEET_NAME.argtypes=[]
+        GetDllLibXls().XlsWorkbook_DEF_BAD_SHEET_NAME.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorkbook_DEF_BAD_SHEET_NAME))
+        return ret
+
+

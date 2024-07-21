@@ -1,0 +1,401 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsPivotCache (  XlsObject, IPivotCache) :
+    """
+
+    """
+    @property
+    def Index(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsPivotCache_get_Index.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_Index.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_Index, self.Ptr)
+        return ret
+
+    @property
+
+    def SourceType(self)->'DataSourceType':
+        """
+
+        """
+        GetDllLibXls().XlsPivotCache_get_SourceType.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_SourceType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_SourceType, self.Ptr)
+        objwraped = DataSourceType(ret)
+        return objwraped
+
+    @property
+
+    def SourceRange(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().XlsPivotCache_get_SourceRange.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_SourceRange.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotCache_get_SourceRange, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @property
+
+    def Parent(self)->'XlsPivotCachesCollection':
+        """
+
+        """
+        GetDllLibXls().XlsPivotCache_get_Parent.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_Parent.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotCache_get_Parent, self.Ptr)
+        ret = None if intPtr==None else XlsPivotCachesCollection(intPtr)
+        return ret
+
+
+    @property
+    def IsUpgradeOnRefresh(self)->bool:
+        """
+    <summary>
+        Specifies a boolean value that indicates whether the cache is scheduled for version
+            upgrade.
+    </summary>
+        """
+        GetDllLibXls().XlsPivotCache_get_IsUpgradeOnRefresh.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_IsUpgradeOnRefresh.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_IsUpgradeOnRefresh, self.Ptr)
+        return ret
+
+    @IsUpgradeOnRefresh.setter
+    def IsUpgradeOnRefresh(self, value:bool):
+        GetDllLibXls().XlsPivotCache_set_IsUpgradeOnRefresh.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotCache_set_IsUpgradeOnRefresh, self.Ptr, value)
+
+    @property
+
+    def RefreshedBy(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsPivotCache_get_RefreshedBy.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_RefreshedBy.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPivotCache_get_RefreshedBy, self.Ptr))
+        return ret
+
+
+    @RefreshedBy.setter
+    def RefreshedBy(self, value:str):
+        GetDllLibXls().XlsPivotCache_set_RefreshedBy.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPivotCache_set_RefreshedBy, self.Ptr, value)
+
+    @property
+    def IsSupportSubQuery(self)->bool:
+        """
+    <summary>
+        Specifies whether the cache's data source supports subqueries
+    </summary>
+        """
+        GetDllLibXls().XlsPivotCache_get_IsSupportSubQuery.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_IsSupportSubQuery.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_IsSupportSubQuery, self.Ptr)
+        return ret
+
+    @IsSupportSubQuery.setter
+    def IsSupportSubQuery(self, value:bool):
+        GetDllLibXls().XlsPivotCache_set_IsSupportSubQuery.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotCache_set_IsSupportSubQuery, self.Ptr, value)
+
+    @property
+    def IsSaveData(self)->bool:
+        """
+    <summary>
+        Specifies a boolean value that indicates whether the pivot records are saved with the
+            cache.
+    </summary>
+        """
+        GetDllLibXls().XlsPivotCache_get_IsSaveData.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_IsSaveData.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_IsSaveData, self.Ptr)
+        return ret
+
+    @IsSaveData.setter
+    def IsSaveData(self, value:bool):
+        GetDllLibXls().XlsPivotCache_set_IsSaveData.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotCache_set_IsSaveData, self.Ptr, value)
+
+    @property
+    def IsOptimizedCache(self)->bool:
+        """
+    <summary>
+        Specifies a boolean value that indicates whether the application will apply optimizations
+            to the cache to reduce memory usage
+    </summary>
+        """
+        GetDllLibXls().XlsPivotCache_get_IsOptimizedCache.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_IsOptimizedCache.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_IsOptimizedCache, self.Ptr)
+        return ret
+
+    @IsOptimizedCache.setter
+    def IsOptimizedCache(self, value:bool):
+        GetDllLibXls().XlsPivotCache_set_IsOptimizedCache.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotCache_set_IsOptimizedCache, self.Ptr, value)
+
+    @property
+    def EnableRefresh(self)->bool:
+        """
+    <summary>
+        Specifies a boolean value that indicates whether the user can refresh the cache. 
+    </summary>
+        """
+        GetDllLibXls().XlsPivotCache_get_EnableRefresh.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_EnableRefresh.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_EnableRefresh, self.Ptr)
+        return ret
+
+    @EnableRefresh.setter
+    def EnableRefresh(self, value:bool):
+        GetDllLibXls().XlsPivotCache_set_EnableRefresh.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotCache_set_EnableRefresh, self.Ptr, value)
+
+    @property
+    def IsBackgroundQuery(self)->bool:
+        """
+    <summary>
+        Specifies a boolean value that indicates whether the application should query and
+               retrieve records asynchronously from the cache.
+    </summary>
+        """
+        GetDllLibXls().XlsPivotCache_get_IsBackgroundQuery.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_IsBackgroundQuery.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_IsBackgroundQuery, self.Ptr)
+        return ret
+
+    @IsBackgroundQuery.setter
+    def IsBackgroundQuery(self, value:bool):
+        GetDllLibXls().XlsPivotCache_set_IsBackgroundQuery.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotCache_set_IsBackgroundQuery, self.Ptr, value)
+
+    @property
+    def CreatedVersion(self)->int:
+        """
+    <summary>
+        Specifies the version of the application that created the cache. This attribute is
+            application-dependent.
+    </summary>
+        """
+        GetDllLibXls().XlsPivotCache_get_CreatedVersion.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_CreatedVersion.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_CreatedVersion, self.Ptr)
+        return ret
+
+    @CreatedVersion.setter
+    def CreatedVersion(self, value:int):
+        GetDllLibXls().XlsPivotCache_set_CreatedVersion.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPivotCache_set_CreatedVersion, self.Ptr, value)
+
+    @property
+    def CalculatedItemIndex(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsPivotCache_get_CalculatedItemIndex.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_CalculatedItemIndex.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_CalculatedItemIndex, self.Ptr)
+        return ret
+
+    @property
+    def MinRefreshableVersion(self)->int:
+        """
+    <summary>
+        Specifies the earliest version of the application that is required to refresh the cache. 
+    </summary>
+        """
+        GetDllLibXls().XlsPivotCache_get_MinRefreshableVersion.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_MinRefreshableVersion.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_MinRefreshableVersion, self.Ptr)
+        return ret
+
+    @MinRefreshableVersion.setter
+    def MinRefreshableVersion(self, value:int):
+        GetDllLibXls().XlsPivotCache_set_MinRefreshableVersion.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPivotCache_set_MinRefreshableVersion, self.Ptr, value)
+
+    @property
+    def RefreshedVersion(self)->int:
+        """
+    <summary>
+         Specifies the version of the application that last refreshed the cache. This attribute
+            depends on whether the application exposes mechanisms via the user interface whereby
+            the end-user can refresh the cache.
+     </summary>
+        """
+        GetDllLibXls().XlsPivotCache_get_RefreshedVersion.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_RefreshedVersion.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_RefreshedVersion, self.Ptr)
+        return ret
+
+    @RefreshedVersion.setter
+    def RefreshedVersion(self, value:int):
+        GetDllLibXls().XlsPivotCache_set_RefreshedVersion.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPivotCache_set_RefreshedVersion, self.Ptr, value)
+
+    @property
+    def IsInvalidData(self)->bool:
+        """
+    <summary>
+        Specifies a boolean value that indicates whether the cache needs to be refreshed.
+    </summary>
+        """
+        GetDllLibXls().XlsPivotCache_get_IsInvalidData.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_IsInvalidData.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_IsInvalidData, self.Ptr)
+        return ret
+
+    @IsInvalidData.setter
+    def IsInvalidData(self, value:bool):
+        GetDllLibXls().XlsPivotCache_set_IsInvalidData.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotCache_set_IsInvalidData, self.Ptr, value)
+
+    @property
+    def SupportAdvancedDrill(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPivotCache_get_SupportAdvancedDrill.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_SupportAdvancedDrill.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_SupportAdvancedDrill, self.Ptr)
+        return ret
+
+    @SupportAdvancedDrill.setter
+    def SupportAdvancedDrill(self, value:bool):
+        GetDllLibXls().XlsPivotCache_set_SupportAdvancedDrill.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotCache_set_SupportAdvancedDrill, self.Ptr, value)
+
+    @property
+    def IsRefreshOnLoad(self)->bool:
+        """
+    <summary>
+        Specifies a boolean value that indicates whether the application will refresh the cache
+    </summary>
+        """
+        GetDllLibXls().XlsPivotCache_get_IsRefreshOnLoad.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_IsRefreshOnLoad.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_IsRefreshOnLoad, self.Ptr)
+        return ret
+
+    @IsRefreshOnLoad.setter
+    def IsRefreshOnLoad(self, value:bool):
+        GetDllLibXls().XlsPivotCache_set_IsRefreshOnLoad.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotCache_set_IsRefreshOnLoad, self.Ptr, value)
+
+    @property
+    def NeedDataArray(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPivotCache_get_NeedDataArray.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_NeedDataArray.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_NeedDataArray, self.Ptr)
+        return ret
+
+    @property
+
+    def RefreshDate(self)->'DateTime':
+        """
+
+        """
+        GetDllLibXls().XlsPivotCache_get_RefreshDate.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_RefreshDate.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotCache_get_RefreshDate, self.Ptr)
+        ret = None if intPtr==None else DateTime(intPtr)
+        return ret
+
+
+    @RefreshDate.setter
+    def RefreshDate(self, value:'DateTime'):
+        GetDllLibXls().XlsPivotCache_set_RefreshDate.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsPivotCache_set_RefreshDate, self.Ptr, value.Ptr)
+
+    @property
+
+    def RangeName(self)->str:
+        """
+    <summary>
+        Contains the name of the pivot cache NamedRange
+    </summary>
+        """
+        GetDllLibXls().XlsPivotCache_get_RangeName.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_RangeName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPivotCache_get_RangeName, self.Ptr))
+        return ret
+
+
+    @RangeName.setter
+    def RangeName(self, value:str):
+        GetDllLibXls().XlsPivotCache_set_RangeName.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPivotCache_set_RangeName, self.Ptr, value)
+
+    @property
+    def HasNamedRange(self)->bool:
+        """
+    <summary>
+        Indicates whether the pivot cache has named range
+    </summary>
+        """
+        GetDllLibXls().XlsPivotCache_get_HasNamedRange.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotCache_get_HasNamedRange.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_get_HasNamedRange, self.Ptr)
+        return ret
+
+    @staticmethod
+
+    def InRange(sourceRange:'IXLSRange',worksheet:'XlsWorksheet',index:int,count:int,isRow:bool)->bool:
+        """
+
+        """
+        intPtrsourceRange:c_void_p = sourceRange.Ptr
+        intPtrworksheet:c_void_p = worksheet.Ptr
+
+        GetDllLibXls().XlsPivotCache_InRange.argtypes=[ c_void_p,c_void_p,c_int,c_int,c_bool]
+        GetDllLibXls().XlsPivotCache_InRange.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotCache_InRange,  intPtrsourceRange,intPtrworksheet,index,count,isRow)
+        return ret
+
+    @dispatch
+
+    def Clone(self ,parent:SpireObject)->SpireObject:
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsPivotCache_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsPivotCache_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotCache_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+#    @dispatch
+#
+#    def Clone(self ,parent:SpireObject,hashNewNames:'Dictionary2')->SpireObject:
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrhashNewNames:c_void_p = hashNewNames.Ptr
+#
+#        GetDllLibXls().XlsPivotCache_ClonePH.argtypes=[c_void_p ,c_void_p,c_void_p]
+#        GetDllLibXls().XlsPivotCache_ClonePH.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsPivotCache_ClonePH, self.Ptr, intPtrparent,intPtrhashNewNames)
+#        ret = None if intPtr==None else SpireObject(intPtr)
+#        return ret
+#
+
+

@@ -1,0 +1,18 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class TopFormatType(Enum):
+    """
+    <summary>
+        Top format type.
+    </summary>
+    """
+    Straight = 0
+    Sharp = 1
+    Trunc = 2
+

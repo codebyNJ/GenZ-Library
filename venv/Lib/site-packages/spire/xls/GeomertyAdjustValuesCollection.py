@@ -1,0 +1,39 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class GeomertyAdjustValuesCollection (SpireObject) :
+    """
+
+    """
+
+    def get_Item(self ,index:int)->'GeomertyAdjustValue':
+        """
+
+        """
+        
+        GetDllLibXls().GeomertyAdjustValuesCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().GeomertyAdjustValuesCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().GeomertyAdjustValuesCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else GeomertyAdjustValue(intPtr)
+        return ret
+
+
+
+    def AddAdjustValue(self ,type:'GeomertyAdjustValueFormulaType')->'GeomertyAdjustValue':
+        """
+
+        """
+        enumtype:c_int = type.value
+
+        GetDllLibXls().GeomertyAdjustValuesCollection_AddAdjustValue.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().GeomertyAdjustValuesCollection_AddAdjustValue.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().GeomertyAdjustValuesCollection_AddAdjustValue, self.Ptr, enumtype)
+        ret = None if intPtr==None else GeomertyAdjustValue(intPtr)
+        return ret
+
+

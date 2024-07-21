@@ -1,0 +1,32 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class UnderlineStyle(Enum):
+    """
+
+    """
+    Continuous = 0
+    TurnOff = 1
+    Dotted = 2
+    Dash = 3
+    DashDot = 4
+    DashDotDot = 5
+    Double = 6
+    HeavyWave = 7
+    LongDash = 8
+    none = 9
+    Thick = 10
+    ThickDotted = 11
+    ThickDash = 12
+    ThickDashDot = 13
+    ThickDashDotDot = 14
+    ThickLongDash = 15
+    DoubleWave = 16
+    Word = 17
+    Wave = 18
+

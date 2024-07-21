@@ -1,0 +1,55 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ConditionalFormats (  CondFormatCollectionWrapper) :
+    """
+    <summary>
+        Contains a condition and the formatting for cells.
+    </summary>
+    """
+
+    def get_Item(self ,index:int)->'ConditionalFormatWrapper':
+        """
+
+        """
+        
+        GetDllLibXls().ConditionalFormats_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ConditionalFormats_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ConditionalFormats_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else ConditionalFormatWrapper(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddCondition(self)->ConditionalFormatWrapper:
+        """
+
+        """
+        GetDllLibXls().ConditionalFormats_AddCondition.argtypes=[c_void_p]
+        GetDllLibXls().ConditionalFormats_AddCondition.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ConditionalFormats_AddCondition, self.Ptr)
+        ret = None if intPtr==None else ConditionalFormatWrapper(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddCondition(self ,type:ConditionalFormatType,stopIsTrue:bool)->ConditionalFormatWrapper:
+        """
+
+        """
+        enumtype:c_int = type.value
+
+        GetDllLibXls().ConditionalFormats_AddConditionTS.argtypes=[c_void_p ,c_int,c_bool]
+        GetDllLibXls().ConditionalFormats_AddConditionTS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ConditionalFormats_AddConditionTS, self.Ptr, enumtype,stopIsTrue)
+        ret = None if intPtr==None else ConditionalFormatWrapper(intPtr)
+        return ret
+
+

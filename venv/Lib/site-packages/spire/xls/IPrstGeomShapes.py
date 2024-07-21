@@ -1,0 +1,81 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IPrstGeomShapes (abc.ABC) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Count(self)->int:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,index:int)->IPrstGeomShape:
+        """
+    <summary>
+        Returns single item from the collection.
+    </summary>
+    <param name="index">Item's index to get.</param>
+    <returns>Single item from the collection.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,name:str)->IPrstGeomShape:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def AddPrstGeomShape(self ,row:int,column:int,height:int,width:int,shapeType:'PrstGeomShapeType')->'IPrstGeomShape':
+        """
+    <summary>
+        Adds new item to the collection.
+    </summary>
+    <param name="row">One-based row index of the top-left corner of the new item.</param>
+    <param name="column">One-based column index of the top-left corner of the new item.</param>
+    <param name="height">Height in pixels of the new item.</param>
+    <param name="width">Width in pixels of the new item.</param>
+    <returns>Newly added item.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def AddNotPrimitiveShape(self ,row:int,column:int,width:int,height:int)->'IGeomPathShape':
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,shapeType:PrstGeomShapeType)->List[IPrstGeomShape]:
+        """
+
+        """
+        pass
+
+
+

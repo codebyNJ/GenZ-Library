@@ -1,0 +1,28 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class PivotFieldFormatType(Enum):
+    """
+
+    """
+    Difference = 0
+    Index = 1
+    Normal = 2
+    Percent = 3
+    PercentageOfDifference = 4
+    PercentageOfColumn = 5
+    PercentageOfRow = 6
+    PercentageOfTotal = 7
+    PercentageOfParent = 8
+    PercentageOfParentColumn = 9
+    PercentageOfParentRow = 10
+    RankDecending = 11
+    PercentageOfRunningTotal = 12
+    RunTotal = 13
+    RankAscending = 14
+

@@ -1,0 +1,367 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsLineShape (  XlsPrstGeomShape, ILineShape) :
+    """
+
+    """
+    @property
+
+    def LineShapeType(self)->'LineShapeType':
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_LineShapeType.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_LineShapeType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_LineShapeType, self.Ptr)
+        objwraped = LineShapeType(ret)
+        return objwraped
+
+    @LineShapeType.setter
+    def LineShapeType(self, value:'LineShapeType'):
+        GetDllLibXls().XlsLineShape_set_LineShapeType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_LineShapeType, self.Ptr, value.value)
+
+    @property
+    def Weight(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_Weight.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_Weight.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_Weight, self.Ptr)
+        return ret
+
+    @Weight.setter
+    def Weight(self, value:float):
+        GetDllLibXls().XlsLineShape_set_Weight.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_Weight, self.Ptr, value)
+
+    @property
+    def MiddleOffset(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_MiddleOffset.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_MiddleOffset.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_MiddleOffset, self.Ptr)
+        return ret
+
+    @MiddleOffset.setter
+    def MiddleOffset(self, value:int):
+        GetDllLibXls().XlsLineShape_set_MiddleOffset.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_MiddleOffset, self.Ptr, value)
+
+    @property
+    def MiddleOffsetPercent(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_MiddleOffsetPercent.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_MiddleOffsetPercent.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_MiddleOffsetPercent, self.Ptr)
+        return ret
+
+    @MiddleOffsetPercent.setter
+    def MiddleOffsetPercent(self, value:float):
+        GetDllLibXls().XlsLineShape_set_MiddleOffsetPercent.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_MiddleOffsetPercent, self.Ptr, value)
+
+    @property
+    def Transparency(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_Transparency.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_Transparency.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_Transparency, self.Ptr)
+        return ret
+
+    @Transparency.setter
+    def Transparency(self, value:float):
+        GetDllLibXls().XlsLineShape_set_Transparency.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_Transparency, self.Ptr, value)
+
+    @property
+
+    def Color(self)->'Color':
+        """
+    <summary>
+        line color
+    </summary>
+        """
+        GetDllLibXls().XlsLineShape_get_Color.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_Color.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsLineShape_get_Color, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @Color.setter
+    def Color(self, value:'Color'):
+        GetDllLibXls().XlsLineShape_set_Color.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_Color, self.Ptr, value.Ptr)
+
+    @property
+
+    def Style(self)->'ShapeLineStyleType':
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_Style.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_Style.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_Style, self.Ptr)
+        objwraped = ShapeLineStyleType(ret)
+        return objwraped
+
+    @Style.setter
+    def Style(self, value:'ShapeLineStyleType'):
+        GetDllLibXls().XlsLineShape_set_Style.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_Style, self.Ptr, value.value)
+
+    @property
+
+    def DashStyle(self)->'ShapeDashLineStyleType':
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_DashStyle.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_DashStyle.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_DashStyle, self.Ptr)
+        objwraped = ShapeDashLineStyleType(ret)
+        return objwraped
+
+    @DashStyle.setter
+    def DashStyle(self, value:'ShapeDashLineStyleType'):
+        GetDllLibXls().XlsLineShape_set_DashStyle.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_DashStyle, self.Ptr, value.value)
+
+    @property
+
+    def BeginArrowheadWidth(self)->'ShapeArrowWidthType':
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_BeginArrowheadWidth.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_BeginArrowheadWidth.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_BeginArrowheadWidth, self.Ptr)
+        objwraped = ShapeArrowWidthType(ret)
+        return objwraped
+
+    @BeginArrowheadWidth.setter
+    def BeginArrowheadWidth(self, value:'ShapeArrowWidthType'):
+        GetDllLibXls().XlsLineShape_set_BeginArrowheadWidth.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_BeginArrowheadWidth, self.Ptr, value.value)
+
+    @property
+
+    def BeginArrowHeadStyle(self)->'ShapeArrowStyleType':
+        """
+    <summary>
+         BeginArrowHeadStyle
+    </summary>
+        """
+        GetDllLibXls().XlsLineShape_get_BeginArrowHeadStyle.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_BeginArrowHeadStyle.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_BeginArrowHeadStyle, self.Ptr)
+        objwraped = ShapeArrowStyleType(ret)
+        return objwraped
+
+    @BeginArrowHeadStyle.setter
+    def BeginArrowHeadStyle(self, value:'ShapeArrowStyleType'):
+        GetDllLibXls().XlsLineShape_set_BeginArrowHeadStyle.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_BeginArrowHeadStyle, self.Ptr, value.value)
+
+    @property
+
+    def BeginArrowheadLength(self)->'ShapeArrowLengthType':
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_BeginArrowheadLength.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_BeginArrowheadLength.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_BeginArrowheadLength, self.Ptr)
+        objwraped = ShapeArrowLengthType(ret)
+        return objwraped
+
+    @BeginArrowheadLength.setter
+    def BeginArrowheadLength(self, value:'ShapeArrowLengthType'):
+        GetDllLibXls().XlsLineShape_set_BeginArrowheadLength.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_BeginArrowheadLength, self.Ptr, value.value)
+
+    @property
+
+    def EndArrowHeadStyle(self)->'ShapeArrowStyleType':
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_EndArrowHeadStyle.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_EndArrowHeadStyle.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_EndArrowHeadStyle, self.Ptr)
+        objwraped = ShapeArrowStyleType(ret)
+        return objwraped
+
+    @EndArrowHeadStyle.setter
+    def EndArrowHeadStyle(self, value:'ShapeArrowStyleType'):
+        GetDllLibXls().XlsLineShape_set_EndArrowHeadStyle.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_EndArrowHeadStyle, self.Ptr, value.value)
+
+    @property
+
+    def EndArrowheadLength(self)->'ShapeArrowLengthType':
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_EndArrowheadLength.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_EndArrowheadLength.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_EndArrowheadLength, self.Ptr)
+        objwraped = ShapeArrowLengthType(ret)
+        return objwraped
+
+    @EndArrowheadLength.setter
+    def EndArrowheadLength(self, value:'ShapeArrowLengthType'):
+        GetDllLibXls().XlsLineShape_set_EndArrowheadLength.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_EndArrowheadLength, self.Ptr, value.value)
+
+    @property
+
+    def EndArrowheadWidth(self)->'ShapeArrowWidthType':
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_EndArrowheadWidth.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_EndArrowheadWidth.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_EndArrowheadWidth, self.Ptr)
+        objwraped = ShapeArrowWidthType(ret)
+        return objwraped
+
+    @EndArrowheadWidth.setter
+    def EndArrowheadWidth(self, value:'ShapeArrowWidthType'):
+        GetDllLibXls().XlsLineShape_set_EndArrowheadWidth.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_EndArrowheadWidth, self.Ptr, value.value)
+
+    @property
+
+    def HyLink(self)->'IHyperLink':
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_HyLink.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_HyLink.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsLineShape_get_HyLink, self.Ptr)
+        ret = None if intPtr==None else HyperLink(intPtr)
+        return ret
+
+
+    @property
+
+    def PrstShapeType(self)->'PrstGeomShapeType':
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_PrstShapeType.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_PrstShapeType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_PrstShapeType, self.Ptr)
+        objwraped = PrstGeomShapeType(ret)
+        return objwraped
+
+    @property
+
+    def StartPoint(self)->'Point':
+        """
+<summary></summary>
+        """
+        GetDllLibXls().XlsLineShape_get_StartPoint.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_StartPoint.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsLineShape_get_StartPoint, self.Ptr)
+        ret = None if intPtr==None else Point(intPtr)
+        return ret
+
+
+    @StartPoint.setter
+    def StartPoint(self, value:'Point'):
+        GetDllLibXls().XlsLineShape_set_StartPoint.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_StartPoint, self.Ptr, value.Ptr)
+
+    @property
+
+    def EndPoint(self)->'Point':
+        """
+<summary></summary>
+        """
+        GetDllLibXls().XlsLineShape_get_EndPoint.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_EndPoint.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsLineShape_get_EndPoint, self.Ptr)
+        ret = None if intPtr==None else Point(intPtr)
+        return ret
+
+
+    @EndPoint.setter
+    def EndPoint(self, value:'Point'):
+        GetDllLibXls().XlsLineShape_set_EndPoint.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_EndPoint, self.Ptr, value.Ptr)
+
+    @property
+    def FlipH(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_FlipH.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_FlipH.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_FlipH, self.Ptr)
+        return ret
+
+    @FlipH.setter
+    def FlipH(self, value:bool):
+        GetDllLibXls().XlsLineShape_set_FlipH.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_FlipH, self.Ptr, value)
+
+    @property
+    def FlipV(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_FlipV.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_FlipV.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_FlipV, self.Ptr)
+        return ret
+
+    @FlipV.setter
+    def FlipV(self, value:bool):
+        GetDllLibXls().XlsLineShape_set_FlipV.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsLineShape_set_FlipV, self.Ptr, value)
+
+    @property
+
+    def ShapeType(self)->'ExcelShapeType':
+        """
+
+        """
+        GetDllLibXls().XlsLineShape_get_ShapeType.argtypes=[c_void_p]
+        GetDllLibXls().XlsLineShape_get_ShapeType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsLineShape_get_ShapeType, self.Ptr)
+        objwraped = ExcelShapeType(ret)
+        return objwraped
+
+#
+#    def Clone(self ,parent:'SpireObject',hashNewNames:'Dictionary2',dicFontIndexes:'Dictionary2',addToCollections:bool)->'IShape':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrhashNewNames:c_void_p = hashNewNames.Ptr
+#        intPtrdicFontIndexes:c_void_p = dicFontIndexes.Ptr
+#
+#        GetDllLibXls().XlsLineShape_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p,c_bool]
+#        GetDllLibXls().XlsLineShape_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsLineShape_Clone, self.Ptr, intPtrparent,intPtrhashNewNames,intPtrdicFontIndexes,addToCollections)
+#        ret = None if intPtr==None else IShape(intPtr)
+#        return ret
+#
+
+

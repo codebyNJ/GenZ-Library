@@ -1,0 +1,85 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IGlow (abc.ABC) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def Color(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @Color.setter
+    @abc.abstractmethod
+    def Color(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def SoftEdge(self)->int:
+        """
+
+        """
+        pass
+
+
+    @SoftEdge.setter
+    @abc.abstractmethod
+    def SoftEdge(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Transparency(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Transparency.setter
+    @abc.abstractmethod
+    def Transparency(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Radius(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Radius.setter
+    @abc.abstractmethod
+    def Radius(self, value:int):
+        """
+
+        """
+        pass
+
+

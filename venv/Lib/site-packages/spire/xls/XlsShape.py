@@ -1,0 +1,967 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from spire.xls.Format3D import *
+from ctypes import *
+import abc
+
+class XlsShape (  XlsObject, IShape, ICloneParent, INamedObject) :
+    """
+
+    """
+    #@dispatch
+
+    #def SaveToImage(self ,fileName:str,imageFormat:ImageFormat):
+    #    """
+    #<summary>
+    #    Save shape to image.
+    #</summary>
+    #<param name="fileName">Output file name.</param>
+    #<param name="imageFormat">Type of the image to create.</param>
+    #    """
+    #    intPtrimageFormat:c_int = imageFormat.value
+
+    #    GetDllLibXls().XlsShape_SaveToImage.argtypes=[c_void_p ,c_void_p,c_void_p]
+    #    CallCFunction(GetDllLibXls().XlsShape_SaveToImage, self.Ptr, fileName,intPtrimageFormat)
+
+    @dispatch
+
+    def SaveToImage(self ,fileStream:Stream):
+        """
+    <summary>
+        Save shape to image.
+    </summary>
+    <param name="fileStream">Output stream. It is ignored if null.</param>
+        """
+        intPtrfileStream:c_void_p = fileStream.Ptr
+
+        GetDllLibXls().XlsShape_SaveToImageF.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsShape_SaveToImageF, self.Ptr, intPtrfileStream)
+
+    @dispatch
+
+    def SaveToImage(self ,fileName:str):
+        """
+    <summary>
+        Save shape to image.
+    </summary>
+    <param name="fileName">Output file name.</param>
+        """
+        
+        GetDllLibXls().XlsShape_SaveToImageF1.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsShape_SaveToImageF1, self.Ptr, fileName)
+
+
+    def SetTextEffect(self ,effect:'PresetTextEffect',text:str):
+        """
+
+        """
+        enumeffect:c_int = effect.value
+
+        GetDllLibXls().XlsShape_SetTextEffect.argtypes=[c_void_p ,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsShape_SetTextEffect, self.Ptr, enumeffect,text)
+
+    @dispatch
+
+    def Clone(self ,parent:SpireObject)->SpireObject:
+        """
+    <summary>
+        Creates a clone of the current shape.
+    </summary>
+    <param name="parent">New parent for the shape object.</param>
+    <returns>A copy of the current shape.</returns>
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsShape_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsShape_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsShape_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+#    @dispatch
+#
+#    def Clone(self ,parent:SpireObject,hashNewNames:'Dictionary2',dicFontIndexes:'Dictionary2',addToCollections:bool)->IShape:
+#        """
+#    <summary>
+#        Creates a clone of the current shape.
+#    </summary>
+#    <param name="parent">New parent for the shape object.</param>
+#    <param name="hashNewNames">Hashtable with new worksheet names.</param>
+#    <param name="dicFontIndexes">Dictionary with new font indexes.</param>
+#    <returns>A copy of the current shape.</returns>
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrhashNewNames:c_void_p = hashNewNames.Ptr
+#        intPtrdicFontIndexes:c_void_p = dicFontIndexes.Ptr
+#
+#        GetDllLibXls().XlsShape_ClonePHDA.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p,c_bool]
+#        GetDllLibXls().XlsShape_ClonePHDA.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsShape_ClonePHDA, self.Ptr, intPtrparent,intPtrhashNewNames,intPtrdicFontIndexes,addToCollections)
+#        ret = None if intPtr==None else IShape(intPtr)
+#        return ret
+#
+
+
+    @property
+
+    def Name(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_Name.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_Name.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsShape_get_Name, self.Ptr))
+        return ret
+
+
+    @Name.setter
+    def Name(self, value:str):
+        GetDllLibXls().XlsShape_set_Name.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsShape_set_Name, self.Ptr, value)
+
+
+    def SetName(self ,name:str):
+        """
+
+        """
+        
+        GetDllLibXls().XlsShape_SetName.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsShape_SetName, self.Ptr, name)
+
+
+    def ChangeLayer(self ,changeType:'ShapeLayerChangeType'):
+        """
+
+        """
+        enumchangeType:c_int = changeType.value
+
+        GetDllLibXls().XlsShape_ChangeLayer.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsShape_ChangeLayer, self.Ptr, enumchangeType)
+
+    @property
+    def Height(self)->int:
+        """
+    <summary>
+        Height of object.
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_Height.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_Height.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_Height, self.Ptr)
+        return ret
+
+    @Height.setter
+    def Height(self, value:int):
+        GetDllLibXls().XlsShape_set_Height.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_Height, self.Ptr, value)
+
+    @property
+    def ID(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_ID.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_ID.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_ID, self.Ptr)
+        return ret
+
+    @property
+    def ShapeId(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_ShapeId.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_ShapeId.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_ShapeId, self.Ptr)
+        return ret
+
+    @ShapeId.setter
+    def ShapeId(self, value:int):
+        GetDllLibXls().XlsShape_set_ShapeId.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_ShapeId, self.Ptr, value)
+
+    @property
+    def Left(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_Left.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_Left.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_Left, self.Ptr)
+        return ret
+
+    @Left.setter
+    def Left(self, value:int):
+        GetDllLibXls().XlsShape_set_Left.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_Left, self.Ptr, value)
+
+    @property
+    def Top(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_Top.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_Top.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_Top, self.Ptr)
+        return ret
+
+    @Top.setter
+    def Top(self, value:int):
+        GetDllLibXls().XlsShape_set_Top.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_Top, self.Ptr, value)
+
+    @property
+    def Width(self)->int:
+        """
+    <summary>
+        Width of object.
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_Width.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_Width.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_Width, self.Ptr)
+        return ret
+
+    @Width.setter
+    def Width(self, value:int):
+        GetDllLibXls().XlsShape_set_Width.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_Width, self.Ptr, value)
+
+    @property
+
+    def ShapeType(self)->'ExcelShapeType':
+        """
+    <summary>
+        Type of shape , Read Only.
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_ShapeType.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_ShapeType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_ShapeType, self.Ptr)
+        objwraped = ExcelShapeType(ret)
+        return objwraped
+
+    @ShapeType.setter
+    def ShapeType(self, value:'ExcelShapeType'):
+        GetDllLibXls().XlsShape_set_ShapeType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_ShapeType, self.Ptr, value.value)
+
+    @property
+    def VmlShape(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_VmlShape.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_VmlShape.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_VmlShape, self.Ptr)
+        return ret
+
+    @VmlShape.setter
+    def VmlShape(self, value:bool):
+        GetDllLibXls().XlsShape_set_VmlShape.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsShape_set_VmlShape, self.Ptr, value)
+
+    @property
+    def IsRelativeResize(self)->bool:
+        """
+    <summary>
+        True means that is relative to original size of picture.
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_IsRelativeResize.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_IsRelativeResize.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_IsRelativeResize, self.Ptr)
+        return ret
+
+    @IsRelativeResize.setter
+    def IsRelativeResize(self, value:bool):
+        GetDllLibXls().XlsShape_set_IsRelativeResize.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsShape_set_IsRelativeResize, self.Ptr, value)
+
+    @property
+    def IsRelative(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_IsRelative.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_IsRelative.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_IsRelative, self.Ptr)
+        return ret
+
+    @IsRelative.setter
+    def IsRelative(self, value:bool):
+        GetDllLibXls().XlsShape_set_IsRelative.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsShape_set_IsRelative, self.Ptr, value)
+
+    @property
+    def Instance(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_Instance.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_Instance.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_Instance, self.Ptr)
+        return ret
+
+    @property
+    def IsShortVersion(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_IsShortVersion.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_IsShortVersion.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_IsShortVersion, self.Ptr)
+        return ret
+
+    @IsShortVersion.setter
+    def IsShortVersion(self, value:bool):
+        GetDllLibXls().XlsShape_set_IsShortVersion.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsShape_set_IsShortVersion, self.Ptr, value)
+
+    @property
+    def ShapeCount(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_ShapeCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_ShapeCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_ShapeCount, self.Ptr)
+        return ret
+
+    @property
+    def Visible(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_Visible.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_Visible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_Visible, self.Ptr)
+        return ret
+
+    @Visible.setter
+    def Visible(self, value:bool):
+        GetDllLibXls().XlsShape_set_Visible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsShape_set_Visible, self.Ptr, value)
+
+    @property
+
+    def HtmlString(self)->str:
+        """
+    <summary>
+        Gets and sets the html string which contains data and some formattings in this shape.
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_HtmlString.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_HtmlString.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsShape_get_HtmlString, self.Ptr))
+        return ret
+
+
+    @HtmlString.setter
+    def HtmlString(self, value:str):
+        GetDllLibXls().XlsShape_set_HtmlString.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsShape_set_HtmlString, self.Ptr, value)
+
+    @property
+
+    def AlternativeText(self)->str:
+        """
+    <summary>
+        Returns or sets the descriptive (alternative) text string for a Shape object when the object is saved to a Web page. Read/write String
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_AlternativeText.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_AlternativeText.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsShape_get_AlternativeText, self.Ptr))
+        return ret
+
+
+    @AlternativeText.setter
+    def AlternativeText(self, value:str):
+        GetDllLibXls().XlsShape_set_AlternativeText.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsShape_set_AlternativeText, self.Ptr, value)
+
+    @property
+
+    def Fill(self)->'IShapeFill':
+        """
+    <summary>
+        Represents fill properties.
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_Fill.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_Fill.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsShape_get_Fill, self.Ptr)
+        ret = None if intPtr==None else XlsShapeFill(intPtr)
+        return ret
+
+
+    @property
+    def UpdatePositions(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_UpdatePositions.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_UpdatePositions.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_UpdatePositions, self.Ptr)
+        return ret
+
+    @UpdatePositions.setter
+    def UpdatePositions(self, value:bool):
+        GetDllLibXls().XlsShape_set_UpdatePositions.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsShape_set_UpdatePositions, self.Ptr, value)
+
+    @property
+    def HasFill(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_HasFill.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_HasFill.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_HasFill, self.Ptr)
+        return ret
+
+    @HasFill.setter
+    def HasFill(self, value:bool):
+        GetDllLibXls().XlsShape_set_HasFill.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsShape_set_HasFill, self.Ptr, value)
+
+    @property
+    def HasLineFormat(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_HasLineFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_HasLineFormat.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_HasLineFormat, self.Ptr)
+        return ret
+
+    @HasLineFormat.setter
+    def HasLineFormat(self, value:bool):
+        GetDllLibXls().XlsShape_set_HasLineFormat.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsShape_set_HasLineFormat, self.Ptr, value)
+
+    @property
+    def IsFlipH(self)->bool:
+        """
+    <summary>
+        Returns or sets if the shape flips Horizontal.false is default;
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_IsFlipH.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_IsFlipH.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_IsFlipH, self.Ptr)
+        return ret
+
+    @IsFlipH.setter
+    def IsFlipH(self, value:bool):
+        GetDllLibXls().XlsShape_set_IsFlipH.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsShape_set_IsFlipH, self.Ptr, value)
+
+    @property
+    def IsFlipV(self)->bool:
+        """
+    <summary>
+        Returns or sets if the shape flips Vertical.false is default;
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_IsFlipV.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_IsFlipV.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_IsFlipV, self.Ptr)
+        return ret
+
+    @IsFlipV.setter
+    def IsFlipV(self, value:bool):
+        GetDllLibXls().XlsShape_set_IsFlipV.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsShape_set_IsFlipV, self.Ptr, value)
+
+    @property
+    def IsGroup(self)->bool:
+        """
+    <summary>
+        This shape is group shape.
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_IsGroup.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_IsGroup.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_IsGroup, self.Ptr)
+        return ret
+
+    @property
+    def IsInGroup(self)->bool:
+        """
+    <summary>
+        This shape is child shape of group shape.
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_IsInGroup.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_IsInGroup.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_IsInGroup, self.Ptr)
+        return ret
+
+    @property
+
+    def AlternativeTextTitle(self)->str:
+        """
+    <summary>
+        Returns or sets the descriptive (alternative) text title string for a Shape object when the object is saved to a Web page. Read/write String
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_AlternativeTextTitle.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_AlternativeTextTitle.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsShape_get_AlternativeTextTitle, self.Ptr))
+        return ret
+
+
+    @AlternativeTextTitle.setter
+    def AlternativeTextTitle(self, value:str):
+        GetDllLibXls().XlsShape_set_AlternativeTextTitle.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsShape_set_AlternativeTextTitle, self.Ptr, value)
+
+    @property
+
+    def OnAction(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_OnAction.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_OnAction.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsShape_get_OnAction, self.Ptr))
+        return ret
+
+
+    @OnAction.setter
+    def OnAction(self, value:str):
+        GetDllLibXls().XlsShape_set_OnAction.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsShape_set_OnAction, self.Ptr, value)
+
+    @property
+    def IsLocked(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_IsLocked.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_IsLocked.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_IsLocked, self.Ptr)
+        return ret
+
+    @IsLocked.setter
+    def IsLocked(self, value:bool):
+        GetDllLibXls().XlsShape_set_IsLocked.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsShape_set_IsLocked, self.Ptr, value)
+
+    @property
+    def IsPrintable(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_IsPrintable.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_IsPrintable.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_IsPrintable, self.Ptr)
+        return ret
+
+    @IsPrintable.setter
+    def IsPrintable(self, value:bool):
+        GetDllLibXls().XlsShape_set_IsPrintable.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsShape_set_IsPrintable, self.Ptr, value)
+
+    @property
+
+    def ResizeBehave(self)->'ResizeBehaveType':
+        """
+    <summary>
+        Specifies all possible settings for how drawing object shall be resized when the rows and columns between its start and ending anchor are resized or inserted(ComboBoxShape and CheckBoxShape and RadioButtonShape set MoveAndResize type value is invalid)
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_ResizeBehave.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_ResizeBehave.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_ResizeBehave, self.Ptr)
+        objwraped = ResizeBehaveType(ret)
+        return objwraped
+
+    @ResizeBehave.setter
+    def ResizeBehave(self, value:'ResizeBehaveType'):
+        GetDllLibXls().XlsShape_set_ResizeBehave.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_ResizeBehave, self.Ptr, value.value)
+
+    @property
+    def IsLockAspectRatio(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_IsLockAspectRatio.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_IsLockAspectRatio.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_IsLockAspectRatio, self.Ptr)
+        return ret
+
+    @IsLockAspectRatio.setter
+    def IsLockAspectRatio(self, value:bool):
+        GetDllLibXls().XlsShape_set_IsLockAspectRatio.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsShape_set_IsLockAspectRatio, self.Ptr, value)
+
+    @property
+    def BottomRow(self)->int:
+        """
+    <summary>
+        Bottom row.
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_BottomRow.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_BottomRow.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_BottomRow, self.Ptr)
+        return ret
+
+    @BottomRow.setter
+    def BottomRow(self, value:int):
+        GetDllLibXls().XlsShape_set_BottomRow.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_BottomRow, self.Ptr, value)
+
+    @property
+    def BottomRowOffset(self)->int:
+        """
+    <summary>
+        Bottom row offset.
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_BottomRowOffset.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_BottomRowOffset.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_BottomRowOffset, self.Ptr)
+        return ret
+
+    @BottomRowOffset.setter
+    def BottomRowOffset(self, value:int):
+        GetDllLibXls().XlsShape_set_BottomRowOffset.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_BottomRowOffset, self.Ptr, value)
+
+    @property
+    def LeftColumn(self)->int:
+        """
+    <summary>
+        Left column.
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_LeftColumn.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_LeftColumn.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_LeftColumn, self.Ptr)
+        return ret
+
+    @LeftColumn.setter
+    def LeftColumn(self, value:int):
+        GetDllLibXls().XlsShape_set_LeftColumn.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_LeftColumn, self.Ptr, value)
+
+    @property
+    def LeftColumnOffset(self)->int:
+        """
+    <summary>
+        Left column offset. 1024 means whole column offset
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_LeftColumnOffset.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_LeftColumnOffset.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_LeftColumnOffset, self.Ptr)
+        return ret
+
+    @LeftColumnOffset.setter
+    def LeftColumnOffset(self, value:int):
+        GetDllLibXls().XlsShape_set_LeftColumnOffset.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_LeftColumnOffset, self.Ptr, value)
+
+    @property
+    def RightColumn(self)->int:
+        """
+    <summary>
+        Right column.
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_RightColumn.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_RightColumn.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_RightColumn, self.Ptr)
+        return ret
+
+    @RightColumn.setter
+    def RightColumn(self, value:int):
+        GetDllLibXls().XlsShape_set_RightColumn.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_RightColumn, self.Ptr, value)
+
+    @property
+    def RightColumnOffset(self)->int:
+        """
+    <summary>
+        Right column offset.
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_RightColumnOffset.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_RightColumnOffset.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_RightColumnOffset, self.Ptr)
+        return ret
+
+    @RightColumnOffset.setter
+    def RightColumnOffset(self, value:int):
+        GetDllLibXls().XlsShape_set_RightColumnOffset.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_RightColumnOffset, self.Ptr, value)
+
+    @property
+    def TopRow(self)->int:
+        """
+    <summary>
+        Top row.
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_TopRow.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_TopRow.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_TopRow, self.Ptr)
+        return ret
+
+    @TopRow.setter
+    def TopRow(self, value:int):
+        GetDllLibXls().XlsShape_set_TopRow.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_TopRow, self.Ptr, value)
+
+    @property
+    def TopRowOffset(self)->int:
+        """
+    <summary>
+        Top row offset.256 means whole row offset
+    </summary>
+        """
+        GetDllLibXls().XlsShape_get_TopRowOffset.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_TopRowOffset.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_TopRowOffset, self.Ptr)
+        return ret
+
+    @TopRowOffset.setter
+    def TopRowOffset(self, value:int):
+        GetDllLibXls().XlsShape_set_TopRowOffset.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_TopRowOffset, self.Ptr, value)
+
+    @property
+
+    def Line(self)->'IShapeLineFormat':
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_Line.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_Line.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsShape_get_Line, self.Ptr)
+        ret = None if intPtr==None else XlsShapeLineFormat(intPtr)
+        return ret
+
+
+    @property
+    def AutoSize(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_AutoSize.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_AutoSize.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_AutoSize, self.Ptr)
+        return ret
+
+    @AutoSize.setter
+    def AutoSize(self, value:bool):
+        GetDllLibXls().XlsShape_set_AutoSize.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsShape_set_AutoSize, self.Ptr, value)
+
+    @property
+    def Rotation(self)->int:
+        """
+    <summary>
+        Returns or sets the rotation of the shape, in degrees.
+    </summary>
+<value></value>
+        """
+        GetDllLibXls().XlsShape_get_Rotation.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_Rotation.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_Rotation, self.Ptr)
+        return ret
+
+    @Rotation.setter
+    def Rotation(self, value:int):
+        GetDllLibXls().XlsShape_set_Rotation.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_Rotation, self.Ptr, value)
+
+    @property
+
+    def Shadow(self)->'IShadow':
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_Shadow.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_Shadow.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsShape_get_Shadow, self.Ptr)
+        ret = None if intPtr==None else ChartShadow(intPtr)
+        return ret
+
+
+    @property
+
+    def Glow(self)->'IGlow':
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_Glow.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_Glow.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsShape_get_Glow, self.Ptr)
+        ret = None if intPtr==None else ShapeGlow(intPtr)
+        return ret
+
+
+    @property
+
+    def Reflection(self)->'IReflectionEffect':
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_Reflection.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_Reflection.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsShape_get_Reflection, self.Ptr)
+        ret = None if intPtr==None else ShapeReflection(intPtr)
+        return ret
+
+
+    @property
+
+    def RichText(self)->'IRichTextString':
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_RichText.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_RichText.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsShape_get_RichText, self.Ptr)
+        ret = None if intPtr==None else RichTextObject(intPtr)
+        return ret
+
+
+    @property
+
+    def ThreeD(self)->'IFormat3D':
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_ThreeD.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_ThreeD.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsShape_get_ThreeD, self.Ptr)
+        ret = None if intPtr==None else Format3D(intPtr)
+        return ret
+
+
+    @property
+    def IsSmartArt(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_IsSmartArt.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_IsSmartArt.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_IsSmartArt, self.Ptr)
+        return ret
+
+    @property
+
+    def TextFrame(self)->'ITextFrame':
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_TextFrame.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_TextFrame.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsShape_get_TextFrame, self.Ptr)
+        ret = None if intPtr==None else ITextFrame(intPtr)
+        return ret
+
+
+    @property
+
+    def TextVerticalAlignment(self)->'ExcelVerticalAlignment':
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_TextVerticalAlignment.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_TextVerticalAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsShape_get_TextVerticalAlignment, self.Ptr)
+        objwraped = ExcelVerticalAlignment(ret)
+        return objwraped
+
+    @TextVerticalAlignment.setter
+    def TextVerticalAlignment(self, value:'ExcelVerticalAlignment'):
+        GetDllLibXls().XlsShape_set_TextVerticalAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsShape_set_TextVerticalAlignment, self.Ptr, value.value)
+
+    @property
+
+    def LinkedCell(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().XlsShape_get_LinkedCell.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_get_LinkedCell.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsShape_get_LinkedCell, self.Ptr)
+        from spire.xls.XlsRange import XlsRange
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @LinkedCell.setter
+    def LinkedCell(self, value:'IXLSRange'):
+        GetDllLibXls().XlsShape_set_LinkedCell.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsShape_set_LinkedCell, self.Ptr, value.Ptr)
+
+    @dispatch
+    def Remove(self):
+        """
+    <summary>
+        Removes object.
+    </summary>
+        """
+        GetDllLibXls().XlsShape_Remove.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsShape_Remove, self.Ptr)
+
+
+    def Scale(self ,scaleWidth:int,scaleHeight:int):
+        """
+    <summary>
+        Scales the shape.
+    </summary>
+    <param name="scaleWidth">Width scale in percent.</param>
+    <param name="scaleHeight">Height scale in percent.</param>
+        """
+        
+        GetDllLibXls().XlsShape_Scale.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsShape_Scale, self.Ptr, scaleWidth,scaleHeight)
+
+    @dispatch
+
+    def SaveToImage(self)->Stream:
+        """
+    <summary>
+        Save shape to image.
+    </summary>
+    <returns>Created image.</returns>
+        """
+        GetDllLibXls().XlsShape_SaveToImage1.argtypes=[c_void_p]
+        GetDllLibXls().XlsShape_SaveToImage1.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsShape_SaveToImage1, self.Ptr)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    #@dispatch
+
+    #def SaveToImage(self ,fileStream:Stream,imageFormat:ImageFormat):
+    #    """
+    #<summary>
+    #    Save shape to image.
+    #</summary>
+    #<param name="fileStream">Output stream. It is ignored if null.</param>
+    #<param name="imageFormat">Type of the image to create.</param>
+    #    """
+    #    intPtrfileStream:c_void_p = fileStream.Ptr
+    #    intPtrimageFormat:c_int = imageFormat.value
+
+    #    GetDllLibXls().XlsShape_SaveToImageFI.argtypes=[c_void_p ,c_void_p,c_void_p]
+    #    CallCFunction(GetDllLibXls().XlsShape_SaveToImageFI, self.Ptr, intPtrfileStream,intPtrimageFormat)
+
+from spire.xls.XlsShapeLineFormat import XlsShapeLineFormat

@@ -1,0 +1,19 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class FindType(Enum):
+    """
+
+    """
+    Text = 1
+    Formula = 2
+    FormulaStringValue = 4
+    Error = 8
+    Number = 16
+    FormulaValue = 32
+

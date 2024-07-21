@@ -1,0 +1,172 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsBorder (  XlsObject, IBorder) :
+    """
+
+    """
+#
+#    def GetThemeColor(self ,type:'ThemeColorType&',tint:'Double&')->bool:
+#        """
+#
+#        """
+#        intPtrtype:c_void_p = type.Ptr
+#        intPtrtint:c_void_p = tint.Ptr
+#
+#        GetDllLibXls().XlsBorder_GetThemeColor.argtypes=[c_void_p ,c_void_p,c_void_p]
+#        GetDllLibXls().XlsBorder_GetThemeColor.restype=c_bool
+#        ret = CallCFunction(GetDllLibXls().XlsBorder_GetThemeColor, self.Ptr, intPtrtype,intPtrtint)
+#        return ret
+
+
+
+    def SetThemeColor(self ,type:'ThemeColorType',tint:float):
+        """
+
+        """
+        enumtype:c_int = type.value
+
+        GetDllLibXls().XlsBorder_SetThemeColor.argtypes=[c_void_p ,c_int,c_double]
+        CallCFunction(GetDllLibXls().XlsBorder_SetThemeColor, self.Ptr, enumtype,tint)
+
+    @property
+
+    def KnownColor(self)->'ExcelColors':
+        """
+    <summary>
+        Returns or sets a ExcelColors value that represents the color of the border
+    </summary>
+        """
+        GetDllLibXls().XlsBorder_get_KnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsBorder_get_KnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBorder_get_KnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @KnownColor.setter
+    def KnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsBorder_set_KnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBorder_set_KnownColor, self.Ptr, value.value)
+
+    @property
+
+    def OColor(self)->'OColor':
+        """
+
+        """
+        GetDllLibXls().XlsBorder_get_OColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsBorder_get_OColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsBorder_get_OColor, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def Color(self)->'Color':
+        """
+    <summary>
+        Returns or sets the primary color of the object, as shown in the table in the remarks section. Use the RGB function to create a color value. 
+            Read/write Color.
+    </summary>
+        """
+        GetDllLibXls().XlsBorder_get_Color.argtypes=[c_void_p]
+        GetDllLibXls().XlsBorder_get_Color.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsBorder_get_Color, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @Color.setter
+    def Color(self, value:'Color'):
+        GetDllLibXls().XlsBorder_set_Color.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsBorder_set_Color, self.Ptr, value.Ptr)
+
+    @property
+
+    def LineStyle(self)->'LineStyleType':
+        """
+    <summary>
+        Returns or sets the line style for the border. Read/write LineStyleType.
+    </summary>
+        """
+        GetDllLibXls().XlsBorder_get_LineStyle.argtypes=[c_void_p]
+        GetDllLibXls().XlsBorder_get_LineStyle.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBorder_get_LineStyle, self.Ptr)
+        objwraped = LineStyleType(ret)
+        return objwraped
+
+    @LineStyle.setter
+    def LineStyle(self, value:'LineStyleType'):
+        GetDllLibXls().XlsBorder_set_LineStyle.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBorder_set_LineStyle, self.Ptr, value.value)
+
+    @property
+    def ShowDiagonalLine(self)->bool:
+        """
+    <summary>
+        Indicates whether shows diagonal line.
+    </summary>
+        """
+        GetDllLibXls().XlsBorder_get_ShowDiagonalLine.argtypes=[c_void_p]
+        GetDllLibXls().XlsBorder_get_ShowDiagonalLine.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsBorder_get_ShowDiagonalLine, self.Ptr)
+        return ret
+
+    @ShowDiagonalLine.setter
+    def ShowDiagonalLine(self, value:bool):
+        GetDllLibXls().XlsBorder_set_ShowDiagonalLine.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsBorder_set_ShowDiagonalLine, self.Ptr, value)
+
+    @property
+
+    def BorderIndex(self)->'BordersLineType':
+        """
+
+        """
+        GetDllLibXls().XlsBorder_get_BorderIndex.argtypes=[c_void_p]
+        GetDllLibXls().XlsBorder_get_BorderIndex.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBorder_get_BorderIndex, self.Ptr)
+        objwraped = BordersLineType(ret)
+        return objwraped
+
+    @staticmethod
+
+    def ColorToExcelColor(color:'ExcelColors')->'ExcelColors':
+        """
+
+        """
+        enumcolor:c_int = color.value
+
+        GetDllLibXls().XlsBorder_ColorToExcelColor.argtypes=[ c_int]
+        GetDllLibXls().XlsBorder_ColorToExcelColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBorder_ColorToExcelColor,  enumcolor)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+
+    def CopyFrom(self ,baseBorder:'IBorder'):
+        """
+
+        """
+        intPtrbaseBorder:c_void_p = baseBorder.Ptr
+
+        GetDllLibXls().XlsBorder_CopyFrom.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsBorder_CopyFrom, self.Ptr, intPtrbaseBorder)
+
+
+    def setLineStyleAndColor(self ,borderLine:'LineStyleType',borderColor:'ExcelColors'):
+        """
+
+        """
+        enumborderLine:c_int = borderLine.value
+        enumborderColor:c_int = borderColor.value
+
+        GetDllLibXls().XlsBorder_setLineStyleAndColor.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsBorder_setLineStyleAndColor, self.Ptr, enumborderLine,enumborderColor)
+

@@ -1,0 +1,564 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from spire.xls.ChartBorder import *
+from ctypes import *
+import abc
+
+class XlsChartAxis (  XlsObject, IChartAxis) :
+    """
+
+    """
+    @property
+
+    def AxisType(self)->'AxisType':
+        """
+    <summary>
+        Type of the axis.
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_AxisType.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_AxisType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_AxisType, self.Ptr)
+        objwraped = AxisType(ret)
+        return objwraped
+
+    @AxisType.setter
+    def AxisType(self, value:'AxisType'):
+        GetDllLibXls().XlsChartAxis_set_AxisType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_AxisType, self.Ptr, value.value)
+
+    @property
+    def IsPrimary(self)->bool:
+        """
+    <summary>
+        True if this is primary axis.
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_IsPrimary.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_IsPrimary.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_IsPrimary, self.Ptr)
+        return ret
+
+    @property
+
+    def Title(self)->str:
+        """
+    <summary>
+        Title of the axis.
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_Title.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_Title.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsChartAxis_get_Title, self.Ptr))
+        return ret
+
+
+    @Title.setter
+    def Title(self, value:str):
+        GetDllLibXls().XlsChartAxis_set_Title.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_Title, self.Ptr, value)
+
+    @property
+    def TextRotationAngle(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_TextRotationAngle.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_TextRotationAngle.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_TextRotationAngle, self.Ptr)
+        return ret
+
+    @TextRotationAngle.setter
+    def TextRotationAngle(self, value:int):
+        GetDllLibXls().XlsChartAxis_set_TextRotationAngle.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_TextRotationAngle, self.Ptr, value)
+
+    @property
+    def IsAutoTextRotation(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_IsAutoTextRotation.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_IsAutoTextRotation.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_IsAutoTextRotation, self.Ptr)
+        return ret
+
+    @property
+
+    def TitleArea(self)->'IChartTextArea':
+        """
+    <summary>
+        Returns text area for the axis title. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_TitleArea.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_TitleArea.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartAxis_get_TitleArea, self.Ptr)
+        ret = None if intPtr==None else IChartTextArea(intPtr)
+        return ret
+
+
+    @property
+
+    def Font(self)->'IFont':
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_Font.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_Font.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartAxis_get_Font, self.Ptr)
+        ret = None if intPtr==None else XlsFont(intPtr)
+        return ret
+
+
+    @property
+
+    def FrameFormat(self)->'IChartFrameFormat':
+        """
+    <summary>
+        Return frame format of Axis. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_FrameFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_FrameFormat.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartAxis_get_FrameFormat, self.Ptr)
+        ret = None if intPtr==None else XlsChartFrameFormat(intPtr)
+        return ret
+
+
+    @property
+    def Has3dProperties(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_Has3dProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_Has3dProperties.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_Has3dProperties, self.Ptr)
+        return ret
+
+    @property
+    def HasAxisTitle(self)->bool:
+        """
+    <summary>
+        Indicates wheather the axis has title
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_HasAxisTitle.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_HasAxisTitle.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_HasAxisTitle, self.Ptr)
+        return ret
+
+    @property
+
+    def MajorGridLines(self)->'IChartGridLine':
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_MajorGridLines.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_MajorGridLines.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartAxis_get_MajorGridLines, self.Ptr)
+        ret = None if intPtr==None else IChartGridLine(intPtr)
+        return ret
+
+
+    @property
+
+    def MinorGridLines(self)->'IChartGridLine':
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_MinorGridLines.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_MinorGridLines.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartAxis_get_MinorGridLines, self.Ptr)
+        ret = None if intPtr==None else IChartGridLine(intPtr)
+        return ret
+
+
+    @property
+    def HasMinorGridLines(self)->bool:
+        """
+    <summary>
+        True if the axis has minor gridlines. Only axes in the primary axis group can have gridlines.
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_HasMinorGridLines.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_HasMinorGridLines.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_HasMinorGridLines, self.Ptr)
+        return ret
+
+    @HasMinorGridLines.setter
+    def HasMinorGridLines(self, value:bool):
+        GetDllLibXls().XlsChartAxis_set_HasMinorGridLines.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_HasMinorGridLines, self.Ptr, value)
+
+    @property
+    def HasMajorGridLines(self)->bool:
+        """
+    <summary>
+        True if the axis has major gridlines. Only axes in the primary axis group can have gridlines.
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_HasMajorGridLines.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_HasMajorGridLines.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_HasMajorGridLines, self.Ptr)
+        return ret
+
+    @HasMajorGridLines.setter
+    def HasMajorGridLines(self, value:bool):
+        GetDllLibXls().XlsChartAxis_set_HasMajorGridLines.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_HasMajorGridLines, self.Ptr, value)
+
+    @property
+    def NumberFormatIndex(self)->int:
+        """
+    <summary>
+        Gets or sets format index.
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_NumberFormatIndex.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_NumberFormatIndex.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_NumberFormatIndex, self.Ptr)
+        return ret
+
+    @NumberFormatIndex.setter
+    def NumberFormatIndex(self, value:int):
+        GetDllLibXls().XlsChartAxis_set_NumberFormatIndex.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_NumberFormatIndex, self.Ptr, value)
+
+    @property
+
+    def NumberFormat(self)->str:
+        """
+    <summary>
+        Gets or sets number format string.
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_NumberFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_NumberFormat.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsChartAxis_get_NumberFormat, self.Ptr))
+        return ret
+
+
+    @NumberFormat.setter
+    def NumberFormat(self, value:str):
+        GetDllLibXls().XlsChartAxis_set_NumberFormat.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_NumberFormat, self.Ptr, value)
+
+    @property
+
+    def MinorTickMark(self)->'TickMarkType':
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_MinorTickMark.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_MinorTickMark.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_MinorTickMark, self.Ptr)
+        objwraped = TickMarkType(ret)
+        return objwraped
+
+    @MinorTickMark.setter
+    def MinorTickMark(self, value:'TickMarkType'):
+        GetDllLibXls().XlsChartAxis_set_MinorTickMark.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_MinorTickMark, self.Ptr, value.value)
+
+    @property
+
+    def MajorTickMark(self)->'TickMarkType':
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_MajorTickMark.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_MajorTickMark.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_MajorTickMark, self.Ptr)
+        objwraped = TickMarkType(ret)
+        return objwraped
+
+    @MajorTickMark.setter
+    def MajorTickMark(self, value:'TickMarkType'):
+        GetDllLibXls().XlsChartAxis_set_MajorTickMark.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_MajorTickMark, self.Ptr, value.value)
+
+    @property
+
+    def Border(self)->'ChartBorder':
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_Border.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_Border.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartAxis_get_Border, self.Ptr)
+        ret = None if intPtr==None else ChartBorder(intPtr)
+        return ret
+
+
+    @property
+
+    def TickLabelPosition(self)->'TickLabelPositionType':
+        """
+    <summary>
+        Represents tick label position.
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_TickLabelPosition.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_TickLabelPosition.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_TickLabelPosition, self.Ptr)
+        objwraped = TickLabelPositionType(ret)
+        return objwraped
+
+    @TickLabelPosition.setter
+    def TickLabelPosition(self, value:'TickLabelPositionType'):
+        GetDllLibXls().XlsChartAxis_set_TickLabelPosition.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_TickLabelPosition, self.Ptr, value.value)
+
+    @property
+    def MultiLevelLable(self)->bool:
+        """
+    <summary>
+        Axis is show Multi-level category lables.
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_MultiLevelLable.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_MultiLevelLable.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_MultiLevelLable, self.Ptr)
+        return ret
+
+    @MultiLevelLable.setter
+    def MultiLevelLable(self, value:bool):
+        GetDllLibXls().XlsChartAxis_set_MultiLevelLable.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_MultiLevelLable, self.Ptr, value)
+
+    @property
+    def Visible(self)->bool:
+        """
+    <summary>
+        Indicates is axis is visible.
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_Visible.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_Visible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_Visible, self.Ptr)
+        return ret
+
+    @Visible.setter
+    def Visible(self, value:bool):
+        GetDllLibXls().XlsChartAxis_set_Visible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_Visible, self.Ptr, value)
+
+    @property
+
+    def Alignment(self)->'AxisTextDirectionType':
+        """
+    <summary>
+        Represents alignment for the tick label.
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_Alignment.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_Alignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_Alignment, self.Ptr)
+        objwraped = AxisTextDirectionType(ret)
+        return objwraped
+
+    @Alignment.setter
+    def Alignment(self, value:'AxisTextDirectionType'):
+        GetDllLibXls().XlsChartAxis_set_Alignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_Alignment, self.Ptr, value.value)
+
+    @property
+    def IsReversed(self)->bool:
+        """
+    <summary>
+        True if plots data points from last to first.
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_IsReversed.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_IsReversed.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_IsReversed, self.Ptr)
+        return ret
+
+    @IsReversed.setter
+    def IsReversed(self, value:bool):
+        GetDllLibXls().XlsChartAxis_set_IsReversed.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_IsReversed, self.Ptr, value)
+
+    @property
+    def AxisId(self)->int:
+        """
+    <summary>
+        Gets axis id.
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_AxisId.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_AxisId.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_AxisId, self.Ptr)
+        return ret
+
+    @property
+
+    def Chart3DOptions(self)->'IFormat3D':
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_Chart3DOptions.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_Chart3DOptions.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartAxis_get_Chart3DOptions, self.Ptr)
+        ret = None if intPtr==None else Format3D(intPtr)
+        return ret
+
+
+    @property
+
+    def Chart3DProperties(self)->'IFormat3D':
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_Chart3DProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_Chart3DProperties.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartAxis_get_Chart3DProperties, self.Ptr)
+        ret = None if intPtr==None else Format3D(intPtr)
+        return ret
+
+
+    @property
+    def Deleted(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_Deleted.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_Deleted.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_Deleted, self.Ptr)
+        return ret
+
+    @Deleted.setter
+    def Deleted(self, value:bool):
+        GetDllLibXls().XlsChartAxis_set_Deleted.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_Deleted, self.Ptr, value)
+
+    @property
+
+    def ParagraphType(self)->'ChartParagraphType':
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_ParagraphType.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_ParagraphType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_ParagraphType, self.Ptr)
+        objwraped = ChartParagraphType(ret)
+        return objwraped
+
+    @ParagraphType.setter
+    def ParagraphType(self, value:'ChartParagraphType'):
+        GetDllLibXls().XlsChartAxis_set_ParagraphType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_ParagraphType, self.Ptr, value.value)
+
+    @property
+
+    def Shadow(self)->'ChartShadow':
+        """
+    <summary>
+        Represents the Shadow.Read-only
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_Shadow.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_Shadow.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartAxis_get_Shadow, self.Ptr)
+        ret = None if intPtr==None else ChartShadow(intPtr)
+        return ret
+
+
+    @property
+
+    def ShadowProperties(self)->'IShadow':
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_ShadowProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_ShadowProperties.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartAxis_get_ShadowProperties, self.Ptr)
+        ret = None if intPtr==None else ChartShadow(intPtr)
+        return ret
+
+
+    @property
+    def AutoTickLabelSpacing(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_AutoTickLabelSpacing.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_AutoTickLabelSpacing.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_AutoTickLabelSpacing, self.Ptr)
+        return ret
+
+    @AutoTickLabelSpacing.setter
+    def AutoTickLabelSpacing(self, value:bool):
+        GetDllLibXls().XlsChartAxis_set_AutoTickLabelSpacing.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_AutoTickLabelSpacing, self.Ptr, value)
+
+    @property
+    def AutoTickMarkSpacing(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_AutoTickMarkSpacing.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_AutoTickMarkSpacing.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_AutoTickMarkSpacing, self.Ptr)
+        return ret
+
+    @AutoTickMarkSpacing.setter
+    def AutoTickMarkSpacing(self, value:bool):
+        GetDllLibXls().XlsChartAxis_set_AutoTickMarkSpacing.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_AutoTickMarkSpacing, self.Ptr, value)
+
+    @property
+    def IsSourceLinked(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartAxis_get_IsSourceLinked.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_IsSourceLinked.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_IsSourceLinked, self.Ptr)
+        return ret
+
+    @IsSourceLinked.setter
+    def IsSourceLinked(self, value:bool):
+        GetDllLibXls().XlsChartAxis_set_IsSourceLinked.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_IsSourceLinked, self.Ptr, value)
+
+    @property
+
+    def TextDirection(self)->'TextVerticalValue':
+        """
+    <summary>
+        axis's text direction
+    </summary>
+        """
+        GetDllLibXls().XlsChartAxis_get_TextDirection.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartAxis_get_TextDirection.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartAxis_get_TextDirection, self.Ptr)
+        objwraped = TextVerticalValue(ret)
+        return objwraped
+
+    @TextDirection.setter
+    def TextDirection(self, value:'TextVerticalValue'):
+        GetDllLibXls().XlsChartAxis_set_TextDirection.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartAxis_set_TextDirection, self.Ptr, value.value)
+
+#
+#    def Clone(self ,parent:'SpireObject',dicFontIndexes:'Dictionary2',dicNewSheetNames:'Dictionary2')->'XlsChartAxis':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrdicFontIndexes:c_void_p = dicFontIndexes.Ptr
+#        intPtrdicNewSheetNames:c_void_p = dicNewSheetNames.Ptr
+#
+#        GetDllLibXls().XlsChartAxis_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+#        GetDllLibXls().XlsChartAxis_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsChartAxis_Clone, self.Ptr, intPtrparent,intPtrdicFontIndexes,intPtrdicNewSheetNames)
+#        ret = None if intPtr==None else XlsChartAxis(intPtr)
+#        return ret
+#
+
+

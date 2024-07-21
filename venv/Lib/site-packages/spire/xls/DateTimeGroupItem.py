@@ -1,0 +1,132 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class DateTimeGroupItem (SpireObject) :
+    """
+
+    """
+    @property
+
+    def MinValue(self)->'DateTime':
+        """
+
+        """
+        GetDllLibXls().DateTimeGroupItem_get_MinValue.argtypes=[c_void_p]
+        GetDllLibXls().DateTimeGroupItem_get_MinValue.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().DateTimeGroupItem_get_MinValue, self.Ptr)
+        ret = None if intPtr==None else DateTime(intPtr)
+        return ret
+
+
+    @property
+
+    def DateTimeGroupingType(self)->'DateTimeGroupingType':
+        """
+
+        """
+        GetDllLibXls().DateTimeGroupItem_get_DateTimeGroupingType.argtypes=[c_void_p]
+        GetDllLibXls().DateTimeGroupItem_get_DateTimeGroupingType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().DateTimeGroupItem_get_DateTimeGroupingType, self.Ptr)
+        objwraped = DateTimeGroupingType(ret)
+        return objwraped
+
+    @DateTimeGroupingType.setter
+    def DateTimeGroupingType(self, value:'DateTimeGroupingType'):
+        GetDllLibXls().DateTimeGroupItem_set_DateTimeGroupingType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().DateTimeGroupItem_set_DateTimeGroupingType, self.Ptr, value.value)
+
+    @property
+    def Year(self)->int:
+        """
+
+        """
+        GetDllLibXls().DateTimeGroupItem_get_Year.argtypes=[c_void_p]
+        GetDllLibXls().DateTimeGroupItem_get_Year.restype=c_int
+        ret = CallCFunction(GetDllLibXls().DateTimeGroupItem_get_Year, self.Ptr)
+        return ret
+
+    @Year.setter
+    def Year(self, value:int):
+        GetDllLibXls().DateTimeGroupItem_set_Year.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().DateTimeGroupItem_set_Year, self.Ptr, value)
+
+    @property
+    def Month(self)->int:
+        """
+
+        """
+        GetDllLibXls().DateTimeGroupItem_get_Month.argtypes=[c_void_p]
+        GetDllLibXls().DateTimeGroupItem_get_Month.restype=c_int
+        ret = CallCFunction(GetDllLibXls().DateTimeGroupItem_get_Month, self.Ptr)
+        return ret
+
+    @Month.setter
+    def Month(self, value:int):
+        GetDllLibXls().DateTimeGroupItem_set_Month.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().DateTimeGroupItem_set_Month, self.Ptr, value)
+
+    @property
+    def Day(self)->int:
+        """
+
+        """
+        GetDllLibXls().DateTimeGroupItem_get_Day.argtypes=[c_void_p]
+        GetDllLibXls().DateTimeGroupItem_get_Day.restype=c_int
+        ret = CallCFunction(GetDllLibXls().DateTimeGroupItem_get_Day, self.Ptr)
+        return ret
+
+    @Day.setter
+    def Day(self, value:int):
+        GetDllLibXls().DateTimeGroupItem_set_Day.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().DateTimeGroupItem_set_Day, self.Ptr, value)
+
+    @property
+    def Hour(self)->int:
+        """
+
+        """
+        GetDllLibXls().DateTimeGroupItem_get_Hour.argtypes=[c_void_p]
+        GetDllLibXls().DateTimeGroupItem_get_Hour.restype=c_int
+        ret = CallCFunction(GetDllLibXls().DateTimeGroupItem_get_Hour, self.Ptr)
+        return ret
+
+    @Hour.setter
+    def Hour(self, value:int):
+        GetDllLibXls().DateTimeGroupItem_set_Hour.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().DateTimeGroupItem_set_Hour, self.Ptr, value)
+
+    @property
+    def Minute(self)->int:
+        """
+
+        """
+        GetDllLibXls().DateTimeGroupItem_get_Minute.argtypes=[c_void_p]
+        GetDllLibXls().DateTimeGroupItem_get_Minute.restype=c_int
+        ret = CallCFunction(GetDllLibXls().DateTimeGroupItem_get_Minute, self.Ptr)
+        return ret
+
+    @Minute.setter
+    def Minute(self, value:int):
+        GetDllLibXls().DateTimeGroupItem_set_Minute.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().DateTimeGroupItem_set_Minute, self.Ptr, value)
+
+    @property
+    def Second(self)->int:
+        """
+
+        """
+        GetDllLibXls().DateTimeGroupItem_get_Second.argtypes=[c_void_p]
+        GetDllLibXls().DateTimeGroupItem_get_Second.restype=c_int
+        ret = CallCFunction(GetDllLibXls().DateTimeGroupItem_get_Second, self.Ptr)
+        return ret
+
+    @Second.setter
+    def Second(self, value:int):
+        GetDllLibXls().DateTimeGroupItem_set_Second.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().DateTimeGroupItem_set_Second, self.Ptr, value)
+

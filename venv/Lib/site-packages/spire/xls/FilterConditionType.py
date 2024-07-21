@@ -1,0 +1,21 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class FilterConditionType(Enum):
+    """
+    <summary>
+        Filter conditions.
+    </summary>
+    """
+    Less = 1
+    Equal = 2
+    LessOrEqual = 3
+    Greater = 4
+    NotEqual = 5
+    GreaterOrEqual = 6
+

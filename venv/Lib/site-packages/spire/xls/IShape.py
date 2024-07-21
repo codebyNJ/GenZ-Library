@@ -1,0 +1,409 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IShape (  IExcelApplication) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Height(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Height.setter
+    @abc.abstractmethod
+    def Height(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ID(self)->int:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Left(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Left.setter
+    @abc.abstractmethod
+    def Left(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Name(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Name.setter
+    @abc.abstractmethod
+    def Name(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Top(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Top.setter
+    @abc.abstractmethod
+    def Top(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Width(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Width.setter
+    @abc.abstractmethod
+    def Width(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def HtmlString(self)->str:
+        """
+    <summary>
+        Gets and sets the html string which contains data and some formattings in this shape.
+    </summary>
+        """
+        pass
+
+
+    @HtmlString.setter
+    @abc.abstractmethod
+    def HtmlString(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ShapeType(self)->'ExcelShapeType':
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Visible(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @Visible.setter
+    @abc.abstractmethod
+    def Visible(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def AlternativeText(self)->str:
+        """
+
+        """
+        pass
+
+
+    @AlternativeText.setter
+    @abc.abstractmethod
+    def AlternativeText(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Fill(self)->'IShapeFill':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Line(self)->'IShapeLineFormat':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def OnAction(self)->str:
+        """
+
+        """
+        pass
+
+
+    @OnAction.setter
+    @abc.abstractmethod
+    def OnAction(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Shadow(self)->'IShadow':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ThreeD(self)->'IFormat3D':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Glow(self)->'IGlow':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Reflection(self)->'IReflectionEffect':
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Rotation(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Rotation.setter
+    @abc.abstractmethod
+    def Rotation(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ResizeBehave(self)->'ResizeBehaveType':
+        """
+    <summary>
+        Specifies all possible settings for how drawing object shall be resized when the rows and columns between its start and ending anchor are resized or inserted(ComboBoxShape and CheckBoxShape and RadioButtonShape set MoveAndResize type value is invalid)
+    </summary>
+        """
+        pass
+
+
+    @ResizeBehave.setter
+    @abc.abstractmethod
+    def ResizeBehave(self, value:'ResizeBehaveType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsLocked(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsLocked.setter
+    @abc.abstractmethod
+    def IsLocked(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsPrintable(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsPrintable.setter
+    @abc.abstractmethod
+    def IsPrintable(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsLockAspectRatio(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsLockAspectRatio.setter
+    @abc.abstractmethod
+    def IsLockAspectRatio(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsSmartArt(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def TextFrame(self)->'ITextFrame':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LinkedCell(self)->'IXLSRange':
+        """
+    <summary>
+        Gets or sets the range linked to the shape's value.
+    </summary>
+        """
+        pass
+
+
+    @LinkedCell.setter
+    @abc.abstractmethod
+    def LinkedCell(self, value:'IXLSRange'):
+        """
+
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Remove(self):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Scale(self ,scaleWidth:int,scaleHeight:int):
+        """
+
+        """
+        pass
+
+

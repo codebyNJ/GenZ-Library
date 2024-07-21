@@ -1,0 +1,159 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IWorksheets (  abc.ABC) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Count(self)->int:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,Index:int)->IWorksheet:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,sheetName:str)->IWorksheet:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    #@abc.abstractmethod
+    #def Parent(self)->'SpireObject':
+    #    """
+
+    #    """
+    #    pass
+
+
+    @property
+    @abc.abstractmethod
+    def UseRangesCache(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @UseRangesCache.setter
+    @abc.abstractmethod
+    def UseRangesCache(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Create(self ,name:str)->IWorksheet:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Create(self)->IWorksheet:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Remove(self ,sheet:IWorksheet):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Remove(self ,sheetName:str):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Remove(self ,index:int):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def AddCopyBefore(self ,toCopy:IWorksheet)->IWorksheet:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def AddCopyBefore(self ,toCopy:IWorksheet,sheetAfter:IWorksheet)->IWorksheet:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def AddCopyAfter(self ,toCopy:IWorksheet)->IWorksheet:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def AddCopyAfter(self ,toCopy:IWorksheet,sheetBefore:IWorksheet)->IWorksheet:
+        """
+
+        """
+        pass
+
+

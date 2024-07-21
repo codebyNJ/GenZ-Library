@@ -1,0 +1,29 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IDigitalSignatures (  abc.ABC) :
+    """
+    <summary>
+        Represents a Collection of DigitalSignature in Excel.
+    </summary>
+    """
+#
+#    @abc.abstractmethod
+#    def Add(self ,certificate:'X509Certificate2',comments:str,signTime:'DateTime')->'IDigitalSignature':
+#        """
+#    <summary>
+#        create a signature and add to DigitalSignatureCollection.
+#    </summary>
+#    <param name="certificate">Certificate object that was used to sign</param>
+#    <param name="comments">Signature Comments</param>
+#    <param name="signTime">Sign Time</param>
+#        """
+#        pass
+#
+
+

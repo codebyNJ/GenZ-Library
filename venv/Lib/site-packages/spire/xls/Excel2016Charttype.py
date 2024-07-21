@@ -1,0 +1,20 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class Excel2016Charttype(Enum):
+    """
+
+    """
+    funnel = 74
+    boxWhisker = 76
+    clusteredColumn = 77
+    paretoLine = 78
+    sunburst = 80
+    treemap = 79
+    waterfall = 75
+

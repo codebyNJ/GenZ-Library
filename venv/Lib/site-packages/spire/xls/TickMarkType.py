@@ -1,0 +1,19 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class TickMarkType(Enum):
+    """
+    <summary>
+        Represents enum of chart tick mark values.
+    </summary>
+    """
+    TickMarkNone = 0
+    TickMarkInside = 1
+    TickMarkOutside = 2
+    TickMarkCross = 3
+

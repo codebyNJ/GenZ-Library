@@ -1,0 +1,154 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IOvalShape (  IPrstGeomShape) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def Line(self)->'IShapeLineFormat':
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Rotation(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Rotation.setter
+    @abc.abstractmethod
+    def Rotation(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def HyLink(self)->'IHyperLink':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def HAlignment(self)->'CommentHAlignType':
+        """
+
+        """
+        pass
+
+
+    @HAlignment.setter
+    @abc.abstractmethod
+    def HAlignment(self, value:'CommentHAlignType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def VAlignment(self)->'CommentVAlignType':
+        """
+
+        """
+        pass
+
+
+    @VAlignment.setter
+    @abc.abstractmethod
+    def VAlignment(self, value:'CommentVAlignType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def TextRotation(self)->'TextRotationType':
+        """
+
+        """
+        pass
+
+
+    @TextRotation.setter
+    @abc.abstractmethod
+    def TextRotation(self, value:'TextRotationType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsTextLocked(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsTextLocked.setter
+    @abc.abstractmethod
+    def IsTextLocked(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RichText(self)->'IRichTextString':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Text(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Text.setter
+    @abc.abstractmethod
+    def Text(self, value:str):
+        """
+
+        """
+        pass
+
+

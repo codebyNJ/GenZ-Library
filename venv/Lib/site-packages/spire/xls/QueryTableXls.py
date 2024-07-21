@@ -1,0 +1,42 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class QueryTableXls (SpireObject) :
+    """
+
+    """
+    @property
+    def AdjustColumnWidth(self)->bool:
+        """
+
+        """
+        GetDllLibXls().QueryTableXls_get_AdjustColumnWidth.argtypes=[c_void_p]
+        GetDllLibXls().QueryTableXls_get_AdjustColumnWidth.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().QueryTableXls_get_AdjustColumnWidth, self.Ptr)
+        return ret
+
+    @AdjustColumnWidth.setter
+    def AdjustColumnWidth(self, value:bool):
+        GetDllLibXls().QueryTableXls_set_AdjustColumnWidth.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().QueryTableXls_set_AdjustColumnWidth, self.Ptr, value)
+
+    @property
+    def PreserveFormatting(self)->bool:
+        """
+
+        """
+        GetDllLibXls().QueryTableXls_get_PreserveFormatting.argtypes=[c_void_p]
+        GetDllLibXls().QueryTableXls_get_PreserveFormatting.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().QueryTableXls_get_PreserveFormatting, self.Ptr)
+        return ret
+
+    @PreserveFormatting.setter
+    def PreserveFormatting(self, value:bool):
+        GetDllLibXls().QueryTableXls_set_PreserveFormatting.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().QueryTableXls_set_PreserveFormatting, self.Ptr, value)
+

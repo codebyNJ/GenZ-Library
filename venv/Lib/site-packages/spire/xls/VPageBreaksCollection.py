@@ -1,0 +1,96 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class VPageBreaksCollection (  XlsVPageBreaksCollection) :
+    """
+
+    """
+
+    def get_Item(self ,index:int)->'VPageBreak':
+        """
+    <summary>
+        Gets a object from collection
+    </summary>
+        """
+        
+        GetDllLibXls().VPageBreaksCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().VPageBreaksCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().VPageBreaksCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else VPageBreak(intPtr)
+        return ret
+
+
+
+    def Add(self ,range:'CellRange')->'VPageBreak':
+        """
+    <summary>
+        Adds a horizontal page break.
+    </summary>
+    <param name="range">Range which a page break need inserted.</param>
+    <returns></returns>
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().VPageBreaksCollection_Add.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().VPageBreaksCollection_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().VPageBreaksCollection_Add, self.Ptr, intPtrrange)
+        ret = None if intPtr==None else VPageBreak(intPtr)
+        return ret
+
+
+
+    def Remove(self ,range:'CellRange'):
+        """
+    <summary>
+        Remove page break with specified range.
+    </summary>
+    <param name="range">range object.</param>
+    <returns></returns>
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().VPageBreaksCollection_Remove.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().VPageBreaksCollection_Remove, self.Ptr, intPtrrange)
+
+    @dispatch
+
+    def GetPageBreak(self ,columnIndex:int)->VPageBreak:
+        """
+    <summary>
+        Returns page break at the specified Column index.
+    </summary>
+    <param name="rowIndex">Column index.</param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().VPageBreaksCollection_GetPageBreak.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().VPageBreaksCollection_GetPageBreak.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().VPageBreaksCollection_GetPageBreak, self.Ptr, columnIndex)
+        ret = None if intPtr==None else VPageBreak(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def GetPageBreak(self ,range:CellRange)->VPageBreak:
+        """
+    <summary>
+        Returns page break at the specified range.
+    </summary>
+    <param name="range">range object.</param>
+    <returns></returns>
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().VPageBreaksCollection_GetPageBreakR.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().VPageBreaksCollection_GetPageBreakR.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().VPageBreaksCollection_GetPageBreakR, self.Ptr, intPtrrange)
+        ret = None if intPtr==None else VPageBreak(intPtr)
+        return ret
+
+

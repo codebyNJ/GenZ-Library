@@ -1,0 +1,23 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CopyRangeOptions(Enum):
+    """
+
+    """
+    none = 0
+    UpdateFormulas = 1
+    UpdateMerges = 2
+    CopyStyles = 4
+    CopyShapes = 8
+    CopyErrorIndicators = 16
+    CopyConditionalFormats = 32
+    CopyDataValidations = 64
+    OnlyCopyFormulaValue = 128
+    All = 127
+

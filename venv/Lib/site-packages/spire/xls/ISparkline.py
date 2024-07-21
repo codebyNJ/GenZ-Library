@@ -1,0 +1,68 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ISparkline (abc.ABC) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def DataRange(self)->'CellRange':
+        """
+
+        """
+        pass
+
+
+    @DataRange.setter
+    @abc.abstractmethod
+    def DataRange(self, value:'CellRange'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RefRange(self)->'CellRange':
+        """
+
+        """
+        pass
+
+
+    @RefRange.setter
+    @abc.abstractmethod
+    def RefRange(self, value:'CellRange'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Column(self)->int:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Row(self)->int:
+        """
+
+        """
+        pass
+
+

@@ -1,0 +1,147 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ExternalConnection (SpireObject) :
+    """
+
+    """
+    @property
+
+    def ID(self)->str:
+        """
+
+        """
+        GetDllLibXls().ExternalConnection_get_ID.argtypes=[c_void_p]
+        GetDllLibXls().ExternalConnection_get_ID.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ExternalConnection_get_ID, self.Ptr))
+        return ret
+
+
+    @property
+
+    def Name(self)->str:
+        """
+
+        """
+        GetDllLibXls().ExternalConnection_get_Name.argtypes=[c_void_p]
+        GetDllLibXls().ExternalConnection_get_Name.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ExternalConnection_get_Name, self.Ptr))
+        return ret
+
+
+    @Name.setter
+    def Name(self, value:str):
+        GetDllLibXls().ExternalConnection_set_Name.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ExternalConnection_set_Name, self.Ptr, value)
+
+    @property
+
+    def ConnType(self)->'ConnectionDataSourceType':
+        """
+
+        """
+        GetDllLibXls().ExternalConnection_get_ConnType.argtypes=[c_void_p]
+        GetDllLibXls().ExternalConnection_get_ConnType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExternalConnection_get_ConnType, self.Ptr)
+        objwraped = ConnectionDataSourceType(ret)
+        return objwraped
+
+    @property
+    def BackgroundRefresh(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ExternalConnection_get_BackgroundRefresh.argtypes=[c_void_p]
+        GetDllLibXls().ExternalConnection_get_BackgroundRefresh.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ExternalConnection_get_BackgroundRefresh, self.Ptr)
+        return ret
+
+    @BackgroundRefresh.setter
+    def BackgroundRefresh(self, value:bool):
+        GetDllLibXls().ExternalConnection_set_BackgroundRefresh.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ExternalConnection_set_BackgroundRefresh, self.Ptr, value)
+
+    @property
+
+    def RefreshedVersion(self)->str:
+        """
+
+        """
+        GetDllLibXls().ExternalConnection_get_RefreshedVersion.argtypes=[c_void_p]
+        GetDllLibXls().ExternalConnection_get_RefreshedVersion.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ExternalConnection_get_RefreshedVersion, self.Ptr))
+        return ret
+
+
+    @RefreshedVersion.setter
+    def RefreshedVersion(self, value:str):
+        GetDllLibXls().ExternalConnection_set_RefreshedVersion.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ExternalConnection_set_RefreshedVersion, self.Ptr, value)
+
+    @property
+    def SaveData(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ExternalConnection_get_SaveData.argtypes=[c_void_p]
+        GetDllLibXls().ExternalConnection_get_SaveData.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ExternalConnection_get_SaveData, self.Ptr)
+        return ret
+
+    @SaveData.setter
+    def SaveData(self, value:bool):
+        GetDllLibXls().ExternalConnection_set_SaveData.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ExternalConnection_set_SaveData, self.Ptr, value)
+
+    @property
+
+    def OdcFile(self)->str:
+        """
+
+        """
+        GetDllLibXls().ExternalConnection_get_OdcFile.argtypes=[c_void_p]
+        GetDllLibXls().ExternalConnection_get_OdcFile.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ExternalConnection_get_OdcFile, self.Ptr))
+        return ret
+
+
+    @OdcFile.setter
+    def OdcFile(self, value:str):
+        GetDllLibXls().ExternalConnection_set_OdcFile.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ExternalConnection_set_OdcFile, self.Ptr, value)
+
+    @property
+    def KeepAlive(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ExternalConnection_get_KeepAlive.argtypes=[c_void_p]
+        GetDllLibXls().ExternalConnection_get_KeepAlive.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ExternalConnection_get_KeepAlive, self.Ptr)
+        return ret
+
+    @KeepAlive.setter
+    def KeepAlive(self, value:bool):
+        GetDllLibXls().ExternalConnection_set_KeepAlive.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ExternalConnection_set_KeepAlive, self.Ptr, value)
+
+    @property
+    def OnlyUseConnectionFile(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ExternalConnection_get_OnlyUseConnectionFile.argtypes=[c_void_p]
+        GetDllLibXls().ExternalConnection_get_OnlyUseConnectionFile.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ExternalConnection_get_OnlyUseConnectionFile, self.Ptr)
+        return ret
+
+    @OnlyUseConnectionFile.setter
+    def OnlyUseConnectionFile(self, value:bool):
+        GetDllLibXls().ExternalConnection_set_OnlyUseConnectionFile.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ExternalConnection_set_OnlyUseConnectionFile, self.Ptr, value)
+

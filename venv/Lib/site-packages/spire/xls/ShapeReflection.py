@@ -1,0 +1,131 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ShapeReflection (  XlsObject, IReflectionEffect, ICloneParent) :
+    """
+
+    """
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().ShapeReflection_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ShapeReflection_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ShapeReflection_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @property
+    def Blur(self)->int:
+        """
+
+        """
+        GetDllLibXls().ShapeReflection_get_Blur.argtypes=[c_void_p]
+        GetDllLibXls().ShapeReflection_get_Blur.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ShapeReflection_get_Blur, self.Ptr)
+        return ret
+
+    @Blur.setter
+    def Blur(self, value:int):
+        GetDllLibXls().ShapeReflection_set_Blur.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ShapeReflection_set_Blur, self.Ptr, value)
+
+    @property
+    def Direction(self)->float:
+        """
+
+        """
+        GetDllLibXls().ShapeReflection_get_Direction.argtypes=[c_void_p]
+        GetDllLibXls().ShapeReflection_get_Direction.restype=c_double
+        ret = CallCFunction(GetDllLibXls().ShapeReflection_get_Direction, self.Ptr)
+        return ret
+
+    @Direction.setter
+    def Direction(self, value:float):
+        GetDllLibXls().ShapeReflection_set_Direction.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().ShapeReflection_set_Direction, self.Ptr, value)
+
+    @property
+    def Distance(self)->int:
+        """
+
+        """
+        GetDllLibXls().ShapeReflection_get_Distance.argtypes=[c_void_p]
+        GetDllLibXls().ShapeReflection_get_Distance.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ShapeReflection_get_Distance, self.Ptr)
+        return ret
+
+    @Distance.setter
+    def Distance(self, value:int):
+        GetDllLibXls().ShapeReflection_set_Distance.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ShapeReflection_set_Distance, self.Ptr, value)
+
+    @property
+    def FadeDirection(self)->float:
+        """
+
+        """
+        GetDllLibXls().ShapeReflection_get_FadeDirection.argtypes=[c_void_p]
+        GetDllLibXls().ShapeReflection_get_FadeDirection.restype=c_double
+        ret = CallCFunction(GetDllLibXls().ShapeReflection_get_FadeDirection, self.Ptr)
+        return ret
+
+    @FadeDirection.setter
+    def FadeDirection(self, value:float):
+        GetDllLibXls().ShapeReflection_set_FadeDirection.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().ShapeReflection_set_FadeDirection, self.Ptr, value)
+
+    @property
+    def RotWithShape(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ShapeReflection_get_RotWithShape.argtypes=[c_void_p]
+        GetDllLibXls().ShapeReflection_get_RotWithShape.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ShapeReflection_get_RotWithShape, self.Ptr)
+        return ret
+
+    @RotWithShape.setter
+    def RotWithShape(self, value:bool):
+        GetDllLibXls().ShapeReflection_set_RotWithShape.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ShapeReflection_set_RotWithShape, self.Ptr, value)
+
+    @property
+    def Size(self)->int:
+        """
+
+        """
+        GetDllLibXls().ShapeReflection_get_Size.argtypes=[c_void_p]
+        GetDllLibXls().ShapeReflection_get_Size.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ShapeReflection_get_Size, self.Ptr)
+        return ret
+
+    @Size.setter
+    def Size(self, value:int):
+        GetDllLibXls().ShapeReflection_set_Size.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ShapeReflection_set_Size, self.Ptr, value)
+
+    @property
+    def Transparency(self)->int:
+        """
+
+        """
+        GetDllLibXls().ShapeReflection_get_Transparency.argtypes=[c_void_p]
+        GetDllLibXls().ShapeReflection_get_Transparency.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ShapeReflection_get_Transparency, self.Ptr)
+        return ret
+
+    @Transparency.setter
+    def Transparency(self, value:int):
+        GetDllLibXls().ShapeReflection_set_Transparency.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ShapeReflection_set_Transparency, self.Ptr, value)
+

@@ -1,0 +1,70 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class SpinnerShapeCollection (  CollectionBase[XlsSpinnerShape],ISpinnerShapes) :
+    """
+
+    """
+    @dispatch
+
+    def get_Item(self ,index:int)->ISpinnerShape:
+        """
+
+        """
+        
+        GetDllLibXls().SpinnerShapeCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().SpinnerShapeCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SpinnerShapeCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsSpinnerShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->ISpinnerShape:
+        """
+
+        """
+        
+        GetDllLibXls().SpinnerShapeCollection_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().SpinnerShapeCollection_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SpinnerShapeCollection_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else XlsSpinnerShape(intPtr)
+        return ret
+
+
+
+    def AddSpinner(self ,row:int,column:int,height:int,width:int)->'ISpinnerShape':
+        """
+
+        """
+        
+        GetDllLibXls().SpinnerShapeCollection_AddSpinner.argtypes=[c_void_p ,c_int,c_int,c_int,c_int]
+        GetDllLibXls().SpinnerShapeCollection_AddSpinner.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SpinnerShapeCollection_AddSpinner, self.Ptr, row,column,height,width)
+        ret = None if intPtr==None else XlsSpinnerShape(intPtr)
+        return ret
+
+
+
+    def AddCopy(self ,source:'ISpinnerShape'):
+        """
+
+        """
+        intPtrsource:c_void_p = source.Ptr
+
+        GetDllLibXls().SpinnerShapeCollection_AddCopy.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().SpinnerShapeCollection_AddCopy, self.Ptr, intPtrsource)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().SpinnerShapeCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().SpinnerShapeCollection_Clear, self.Ptr)
+

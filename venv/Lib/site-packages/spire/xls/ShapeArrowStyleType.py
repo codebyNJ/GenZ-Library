@@ -1,0 +1,21 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ShapeArrowStyleType(Enum):
+    """
+    <summary>
+        Represents shape arrow style type.
+    </summary>
+    """
+    LineNoArrow = 0
+    LineArrow = 1
+    LineArrowStealth = 2
+    LineArrowDiamond = 3
+    LineArrowOval = 4
+    LineArrowOpen = 5
+

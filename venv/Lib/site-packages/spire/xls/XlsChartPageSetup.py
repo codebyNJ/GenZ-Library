@@ -1,0 +1,56 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsChartPageSetup (  XlsPageSetupBase, IChartPageSetup) :
+    """
+
+    """
+    @property
+    def FitToPagesTall(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartPageSetup_get_FitToPagesTall.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartPageSetup_get_FitToPagesTall.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartPageSetup_get_FitToPagesTall, self.Ptr)
+        return ret
+
+    @FitToPagesTall.setter
+    def FitToPagesTall(self, value:bool):
+        GetDllLibXls().XlsChartPageSetup_set_FitToPagesTall.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartPageSetup_set_FitToPagesTall, self.Ptr, value)
+
+    @property
+    def FitToPagesWide(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartPageSetup_get_FitToPagesWide.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartPageSetup_get_FitToPagesWide.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartPageSetup_get_FitToPagesWide, self.Ptr)
+        return ret
+
+    @FitToPagesWide.setter
+    def FitToPagesWide(self, value:bool):
+        GetDllLibXls().XlsChartPageSetup_set_FitToPagesWide.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartPageSetup_set_FitToPagesWide, self.Ptr, value)
+
+
+    def Clone(self ,parent:'SpireObject')->'XlsChartPageSetup':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsChartPageSetup_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsChartPageSetup_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartPageSetup_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else XlsChartPageSetup(intPtr)
+        return ret
+
+

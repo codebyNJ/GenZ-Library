@@ -1,0 +1,72 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class PicTile (SpireObject) :
+    """
+
+    """
+    @property
+    def OffsetX(self)->float:
+        """
+
+        """
+        GetDllLibXls().PicTile_get_OffsetX.argtypes=[c_void_p]
+        GetDllLibXls().PicTile_get_OffsetX.restype=c_double
+        ret = CallCFunction(GetDllLibXls().PicTile_get_OffsetX, self.Ptr)
+        return ret
+
+    @OffsetX.setter
+    def OffsetX(self, value:float):
+        GetDllLibXls().PicTile_set_OffsetX.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().PicTile_set_OffsetX, self.Ptr, value)
+
+    @property
+    def OffsetY(self)->float:
+        """
+
+        """
+        GetDllLibXls().PicTile_get_OffsetY.argtypes=[c_void_p]
+        GetDllLibXls().PicTile_get_OffsetY.restype=c_double
+        ret = CallCFunction(GetDllLibXls().PicTile_get_OffsetY, self.Ptr)
+        return ret
+
+    @OffsetY.setter
+    def OffsetY(self, value:float):
+        GetDllLibXls().PicTile_set_OffsetY.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().PicTile_set_OffsetY, self.Ptr, value)
+
+    @property
+    def ScaleX(self)->float:
+        """
+
+        """
+        GetDllLibXls().PicTile_get_ScaleX.argtypes=[c_void_p]
+        GetDllLibXls().PicTile_get_ScaleX.restype=c_double
+        ret = CallCFunction(GetDllLibXls().PicTile_get_ScaleX, self.Ptr)
+        return ret
+
+    @ScaleX.setter
+    def ScaleX(self, value:float):
+        GetDllLibXls().PicTile_set_ScaleX.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().PicTile_set_ScaleX, self.Ptr, value)
+
+    @property
+    def ScaleY(self)->float:
+        """
+
+        """
+        GetDllLibXls().PicTile_get_ScaleY.argtypes=[c_void_p]
+        GetDllLibXls().PicTile_get_ScaleY.restype=c_double
+        ret = CallCFunction(GetDllLibXls().PicTile_get_ScaleY, self.Ptr)
+        return ret
+
+    @ScaleY.setter
+    def ScaleY(self, value:float):
+        GetDllLibXls().PicTile_set_ScaleY.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().PicTile_set_ScaleY, self.Ptr, value)
+

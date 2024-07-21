@@ -1,0 +1,133 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class RichTextObject (  SpireObject, IRichTextString) :
+    """
+
+    """
+
+    def GetFont(self ,position:int)->'XlsFont':
+        """
+
+        """
+        
+        GetDllLibXls().RichTextObject_GetFont.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().RichTextObject_GetFont.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().RichTextObject_GetFont, self.Ptr, position)
+        ret = None if intPtr==None else XlsFont(intPtr)
+        return ret
+
+
+
+    def SetFont(self ,startPos:int,endPos:int,font:'IFont'):
+        """
+
+        """
+        intPtrfont:c_void_p = font.Ptr
+
+        GetDllLibXls().RichTextObject_SetFont.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().RichTextObject_SetFont, self.Ptr, startPos,endPos,intPtrfont)
+
+    def ClearFormatting(self):
+        """
+    <summary>
+        Clears formatting.
+    </summary>
+        """
+        GetDllLibXls().RichTextObject_ClearFormatting.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().RichTextObject_ClearFormatting, self.Ptr)
+
+    def Clear(self):
+        """
+    <summary>
+        Clears all.
+    </summary>
+        """
+        GetDllLibXls().RichTextObject_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().RichTextObject_Clear, self.Ptr)
+
+    @property
+
+    def Text(self)->str:
+        """
+
+        """
+        GetDllLibXls().RichTextObject_get_Text.argtypes=[c_void_p]
+        GetDllLibXls().RichTextObject_get_Text.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().RichTextObject_get_Text, self.Ptr))
+        return ret
+
+
+    @Text.setter
+    def Text(self, value:str):
+        GetDllLibXls().RichTextObject_set_Text.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().RichTextObject_set_Text, self.Ptr, value)
+
+    @property
+
+    def RtfText(self)->str:
+        """
+    <summary>
+        Gets Rtf Text. Read-Only.
+    </summary>
+        """
+        GetDllLibXls().RichTextObject_get_RtfText.argtypes=[c_void_p]
+        GetDllLibXls().RichTextObject_get_RtfText.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().RichTextObject_get_RtfText, self.Ptr))
+        return ret
+
+
+    @property
+    def IsFormatted(self)->bool:
+        """
+    <summary>
+        Indicates whether rich text string contains formatting Read-only.
+    </summary>
+        """
+        GetDllLibXls().RichTextObject_get_IsFormatted.argtypes=[c_void_p]
+        GetDllLibXls().RichTextObject_get_IsFormatted.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().RichTextObject_get_IsFormatted, self.Ptr)
+        return ret
+
+    @property
+
+    def Parent(self)->'SpireObject':
+        """
+
+        """
+        GetDllLibXls().RichTextObject_get_Parent.argtypes=[c_void_p]
+        GetDllLibXls().RichTextObject_get_Parent.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().RichTextObject_get_Parent, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    def BeginUpdate(self):
+        """
+
+        """
+        GetDllLibXls().RichTextObject_BeginUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().RichTextObject_BeginUpdate, self.Ptr)
+
+    def EndUpdate(self):
+        """
+
+        """
+        GetDllLibXls().RichTextObject_EndUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().RichTextObject_EndUpdate, self.Ptr)
+
+
+    def Append(self ,text:str,font:'IFont'):
+        """
+
+        """
+        intPtrfont:c_void_p = font.Ptr
+
+        GetDllLibXls().RichTextObject_Append.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().RichTextObject_Append, self.Ptr, text,intPtrfont)
+

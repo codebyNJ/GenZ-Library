@@ -1,0 +1,331 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IShapeLineFormat (abc.ABC) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Weight(self)->float:
+        """
+
+        """
+        pass
+
+
+    @Weight.setter
+    @abc.abstractmethod
+    def Weight(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ForeColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @ForeColor.setter
+    @abc.abstractmethod
+    def ForeColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BackColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @BackColor.setter
+    @abc.abstractmethod
+    def BackColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ForeKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @ForeKnownColor.setter
+    @abc.abstractmethod
+    def ForeKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BackKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @BackKnownColor.setter
+    @abc.abstractmethod
+    def BackKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BeginArrowHeadStyle(self)->'ShapeArrowStyleType':
+        """
+
+        """
+        pass
+
+
+    @BeginArrowHeadStyle.setter
+    @abc.abstractmethod
+    def BeginArrowHeadStyle(self, value:'ShapeArrowStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def EndArrowHeadStyle(self)->'ShapeArrowStyleType':
+        """
+
+        """
+        pass
+
+
+    @EndArrowHeadStyle.setter
+    @abc.abstractmethod
+    def EndArrowHeadStyle(self, value:'ShapeArrowStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BeginArrowheadLength(self)->'ShapeArrowLengthType':
+        """
+
+        """
+        pass
+
+
+    @BeginArrowheadLength.setter
+    @abc.abstractmethod
+    def BeginArrowheadLength(self, value:'ShapeArrowLengthType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def EndArrowheadLength(self)->'ShapeArrowLengthType':
+        """
+
+        """
+        pass
+
+
+    @EndArrowheadLength.setter
+    @abc.abstractmethod
+    def EndArrowheadLength(self, value:'ShapeArrowLengthType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BeginArrowheadWidth(self)->'ShapeArrowWidthType':
+        """
+
+        """
+        pass
+
+
+    @BeginArrowheadWidth.setter
+    @abc.abstractmethod
+    def BeginArrowheadWidth(self, value:'ShapeArrowWidthType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def EndArrowheadWidth(self)->'ShapeArrowWidthType':
+        """
+
+        """
+        pass
+
+
+    @EndArrowheadWidth.setter
+    @abc.abstractmethod
+    def EndArrowheadWidth(self, value:'ShapeArrowWidthType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def DashStyle(self)->'ShapeDashLineStyleType':
+        """
+
+        """
+        pass
+
+
+    @DashStyle.setter
+    @abc.abstractmethod
+    def DashStyle(self, value:'ShapeDashLineStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Style(self)->'ShapeLineStyleType':
+        """
+
+        """
+        pass
+
+
+    @Style.setter
+    @abc.abstractmethod
+    def Style(self, value:'ShapeLineStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Transparency(self)->float:
+        """
+
+        """
+        pass
+
+
+    @Transparency.setter
+    @abc.abstractmethod
+    def Transparency(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Visible(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @Visible.setter
+    @abc.abstractmethod
+    def Visible(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Pattern(self)->'GradientPatternType':
+        """
+
+        """
+        pass
+
+
+    @Pattern.setter
+    @abc.abstractmethod
+    def Pattern(self, value:'GradientPatternType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HasPattern(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @HasPattern.setter
+    @abc.abstractmethod
+    def HasPattern(self, value:bool):
+        """
+
+        """
+        pass
+
+

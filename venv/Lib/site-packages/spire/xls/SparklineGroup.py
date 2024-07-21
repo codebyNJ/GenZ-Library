@@ -1,0 +1,523 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class SparklineGroup (  SpireObject, ISparklineGroup) :
+    """
+
+    """
+    @property
+
+    def SparklineList(self)->'SparklineCollection':
+        """
+
+        """
+        GetDllLibXls().SparklineGroup_get_SparklineList.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_SparklineList.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SparklineGroup_get_SparklineList, self.Ptr)
+        ret = None if intPtr==None else SparklineCollection(intPtr)
+        return ret
+
+
+    @property
+    def ShowHorizontalAxis(self)->bool:
+        """
+    <summary>
+        Indicates whether to show the sparkline horizontal axis. The horizontal axis appears if the sparkline has data that crosses the zero axis.
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_ShowHorizontalAxis.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_ShowHorizontalAxis.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_ShowHorizontalAxis, self.Ptr)
+        return ret
+
+    @ShowHorizontalAxis.setter
+    def ShowHorizontalAxis(self, value:bool):
+        GetDllLibXls().SparklineGroup_set_ShowHorizontalAxis.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_ShowHorizontalAxis, self.Ptr, value)
+
+    @property
+    def IsDisplayHidden(self)->bool:
+        """
+    <summary>
+        Indicates whether to show data in hidden rows and columns.
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_IsDisplayHidden.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_IsDisplayHidden.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_IsDisplayHidden, self.Ptr)
+        return ret
+
+    @IsDisplayHidden.setter
+    def IsDisplayHidden(self, value:bool):
+        GetDllLibXls().SparklineGroup_set_IsDisplayHidden.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_IsDisplayHidden, self.Ptr, value)
+
+    @property
+    def PlotRightToLeft(self)->bool:
+        """
+
+        """
+        GetDllLibXls().SparklineGroup_get_PlotRightToLeft.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_PlotRightToLeft.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_PlotRightToLeft, self.Ptr)
+        return ret
+
+    @PlotRightToLeft.setter
+    def PlotRightToLeft(self, value:bool):
+        GetDllLibXls().SparklineGroup_set_PlotRightToLeft.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_PlotRightToLeft, self.Ptr, value)
+
+    @property
+    def ShowFirstPoint(self)->bool:
+        """
+    <summary>
+        Indicates whether to highlight the first point of data in the sparkline group. 
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_ShowFirstPoint.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_ShowFirstPoint.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_ShowFirstPoint, self.Ptr)
+        return ret
+
+    @ShowFirstPoint.setter
+    def ShowFirstPoint(self, value:bool):
+        GetDllLibXls().SparklineGroup_set_ShowFirstPoint.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_ShowFirstPoint, self.Ptr, value)
+
+    @property
+    def ShowLastPoint(self)->bool:
+        """
+    <summary>
+        Indicates whether to highlight the last point of data in the sparkline group. 
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_ShowLastPoint.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_ShowLastPoint.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_ShowLastPoint, self.Ptr)
+        return ret
+
+    @ShowLastPoint.setter
+    def ShowLastPoint(self, value:bool):
+        GetDllLibXls().SparklineGroup_set_ShowLastPoint.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_ShowLastPoint, self.Ptr, value)
+
+    @property
+    def ShowLowPoint(self)->bool:
+        """
+    <summary>
+        Indicates whether to highlight the lowest points of data in the sparkline group.
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_ShowLowPoint.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_ShowLowPoint.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_ShowLowPoint, self.Ptr)
+        return ret
+
+    @ShowLowPoint.setter
+    def ShowLowPoint(self, value:bool):
+        GetDllLibXls().SparklineGroup_set_ShowLowPoint.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_ShowLowPoint, self.Ptr, value)
+
+    @property
+    def ShowHighPoint(self)->bool:
+        """
+    <summary>
+        Indicates whether to highlight the highest points of data in the sparkline group. 
+     </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_ShowHighPoint.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_ShowHighPoint.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_ShowHighPoint, self.Ptr)
+        return ret
+
+    @ShowHighPoint.setter
+    def ShowHighPoint(self, value:bool):
+        GetDllLibXls().SparklineGroup_set_ShowHighPoint.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_ShowHighPoint, self.Ptr, value)
+
+    @property
+    def ShowNegativePoint(self)->bool:
+        """
+    <summary>
+        Indicates whether to highlight the negative values on the sparkline group with a different color or marker.
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_ShowNegativePoint.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_ShowNegativePoint.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_ShowNegativePoint, self.Ptr)
+        return ret
+
+    @ShowNegativePoint.setter
+    def ShowNegativePoint(self, value:bool):
+        GetDllLibXls().SparklineGroup_set_ShowNegativePoint.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_ShowNegativePoint, self.Ptr, value)
+
+    @property
+    def ShowMarkers(self)->bool:
+        """
+    <summary>
+        Indicates whether to highlight each point in each line sparkline in the sparkline group.  
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_ShowMarkers.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_ShowMarkers.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_ShowMarkers, self.Ptr)
+        return ret
+
+    @ShowMarkers.setter
+    def ShowMarkers(self, value:bool):
+        GetDllLibXls().SparklineGroup_set_ShowMarkers.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_ShowMarkers, self.Ptr, value)
+
+    @property
+    def VerticalAxisMaxValue(self)->float:
+        """
+    <summary>
+        Gets and sets the custom maximum value for the vertical axis. 
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_VerticalAxisMaxValue.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_VerticalAxisMaxValue.restype=c_double
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_VerticalAxisMaxValue, self.Ptr)
+        return ret
+
+    @VerticalAxisMaxValue.setter
+    def VerticalAxisMaxValue(self, value:float):
+        GetDllLibXls().SparklineGroup_set_VerticalAxisMaxValue.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_VerticalAxisMaxValue, self.Ptr, value)
+
+    @property
+
+    def VerticalAxisMaxType(self)->'SpartlineVerticalAxisType':
+        """
+    <summary>
+        Represents the vertical axis maximum value type. 
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_VerticalAxisMaxType.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_VerticalAxisMaxType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_VerticalAxisMaxType, self.Ptr)
+        objwraped = SpartlineVerticalAxisType(ret)
+        return objwraped
+
+    @VerticalAxisMaxType.setter
+    def VerticalAxisMaxType(self, value:'SpartlineVerticalAxisType'):
+        GetDllLibXls().SparklineGroup_set_VerticalAxisMaxType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_VerticalAxisMaxType, self.Ptr, value.value)
+
+    @property
+    def VerticalAxisMinValue(self)->float:
+        """
+    <summary>
+        Gets and sets the custom minimum value for the vertical axis. 
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_VerticalAxisMinValue.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_VerticalAxisMinValue.restype=c_double
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_VerticalAxisMinValue, self.Ptr)
+        return ret
+
+    @VerticalAxisMinValue.setter
+    def VerticalAxisMinValue(self, value:float):
+        GetDllLibXls().SparklineGroup_set_VerticalAxisMinValue.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_VerticalAxisMinValue, self.Ptr, value)
+
+    @property
+
+    def VerticalAxisMinValueType(self)->'SpartlineVerticalAxisType':
+        """
+    <summary>
+        Represents the vertical axis minimum value type. 
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_VerticalAxisMinValueType.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_VerticalAxisMinValueType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_VerticalAxisMinValueType, self.Ptr)
+        objwraped = SpartlineVerticalAxisType(ret)
+        return objwraped
+
+    @VerticalAxisMinValueType.setter
+    def VerticalAxisMinValueType(self, value:'SpartlineVerticalAxisType'):
+        GetDllLibXls().SparklineGroup_set_VerticalAxisMinValueType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_VerticalAxisMinValueType, self.Ptr, value.value)
+
+    @property
+
+    def SparklineType(self)->'SparklineType':
+        """
+    <summary>
+        Indicates the sparkline type of the sparkline group.
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_SparklineType.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_SparklineType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_SparklineType, self.Ptr)
+        objwraped = SparklineType(ret)
+        return objwraped
+
+    @SparklineType.setter
+    def SparklineType(self, value:'SparklineType'):
+        GetDllLibXls().SparklineGroup_set_SparklineType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_SparklineType, self.Ptr, value.value)
+
+    @property
+    def IsHorizontalDateAxis(self)->bool:
+        """
+    <summary>
+        Indicates wheter represents the horizontal axis type as Dateaxis.
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_IsHorizontalDateAxis.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_IsHorizontalDateAxis.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_IsHorizontalDateAxis, self.Ptr)
+        return ret
+
+    @IsHorizontalDateAxis.setter
+    def IsHorizontalDateAxis(self, value:bool):
+        GetDllLibXls().SparklineGroup_set_IsHorizontalDateAxis.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_IsHorizontalDateAxis, self.Ptr, value)
+
+    @property
+
+    def EmptyCellsType(self)->'SparklineEmptyCells':
+        """
+
+        """
+        GetDllLibXls().SparklineGroup_get_EmptyCellsType.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_EmptyCellsType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_EmptyCellsType, self.Ptr)
+        objwraped = SparklineEmptyCells(ret)
+        return objwraped
+
+    @EmptyCellsType.setter
+    def EmptyCellsType(self, value:'SparklineEmptyCells'):
+        GetDllLibXls().SparklineGroup_set_EmptyCellsType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_EmptyCellsType, self.Ptr, value.value)
+
+    @property
+
+    def HorizontalDateAxisRange(self)->'CellRange':
+        """
+    <summary>
+        Represents the range that contains the date values for the sparkline data.
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_HorizontalDateAxisRange.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_HorizontalDateAxisRange.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SparklineGroup_get_HorizontalDateAxisRange, self.Ptr)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @HorizontalDateAxisRange.setter
+    def HorizontalDateAxisRange(self, value:'CellRange'):
+        GetDllLibXls().SparklineGroup_set_HorizontalDateAxisRange.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_HorizontalDateAxisRange, self.Ptr, value.Ptr)
+
+    @property
+
+    def HorizontalAxisColor(self)->'Color':
+        """
+    <summary>
+        Gets and sets the color of the horizontal axis in the sparkline group.
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_HorizontalAxisColor.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_HorizontalAxisColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SparklineGroup_get_HorizontalAxisColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @HorizontalAxisColor.setter
+    def HorizontalAxisColor(self, value:'Color'):
+        GetDllLibXls().SparklineGroup_set_HorizontalAxisColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_HorizontalAxisColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def FirstPointColor(self)->'Color':
+        """
+    <summary>
+        Gets and sets the color of the first point of data in the sparkline group. 
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_FirstPointColor.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_FirstPointColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SparklineGroup_get_FirstPointColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @FirstPointColor.setter
+    def FirstPointColor(self, value:'Color'):
+        GetDllLibXls().SparklineGroup_set_FirstPointColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_FirstPointColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def HighPointColor(self)->'Color':
+        """
+    <summary>
+        Gets and sets the color of the highest points of data in the sparkline group. 
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_HighPointColor.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_HighPointColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SparklineGroup_get_HighPointColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @HighPointColor.setter
+    def HighPointColor(self, value:'Color'):
+        GetDllLibXls().SparklineGroup_set_HighPointColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_HighPointColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def LastPointColor(self)->'Color':
+        """
+    <summary>
+        Gets and sets the color of the last point of data in the sparkline group.
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_LastPointColor.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_LastPointColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SparklineGroup_get_LastPointColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @LastPointColor.setter
+    def LastPointColor(self, value:'Color'):
+        GetDllLibXls().SparklineGroup_set_LastPointColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_LastPointColor, self.Ptr, value.Ptr)
+
+    @property
+    def LineWeight(self)->float:
+        """
+    <summary>
+        Gets and sets the line weight in each line sparkline in the sparkline group, in the unit of points. 
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_LineWeight.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_LineWeight.restype=c_double
+        ret = CallCFunction(GetDllLibXls().SparklineGroup_get_LineWeight, self.Ptr)
+        return ret
+
+    @LineWeight.setter
+    def LineWeight(self, value:float):
+        GetDllLibXls().SparklineGroup_set_LineWeight.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_LineWeight, self.Ptr, value)
+
+    @property
+
+    def LowPointColor(self)->'Color':
+        """
+    <summary>
+        Gets and sets the color of the lowest points of data in the sparkline group.
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_LowPointColor.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_LowPointColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SparklineGroup_get_LowPointColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @LowPointColor.setter
+    def LowPointColor(self, value:'Color'):
+        GetDllLibXls().SparklineGroup_set_LowPointColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_LowPointColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def MarkersColor(self)->'Color':
+        """
+    <summary>
+        Gets and sets the color of points in each line sparkline in the sparkline group.
+     </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_MarkersColor.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_MarkersColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SparklineGroup_get_MarkersColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @MarkersColor.setter
+    def MarkersColor(self, value:'Color'):
+        GetDllLibXls().SparklineGroup_set_MarkersColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_MarkersColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def NegativePointColor(self)->'Color':
+        """
+    <summary>
+        Gets and sets the color of the negative values on the sparkline group.
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_NegativePointColor.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_NegativePointColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SparklineGroup_get_NegativePointColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @NegativePointColor.setter
+    def NegativePointColor(self, value:'Color'):
+        GetDllLibXls().SparklineGroup_set_NegativePointColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_NegativePointColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def SparklineColor(self)->'Color':
+        """
+    <summary>
+        Gets and sets the color of the sparklines in the sparkline group. 
+    </summary>
+        """
+        GetDllLibXls().SparklineGroup_get_SparklineColor.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_get_SparklineColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SparklineGroup_get_SparklineColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @SparklineColor.setter
+    def SparklineColor(self, value:'Color'):
+        GetDllLibXls().SparklineGroup_set_SparklineColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().SparklineGroup_set_SparklineColor, self.Ptr, value.Ptr)
+
+
+    def Add(self)->'SparklineCollection':
+        """
+
+        """
+        GetDllLibXls().SparklineGroup_Add.argtypes=[c_void_p]
+        GetDllLibXls().SparklineGroup_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SparklineGroup_Add, self.Ptr)
+        ret = None if intPtr==None else SparklineCollection(intPtr)
+        return ret
+
+
+
+    def get_Item(self ,index:int)->'SparklineCollection':
+        """
+
+        """
+        
+        GetDllLibXls().SparklineGroup_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().SparklineGroup_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SparklineGroup_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else SparklineCollection(intPtr)
+        return ret
+
+

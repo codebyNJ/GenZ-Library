@@ -1,0 +1,2694 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IWorksheet (  ITabSheet, IExcelApplication) :
+    """
+
+    """
+
+    @abc.abstractmethod
+    def Protect(self ,password:str):
+        """
+    <summary>
+         Protects worksheet's content with password.
+        <example>The following code illustrates how to protect the sheet except select lock/unlock cells:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Protects the first worksheet's content with password
+        worksheet.Protect("123456");
+        //Save to file
+        workbook.SaveToFile("Protect.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="password">Password to protect with.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Unprotect(self ,password:str):
+        """
+    <summary>
+        Unprotects worksheet's content with password.
+    </summary>
+    <param name="password">Password to unprotect.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def AutoFitRow(self ,rowIndex:int):
+        """
+    <summary>
+         Autofits specified row.
+        <example>The following code illustrates how to Auto-fit the row:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet["C2"].Value = "Sample text";
+        //Set Style
+        CellStyle style = workbook.Styles.Add("CustomStyle");
+        IFont font = style.Font;
+        font.Size = 18;
+        worksheet["C2"].Style = style;
+        //Set auto fit
+        worksheet.AutoFitRow(2);
+        //Save to file
+        workbook.SaveToFile("AutoFitRow.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="rowIndex">One-based row index.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def AutoFitColumn(self ,columnIndex:int):
+        """
+    <summary>
+         Autofits specified column.
+        <example>The following code illustrates how to Auto-fit the column:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet["A1"].Text = "Sample text in cell";
+        //Set auto fit
+        worksheet.AutoFitColumn(1);
+        //Save to file
+        workbook.SaveToFile("AutoFitColumn.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="columnIndex">One-based column index.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Replace(self ,oldValue:str,newValue:str):
+        """
+    <summary>
+         Replaces specified string by specified value.
+        <example>The following code snippet illustrates how to replace the string with another string:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Replace the oldValue by newValue
+        string oldValue = "Find";
+        string newValue = "NewValue";
+        worksheet.Replace(oldValue, newValue);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValue">New value for the range with specified string.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Replace(self ,oldValue:str,newValue:float):
+        """
+    <summary>
+         Replaces specified string by specified value.
+        <example>The following code snippet illustrates how to replace the string with double:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Replace the oldValue by double
+        string oldValue = "Ten";
+        worksheet.Replace(oldValue, 10.0);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValue">New value for the range with specified string.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Replace(self ,oldValue:str,newValue:DateTime):
+        """
+    <summary>
+         Replaces specified string by specified value.
+        <example>The following code illustrates how to replace the string value with datetime:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Replace the oldValue by dateTime
+        string oldValue = "Find";
+        DateTime dateTime = DateTime.Now;
+        worksheet.Replace(oldValue, dateTime);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValue">New value for the range with specified string.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Replace(self ,oldValue:str,newValues:List[str],isVertical:bool):
+        """
+    <summary>
+         Replaces specified string by data from array.
+        <example>The following code snippet illustrates how to replace the string with array of string values:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Replace the oldValue by array of string values
+        string oldValue = "Find";
+        string[] newValues = { "X values", "Y values" };
+        worksheet.Replace(oldValue, newValues , true);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValues">Array of new values.</param>
+    <param name="isVertical">Indicates whether array should be inserted vertically.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Replace(self ,oldValue:str,newValues:List[int],isVertical:bool):
+        """
+    <summary>
+         Replaces specified string by data from array.
+        <example>The following code snippet illustrates how to replace the string with array of int values:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Replace the oldValue by array of int values
+        string oldValue = "Find";
+        int[] newValues = { 1, 2 };
+        worksheet.Replace(oldValue, newValues, true);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValues">Array of new values.</param>
+    <param name="isVertical">Indicates whether array should be inserted vertically.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Replace(self ,oldValue:str,newValues:List[float],isVertical:bool):
+        """
+    <summary>
+         Replaces specified string by data from array.
+        <example>The following code snippet illustrates how to replace the string with array of double values:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Replace the oldValue by array of double values
+        string oldValue = "Find";
+        double[] newValues = { 1.0, 2.0 };
+        worksheet.Replace(oldValue, newValues, true);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValues">Array of new values.</param>
+    <param name="isVertical">Indicates whether array should be inserted vertically.</param>
+        """
+        pass
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def Replace(self ,oldValue:str,newValues:'DataTable',isFieldNamesShown:bool):
+#        """
+#    <summary>
+#         Replaces specified string by data table values.
+#        <example>The following code snippet illustrates how to replace the string value with data table:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Replace the oldValue by data table
+#        string oldValue = "Find";
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("Dosage", typeof(int));
+#        table.Rows.Add(1);
+#        worksheet.Replace(oldValue, table, true);
+#        //Save to file
+#        workbook.SaveToFile("Replace.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="oldValue">String value to replace.</param>
+#    <param name="newValues">Data table with new data.</param>
+#    <param name="isFieldNamesShown">Indicates wheter field name must be shown.</param>
+#        """
+#        pass
+#
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def Replace(self ,oldValue:str,newValues:'DataColumn',isFieldNamesShown:bool):
+#        """
+#    <summary>
+#         Replaces specified string by data column values.
+#        <example>The following code snippet illustrates how to replace the string value with data column:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Replace the oldValue by data column
+#        string oldValue = "Find";
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("Dosage", typeof(int));
+#        table.Rows.Add(1);
+#        System.Data.DataColumn dataColumn = table.Columns[0];
+#        worksheet.Replace(oldValue, dataColumn, true);
+#        //Save to file
+#        workbook.SaveToFile("Replace.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="oldValue">String value to replace.</param>
+#    <param name="newValues">Data table with new data.</param>
+#    <param name="isFieldNamesShown">Indicates whether field name must be shown.</param>
+#        """
+#        pass
+#
+
+
+    @abc.abstractmethod
+    def Remove(self):
+        """
+    <summary>
+        Removes worksheet from parent worksheets collection.
+    </summary>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def MoveWorksheet(self ,iNewIndex:int):
+        """
+    <summary>
+        Moves worksheet.
+    </summary>
+    <param name="iNewIndex">New index of the worksheet.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def ColumnWidthToPixels(self ,widthInChars:float)->int:
+        """
+    <summary>
+        Converts column width into pixels.
+    </summary>
+    <param name="widthInChars">Width in characters.</param>
+    <returns>Width in pixels</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def PixelsToColumnWidth(self ,pixels:float)->float:
+        """
+    <summary>
+        Converts pixels into column width (in characters).
+    </summary>
+    <param name="pixels">Width in pixels</param>
+    <returns>Widht in characters.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetColumnWidthInPixels(self ,columnIndex:int,value:int):
+        """
+    <summary>
+         Sets column width in pixels.
+        <example>The following code illustrates how to set width for a column:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set column width
+        worksheet.SetColumnWidthInPixels(2, 160);
+        //Save to file
+        workbook.SaveToFile("SetColumnWidthInPixels.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="columnIndex">One-based column index.</param>
+    <param name="value">Width to set.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetRowHeightPixels(self ,Row:int,value:float):
+        """
+    <summary>
+         Sets row height in pixels.
+        <example>The following code illustrates how to set height for a row:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set row height
+        worksheet.SetRowHeightPixels(3, 150);
+        //Save to file
+        workbook.SaveToFile("SetRowHeightPixels.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="Row">One-based row index to set height.</param>
+    <param name="value">Value in pixels to set.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetColumnWidthPixels(self ,Column:int)->int:
+        """
+    <summary>
+         Returns width in pixels from ColumnInfoRecord if there is corresponding ColumnInfoRecord
+             or StandardWidth if not.
+        <example>The following code illustrates how to get the column width for a particular column:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet["A1"].Text = "Sample text in cell";
+        //Set auto fit
+        worksheet.AutoFitColumn(1);
+        //Get column width
+        Console.WriteLine(worksheet.GetColumnWidthPixels(1));
+        //Save to file
+        workbook.SaveToFile("UsedRange.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="Column">One-based index of the column.</param>
+    <returns>Width in pixels of the specified column.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetRowHeightPixels(self ,Row:int)->int:
+        """
+    <summary>
+         Returns height from RowRecord if there is a corresponding RowRecord.
+             Otherwise returns StandardHeight. 
+        <example>The following code illustrates how to get the row height for a particular row:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet["C2"].Text = "Sample text";
+        worksheet["C2"].Style.Font.Size = 18;
+        //Set auto fit
+        worksheet.AutoFitRow(2);
+        //Get row height
+        Console.WriteLine(worksheet.GetRowHeightPixels(2));
+        //Save to file
+        workbook.SaveToFile("UsedRange.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="Row">One-bazed index of the row.</param>
+    <returns>
+             Height in pixels from RowRecord if there is corresponding RowRecord.
+             Otherwise returns StandardHeight.
+             </returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SaveToFile(self ,fileName:str,separator:str):
+        """
+    <summary>
+        Save tabsheet using separator.
+    </summary>
+<example>The following code illustrates how to saves the worksheet in a different file with separator:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Save to file
+        worksheet.SaveToFile("SaveToFile.csv" , ",");</para></code></example>
+    <param name="fileName">File to save.</param>
+    <param name="separator">Current seperator.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SaveToStream(self ,stream:'Stream',separator:str):
+        """
+    <summary>
+        Save tabsheet using separator.
+            <example>The following code illustrates how to saves the worksheet as stream with separator:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create stream
+        Stream stream = new MemoryStream();
+        //Save to stream
+        worksheet.SaveToStream(stream , ",");
+        </code>
+        </example>
+    </summary>
+    <param name="stream">Stream to save. </param>
+    <param name="separator">Current seperator.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SetDefaultColumnStyle(self ,iColumnIndex:int,defaultStyle:IStyle):
+        """
+    <summary>
+         Sets by column index default style for column.
+        <example>The following code illustrates how to set the default style for a column:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create style
+        CellStyle style = workbook.Styles.Add("CustomStyle");
+        //Set Color
+        style.Color = Color.Red;
+        //Set default style
+        worksheet.SetDefaultColumnStyle(2, style);
+        //Save to file
+        workbook.SaveToFile("SetDefaultColumnStyle.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="iColumnIndex">Column index.</param>
+    <param name="defaultStyle">Default style.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SetDefaultColumnStyle(self ,iStartColumnIndex:int,iEndColumnIndex:int,defaultStyle:IStyle):
+        """
+    <summary>
+         Sets by column index default style for column.
+        <example>The following code illustrates how to set the default style for columns:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create style
+        CellStyle style = workbook.Styles.Add("CustomStyle");
+        //Set Color
+        style.Color = Color.Red;
+        //Set default style
+        worksheet.SetDefaultColumnStyle(2, 5, style);
+        //Save to file
+        workbook.SaveToFile("SetDefaultColumnStyle.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="iStartColumnIndex">Start column index.</param>
+    <param name="iEndColumnIndex">End column index.</param>
+    <param name="defaultStyle">Default style.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SetDefaultRowStyle(self ,rowIndex:int,defaultStyle:IStyle):
+        """
+    <summary>
+         Sets by column index default style for row.
+        <example>The following code illustrates how to set the default style for a row:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create style
+        CellStyle style = workbook.Styles.Add("CustomStyle");
+        //Set Color
+        style.Color = Color.Red;
+        //Set default style
+        worksheet.SetDefaultRowStyle(2, style);
+        //Save to file
+        workbook.SaveToFile("SetDefaultRowStyle.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="rowIndex">Row index.</param>
+    <param name="defaultStyle">Default style.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SetDefaultRowStyle(self ,iStartRowIndex:int,iEndRowIndex:int,defaultStyle:IStyle):
+        """
+    <summary>
+         Sets by column index default style for row.
+        <example>The following code illustrates how to set the default style for rows:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create style
+        CellStyle style = workbook.Styles.Add("CustomStyle");
+        //Set Color
+        style.Color = Color.Red;
+        //Set default style
+        worksheet.SetDefaultRowStyle(2, 5, style);
+        //Save to file
+        workbook.SaveToFile("SetDefaultRowStyle.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="iStartRowIndex">Start row index.</param>
+    <param name="iEndRowIndex">End row index.</param>
+    <param name="defaultStyle">Default style.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetDefaultColumnStyle(self ,iColumnIndex:int)->'IStyle':
+        """
+    <summary>
+         Returns default column style.
+        <example>The following code illustrates how to get default column style:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create style
+        CellStyle style = workbook.Styles.Add("CustomStyle");
+        //Set Color
+        style.Color = Color.Red;
+        //Set default style
+        worksheet.SetDefaultColumnStyle(2,style);
+        //Get default style
+        CellStyle defaultStyle = worksheet.GetDefaultColumnStyle(2);
+        //Set color
+        defaultStyle.Color = Color.Blue;
+        worksheet.SetDefaultColumnStyle(3, defaultStyle);
+        //Save to file
+        workbook.SaveToFile("GetDefaultColumnStyle.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="iColumnIndex">Column index.</param>
+    <returns>Default column style or null if style wasn't set.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetDefaultRowStyle(self ,rowIndex:int)->'IStyle':
+        """
+    <summary>
+         Returns default row style.
+        <example>The following code illustrates how to get default row style:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create style
+        CellStyle style = workbook.Styles.Add("CustomStyle");
+        //Set Color
+        style.Color = Color.Red;
+        //Set default style
+        worksheet.SetDefaultRowStyle(2,style);
+        //Get default style
+        CellStyle defaultStyle = worksheet.GetDefaultRowStyle(2);
+        //Set color
+        defaultStyle.Color = Color.Blue;
+        worksheet.SetDefaultRowStyle(3, defaultStyle);
+        //Save to file
+        workbook.SaveToFile("GetDefaultColumnStyle.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="rowIndex">Row index.</param>
+    <returns>Default row style or null if style wasn't set.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetValue(self ,iRow:int,iColumn:int,value:str):
+        """
+    <summary>
+        Sets value in the specified cell.
+    </summary>
+    <param name="iRow">One-based row index  of the cell to set value.</param>
+    <param name="iColumn">One-based column index of the cell to set value.</param>
+    <param name="value">Value to set.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetNumber(self ,iRow:int,iColumn:int,value:float):
+        """
+    <summary>
+        Sets value in the specified cell.
+    </summary>
+    <param name="iRow">One-based row index  of the cell to set value.</param>
+    <param name="iColumn">One-based column index of the cell to set value.</param>
+    <param name="value">Value to set.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetBoolean(self ,iRow:int,iColumn:int,value:bool):
+        """
+    <summary>
+        Sets value in the specified cell.
+    </summary>
+    <param name="iRow">One-based row index  of the cell to set value.</param>
+    <param name="iColumn">One-based column index of the cell to set value.</param>
+    <param name="value">Value to set.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetText(self ,iRow:int,iColumn:int,value:str):
+        """
+    <summary>
+        Sets text in the specified cell.
+    </summary>
+    <param name="iRow">One-based row index  of the cell to set value.</param>
+    <param name="iColumn">One-based column index of the cell to set value.</param>
+    <param name="value">Text to set.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetFormula(self ,iRow:int,iColumn:int,value:str):
+        """
+    <summary>
+        Sets formula in the specified cell.
+    </summary>
+    <param name="iRow">One-based row index  of the cell to set value.</param>
+    <param name="iColumn">One-based column index of the cell to set value.</param>
+    <param name="value">Formula to set.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetError(self ,iRow:int,iColumn:int,value:str):
+        """
+    <summary>
+        Sets error in the specified cell.
+    </summary>
+    <param name="iRow">One-based row index  of the cell to set value.</param>
+    <param name="iColumn">One-based column index of the cell to set value.</param>
+    <param name="value">Error to set.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetBlank(self ,iRow:int,iColumn:int):
+        """
+    <summary>
+        Sets blank in specified cell.
+    </summary>
+    <param name="iRow">One-based row index  of the cell to set value.</param>
+    <param name="iColumn">One-based column index of the cell to set value.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetFormulaNumberValue(self ,iRow:int,iColumn:int,value:float):
+        """
+    <summary>
+        Sets formula number value.
+    </summary>
+    <param name="iRow">One based row index.</param>
+    <param name="iColumn">One based column index.</param>
+    <param name="value">Represents formula number value for set.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetFormulaErrorValue(self ,iRow:int,iColumn:int,value:str):
+        """
+    <summary>
+        Sets formula error value.
+    </summary>
+    <param name="iRow">One based row index.</param>
+    <param name="iColumn">One based column index.</param>
+    <param name="value">Represents formula error value for set.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetFormulaBoolValue(self ,iRow:int,iColumn:int,value:bool):
+        """
+    <summary>
+        Sets formula bool value.
+    </summary>
+    <param name="iRow">One based row index.</param>
+    <param name="iColumn">One based column index.</param>
+    <param name="value">Represents formula bool value for set.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetFormulaStringValue(self ,iRow:int,iColumn:int,value:str):
+        """
+    <summary>
+        Sets formula string value.
+    </summary>
+    <param name="iRow">One based row index.</param>
+    <param name="iColumn">One based column index.</param>
+    <param name="value">Represents formula string value for set.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetText(self ,row:int,column:int)->str:
+        """
+    <summary>
+        Returns string value corresponding to the cell.
+    </summary>
+    <param name="row">One-based row index of the cell to get value from.</param>
+    <param name="column">One-based column index of the cell to get value from.</param>
+    <returns>String contained by the cell.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetNumber(self ,row:int,column:int)->float:
+        """
+    <summary>
+        Returns number value corresponding to the cell.
+    </summary>
+    <param name="row">One-based row index of the cell to get value from.</param>
+    <param name="column">One-based column index of the cell to get value from.</param>
+    <returns>Number contained by the cell.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetFormula(self ,row:int,column:int,bR1C1:bool)->str:
+        """
+    <summary>
+        Returns formula value corresponding to the cell.
+    </summary>
+    <param name="row">One-based row index of the cell to get value from.</param>
+    <param name="column">One-based column index of the cell to get value from.</param>
+    <param name="bR1C1">Indicates whether R1C1 notation should be used.</param>
+    <returns>Formula contained by the cell.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetError(self ,row:int,column:int)->str:
+        """
+    <summary>
+        Gets error value from cell.
+    </summary>
+    <param name="row">Row index.</param>
+    <param name="column">Column index.</param>
+    <returns>Returns error value or null.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetBoolean(self ,row:int,column:int)->bool:
+        """
+    <summary>
+        Gets bool value from cell.
+    </summary>
+    <param name="row">Represents row index.</param>
+    <param name="column">Represents column index.</param>
+    <returns>Returns found bool value. If cannot found returns false.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetFormulaBoolValue(self ,row:int,column:int)->bool:
+        """
+    <summary>
+        Gets formula bool value from cell.
+    </summary>
+    <param name="row">Represents row index.</param>
+    <param name="column">Represents column index.</param>
+    <returns>Returns found bool value. If cannot found returns false.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetFormulaErrorValue(self ,row:int,column:int)->str:
+        """
+    <summary>
+        Gets formula error value from cell.
+    </summary>
+    <param name="row">Row index.</param>
+    <param name="column">Column index.</param>
+    <returns>Returns error value or null.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetFormulaNumberValue(self ,row:int,column:int)->float:
+        """
+    <summary>
+        Returns formula number value corresponding to the cell.
+    </summary>
+    <param name="row">One-based row index of the cell to get value from.</param>
+    <param name="column">One-based column index of the cell to get value from.</param>
+    <returns>Number contained by the cell.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetFormulaStringValue(self ,row:int,column:int)->str:
+        """
+    <summary>
+        Returns formula string value corresponding to the cell.
+    </summary>
+    <param name="row">One-based row index of the cell to get value from.</param>
+    <param name="column">One-based column index of the cell to get value from.</param>
+    <returns>String contained by the cell.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SaveToImage(self ,firstRow:int,firstColumn:int,lastRow:int,lastColumn:int)->Stream:
+        """
+    <summary>
+        Converts range into image (Bitmap).
+    </summary>
+    <param name="firstRow">One-based index of the first row to convert.</param>
+    <param name="firstColumn">One-based index of the first column to convert.</param>
+    <param name="lastRow">One-based index of the last row to convert.</param>
+    <param name="lastColumn">One-based index of the last column to convert.</param>
+    <returns></returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SaveToImage(self ,stream:Stream,firstRow:int,firstColumn:int,lastRow:int,lastColumn:int,imageType:ImageType)->Stream:
+        """
+    <summary>
+         Converts range into image.
+        <example>The following code illustrates how to convert the specified range into image with the specified type:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Creat stream
+        Stream stream = new MemoryStream();
+        //Save to image
+        System.Drawing.Image image = worksheet.SaveToImage(stream,1, 1, 10, 20, Spire.Xls.ImageType.Bitmap);
+        image.Save("Sample.png", System.Drawing.Imaging.ImageFormat.Png);
+        </code>
+        </example>
+    </summary>
+    <param name="firstRow">One-based index of the first row to convert.</param>
+    <param name="firstColumn">One-based index of the first column to convert.</param>
+    <param name="lastRow">One-based index of the last row to convert.</param>
+    <param name="lastColumn">One-based index of the last column to convert.</param>
+    <param name="imageType">Type of the image to create.</param>
+    <param name="stream">Output stream. It is ignored if null.</param>
+    <returns>Created image.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SaveToHtml(self ,filename:str):
+        """
+    <summary>
+        Saves worksheet with specified filename.
+            <example>The following code snippets illustrates how to save as html to the specified file name:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Save to HTML file
+        worksheet.SaveToHtml("Output.html");
+        </code>
+        </example>
+    </summary>
+    <param name="filename">File to save.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SaveToHtml(self ,stream:Stream):
+        """
+    <summary>
+        Save to HTML stream.
+            <example>The following code snippets illustrates how to save as html as stream:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Creat stream
+        Stream stream = new MemoryStream();
+        //Save to HTML stream
+        worksheet.SaveToHtml(stream);
+        </code>
+        </example>
+    </summary>
+    <param name="stream">Stream object.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SaveToHtml(self ,filename:str,saveOptions:HTMLOptions):
+        """
+    <summary>
+        Saves as HTML.
+            <example>The following code snippets illustrates how to save as html to the specified file name and save option:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Save to HTML file
+        worksheet.SaveToHtml("Sample.html" , Spire.Xls.Core.Spreadsheet.HTMLOptions.Default);
+        </code>
+        </example>
+    </summary>
+    <param name="filename">The filename.</param>
+    <param name="saveOptions">The option.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SaveToHtml(self ,stream:Stream,saveOptions:HTMLOptions):
+        """
+    <summary>
+        Saves work sheet to HTML.
+            <example>The following code snippets illustrates how to save as html as stream with Save option:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Creat stream
+        Stream stream = new MemoryStream();
+        //Save to HTML stream
+        worksheet.SaveToHtml(stream, Spire.Xls.Core.Spreadsheet.HTMLOptions.Default);
+        </code>
+        </example>
+    </summary>
+    <param name="stream">Stream to save.</param>
+    <param name="saveOptions">Save Options.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SaveToImage(self ,outputStream:Stream,firstRow:int,firstColumn:int,lastRow:int,lastColumn:int,emfType:EmfType)->Stream:
+        """
+    <summary>
+        Converts range into metafile image.
+    </summary>
+    <param name="firstRow">One-based index of the first row to convert.</param>
+    <param name="firstColumn">One-based index of the first column to convert.</param>
+    <param name="lastRow">One-based index of the last row to convert.</param>
+    <param name="lastColumn">One-based index of the last column to convert.</param>
+    <param name="emfType">Metafile EmfType.</param>
+    <param name="outputStream">Output stream. It is ignored if null.</param>
+    <returns>Created image.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SaveToImage(self ,outputStream:Stream,firstRow:int,firstColumn:int,lastRow:int,lastColumn:int,imageType:ImageType,emfType:EmfType)->Stream:
+        """
+    <summary>
+        Converts range into image.
+    </summary>
+    <param name="firstRow">One-based index of the first row to convert.</param>
+    <param name="firstColumn">One-based index of the first column to convert.</param>
+    <param name="lastRow">One-based index of the last row to convert.</param>
+    <param name="lastColumn">One-based index of the last column to convert.</param>
+    <param name="imageType">Type of the image to create.</param>
+    <param name="outputStream">Output stream. It is ignored if null.</param>
+    <param name="emfType">Metafile EmfType.</param>
+    <returns>Created image.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def add_CellValueChanged(self ,value:'CellValueChangedEventHandler'):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def remove_CellValueChanged(self ,value:'CellValueChangedEventHandler'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def AutoFilters(self)->'IAutoFilters':
+        """
+    <summary>
+        Returns collection of worksheet's autofilters. Read-only.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Cells(self)->'ListXlsRanges':
+        """
+    <summary>
+        Returns all used cells in the worksheet. Read-only.
+    </summary>
+        """
+        pass
+
+
+
+    @property
+    @abc.abstractmethod
+    def DisplayPageBreaks(self)->bool:
+        """
+    <summary>
+        True if page breaks (both automatic and manual) on the specified
+            worksheet are displayed. Read / write Boolean.
+    </summary>
+        """
+        pass
+
+
+    @DisplayPageBreaks.setter
+    @abc.abstractmethod
+    def DisplayPageBreaks(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Index(self)->int:
+        """
+    <summary>
+        Returns the index number of the object within the collection of
+            similar objects. Read-only.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def MergedCells(self)->'ListXlsRanges':
+        """
+    <summary>
+         Returns all merged ranges. Read-only.
+        <example>The following code illustrates how to get the merged ranges:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Merge cells
+        worksheet["C2:D2"].Merge();
+        worksheet["F3:G3"].Merge();
+        //Get merged ranges
+        IXLSRange[] mergedRanges = worksheet.MergedCells;
+        //Get merged range count . Output will be 2
+        Console.Write(mergedRanges.Length);
+        //Save to file
+        workbook.SaveToFile("MergedCells.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+
+    @property
+
+    @abc.abstractmethod
+    def Names(self)->'INameRanges':
+        """
+    <summary>
+        For a Worksheet object, returns a Names collection that represents
+            all the worksheet-specific names (names defined with the "WorksheetName!"
+            prefix). Read-only Names object.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def CodeName(self)->str:
+        """
+    <summary>
+        Name that is used by macros to access the workbook items.
+    </summary>
+        """
+        pass
+
+
+    @CodeName.setter
+    @abc.abstractmethod
+    def CodeName(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PageSetup(self)->'IPageSetup':
+        """
+    <summary>
+        Returns a PageSetup object that contains all the page setup settings
+            for the specified object. Read-only.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def AllocatedRange(self)->'IXLSRange':
+        """
+    <summary>
+        Returns a Range object that represents a cell or a range of cells.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Rows(self)->'ListXlsRanges':
+        """
+    <summary>
+        For a Worksheet object, returns an array of Range objects that represents
+            all the rows on the specified worksheet. Read-only Range object.
+    </summary>
+        """
+        pass
+
+
+
+    @property
+    @abc.abstractmethod
+    def Columns(self)->'ListXlsRanges':
+        """
+    <summary>
+        For a Worksheet object, returns an array of Range objects that represents
+            all the columns on the specified worksheet. Read-only Range object.
+    </summary>
+        """
+        pass
+
+
+
+    @property
+    @abc.abstractmethod
+    def DefaultRowHeight(self)->float:
+        """
+    <summary>
+         Returns the standard (default) height of all the rows in the worksheet,
+             in points. Read/write Double.
+        <example>The following code illustrates how to get the default row height:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Get row height
+        Console.Write(worksheet.DefaultRowHeight);
+        //Set default height
+        worksheet.DefaultRowHeight = 40;
+        //Save to file
+        workbook.SaveToFile("DefaultRowHeight.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @DefaultRowHeight.setter
+    @abc.abstractmethod
+    def DefaultRowHeight(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def DefaultColumnWidth(self)->float:
+        """
+    <summary>
+         Returns or sets the standard (default) width of all the columns in the
+             worksheet. Read/write Double.
+        <example>The following code illustrates how to get the default column width:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Get column width
+        Console.Write(worksheet.DefaultColumnWidth);
+        //Set default width
+        worksheet.DefaultColumnWidth = 40;
+        //Save to file
+        workbook.SaveToFile("DefaultColumnWidth.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @DefaultColumnWidth.setter
+    @abc.abstractmethod
+    def DefaultColumnWidth(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Type(self)->'ExcelSheetType':
+        """
+    <summary>
+        Returns or sets the worksheet type. Read-only ExcelSheetType.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Range(self)->'XlsRange':
+        """
+    <summary>
+         Returns a Range object that represents the used range on the
+             specified worksheet. Read-only.            
+        <example>The following code illustrates how to get used range on the specified worksheet:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet["B2"].Text = "Text";
+        //Set Color
+        worksheet["J3"].Style.Color = Color.Red;
+        //Get used range . Output will be B2:J3
+        Console.Write(worksheet.Range.RangeAddressLocal);
+        //Save to file
+        workbook.SaveToFile("UsedRange.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Zoom(self)->int:
+        """
+    <summary>
+         Zoom factor of document. Value must be in range from 10 till 400.
+        <example>The following code illustrates how to set zoom level of the sheet:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set zoom
+        worksheet.Zoom = 200;
+        //Save to file
+        workbook.SaveToFile("Zoom.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @Zoom.setter
+    @abc.abstractmethod
+    def Zoom(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def VerticalSplit(self)->int:
+        """
+    <summary>
+        Gets or sets the position of vertical split in the worksheet.
+    </summary>
+<remarks>
+            Position of the vertical split (px, 0 = No vertical split):
+            Unfrozen pane: Width of the left pane(s) (in twips = 1/20 of a point)
+            Frozen pane: Number of visible columns in left pane(s)
+            </remarks>
+        """
+        pass
+
+
+    @VerticalSplit.setter
+    @abc.abstractmethod
+    def VerticalSplit(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HorizontalSplit(self)->int:
+        """
+    <summary>
+        Gets or sets the position of horizontal split in the worksheet.
+    </summary>
+<remarks>
+            Position of the horizontal split (by, 0 = No horizontal split):
+            Unfrozen pane: Height of the top pane(s) (in twips = 1/20 of a point)
+            Frozen pane: Number of visible rows in top pane(s)
+            </remarks>
+        """
+        pass
+
+
+    @HorizontalSplit.setter
+    @abc.abstractmethod
+    def HorizontalSplit(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def FirstVisibleRow(self)->int:
+        """
+    <summary>
+        Index to first visible row in bottom pane(s).
+    </summary>
+        """
+        pass
+
+
+    @FirstVisibleRow.setter
+    @abc.abstractmethod
+    def FirstVisibleRow(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def FirstVisibleColumn(self)->int:
+        """
+    <summary>
+        Index to first visible column in right pane(s).
+    </summary>
+        """
+        pass
+
+
+    @FirstVisibleColumn.setter
+    @abc.abstractmethod
+    def FirstVisibleColumn(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ActivePane(self)->int:
+        """
+    <summary>
+        Identifier of pane with active cell cursor.
+    </summary>
+        """
+        pass
+
+
+    @ActivePane.setter
+    @abc.abstractmethod
+    def ActivePane(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsDisplayZeros(self)->bool:
+        """
+    <summary>
+        True if zero values to be displayed
+            False otherwise.
+    </summary>
+        """
+        pass
+
+
+    @IsDisplayZeros.setter
+    @abc.abstractmethod
+    def IsDisplayZeros(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def GridLinesVisible(self)->bool:
+        """
+    <summary>
+         True if gridlines are visible;
+             False otherwise.
+        <example>The following code illustrates how to set visibility for grid lines:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set grid line visibility
+        worksheet.GridLinesVisible = false;
+        //Save to file
+        workbook.SaveToFile("GridLinesVisible.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @GridLinesVisible.setter
+    @abc.abstractmethod
+    def GridLinesVisible(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def GridLineColor(self)->'ExcelColors':
+        """
+    <summary>
+         Gets / sets Grid line color.
+        <example>The following code illustrates how to set the grid line color:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set grid lines color
+        worksheet.GridLineColor = ExcelColors.Red;
+        //Save to file
+        workbook.SaveToFile("GridLineColor.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @GridLineColor.setter
+    @abc.abstractmethod
+    def GridLineColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def RowColumnHeadersVisible(self)->bool:
+        """
+    <summary>
+        True if row and column headers are visible;
+            False otherwise.
+    </summary>
+        """
+        pass
+
+
+    @RowColumnHeadersVisible.setter
+    @abc.abstractmethod
+    def RowColumnHeadersVisible(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def FormulasVisible(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @FormulasVisible.setter
+    @abc.abstractmethod
+    def FormulasVisible(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def VPageBreaks(self)->'IVPageBreaks':
+        """
+    <summary>
+        Returns a VPageBreaks collection that represents the vertical page
+            breaks on the sheet. Read-only.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def HPageBreaks(self)->'IHPageBreaks':
+        """
+    <summary>
+        Returns an HPageBreaks collection that represents the horizontal
+            page breaks on the sheet. Read-only.
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsStringsPreserved(self)->bool:
+        """
+    <summary>
+        Indicates if all values in the workbook are preserved as strings.
+    </summary>
+        """
+        pass
+
+
+    @IsStringsPreserved.setter
+    @abc.abstractmethod
+    def IsStringsPreserved(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Comments(self)->'IComments':
+        """
+    <summary>
+         Comments collection.            
+        <example>The following code illustrates how to access the comments collection in the worksheet:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Adding comments to a cell.
+        ICommentShape comment1 = worksheet.Range["A1"].AddComment();
+        ICommentShape comment2 = worksheet.Range["B1"].AddComment();
+        //Set comment text
+        comment1.Text = "Comment1";
+        comment2.Text = "Comment2";
+        //Check count
+        Console.Write(worksheet.Comments.Count);
+        //Save to file
+        workbook.SaveToFile("Comments.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,row:int,column:int)->IXLSRange:
+        """
+    <summary>
+        Gets / sets cell by row and index.
+    </summary>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,row:int,column:int,lastRow:int,lastColumn:int)->IXLSRange:
+        """
+    <summary>
+        Get cells range.
+    </summary>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,name:str)->IXLSRange:
+        """
+    <summary>
+        Get cell range.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def HyperLinks(self)->'IHyperLinks':
+        """
+    <summary>
+        Collection of all worksheet's hyperlinks.
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def UseRangesCache(self)->bool:
+        """
+    <summary>
+        Indicates whether all created range objects should be cached. Default value is false.
+    </summary>
+        """
+        pass
+
+
+    @UseRangesCache.setter
+    @abc.abstractmethod
+    def UseRangesCache(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def TopVisibleRow(self)->int:
+        """
+    <summary>
+         Gets/sets top visible row of the worksheet.
+        <example>The following code illustrates how to set the top visible row:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set top visible row
+        worksheet.TopVisibleRow = 5;
+        //Get top visible row
+        Console.Write(worksheet.TopVisibleRow);
+        //Save to file
+        workbook.SaveToFile("TopVisibleRow.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @TopVisibleRow.setter
+    @abc.abstractmethod
+    def TopVisibleRow(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def LeftVisibleColumn(self)->int:
+        """
+    <summary>
+         Gets/sets left visible column of the worksheet.
+        <example>The following code illustrates how to set the left visible column:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set left visible column
+        worksheet.LeftVisibleColumn = 3;
+        //Get left visible column
+        Console.Write(worksheet.LeftVisibleColumn);
+        //Save to file
+        workbook.SaveToFile("LeftVisibleColumn.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @LeftVisibleColumn.setter
+    @abc.abstractmethod
+    def LeftVisibleColumn(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PivotTables(self)->'PivotTablesCollection':
+        """
+    <summary>
+        Returns pivot table collection containing all pivot tables in the worksheet. Read-only.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ListObjects(self)->'IListObjects':
+        """
+    <summary>
+        Gets collection of all list objects in the worksheet.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def OleObjects(self)->'IOleObjects':
+        """
+    <summary>
+         Gets the OLE objects.
+        <example>The following code illustrates how to access the IListObjects collection in the worksheet to add a new IOleObject:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create image stream
+        System.Drawing.Image image = System.Drawing.Image.FromFile("image.png");
+        //Add ole object
+        IOleObject oleObject = worksheet.OleObjects.Add("Shapes.xlsx", image, OleLinkType.Embed);
+        //Save to file
+        workbook.SaveToFile("OLEObjects.xlsx");
+        </code>
+        </example>
+    </summary>
+<value>The OLE objects.</value>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HasOleObjects(self)->bool:
+        """
+    <summary>
+         Gets or sets a value indicating whether this instance is OLE object.
+        <example>The following code illustrates how to access the IListObjects collection in the worksheet to add a new IOleObject and check Ole Object:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create image stream
+        System.Drawing.Image image = System.Drawing.Image.FromFile("image.png");
+        //Add ole object
+        IOleObject oleObject = worksheet.OleObjects.Add("Shapes.xlsx", image, OleLinkType.Embed);
+        //Check HasOleObject.Output will be true.</para>
+                 Console.Write(worksheet.HasOleObjects);
+                 
+                 <para>//Save to file
+        workbook.SaveToFile("HasOleObjects.xlsx");
+        </code>
+        </example>
+    </summary>
+<value>
+  <c>true</c> if this instance is OLE object; otherwise, <c>false</c>.
+             </value>
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def CopyToClipboard(self):
+        """
+    <summary>
+        Copies worksheet into the clipboard.
+    </summary>
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Clear(self):
+        """
+    <summary>
+        Clears worksheet data. Removes all formatting and merges.
+    </summary>
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def ClearData(self):
+        """
+    <summary>
+        Clears worksheet. Only the data is removed from each cell.
+    </summary>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def CheckExistence(self ,iRow:int,iColumn:int)->bool:
+        """
+    <summary>
+         Indicates whether a cell was initialized or accessed by the user.
+        <example>The following code illustrates if the cells was initialized or accessed by the user:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet.Range["A1"].Text = "Hello";
+        //Check the cell.Output will be true.
+        Console.Write(worksheet.CheckExistence(1, 1));
+        //Save to file
+        workbook.SaveToFile("CheckExistence.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="iRow">One-based row index of the cell.</param>
+    <param name="iColumn">One-based column index of the cell.</param>
+    <returns>Value indicating whether the cell was initialized or accessed by the user.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def CreateNamedRanges(self ,namedRange:str,referRange:str,vertical:bool):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def IsColumnVisible(self ,columnIndex:int)->bool:
+        """
+    <summary>
+        Method check is Column with specifed index visible to end user or not.
+    </summary>
+    <param name="columnIndex">Index of column.</param>
+    <returns>True - column is visible; otherwise False.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def IsRowVisible(self ,rowIndex:int)->bool:
+        """
+    <summary>
+        Method check is Row with specifed index visible to user or not.
+    </summary>
+    <param name="rowIndex">Index of row visibility of each must be checked.</param>
+    <returns>True - row is visible to user, otherwise False.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def DeleteRow(self ,index:int):
+        """
+    <summary>
+        Removes specified row (with formulas update).
+    </summary>
+    <param name="index">One-based row index to remove.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def DeleteColumn(self ,index:int):
+        """
+    <summary>
+        Removes specified column (with formulas update).
+    </summary>
+    <param name="index">One-based column index to remove.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def InsertArray(self ,arrObject:List[SpireObject],firstRow:int,firstColumn:int,isVertical:bool)->int:
+        """
+    <summary>
+         Imports an array of objects into a worksheet.
+        <example>The following code illustrates how to Imports an array of Object into a worksheet with specified alignment:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Initialize the Object Array
+        object[] array = new object[4] { "Total Income", "Actual Expense", "Expected Expenses", "Profit" };
+        //Insert the Object Array to Sheet
+        worksheet.InsertArray(array, 1, 1, true);
+        //Save to file
+        workbook.SaveToFile(InsertArray.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="arrObject">Array to import.</param>
+    <param name="firstRow">Row of the first cell where array should be imported.</param>
+    <param name="firstColumn">Column of the first cell where array should be imported.</param>
+    <param name="isVertical">True if array should be imported vertically; False - horizontally.</param>
+    <returns>Number of imported elements.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def InsertArray(self ,arrString:List[str],firstRow:int,firstColumn:int,isVertical:bool)->int:
+        """
+    <summary>
+         Imports an array of strings into a worksheet.
+        <example>The following code illustrates how to Imports an array of String into a worksheet with specified row and column:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Initialize the string Array
+        string[] arrayString = new string[4] { "Total Income", "Actual Expense", "Expected Expenses", "Profit" };
+        //Insert the string Array to Sheet
+        worksheet.InsertArray(arrayString, 1, 1, true);
+        //Save to file
+        workbook.SaveToFile(InsertArray.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="arrString">Array to import.</param>
+    <param name="firstRow">Row of the first cell where array should be imported.</param>
+    <param name="firstColumn">Column of the first cell where array should be imported.</param>
+    <param name="isVertical">True if array should be imported vertically; False - horizontally.</param>
+    <returns>Number of imported elements.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def InsertArray(self ,arrInt:List[int],firstRow:int,firstColumn:int,isVertical:bool)->int:
+        """
+    <summary>
+         Imports an array of integers into a worksheet.
+        <example>The following code illustrates how to Imports an array of integer values into a worksheet with the specified row and column:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Initialize the integer Array
+        int[] arrayInt = new int[4] {1000, 2000, 3000, 4000};
+        //Insert the integer Array to Sheet
+        worksheet.InsertArray(arrayInt, 1, 1, true);
+        //Save to file
+        workbook.SaveToFile(InsertArray.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="arrInt">Array to import.</param>
+    <param name="firstRow">Row of the first cell where array should be imported.</param>
+    <param name="firstColumn">Column of the first cell where array should be imported.</param>
+    <param name="isVertical">True if array should be imported vertically; False - horizontally.</param>
+    <returns>Number of imported elements.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def InsertArray(self ,arrDouble:List[float],firstRow:int,firstColumn:int,isVertical:bool)->int:
+        """
+    <summary>
+         Imports an array of doubles into a worksheet.
+        <example>The following code illustrates how to Imports an array of Double values into a worksheet with the specified row and column:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Initialize the double Array
+        double[] arrayDouble = new double[4] { 344.0045, 345.0045, 346.0045, 347.0045 };
+        //Insert the double Array to Sheet
+        worksheet.InsertArray(arrayDouble, 1, 1, true);
+        //Save to file
+        workbook.SaveToFile(InsertArray.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="arrDouble">Array to import.</param>
+    <param name="firstRow">Row of the first cell where array should be imported.</param>
+    <param name="firstColumn">Column of the first cell where array should be imported.</param>
+    <param name="isVertical">True if array should be imported vertically; False - horizontally.</param>
+    <returns>Number of imported elements.</returns>
+        """
+        pass
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def InsertArray(self ,arrDateTime:'DateTime[]',firstRow:int,firstColumn:int,isVertical:bool)->int:
+#        """
+#    <summary>
+#         Imports an array of DateTimes into worksheet.
+#        <example>The following code illustrates how to Imports an array of DateTime values into a worksheet with the specified row and colum:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Initialize the DateTime Array
+#        DateTime[] arrayDate = new DateTime[4] { DateTime.Parse("06:45"), DateTime.Parse("08:30"), DateTime.Parse("09:40"), DateTime.Parse("10:30") };
+#        //Insert the DateTime Array to Sheet
+#        worksheet.InsertArray(arrayDate, 1, 1, true);
+#        //Save to file
+#        workbook.SaveToFile(InsertArray.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="arrDateTime">Array to import.</param>
+#    <param name="firstRow">Row of the first cell where array should be imported.</param>
+#    <param name="firstColumn">Column of the first cell where array should be imported.</param>
+#    <param name="isVertical">True if array should be imported vertically; False - horizontally.</param>
+#    <returns>Number of imported elements.</returns>
+#        """
+#        pass
+#
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def InsertArray(self ,arrObject:'Object[,]',firstRow:int,firstColumn:int)->int:
+#        """
+#
+#        """
+#        pass
+#
+
+
+#
+#    @abc.abstractmethod
+#    def InsertDataColumn(self ,dataColumn:'DataColumn',isFieldNameShown:bool,firstRow:int,firstColumn:int)->int:
+#        """
+#    <summary>
+#         Imports data from a DataColumn into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataColumn into a worksheet with the specified row and column:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Insert the DataColumn to worksheet
+#        System.Data.DataColumn column = table.Columns[2];
+#        worksheet.InsertDataColumn(column, true, 1, 1);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataColumn.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataColumn">DataColumn with desired data.</param>
+#    <param name="isFieldNameShown">True if column name must also be imported.</param>
+#    <param name="firstRow">Row of the first cell where DataTable should be imported.</param>
+#    <param name="firstColumn">Column of the first cell where DataTable should be imported.</param>
+#    <returns>Number of imported rows.</returns>
+#        """
+#        pass
+#
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def InsertDataTable(self ,dataTable:'DataTable',isFieldNameShown:bool,firstRow:int,firstColumn:int)->int:
+#        """
+#    <summary>
+#         Imports data from a DataTable into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataTable into a worksheet with the specified row and column:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Insert the DataTable to worksheet
+#        worksheet.InsertDataTable(table, true, 1, 1);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataTable.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataTable">DataTable with desired data.</param>
+#    <param name="isFieldNameShown">True if column names must also be imported.</param>
+#    <param name="firstRow">Row of the first cell where DataTable should be imported.</param>
+#    <param name="firstColumn">Column of the first cell where DataTable should be imported.</param>
+#    <returns>Number of imported rows.</returns>
+#        """
+#        pass
+#
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def InsertDataTable(self ,dataTable:'DataTable',isFieldNameShown:bool,firstRow:int,firstColumn:int,preserveTypes:bool)->int:
+#        """
+#    <summary>
+#         Imports data from a DataTable into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataTable into a worksheet with the specified row and column along with the preserve type:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Insert the DataTable to worksheet
+#        worksheet.InsertDataTable(table, true, 1, 1 , true);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataTable.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataTable">DataTable with desired data.</param>
+#    <param name="isFieldNameShown">True if column names must also be imported.</param>
+#    <param name="firstRow">Row of the first cell where DataTable should be imported.</param>
+#    <param name="firstColumn">Column of the first cell where DataTable should be imported.</param>
+#    <param name="preserveTypes">
+#             Indicates whether XlsIO should try to preserve types in DataTable,
+#             i.e. if it is set to False (default) and in DataTable we have in string column
+#             value that contains only numbers, it would be converted to number.
+#     </param>
+#    <returns>Number of imported rows.</returns>
+#        """
+#        pass
+#
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def InsertDataTable(self ,dataTable:'DataTable',isFieldNameShown:bool,firstRow:int,firstColumn:int,maxRows:int,maxColumns:int)->int:
+#        """
+#    <summary>
+#         Imports data from a DataTable into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataTable into a worksheet with the specified range:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Insert the DataTable to worksheet
+#        worksheet.InsertDataTable(table, true, 1 , 1 , 2 , 2);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataTable.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataTable">DataTable with desired data.</param>
+#    <param name="isFieldNameShown">True if column names must also be imported.</param>
+#    <param name="firstRow">Row of the first cell where DataTable should be imported.</param>
+#    <param name="firstColumn">Column of the first cell where DataTable should be imported.</param>
+#    <param name="maxRows">Maximum number of rows to import.</param>
+#    <param name="maxColumns">Maximum number of columns to import.</param>
+#    <returns>Number of imported rows.</returns>
+#        """
+#        pass
+#
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def InsertDataTable(self ,dataTable:'DataTable',isFieldNameShown:bool,firstRow:int,firstColumn:int,maxRows:int,maxColumns:int,preserveTypes:bool)->int:
+#        """
+#    <summary>
+#         Imports data from a DataTable into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataTable into a worksheet with specified range along with preserve type:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Insert the DataTable to worksheet
+#        worksheet.InsertDataTable(table, true, 1 , 1 , 2 , 2 , true);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataTable.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataTable">DataTable with desired data.</param>
+#    <param name="isFieldNameShown">True if column names must also be imported.</param>
+#    <param name="firstRow">Row of the first cell where DataTable should be imported.</param>
+#    <param name="firstColumn">Column of the first cell where DataTable should be imported.</param>
+#    <param name="maxRows">Maximum number of rows to import.</param>
+#    <param name="maxColumns">Maximum number of columns to import.</param>
+#    <param name="preserveTypes">
+#             Indicates whether XlsIO should try to preserve types in DataTable,
+#             i.e. if it is set to False (default) and in DataTable we have in string column
+#             value that contains only numbers, it would be converted to number.
+#     </param>
+#    <returns>Number of imported rows.</returns>
+#        """
+#        pass
+#
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def InsertDataView(self ,dataView:'DataView',isFieldNameShown:bool,firstRow:int,firstColumn:int)->int:
+#        """
+#    <summary>
+#         Imports data from a DataView into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataView into a worksheet with the specified row and column:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Initialize dataview of datatable
+#        System.Data.DataView view = table.DefaultView;
+#        //Import data from DataView
+#        worksheet.InsertDataView(view, true, 1, 1);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataView.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataView">DataView with desired data.</param>
+#    <param name="isFieldNameShown">TRUE if column names must also be imported.</param>
+#    <param name="firstRow">Row of the first cell where DataView should be imported.</param>
+#    <param name="firstColumn">Column of the first cell where DataView should be imported.</param>
+#    <returns>Number of imported rows.</returns>
+#        """
+#        pass
+#
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def InsertDataView(self ,dataView:'DataView',isFieldNameShown:bool,firstRow:int,firstColumn:int,bPreserveTypes:bool)->int:
+#        """
+#    <summary>
+#         Imports data from a DataView into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataView into a worksheet with the specified specified row and column along with preserve type:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Initialize dataview of datatable
+#        System.Data.DataView view = table.DefaultView;
+#        //Import data from DataView
+#        worksheet.InsertDataView(view, true, 1, 1 , true);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataView.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataView">DataView with desired data.</param>
+#    <param name="isFieldNameShown">TRUE if column names must also be imported.</param>
+#    <param name="firstRow">Row of the first cell where DataView should be imported.</param>
+#    <param name="firstColumn">Column of the first cell where DataView should be imported.</param>
+#    <param name="bPreserveTypes">Indicates whether to preserve column types.</param>
+#    <returns>Number of imported rows.</returns>
+#        """
+#        pass
+#
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def InsertDataView(self ,dataView:'DataView',isFieldNameShown:bool,firstRow:int,firstColumn:int,maxRows:int,maxColumns:int)->int:
+#        """
+#    <summary>
+#         Imports data from a DataView into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataView into a worksheet with the specified range:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Initialize dataview of datatable
+#        System.Data.DataView view = table.DefaultView;
+#        //Import data from DataView
+#        worksheet.InsertDataView(view, true, 1, 1 , 2 , 2);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataView.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataView">DataView with desired data.</param>
+#    <param name="isFieldNameShown">TRUE if column names must also be imported.</param>
+#    <param name="firstRow">Row of the first cell where DataView should be imported.</param>
+#    <param name="firstColumn">Column of the first cell where DataView should be imported.</param>
+#    <param name="maxRows">Maximum number of rows to import.</param>
+#    <param name="maxColumns">Maximum number of columns to import.</param>
+#    <returns>Number of imported rows.</returns>
+#        """
+#        pass
+#
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def InsertDataView(self ,dataView:'DataView',isFieldNameShown:bool,firstRow:int,firstColumn:int,maxRows:int,maxColumns:int,bPreserveTypes:bool)->int:
+#        """
+#    <summary>
+#         Imports data from a DataView into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataView into a worksheet with the specified range along with preserve type:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Initialize dataview of datatable
+#        System.Data.DataView view = table.DefaultView;
+#        //Import data from DataView
+#        worksheet.InsertDataView(view, true, 1, 1 , 2 , 2 , true);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataView.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataView">DataView with desired data.</param>
+#    <param name="isFieldNameShown">TRUE if column names must also be imported.</param>
+#    <param name="firstRow">Row of the first cell where DataView should be imported.</param>
+#    <param name="firstColumn">Column of the first cell where DataView should be imported.</param>
+#    <param name="maxRows">Maximum number of rows to import.</param>
+#    <param name="maxColumns">Maximum number of columns to import.</param>
+#    <param name="bPreserveTypes">Indicates whether to preserve column types.</param>
+#    <returns>Number of imported rows</returns>
+#        """
+#        pass
+#
+
+
+    @abc.abstractmethod
+    def RemovePanes(self):
+        """
+    <summary>
+        Removes panes from a worksheet.
+    </summary>
+        """
+        pass
+
+

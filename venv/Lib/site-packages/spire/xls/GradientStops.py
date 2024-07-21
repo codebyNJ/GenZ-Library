@@ -1,0 +1,146 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class GradientStops (SpireObject) :
+    """
+
+    """
+    @property
+    def Angle(self)->int:
+        """
+
+        """
+        GetDllLibXls().GradientStops_get_Angle.argtypes=[c_void_p]
+        GetDllLibXls().GradientStops_get_Angle.restype=c_int
+        ret = CallCFunction(GetDllLibXls().GradientStops_get_Angle, self.Ptr)
+        return ret
+
+    @Angle.setter
+    def Angle(self, value:int):
+        GetDllLibXls().GradientStops_set_Angle.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().GradientStops_set_Angle, self.Ptr, value)
+
+    @property
+
+    def GradientType(self)->'GradientType':
+        """
+
+        """
+        GetDllLibXls().GradientStops_get_GradientType.argtypes=[c_void_p]
+        GetDllLibXls().GradientStops_get_GradientType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().GradientStops_get_GradientType, self.Ptr)
+        objwraped = GradientType(ret)
+        return objwraped
+
+    @GradientType.setter
+    def GradientType(self, value:'GradientType'):
+        GetDllLibXls().GradientStops_set_GradientType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().GradientStops_set_GradientType, self.Ptr, value.value)
+
+    @property
+
+    def FillToRect(self)->'Rectangle':
+        """
+
+        """
+        GetDllLibXls().GradientStops_get_FillToRect.argtypes=[c_void_p]
+        GetDllLibXls().GradientStops_get_FillToRect.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().GradientStops_get_FillToRect, self.Ptr)
+        ret = None if intPtr==None else Rectangle(intPtr)
+        return ret
+
+
+    @FillToRect.setter
+    def FillToRect(self, value:'Rectangle'):
+        GetDllLibXls().GradientStops_set_FillToRect.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().GradientStops_set_FillToRect, self.Ptr, value.Ptr)
+
+    @property
+    def IsDoubled(self)->bool:
+        """
+
+        """
+        GetDllLibXls().GradientStops_get_IsDoubled.argtypes=[c_void_p]
+        GetDllLibXls().GradientStops_get_IsDoubled.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().GradientStops_get_IsDoubled, self.Ptr)
+        return ret
+
+    def DoubleGradientStops(self):
+        """
+
+        """
+        GetDllLibXls().GradientStops_DoubleGradientStops.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().GradientStops_DoubleGradientStops, self.Ptr)
+
+    def InvertGradientStops(self):
+        """
+
+        """
+        GetDllLibXls().GradientStops_InvertGradientStops.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().GradientStops_InvertGradientStops, self.Ptr)
+
+
+    def ShrinkGradientStops(self)->'GradientStops':
+        """
+
+        """
+        GetDllLibXls().GradientStops_ShrinkGradientStops.argtypes=[c_void_p]
+        GetDllLibXls().GradientStops_ShrinkGradientStops.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().GradientStops_ShrinkGradientStops, self.Ptr)
+        ret = None if intPtr==None else GradientStops(intPtr)
+        return ret
+
+
+
+    def Clone(self)->'GradientStops':
+        """
+
+        """
+        GetDllLibXls().GradientStops_Clone.argtypes=[c_void_p]
+        GetDllLibXls().GradientStops_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().GradientStops_Clone, self.Ptr)
+        ret = None if intPtr==None else GradientStops(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,stop:XlsGradientStop):
+        """
+
+        """
+        intPtrstop:c_void_p = stop.Ptr
+
+        GetDllLibXls().GradientStops_Add.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().GradientStops_Add, self.Ptr, intPtrstop)
+
+    @dispatch
+
+    def Add(self ,color:Color,position:int,transparency:int,tint:int,shade:int)->XlsGradientStop:
+        """
+
+        """
+        intPtrcolor:c_void_p = color.Ptr
+
+        GetDllLibXls().GradientStops_AddCPTTS.argtypes=[c_void_p ,c_void_p,c_int,c_int,c_int,c_int]
+        GetDllLibXls().GradientStops_AddCPTTS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().GradientStops_AddCPTTS, self.Ptr, intPtrcolor,position,transparency,tint,shade)
+        ret = None if intPtr==None else XlsGradientStop(intPtr)
+        return ret
+
+
+
+    def Serialize(self ,stream:'Stream'):
+        """
+
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().GradientStops_Serialize.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().GradientStops_Serialize, self.Ptr, intPtrstream)
+

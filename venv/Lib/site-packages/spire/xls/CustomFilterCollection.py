@@ -1,0 +1,113 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CustomFilterCollection (SpireObject) :
+    """
+
+    """
+
+    def GetEnumerator(self)->'IEnumerator':
+        """
+
+        """
+        GetDllLibXls().CustomFilterCollection_GetEnumerator.argtypes=[c_void_p]
+        GetDllLibXls().CustomFilterCollection_GetEnumerator.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CustomFilterCollection_GetEnumerator, self.Ptr)
+        ret = None if intPtr==None else IEnumerator(intPtr)
+        return ret
+
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().CustomFilterCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().CustomFilterCollection_Clear, self.Ptr)
+
+    @property
+    def Capacity(self)->int:
+        """
+
+        """
+        GetDllLibXls().CustomFilterCollection_get_Capacity.argtypes=[c_void_p]
+        GetDllLibXls().CustomFilterCollection_get_Capacity.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CustomFilterCollection_get_Capacity, self.Ptr)
+        return ret
+
+    @Capacity.setter
+    def Capacity(self, value:int):
+        GetDllLibXls().CustomFilterCollection_set_Capacity.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CustomFilterCollection_set_Capacity, self.Ptr, value)
+
+    @property
+    def Count(self)->int:
+        """
+
+        """
+        GetDllLibXls().CustomFilterCollection_get_Count.argtypes=[c_void_p]
+        GetDllLibXls().CustomFilterCollection_get_Count.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CustomFilterCollection_get_Count, self.Ptr)
+        return ret
+
+    @property
+
+    def RelationShip(self)->'RelationShip':
+        """
+
+        """
+        GetDllLibXls().CustomFilterCollection_get_RelationShip.argtypes=[c_void_p]
+        GetDllLibXls().CustomFilterCollection_get_RelationShip.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CustomFilterCollection_get_RelationShip, self.Ptr)
+        objwraped = RelationShip(ret)
+        return objwraped
+
+    @RelationShip.setter
+    def RelationShip(self, value:'RelationShip'):
+        GetDllLibXls().CustomFilterCollection_set_RelationShip.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CustomFilterCollection_set_RelationShip, self.Ptr, value.value)
+
+
+    def Add(self ,customFilter:'CustomFilter'):
+        """
+
+        """
+        intPtrcustomFilter:c_void_p = customFilter.Ptr
+
+        GetDllLibXls().CustomFilterCollection_Add.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().CustomFilterCollection_Add, self.Ptr, intPtrcustomFilter)
+
+
+    def get_Item(self ,index:int)->'CustomFilter':
+        """
+    <summary>
+        Gets the custom filter in the specific index.
+    </summary>
+    <param name="index">The index.</param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().CustomFilterCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().CustomFilterCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CustomFilterCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else CustomFilter(intPtr)
+        return ret
+
+
+
+    def GetByIndex(self ,index:int)->'CustomFilter':
+        """
+
+        """
+        
+        GetDllLibXls().CustomFilterCollection_GetByIndex.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().CustomFilterCollection_GetByIndex.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CustomFilterCollection_GetByIndex, self.Ptr, index)
+        ret = None if intPtr==None else CustomFilter(intPtr)
+        return ret
+
+

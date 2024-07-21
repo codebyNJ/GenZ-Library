@@ -1,0 +1,166 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class MultipleFilterCollection (SpireObject) :
+    """
+
+    """
+
+    def GetEnumerator(self)->'IEnumerator':
+        """
+
+        """
+        GetDllLibXls().MultipleFilterCollection_GetEnumerator.argtypes=[c_void_p]
+        GetDllLibXls().MultipleFilterCollection_GetEnumerator.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().MultipleFilterCollection_GetEnumerator, self.Ptr)
+        ret = None if intPtr==None else IEnumerator(intPtr)
+        return ret
+
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().MultipleFilterCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().MultipleFilterCollection_Clear, self.Ptr)
+
+    @property
+    def Capacity(self)->int:
+        """
+
+        """
+        GetDllLibXls().MultipleFilterCollection_get_Capacity.argtypes=[c_void_p]
+        GetDllLibXls().MultipleFilterCollection_get_Capacity.restype=c_int
+        ret = CallCFunction(GetDllLibXls().MultipleFilterCollection_get_Capacity, self.Ptr)
+        return ret
+
+    @Capacity.setter
+    def Capacity(self, value:int):
+        GetDllLibXls().MultipleFilterCollection_set_Capacity.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().MultipleFilterCollection_set_Capacity, self.Ptr, value)
+
+    @property
+    def Count(self)->int:
+        """
+
+        """
+        GetDllLibXls().MultipleFilterCollection_get_Count.argtypes=[c_void_p]
+        GetDllLibXls().MultipleFilterCollection_get_Count.restype=c_int
+        ret = CallCFunction(GetDllLibXls().MultipleFilterCollection_get_Count, self.Ptr)
+        return ret
+
+
+    def RemoveDateFilter(self ,type:'DateTimeGroupingType',year:int,month:int,day:int,hour:int,minute:int,second:int):
+        """
+    <summary>
+        Remove a date in the filter.
+    </summary>
+    <param name="type"></param>
+    <param name="year"></param>
+    <param name="month"></param>
+    <param name="day"></param>
+    <param name="hour"></param>
+    <param name="minute"></param>
+    <param name="second"></param>
+        """
+        enumtype:c_int = type.value
+
+        GetDllLibXls().MultipleFilterCollection_RemoveDateFilter.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().MultipleFilterCollection_RemoveDateFilter, self.Ptr, enumtype,year,month,day,hour,minute,second)
+
+
+    def RemoveAt(self ,index:int):
+        """
+
+        """
+        
+        GetDllLibXls().MultipleFilterCollection_RemoveAt.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().MultipleFilterCollection_RemoveAt, self.Ptr, index)
+
+
+    def RemoveFilter(self ,filter:str):
+        """
+
+        """
+        
+        GetDllLibXls().MultipleFilterCollection_RemoveFilter.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().MultipleFilterCollection_RemoveFilter, self.Ptr, filter)
+
+    @property
+    def MatchBlank(self)->bool:
+        """
+
+        """
+        GetDllLibXls().MultipleFilterCollection_get_MatchBlank.argtypes=[c_void_p]
+        GetDllLibXls().MultipleFilterCollection_get_MatchBlank.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().MultipleFilterCollection_get_MatchBlank, self.Ptr)
+        return ret
+
+    @MatchBlank.setter
+    def MatchBlank(self, value:bool):
+        GetDllLibXls().MultipleFilterCollection_set_MatchBlank.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().MultipleFilterCollection_set_MatchBlank, self.Ptr, value)
+
+
+    def get_Item(self ,index:int)->'SpireObject':
+        """
+
+        """
+        
+        GetDllLibXls().MultipleFilterCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().MultipleFilterCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().MultipleFilterCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+
+    def GetByIndex(self ,index:int)->'SpireObject':
+        """
+
+        """
+        
+        GetDllLibXls().MultipleFilterCollection_GetByIndex.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().MultipleFilterCollection_GetByIndex.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().MultipleFilterCollection_GetByIndex, self.Ptr, index)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,filter:str):
+        """
+
+        """
+        
+        GetDllLibXls().MultipleFilterCollection_Add.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().MultipleFilterCollection_Add, self.Ptr, filter)
+
+    @dispatch
+
+    def Add(self ,filter:DateTimeGroupItem):
+        """
+
+        """
+        intPtrfilter:c_void_p = filter.Ptr
+
+        GetDllLibXls().MultipleFilterCollection_AddF.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().MultipleFilterCollection_AddF, self.Ptr, intPtrfilter)
+
+    @dispatch
+
+    def Add(self ,type:DateTimeGroupingType,year:int,month:int,day:int):
+        """
+
+        """
+        enumtype:c_int = type.value
+
+        GetDllLibXls().MultipleFilterCollection_AddTYMD.argtypes=[c_void_p ,c_int,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().MultipleFilterCollection_AddTYMD, self.Ptr, enumtype,year,month,day)
+

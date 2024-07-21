@@ -1,0 +1,42 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class RangeRichTextString (  RichTextString) :
+    """
+
+    """
+    def Dispose(self):
+        """
+
+        """
+        GetDllLibXls().RangeRichTextString_Dispose.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().RangeRichTextString_Dispose, self.Ptr)
+
+    @property
+    def Index(self)->int:
+        """
+
+        """
+        GetDllLibXls().RangeRichTextString_get_Index.argtypes=[c_void_p]
+        GetDllLibXls().RangeRichTextString_get_Index.restype=c_int
+        ret = CallCFunction(GetDllLibXls().RangeRichTextString_get_Index, self.Ptr)
+        return ret
+
+    @property
+
+    def DefaultFont(self)->'XlsFont':
+        """
+
+        """
+        GetDllLibXls().RangeRichTextString_get_DefaultFont.argtypes=[c_void_p]
+        GetDllLibXls().RangeRichTextString_get_DefaultFont.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().RangeRichTextString_get_DefaultFont, self.Ptr)
+        ret = None if intPtr==None else XlsFont(intPtr)
+        return ret
+
+

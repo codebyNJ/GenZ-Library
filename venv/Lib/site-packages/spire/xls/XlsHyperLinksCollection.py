@@ -1,0 +1,102 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from spire.xls.XlsHyperLink import *
+from ctypes import *
+import abc
+
+class XlsHyperLinksCollection (  CollectionBase[XlsHyperLink],ICloneParent, IHyperLinks) :
+    """
+
+    """
+
+    def get_Item(self ,index:int)->'IHyperLink':
+        """
+
+        """
+        
+        GetDllLibXls().XlsHyperLinksCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsHyperLinksCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsHyperLinksCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsHyperLink(intPtr)
+        return ret
+
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+    <summary>
+        Creates a new object that is a copy of the current instance.
+    </summary>
+    <param name="parent">Parent object for a copy of this instance.</param>
+    <returns>A new object that is a copy of this instance.</returns>
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsHyperLinksCollection_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsHyperLinksCollection_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsHyperLinksCollection_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+
+    def Add(self ,range:'IXLSRange')->'IHyperLink':
+        """
+
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().XlsHyperLinksCollection_Add.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsHyperLinksCollection_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsHyperLinksCollection_Add, self.Ptr, intPtrrange)
+        ret = None if intPtr==None else XlsHyperLink(intPtr)
+        return ret
+
+
+    @property
+    def IsReadOnly(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsHyperLinksCollection_get_IsReadOnly.argtypes=[c_void_p]
+        GetDllLibXls().XlsHyperLinksCollection_get_IsReadOnly.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsHyperLinksCollection_get_IsReadOnly, self.Ptr)
+        return ret
+
+    def CreateHyperlinkStyles(self):
+        """
+    <summary>
+        Creates hyperlink styles.
+    </summary>
+        """
+        GetDllLibXls().XlsHyperLinksCollection_CreateHyperlinkStyles.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsHyperLinksCollection_CreateHyperlinkStyles, self.Ptr)
+
+
+    def GetRangeHyperlinks(self ,range:'IXLSRange')->'XlsHyperLinksCollection':
+        """
+    <summary>
+        Gets hyperlinks for the specified range.
+    </summary>
+    <param name="range">range object.</param>
+    <returns></returns>
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().XlsHyperLinksCollection_GetRangeHyperlinks.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsHyperLinksCollection_GetRangeHyperlinks.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsHyperLinksCollection_GetRangeHyperlinks, self.Ptr, intPtrrange)
+        ret = None if intPtr==None else XlsHyperLinksCollection(intPtr)
+        return ret
+
+    def GetEnumerator(self)->'IEnumerator':
+        """
+
+        """
+        ret = super(XlsHyperLinksCollection, self).GetEnumerator()
+        ret._gtype = XlsHyperLink
+        return ret
+

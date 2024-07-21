@@ -1,0 +1,178 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IChartLegendEntry (abc.ABC) :
+    """
+    <summary>
+        Represents a legend entry in a chart legend.
+    </summary>
+    """
+    @property
+    @abc.abstractmethod
+    def IsDeleted(self)->bool:
+        """
+    <summary>
+        If true then this entry deleted. otherwise false.
+            <example>The following code illustrates use of IsDeleted property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //Create a chartLegend
+        IChartLegend chartLegend = chart.Legend;
+        chartLegend.LegendEntries[0].Delete();
+        //True if the entry is deleted
+        bool isDeletedEntry = chartLegend.LegendEntries[0].IsDeleted;
+        if(isDeletedEntry){ //Your code here }
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @IsDeleted.setter
+    @abc.abstractmethod
+    def IsDeleted(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsFormatted(self)->bool:
+        """
+    <summary>
+        True if the legend entry has been formatted.
+            <example>The following code illustrates use of IsFormatted property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //Create a chartLegend
+        IChartLegend chartLegend = chart.Legend;
+        chartLegend.LegendEntries[1].TextArea.Color = Color.Blue;
+        //True if the legend entry is formatted
+        bool isEntryFromatted = chartLegend.LegendEntries[1].IsFormatted;
+        if(isEntryFromatted){ //Your code here }
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @IsFormatted.setter
+    @abc.abstractmethod
+    def IsFormatted(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def TextArea(self)->'IChartTextArea':
+        """
+    <summary>
+        Represents text area.
+            <example>The following code illustrates use of TextArea property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //Create a chartLegend
+        IChartLegend chartLegend = chart.Legend;
+        chartLegend.LegendEntries[1].TextArea.Color = Color.Blue;
+        chartLegend.LegendEntries[1].TextArea.Size = 10;
+        chartLegend.LegendEntries[1].TextArea.FontName = "Bernard MT Condensed";
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BackgroundMode(self)->'ChartBackgroundMode':
+        """
+    <summary>
+        Display mode of the background.
+    </summary>
+        """
+        pass
+
+
+    @BackgroundMode.setter
+    @abc.abstractmethod
+    def BackgroundMode(self, value:'ChartBackgroundMode'):
+        """
+
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Delete(self):
+        """
+    <summary>
+        Deletes current legend entry.
+            <example>The following code illustrates how to use Delete method for legend:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //Create a chartLegend
+        IChartLegend chartLegend = chart.Legend;
+        //Delete the first legend entry out of five entires
+        chartLegend.LegendEntries[0].Delete();
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+

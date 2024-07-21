@@ -1,0 +1,185 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class SortColumns (  ISortColumns) :
+    """
+    <summary>
+        Represents the sort column collection.
+    </summary>
+    """
+    @dispatch
+
+    def Add(self ,key:int,sortComparsionType:SortComparsionType,orderBy:OrderBy)->SortColumn:
+        """
+    <summary>
+        Adds the item in the collection.
+    </summary>
+    <param name="key">Column Index to sort the data.</param>
+    <param name="sortComparsionType">Compare value type.</param>
+    <param name="orderBy">To order the sorted data.</param>
+    <returns>Added sort column.</returns>
+        """
+        enumsortComparsionType:c_int = sortComparsionType.value
+        enumorderBy:c_int = orderBy.value
+
+        GetDllLibXls().SortColumns_Add.argtypes=[c_void_p ,c_int,c_int,c_int]
+        GetDllLibXls().SortColumns_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SortColumns_Add, self.Ptr, key,enumsortComparsionType,enumorderBy)
+        ret = None if intPtr==None else SortColumn(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,key:int,orderBy:OrderBy)->SortColumn:
+        """
+    <summary>
+         Adds the item in the collection.
+    </summary>
+    <param name="key">Column Index to sort the data.</param>
+    <param name="orderBy">To order the sorted data.</param>
+    <returns>Added sort column.</returns>
+        """
+        enumorderBy:c_int = orderBy.value
+
+        GetDllLibXls().SortColumns_AddKO.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().SortColumns_AddKO.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SortColumns_AddKO, self.Ptr, key,enumorderBy)
+        ret = None if intPtr==None else SortColumn(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,key:int,customSortOrder:List[str])->SortColumn:
+        """
+    <summary>
+         Adds the item in the collection.
+    </summary>
+    <param name="key">Column Index to sort the data.</param>
+    <param name="customSortOrder">Custom order to order the sorted data.</param>
+    <returns>Added sort column.</returns>
+        """
+        #arraycustomSortOrder:ArrayTypecustomSortOrder = ""
+        countcustomSortOrder = len(customSortOrder)
+        ArrayTypecustomSortOrder = c_wchar_p * countcustomSortOrder
+        arraycustomSortOrder = ArrayTypecustomSortOrder()
+        for i in range(0, countcustomSortOrder):
+            arraycustomSortOrder[i] = customSortOrder[i]
+
+
+        GetDllLibXls().SortColumns_AddKC.argtypes=[c_void_p ,c_int,ArrayTypecustomSortOrder,c_int]
+        GetDllLibXls().SortColumns_AddKC.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SortColumns_AddKC, self.Ptr, key,arraycustomSortOrder,countcustomSortOrder)
+        ret = None if intPtr==None else SortColumn(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Remove(self ,sortColumn:SortColumn):
+        """
+
+        """
+        intPtrsortColumn:c_void_p = sortColumn.Ptr
+
+        GetDllLibXls().SortColumns_Remove.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().SortColumns_Remove, self.Ptr, intPtrsortColumn)
+
+    @dispatch
+
+    def Remove(self ,key:int):
+        """
+    <summary>
+        Remvoes the Sort item in the collection.
+    </summary>
+    <param name="fieldIndex">Field index to remove.</param>
+        """
+        
+        GetDllLibXls().SortColumns_RemoveK.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().SortColumns_RemoveK, self.Ptr, key)
+
+
+    def RemoveAt(self ,index:int):
+        """
+
+        """
+        
+        GetDllLibXls().SortColumns_RemoveAt.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().SortColumns_RemoveAt, self.Ptr, index)
+
+
+    def GetByIndex(self ,index:int)->'SortColumn':
+        """
+
+        """
+        
+        GetDllLibXls().SortColumns_GetByIndex.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().SortColumns_GetByIndex.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SortColumns_GetByIndex, self.Ptr, index)
+        ret = None if intPtr==None else SortColumn(intPtr)
+        return ret
+
+
+
+    def get_Item(self ,fieldIndex:int)->'SortColumn':
+        """
+
+        """
+        
+        GetDllLibXls().SortColumns_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().SortColumns_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SortColumns_get_Item, self.Ptr, fieldIndex)
+        ret = None if intPtr==None else SortColumn(intPtr)
+        return ret
+
+
+
+    def GetEnumerator(self)->'IEnumerator':
+        """
+
+        """
+        GetDllLibXls().SortColumns_GetEnumerator.argtypes=[c_void_p]
+        GetDllLibXls().SortColumns_GetEnumerator.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SortColumns_GetEnumerator, self.Ptr)
+        ret = None if intPtr==None else IEnumerator(intPtr)
+        return ret
+
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().SortColumns_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().SortColumns_Clear, self.Ptr)
+
+    @property
+    def Capacity(self)->int:
+        """
+
+        """
+        GetDllLibXls().SortColumns_get_Capacity.argtypes=[c_void_p]
+        GetDllLibXls().SortColumns_get_Capacity.restype=c_int
+        ret = CallCFunction(GetDllLibXls().SortColumns_get_Capacity, self.Ptr)
+        return ret
+
+    @Capacity.setter
+    def Capacity(self, value:int):
+        GetDllLibXls().SortColumns_set_Capacity.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().SortColumns_set_Capacity, self.Ptr, value)
+
+    @property
+    def Count(self)->int:
+        """
+
+        """
+        GetDllLibXls().SortColumns_get_Count.argtypes=[c_void_p]
+        GetDllLibXls().SortColumns_get_Count.restype=c_int
+        ret = CallCFunction(GetDllLibXls().SortColumns_get_Count, self.Ptr)
+        return ret
+

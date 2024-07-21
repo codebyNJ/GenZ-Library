@@ -1,0 +1,92 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CollectionExtended (  IExcelApplication, ICloneParent) :
+    """
+
+    """
+    @property
+
+    def Parent(self)->'SpireObject':
+        """
+
+        """
+        GetDllLibXls().CollectionExtended_get_Parent.argtypes=[c_void_p]
+        GetDllLibXls().CollectionExtended_get_Parent.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CollectionExtended_get_Parent, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+#
+#    def add_Changed(self ,value:'EventHandler'):
+#        """
+#
+#        """
+#        intPtrvalue:c_void_p = value.Ptr
+#
+#        GetDllLibXls().CollectionExtended_add_Changed.argtypes=[c_void_p ,c_void_p]
+#        CallCFunction(GetDllLibXls().CollectionExtended_add_Changed, self.Ptr, intPtrvalue)
+
+
+#
+#    def remove_Changed(self ,value:'EventHandler'):
+#        """
+#
+#        """
+#        intPtrvalue:c_void_p = value.Ptr
+#
+#        GetDllLibXls().CollectionExtended_remove_Changed.argtypes=[c_void_p ,c_void_p]
+#        CallCFunction(GetDllLibXls().CollectionExtended_remove_Changed, self.Ptr, intPtrvalue)
+
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+    <summary>
+        Creates copy of the collection.
+    </summary>
+    <param name="parent">Parent object for the new collection.</param>
+    <returns>A copy of the collection.</returns>
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().CollectionExtended_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().CollectionExtended_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CollectionExtended_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+
+    def EnsureCapacity(self ,size:int):
+        """
+    <summary>
+        Enlarges internal storage if necessary.
+    </summary>
+    <param name="size">Required size.</param>
+        """
+        
+        GetDllLibXls().CollectionExtended_EnsureCapacity.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().CollectionExtended_EnsureCapacity, self.Ptr, size)
+
+#    @staticmethod
+#
+#    def GenerateDefaultName(namesCollection:'ICollection1',strStart:str)->str:
+#        """
+#
+#        """
+#        intPtrnamesCollection:c_void_p = namesCollection.Ptr
+#
+#        GetDllLibXls().CollectionExtended_GenerateDefaultName.argtypes=[ c_void_p,c_void_p]
+#        GetDllLibXls().CollectionExtended_GenerateDefaultName.restype=c_wchar_p
+#        ret = CallCFunction(GetDllLibXls().CollectionExtended_GenerateDefaultName,  intPtrnamesCollection,strStart)
+#        return ret
+#
+
+

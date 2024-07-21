@@ -1,0 +1,144 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class HTMLOptions (SpireObject) :
+    """
+
+    """
+    @dispatch
+    def __init__(self):
+        GetDllLibXls().HTMLOptions_Create.restype = c_void_p
+        intPtr = CallCFunction(GetDllLibXls().HTMLOptions_Create)
+        super(HTMLOptions, self).__init__(intPtr)
+    @property
+
+    def ImagePath(self)->str:
+        """
+
+        """
+        GetDllLibXls().HTMLOptions_get_ImagePath.argtypes=[c_void_p]
+        GetDllLibXls().HTMLOptions_get_ImagePath.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().HTMLOptions_get_ImagePath, self.Ptr))
+        return ret
+
+
+    @ImagePath.setter
+    def ImagePath(self, value:str):
+        GetDllLibXls().HTMLOptions_set_ImagePath.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().HTMLOptions_set_ImagePath, self.Ptr, value)
+
+    @property
+
+    def TextMode(self)->'GetText':
+        """
+
+        """
+        GetDllLibXls().HTMLOptions_get_TextMode.argtypes=[c_void_p]
+        GetDllLibXls().HTMLOptions_get_TextMode.restype=c_int
+        ret = CallCFunction(GetDllLibXls().HTMLOptions_get_TextMode, self.Ptr)
+        objwraped = GetText(ret)
+        return objwraped
+
+    @TextMode.setter
+    def TextMode(self, value:'GetText'):
+        GetDllLibXls().HTMLOptions_set_TextMode.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().HTMLOptions_set_TextMode, self.Ptr, value.value)
+
+    @property
+
+    def ImageLocationType(self)->'ImageLocationTypes':
+        """
+    <summary>
+        Gets or sets the Image Location type.
+            GlobalAbsolute or Relative to Table
+    </summary>
+        """
+        GetDllLibXls().HTMLOptions_get_ImageLocationType.argtypes=[c_void_p]
+        GetDllLibXls().HTMLOptions_get_ImageLocationType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().HTMLOptions_get_ImageLocationType, self.Ptr)
+        objwraped = ImageLocationTypes(ret)
+        return objwraped
+
+    @ImageLocationType.setter
+    def ImageLocationType(self, value:'ImageLocationTypes'):
+        GetDllLibXls().HTMLOptions_set_ImageLocationType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().HTMLOptions_set_ImageLocationType, self.Ptr, value.value)
+
+    @property
+    def ImageEmbedded(self)->bool:
+        """
+    <summary>
+        If false,indicates exporting the image as a single file; 
+            If true, embedding the image into the html code using Data URI scheme.
+            The default value is false.
+            Note: Internet Explorer 8 limits data URIs to a maximum length of 32KB.
+    </summary>
+<value>The value of the HTML export image style sheet.</value>
+        """
+        GetDllLibXls().HTMLOptions_get_ImageEmbedded.argtypes=[c_void_p]
+        GetDllLibXls().HTMLOptions_get_ImageEmbedded.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().HTMLOptions_get_ImageEmbedded, self.Ptr)
+        return ret
+
+    @ImageEmbedded.setter
+    def ImageEmbedded(self, value:bool):
+        GetDllLibXls().HTMLOptions_set_ImageEmbedded.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().HTMLOptions_set_ImageEmbedded, self.Ptr, value)
+
+    @property
+
+    def StyleDefine(self)->'StyleDefineType':
+        """
+    <summary>
+        where is the style defined; default : head
+    </summary>
+        """
+        GetDllLibXls().HTMLOptions_get_StyleDefine.argtypes=[c_void_p]
+        GetDllLibXls().HTMLOptions_get_StyleDefine.restype=c_int
+        ret = CallCFunction(GetDllLibXls().HTMLOptions_get_StyleDefine, self.Ptr)
+        objwraped = StyleDefineType(ret)
+        return objwraped
+
+    @StyleDefine.setter
+    def StyleDefine(self, value:'StyleDefineType'):
+        GetDllLibXls().HTMLOptions_set_StyleDefine.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().HTMLOptions_set_StyleDefine, self.Ptr, value.value)
+
+    @property
+    def IsFixedTableColWidth(self)->bool:
+        """
+    <summary>
+        Gets or sets whether the width of td is fixed :
+            If true, the width of td is fixed, same as width of column in excel view.
+            If false, the width of td is not fixed.
+            Default is false.
+    </summary>
+        """
+        GetDllLibXls().HTMLOptions_get_IsFixedTableColWidth.argtypes=[c_void_p]
+        GetDllLibXls().HTMLOptions_get_IsFixedTableColWidth.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().HTMLOptions_get_IsFixedTableColWidth, self.Ptr)
+        return ret
+
+    @IsFixedTableColWidth.setter
+    def IsFixedTableColWidth(self, value:bool):
+        GetDllLibXls().HTMLOptions_set_IsFixedTableColWidth.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().HTMLOptions_set_IsFixedTableColWidth, self.Ptr, value)
+
+    @staticmethod
+
+    def Default()->'HTMLOptions':
+        """
+
+        """
+        #GetDllLibXls().HTMLOptions_Default.argtypes=[]
+        GetDllLibXls().HTMLOptions_Default.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().HTMLOptions_Default)
+        ret = None if intPtr==None else HTMLOptions(intPtr)
+        return ret
+
+

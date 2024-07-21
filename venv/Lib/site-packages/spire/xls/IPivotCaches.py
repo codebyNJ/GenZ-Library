@@ -1,0 +1,39 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IPivotCaches (abc.ABC) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Count(self)->int:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def get_Item(self ,index:int)->'IPivotCache':
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Add(self ,range:'CellRange')->'PivotCache':
+        """
+
+        """
+        pass
+
+

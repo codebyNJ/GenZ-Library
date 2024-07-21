@@ -1,0 +1,520 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsValidation (  IDataValidation, IExcelApplication, IOptimizedUpdate, ICloneParent) :
+    """
+
+    """
+    @property
+
+    def InputTitle(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_InputTitle.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_InputTitle.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsValidation_get_InputTitle, self.Ptr))
+        return ret
+
+
+    @InputTitle.setter
+    def InputTitle(self, value:str):
+        GetDllLibXls().XlsValidation_set_InputTitle.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsValidation_set_InputTitle, self.Ptr, value)
+
+    @property
+
+    def InputMessage(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_InputMessage.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_InputMessage.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsValidation_get_InputMessage, self.Ptr))
+        return ret
+
+
+    @InputMessage.setter
+    def InputMessage(self, value:str):
+        GetDllLibXls().XlsValidation_set_InputMessage.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsValidation_set_InputMessage, self.Ptr, value)
+
+    @property
+
+    def ErrorTitle(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_ErrorTitle.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_ErrorTitle.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsValidation_get_ErrorTitle, self.Ptr))
+        return ret
+
+
+    @ErrorTitle.setter
+    def ErrorTitle(self, value:str):
+        GetDllLibXls().XlsValidation_set_ErrorTitle.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsValidation_set_ErrorTitle, self.Ptr, value)
+
+    @property
+
+    def ErrorMessage(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_ErrorMessage.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_ErrorMessage.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsValidation_get_ErrorMessage, self.Ptr))
+        return ret
+
+
+    @ErrorMessage.setter
+    def ErrorMessage(self, value:str):
+        GetDllLibXls().XlsValidation_set_ErrorMessage.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsValidation_set_ErrorMessage, self.Ptr, value)
+
+    @property
+
+    def Formula1(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_Formula1.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_Formula1.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsValidation_get_Formula1, self.Ptr))
+        return ret
+
+
+    @Formula1.setter
+    def Formula1(self, value:str):
+        GetDllLibXls().XlsValidation_set_Formula1.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsValidation_set_Formula1, self.Ptr, value)
+
+    @property
+
+    def DateTime1(self)->'DateTime':
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_DateTime1.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_DateTime1.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsValidation_get_DateTime1, self.Ptr)
+        ret = None if intPtr==None else DateTime(intPtr)
+        return ret
+
+
+    @DateTime1.setter
+    def DateTime1(self, value:'DateTime'):
+        GetDllLibXls().XlsValidation_set_DateTime1.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsValidation_set_DateTime1, self.Ptr, value.Ptr)
+
+    @property
+
+    def Formula2(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_Formula2.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_Formula2.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsValidation_get_Formula2, self.Ptr))
+        return ret
+
+
+    @Formula2.setter
+    def Formula2(self, value:str):
+        GetDllLibXls().XlsValidation_set_Formula2.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsValidation_set_Formula2, self.Ptr, value)
+
+    @property
+
+    def DateTime2(self)->'DateTime':
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_DateTime2.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_DateTime2.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsValidation_get_DateTime2, self.Ptr)
+        ret = None if intPtr==None else DateTime(intPtr)
+        return ret
+
+
+    @DateTime2.setter
+    def DateTime2(self, value:'DateTime'):
+        GetDllLibXls().XlsValidation_set_DateTime2.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsValidation_set_DateTime2, self.Ptr, value.Ptr)
+
+    @property
+
+    def AllowType(self)->'CellDataType':
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_AllowType.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_AllowType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsValidation_get_AllowType, self.Ptr)
+        objwraped = CellDataType(ret)
+        return objwraped
+
+    @AllowType.setter
+    def AllowType(self, value:'CellDataType'):
+        GetDllLibXls().XlsValidation_set_AllowType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsValidation_set_AllowType, self.Ptr, value.value)
+
+    @property
+
+    def CompareOperator(self)->'ValidationComparisonOperator':
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_CompareOperator.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_CompareOperator.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsValidation_get_CompareOperator, self.Ptr)
+        objwraped = ValidationComparisonOperator(ret)
+        return objwraped
+
+    @CompareOperator.setter
+    def CompareOperator(self, value:'ValidationComparisonOperator'):
+        GetDllLibXls().XlsValidation_set_CompareOperator.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsValidation_set_CompareOperator, self.Ptr, value.value)
+
+    @property
+    def IsListInFormula(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_IsListInFormula.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_IsListInFormula.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsValidation_get_IsListInFormula, self.Ptr)
+        return ret
+
+    @IsListInFormula.setter
+    def IsListInFormula(self, value:bool):
+        GetDllLibXls().XlsValidation_set_IsListInFormula.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsValidation_set_IsListInFormula, self.Ptr, value)
+
+    @property
+    def IgnoreBlank(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_IgnoreBlank.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_IgnoreBlank.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsValidation_get_IgnoreBlank, self.Ptr)
+        return ret
+
+    @IgnoreBlank.setter
+    def IgnoreBlank(self, value:bool):
+        GetDllLibXls().XlsValidation_set_IgnoreBlank.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsValidation_set_IgnoreBlank, self.Ptr, value)
+
+    @property
+    def IsSuppressDropDownArrow(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_IsSuppressDropDownArrow.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_IsSuppressDropDownArrow.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsValidation_get_IsSuppressDropDownArrow, self.Ptr)
+        return ret
+
+    @IsSuppressDropDownArrow.setter
+    def IsSuppressDropDownArrow(self, value:bool):
+        GetDllLibXls().XlsValidation_set_IsSuppressDropDownArrow.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsValidation_set_IsSuppressDropDownArrow, self.Ptr, value)
+
+    @property
+    def ShapesCount(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_ShapesCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_ShapesCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsValidation_get_ShapesCount, self.Ptr)
+        return ret
+
+    @property
+    def ShowInput(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_ShowInput.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_ShowInput.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsValidation_get_ShowInput, self.Ptr)
+        return ret
+
+    @ShowInput.setter
+    def ShowInput(self, value:bool):
+        GetDllLibXls().XlsValidation_set_ShowInput.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsValidation_set_ShowInput, self.Ptr, value)
+
+    @property
+    def ShowError(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_ShowError.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_ShowError.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsValidation_get_ShowError, self.Ptr)
+        return ret
+
+    @ShowError.setter
+    def ShowError(self, value:bool):
+        GetDllLibXls().XlsValidation_set_ShowError.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsValidation_set_ShowError, self.Ptr, value)
+
+    @property
+    def PromptBoxHPosition(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_PromptBoxHPosition.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_PromptBoxHPosition.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsValidation_get_PromptBoxHPosition, self.Ptr)
+        return ret
+
+    @PromptBoxHPosition.setter
+    def PromptBoxHPosition(self, value:int):
+        GetDllLibXls().XlsValidation_set_PromptBoxHPosition.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsValidation_set_PromptBoxHPosition, self.Ptr, value)
+
+    @property
+    def PromptBoxVPosition(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_PromptBoxVPosition.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_PromptBoxVPosition.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsValidation_get_PromptBoxVPosition, self.Ptr)
+        return ret
+
+    @PromptBoxVPosition.setter
+    def PromptBoxVPosition(self, value:int):
+        GetDllLibXls().XlsValidation_set_PromptBoxVPosition.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsValidation_set_PromptBoxVPosition, self.Ptr, value)
+
+    @property
+    def IsInputVisible(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_IsInputVisible.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_IsInputVisible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsValidation_get_IsInputVisible, self.Ptr)
+        return ret
+
+    @IsInputVisible.setter
+    def IsInputVisible(self, value:bool):
+        GetDllLibXls().XlsValidation_set_IsInputVisible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsValidation_set_IsInputVisible, self.Ptr, value)
+
+    @property
+    def IsInputPositionFixed(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_IsInputPositionFixed.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_IsInputPositionFixed.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsValidation_get_IsInputPositionFixed, self.Ptr)
+        return ret
+
+    @IsInputPositionFixed.setter
+    def IsInputPositionFixed(self, value:bool):
+        GetDllLibXls().XlsValidation_set_IsInputPositionFixed.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsValidation_set_IsInputPositionFixed, self.Ptr, value)
+
+    @property
+
+    def AlertStyle(self)->'AlertStyleType':
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_AlertStyle.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_AlertStyle.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsValidation_get_AlertStyle, self.Ptr)
+        objwraped = AlertStyleType(ret)
+        return objwraped
+
+    @AlertStyle.setter
+    def AlertStyle(self, value:'AlertStyleType'):
+        GetDllLibXls().XlsValidation_set_AlertStyle.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsValidation_set_AlertStyle, self.Ptr, value.value)
+
+    @property
+
+    def Values(self)->List[str]:
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_Values.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_Values.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().XlsValidation_get_Values, self.Ptr)
+        ret = GetVectorFromArray(intPtrArray, c_wchar_p)
+        return ret
+
+    @Values.setter
+    def Values(self, value:List[str]):
+        vCount = len(value)
+        ArrayType = c_wchar_p * vCount
+        vArray = ArrayType()
+        for i in range(0, vCount):
+            vArray[i] = value[i]
+        GetDllLibXls().XlsValidation_set_Values.argtypes=[c_void_p, ArrayType, c_int]
+        CallCFunction(GetDllLibXls().XlsValidation_set_Values, self.Ptr, vArray, vCount)
+
+    @property
+
+    def DataRange(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_DataRange.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_DataRange.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsValidation_get_DataRange, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @DataRange.setter
+    def DataRange(self, value:'IXLSRange'):
+        GetDllLibXls().XlsValidation_set_DataRange.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsValidation_set_DataRange, self.Ptr, value.Ptr)
+
+    @dispatch
+
+    def AddRange(self ,dv:'XlsValidation'):
+        """
+
+        """
+        intPtrdv:c_void_p = dv.Ptr
+
+        GetDllLibXls().XlsValidation_AddRange.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsValidation_AddRange, self.Ptr, intPtrdv)
+
+    @dispatch
+
+    def AddRange(self ,range:XlsRange):
+        """
+
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().XlsValidation_AddRangeR.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsValidation_AddRangeR, self.Ptr, intPtrrange)
+
+#    @dispatch
+#
+#    def RemoveRange(self ,rectangles:'Rectangle[]'):
+#        """
+#
+#        """
+#        #arrayrectangles:ArrayTyperectangles = ""
+#        countrectangles = len(rectangles)
+#        ArrayTyperectangles = c_void_p * countrectangles
+#        arrayrectangles = ArrayTyperectangles()
+#        for i in range(0, countrectangles):
+#            arrayrectangles[i] = rectangles[i].Ptr
+#
+#
+#        GetDllLibXls().XlsValidation_RemoveRange.argtypes=[c_void_p ,ArrayTyperectangles]
+#        CallCFunction(GetDllLibXls().XlsValidation_RemoveRange, self.Ptr, arrayrectangles)
+
+
+    @dispatch
+
+    def RemoveRange(self ,range:XlsRange):
+        """
+
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().XlsValidation_RemoveRangeR.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsValidation_RemoveRangeR, self.Ptr, intPtrrange)
+
+    @property
+
+    def Worksheet(self)->'XlsWorksheet':
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_Worksheet.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_Worksheet.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsValidation_get_Worksheet, self.Ptr)
+        ret = None if intPtr==None else XlsWorksheet(intPtr)
+        return ret
+
+
+
+    def ContainsCell(self ,lCellIndex:int)->bool:
+        """
+
+        """
+        
+        GetDllLibXls().XlsValidation_ContainsCell.argtypes=[c_void_p ,c_long]
+        GetDllLibXls().XlsValidation_ContainsCell.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsValidation_ContainsCell, self.Ptr, lCellIndex)
+        return ret
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsValidation_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsValidation_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsValidation_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @property
+
+    def Parent(self)->'SpireObject':
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_Parent.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_Parent.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsValidation_get_Parent, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @property
+
+    def ParentCollection(self)->'XlsDataValidationCollection':
+        """
+
+        """
+        GetDllLibXls().XlsValidation_get_ParentCollection.argtypes=[c_void_p]
+        GetDllLibXls().XlsValidation_get_ParentCollection.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsValidation_get_ParentCollection, self.Ptr)
+        ret = None if intPtr==None else XlsDataValidationCollection(intPtr)
+        return ret
+
+
+    @ParentCollection.setter
+    def ParentCollection(self, value:'XlsDataValidationCollection'):
+        GetDllLibXls().XlsValidation_set_ParentCollection.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsValidation_set_ParentCollection, self.Ptr, value.Ptr)
+
+    def BeginUpdate(self):
+        """
+
+        """
+        GetDllLibXls().XlsValidation_BeginUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsValidation_BeginUpdate, self.Ptr)
+
+    def EndUpdate(self):
+        """
+
+        """
+        GetDllLibXls().XlsValidation_EndUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsValidation_EndUpdate, self.Ptr)
+

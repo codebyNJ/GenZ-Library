@@ -1,0 +1,176 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsOvalShape (  XlsShape, IOvalShape) :
+    """
+
+    """
+    @property
+
+    def ShapeType(self)->'ExcelShapeType':
+        """
+
+        """
+        GetDllLibXls().XlsOvalShape_get_ShapeType.argtypes=[c_void_p]
+        GetDllLibXls().XlsOvalShape_get_ShapeType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsOvalShape_get_ShapeType, self.Ptr)
+        objwraped = ExcelShapeType(ret)
+        return objwraped
+
+    @property
+
+    def Text(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsOvalShape_get_Text.argtypes=[c_void_p]
+        GetDllLibXls().XlsOvalShape_get_Text.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsOvalShape_get_Text, self.Ptr))
+        return ret
+
+
+    @Text.setter
+    def Text(self, value:str):
+        GetDllLibXls().XlsOvalShape_set_Text.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsOvalShape_set_Text, self.Ptr, value)
+
+    @property
+    def IsTextLocked(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsOvalShape_get_IsTextLocked.argtypes=[c_void_p]
+        GetDllLibXls().XlsOvalShape_get_IsTextLocked.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsOvalShape_get_IsTextLocked, self.Ptr)
+        return ret
+
+    @IsTextLocked.setter
+    def IsTextLocked(self, value:bool):
+        GetDllLibXls().XlsOvalShape_set_IsTextLocked.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsOvalShape_set_IsTextLocked, self.Ptr, value)
+
+    @property
+
+    def TextRotation(self)->'TextRotationType':
+        """
+
+        """
+        GetDllLibXls().XlsOvalShape_get_TextRotation.argtypes=[c_void_p]
+        GetDllLibXls().XlsOvalShape_get_TextRotation.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsOvalShape_get_TextRotation, self.Ptr)
+        objwraped = TextRotationType(ret)
+        return objwraped
+
+    @TextRotation.setter
+    def TextRotation(self, value:'TextRotationType'):
+        GetDllLibXls().XlsOvalShape_set_TextRotation.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsOvalShape_set_TextRotation, self.Ptr, value.value)
+
+    @property
+
+    def RichText(self)->'IRichTextString':
+        """
+
+        """
+        GetDllLibXls().XlsOvalShape_get_RichText.argtypes=[c_void_p]
+        GetDllLibXls().XlsOvalShape_get_RichText.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsOvalShape_get_RichText, self.Ptr)
+        ret = None if intPtr==None else RichTextObject(intPtr)
+        return ret
+
+
+    @property
+
+    def HAlignment(self)->'CommentHAlignType':
+        """
+
+        """
+        GetDllLibXls().XlsOvalShape_get_HAlignment.argtypes=[c_void_p]
+        GetDllLibXls().XlsOvalShape_get_HAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsOvalShape_get_HAlignment, self.Ptr)
+        objwraped = CommentHAlignType(ret)
+        return objwraped
+
+    @HAlignment.setter
+    def HAlignment(self, value:'CommentHAlignType'):
+        GetDllLibXls().XlsOvalShape_set_HAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsOvalShape_set_HAlignment, self.Ptr, value.value)
+
+    @property
+
+    def VAlignment(self)->'CommentVAlignType':
+        """
+
+        """
+        GetDllLibXls().XlsOvalShape_get_VAlignment.argtypes=[c_void_p]
+        GetDllLibXls().XlsOvalShape_get_VAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsOvalShape_get_VAlignment, self.Ptr)
+        objwraped = CommentVAlignType(ret)
+        return objwraped
+
+    @VAlignment.setter
+    def VAlignment(self, value:'CommentVAlignType'):
+        GetDllLibXls().XlsOvalShape_set_VAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsOvalShape_set_VAlignment, self.Ptr, value.value)
+
+    @property
+
+    def HyLink(self)->'IHyperLink':
+        """
+
+        """
+        GetDllLibXls().XlsOvalShape_get_HyLink.argtypes=[c_void_p]
+        GetDllLibXls().XlsOvalShape_get_HyLink.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsOvalShape_get_HyLink, self.Ptr)
+        ret = None if intPtr==None else HyperLink(intPtr)
+        return ret
+
+
+    @property
+
+    def PrstShapeType(self)->'PrstGeomShapeType':
+        """
+
+        """
+        GetDllLibXls().XlsOvalShape_get_PrstShapeType.argtypes=[c_void_p]
+        GetDllLibXls().XlsOvalShape_get_PrstShapeType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsOvalShape_get_PrstShapeType, self.Ptr)
+        objwraped = PrstGeomShapeType(ret)
+        return objwraped
+
+#    @property
+#
+#    def GeomPaths(self)->'CollectionExtended1':
+#        """
+#
+#        """
+#        GetDllLibXls().XlsOvalShape_get_GeomPaths.argtypes=[c_void_p]
+#        GetDllLibXls().XlsOvalShape_get_GeomPaths.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsOvalShape_get_GeomPaths, self.Ptr)
+#        ret = None if intPtr==None else CollectionExtended1(intPtr)
+#        return ret
+#
+
+
+#
+#    def Clone(self ,parent:'SpireObject',hashNewNames:'Dictionary2',dicFontIndexes:'Dictionary2',addToCollections:bool)->'IShape':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrhashNewNames:c_void_p = hashNewNames.Ptr
+#        intPtrdicFontIndexes:c_void_p = dicFontIndexes.Ptr
+#
+#        GetDllLibXls().XlsOvalShape_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p,c_bool]
+#        GetDllLibXls().XlsOvalShape_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsOvalShape_Clone, self.Ptr, intPtrparent,intPtrhashNewNames,intPtrdicFontIndexes,addToCollections)
+#        ret = None if intPtr==None else IShape(intPtr)
+#        return ret
+#
+
+

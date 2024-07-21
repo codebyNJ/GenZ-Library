@@ -1,0 +1,91 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ColorConditionValue (  XlsConditionValue) :
+    """
+
+    """
+    @property
+
+    def FormatColor(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().ColorConditionValue_get_FormatColor.argtypes=[c_void_p]
+        GetDllLibXls().ColorConditionValue_get_FormatColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ColorConditionValue_get_FormatColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @FormatColor.setter
+    def FormatColor(self, value:'Color'):
+        GetDllLibXls().ColorConditionValue_set_FormatColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().ColorConditionValue_set_FormatColor, self.Ptr, value.Ptr)
+
+    @property
+    def IsGTE(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ColorConditionValue_get_IsGTE.argtypes=[c_void_p]
+        GetDllLibXls().ColorConditionValue_get_IsGTE.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ColorConditionValue_get_IsGTE, self.Ptr)
+        return ret
+
+    @IsGTE.setter
+    def IsGTE(self, value:bool):
+        GetDllLibXls().ColorConditionValue_set_IsGTE.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ColorConditionValue_set_IsGTE, self.Ptr, value)
+
+    @property
+
+    def Position(self)->'ConditionValuePosition':
+        """
+
+        """
+        GetDllLibXls().ColorConditionValue_get_Position.argtypes=[c_void_p]
+        GetDllLibXls().ColorConditionValue_get_Position.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ColorConditionValue_get_Position, self.Ptr)
+        objwraped = ConditionValuePosition(ret)
+        return objwraped
+
+    @property
+
+    def Type(self)->'ConditionValueType':
+        """
+
+        """
+        GetDllLibXls().ColorConditionValue_get_Type.argtypes=[c_void_p]
+        GetDllLibXls().ColorConditionValue_get_Type.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ColorConditionValue_get_Type, self.Ptr)
+        objwraped = ConditionValueType(ret)
+        return objwraped
+
+    @Type.setter
+    def Type(self, value:'ConditionValueType'):
+        GetDllLibXls().ColorConditionValue_set_Type.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ColorConditionValue_set_Type, self.Ptr, value.value)
+
+    @property
+
+    def Value(self)->str:
+        """
+
+        """
+        GetDllLibXls().ColorConditionValue_get_Value.argtypes=[c_void_p]
+        GetDllLibXls().ColorConditionValue_get_Value.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ColorConditionValue_get_Value, self.Ptr))
+        return ret
+
+
+    @Value.setter
+    def Value(self, value:str):
+        GetDllLibXls().ColorConditionValue_set_Value.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ColorConditionValue_set_Value, self.Ptr, value)
+

@@ -1,0 +1,55 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class UtilityMethods (SpireObject) :
+    """
+
+    """
+    @staticmethod
+
+    def SetPdfLogFile(path:str):
+        """
+
+        """
+        
+        GetDllLibXls().UtilityMethods_SetPdfLogFile.argtypes=[ c_void_p]
+        CallCFunction(GetDllLibXls().UtilityMethods_SetPdfLogFile,  path)
+
+    @staticmethod
+
+    def SetLogFile(path:str):
+        """
+
+        """
+        
+        GetDllLibXls().UtilityMethods_SetLogFile.argtypes=[ c_void_p]
+        CallCFunction(GetDllLibXls().UtilityMethods_SetLogFile,  path)
+
+    @staticmethod
+
+    def SpecialSymbolConvertForStyleName(s:str)->str:
+        """
+
+        """
+        
+        GetDllLibXls().UtilityMethods_SpecialSymbolConvertForStyleName.argtypes=[ c_void_p]
+        GetDllLibXls().UtilityMethods_SpecialSymbolConvertForStyleName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().UtilityMethods_SpecialSymbolConvertForStyleName,  s))
+        return ret
+
+
+    @staticmethod
+    def StandardResolution()->float:
+        """
+
+        """
+        #GetDllLibXls().UtilityMethods_StandardResolution.argtypes=[]
+        GetDllLibXls().UtilityMethods_StandardResolution.restype=c_float
+        ret = CallCFunction(GetDllLibXls().UtilityMethods_StandardResolution)
+        return ret
+

@@ -1,0 +1,606 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IConditionalFormat (  IExcelApplication) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def FormatType(self)->'ConditionalFormatType':
+        """
+
+        """
+        pass
+
+
+    @FormatType.setter
+    @abc.abstractmethod
+    def FormatType(self, value:'ConditionalFormatType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Operator(self)->'ComparisonOperatorType':
+        """
+
+        """
+        pass
+
+
+    @Operator.setter
+    @abc.abstractmethod
+    def Operator(self, value:'ComparisonOperatorType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsBold(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsBold.setter
+    @abc.abstractmethod
+    def IsBold(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsItalic(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsItalic.setter
+    @abc.abstractmethod
+    def IsItalic(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Priority(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Priority.setter
+    @abc.abstractmethod
+    def Priority(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def FontKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @FontKnownColor.setter
+    @abc.abstractmethod
+    def FontKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def FontColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @FontColor.setter
+    @abc.abstractmethod
+    def FontColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Underline(self)->'FontUnderlineType':
+        """
+
+        """
+        pass
+
+
+    @Underline.setter
+    @abc.abstractmethod
+    def Underline(self, value:'FontUnderlineType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsStrikeThrough(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsStrikeThrough.setter
+    @abc.abstractmethod
+    def IsStrikeThrough(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LeftBorderKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @LeftBorderKnownColor.setter
+    @abc.abstractmethod
+    def LeftBorderKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LeftBorderColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @LeftBorderColor.setter
+    @abc.abstractmethod
+    def LeftBorderColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LeftBorderStyle(self)->'LineStyleType':
+        """
+
+        """
+        pass
+
+
+    @LeftBorderStyle.setter
+    @abc.abstractmethod
+    def LeftBorderStyle(self, value:'LineStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RightBorderKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @RightBorderKnownColor.setter
+    @abc.abstractmethod
+    def RightBorderKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RightBorderColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @RightBorderColor.setter
+    @abc.abstractmethod
+    def RightBorderColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RightBorderStyle(self)->'LineStyleType':
+        """
+
+        """
+        pass
+
+
+    @RightBorderStyle.setter
+    @abc.abstractmethod
+    def RightBorderStyle(self, value:'LineStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def TopBorderKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @TopBorderKnownColor.setter
+    @abc.abstractmethod
+    def TopBorderKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def TopBorderColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @TopBorderColor.setter
+    @abc.abstractmethod
+    def TopBorderColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def TopBorderStyle(self)->'LineStyleType':
+        """
+
+        """
+        pass
+
+
+    @TopBorderStyle.setter
+    @abc.abstractmethod
+    def TopBorderStyle(self, value:'LineStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BottomBorderKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @BottomBorderKnownColor.setter
+    @abc.abstractmethod
+    def BottomBorderKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BottomBorderColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @BottomBorderColor.setter
+    @abc.abstractmethod
+    def BottomBorderColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BottomBorderStyle(self)->'LineStyleType':
+        """
+
+        """
+        pass
+
+
+    @BottomBorderStyle.setter
+    @abc.abstractmethod
+    def BottomBorderStyle(self, value:'LineStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def FirstFormula(self)->str:
+        """
+
+        """
+        pass
+
+
+    @FirstFormula.setter
+    @abc.abstractmethod
+    def FirstFormula(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def SecondFormula(self)->str:
+        """
+
+        """
+        pass
+
+
+    @SecondFormula.setter
+    @abc.abstractmethod
+    def SecondFormula(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def KnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @KnownColor.setter
+    @abc.abstractmethod
+    def KnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Color(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @Color.setter
+    @abc.abstractmethod
+    def Color(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BackKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @BackKnownColor.setter
+    @abc.abstractmethod
+    def BackKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BackColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @BackColor.setter
+    @abc.abstractmethod
+    def BackColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def FillPattern(self)->'ExcelPatternType':
+        """
+
+        """
+        pass
+
+
+    @FillPattern.setter
+    @abc.abstractmethod
+    def FillPattern(self, value:'ExcelPatternType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsSuperScript(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsSuperScript.setter
+    @abc.abstractmethod
+    def IsSuperScript(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsSubScript(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsSubScript.setter
+    @abc.abstractmethod
+    def IsSubScript(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def DataBar(self)->'DataBar':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def IconSet(self)->'IconSet':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ColorScale(self)->'ColorScale':
+        """
+
+        """
+        pass
+
+

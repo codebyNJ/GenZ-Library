@@ -1,0 +1,101 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsBordersCollection (  CollectionBase[XlsBorder],IBorders) :
+    """
+
+    """
+    @property
+
+    def KnownColor(self)->'ExcelColors':
+        """
+    <summary>
+        Returns or sets the primary excel color of the object. 
+    </summary>
+        """
+        GetDllLibXls().XlsBordersCollection_get_KnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsBordersCollection_get_KnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBordersCollection_get_KnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @KnownColor.setter
+    def KnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsBordersCollection_set_KnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBordersCollection_set_KnownColor, self.Ptr, value.value)
+
+    @property
+
+    def Color(self)->'Color':
+        """
+    <summary>
+        Returns or sets the primary color of the object.
+    </summary>
+        """
+        GetDllLibXls().XlsBordersCollection_get_Color.argtypes=[c_void_p]
+        GetDllLibXls().XlsBordersCollection_get_Color.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsBordersCollection_get_Color, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @Color.setter
+    def Color(self, value:'Color'):
+        GetDllLibXls().XlsBordersCollection_set_Color.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsBordersCollection_set_Color, self.Ptr, value.Ptr)
+
+
+    def get_Item(self ,index:'BordersLineType')->'IBorder':
+        """
+
+        """
+        enumindex:c_int = index.value
+
+        GetDllLibXls().XlsBordersCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsBordersCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsBordersCollection_get_Item, self.Ptr, enumindex)
+        ret = None if intPtr==None else IBorder(intPtr)
+        return ret
+
+
+    @property
+
+    def LineStyle(self)->'LineStyleType':
+        """
+    <summary>
+        Returns or sets the line style for the border.
+    </summary>
+        """
+        GetDllLibXls().XlsBordersCollection_get_LineStyle.argtypes=[c_void_p]
+        GetDllLibXls().XlsBordersCollection_get_LineStyle.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBordersCollection_get_LineStyle, self.Ptr)
+        objwraped = LineStyleType(ret)
+        return objwraped
+
+    @LineStyle.setter
+    def LineStyle(self, value:'LineStyleType'):
+        GetDllLibXls().XlsBordersCollection_set_LineStyle.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBordersCollection_set_LineStyle, self.Ptr, value.value)
+
+    @property
+
+    def Value(self)->'LineStyleType':
+        """
+
+        """
+        GetDllLibXls().XlsBordersCollection_get_Value.argtypes=[c_void_p]
+        GetDllLibXls().XlsBordersCollection_get_Value.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBordersCollection_get_Value, self.Ptr)
+        objwraped = LineStyleType(ret)
+        return objwraped
+
+    @Value.setter
+    def Value(self, value:'LineStyleType'):
+        GetDllLibXls().XlsBordersCollection_set_Value.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBordersCollection_set_Value, self.Ptr, value.value)
+

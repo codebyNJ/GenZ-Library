@@ -1,0 +1,171 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsChartGridLine (  XlsObject, IChartGridLine) :
+    """
+
+    """
+    @property
+
+    def AxisLineType(self)->'AxisLineIdentifierType':
+        """
+    <summary>
+        Gets or sets axis line type.
+    </summary>
+        """
+        GetDllLibXls().XlsChartGridLine_get_AxisLineType.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartGridLine_get_AxisLineType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartGridLine_get_AxisLineType, self.Ptr)
+        objwraped = AxisLineIdentifierType(ret)
+        return objwraped
+
+    @property
+
+    def Border(self)->'ChartBorder':
+        """
+    <summary>
+        Gets line border. 
+    </summary>
+        """
+        GetDllLibXls().XlsChartGridLine_get_Border.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartGridLine_get_Border.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartGridLine_get_Border, self.Ptr)
+        ret = None if intPtr==None else ChartBorder(intPtr)
+        return ret
+
+
+    @property
+
+    def Format3D(self)->'Format3D':
+        """
+
+        """
+        GetDllLibXls().XlsChartGridLine_get_Format3D.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartGridLine_get_Format3D.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartGridLine_get_Format3D, self.Ptr)
+        ret = None if intPtr==None else Format3D(intPtr)
+        return ret
+
+
+    @property
+    def HasFormat3D(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartGridLine_get_HasFormat3D.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartGridLine_get_HasFormat3D.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartGridLine_get_HasFormat3D, self.Ptr)
+        return ret
+
+    @property
+    def HasInterior(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartGridLine_get_HasInterior.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartGridLine_get_HasInterior.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartGridLine_get_HasInterior, self.Ptr)
+        return ret
+
+    @property
+    def HasLineProperties(self)->bool:
+        """
+    <summary>
+        Indicates whether line formatting object was created.
+    </summary>
+        """
+        GetDllLibXls().XlsChartGridLine_get_HasLineProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartGridLine_get_HasLineProperties.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartGridLine_get_HasLineProperties, self.Ptr)
+        return ret
+
+    @property
+    def HasShadow(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartGridLine_get_HasShadow.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartGridLine_get_HasShadow.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartGridLine_get_HasShadow, self.Ptr)
+        return ret
+
+    @property
+
+    def Shadow(self)->'ChartShadow':
+        """
+
+        """
+        GetDllLibXls().XlsChartGridLine_get_Shadow.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartGridLine_get_Shadow.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartGridLine_get_Shadow, self.Ptr)
+        ret = None if intPtr==None else ChartShadow(intPtr)
+        return ret
+
+
+    @property
+
+    def LineProperties(self)->'ChartBorder':
+        """
+    <summary>
+        Gets line border.
+    </summary>
+        """
+        GetDllLibXls().XlsChartGridLine_get_LineProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartGridLine_get_LineProperties.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartGridLine_get_LineProperties, self.Ptr)
+        ret = None if intPtr==None else ChartBorder(intPtr)
+        return ret
+
+
+    @property
+
+    def Interior(self)->'IChartInterior':
+        """
+
+        """
+        GetDllLibXls().XlsChartGridLine_get_Interior.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartGridLine_get_Interior.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartGridLine_get_Interior, self.Ptr)
+        ret = None if intPtr==None else IChartInterior(intPtr)
+        return ret
+
+
+    @property
+
+    def Fill(self)->'IShapeFill':
+        """
+
+        """
+        GetDllLibXls().XlsChartGridLine_get_Fill.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartGridLine_get_Fill.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartGridLine_get_Fill, self.Ptr)
+        ret = None if intPtr==None else XlsShapeFill(intPtr)
+        return ret
+
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsChartGridLine_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsChartGridLine_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartGridLine_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    def Delete(self):
+        """
+
+        """
+        GetDllLibXls().XlsChartGridLine_Delete.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartGridLine_Delete, self.Ptr)
+

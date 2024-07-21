@@ -1,0 +1,25 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class QueryTableCollection (SpireObject) :
+    """
+
+    """
+
+    def get_Item(self ,index:int)->'QueryTableXls':
+        """
+
+        """
+        
+        GetDllLibXls().QueryTableCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().QueryTableCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().QueryTableCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else QueryTableXls(intPtr)
+        return ret
+
+

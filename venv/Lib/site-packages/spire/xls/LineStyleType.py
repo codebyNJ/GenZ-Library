@@ -1,0 +1,29 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class LineStyleType(Enum):
+    """
+    <summary>
+        Border line styles.
+    </summary>
+    """
+    none = 0
+    Thin = 1
+    Medium = 2
+    Dashed = 3
+    Dotted = 4
+    Thick = 5
+    Double = 6
+    Hair = 7
+    MediumDashed = 8
+    DashDot = 9
+    MediumDashDot = 10
+    DashDotDot = 11
+    MediumDashDotDot = 12
+    SlantedDashDot = 13
+

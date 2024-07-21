@@ -1,0 +1,68 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IDataValidationTable (abc.ABC) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def Workbook(self)->'Workbook':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Worksheet(self)->'Worksheet':
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShapesCount(self)->int:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def get_Item(self ,index:int)->'XlsDataValidationCollection':
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def FindDataValidation(self ,iCellIndex:int)->'IDataValidation':
+        """
+
+        """
+        pass
+
+
+#
+#    @abc.abstractmethod
+#    def Remove(self ,rectangles:'Rectangle[]'):
+#        """
+#
+#        """
+#        pass
+#
+

@@ -1,0 +1,301 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsChartDropBar (  XlsObject, IChartFillBorder) :
+    """
+
+    """
+    @property
+    def HasInterior(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartDropBar_get_HasInterior.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_HasInterior.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartDropBar_get_HasInterior, self.Ptr)
+        return ret
+
+    @property
+    def HasLineProperties(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartDropBar_get_HasLineProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_HasLineProperties.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartDropBar_get_HasLineProperties, self.Ptr)
+        return ret
+
+    @property
+    def HasFormat3D(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartDropBar_get_HasFormat3D.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_HasFormat3D.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartDropBar_get_HasFormat3D, self.Ptr)
+        return ret
+
+    @property
+    def HasShadow(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartDropBar_get_HasShadow.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_HasShadow.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartDropBar_get_HasShadow, self.Ptr)
+        return ret
+
+    @property
+
+    def LineProperties(self)->'ChartBorder':
+        """
+
+        """
+        GetDllLibXls().XlsChartDropBar_get_LineProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_LineProperties.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartDropBar_get_LineProperties, self.Ptr)
+        ret = None if intPtr==None else ChartBorder(intPtr)
+        return ret
+
+
+    @property
+
+    def Interior(self)->'IChartInterior':
+        """
+
+        """
+        GetDllLibXls().XlsChartDropBar_get_Interior.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_Interior.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartDropBar_get_Interior, self.Ptr)
+        ret = None if intPtr==None else IChartInterior(intPtr)
+        return ret
+
+
+    @property
+
+    def Fill(self)->'IShapeFill':
+        """
+
+        """
+        GetDllLibXls().XlsChartDropBar_get_Fill.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_Fill.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartDropBar_get_Fill, self.Ptr)
+        ret = None if intPtr==None else XlsShapeFill(intPtr)
+        return ret
+
+
+    @property
+
+    def Format3D(self)->'Format3D':
+        """
+
+        """
+        GetDllLibXls().XlsChartDropBar_get_Format3D.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_Format3D.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartDropBar_get_Format3D, self.Ptr)
+        ret = None if intPtr==None else Format3D(intPtr)
+        return ret
+
+
+    @property
+    def GapWidth(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsChartDropBar_get_GapWidth.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_GapWidth.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartDropBar_get_GapWidth, self.Ptr)
+        return ret
+
+    @GapWidth.setter
+    def GapWidth(self, value:int):
+        GetDllLibXls().XlsChartDropBar_set_GapWidth.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartDropBar_set_GapWidth, self.Ptr, value)
+
+    @property
+
+    def Shadow(self)->'ChartShadow':
+        """
+
+        """
+        GetDllLibXls().XlsChartDropBar_get_Shadow.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_Shadow.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartDropBar_get_Shadow, self.Ptr)
+        ret = None if intPtr==None else ChartShadow(intPtr)
+        return ret
+
+
+    @property
+
+    def ForeGroundColorObject(self)->'OColor':
+        """
+    <summary>
+        Gets or sets foreground color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartDropBar_get_ForeGroundColorObject.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_ForeGroundColorObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartDropBar_get_ForeGroundColorObject, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def ForeGroundColor(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().XlsChartDropBar_get_ForeGroundColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_ForeGroundColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartDropBar_get_ForeGroundColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @ForeGroundColor.setter
+    def ForeGroundColor(self, value:'Color'):
+        GetDllLibXls().XlsChartDropBar_set_ForeGroundColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartDropBar_set_ForeGroundColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def ForeGroundKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        GetDllLibXls().XlsChartDropBar_get_ForeGroundKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_ForeGroundKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartDropBar_get_ForeGroundKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @ForeGroundKnownColor.setter
+    def ForeGroundKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsChartDropBar_set_ForeGroundKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartDropBar_set_ForeGroundKnownColor, self.Ptr, value.value)
+
+    @property
+
+    def BackGroundColor(self)->'Color':
+        """
+    <summary>
+        Gets or sets background color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartDropBar_get_BackGroundColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_BackGroundColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartDropBar_get_BackGroundColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @BackGroundColor.setter
+    def BackGroundColor(self, value:'Color'):
+        GetDllLibXls().XlsChartDropBar_set_BackGroundColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartDropBar_set_BackGroundColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def BackGroundKnownColor(self)->'ExcelColors':
+        """
+    <summary>
+        Gets or sets background color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartDropBar_get_BackGroundKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_BackGroundKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartDropBar_get_BackGroundKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @BackGroundKnownColor.setter
+    def BackGroundKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsChartDropBar_set_BackGroundKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartDropBar_set_BackGroundKnownColor, self.Ptr, value.value)
+
+    @property
+
+    def BackGroundColorObject(self)->'OColor':
+        """
+
+        """
+        GetDllLibXls().XlsChartDropBar_get_BackGroundColorObject.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_BackGroundColorObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartDropBar_get_BackGroundColorObject, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def Pattern(self)->'ExcelPatternType':
+        """
+    <summary>
+        Gets pattern.
+    </summary>
+        """
+        GetDllLibXls().XlsChartDropBar_get_Pattern.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_Pattern.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartDropBar_get_Pattern, self.Ptr)
+        objwraped = ExcelPatternType(ret)
+        return objwraped
+
+    @Pattern.setter
+    def Pattern(self, value:'ExcelPatternType'):
+        GetDllLibXls().XlsChartDropBar_set_Pattern.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartDropBar_set_Pattern, self.Ptr, value.value)
+
+    @property
+    def IsAutomaticFormat(self)->bool:
+        """
+    <summary>
+        Gets if use automatic format.
+    </summary>
+        """
+        GetDllLibXls().XlsChartDropBar_get_IsAutomaticFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_IsAutomaticFormat.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartDropBar_get_IsAutomaticFormat, self.Ptr)
+        return ret
+
+    @IsAutomaticFormat.setter
+    def IsAutomaticFormat(self, value:bool):
+        GetDllLibXls().XlsChartDropBar_set_IsAutomaticFormat.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartDropBar_set_IsAutomaticFormat, self.Ptr, value)
+
+    @property
+    def Visible(self)->bool:
+        """
+    <summary>
+        Gets or sets visiblity.
+    </summary>
+        """
+        GetDllLibXls().XlsChartDropBar_get_Visible.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDropBar_get_Visible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartDropBar_get_Visible, self.Ptr)
+        return ret
+
+    @Visible.setter
+    def Visible(self, value:bool):
+        GetDllLibXls().XlsChartDropBar_set_Visible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartDropBar_set_Visible, self.Ptr, value)
+
+
+    def Clone(self ,parent:'SpireObject')->'XlsChartDropBar':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsChartDropBar_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsChartDropBar_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartDropBar_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else XlsChartDropBar(intPtr)
+        return ret
+
+

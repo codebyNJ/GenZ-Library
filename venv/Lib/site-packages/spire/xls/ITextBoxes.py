@@ -1,0 +1,61 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ITextBoxes (abc.ABC) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Count(self)->int:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,index:int)->ITextBoxLinkShape:
+        """
+    <summary>
+        Returns single item from the collection.
+    </summary>
+    <param name="index">Item's index to get.</param>
+    <returns>Single item from the collection.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,name:str)->ITextBoxLinkShape:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def AddTextBox(self ,row:int,column:int,height:int,width:int)->'ITextBoxLinkShape':
+        """
+    <summary>
+        Adds new item to the collection.
+    </summary>
+    <param name="row">One-based row index of the top-left corner of the new item.</param>
+    <param name="column">One-based column index of the top-left corner of the new item.</param>
+    <param name="height">Height in pixels of the new item.</param>
+    <param name="width">Width in pixels of the new item.</param>
+    <returns>Newly added item.</returns>
+        """
+        pass
+
+

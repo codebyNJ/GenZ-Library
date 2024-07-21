@@ -1,0 +1,108 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsChartDataPoint (  XlsObject, IChartDataPoint) :
+    """
+
+    """
+    @property
+
+    def DataFormat(self)->'IChartSerieDataFormat':
+        """
+
+        """
+        GetDllLibXls().XlsChartDataPoint_get_DataFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDataPoint_get_DataFormat.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartDataPoint_get_DataFormat, self.Ptr)
+        ret = None if intPtr==None else XlsChartSerieDataFormat(intPtr)
+        return ret
+
+
+    @property
+
+    def DataLabels(self)->'IChartDataLabels':
+        """
+
+        """
+        GetDllLibXls().XlsChartDataPoint_get_DataLabels.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDataPoint_get_DataLabels.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartDataPoint_get_DataLabels, self.Ptr)
+        ret = None if intPtr==None else XlsChartDataLabels(intPtr)
+        return ret
+
+
+    @property
+    def Index(self)->int:
+        """
+    <summary>
+        Gets or sets index of the point in the points collection.
+    </summary>
+        """
+        GetDllLibXls().XlsChartDataPoint_get_Index.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDataPoint_get_Index.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartDataPoint_get_Index, self.Ptr)
+        return ret
+
+    @property
+    def IsDefault(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartDataPoint_get_IsDefault.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDataPoint_get_IsDefault.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartDataPoint_get_IsDefault, self.Ptr)
+        return ret
+
+    @property
+    def HasDataLabels(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartDataPoint_get_HasDataLabels.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDataPoint_get_HasDataLabels.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartDataPoint_get_HasDataLabels, self.Ptr)
+        return ret
+
+    @property
+    def SetAsTotal(self)->bool:
+        """
+    <summary>
+         True if the data point is considered as Subtotals or Totals. otherwise False.
+    </summary>
+<remarks>Applies only to Waterfall charts.</remarks>
+        """
+        GetDllLibXls().XlsChartDataPoint_get_SetAsTotal.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartDataPoint_get_SetAsTotal.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartDataPoint_get_SetAsTotal, self.Ptr)
+        return ret
+
+    @SetAsTotal.setter
+    def SetAsTotal(self, value:bool):
+        GetDllLibXls().XlsChartDataPoint_set_SetAsTotal.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartDataPoint_set_SetAsTotal, self.Ptr, value)
+
+
+    def ClearDataFormats(self ,format:'XlsChartSerieDataFormat'):
+        """
+
+        """
+        intPtrformat:c_void_p = format.Ptr
+
+        GetDllLibXls().XlsChartDataPoint_ClearDataFormats.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartDataPoint_ClearDataFormats, self.Ptr, intPtrformat)
+
+
+    def CloneDataFormat(self ,serieFormat:'XlsChartSerieDataFormat'):
+        """
+
+        """
+        intPtrserieFormat:c_void_p = serieFormat.Ptr
+
+        GetDllLibXls().XlsChartDataPoint_CloneDataFormat.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartDataPoint_CloneDataFormat, self.Ptr, intPtrserieFormat)
+

@@ -1,0 +1,22 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class RectangleShapeType(Enum):
+    """
+
+    """
+    Rect = 0
+    RoundRect = 1
+    Snip1Rect = 2
+    Snip2SameRect = 3
+    Snip2DiagRect = 4
+    SnipRoundRect = 5
+    Round1Rect = 6
+    Round2SameRect = 7
+    Round2DiagRect = 8
+

@@ -1,0 +1,138 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IReflectionEffect (abc.ABC) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Blur(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Blur.setter
+    @abc.abstractmethod
+    def Blur(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Direction(self)->float:
+        """
+
+        """
+        pass
+
+
+    @Direction.setter
+    @abc.abstractmethod
+    def Direction(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Distance(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Distance.setter
+    @abc.abstractmethod
+    def Distance(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def FadeDirection(self)->float:
+        """
+
+        """
+        pass
+
+
+    @FadeDirection.setter
+    @abc.abstractmethod
+    def FadeDirection(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def RotWithShape(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @RotWithShape.setter
+    @abc.abstractmethod
+    def RotWithShape(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Size(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Size.setter
+    @abc.abstractmethod
+    def Size(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Transparency(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Transparency.setter
+    @abc.abstractmethod
+    def Transparency(self, value:int):
+        """
+
+        """
+        pass
+
+

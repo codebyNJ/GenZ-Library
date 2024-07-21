@@ -1,0 +1,19 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class VariableTypeAction(Enum):
+    """
+    <summary>
+        Defines value type and numberformat in the 
+            template marker variable.
+    </summary>
+    """
+    DetectDataType = 0
+    DetectNumberFormat = 1
+    none = 2
+

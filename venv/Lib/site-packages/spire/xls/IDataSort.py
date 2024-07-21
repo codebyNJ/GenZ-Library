@@ -1,0 +1,95 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IDataSort (abc.ABC) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def IsCaseSensitive(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsCaseSensitive.setter
+    @abc.abstractmethod
+    def IsCaseSensitive(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsIncludeTitle(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsIncludeTitle.setter
+    @abc.abstractmethod
+    def IsIncludeTitle(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Orientation(self)->'SortOrientationType':
+        """
+
+        """
+        pass
+
+
+    @Orientation.setter
+    @abc.abstractmethod
+    def Orientation(self, value:'SortOrientationType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def SortColumns(self)->'SortColumns':
+        """
+
+        """
+        pass
+
+
+    @SortColumns.setter
+    @abc.abstractmethod
+    def SortColumns(self, value:'SortColumns'):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Sort(self ,range:'CellRange'):
+        """
+
+        """
+        pass
+
+

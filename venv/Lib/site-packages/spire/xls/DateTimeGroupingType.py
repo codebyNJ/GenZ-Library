@@ -1,0 +1,19 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class DateTimeGroupingType(Enum):
+    """
+
+    """
+    Day = 0
+    Hour = 1
+    Minute = 2
+    Month = 3
+    Second = 4
+    Year = 5
+

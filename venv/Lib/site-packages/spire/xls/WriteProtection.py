@@ -1,0 +1,64 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class WriteProtection (SpireObject) :
+    """
+
+    """
+    @property
+
+    def Author(self)->str:
+        """
+    <summary>
+        Gets and sets the author.
+    </summary>
+        """
+        GetDllLibXls().WriteProtection_get_Author.argtypes=[c_void_p]
+        GetDllLibXls().WriteProtection_get_Author.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().WriteProtection_get_Author, self.Ptr))
+        return ret
+
+
+    @Author.setter
+    def Author(self, value:str):
+        GetDllLibXls().WriteProtection_set_Author.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().WriteProtection_set_Author, self.Ptr, value)
+
+    @property
+    def IsWriteProtected(self)->bool:
+        """
+    <summary>
+        Gets whether this workbook is write protected.
+    </summary>
+        """
+        GetDllLibXls().WriteProtection_get_IsWriteProtected.argtypes=[c_void_p]
+        GetDllLibXls().WriteProtection_get_IsWriteProtected.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().WriteProtection_get_IsWriteProtected, self.Ptr)
+        return ret
+
+    def SetPassword(self, value:str):
+        GetDllLibXls().WriteProtection_set_Password.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().WriteProtection_set_Password, self.Ptr, value)
+
+    @property
+    def RecommendReadOnly(self)->bool:
+        """
+    <summary>
+        Gets or sets whether the Read Only Recommended option is selected.
+    </summary>
+        """
+        GetDllLibXls().WriteProtection_get_RecommendReadOnly.argtypes=[c_void_p]
+        GetDllLibXls().WriteProtection_get_RecommendReadOnly.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().WriteProtection_get_RecommendReadOnly, self.Ptr)
+        return ret
+
+    @RecommendReadOnly.setter
+    def RecommendReadOnly(self, value:bool):
+        GetDllLibXls().WriteProtection_set_RecommendReadOnly.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().WriteProtection_set_RecommendReadOnly, self.Ptr, value)
+

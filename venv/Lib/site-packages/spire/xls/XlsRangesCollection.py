@@ -1,0 +1,1566 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsRangesCollection (  CollectionBase[XlsRange], IXLSRanges, ICombinedRange) :
+    """
+
+    """
+
+    def Intersect(self ,range:'IXLSRange')->'IXLSRange':
+        """
+
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().XlsRangesCollection_Intersect.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsRangesCollection_Intersect.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_Intersect, self.Ptr, intPtrrange)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Merge(self ,range:IXLSRange)->IXLSRange:
+        """
+
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().XlsRangesCollection_Merge.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsRangesCollection_Merge.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_Merge, self.Ptr, intPtrrange)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    def AutoFitRows(self):
+        """
+    <summary>
+        Autofits all rows.
+    </summary>
+        """
+        GetDllLibXls().XlsRangesCollection_AutoFitRows.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_AutoFitRows, self.Ptr)
+
+    def AutoFitColumns(self):
+        """
+    <summary>
+        Autofits all columns. 
+    </summary>
+        """
+        GetDllLibXls().XlsRangesCollection_AutoFitColumns.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_AutoFitColumns, self.Ptr)
+
+
+    def AddComment(self)->'ICommentShape':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_AddComment.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_AddComment.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_AddComment, self.Ptr)
+        ret = None if intPtr==None else XlsComment(intPtr)
+        return ret
+
+
+    @dispatch
+    def BorderAround(self):
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_BorderAround.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_BorderAround, self.Ptr)
+
+    @dispatch
+
+    def BorderAround(self ,borderLine:LineStyleType):
+        """
+
+        """
+        enumborderLine:c_int = borderLine.value
+
+        GetDllLibXls().XlsRangesCollection_BorderAroundB.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_BorderAroundB, self.Ptr, enumborderLine)
+
+    @dispatch
+
+    def BorderAround(self ,borderLine:LineStyleType,borderColor:Color):
+        """
+
+        """
+        enumborderLine:c_int = borderLine.value
+        intPtrborderColor:c_void_p = borderColor.Ptr
+
+        GetDllLibXls().XlsRangesCollection_BorderAroundBB.argtypes=[c_void_p ,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_BorderAroundBB, self.Ptr, enumborderLine,intPtrborderColor)
+
+    @dispatch
+
+    def BorderAround(self ,borderLine:LineStyleType,borderColor:ExcelColors):
+        """
+    <summary>
+        Sets around border for current range.
+    </summary>
+    <param name="borderLine">Represents border line.</param>
+    <param name="borderColor">Represents border color as ExcelColors.</param>
+        """
+        enumborderLine:c_int = borderLine.value
+        enumborderColor:c_int = borderColor.value
+
+        GetDllLibXls().XlsRangesCollection_BorderAroundBB1.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_BorderAroundBB1, self.Ptr, enumborderLine,enumborderColor)
+
+    @dispatch
+    def BorderInside(self):
+        """
+    <summary>
+        Sets inside border for current range.
+    </summary>
+        """
+        GetDllLibXls().XlsRangesCollection_BorderInside.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_BorderInside, self.Ptr)
+
+    @dispatch
+
+    def BorderInside(self ,borderLine:LineStyleType):
+        """
+
+        """
+        enumborderLine:c_int = borderLine.value
+
+        GetDllLibXls().XlsRangesCollection_BorderInsideB.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_BorderInsideB, self.Ptr, enumborderLine)
+
+    @dispatch
+
+    def BorderInside(self ,borderLine:LineStyleType,borderColor:Color):
+        """
+
+        """
+        enumborderLine:c_int = borderLine.value
+        intPtrborderColor:c_void_p = borderColor.Ptr
+
+        GetDllLibXls().XlsRangesCollection_BorderInsideBB.argtypes=[c_void_p ,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_BorderInsideBB, self.Ptr, enumborderLine,intPtrborderColor)
+
+    @dispatch
+
+    def BorderInside(self ,borderLine:LineStyleType,borderColor:ExcelColors):
+        """
+    <summary>
+        Sets inside border for current range.
+    </summary>
+    <param name="borderLine">Represents border line.</param>
+    <param name="borderColor">Represents border color as ExcelColors.</param>
+        """
+        enumborderLine:c_int = borderLine.value
+        enumborderColor:c_int = borderColor.value
+
+        GetDllLibXls().XlsRangesCollection_BorderInsideBB1.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_BorderInsideBB1, self.Ptr, enumborderLine,enumborderColor)
+
+    def BorderNone(self):
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_BorderNone.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_BorderNone, self.Ptr)
+
+
+    def CollapseGroup(self ,groupBy:'GroupByType'):
+        """
+
+        """
+        enumgroupBy:c_int = groupBy.value
+
+        GetDllLibXls().XlsRangesCollection_CollapseGroup.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_CollapseGroup, self.Ptr, enumgroupBy)
+
+    @dispatch
+
+    def ExpandGroup(self ,groupBy:GroupByType):
+        """
+
+        """
+        enumgroupBy:c_int = groupBy.value
+
+        GetDllLibXls().XlsRangesCollection_ExpandGroup.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_ExpandGroup, self.Ptr, enumgroupBy)
+
+    @dispatch
+
+    def ExpandGroup(self ,groupBy:GroupByType,flags:ExpandCollapseFlags):
+        """
+
+        """
+        enumgroupBy:c_int = groupBy.value
+        enumflags:c_int = flags.value
+
+        GetDllLibXls().XlsRangesCollection_ExpandGroupGF.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_ExpandGroupGF, self.Ptr, enumgroupBy,enumflags)
+
+#
+#    def GetNewRangeLocation(self ,names:'Dictionary2',sheetName:'String&')->str:
+#        """
+#
+#        """
+#        intPtrnames:c_void_p = names.Ptr
+#        intPtrsheetName:c_void_p = sheetName.Ptr
+#
+#        GetDllLibXls().XlsRangesCollection_GetNewRangeLocation.argtypes=[c_void_p ,c_void_p,c_void_p]
+#        GetDllLibXls().XlsRangesCollection_GetNewRangeLocation.restype=c_wchar_p
+#        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_GetNewRangeLocation, self.Ptr, intPtrnames,intPtrsheetName)
+#        return ret
+#
+
+
+#
+#    def Clone(self ,parent:'SpireObject',hashNewNames:'Dictionary2',book:'XlsWorkbook')->'IXLSRange':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrhashNewNames:c_void_p = hashNewNames.Ptr
+#        intPtrbook:c_void_p = book.Ptr
+#
+#        GetDllLibXls().XlsRangesCollection_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+#        GetDllLibXls().XlsRangesCollection_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_Clone, self.Ptr, intPtrparent,intPtrhashNewNames,intPtrbook)
+#        ret = None if intPtr==None else XlsRange(intPtr)
+#        return ret
+#
+
+
+    @property
+    def CellsCount(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_CellsCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_CellsCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_CellsCount, self.Ptr)
+        return ret
+
+    def ClearConditionalFormats(self):
+        """
+    <summary>
+        Clears conditional formats.
+    </summary>
+        """
+        GetDllLibXls().XlsRangesCollection_ClearConditionalFormats.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_ClearConditionalFormats, self.Ptr)
+
+
+    def GetRectangles(self)->List['Rectangle']:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_GetRectangles.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_GetRectangles.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().XlsRangesCollection_GetRectangles, self.Ptr)
+        ret = GetVectorFromArray(intPtrArray, Rectangle)
+        return ret
+
+
+    def GetRectanglesCount(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_GetRectanglesCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_GetRectanglesCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_GetRectanglesCount, self.Ptr)
+        return ret
+
+    @property
+
+    def WorksheetName(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_WorksheetName.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_WorksheetName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_WorksheetName, self.Ptr))
+        return ret
+
+
+
+    def Remove(self ,range:'IXLSRange'):
+        """
+
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().XlsRangesCollection_Remove.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_Remove, self.Ptr, intPtrrange)
+
+    @dispatch
+
+    def get_Item(self ,index:int)->IXLSRange:
+        """
+
+        """
+        
+        GetDllLibXls().XlsRangesCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsRangesCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def set_Item(self ,index:int,value:IXLSRange):
+        """
+
+        """
+        intPtrvalue:c_void_p = value.Ptr
+
+        GetDllLibXls().XlsRangesCollection_set_Item.argtypes=[c_void_p ,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_Item, self.Ptr, index,intPtrvalue)
+
+
+    def GetEnumerator(self)->'IEnumerator':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_GetEnumerator.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_GetEnumerator.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_GetEnumerator, self.Ptr)
+        ret = None if intPtr==None else IEnumerator(intPtr)
+        return ret
+
+
+    @property
+
+    def EnvalutedValue(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_EnvalutedValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_EnvalutedValue.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_EnvalutedValue, self.Ptr))
+        return ret
+
+
+    @property
+
+    def RangeAddress(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_RangeAddress.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_RangeAddress.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_RangeAddress, self.Ptr))
+        return ret
+
+
+    @property
+
+    def RangeAddressLocal(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_RangeAddressLocal.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_RangeAddressLocal.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_RangeAddressLocal, self.Ptr))
+        return ret
+
+
+    @property
+
+    def RangeGlobalAddress(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_RangeGlobalAddress.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_RangeGlobalAddress.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_RangeGlobalAddress, self.Ptr))
+        return ret
+
+
+    @property
+
+    def RangeR1C1Address(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_RangeR1C1Address.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_RangeR1C1Address.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_RangeR1C1Address, self.Ptr))
+        return ret
+
+
+    @property
+
+    def RangeR1C1AddressLocal(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_RangeR1C1AddressLocal.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_RangeR1C1AddressLocal.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_RangeR1C1AddressLocal, self.Ptr))
+        return ret
+
+
+    @property
+    def BooleanValue(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_BooleanValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_BooleanValue.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_BooleanValue, self.Ptr)
+        return ret
+
+    @BooleanValue.setter
+    def BooleanValue(self, value:bool):
+        GetDllLibXls().XlsRangesCollection_set_BooleanValue.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_BooleanValue, self.Ptr, value)
+
+    @property
+
+    def Borders(self)->'IBorders':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_Borders.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_Borders.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_Borders, self.Ptr)
+        ret = None if intPtr==None else XlsBordersCollection(intPtr)
+        return ret
+
+
+#    @property
+#
+#    def Cells(self)->'ListCellRanges':
+#        """
+#
+#        """
+#        GetDllLibXls().XlsRangesCollection_get_Cells.argtypes=[c_void_p]
+#        GetDllLibXls().XlsRangesCollection_get_Cells.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_Cells, self.Ptr)
+#        ret = None if intPtr==None else ListCellRanges(intPtr)
+#        return ret
+
+
+#    @property
+#
+#    def CellList(self)->'List1':
+#        """
+#
+#        """
+#        GetDllLibXls().XlsRangesCollection_get_CellList.argtypes=[c_void_p]
+#        GetDllLibXls().XlsRangesCollection_get_CellList.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_CellList, self.Ptr)
+#        ret = None if intPtr==None else List1(intPtr)
+#        return ret
+#
+
+
+    @property
+    def Column(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_Column.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_Column.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_Column, self.Ptr)
+        return ret
+
+    @property
+    def ColumnGroupLevel(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_ColumnGroupLevel.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_ColumnGroupLevel.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_ColumnGroupLevel, self.Ptr)
+        return ret
+
+    @property
+    def ColumnWidth(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_ColumnWidth.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_ColumnWidth.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_ColumnWidth, self.Ptr)
+        return ret
+
+    @ColumnWidth.setter
+    def ColumnWidth(self, value:float):
+        GetDllLibXls().XlsRangesCollection_set_ColumnWidth.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_ColumnWidth, self.Ptr, value)
+
+    @property
+
+    def DateTimeValue(self)->'DateTime':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_DateTimeValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_DateTimeValue.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_DateTimeValue, self.Ptr)
+        ret = None if intPtr==None else DateTime(intPtr)
+        return ret
+
+
+    @DateTimeValue.setter
+    def DateTimeValue(self, value:'DateTime'):
+        GetDllLibXls().XlsRangesCollection_set_DateTimeValue.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_DateTimeValue, self.Ptr, value.Ptr)
+
+    @property
+
+    def NumberText(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_NumberText.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_NumberText.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_NumberText, self.Ptr))
+        return ret
+
+
+    @property
+
+    def EndCell(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_EndCell.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_EndCell.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_EndCell, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @property
+
+    def EntireColumn(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_EntireColumn.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_EntireColumn.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_EntireColumn, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @property
+
+    def EntireRow(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_EntireRow.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_EntireRow.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_EntireRow, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @property
+
+    def ErrorValue(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_ErrorValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_ErrorValue.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_ErrorValue, self.Ptr))
+        return ret
+
+
+    @ErrorValue.setter
+    def ErrorValue(self, value:str):
+        GetDllLibXls().XlsRangesCollection_set_ErrorValue.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_ErrorValue, self.Ptr, value)
+
+    @property
+
+    def Formula(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_Formula.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_Formula.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_Formula, self.Ptr))
+        return ret
+
+
+    @Formula.setter
+    def Formula(self, value:str):
+        GetDllLibXls().XlsRangesCollection_set_Formula.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_Formula, self.Ptr, value)
+
+    @property
+
+    def FormulaR1C1(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_FormulaR1C1.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_FormulaR1C1.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_FormulaR1C1, self.Ptr))
+        return ret
+
+
+    @FormulaR1C1.setter
+    def FormulaR1C1(self, value:str):
+        GetDllLibXls().XlsRangesCollection_set_FormulaR1C1.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_FormulaR1C1, self.Ptr, value)
+
+    @property
+
+    def FormulaArray(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_FormulaArray.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_FormulaArray.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_FormulaArray, self.Ptr))
+        return ret
+
+
+    @FormulaArray.setter
+    def FormulaArray(self, value:str):
+        GetDllLibXls().XlsRangesCollection_set_FormulaArray.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_FormulaArray, self.Ptr, value)
+
+    @property
+
+    def FormulaArrayR1C1(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_FormulaArrayR1C1.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_FormulaArrayR1C1.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_FormulaArrayR1C1, self.Ptr))
+        return ret
+
+
+    @FormulaArrayR1C1.setter
+    def FormulaArrayR1C1(self, value:str):
+        GetDllLibXls().XlsRangesCollection_set_FormulaArrayR1C1.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_FormulaArrayR1C1, self.Ptr, value)
+
+    @property
+    def IsFormulaHidden(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_IsFormulaHidden.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_IsFormulaHidden.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_IsFormulaHidden, self.Ptr)
+        return ret
+
+    @IsFormulaHidden.setter
+    def IsFormulaHidden(self, value:bool):
+        GetDllLibXls().XlsRangesCollection_set_IsFormulaHidden.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_IsFormulaHidden, self.Ptr, value)
+
+    @property
+
+    def FormulaDateTime(self)->'DateTime':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_FormulaDateTime.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_FormulaDateTime.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_FormulaDateTime, self.Ptr)
+        ret = None if intPtr==None else DateTime(intPtr)
+        return ret
+
+
+    @FormulaDateTime.setter
+    def FormulaDateTime(self, value:'DateTime'):
+        GetDllLibXls().XlsRangesCollection_set_FormulaDateTime.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_FormulaDateTime, self.Ptr, value.Ptr)
+
+    @property
+    def HasDataValidation(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasDataValidation.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasDataValidation.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasDataValidation, self.Ptr)
+        return ret
+
+    @property
+    def HasBoolean(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasBoolean.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasBoolean.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasBoolean, self.Ptr)
+        return ret
+
+    @property
+    def HasDateTime(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasDateTime.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasDateTime.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasDateTime, self.Ptr)
+        return ret
+
+    @property
+    def HasFormulaBoolValue(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasFormulaBoolValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasFormulaBoolValue.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasFormulaBoolValue, self.Ptr)
+        return ret
+
+    @property
+    def HasFormulaErrorValue(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasFormulaErrorValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasFormulaErrorValue.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasFormulaErrorValue, self.Ptr)
+        return ret
+
+    @property
+    def HasFormulaDateTime(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasFormulaDateTime.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasFormulaDateTime.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasFormulaDateTime, self.Ptr)
+        return ret
+
+    @property
+    def HasFormulaNumberValue(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasFormulaNumberValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasFormulaNumberValue.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasFormulaNumberValue, self.Ptr)
+        return ret
+
+    @property
+    def HasFormulaStringValue(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasFormulaStringValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasFormulaStringValue.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasFormulaStringValue, self.Ptr)
+        return ret
+
+    @property
+    def HasFormula(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasFormula.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasFormula.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasFormula, self.Ptr)
+        return ret
+
+    @property
+    def HasFormulaArray(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasFormulaArray.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasFormulaArray.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasFormulaArray, self.Ptr)
+        return ret
+
+    @property
+    def HasNumber(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasNumber.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasNumber.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasNumber, self.Ptr)
+        return ret
+
+    @property
+    def HasRichText(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasRichText.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasRichText.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasRichText, self.Ptr)
+        return ret
+
+    @property
+    def HasString(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasString.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasString.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasString, self.Ptr)
+        return ret
+
+    @property
+    def HasStyle(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasStyle.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasStyle.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasStyle, self.Ptr)
+        return ret
+
+    @property
+
+    def HorizontalAlignment(self)->'HorizontalAlignType':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HorizontalAlignment.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HorizontalAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HorizontalAlignment, self.Ptr)
+        objwraped = HorizontalAlignType(ret)
+        return objwraped
+
+    @HorizontalAlignment.setter
+    def HorizontalAlignment(self, value:'HorizontalAlignType'):
+        GetDllLibXls().XlsRangesCollection_set_HorizontalAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_HorizontalAlignment, self.Ptr, value.value)
+
+    @property
+
+    def Hyperlinks(self)->'IHyperLinks':
+        """
+    <summary>
+        Returns hyperlinks for this ranges collection.
+    </summary>
+        """
+        GetDllLibXls().XlsRangesCollection_get_Hyperlinks.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_Hyperlinks.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_Hyperlinks, self.Ptr)
+        ret = None if intPtr==None else IHyperLinks(intPtr)
+        return ret
+
+
+    @property
+    def IndentLevel(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_IndentLevel.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_IndentLevel.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_IndentLevel, self.Ptr)
+        return ret
+
+    @IndentLevel.setter
+    def IndentLevel(self, value:int):
+        GetDllLibXls().XlsRangesCollection_set_IndentLevel.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_IndentLevel, self.Ptr, value)
+
+    @property
+    def IsBlank(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_IsBlank.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_IsBlank.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_IsBlank, self.Ptr)
+        return ret
+
+    @property
+    def HasError(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasError.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasError.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasError, self.Ptr)
+        return ret
+
+    @property
+    def IsGroupedByColumn(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_IsGroupedByColumn.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_IsGroupedByColumn.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_IsGroupedByColumn, self.Ptr)
+        return ret
+
+    @property
+    def IsGroupedByRow(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_IsGroupedByRow.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_IsGroupedByRow.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_IsGroupedByRow, self.Ptr)
+        return ret
+
+    @property
+    def IsInitialized(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_IsInitialized.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_IsInitialized.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_IsInitialized, self.Ptr)
+        return ret
+
+    @property
+    def LastColumn(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_LastColumn.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_LastColumn.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_LastColumn, self.Ptr)
+        return ret
+
+    @LastColumn.setter
+    def LastColumn(self, value:int):
+        GetDllLibXls().XlsRangesCollection_set_LastColumn.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_LastColumn, self.Ptr, value)
+
+    @property
+    def LastRow(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_LastRow.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_LastRow.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_LastRow, self.Ptr)
+        return ret
+
+    @LastRow.setter
+    def LastRow(self, value:int):
+        GetDllLibXls().XlsRangesCollection_set_LastRow.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_LastRow, self.Ptr, value)
+
+    @property
+    def NumberValue(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_NumberValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_NumberValue.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_NumberValue, self.Ptr)
+        return ret
+
+    @NumberValue.setter
+    def NumberValue(self, value:float):
+        GetDllLibXls().XlsRangesCollection_set_NumberValue.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_NumberValue, self.Ptr, value)
+
+    @property
+
+    def NumberFormat(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_NumberFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_NumberFormat.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_NumberFormat, self.Ptr))
+        return ret
+
+
+    @NumberFormat.setter
+    def NumberFormat(self, value:str):
+        GetDllLibXls().XlsRangesCollection_set_NumberFormat.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_NumberFormat, self.Ptr, value)
+
+    @property
+    def Row(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_Row.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_Row.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_Row, self.Ptr)
+        return ret
+
+    @property
+    def RowGroupLevel(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_RowGroupLevel.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_RowGroupLevel.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_RowGroupLevel, self.Ptr)
+        return ret
+
+    @property
+    def RowHeight(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_RowHeight.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_RowHeight.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_RowHeight, self.Ptr)
+        return ret
+
+    @RowHeight.setter
+    def RowHeight(self, value:float):
+        GetDllLibXls().XlsRangesCollection_set_RowHeight.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_RowHeight, self.Ptr, value)
+
+    @property
+
+    def Rows(self)->ListXlsRanges:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_Rows.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_Rows.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_Rows, self.Ptr)
+        ret = None if intPtr==None else ListXlsRanges(intPtr)
+        return ret
+
+
+    @property
+
+    def Columns(self)->ListXlsRanges:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_Columns.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_Columns.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_Columns, self.Ptr)
+        ret = None if intPtr==None else ListXlsRanges(intPtr)
+        return ret
+
+
+    @property
+
+    def Style(self)->'IStyle':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_Style.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_Style.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_Style, self.Ptr)
+        ret = None if intPtr==None else CellStyle(intPtr)
+        return ret
+
+
+    @Style.setter
+    def Style(self, value:'IStyle'):
+        GetDllLibXls().XlsRangesCollection_set_Style.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_Style, self.Ptr, value.Ptr)
+
+    @property
+
+    def CellStyleName(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_CellStyleName.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_CellStyleName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_CellStyleName, self.Ptr))
+        return ret
+
+
+    @CellStyleName.setter
+    def CellStyleName(self, value:str):
+        GetDllLibXls().XlsRangesCollection_set_CellStyleName.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_CellStyleName, self.Ptr, value)
+
+    @property
+
+    def Text(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_Text.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_Text.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_Text, self.Ptr))
+        return ret
+
+
+    @Text.setter
+    def Text(self, value:str):
+        GetDllLibXls().XlsRangesCollection_set_Text.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_Text, self.Ptr, value)
+
+    @property
+
+    def TimeSpanValue(self)->'TimeSpan':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_TimeSpanValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_TimeSpanValue.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_TimeSpanValue, self.Ptr)
+        ret = None if intPtr==None else TimeSpan(intPtr)
+        return ret
+
+
+    @TimeSpanValue.setter
+    def TimeSpanValue(self, value:'TimeSpan'):
+        GetDllLibXls().XlsRangesCollection_set_TimeSpanValue.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_TimeSpanValue, self.Ptr, value.Ptr)
+
+    @property
+
+    def Value(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_Value.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_Value.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_Value, self.Ptr))
+        return ret
+
+
+    @Value.setter
+    def Value(self, value:str):
+        GetDllLibXls().XlsRangesCollection_set_Value.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_Value, self.Ptr, value)
+
+    @property
+
+    def Value2(self)->'SpireObject':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_Value2.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_Value2.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_Value2, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @Value2.setter
+    def Value2(self, value:'SpireObject'):
+        GetDllLibXls().XlsRangesCollection_set_Value2.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_Value2, self.Ptr, value.Ptr)
+
+    @property
+
+    def VerticalAlignment(self)->'VerticalAlignType':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_VerticalAlignment.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_VerticalAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_VerticalAlignment, self.Ptr)
+        objwraped = VerticalAlignType(ret)
+        return objwraped
+
+    @VerticalAlignment.setter
+    def VerticalAlignment(self, value:'VerticalAlignType'):
+        GetDllLibXls().XlsRangesCollection_set_VerticalAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_VerticalAlignment, self.Ptr, value.value)
+
+    @property
+
+    def Worksheet(self)->'IWorksheet':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_Worksheet.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_Worksheet.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_Worksheet, self.Ptr)
+        ret = None if intPtr==None else XlsWorksheet(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,row:int,column:int)->IXLSRange:
+        """
+
+        """
+        
+        GetDllLibXls().XlsRangesCollection_get_ItemRC.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsRangesCollection_get_ItemRC.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_ItemRC, self.Ptr, row,column)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def set_Item(self ,row:int,column:int,value:IXLSRange):
+        """
+
+        """
+        intPtrvalue:c_void_p = value.Ptr
+
+        GetDllLibXls().XlsRangesCollection_set_ItemRCV.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_ItemRCV, self.Ptr, row,column,intPtrvalue)
+
+    @dispatch
+
+    def get_Item(self ,row:int,column:int,lastRow:int,lastColumn:int)->IXLSRange:
+        """
+
+        """
+        
+        GetDllLibXls().XlsRangesCollection_get_ItemRCLL.argtypes=[c_void_p ,c_int,c_int,c_int,c_int]
+        GetDllLibXls().XlsRangesCollection_get_ItemRCLL.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_ItemRCLL, self.Ptr, row,column,lastRow,lastColumn)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->IXLSRange:
+        """
+
+        """
+        
+        GetDllLibXls().XlsRangesCollection_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str,IsR1C1Notation:bool)->IXLSRange:
+        """
+
+        """
+        
+        GetDllLibXls().XlsRangesCollection_get_ItemNI.argtypes=[c_void_p ,c_void_p,c_bool]
+        GetDllLibXls().XlsRangesCollection_get_ItemNI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_ItemNI, self.Ptr, name,IsR1C1Notation)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @property
+
+    def ConditionalFormats(self)->'ConditionalFormats':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_ConditionalFormats.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_ConditionalFormats.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_ConditionalFormats, self.Ptr)
+        ret = None if intPtr==None else ConditionalFormats(intPtr)
+        return ret
+
+
+    @property
+
+    def DataValidation(self)->'Validation':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_DataValidation.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_DataValidation.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_DataValidation, self.Ptr)
+        ret = None if intPtr==None else Validation(intPtr)
+        return ret
+
+
+    @property
+
+    def FormulaStringValue(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_FormulaStringValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_FormulaStringValue.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_FormulaStringValue, self.Ptr))
+        return ret
+
+
+    @FormulaStringValue.setter
+    def FormulaStringValue(self, value:str):
+        GetDllLibXls().XlsRangesCollection_set_FormulaStringValue.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_FormulaStringValue, self.Ptr, value)
+
+    @property
+    def FormulaNumberValue(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_FormulaNumberValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_FormulaNumberValue.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_FormulaNumberValue, self.Ptr)
+        return ret
+
+    @FormulaNumberValue.setter
+    def FormulaNumberValue(self, value:float):
+        GetDllLibXls().XlsRangesCollection_set_FormulaNumberValue.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_FormulaNumberValue, self.Ptr, value)
+
+    @property
+    def FormulaBoolValue(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_FormulaBoolValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_FormulaBoolValue.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_FormulaBoolValue, self.Ptr)
+        return ret
+
+    @FormulaBoolValue.setter
+    def FormulaBoolValue(self, value:bool):
+        GetDllLibXls().XlsRangesCollection_set_FormulaBoolValue.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_FormulaBoolValue, self.Ptr, value)
+
+    @property
+
+    def FormulaErrorValue(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_FormulaErrorValue.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_FormulaErrorValue.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_FormulaErrorValue, self.Ptr))
+        return ret
+
+
+    @FormulaErrorValue.setter
+    def FormulaErrorValue(self, value:str):
+        GetDllLibXls().XlsRangesCollection_set_FormulaErrorValue.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_FormulaErrorValue, self.Ptr, value)
+
+    @property
+
+    def HtmlString(self)->str:
+        """
+    <summary>
+        Gets and sets the html string which contains data and some formattings in this cell.
+    </summary>
+        """
+        GetDllLibXls().XlsRangesCollection_get_HtmlString.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HtmlString.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_HtmlString, self.Ptr))
+        return ret
+
+
+    @HtmlString.setter
+    def HtmlString(self, value:str):
+        GetDllLibXls().XlsRangesCollection_set_HtmlString.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_HtmlString, self.Ptr, value)
+
+    @property
+
+    def Comment(self)->'ICommentShape':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_Comment.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_Comment.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_Comment, self.Ptr)
+        ret = None if intPtr==None else XlsComment(intPtr)
+        return ret
+
+
+    @property
+
+    def RichText(self)->'IRichTextString':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_RichText.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_RichText.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_RichText, self.Ptr)
+        ret = None if intPtr==None else RichTextObject(intPtr)
+        return ret
+
+
+    @property
+    def HasMerged(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasMerged.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasMerged.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasMerged, self.Ptr)
+        return ret
+
+    @property
+
+    def MergeArea(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_MergeArea.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_MergeArea.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_MergeArea, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @property
+    def IsWrapText(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_IsWrapText.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_IsWrapText.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_IsWrapText, self.Ptr)
+        return ret
+
+    @IsWrapText.setter
+    def IsWrapText(self, value:bool):
+        GetDllLibXls().XlsRangesCollection_set_IsWrapText.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_IsWrapText, self.Ptr, value)
+
+    @property
+    def HasExternalFormula(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_HasExternalFormula.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_HasExternalFormula.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_HasExternalFormula, self.Ptr)
+        return ret
+
+    @property
+
+    def IgnoreErrorOptions(self)->'IgnoreErrorType':
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_IgnoreErrorOptions.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_IgnoreErrorOptions.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsRangesCollection_get_IgnoreErrorOptions, self.Ptr)
+        objwraped = IgnoreErrorType(ret)
+        return objwraped
+
+    @IgnoreErrorOptions.setter
+    def IgnoreErrorOptions(self, value:'IgnoreErrorType'):
+        GetDllLibXls().XlsRangesCollection_set_IgnoreErrorOptions.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_IgnoreErrorOptions, self.Ptr, value.value)
+
+    @property
+
+    def IsStringsPreserved(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_IsStringsPreserved.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_IsStringsPreserved.restype=c_bool
+        return CallCFunction(GetDllLibXls().XlsRangesCollection_get_IsStringsPreserved, self.Ptr)
+
+
+
+    @IsStringsPreserved.setter
+    def IsStringsPreserved(self, value:bool):
+        GetDllLibXls().XlsRangesCollection_set_IsStringsPreserved.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_IsStringsPreserved, self.Ptr, value)
+
+
+    @property
+
+    def BuiltInStyle(self)->BuiltInStyles:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_BuiltInStyle.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_BuiltInStyle.restype=c_int
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_get_BuiltInStyle, self.Ptr)
+        ret = None if intPtr==None else BuiltInStyles(intPtr)
+        return ret
+
+
+
+    @BuiltInStyle.setter
+    def BuiltInStyle(self, value:BuiltInStyles):
+        GetDllLibXls().XlsRangesCollection_set_BuiltInStyle.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_set_BuiltInStyle, self.Ptr, value.value)
+
+
+    @property
+
+    def RangeGlobalAddress2007(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_get_RangeGlobalAddress2007.argtypes=[c_void_p]
+        GetDllLibXls().XlsRangesCollection_get_RangeGlobalAddress2007.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsRangesCollection_get_RangeGlobalAddress2007, self.Ptr))
+        return ret
+
+
+
+    def Activate(self ,scroll:bool)->'IXLSRange':
+        """
+    <summary>
+        Activages a single cell, scroll to it and activates the respective sheet
+            To select a range of cells, use the Select method.
+    </summary>
+    <param name="scroll">True to scroll to the cell</param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().XlsRangesCollection_Activate.argtypes=[c_void_p ,c_bool]
+        GetDllLibXls().XlsRangesCollection_Activate.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_Activate, self.Ptr, scroll)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+#
+#    def ExportDataTable(self ,options:'ExportTableOptions')->'DataTable':
+#        """
+#
+#        """
+#        intPtroptions:c_void_p = options.Ptr
+#
+#        GetDllLibXls().XlsRangesCollection_ExportDataTable.argtypes=[c_void_p ,c_void_p]
+#        GetDllLibXls().XlsRangesCollection_ExportDataTable.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsRangesCollection_ExportDataTable, self.Ptr, intPtroptions)
+#        ret = None if intPtr==None else DataTable(intPtr)
+#        return ret
+#
+
+
+    @dispatch
+    def Merge(self):
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_Merge1.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_Merge1, self.Ptr)
+
+    @dispatch
+
+    def Merge(self ,clearCells:bool):
+        """
+
+        """
+        
+        GetDllLibXls().XlsRangesCollection_MergeC.argtypes=[c_void_p ,c_bool]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_MergeC, self.Ptr, clearCells)
+
+    def UnMerge(self):
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_UnMerge.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_UnMerge, self.Ptr)
+
+    def FreezePanes(self):
+        """
+
+        """
+        GetDllLibXls().XlsRangesCollection_FreezePanes.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsRangesCollection_FreezePanes, self.Ptr)
+
+    def ClearContents(self):
+        GetObjIntPtr(self.Ptr, "ClearContents", "");

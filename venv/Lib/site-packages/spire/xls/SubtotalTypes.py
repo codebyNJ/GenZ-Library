@@ -1,0 +1,26 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class SubtotalTypes(Enum):
+    """
+
+    """
+    none = 0
+    Default = 1
+    Sum = 2
+    Counta = 4
+    Average = 8
+    Max = 16
+    Min = 32
+    Product = 64
+    Count = 128
+    Stdev = 256
+    Stdevp = 512
+    Var = 1024
+    Varp = 2048
+

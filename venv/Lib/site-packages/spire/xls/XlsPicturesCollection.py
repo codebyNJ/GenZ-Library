@@ -1,0 +1,365 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsPicturesCollection (  CollectionBase[XlsBitmapShape], IPictures) :
+    """
+
+    """
+    @dispatch
+
+    def Add(self ,image:Stream,pictureName:str)->IPictureShape:
+        """
+
+        """
+        intPtrimage:c_void_p = image.Ptr
+
+        GetDllLibXls().XlsPicturesCollection_Add.argtypes=[c_void_p ,c_void_p,c_void_p]
+        GetDllLibXls().XlsPicturesCollection_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_Add, self.Ptr, intPtrimage,pictureName)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,image:Stream,pictureName:str,imageFormat:ImageFormatType)->IPictureShape:
+        """
+
+        """
+        intPtrimage:c_void_p = image.Ptr
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().XlsPicturesCollection_AddIPI.argtypes=[c_void_p ,c_void_p,c_void_p,c_int]
+        GetDllLibXls().XlsPicturesCollection_AddIPI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddIPI, self.Ptr, intPtrimage,pictureName,enumimageFormat)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,strFileName:str)->IPictureShape:
+        """
+
+        """
+        
+        GetDllLibXls().XlsPicturesCollection_AddS.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsPicturesCollection_AddS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddS, self.Ptr, strFileName)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,strFileName:str,imageFormat:ImageFormatType)->IPictureShape:
+        """
+
+        """
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().XlsPicturesCollection_AddSI.argtypes=[c_void_p ,c_void_p,c_int]
+        GetDllLibXls().XlsPicturesCollection_AddSI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddSI, self.Ptr, strFileName,enumimageFormat)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,image:Stream)->IPictureShape:
+        """
+
+        """
+        intPtrimage:c_void_p = image.Ptr
+
+        GetDllLibXls().XlsPicturesCollection_AddTLI.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        GetDllLibXls().XlsPicturesCollection_AddTLI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLI, self.Ptr, topRow,leftColumn,intPtrimage)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,image:Stream,imageFormat:ImageFormatType)->IPictureShape:
+        """
+
+        """
+        intPtrimage:c_void_p = image.Ptr
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().XlsPicturesCollection_AddTLII.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int]
+        GetDllLibXls().XlsPicturesCollection_AddTLII.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLII, self.Ptr, topRow,leftColumn,intPtrimage,enumimageFormat)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,stream:Stream)->IPictureShape:
+        """
+
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().XlsPicturesCollection_AddTLS.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        GetDllLibXls().XlsPicturesCollection_AddTLS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLS, self.Ptr, topRow,leftColumn,intPtrstream)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,stream:Stream,imageFormat:ImageFormatType)->IPictureShape:
+        """
+
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().XlsPicturesCollection_AddTLSI.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int]
+        GetDllLibXls().XlsPicturesCollection_AddTLSI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLSI, self.Ptr, topRow,leftColumn,intPtrstream,enumimageFormat)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,fileName:str)->IPictureShape:
+        """
+
+        """
+        
+        GetDllLibXls().XlsPicturesCollection_AddTLF.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        GetDllLibXls().XlsPicturesCollection_AddTLF.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLF, self.Ptr, topRow,leftColumn,fileName)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,fileName:str,imageFormat:ImageFormatType)->IPictureShape:
+        """
+
+        """
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().XlsPicturesCollection_AddTLFI.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int]
+        GetDllLibXls().XlsPicturesCollection_AddTLFI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLFI, self.Ptr, topRow,leftColumn,fileName,enumimageFormat)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,bottomRow:int,rightColumn:int,image:Stream)->IPictureShape:
+        """
+
+        """
+        intPtrimage:c_void_p = image.Ptr
+
+        GetDllLibXls().XlsPicturesCollection_AddTLBRI.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_void_p]
+        GetDllLibXls().XlsPicturesCollection_AddTLBRI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLBRI, self.Ptr, topRow,leftColumn,bottomRow,rightColumn,intPtrimage)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+
+    def AddLinkPic(self ,topRow:int,leftColumn:int,height:int,width:int,linktarget:str)->'IPictureShape':
+        """
+
+        """
+        
+        GetDllLibXls().XlsPicturesCollection_AddLinkPic.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_void_p]
+        GetDllLibXls().XlsPicturesCollection_AddLinkPic.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddLinkPic, self.Ptr, topRow,leftColumn,height,width,linktarget)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,bottomRow:int,rightColumn:int,image:Stream,imageFormat:ImageFormatType)->IPictureShape:
+        """
+
+        """
+        intPtrimage:c_void_p = image.Ptr
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().XlsPicturesCollection_AddTLBRII.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_void_p,c_int]
+        GetDllLibXls().XlsPicturesCollection_AddTLBRII.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLBRII, self.Ptr, topRow,leftColumn,bottomRow,rightColumn,intPtrimage,enumimageFormat)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,bottomRow:int,rightColumn:int,stream:Stream)->IPictureShape:
+        """
+
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().XlsPicturesCollection_AddTLBRS.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_void_p]
+        GetDllLibXls().XlsPicturesCollection_AddTLBRS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLBRS, self.Ptr, topRow,leftColumn,bottomRow,rightColumn,intPtrstream)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,bottomRow:int,rightColumn:int,stream:Stream,imageFormat:ImageFormatType)->IPictureShape:
+        """
+
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().XlsPicturesCollection_AddTLBRSI.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_void_p,c_int]
+        GetDllLibXls().XlsPicturesCollection_AddTLBRSI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLBRSI, self.Ptr, topRow,leftColumn,bottomRow,rightColumn,intPtrstream,enumimageFormat)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,bottomRow:int,rightColumn:int,fileName:str)->IPictureShape:
+        """
+
+        """
+        
+        GetDllLibXls().XlsPicturesCollection_AddTLBRF.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_void_p]
+        GetDllLibXls().XlsPicturesCollection_AddTLBRF.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLBRF, self.Ptr, topRow,leftColumn,bottomRow,rightColumn,fileName)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,bottomRow:int,rightColumn:int,fileName:str,imageFormat:ImageFormatType)->IPictureShape:
+        """
+
+        """
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().XlsPicturesCollection_AddTLBRFI.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_void_p,c_int]
+        GetDllLibXls().XlsPicturesCollection_AddTLBRFI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLBRFI, self.Ptr, topRow,leftColumn,bottomRow,rightColumn,fileName,enumimageFormat)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,image:Stream,scaleWidth:int,scaleHeight:int)->IPictureShape:
+        """
+
+        """
+        intPtrimage:c_void_p = image.Ptr
+
+        GetDllLibXls().XlsPicturesCollection_AddTLISS.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int,c_int]
+        GetDllLibXls().XlsPicturesCollection_AddTLISS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLISS, self.Ptr, topRow,leftColumn,intPtrimage,scaleWidth,scaleHeight)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,image:Stream,scaleWidth:int,scaleHeight:int,imageFormat:ImageFormatType)->IPictureShape:
+        """
+
+        """
+        intPtrimage:c_void_p = image.Ptr
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().XlsPicturesCollection_AddTLISSI.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int,c_int,c_int]
+        GetDllLibXls().XlsPicturesCollection_AddTLISSI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLISSI, self.Ptr, topRow,leftColumn,intPtrimage,scaleWidth,scaleHeight,enumimageFormat)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,stream:Stream,scaleWidth:int,scaleHeight:int)->IPictureShape:
+        """
+
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().XlsPicturesCollection_AddTLSSS.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int,c_int]
+        GetDllLibXls().XlsPicturesCollection_AddTLSSS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLSSS, self.Ptr, topRow,leftColumn,intPtrstream,scaleWidth,scaleHeight)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,stream:Stream,scaleWidth:int,scaleHeight:int,imageFormat:ImageFormatType)->IPictureShape:
+        """
+
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().XlsPicturesCollection_AddTLSSSI.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int,c_int,c_int]
+        GetDllLibXls().XlsPicturesCollection_AddTLSSSI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLSSSI, self.Ptr, topRow,leftColumn,intPtrstream,scaleWidth,scaleHeight,enumimageFormat)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,fileName:str,scaleWidth:int,scaleHeight:int)->IPictureShape:
+        """
+
+        """
+        
+        GetDllLibXls().XlsPicturesCollection_AddTLFSS.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int,c_int]
+        GetDllLibXls().XlsPicturesCollection_AddTLFSS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLFSS, self.Ptr, topRow,leftColumn,fileName,scaleWidth,scaleHeight)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,fileName:str,scaleWidth:int,scaleHeight:int,imageFormat:ImageFormatType)->IPictureShape:
+        """
+
+        """
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().XlsPicturesCollection_AddTLFSSI.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int,c_int,c_int]
+        GetDllLibXls().XlsPicturesCollection_AddTLFSSI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPicturesCollection_AddTLFSSI, self.Ptr, topRow,leftColumn,fileName,scaleWidth,scaleHeight,enumimageFormat)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().XlsPicturesCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsPicturesCollection_Clear, self.Ptr)
+

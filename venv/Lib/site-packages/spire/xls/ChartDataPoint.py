@@ -1,0 +1,42 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartDataPoint (  XlsChartDataPoint) :
+    """
+
+    """
+    @property
+
+    def DataFormat(self)->'ChartSerieDataFormat':
+        """
+    <summary>
+        Gets data format. Read-only.
+    </summary>
+        """
+        GetDllLibXls().ChartDataPoint_get_DataFormat.argtypes=[c_void_p]
+        GetDllLibXls().ChartDataPoint_get_DataFormat.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartDataPoint_get_DataFormat, self.Ptr)
+        ret = None if intPtr==None else ChartSerieDataFormat(intPtr)
+        return ret
+
+
+    @property
+
+    def DataLabels(self)->'ChartDataLabels':
+        """
+    <summary>
+        Gets data labels object for the data point. Read-only.
+    </summary>
+        """
+        GetDllLibXls().ChartDataPoint_get_DataLabels.argtypes=[c_void_p]
+        GetDllLibXls().ChartDataPoint_get_DataLabels.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartDataPoint_get_DataLabels, self.Ptr)
+        ret = None if intPtr==None else ChartDataLabels(intPtr)
+        return ret
+
+

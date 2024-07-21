@@ -1,0 +1,305 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ILineShape (  IPrstGeomShape) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def Color(self)->'Color':
+        """
+    <summary>
+        line color
+    </summary>
+        """
+        pass
+
+
+    @Color.setter
+    @abc.abstractmethod
+    def Color(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BeginArrowHeadStyle(self)->'ShapeArrowStyleType':
+        """
+    <summary>
+        Begin Arrow Head Style
+    </summary>
+        """
+        pass
+
+
+    @BeginArrowHeadStyle.setter
+    @abc.abstractmethod
+    def BeginArrowHeadStyle(self, value:'ShapeArrowStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BeginArrowheadLength(self)->'ShapeArrowLengthType':
+        """
+    <summary>
+        Begin Arrow head Length
+    </summary>
+        """
+        pass
+
+
+    @BeginArrowheadLength.setter
+    @abc.abstractmethod
+    def BeginArrowheadLength(self, value:'ShapeArrowLengthType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BeginArrowheadWidth(self)->'ShapeArrowWidthType':
+        """
+    <summary>
+        Begin Arrow head Width
+    </summary>
+        """
+        pass
+
+
+    @BeginArrowheadWidth.setter
+    @abc.abstractmethod
+    def BeginArrowheadWidth(self, value:'ShapeArrowWidthType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def EndArrowHeadStyle(self)->'ShapeArrowStyleType':
+        """
+    <summary>
+        End Arrow Head Style
+    </summary>
+        """
+        pass
+
+
+    @EndArrowHeadStyle.setter
+    @abc.abstractmethod
+    def EndArrowHeadStyle(self, value:'ShapeArrowStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def EndArrowheadLength(self)->'ShapeArrowLengthType':
+        """
+    <summary>
+        End Arrow head Length
+    </summary>
+        """
+        pass
+
+
+    @EndArrowheadLength.setter
+    @abc.abstractmethod
+    def EndArrowheadLength(self, value:'ShapeArrowLengthType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def EndArrowheadWidth(self)->'ShapeArrowWidthType':
+        """
+    <summary>
+        End Arrow head Width
+    </summary>
+        """
+        pass
+
+
+    @EndArrowheadWidth.setter
+    @abc.abstractmethod
+    def EndArrowheadWidth(self, value:'ShapeArrowWidthType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def DashStyle(self)->'ShapeDashLineStyleType':
+        """
+    <summary>
+        DashStyle
+    </summary>
+        """
+        pass
+
+
+    @DashStyle.setter
+    @abc.abstractmethod
+    def DashStyle(self, value:'ShapeDashLineStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Style(self)->'ShapeLineStyleType':
+        """
+    <summary>
+        Style
+    </summary>
+        """
+        pass
+
+
+    @Style.setter
+    @abc.abstractmethod
+    def Style(self, value:'ShapeLineStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Transparency(self)->float:
+        """
+    <summary>
+        Transparency 
+            value 0---1
+    </summary>
+        """
+        pass
+
+
+    @Transparency.setter
+    @abc.abstractmethod
+    def Transparency(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Weight(self)->float:
+        """
+    <summary>
+        Weight
+    </summary>
+        """
+        pass
+
+
+    @Weight.setter
+    @abc.abstractmethod
+    def Weight(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def MiddleOffsetPercent(self)->float:
+        """
+    <summary>
+        MiddleOffsetPercent 
+            Set middle point value , 
+            when middle point localed at back of start point  value is less than 0
+            when middle point  localed at start point  value is 0
+            when middle point  localed at end point  value is 1
+            when middle point localed at back of end point  value is greater than 0
+    </summary>
+        """
+        pass
+
+
+    @MiddleOffsetPercent.setter
+    @abc.abstractmethod
+    def MiddleOffsetPercent(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LineShapeType(self)->'LineShapeType':
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Rotation(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Rotation.setter
+    @abc.abstractmethod
+    def Rotation(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def HyLink(self)->'IHyperLink':
+        """
+
+        """
+        pass
+
+

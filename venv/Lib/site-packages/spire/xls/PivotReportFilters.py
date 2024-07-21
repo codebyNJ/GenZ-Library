@@ -1,0 +1,63 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class PivotReportFilters (SpireObject) :
+    """
+
+    """
+
+    def get_Item(self ,name:str)->'PivotReportFilter':
+        """
+
+        """
+        
+        GetDllLibXls().PivotReportFilters_get_Item.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().PivotReportFilters_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PivotReportFilters_get_Item, self.Ptr, name)
+        ret = None if intPtr==None else PivotReportFilter(intPtr)
+        return ret
+
+
+
+    def RemoveAt(self ,index:int):
+        """
+
+        """
+        
+        GetDllLibXls().PivotReportFilters_RemoveAt.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().PivotReportFilters_RemoveAt, self.Ptr, index)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().PivotReportFilters_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().PivotReportFilters_Clear, self.Ptr)
+
+
+    def Remove(self ,item:'PivotReportFilter')->bool:
+        """
+
+        """
+        intPtritem:c_void_p = item.Ptr
+
+        GetDllLibXls().PivotReportFilters_Remove.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().PivotReportFilters_Remove.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().PivotReportFilters_Remove, self.Ptr, intPtritem)
+        return ret
+
+
+    def Add(self ,item:'PivotReportFilter'):
+        """
+
+        """
+        intPtritem:c_void_p = item.Ptr
+
+        GetDllLibXls().PivotReportFilters_Add.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().PivotReportFilters_Add, self.Ptr, intPtritem)
+

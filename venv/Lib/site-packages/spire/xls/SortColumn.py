@@ -1,0 +1,120 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class SortColumn (  SpireObject, ISortColumn) :
+    """
+
+    """
+    @property
+    def Key(self)->int:
+        """
+    <summary>
+        Represents the column to be sorted on.
+    </summary>
+        """
+        GetDllLibXls().SortColumn_get_Key.argtypes=[c_void_p]
+        GetDllLibXls().SortColumn_get_Key.restype=c_int
+        ret = CallCFunction(GetDllLibXls().SortColumn_get_Key, self.Ptr)
+        return ret
+
+    @Key.setter
+    def Key(self, value:int):
+        GetDllLibXls().SortColumn_set_Key.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().SortColumn_set_Key, self.Ptr, value)
+
+    @property
+
+    def ComparsionType(self)->'SortComparsionType':
+        """
+    <summary>
+        Represents the sort by in the range.
+    </summary>
+        """
+        GetDllLibXls().SortColumn_get_ComparsionType.argtypes=[c_void_p]
+        GetDllLibXls().SortColumn_get_ComparsionType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().SortColumn_get_ComparsionType, self.Ptr)
+        objwraped = SortComparsionType(ret)
+        return objwraped
+
+    @ComparsionType.setter
+    def ComparsionType(self, value:'SortComparsionType'):
+        GetDllLibXls().SortColumn_set_ComparsionType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().SortColumn_set_ComparsionType, self.Ptr, value.value)
+
+    @property
+
+    def Order(self)->'OrderBy':
+        """
+    <summary>
+        Represents the sort order.
+    </summary>
+        """
+        GetDllLibXls().SortColumn_get_Order.argtypes=[c_void_p]
+        GetDllLibXls().SortColumn_get_Order.restype=c_int
+        ret = CallCFunction(GetDllLibXls().SortColumn_get_Order, self.Ptr)
+        objwraped = OrderBy(ret)
+        return objwraped
+
+    @Order.setter
+    def Order(self, value:'OrderBy'):
+        GetDllLibXls().SortColumn_set_Order.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().SortColumn_set_Order, self.Ptr, value.value)
+
+    @property
+
+    def CustomSortOrder(self)->List[str]:
+        """
+    <summary>
+        Represents the custom sort order data.
+    </summary>
+        """
+        GetDllLibXls().SortColumn_get_CustomSortOrder.argtypes=[c_void_p]
+        GetDllLibXls().SortColumn_get_CustomSortOrder.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().SortColumn_get_CustomSortOrder, self.Ptr)
+        ret = GetVectorFromArray(intPtrArray, c_wchar_p)
+        return ret
+
+    @CustomSortOrder.setter
+    def CustomSortOrder(self, value:List[str]):
+        vCount = len(value)
+        ArrayType = c_wchar_p * vCount
+        vArray = ArrayType()
+        for i in range(0, vCount):
+            vArray[i] = value[i]
+        GetDllLibXls().SortColumn_set_CustomSortOrder.argtypes=[c_void_p, ArrayType, c_int]
+        CallCFunction(GetDllLibXls().SortColumn_set_CustomSortOrder, self.Ptr, vArray, vCount)
+
+    @property
+
+    def Color(self)->'Color':
+        """
+    <summary>
+        Represents the color to sort. Throws exception when SortOn type is Values.
+    </summary>
+        """
+        GetDllLibXls().SortColumn_get_Color.argtypes=[c_void_p]
+        GetDllLibXls().SortColumn_get_Color.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().SortColumn_get_Color, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @Color.setter
+    def Color(self, value:'Color'):
+        GetDllLibXls().SortColumn_set_Color.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().SortColumn_set_Color, self.Ptr, value.Ptr)
+
+
+    def SetLevel(self ,level:int):
+        """
+
+        """
+        
+        GetDllLibXls().SortColumn_SetLevel.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().SortColumn_SetLevel, self.Ptr, level)
+

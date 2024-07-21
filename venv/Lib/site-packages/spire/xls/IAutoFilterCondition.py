@@ -1,0 +1,123 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IAutoFilterCondition (abc.ABC) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def DataType(self)->'FilterDataType':
+        """
+
+        """
+        pass
+
+
+    @DataType.setter
+    @abc.abstractmethod
+    def DataType(self, value:'FilterDataType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ConditionOperator(self)->'FilterConditionType':
+        """
+
+        """
+        pass
+
+
+    @ConditionOperator.setter
+    @abc.abstractmethod
+    def ConditionOperator(self, value:'FilterConditionType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def String(self)->str:
+        """
+
+        """
+        pass
+
+
+    @String.setter
+    @abc.abstractmethod
+    def String(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Boolean(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @Boolean.setter
+    @abc.abstractmethod
+    def Boolean(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ErrorCode(self)->int:
+        """
+
+        """
+        pass
+
+
+    @ErrorCode.setter
+    @abc.abstractmethod
+    def ErrorCode(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Double(self)->float:
+        """
+
+        """
+        pass
+
+
+    @Double.setter
+    @abc.abstractmethod
+    def Double(self, value:float):
+        """
+
+        """
+        pass
+
+

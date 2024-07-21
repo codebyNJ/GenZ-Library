@@ -1,0 +1,220 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsPageSetup (  XlsPageSetupBase, IPageSetup) :
+    """
+
+    """
+    @property
+    def IsPrintGridlines(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetup_get_IsPrintGridlines.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetup_get_IsPrintGridlines.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPageSetup_get_IsPrintGridlines, self.Ptr)
+        return ret
+
+    @IsPrintGridlines.setter
+    def IsPrintGridlines(self, value:bool):
+        GetDllLibXls().XlsPageSetup_set_IsPrintGridlines.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPageSetup_set_IsPrintGridlines, self.Ptr, value)
+
+    @property
+    def IsPrintHeadings(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetup_get_IsPrintHeadings.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetup_get_IsPrintHeadings.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPageSetup_get_IsPrintHeadings, self.Ptr)
+        return ret
+
+    @IsPrintHeadings.setter
+    def IsPrintHeadings(self, value:bool):
+        GetDllLibXls().XlsPageSetup_set_IsPrintHeadings.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPageSetup_set_IsPrintHeadings, self.Ptr, value)
+
+    @property
+
+    def PrintArea(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetup_get_PrintArea.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetup_get_PrintArea.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetup_get_PrintArea, self.Ptr))
+        return ret
+
+
+    @PrintArea.setter
+    def PrintArea(self, value:str):
+        GetDllLibXls().XlsPageSetup_set_PrintArea.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetup_set_PrintArea, self.Ptr, value)
+
+    @property
+
+    def PrintTitleColumns(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetup_get_PrintTitleColumns.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetup_get_PrintTitleColumns.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetup_get_PrintTitleColumns, self.Ptr))
+        return ret
+
+
+    @PrintTitleColumns.setter
+    def PrintTitleColumns(self, value:str):
+        GetDllLibXls().XlsPageSetup_set_PrintTitleColumns.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetup_set_PrintTitleColumns, self.Ptr, value)
+
+    @property
+
+    def PrintTitleRows(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetup_get_PrintTitleRows.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetup_get_PrintTitleRows.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetup_get_PrintTitleRows, self.Ptr))
+        return ret
+
+
+    @PrintTitleRows.setter
+    def PrintTitleRows(self, value:str):
+        GetDllLibXls().XlsPageSetup_set_PrintTitleRows.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPageSetup_set_PrintTitleRows, self.Ptr, value)
+
+    @property
+
+    def RelationId(self)->str:
+        """
+    <summary>
+        Gets / sets relation id to the printer settings part.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetup_get_RelationId.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetup_get_RelationId.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPageSetup_get_RelationId, self.Ptr))
+        return ret
+
+
+    @property
+    def IsSummaryRowBelow(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetup_get_IsSummaryRowBelow.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetup_get_IsSummaryRowBelow.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPageSetup_get_IsSummaryRowBelow, self.Ptr)
+        return ret
+
+    @IsSummaryRowBelow.setter
+    def IsSummaryRowBelow(self, value:bool):
+        GetDllLibXls().XlsPageSetup_set_IsSummaryRowBelow.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPageSetup_set_IsSummaryRowBelow, self.Ptr, value)
+
+    @property
+    def IsSummaryColumnRight(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetup_get_IsSummaryColumnRight.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetup_get_IsSummaryColumnRight.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPageSetup_get_IsSummaryColumnRight, self.Ptr)
+        return ret
+
+    @IsSummaryColumnRight.setter
+    def IsSummaryColumnRight(self, value:bool):
+        GetDllLibXls().XlsPageSetup_set_IsSummaryColumnRight.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPageSetup_set_IsSummaryColumnRight, self.Ptr, value)
+
+    @property
+    def IsFitToPage(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetup_get_IsFitToPage.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetup_get_IsFitToPage.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPageSetup_get_IsFitToPage, self.Ptr)
+        return ret
+
+    @IsFitToPage.setter
+    def IsFitToPage(self, value:bool):
+        GetDllLibXls().XlsPageSetup_set_IsFitToPage.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPageSetup_set_IsFitToPage, self.Ptr, value)
+
+    @property
+    def NeedDataArray(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetup_get_NeedDataArray.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetup_get_NeedDataArray.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPageSetup_get_NeedDataArray, self.Ptr)
+        return ret
+
+    @property
+    def DefaultRowHeight(self)->int:
+        """
+    <summary>
+        Gets or sets default row height.
+    </summary>
+        """
+        GetDllLibXls().XlsPageSetup_get_DefaultRowHeight.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetup_get_DefaultRowHeight.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetup_get_DefaultRowHeight, self.Ptr)
+        return ret
+
+    @DefaultRowHeight.setter
+    def DefaultRowHeight(self, value:int):
+        GetDllLibXls().XlsPageSetup_set_DefaultRowHeight.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPageSetup_set_DefaultRowHeight, self.Ptr, value)
+
+    @property
+    def DefaultRowHeightFlag(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPageSetup_get_DefaultRowHeightFlag.argtypes=[c_void_p]
+        GetDllLibXls().XlsPageSetup_get_DefaultRowHeightFlag.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPageSetup_get_DefaultRowHeightFlag, self.Ptr)
+        return ret
+
+    @DefaultRowHeightFlag.setter
+    def DefaultRowHeightFlag(self, value:bool):
+        GetDllLibXls().XlsPageSetup_set_DefaultRowHeightFlag.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPageSetup_set_DefaultRowHeightFlag, self.Ptr, value)
+
+
+    def Clone(self ,parent:'SpireObject')->'XlsPageSetup':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsPageSetup_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsPageSetup_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPageSetup_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else XlsPageSetup(intPtr)
+        return ret
+
+
+
+    def GetStoreSize(self ,version:'ExcelVersion')->int:
+        """
+
+        """
+        enumversion:c_int = version.value
+
+        GetDllLibXls().XlsPageSetup_GetStoreSize.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsPageSetup_GetStoreSize.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPageSetup_GetStoreSize, self.Ptr, enumversion)
+        return ret
+

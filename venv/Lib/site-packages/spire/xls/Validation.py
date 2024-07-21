@@ -1,0 +1,33 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class Validation (  XlsValidationWrapper) :
+    """
+
+    """
+    @property
+
+    def DataRange(self)->'CellRange':
+        """
+    <summary>
+        Returns data type validation for a range
+    </summary>
+        """
+        GetDllLibXls().Validation_get_DataRange.argtypes=[c_void_p]
+        GetDllLibXls().Validation_get_DataRange.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().Validation_get_DataRange, self.Ptr)
+        from spire.xls import CellRange
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @DataRange.setter
+    def DataRange(self, value:'CellRange'):
+        GetDllLibXls().Validation_set_DataRange.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().Validation_set_DataRange, self.Ptr, value.Ptr)
+

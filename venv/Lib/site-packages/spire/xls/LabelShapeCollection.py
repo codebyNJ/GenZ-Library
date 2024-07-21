@@ -1,0 +1,71 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+from spire.xls.XlsLabelShape import XlsLabelShape
+
+class LabelShapeCollection (  CollectionBase[XlsLabelShape],ILabelShapes) :
+    """
+
+    """
+    @dispatch
+
+    def get_Item(self ,index:int)->ILabelShape:
+        """
+
+        """
+        
+        GetDllLibXls().LabelShapeCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().LabelShapeCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().LabelShapeCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsLabelShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->ILabelShape:
+        """
+
+        """
+        
+        GetDllLibXls().LabelShapeCollection_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().LabelShapeCollection_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().LabelShapeCollection_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else XlsLabelShape(intPtr)
+        return ret
+
+
+
+    def AddLabel(self ,row:int,column:int,height:int,width:int)->'ILabelShape':
+        """
+
+        """
+        
+        GetDllLibXls().LabelShapeCollection_AddLabel.argtypes=[c_void_p ,c_int,c_int,c_int,c_int]
+        GetDllLibXls().LabelShapeCollection_AddLabel.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().LabelShapeCollection_AddLabel, self.Ptr, row,column,height,width)
+        ret = None if intPtr==None else XlsLabelShape(intPtr)
+        return ret
+
+
+
+    def AddCopy(self ,source:'ILabelShape'):
+        """
+
+        """
+        intPtrsource:c_void_p = source.Ptr
+
+        GetDllLibXls().LabelShapeCollection_AddCopy.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().LabelShapeCollection_AddCopy, self.Ptr, intPtrsource)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().LabelShapeCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().LabelShapeCollection_Clear, self.Ptr)
+

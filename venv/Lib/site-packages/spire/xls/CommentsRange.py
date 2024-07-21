@@ -1,0 +1,578 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CommentsRange (  XlsObject, IComment, ITextBoxShape, ITextBox, IShape) :
+    """
+
+    """
+    @property
+
+    def Author(self)->str:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_Author.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_Author.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().CommentsRange_get_Author, self.Ptr))
+        return ret
+
+
+    @Author.setter
+    def Author(self, value:str):
+        GetDllLibXls().CommentsRange_set_Author.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().CommentsRange_set_Author, self.Ptr, value)
+
+    @property
+    def IsVisible(self)->bool:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_IsVisible.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_IsVisible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_IsVisible, self.Ptr)
+        return ret
+
+    @IsVisible.setter
+    def IsVisible(self, value:bool):
+        GetDllLibXls().CommentsRange_set_IsVisible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CommentsRange_set_IsVisible, self.Ptr, value)
+
+    @property
+    def Row(self)->int:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_Row.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_Row.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_Row, self.Ptr)
+        return ret
+
+    @property
+    def Column(self)->int:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_Column.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_Column.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_Column, self.Ptr)
+        return ret
+
+    @property
+
+    def RichText(self)->'IRichTextString':
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_RichText.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_RichText.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CommentsRange_get_RichText, self.Ptr)
+        ret = None if intPtr==None else RichTextObject(intPtr)
+        return ret
+
+
+    @property
+
+    def Text(self)->str:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_Text.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_Text.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().CommentsRange_get_Text, self.Ptr))
+        return ret
+
+
+    @Text.setter
+    def Text(self, value:str):
+        GetDllLibXls().CommentsRange_set_Text.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().CommentsRange_set_Text, self.Ptr, value)
+
+    @property
+
+    def HtmlString(self)->str:
+        """
+    <summary>
+        Gets and sets the html string which contains data and some formattings in this shape.
+    </summary>
+        """
+        GetDllLibXls().CommentsRange_get_HtmlString.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_HtmlString.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().CommentsRange_get_HtmlString, self.Ptr))
+        return ret
+
+
+    @HtmlString.setter
+    def HtmlString(self, value:str):
+        GetDllLibXls().CommentsRange_set_HtmlString.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().CommentsRange_set_HtmlString, self.Ptr, value)
+
+    @property
+    def IsMoveWithCell(self)->bool:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_IsMoveWithCell.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_IsMoveWithCell.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_IsMoveWithCell, self.Ptr)
+        return ret
+
+    @IsMoveWithCell.setter
+    def IsMoveWithCell(self, value:bool):
+        GetDllLibXls().CommentsRange_set_IsMoveWithCell.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CommentsRange_set_IsMoveWithCell, self.Ptr, value)
+
+    @property
+    def AutoSize(self)->bool:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_AutoSize.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_AutoSize.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_AutoSize, self.Ptr)
+        return ret
+
+    @AutoSize.setter
+    def AutoSize(self, value:bool):
+        GetDllLibXls().CommentsRange_set_AutoSize.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CommentsRange_set_AutoSize, self.Ptr, value)
+
+    def Remove(self):
+        """
+
+        """
+        GetDllLibXls().CommentsRange_Remove.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().CommentsRange_Remove, self.Ptr)
+
+
+    def Scale(self ,scaleWidth:int,scaleHeight:int):
+        """
+
+        """
+        
+        GetDllLibXls().CommentsRange_Scale.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().CommentsRange_Scale, self.Ptr, scaleWidth,scaleHeight)
+
+    @property
+
+    def ResizeBehave(self)->'ResizeBehaveType':
+        """
+    <summary>
+        Specifies all possible settings for how drawing object shall be resized when the rows and columns between its start and ending anchor are resized or inserted
+    </summary>
+        """
+        GetDllLibXls().CommentsRange_get_ResizeBehave.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_ResizeBehave.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_ResizeBehave, self.Ptr)
+        objwraped = ResizeBehaveType(ret)
+        return objwraped
+
+    @ResizeBehave.setter
+    def ResizeBehave(self, value:'ResizeBehaveType'):
+        GetDllLibXls().CommentsRange_set_ResizeBehave.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CommentsRange_set_ResizeBehave, self.Ptr, value.value)
+
+    @property
+    def Visible(self)->bool:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_Visible.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_Visible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_Visible, self.Ptr)
+        return ret
+
+    @Visible.setter
+    def Visible(self, value:bool):
+        GetDllLibXls().CommentsRange_set_Visible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CommentsRange_set_Visible, self.Ptr, value)
+
+    @property
+    def Height(self)->int:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_Height.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_Height.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_Height, self.Ptr)
+        return ret
+
+    @Height.setter
+    def Height(self, value:int):
+        GetDllLibXls().CommentsRange_set_Height.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CommentsRange_set_Height, self.Ptr, value)
+
+    @property
+    def ID(self)->int:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_ID.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_ID.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_ID, self.Ptr)
+        return ret
+
+    @property
+    def IsSmartArt(self)->bool:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_IsSmartArt.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_IsSmartArt.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_IsSmartArt, self.Ptr)
+        return ret
+
+    @property
+    def Left(self)->int:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_Left.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_Left.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_Left, self.Ptr)
+        return ret
+
+    @Left.setter
+    def Left(self, value:int):
+        GetDllLibXls().CommentsRange_set_Left.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CommentsRange_set_Left, self.Ptr, value)
+
+    @property
+
+    def Name(self)->str:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_Name.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_Name.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().CommentsRange_get_Name, self.Ptr))
+        return ret
+
+
+    @Name.setter
+    def Name(self, value:str):
+        GetDllLibXls().CommentsRange_set_Name.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().CommentsRange_set_Name, self.Ptr, value)
+
+    @property
+    def Top(self)->int:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_Top.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_Top.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_Top, self.Ptr)
+        return ret
+
+    @Top.setter
+    def Top(self, value:int):
+        GetDllLibXls().CommentsRange_set_Top.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CommentsRange_set_Top, self.Ptr, value)
+
+    @property
+    def Width(self)->int:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_Width.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_Width.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_Width, self.Ptr)
+        return ret
+
+    @Width.setter
+    def Width(self, value:int):
+        GetDllLibXls().CommentsRange_set_Width.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CommentsRange_set_Width, self.Ptr, value)
+
+    @property
+
+    def ShapeType(self)->'ExcelShapeType':
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_ShapeType.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_ShapeType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_ShapeType, self.Ptr)
+        objwraped = ExcelShapeType(ret)
+        return objwraped
+
+    @ShapeType.setter
+    def ShapeType(self, value:'ExcelShapeType'):
+        GetDllLibXls().CommentsRange_set_ShapeType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CommentsRange_set_ShapeType, self.Ptr, value.value)
+
+    @property
+
+    def AlternativeText(self)->str:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_AlternativeText.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_AlternativeText.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().CommentsRange_get_AlternativeText, self.Ptr))
+        return ret
+
+
+    @AlternativeText.setter
+    def AlternativeText(self, value:str):
+        GetDllLibXls().CommentsRange_set_AlternativeText.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().CommentsRange_set_AlternativeText, self.Ptr, value)
+
+    @property
+
+    def TextFrame(self)->'ITextFrame':
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_TextFrame.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_TextFrame.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CommentsRange_get_TextFrame, self.Ptr)
+        ret = None if intPtr==None else ITextFrame(intPtr)
+        return ret
+
+
+    @property
+
+    def Fill(self)->'IShapeFill':
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_Fill.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_Fill.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CommentsRange_get_Fill, self.Ptr)
+        ret = None if intPtr==None else XlsShapeFill(intPtr)
+        return ret
+
+
+    @property
+
+    def Line(self)->'IShapeLineFormat':
+        """
+    <summary>
+        Represents line format properties. Read only.
+    </summary>
+        """
+        GetDllLibXls().CommentsRange_get_Line.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_Line.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CommentsRange_get_Line, self.Ptr)
+        ret = None if intPtr==None else XlsShapeLineFormat(intPtr)
+        return ret
+
+
+    @property
+
+    def OnAction(self)->str:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_OnAction.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_OnAction.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().CommentsRange_get_OnAction, self.Ptr))
+        return ret
+
+
+    @OnAction.setter
+    def OnAction(self, value:str):
+        GetDllLibXls().CommentsRange_set_OnAction.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().CommentsRange_set_OnAction, self.Ptr, value)
+
+    @property
+
+    def LinkedCell(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_LinkedCell.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_LinkedCell.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CommentsRange_get_LinkedCell, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @LinkedCell.setter
+    def LinkedCell(self, value:'IXLSRange'):
+        GetDllLibXls().CommentsRange_set_LinkedCell.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().CommentsRange_set_LinkedCell, self.Ptr, value.Ptr)
+
+    @property
+    def Rotation(self)->int:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_Rotation.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_Rotation.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_Rotation, self.Ptr)
+        return ret
+
+    @Rotation.setter
+    def Rotation(self, value:int):
+        GetDllLibXls().CommentsRange_set_Rotation.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CommentsRange_set_Rotation, self.Ptr, value)
+
+    @property
+
+    def ThreeD(self)->'IFormat3D':
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_ThreeD.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_ThreeD.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CommentsRange_get_ThreeD, self.Ptr)
+        ret = None if intPtr==None else Format3D(intPtr)
+        return ret
+
+
+    @property
+
+    def Glow(self)->'IGlow':
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_Glow.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_Glow.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CommentsRange_get_Glow, self.Ptr)
+        ret = None if intPtr==None else ShapeGlow(intPtr)
+        return ret
+
+
+    @property
+
+    def Shadow(self)->'IShadow':
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_Shadow.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_Shadow.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CommentsRange_get_Shadow, self.Ptr)
+        ret = None if intPtr==None else ChartShadow(intPtr)
+        return ret
+
+
+    @property
+
+    def Reflection(self)->'IReflectionEffect':
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_Reflection.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_Reflection.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CommentsRange_get_Reflection, self.Ptr)
+        ret = None if intPtr==None else ShapeReflection(intPtr)
+        return ret
+
+
+    @property
+    def IsLockAspectRatio(self)->bool:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_IsLockAspectRatio.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_IsLockAspectRatio.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_IsLockAspectRatio, self.Ptr)
+        return ret
+
+    @IsLockAspectRatio.setter
+    def IsLockAspectRatio(self, value:bool):
+        GetDllLibXls().CommentsRange_set_IsLockAspectRatio.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CommentsRange_set_IsLockAspectRatio, self.Ptr, value)
+
+    @property
+    def IsPrintable(self)->bool:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_IsPrintable.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_IsPrintable.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_IsPrintable, self.Ptr)
+        return ret
+
+    @IsPrintable.setter
+    def IsPrintable(self, value:bool):
+        GetDllLibXls().CommentsRange_set_IsPrintable.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CommentsRange_set_IsPrintable, self.Ptr, value)
+
+    @property
+    def IsLocked(self)->bool:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_IsLocked.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_IsLocked.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_IsLocked, self.Ptr)
+        return ret
+
+    @IsLocked.setter
+    def IsLocked(self, value:bool):
+        GetDllLibXls().CommentsRange_set_IsLocked.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CommentsRange_set_IsLocked, self.Ptr, value)
+
+    @property
+
+    def HAlignment(self)->'CommentHAlignType':
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_HAlignment.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_HAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_HAlignment, self.Ptr)
+        objwraped = CommentHAlignType(ret)
+        return objwraped
+
+    @HAlignment.setter
+    def HAlignment(self, value:'CommentHAlignType'):
+        GetDllLibXls().CommentsRange_set_HAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CommentsRange_set_HAlignment, self.Ptr, value.value)
+
+    @property
+
+    def VAlignment(self)->'CommentVAlignType':
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_VAlignment.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_VAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_VAlignment, self.Ptr)
+        objwraped = CommentVAlignType(ret)
+        return objwraped
+
+    @VAlignment.setter
+    def VAlignment(self, value:'CommentVAlignType'):
+        GetDllLibXls().CommentsRange_set_VAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CommentsRange_set_VAlignment, self.Ptr, value.value)
+
+    @property
+
+    def TextRotation(self)->'TextRotationType':
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_TextRotation.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_TextRotation.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_TextRotation, self.Ptr)
+        objwraped = TextRotationType(ret)
+        return objwraped
+
+    @TextRotation.setter
+    def TextRotation(self, value:'TextRotationType'):
+        GetDllLibXls().CommentsRange_set_TextRotation.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CommentsRange_set_TextRotation, self.Ptr, value.value)
+
+    @property
+    def IsTextLocked(self)->bool:
+        """
+
+        """
+        GetDllLibXls().CommentsRange_get_IsTextLocked.argtypes=[c_void_p]
+        GetDllLibXls().CommentsRange_get_IsTextLocked.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CommentsRange_get_IsTextLocked, self.Ptr)
+        return ret
+
+    @IsTextLocked.setter
+    def IsTextLocked(self, value:bool):
+        GetDllLibXls().CommentsRange_set_IsTextLocked.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CommentsRange_set_IsTextLocked, self.Ptr, value)
+

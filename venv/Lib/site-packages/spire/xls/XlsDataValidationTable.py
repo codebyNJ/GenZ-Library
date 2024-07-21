@@ -1,0 +1,105 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsDataValidationTable (  SpireObject, IDataValidationTable) :
+    """
+
+    """
+    @property
+
+    def Worksheet(self)->'Worksheet':
+        """
+
+        """
+        GetDllLibXls().XlsDataValidationTable_get_Worksheet.argtypes=[c_void_p]
+        GetDllLibXls().XlsDataValidationTable_get_Worksheet.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsDataValidationTable_get_Worksheet, self.Ptr)
+        ret = None if intPtr==None else Worksheet(intPtr)
+        return ret
+
+
+    @property
+
+    def Workbook(self)->'Workbook':
+        """
+
+        """
+        GetDllLibXls().XlsDataValidationTable_get_Workbook.argtypes=[c_void_p]
+        GetDllLibXls().XlsDataValidationTable_get_Workbook.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsDataValidationTable_get_Workbook, self.Ptr)
+        ret = None if intPtr==None else Workbook(intPtr)
+        return ret
+
+
+
+    def get_Item(self ,index:int)->'XlsDataValidationCollection':
+        """
+
+        """
+        
+        GetDllLibXls().XlsDataValidationTable_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsDataValidationTable_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsDataValidationTable_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsDataValidationCollection(intPtr)
+        return ret
+
+
+    @property
+    def ShapesCount(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsDataValidationTable_get_ShapesCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsDataValidationTable_get_ShapesCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsDataValidationTable_get_ShapesCount, self.Ptr)
+        return ret
+
+
+    def FindDataValidation(self ,iCellIndex:int)->'IDataValidation':
+        """
+
+        """
+        
+        GetDllLibXls().XlsDataValidationTable_FindDataValidation.argtypes=[c_void_p ,c_long]
+        GetDllLibXls().XlsDataValidationTable_FindDataValidation.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsDataValidationTable_FindDataValidation, self.Ptr, iCellIndex)
+        ret = None if intPtr==None else XlsValidation(intPtr)
+        return ret
+
+
+
+    def Remove(self ,rectangles:List[Rectangle]):
+        """
+
+        """
+        #arrayrectangles:ArrayTyperectangles = ""
+        countrectangles = len(rectangles)
+        ArrayTyperectangles = c_void_p * countrectangles
+        arrayrectangles = ArrayTyperectangles()
+        for i in range(0, countrectangles):
+            arrayrectangles[i] = rectangles[i].Ptr
+
+
+        GetDllLibXls().XlsDataValidationTable_Remove.argtypes=[c_void_p ,ArrayTyperectangles,c_int]
+        CallCFunction(GetDllLibXls().XlsDataValidationTable_Remove, self.Ptr, arrayrectangles, countrectangles)
+
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsDataValidationTable_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsDataValidationTable_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsDataValidationTable_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+

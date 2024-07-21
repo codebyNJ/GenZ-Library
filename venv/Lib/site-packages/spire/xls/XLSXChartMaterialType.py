@@ -1,0 +1,32 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XLSXChartMaterialType(Enum):
+    """
+    <summary>
+        Indicates the Material property values fro the chart
+    </summary>
+    """
+    none = 0
+    Matte = 1
+    WarmMatte = 2
+    Plastic = 3
+    Metal = 4
+    DarkEdge = 5
+    SoftEdge = 6
+    Flat = 7
+    WireFrame = 8
+    Powder = 9
+    TranslucentPowder = 10
+    Clear = 11
+    SoftMetal = 12
+    LegacyMatte = 13
+    LegacyMetal = 14
+    LegacyPlastic = 15
+    LegacyWireframe = 16
+

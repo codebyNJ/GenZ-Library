@@ -1,0 +1,69 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IStyles (  abc.ABC) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Count(self)->int:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,Index:int)->IStyle:
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def get_Item(self ,name:str)->IStyle:
+        """
+
+        """
+        pass
+
+
+    #@property
+
+    #@abc.abstractmethod
+    #def Parent(self)->'SpireObject':
+    #    """
+
+    #    """
+    #    pass
+
+
+
+    @abc.abstractmethod
+    def Contains(self ,name:str)->bool:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Remove(self ,styleName:str):
+        """
+
+        """
+        pass
+
+

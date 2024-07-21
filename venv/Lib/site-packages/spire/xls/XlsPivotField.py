@@ -1,0 +1,767 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsPivotField (  SpireObject, IPivotField, ICloneParent) :
+    """
+
+    """
+    @property
+
+    def Parent(self)->'PivotTableFields':
+        """
+
+        """
+        GetDllLibXls().XlsPivotField_get_Parent.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_Parent.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotField_get_Parent, self.Ptr)
+        ret = None if intPtr==None else PivotTableFields(intPtr)
+        return ret
+
+
+    @property
+
+    def Name(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsPivotField_get_Name.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_Name.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPivotField_get_Name, self.Ptr))
+        return ret
+
+
+    @property
+
+    def Axis(self)->'AxisTypes':
+        """
+
+        """
+        GetDllLibXls().XlsPivotField_get_Axis.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_Axis.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_Axis, self.Ptr)
+        objwraped = AxisTypes(ret)
+        return objwraped
+
+    @Axis.setter
+    def Axis(self, value:'AxisTypes'):
+        GetDllLibXls().XlsPivotField_set_Axis.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_Axis, self.Ptr, value.value)
+
+    @property
+
+    def NumberFormat(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsPivotField_get_NumberFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_NumberFormat.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPivotField_get_NumberFormat, self.Ptr))
+        return ret
+
+
+    @NumberFormat.setter
+    def NumberFormat(self, value:str):
+        GetDllLibXls().XlsPivotField_set_NumberFormat.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_NumberFormat, self.Ptr, value)
+
+    @property
+
+    def Subtotals(self)->'SubtotalTypes':
+        """
+
+        """
+        GetDllLibXls().XlsPivotField_get_Subtotals.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_Subtotals.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_Subtotals, self.Ptr)
+        objwraped = SubtotalTypes(ret)
+        return objwraped
+
+    @Subtotals.setter
+    def Subtotals(self, value:'SubtotalTypes'):
+        GetDllLibXls().XlsPivotField_set_Subtotals.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_Subtotals, self.Ptr, value.value)
+
+    @property
+    def CanDragToRow(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPivotField_get_CanDragToRow.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_CanDragToRow.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_CanDragToRow, self.Ptr)
+        return ret
+
+    @CanDragToRow.setter
+    def CanDragToRow(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_CanDragToRow.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_CanDragToRow, self.Ptr, value)
+
+    @property
+    def CanDragToColumn(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPivotField_get_CanDragToColumn.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_CanDragToColumn.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_CanDragToColumn, self.Ptr)
+        return ret
+
+    @CanDragToColumn.setter
+    def CanDragToColumn(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_CanDragToColumn.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_CanDragToColumn, self.Ptr, value)
+
+    @property
+    def CanDragToPage(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPivotField_get_CanDragToPage.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_CanDragToPage.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_CanDragToPage, self.Ptr)
+        return ret
+
+    @CanDragToPage.setter
+    def CanDragToPage(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_CanDragToPage.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_CanDragToPage, self.Ptr, value)
+
+    @property
+    def CanDragOff(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPivotField_get_CanDragOff.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_CanDragOff.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_CanDragOff, self.Ptr)
+        return ret
+
+    @CanDragOff.setter
+    def CanDragOff(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_CanDragOff.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_CanDragOff, self.Ptr, value)
+
+    @property
+    def CanDragToData(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPivotField_get_CanDragToData.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_CanDragToData.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_CanDragToData, self.Ptr)
+        return ret
+
+    @CanDragToData.setter
+    def CanDragToData(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_CanDragToData.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_CanDragToData, self.Ptr, value)
+
+    @property
+    def DataField(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPivotField_get_DataField.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_DataField.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_DataField, self.Ptr)
+        return ret
+
+    @DataField.setter
+    def DataField(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_DataField.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_DataField, self.Ptr, value)
+
+    @property
+    def IsDataField(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsPivotField_get_IsDataField.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_IsDataField.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_IsDataField, self.Ptr)
+        return ret
+
+    @property
+    def NumberFormatIndex(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsPivotField_get_NumberFormatIndex.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_NumberFormatIndex.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_NumberFormatIndex, self.Ptr)
+        return ret
+
+    @NumberFormatIndex.setter
+    def NumberFormatIndex(self, value:int):
+        GetDllLibXls().XlsPivotField_set_NumberFormatIndex.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_NumberFormatIndex, self.Ptr, value)
+
+    @property
+
+    def SubtotalCaption(self)->str:
+        """
+    <summary>
+        Specifies the custom text that is displayed for the subtotals caption.
+    </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_SubtotalCaption.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_SubtotalCaption.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPivotField_get_SubtotalCaption, self.Ptr))
+        return ret
+
+
+    @SubtotalCaption.setter
+    def SubtotalCaption(self, value:str):
+        GetDllLibXls().XlsPivotField_set_SubtotalCaption.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_SubtotalCaption, self.Ptr, value)
+
+    @property
+    def SubtotalTop(self)->bool:
+        """
+    <summary>
+        Get or set whether show 
+    </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_SubtotalTop.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_SubtotalTop.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_SubtotalTop, self.Ptr)
+        return ret
+
+    @SubtotalTop.setter
+    def SubtotalTop(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_SubtotalTop.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_SubtotalTop, self.Ptr, value)
+
+    @property
+    def IsAutoShow(self)->bool:
+        """
+    <summary>
+        Autoshow is enabled.
+    </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_IsAutoShow.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_IsAutoShow.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_IsAutoShow, self.Ptr)
+        return ret
+
+    @IsAutoShow.setter
+    def IsAutoShow(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_IsAutoShow.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_IsAutoShow, self.Ptr, value)
+
+    @property
+    def IsDragToHide(self)->bool:
+        """
+    <summary>
+        User can remove field from fiew.
+    </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_IsDragToHide.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_IsDragToHide.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_IsDragToHide, self.Ptr)
+        return ret
+
+    @IsDragToHide.setter
+    def IsDragToHide(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_IsDragToHide.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_IsDragToHide, self.Ptr, value)
+
+    @property
+    def ShowNewItemsInFilter(self)->bool:
+        """
+    <summary>
+        Specifies a boolean value that indicates whether manual filter is in inclusive mode.
+    </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_ShowNewItemsInFilter.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_ShowNewItemsInFilter.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_ShowNewItemsInFilter, self.Ptr)
+        return ret
+
+    @ShowNewItemsInFilter.setter
+    def ShowNewItemsInFilter(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_ShowNewItemsInFilter.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_ShowNewItemsInFilter, self.Ptr, value)
+
+    @property
+    def ShowNewItemsOnRefresh(self)->bool:
+        """
+    <summary>
+         Specifies a boolean value that indicates whether new items that appear after a refresh
+            should be hidden by default.
+     </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_ShowNewItemsOnRefresh.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_ShowNewItemsOnRefresh.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_ShowNewItemsOnRefresh, self.Ptr)
+        return ret
+
+    @ShowNewItemsOnRefresh.setter
+    def ShowNewItemsOnRefresh(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_ShowNewItemsOnRefresh.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_ShowNewItemsOnRefresh, self.Ptr, value)
+
+    @property
+    def ShowBlankRow(self)->bool:
+        """
+    <summary>
+        True if a blank row is inserted after the specified row field in a PivotTable report.
+    </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_ShowBlankRow.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_ShowBlankRow.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_ShowBlankRow, self.Ptr)
+        return ret
+
+    @ShowBlankRow.setter
+    def ShowBlankRow(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_ShowBlankRow.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_ShowBlankRow, self.Ptr, value)
+
+    @property
+    def ShowPageBreak(self)->bool:
+        """
+    <summary>
+        True if a page break is inserted after each field. 
+    </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_ShowPageBreak.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_ShowPageBreak.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_ShowPageBreak, self.Ptr)
+        return ret
+
+    @ShowPageBreak.setter
+    def ShowPageBreak(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_ShowPageBreak.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_ShowPageBreak, self.Ptr, value)
+
+    @property
+    def ItemsPerPage(self)->int:
+        """
+    <summary>
+        Specifies the number of items showed per page in the PivotTable.
+    </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_ItemsPerPage.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_ItemsPerPage.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_ItemsPerPage, self.Ptr)
+        return ret
+
+    @ItemsPerPage.setter
+    def ItemsPerPage(self, value:int):
+        GetDllLibXls().XlsPivotField_set_ItemsPerPage.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_ItemsPerPage, self.Ptr, value)
+
+    @property
+    def IsMultiSelected(self)->bool:
+        """
+    <summary>
+         Specifies a boolean value that indicates whether the field can have multiple items
+            selected in the page field.
+     </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_IsMultiSelected.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_IsMultiSelected.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_IsMultiSelected, self.Ptr)
+        return ret
+
+    @IsMultiSelected.setter
+    def IsMultiSelected(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_IsMultiSelected.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_IsMultiSelected, self.Ptr, value)
+
+    @property
+    def IsShowAllItems(self)->bool:
+        """
+    <summary>
+        Show all items for this field.
+    </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_IsShowAllItems.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_IsShowAllItems.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_IsShowAllItems, self.Ptr)
+        return ret
+
+    @IsShowAllItems.setter
+    def IsShowAllItems(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_IsShowAllItems.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_IsShowAllItems, self.Ptr, value)
+
+    @property
+    def ShowOutline(self)->bool:
+        """
+    <summary>
+         Specifies a boolean value that indicates whether the items in this field should be shown
+            in Outline form.
+            If the parameter is true, the field layout is "Show item labels in outline form".
+            If the parameter is false, the field layout is "Show item labels in tabular form".
+     </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_ShowOutline.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_ShowOutline.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_ShowOutline, self.Ptr)
+        return ret
+
+    @ShowOutline.setter
+    def ShowOutline(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_ShowOutline.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_ShowOutline, self.Ptr, value)
+
+    @property
+    def ShowDropDown(self)->bool:
+        """
+    <summary>
+        True if the flag for the specified PivotTable field or PivotTable item is set to "drilled" (expanded, or visible).
+    </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_ShowDropDown.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_ShowDropDown.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_ShowDropDown, self.Ptr)
+        return ret
+
+    @ShowDropDown.setter
+    def ShowDropDown(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_ShowDropDown.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_ShowDropDown, self.Ptr, value)
+
+    @property
+    def ShowPropAsCaption(self)->bool:
+        """
+    <summary>
+         Specifies a boolean value that indicates whether to show the property as a member
+            caption.
+     </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_ShowPropAsCaption.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_ShowPropAsCaption.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_ShowPropAsCaption, self.Ptr)
+        return ret
+
+    @ShowPropAsCaption.setter
+    def ShowPropAsCaption(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_ShowPropAsCaption.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_ShowPropAsCaption, self.Ptr, value)
+
+    @property
+    def ShowToolTip(self)->bool:
+        """
+    <summary>
+        Specifies a boolean value that indicates whether to show the member property value in a
+            tooltip on the appropriate PivotTable cells.
+    </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_ShowToolTip.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_ShowToolTip.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_ShowToolTip, self.Ptr)
+        return ret
+
+    @ShowToolTip.setter
+    def ShowToolTip(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_ShowToolTip.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_ShowToolTip, self.Ptr, value)
+
+    @property
+
+    def SortType(self)->PivotFieldSortType:
+        """
+    <summary>
+        Specifies the type of sort that is applied to this field.
+    </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_SortType.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_SortType.restype=c_int
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotField_get_SortType, self.Ptr)
+        ret = None if intPtr==None else PivotFieldSortType(intPtr)
+        return ret
+
+
+
+    @SortType.setter
+    def SortType(self, value:PivotFieldSortType):
+        GetDllLibXls().XlsPivotField_set_SortType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_SortType, self.Ptr, value.value)
+
+
+    @property
+
+    def Caption(self)->str:
+        """
+    <summary>
+         Specifies the unique name of the member property to be used as a caption for the field
+            and field items.
+     </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_Caption.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_Caption.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPivotField_get_Caption, self.Ptr))
+        return ret
+
+
+    @Caption.setter
+    def Caption(self, value:str):
+        GetDllLibXls().XlsPivotField_set_Caption.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_Caption, self.Ptr, value)
+
+    @property
+    def Compact(self)->bool:
+        """
+    <summary>
+         Specifies a boolean value that indicates whether the application will display fields
+            compactly in the sheet on which this PivotTable resides
+     </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_Compact.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_Compact.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_Compact, self.Ptr)
+        return ret
+
+    @Compact.setter
+    def Compact(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_Compact.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_Compact, self.Ptr, value)
+
+    @property
+
+    def Formula(self)->str:
+        """
+    <summary>
+        Specifies the formula for the calculated field
+    </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_Formula.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_Formula.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsPivotField_get_Formula, self.Ptr))
+        return ret
+
+
+    @Formula.setter
+    def Formula(self, value:str):
+        GetDllLibXls().XlsPivotField_set_Formula.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_Formula, self.Ptr, value)
+
+    @property
+    def IsFormulaField(self)->bool:
+        """
+    <summary>
+        Indicates whether this field is formula field
+    </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_IsFormulaField.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_IsFormulaField.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_IsFormulaField, self.Ptr)
+        return ret
+
+    @property
+    def RepeatItemLabels(self)->bool:
+        """
+    <summary>
+        True if the field repeat item labels.
+    </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_RepeatItemLabels.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_RepeatItemLabels.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_RepeatItemLabels, self.Ptr)
+        return ret
+
+    @RepeatItemLabels.setter
+    def RepeatItemLabels(self, value:bool):
+        GetDllLibXls().XlsPivotField_set_RepeatItemLabels.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_RepeatItemLabels, self.Ptr, value)
+
+    @property
+
+    def AutoSort(self)->'AutoSortScope':
+        """
+    <summary>
+        Preserves the sorting elements of the field
+    </summary>
+        """
+        GetDllLibXls().XlsPivotField_get_AutoSort.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_AutoSort.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotField_get_AutoSort, self.Ptr)
+        ret = None if intPtr==None else AutoSortScope(intPtr)
+        return ret
+
+
+    @AutoSort.setter
+    def AutoSort(self, value:'AutoSortScope'):
+        GetDllLibXls().XlsPivotField_set_AutoSort.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_AutoSort, self.Ptr, value.Ptr)
+
+    @property
+
+    def ShowDataAs(self)->'PivotFieldFormatType':
+        """
+
+        """
+        GetDllLibXls().XlsPivotField_get_ShowDataAs.argtypes=[c_void_p]
+        GetDllLibXls().XlsPivotField_get_ShowDataAs.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_get_ShowDataAs, self.Ptr)
+        objwraped = PivotFieldFormatType(ret)
+        return objwraped
+
+    @ShowDataAs.setter
+    def ShowDataAs(self, value:'PivotFieldFormatType'):
+        GetDllLibXls().XlsPivotField_set_ShowDataAs.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsPivotField_set_ShowDataAs, self.Ptr, value.value)
+
+
+    def AddItemOption(self ,index:int):
+        """
+    <summary>
+        Represents the index of item and itemoptions key pairs
+    </summary>
+        """
+        
+        GetDllLibXls().XlsPivotField_AddItemOption.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsPivotField_AddItemOption, self.Ptr, index)
+
+
+    def IsHiddenItemDetail(self ,index:int)->bool:
+        """
+    <summary>
+        Indicates whether the specific PivotItem is hidden detail.
+             Must call after pivottable CalculateData function.
+    </summary>
+    <param name="index">the index of the pivotItem in the pivotField.</param>
+    <returns>whether the specific PivotItem is hidden detail</returns>
+        """
+        
+        GetDllLibXls().XlsPivotField_IsHiddenItemDetail.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsPivotField_IsHiddenItemDetail.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_IsHiddenItemDetail, self.Ptr, index)
+        return ret
+
+    @dispatch
+
+    def HideItemDetail(self ,index:int,isHiddenDetail:bool):
+        """
+    <summary>
+         Sets whether the specific PivotItem in a pivot field is hidden detail.
+             Must call after pivottable CalculateData function.
+    </summary>
+    <param name="index">the index of the pivotItem in the pivotField.</param>
+    <param name="isHiddenDetail">whether the specific PivotItem is hidden</param>
+        """
+        
+        GetDllLibXls().XlsPivotField_HideItemDetail.argtypes=[c_void_p ,c_int,c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_HideItemDetail, self.Ptr, index,isHiddenDetail)
+
+    @dispatch
+
+    def HideItemDetail(self ,itemValue:str,isHiddenDetail:bool):
+        """
+    <summary>
+         Sets whether the PivotItems in a pivot field is hidden detail.That is collapse/expand this field.
+             Must call after pivottable CalculateData function.
+    </summary>
+    <param name="itemValue">the value of the pivotItem in the pivotField.</param>
+    <param name="isHiddenDetail">whether the specific PivotItem is hidden</param>
+        """
+        
+        GetDllLibXls().XlsPivotField_HideItemDetailII.argtypes=[c_void_p ,c_void_p,c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_HideItemDetailII, self.Ptr, itemValue,isHiddenDetail)
+
+
+    def HideDetail(self ,isHiddenDetail:bool):
+        """
+    <summary>
+         Sets whether the PivotItems in a pivot field is hidden detail.That is collapse/expand this field.
+             Must call after pivottable CalculateData function.
+    </summary>
+    <param name="isHiddenDetail">whether DetailItems is hidden</param>
+        """
+        
+        GetDllLibXls().XlsPivotField_HideDetail.argtypes=[c_void_p ,c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_HideDetail, self.Ptr, isHiddenDetail)
+
+
+    def IsHiddenItem(self ,index:int)->bool:
+        """
+    <summary>
+        Indicates whether the specific PivotItem is hidden.
+             Must call after pivottable CalculateData function.
+    </summary>
+    <param name="index">the index of the pivotItem in the pivotField.</param>
+    <returns>whether the specific PivotItem is hidden</returns>
+        """
+        
+        GetDllLibXls().XlsPivotField_IsHiddenItem.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsPivotField_IsHiddenItem.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsPivotField_IsHiddenItem, self.Ptr, index)
+        return ret
+
+    @dispatch
+
+    def HideItem(self ,index:int,isHidden:bool):
+        """
+    <summary>
+         Sets whether the specific PivotItem in a data field is hidden.
+             Must call after pivottable CalculateData function.
+    </summary>
+    <param name="index">the index of the pivotItem in the pivotField.</param>
+    <param name="isHidden">whether the specific PivotItem is hidden</param>
+        """
+        
+        GetDllLibXls().XlsPivotField_HideItem.argtypes=[c_void_p ,c_int,c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_HideItem, self.Ptr, index,isHidden)
+
+
+    def HideAllItem(self ,isHidden:bool):
+        """
+    <summary>
+         Sets whether the all PivotItem in a data field is hidden.
+             Must call after pivottable CalculateData function.
+    </summary>
+    <param name="isHidden">whether the specific PivotItem is hidden</param>
+        """
+        
+        GetDllLibXls().XlsPivotField_HideAllItem.argtypes=[c_void_p ,c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_HideAllItem, self.Ptr, isHidden)
+
+    @dispatch
+
+    def HideItem(self ,itemValue:str,isHidden:bool):
+        """
+    <summary>
+         Sets whether the specific PivotItem in a data field is hidden.
+             Must call after pivottable CalculateData function.
+    </summary>
+    <param name="itemValue">the value of the pivotItem in the pivotField.</param>
+    <param name="isHidden">whether the specific PivotItem is hidden</param>
+        """
+        
+        GetDllLibXls().XlsPivotField_HideItemII.argtypes=[c_void_p ,c_void_p,c_bool]
+        CallCFunction(GetDllLibXls().XlsPivotField_HideItemII, self.Ptr, itemValue,isHidden)
+
+
+    def Sort(self ,isAscendSort:bool,sortByField:'PivotDataField'):
+        """
+    <summary>
+        Sort row fildes or col fields by data field.
+    </summary>
+        """
+        intPtrsortByField:c_void_p = sortByField.Ptr
+
+        GetDllLibXls().XlsPivotField_Sort.argtypes=[c_void_p ,c_bool,c_void_p]
+        CallCFunction(GetDllLibXls().XlsPivotField_Sort, self.Ptr, isAscendSort,intPtrsortByField)
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsPivotField_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsPivotField_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsPivotField_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+

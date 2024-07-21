@@ -1,0 +1,52 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CellValueChangedEventHandler (SpireObject) :
+    """
+
+    """
+
+    def Invoke(self ,sender:'SpireObject',e:'CellValueChangedEventArgs'):
+        """
+
+        """
+        intPtrsender:c_void_p = sender.Ptr
+        intPtre:c_void_p = e.Ptr
+
+        GetDllLibXls().CellValueChangedEventHandler_Invoke.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().CellValueChangedEventHandler_Invoke, self.Ptr, intPtrsender,intPtre)
+
+#
+#    def BeginInvoke(self ,sender:'SpireObject',e:'CellValueChangedEventArgs',callback:'AsyncCallback',object:'SpireObject')->'IAsyncResult':
+#        """
+#
+#        """
+#        intPtrsender:c_void_p = sender.Ptr
+#        intPtre:c_void_p = e.Ptr
+#        intPtrcallback:c_void_p = callback.Ptr
+#        intPtrobject:c_void_p = object.Ptr
+#
+#        GetDllLibXls().CellValueChangedEventHandler_BeginInvoke.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p,c_void_p]
+#        GetDllLibXls().CellValueChangedEventHandler_BeginInvoke.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().CellValueChangedEventHandler_BeginInvoke, self.Ptr, intPtrsender,intPtre,intPtrcallback,intPtrobject)
+#        ret = None if intPtr==None else IAsyncResult(intPtr)
+#        return ret
+#
+
+
+#
+#    def EndInvoke(self ,result:'IAsyncResult'):
+#        """
+#
+#        """
+#        intPtrresult:c_void_p = result.Ptr
+#
+#        GetDllLibXls().CellValueChangedEventHandler_EndInvoke.argtypes=[c_void_p ,c_void_p]
+#        CallCFunction(GetDllLibXls().CellValueChangedEventHandler_EndInvoke, self.Ptr, intPtrresult)
+
+

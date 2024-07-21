@@ -1,0 +1,87 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsCommentsCollection (  CollectionBase[XlsComment],IComments) :
+    """
+
+    """
+    @dispatch
+
+    def get_Item(self ,index:int)->ICommentShape:
+        """
+
+        """
+        
+        GetDllLibXls().XlsCommentsCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsCommentsCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsCommentsCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsComment(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,iRow:int,iColumn:int)->ICommentShape:
+        """
+
+        """
+        
+        GetDllLibXls().XlsCommentsCollection_get_ItemII.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsCommentsCollection_get_ItemII.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsCommentsCollection_get_ItemII, self.Ptr, iRow,iColumn)
+        ret = None if intPtr==None else XlsComment(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->ICommentShape:
+        """
+
+        """
+        
+        GetDllLibXls().XlsCommentsCollection_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsCommentsCollection_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsCommentsCollection_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else XlsComment(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddComment(self ,iRow:int,iColumn:int)->ICommentShape:
+        """
+    <summary>
+        Adds comment to the specified range.
+    </summary>
+    <param name="iRow">Row of the cell to add comment to.</param>
+    <param name="iColumn">Column of the cell to add comment to.</param>
+    <returns>Newly created comment shape.</returns>
+        """
+        
+        GetDllLibXls().XlsCommentsCollection_AddComment.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsCommentsCollection_AddComment.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsCommentsCollection_AddComment, self.Ptr, iRow,iColumn)
+        ret = None if intPtr==None else XlsComment(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddComment(self ,iRow:int,iColumn:int,bIsParseOptions:bool)->ICommentShape:
+        """
+
+        """
+        
+        GetDllLibXls().XlsCommentsCollection_AddCommentIIB.argtypes=[c_void_p ,c_int,c_int,c_bool]
+        GetDllLibXls().XlsCommentsCollection_AddCommentIIB.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsCommentsCollection_AddCommentIIB, self.Ptr, iRow,iColumn,bIsParseOptions)
+        ret = None if intPtr==None else XlsComment(intPtr)
+        return ret
+
+

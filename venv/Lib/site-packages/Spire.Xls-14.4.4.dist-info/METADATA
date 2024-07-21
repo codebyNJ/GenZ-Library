@@ -1,0 +1,197 @@
+Metadata-Version: 2.1
+Name: Spire.Xls
+Version: 14.4.4
+Summary: A 100% standalone Excel Python API for Processing Excel Files
+Home-page: https://www.e-iceblue.com
+Author: E-iceblue
+Author-email: sales@e-iceblue.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.6
+Classifier: License :: Free To Use But Restricted
+Classifier: License :: Other/Proprietary License
+Classifier: Operating System :: Microsoft :: Windows
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Operating System :: Unix
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: plum-dispatch (==1.7.4)
+
+# A Python Library for Processing Excel Spreadsheets
+
+[![Foo](https://i.imgur.com/pivJdXR.png)](https://www.e-iceblue.com/Introduce/xls-for-python.html)
+
+[Product Page](https://www.e-iceblue.com/Introduce/xls-for-python.html) | [Documentation](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Spire.XLS-for-Python-Program-Guide-Content.html) | [Examples](https://github.com/eiceblue/Spire.XLS-for-Python) | [Forum](https://www.e-iceblue.com/forum/spire-xls-f4.html) | [Temporary License](https://www.e-iceblue.com/TemLicense.html) | [Customized Demo](https://www.e-iceblue.com/Misc/customized-demo.html)
+
+[**Spire.XLS for Python**](https://www.e-iceblue.com/Introduce/xls-for-python.html) is a powerful Python Excel API that can be used to create, read, write, and convert Excel spreadsheets in any type of Python applications without installing Microsoft Office.
+
+Spire.XLS for Python provides a comprehensive set of interfaces that allow for the manipulation of Excel files with ease. By utilizing it, developers can automate spreadsheet-related tasks, streamline data analysis, and build applications that interact seamlessly with Excel documents.
+
+
+
+### Excel Spreadsheets Processing & Security Features
+
+- [Create, read and write Excel files](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Document-Operation/Python-Create-Read-or-Update-Excel-Documents.html)
+- [Merge Excel files](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Document-Operation/Python-Merge-Excel-Files-into-One.html), or split Excel files
+- [Insert rows & columns in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Cells/Python-Insert-Rows-and-Columns-in-Excel.html)
+- [Delete rows & columns from Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Cells/Python-Delete-Rows-and-Columns-from-Excel.html)
+- [Set row height & column width in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Cells/Python-Set-Row-Height-and-Column-Width-in-Excel.html)
+- [Add worksheets](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Worksheet/Python-Add-Worksheets-to-Excel.html), [copy worksheets](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Worksheet/Python-Copy-Worksheets-in-Excel.html), or rename worksheets
+- [Move or delete worksheets](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Worksheet/Python-Move-or-Delete-Worksheets-in-Excel.html)
+- Hide or show worksheets
+- [Freeze or unfreeze Excel panes](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Cells/Python-Freeze-or-Unfreeze-Panes-in-Excel.html)
+- [Apply conditional formatting in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Conditional-Formatting/Python-Apply-Conditional-Formatting-in-Excel.html)
+- Remove conditional formatting from Excel
+- [Add comments in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Comment/Python-Add-Comments-in-Excel.html)
+- [Edit or remove comments in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Comment/Python-Edit-or-Remove-Comments-in-Excel.html)
+- Hide or show Excel comments
+- [Add or remove auto filter in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Document-Operation/Python-Add-or-Remove-AutoFilter-in-Excel.html)
+
+- [Encrypt or decrypt Excel files](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Security/Python-Protect-or-Unprotect-Excel-Files.html)
+- Add or delete digital signatures in Excel
+- [Tracking changes in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Document-Operation/Python-Accept-or-Reject-Tracked-Changes-in-Excel.html)
+- [Lock Excel cells](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Security/Python-Lock-Specific-Cells-in-Excel.html)
+
+**Compatible with:** old Excel 97-2003 format (.xls), Excel 2007, Excel 2010, Excel 2013, Excel 2016 and Excel 2019 (.xlsx, .xlsb, .xlsm), and Open Office(.ods) format
+
+
+
+### High Quality Excel File Conversion
+
+- [Convert Excel (XLS or XLSX) to PDF](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Conversion/Python-Convert-Excel-to-PDF.html)
+- [Conversion between Excel and HTML](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Conversion/Python-Convert-Excel-to-HTML-and-Vice-Versa.html)
+- [Convert Excel to Images (PNG, JPG or BMP)](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Conversion/Python-Convert-Excel-to-Images.html)
+- [Conversion between Excel and CSV](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Conversion/Python-Convert-Excel-to-CSV-and-Vice-Versa.html)
+- [Convert Excel to XML](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Conversion/Python-Convert-Excel-to-Open-XML-or-Open-XML-to-Excel.html)
+- [Convert Excel to TXT](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Conversion/Python-Convert-Excel-to-TXT-Text.html)
+- [Convert CSV to PDF](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Conversion/Python-Convert-CSV-to-PDF.html)
+- [Convert Excel to SVG](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Conversion/Python-Convert-Excel-to-SVG.html) 
+- Convert Excel to XPS
+- Convert XLS to XLSM
+- Conversion between XLS and XLSX
+- Convert Excel to ODS (OpenDocument Spreadsheet)
+- Convert Excel charts to Images
+
+
+
+### Advanced Cell Manipulation & Calculation Engine
+
+- [Merge or unmerge Excel cells](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Cells/Python-Merge-or-Unmerge-Cells-in-Excel.html)
+- [Wrap or unwrap text in Excel Cells](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Cells/Python-Wrap-or-Unwrap-Text-in-Excel-Cells.html)
+- Align text in Excel cells
+- [Add or remove cell borders in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Cells/Python-Add-or-Remove-Cell-Borders-in-Excel.html)
+- [Set fonts in Excel cells](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Data/Python-Set-or-Change-Fonts-in-Excel.html) (including font size, color, bold, italic, underlining, etc.)
+- [Set fill color, gradient or pattern for Excel cells](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Cells/Python-Add-Fill-Color-Gradient-or-Pattern-to-Excel-Cells.html)
+- [Find & replace data in Excel cells](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Data/Python-Find-and-Replace-Data-in-Excel.html)
+- [Add or read Excel formulas](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Formula/Python-Add-or-Read-Formulas-in-Excel.html)
+- Calculate Excel formulas
+- Remove Excel formulas
+- [Create, edit or delete named ranges in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Formula/Python-Create-Edit-or-Delete-Named-Ranges-in-Excel.html)
+
+
+
+### Excel Charts, Images, Shapes and Other Elements
+
+- Create pie charts in Excel 
+- [Create column charts in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Chart/Python-Create-Column-Charts-in-Excel.html)
+- [Create bar charts in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Chart/Python-Create-a-Bar-Chart-in-Excel.html)
+- Create line charts in Excel 
+- Create radar charts in Excel 
+- [Insert or delete pictures in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Image/Python-Insert-or-Delete-Pictures-in-Excel.html)
+- [Compress, resize, or move images in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Image/Python-Compress-Resize-or-Move-Images-in-Excel.html)
+- [Replace or extract images in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Image/Python-Replace-or-Extract-Images-in-Excel.html)
+- [Insert or remove shapes in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Objects/Python-Insert-or-Remove-Shapes-in-Excel.html)
+- [Create or operate pivot tables in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Pivot-Table/Python-Create-or-Operate-Pivot-Tables-in-Excel.html)
+- [Add, update, or delete textboxes in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Objects/Python-Add-Update-or-Delete-Textboxes-in-Excel.html)
+- [Insert hyperlinks in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Link/Python-Add-Hyperlinks-to-Excel.html)
+- [Update or remove hyperlinks in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Link/Python-Extract-Modify-or-Remove-Hyperlinks-in-Excel.html)
+- [Add header & footer in Excel](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Header-and-Footer/Python-Add-Headers-and-Footers-to-Excel.html)
+- Add watermarks in Excel
+
+
+
+## Examples
+
+### [Create an Excel File in Python](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Document-Operation/Python-Create-Read-or-Update-Excel-Documents.html)
+
+```Python
+from spire.xls.common import *
+from spire.xls import *
+
+outputFile = "CreateAnExcelWithFiveSheet.xlsx"
+
+# Create an object of Workbook class 
+workbook = Workbook()
+
+# Add five sheets to this file 
+workbook.CreateEmptySheets(5)
+
+# Loop through the added worksheets
+for i in range(0, 5):
+    sheet = workbook.Worksheets[i]
+    sheet.Name = "Sheet" + str(i)
+
+    # Add text to cells
+    for row in range(1, 151):
+        for col in range(1, 51):
+            sheet.Range[row,col].Text = "row" + str(row) + " col" + str(col)
+
+# Save the Excel file            
+workbook.SaveToFile(outputFile, ExcelVersion.Version2016)
+workbook.Dispose()
+```
+
+
+
+### [Convert Excel to PDF in Python](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Conversion/Python-Convert-Excel-to-PDF.html)
+
+```Python
+from spire.xls import *
+from spire.xls.common import *
+
+inputFile = "Input.xlsx"
+outputFile = "ExcelToPDF.pdf"
+
+# Create a Workbook object
+workbook = Workbook()
+
+# Load an Excel document
+workbook.LoadFromFile(inputFile)
+
+# Set worksheet to fit to page when converting
+workbook.ConverterSetting.SheetFitToPage = True
+
+# Convert the Excel file to PDF
+workbook.SaveToFile(outputFile, FileFormat.PDF)
+workbook.Dispose()
+```
+
+
+
+### [Convert Excel to Image in Python](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Conversion/Python-Convert-Excel-to-Images.html#1)
+
+```Python
+from spire.xls import *
+from spire.xls.common import *
+
+# Create a Workbook object
+workbook = Workbook()
+
+# Load an Excel file
+workbook.LoadFromFile("Sample.xlsx")
+
+# Get the first worksheet
+sheet = workbook.Worksheets[0]
+
+# Save the worksheet to an image
+image = sheet.ToImage(sheet.FirstRow, sheet.FirstColumn, sheet.LastRow, sheet.LastColumn)
+
+# Save the image to a PNG file
+image.Save("SheetToImage.png", ImageFormat.get_Png())
+workbook.Dispose()
+```
+
+[Product Page](https://www.e-iceblue.com/Introduce/xls-for-python.html) | [Documentation](https://www.e-iceblue.com/Tutorials/Python/Spire.XLS-for-Python/Program-Guide/Spire.XLS-for-Python-Program-Guide-Content.html) | [Examples](https://github.com/eiceblue/Spire.XLS-for-Python) | [Forum](https://www.e-iceblue.com/forum/spire-xls-f4.html) | [Temporary License](https://www.e-iceblue.com/TemLicense.html) | [Customized Demo](https://www.e-iceblue.com/Misc/customized-demo.html)
+
+
+

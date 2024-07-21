@@ -1,0 +1,18 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CategoryType(Enum):
+    """
+    <summary>
+        Represents category type.
+    </summary>
+    """
+    Category = 0
+    Time = 1
+    Automatic = 2
+

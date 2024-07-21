@@ -1,0 +1,93 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IRichTextString (  IExcelApplication, IOptimizedUpdate) :
+    """
+
+    """
+
+    @abc.abstractmethod
+    def GetFont(self ,index:int)->'IFont':
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetFont(self ,iStartPos:int,iEndPos:int,font:'IFont'):
+        """
+
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def ClearFormatting(self):
+        """
+
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Clear(self):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Append(self ,text:str,font:'IFont'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Text(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Text.setter
+    @abc.abstractmethod
+    def Text(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RtfText(self)->str:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsFormatted(self)->bool:
+        """
+
+        """
+        pass
+
+

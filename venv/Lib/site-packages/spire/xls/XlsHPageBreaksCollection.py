@@ -1,0 +1,85 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsHPageBreaksCollection (  CollectionBase[HPageBreak], IHPageBreaks) :
+    """
+
+    """
+    @property
+    def ManualBreakCount(self)->int:
+        """
+    <summary>
+        Gets manual breaks count. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsHPageBreaksCollection_get_ManualBreakCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsHPageBreaksCollection_get_ManualBreakCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsHPageBreaksCollection_get_ManualBreakCount, self.Ptr)
+        return ret
+
+    @property
+    def RecordCode(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsHPageBreaksCollection_get_RecordCode.argtypes=[c_void_p]
+        GetDllLibXls().XlsHPageBreaksCollection_get_RecordCode.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsHPageBreaksCollection_get_RecordCode, self.Ptr)
+        return ret
+
+    @property
+    def NeedDataArray(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsHPageBreaksCollection_get_NeedDataArray.argtypes=[c_void_p]
+        GetDllLibXls().XlsHPageBreaksCollection_get_NeedDataArray.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsHPageBreaksCollection_get_NeedDataArray, self.Ptr)
+        return ret
+
+    @property
+    def StreamPos(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsHPageBreaksCollection_get_StreamPos.argtypes=[c_void_p]
+        GetDllLibXls().XlsHPageBreaksCollection_get_StreamPos.restype=c_long
+        ret = CallCFunction(GetDllLibXls().XlsHPageBreaksCollection_get_StreamPos, self.Ptr)
+        return ret
+
+    @StreamPos.setter
+    def StreamPos(self, value:int):
+        GetDllLibXls().XlsHPageBreaksCollection_set_StreamPos.argtypes=[c_void_p, c_long]
+        CallCFunction(GetDllLibXls().XlsHPageBreaksCollection_set_StreamPos, self.Ptr, value)
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+    <summary>
+        Creates copy of the collection.
+    </summary>
+    <param name="parent">Parent for new collection.</param>
+    <returns>A clone of the current collection.</returns>
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsHPageBreaksCollection_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsHPageBreaksCollection_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsHPageBreaksCollection_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+    def GetEnumerator(self)->'IEnumerator':
+        """
+
+        """
+        ret = super(XlsHPageBreaksCollection, self).GetEnumerator()
+        ret._gtype = HPageBreak
+        return ret
+
+

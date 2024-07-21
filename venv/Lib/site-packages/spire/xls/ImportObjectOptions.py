@@ -1,0 +1,89 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ImportObjectOptions (SpireObject) :
+    """
+
+    """
+    @property
+    def ConvertNumericData(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ImportObjectOptions_get_ConvertNumericData.argtypes=[c_void_p]
+        GetDllLibXls().ImportObjectOptions_get_ConvertNumericData.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ImportObjectOptions_get_ConvertNumericData, self.Ptr)
+        return ret
+
+    @ConvertNumericData.setter
+    def ConvertNumericData(self, value:bool):
+        GetDllLibXls().ImportObjectOptions_set_ConvertNumericData.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ImportObjectOptions_set_ConvertNumericData, self.Ptr, value)
+
+    @property
+    def InsertRows(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ImportObjectOptions_get_InsertRows.argtypes=[c_void_p]
+        GetDllLibXls().ImportObjectOptions_get_InsertRows.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ImportObjectOptions_get_InsertRows, self.Ptr)
+        return ret
+
+    @InsertRows.setter
+    def InsertRows(self, value:bool):
+        GetDllLibXls().ImportObjectOptions_set_InsertRows.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ImportObjectOptions_set_InsertRows, self.Ptr, value)
+
+    @property
+    def CheckMergedCells(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ImportObjectOptions_get_CheckMergedCells.argtypes=[c_void_p]
+        GetDllLibXls().ImportObjectOptions_get_CheckMergedCells.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ImportObjectOptions_get_CheckMergedCells, self.Ptr)
+        return ret
+
+    @CheckMergedCells.setter
+    def CheckMergedCells(self, value:bool):
+        GetDllLibXls().ImportObjectOptions_set_CheckMergedCells.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ImportObjectOptions_set_CheckMergedCells, self.Ptr, value)
+
+    @property
+    def IsFieldNameShown(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ImportObjectOptions_get_IsFieldNameShown.argtypes=[c_void_p]
+        GetDllLibXls().ImportObjectOptions_get_IsFieldNameShown.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ImportObjectOptions_get_IsFieldNameShown, self.Ptr)
+        return ret
+
+    @IsFieldNameShown.setter
+    def IsFieldNameShown(self, value:bool):
+        GetDllLibXls().ImportObjectOptions_set_IsFieldNameShown.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ImportObjectOptions_set_IsFieldNameShown, self.Ptr, value)
+
+    @property
+
+    def DateFormat(self)->str:
+        """
+
+        """
+        GetDllLibXls().ImportObjectOptions_get_DateFormat.argtypes=[c_void_p]
+        GetDllLibXls().ImportObjectOptions_get_DateFormat.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ImportObjectOptions_get_DateFormat, self.Ptr))
+        return ret
+
+
+    @DateFormat.setter
+    def DateFormat(self, value:str):
+        GetDllLibXls().ImportObjectOptions_set_DateFormat.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ImportObjectOptions_set_DateFormat, self.Ptr, value)
+

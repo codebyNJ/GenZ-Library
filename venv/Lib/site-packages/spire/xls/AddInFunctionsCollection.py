@@ -1,0 +1,29 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class AddInFunctionsCollection (  XlsAddInFunctionsCollection) :
+    """
+
+    """
+
+    def get_Item(self ,index:int)->'ExcelAddInFunction':
+        """
+    <summary>
+        Get Add-In function.
+    </summary>
+    <param name="index">Item index.</param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().AddInFunctionsCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().AddInFunctionsCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().AddInFunctionsCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else ExcelAddInFunction(intPtr)
+        return ret
+
+

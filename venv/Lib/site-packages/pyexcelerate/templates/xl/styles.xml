@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:x14ac="http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac" mc:Ignorable="x14ac">
+<numFmts>
+{% for format in workbook.num_fmts %}{{ format.get_xml_string() }}{% endfor %}
+</numFmts>
+<fonts><font><sz val="11"/><color theme="1"/><name val="Calibri"/><family val="2"/><scheme val="minor"/></font>
+{% for font in workbook.fonts %}{{ font.get_xml_string() }}{% endfor %}</fonts>
+<fills>
+<fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill>
+{% for fill in workbook.fills %}{{ fill.get_xml_string() }}{% endfor %}
+</fills>
+<borders>
+<border><left/><right/><top/><bottom/><diagonal/></border>
+{% for borders in workbook.borders %}{{ borders.get_xml_string() }}{% endfor %}
+</borders>
+<cellStyleXfs count="1">
+    <xf numFmtId="0" fontId="0" fillId="0" borderId="0"/>
+</cellStyleXfs>
+<cellXfs>
+<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>
+{% for style in workbook.styles %}
+{{ style.get_xml_string() }}
+{% endfor %}
+</cellXfs>
+<cellStyles count="1">
+    <cellStyle name="Normal" xfId="0" builtinId="0"/>
+</cellStyles>
+<dxfs count="0"/>
+<tableStyles count="0" defaultTableStyle="TableStyleMedium2" defaultPivotStyle="PivotStyleLight16"/>
+<extLst>
+    <ext xmlns:x14="http://schemas.microsoft.com/office/spreadsheetml/2009/9/main" uri="{EB79DEF2-80B8-43e5-95BD-54CBDDF9020C}">
+    <x14:slicerStyles defaultSlicerStyle="SlicerStyleLight1"/>
+</ext>
+</extLst>
+</styleSheet>
+

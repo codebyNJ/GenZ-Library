@@ -1,0 +1,99 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IPictureShape (  IShape, IExcelApplication) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def FileName(self)->str:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Picture(self)->'Stream':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ColorFrom(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @ColorFrom.setter
+    @abc.abstractmethod
+    def ColorFrom(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ColorTo(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @ColorTo.setter
+    @abc.abstractmethod
+    def ColorTo(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Fill(self)->'IShapeFill':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Line(self)->'IShapeLineFormat':
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Remove(self ,removeImage:bool):
+        """
+
+        """
+        pass
+
+

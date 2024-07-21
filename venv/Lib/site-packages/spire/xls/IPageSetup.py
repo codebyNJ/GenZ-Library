@@ -1,0 +1,195 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IPageSetup (  IPageSetupBase, IExcelApplication) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def FitToPagesTall(self)->int:
+        """
+
+        """
+        pass
+
+
+    @FitToPagesTall.setter
+    @abc.abstractmethod
+    def FitToPagesTall(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def FitToPagesWide(self)->int:
+        """
+
+        """
+        pass
+
+
+    @FitToPagesWide.setter
+    @abc.abstractmethod
+    def FitToPagesWide(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsPrintGridlines(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsPrintGridlines.setter
+    @abc.abstractmethod
+    def IsPrintGridlines(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsPrintHeadings(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsPrintHeadings.setter
+    @abc.abstractmethod
+    def IsPrintHeadings(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PrintArea(self)->str:
+        """
+
+        """
+        pass
+
+
+    @PrintArea.setter
+    @abc.abstractmethod
+    def PrintArea(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PrintTitleColumns(self)->str:
+        """
+
+        """
+        pass
+
+
+    @PrintTitleColumns.setter
+    @abc.abstractmethod
+    def PrintTitleColumns(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PrintTitleRows(self)->str:
+        """
+
+        """
+        pass
+
+
+    @PrintTitleRows.setter
+    @abc.abstractmethod
+    def PrintTitleRows(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsSummaryRowBelow(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsSummaryRowBelow.setter
+    @abc.abstractmethod
+    def IsSummaryRowBelow(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsSummaryColumnRight(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsSummaryColumnRight.setter
+    @abc.abstractmethod
+    def IsSummaryColumnRight(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsFitToPage(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsFitToPage.setter
+    @abc.abstractmethod
+    def IsFitToPage(self, value:bool):
+        """
+
+        """
+        pass
+
+

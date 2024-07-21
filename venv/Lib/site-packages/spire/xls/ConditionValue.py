@@ -1,0 +1,82 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ConditionValue (  SpireObject,IConditionValue) :
+    """
+    <summary>
+        Represents single condition value for iconset, databar, colorscale conditions.
+    </summary>
+    """
+    @property
+
+    def Type(self)->'ConditionValueType':
+        """
+    <summary>
+        specifies how the threshold values for a data bar, color scale,
+            or icon set conditional format are determined
+    </summary>
+        """
+        GetDllLibXls().ConditionValue_get_Type.argtypes=[c_void_p]
+        GetDllLibXls().ConditionValue_get_Type.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ConditionValue_get_Type, self.Ptr)
+        objwraped = ConditionValueType(ret)
+        return objwraped
+
+    @Type.setter
+    def Type(self, value:'ConditionValueType'):
+        GetDllLibXls().ConditionValue_set_Type.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ConditionValue_set_Type, self.Ptr, value.value)
+
+    @property
+    def IsGTE(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ConditionValue_get_IsGTE.argtypes=[c_void_p]
+        GetDllLibXls().ConditionValue_get_IsGTE.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ConditionValue_get_IsGTE, self.Ptr)
+        return ret
+
+    @IsGTE.setter
+    def IsGTE(self, value:bool):
+        GetDllLibXls().ConditionValue_set_IsGTE.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ConditionValue_set_IsGTE, self.Ptr, value)
+
+    @property
+
+    def Value(self)->'SpireObject':
+        """
+    <summary>
+        Returns or sets the shortest bar or longest bar threshold value for a data
+            bar conditional format.
+    </summary>
+        """
+        GetDllLibXls().ConditionValue_get_Value.argtypes=[c_void_p]
+        GetDllLibXls().ConditionValue_get_Value.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ConditionValue_get_Value, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @Value.setter
+    def Value(self, value:'SpireObject'):
+        GetDllLibXls().ConditionValue_set_Value.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().ConditionValue_set_Value, self.Ptr, value.Ptr)
+
+
+    def m_condtionValue(self)->'IConditionValue':
+        """
+
+        """
+        GetDllLibXls().ConditionValue_m_condtionValue.argtypes=[c_void_p]
+        GetDllLibXls().ConditionValue_m_condtionValue.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ConditionValue_m_condtionValue, self.Ptr)
+        ret = None if intPtr==None else XlsConditionValue(intPtr)
+        return ret
+
+

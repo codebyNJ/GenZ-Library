@@ -1,0 +1,25 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XLSXChartShadowOuterType(Enum):
+    """
+    <summary>
+        Indicates the Outer Shadow values
+    </summary>
+    """
+    none = 0
+    OffsetRight = 1
+    OffsetDiagonalBottomRight = 2
+    OffsetBottom = 3
+    OffsetDiagonalTopLeft = 4
+    OffsetCenter = 5
+    OffsetTop = 6
+    OffsetLeft = 7
+    OffsetDiagonalTopRight = 8
+    OffsetDiagonalBottomLeft = 9
+

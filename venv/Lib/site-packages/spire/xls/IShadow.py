@@ -1,0 +1,244 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IShadow (abc.ABC) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def ShadowOuterType(self)->'XLSXChartShadowOuterType':
+        """
+
+        """
+        pass
+
+
+    @ShadowOuterType.setter
+    @abc.abstractmethod
+    def ShadowOuterType(self, value:'XLSXChartShadowOuterType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ShadowInnerType(self)->'XLSXChartShadowInnerType':
+        """
+
+        """
+        pass
+
+
+    @ShadowInnerType.setter
+    @abc.abstractmethod
+    def ShadowInnerType(self, value:'XLSXChartShadowInnerType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ShadowPrespectiveType(self)->'XLSXChartPrespectiveType':
+        """
+
+        """
+        pass
+
+
+    @ShadowPrespectiveType.setter
+    @abc.abstractmethod
+    def ShadowPrespectiveType(self, value:'XLSXChartPrespectiveType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HasCustomStyle(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @HasCustomStyle.setter
+    @abc.abstractmethod
+    def HasCustomStyle(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Transparency(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Transparency.setter
+    @abc.abstractmethod
+    def Transparency(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Size(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Size.setter
+    @abc.abstractmethod
+    def Size(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Blur(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Blur.setter
+    @abc.abstractmethod
+    def Blur(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Angle(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Angle.setter
+    @abc.abstractmethod
+    def Angle(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Distance(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Distance.setter
+    @abc.abstractmethod
+    def Distance(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Color(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @Color.setter
+    @abc.abstractmethod
+    def Color(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def SoftEdge(self)->int:
+        """
+
+        """
+        pass
+
+
+    @SoftEdge.setter
+    @abc.abstractmethod
+    def SoftEdge(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def CustomShadowStyles(self ,iOuter:XLSXChartShadowOuterType,iTransparency:int,iSize:int,iBlur:int,iAngle:int,iDistance:int,iCustomShadowStyle:bool):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def CustomShadowStyles(self ,iInner:XLSXChartShadowInnerType,iTransparency:int,iBlur:int,iAngle:int,iDistance:int,iCustomShadowStyle:bool):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def CustomShadowStyles(self ,iPerspective:XLSXChartPrespectiveType,iTransparency:int,iSize:int,iBlur:int,iAngle:int,iDistance:int,iCustomShadowStyle:bool):
+        """
+
+        """
+        pass
+
+

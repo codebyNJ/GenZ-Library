@@ -1,0 +1,428 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ISparklineGroup (  abc.ABC) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def ShowHorizontalAxis(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowHorizontalAxis.setter
+    @abc.abstractmethod
+    def ShowHorizontalAxis(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsDisplayHidden(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsDisplayHidden.setter
+    @abc.abstractmethod
+    def IsDisplayHidden(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def PlotRightToLeft(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @PlotRightToLeft.setter
+    @abc.abstractmethod
+    def PlotRightToLeft(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowFirstPoint(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowFirstPoint.setter
+    @abc.abstractmethod
+    def ShowFirstPoint(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowLastPoint(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowLastPoint.setter
+    @abc.abstractmethod
+    def ShowLastPoint(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowLowPoint(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowLowPoint.setter
+    @abc.abstractmethod
+    def ShowLowPoint(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowHighPoint(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowHighPoint.setter
+    @abc.abstractmethod
+    def ShowHighPoint(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowNegativePoint(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowNegativePoint.setter
+    @abc.abstractmethod
+    def ShowNegativePoint(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowMarkers(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowMarkers.setter
+    @abc.abstractmethod
+    def ShowMarkers(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def SparklineType(self)->'SparklineType':
+        """
+
+        """
+        pass
+
+
+    @SparklineType.setter
+    @abc.abstractmethod
+    def SparklineType(self, value:'SparklineType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsHorizontalDateAxis(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsHorizontalDateAxis.setter
+    @abc.abstractmethod
+    def IsHorizontalDateAxis(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def EmptyCellsType(self)->'SparklineEmptyCells':
+        """
+
+        """
+        pass
+
+
+    @EmptyCellsType.setter
+    @abc.abstractmethod
+    def EmptyCellsType(self, value:'SparklineEmptyCells'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def HorizontalDateAxisRange(self)->'CellRange':
+        """
+
+        """
+        pass
+
+
+    @HorizontalDateAxisRange.setter
+    @abc.abstractmethod
+    def HorizontalDateAxisRange(self, value:'CellRange'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def HorizontalAxisColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @HorizontalAxisColor.setter
+    @abc.abstractmethod
+    def HorizontalAxisColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def FirstPointColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @FirstPointColor.setter
+    @abc.abstractmethod
+    def FirstPointColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def HighPointColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @HighPointColor.setter
+    @abc.abstractmethod
+    def HighPointColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LastPointColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @LastPointColor.setter
+    @abc.abstractmethod
+    def LastPointColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def LineWeight(self)->float:
+        """
+
+        """
+        pass
+
+
+    @LineWeight.setter
+    @abc.abstractmethod
+    def LineWeight(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LowPointColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @LowPointColor.setter
+    @abc.abstractmethod
+    def LowPointColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def MarkersColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @MarkersColor.setter
+    @abc.abstractmethod
+    def MarkersColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def NegativePointColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @NegativePointColor.setter
+    @abc.abstractmethod
+    def NegativePointColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def SparklineColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @SparklineColor.setter
+    @abc.abstractmethod
+    def SparklineColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Add(self)->'SparklineCollection':
+        """
+
+        """
+        pass
+
+

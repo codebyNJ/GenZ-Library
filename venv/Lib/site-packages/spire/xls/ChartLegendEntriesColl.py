@@ -1,0 +1,128 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartLegendEntriesColl (  XlsObject, IChartLegendEntries) :
+    """
+
+    """
+    @property
+    def Count(self)->int:
+        """
+
+        """
+        GetDllLibXls().ChartLegendEntriesColl_get_Count.argtypes=[c_void_p]
+        GetDllLibXls().ChartLegendEntriesColl_get_Count.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartLegendEntriesColl_get_Count, self.Ptr)
+        return ret
+
+
+    def get_Item(self ,iIndex:int)->'IChartLegendEntry':
+        """
+
+        """
+        
+        GetDllLibXls().ChartLegendEntriesColl_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ChartLegendEntriesColl_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartLegendEntriesColl_get_Item, self.Ptr, iIndex)
+        ret = None if intPtr==None else XlsChartLegendEntry(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,iIndex:int)->XlsChartLegendEntry:
+        """
+
+        """
+        
+        GetDllLibXls().ChartLegendEntriesColl_Add.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ChartLegendEntriesColl_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartLegendEntriesColl_Add, self.Ptr, iIndex)
+        ret = None if intPtr==None else XlsChartLegendEntry(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,iIndex:int,entry:XlsChartLegendEntry)->XlsChartLegendEntry:
+        """
+
+        """
+        intPtrentry:c_void_p = entry.Ptr
+
+        GetDllLibXls().ChartLegendEntriesColl_AddIE.argtypes=[c_void_p ,c_int,c_void_p]
+        GetDllLibXls().ChartLegendEntriesColl_AddIE.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartLegendEntriesColl_AddIE, self.Ptr, iIndex,intPtrentry)
+        ret = None if intPtr==None else XlsChartLegendEntry(intPtr)
+        return ret
+
+
+
+    def Contains(self ,iIndex:int)->bool:
+        """
+
+        """
+        
+        GetDllLibXls().ChartLegendEntriesColl_Contains.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ChartLegendEntriesColl_Contains.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartLegendEntriesColl_Contains, self.Ptr, iIndex)
+        return ret
+
+
+    def CanDelete(self ,iIndex:int)->bool:
+        """
+
+        """
+        
+        GetDllLibXls().ChartLegendEntriesColl_CanDelete.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ChartLegendEntriesColl_CanDelete.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartLegendEntriesColl_CanDelete, self.Ptr, iIndex)
+        return ret
+
+
+    def Remove(self ,iIndex:int):
+        """
+
+        """
+        
+        GetDllLibXls().ChartLegendEntriesColl_Remove.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().ChartLegendEntriesColl_Remove, self.Ptr, iIndex)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().ChartLegendEntriesColl_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().ChartLegendEntriesColl_Clear, self.Ptr)
+
+#
+#    def Clone(self ,parent:'SpireObject',dicIndexes:'Dictionary2',dicNewSheetNames:'Dictionary2')->'ChartLegendEntriesColl':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrdicIndexes:c_void_p = dicIndexes.Ptr
+#        intPtrdicNewSheetNames:c_void_p = dicNewSheetNames.Ptr
+#
+#        GetDllLibXls().ChartLegendEntriesColl_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+#        GetDllLibXls().ChartLegendEntriesColl_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().ChartLegendEntriesColl_Clone, self.Ptr, intPtrparent,intPtrdicIndexes,intPtrdicNewSheetNames)
+#        ret = None if intPtr==None else ChartLegendEntriesColl(intPtr)
+#        return ret
+#
+
+
+
+    def UpdateEntries(self ,entryIndex:int,value:int):
+        """
+
+        """
+        
+        GetDllLibXls().ChartLegendEntriesColl_UpdateEntries.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().ChartLegendEntriesColl_UpdateEntries, self.Ptr, entryIndex,value)
+

@@ -1,0 +1,72 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+from spire.xls.IXLSRange import IXLSRange
+class ISparklines (  abc.ABC ):
+    """
+
+    """
+    @dispatch
+
+    @abc.abstractmethod
+    def Add(self)->'ISparklines':
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Add(self ,dataRange:IXLSRange,referenceRange:IXLSRange):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def RefreshRanges(self ,dataRange:IXLSRange,referenceRange:IXLSRange):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Add(self ,dataRange:IXLSRange,referenceRange:IXLSRange,isVertical:bool):
+        """
+
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def RefreshRanges(self ,dataRange:IXLSRange,referenceRange:IXLSRange,isVertical:bool):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Clear(self ,sparkline:'Sparkline'):
+        """
+
+        """
+        pass
+
+

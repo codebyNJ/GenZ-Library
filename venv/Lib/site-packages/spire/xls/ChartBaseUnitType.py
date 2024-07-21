@@ -1,0 +1,18 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartBaseUnitType(Enum):
+    """
+    <summary>
+        Represents chart base unit.
+    </summary>
+    """
+    Day = 0
+    Month = 1
+    Year = 2
+

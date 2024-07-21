@@ -1,0 +1,72 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartFormat (  XlsChartFormat) :
+    """
+
+    """
+    @property
+
+    def DataFormatOrNull(self)->'ChartSerieDataFormat':
+        """
+    <summary>
+        Returns dataformat or null; Read-only.
+    </summary>
+        """
+        GetDllLibXls().ChartFormat_get_DataFormatOrNull.argtypes=[c_void_p]
+        GetDllLibXls().ChartFormat_get_DataFormatOrNull.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartFormat_get_DataFormatOrNull, self.Ptr)
+        ret = None if intPtr==None else ChartSerieDataFormat(intPtr)
+        return ret
+
+
+    @property
+
+    def FirstDropBar(self)->'ChartDropBar':
+        """
+    <summary>
+        Gets first drop bar.
+    </summary>
+        """
+        GetDllLibXls().ChartFormat_get_FirstDropBar.argtypes=[c_void_p]
+        GetDllLibXls().ChartFormat_get_FirstDropBar.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartFormat_get_FirstDropBar, self.Ptr)
+        ret = None if intPtr==None else ChartDropBar(intPtr)
+        return ret
+
+
+    @property
+
+    def PieSeriesLine(self)->'ChartBorder':
+        """
+    <summary>
+        Represents series line properties. ( For pie of pie or pie of bar chart types only. ) Read only.
+    </summary>
+        """
+        GetDllLibXls().ChartFormat_get_PieSeriesLine.argtypes=[c_void_p]
+        GetDllLibXls().ChartFormat_get_PieSeriesLine.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartFormat_get_PieSeriesLine, self.Ptr)
+        ret = None if intPtr==None else ChartBorder(intPtr)
+        return ret
+
+
+    @property
+
+    def SecondDropBar(self)->'ChartDropBar':
+        """
+    <summary>
+        Returns object that represents second drop bar.
+    </summary>
+        """
+        GetDllLibXls().ChartFormat_get_SecondDropBar.argtypes=[c_void_p]
+        GetDllLibXls().ChartFormat_get_SecondDropBar.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartFormat_get_SecondDropBar, self.Ptr)
+        ret = None if intPtr==None else ChartDropBar(intPtr)
+        return ret
+
+

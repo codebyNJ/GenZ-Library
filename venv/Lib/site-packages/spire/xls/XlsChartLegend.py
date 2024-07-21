@@ -1,0 +1,355 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsChartLegend (  XlsObject, IChartLegend) :
+    """
+
+    """
+    @property
+    def AutoPosition(self)->bool:
+        """
+    <summary>
+        Automatic positioning .
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegend_get_AutoPosition.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_AutoPosition.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartLegend_get_AutoPosition, self.Ptr)
+        return ret
+
+    @property
+
+    def TextArea(self)->'IChartTextArea':
+        """
+
+        """
+        GetDllLibXls().XlsChartLegend_get_TextArea.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_TextArea.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartLegend_get_TextArea, self.Ptr)
+        ret = None if intPtr==None else IChartTextArea(intPtr)
+        return ret
+
+
+    @property
+    def X(self)->int:
+        """
+    <summary>
+        X-position of upper-left corner. 1/4000 of chart plot.
+            IsXMode Shall set to True
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegend_get_X.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_X.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartLegend_get_X, self.Ptr)
+        return ret
+
+    @X.setter
+    def X(self, value:int):
+        GetDllLibXls().XlsChartLegend_set_X.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartLegend_set_X, self.Ptr, value)
+
+    @property
+    def Y(self)->int:
+        """
+    <summary>
+        Y-position of upper-left corner. 1/4000 of chart plot. 
+            IsYMode Shall set to True
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegend_get_Y.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_Y.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartLegend_get_Y, self.Ptr)
+        return ret
+
+    @Y.setter
+    def Y(self, value:int):
+        GetDllLibXls().XlsChartLegend_set_Y.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartLegend_set_Y, self.Ptr, value)
+
+    @property
+
+    def Position(self)->'LegendPositionType':
+        """
+    <summary>
+        Legend position type.
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegend_get_Position.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_Position.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartLegend_get_Position, self.Ptr)
+        objwraped = LegendPositionType(ret)
+        return objwraped
+
+    @Position.setter
+    def Position(self, value:'LegendPositionType'):
+        GetDllLibXls().XlsChartLegend_set_Position.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartLegend_set_Position, self.Ptr, value.value)
+
+    @property
+    def IsVerticalLegend(self)->bool:
+        """
+    <summary>
+        Indicates whether if vertical legend.
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegend_get_IsVerticalLegend.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_IsVerticalLegend.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartLegend_get_IsVerticalLegend, self.Ptr)
+        return ret
+
+    @IsVerticalLegend.setter
+    def IsVerticalLegend(self, value:bool):
+        GetDllLibXls().XlsChartLegend_set_IsVerticalLegend.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartLegend_set_IsVerticalLegend, self.Ptr, value)
+
+    @property
+    def IncludeInLayout(self)->bool:
+        """
+    <summary>
+        Show legend without overlapping. Default is True.
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegend_get_IncludeInLayout.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_IncludeInLayout.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartLegend_get_IncludeInLayout, self.Ptr)
+        return ret
+
+    @IncludeInLayout.setter
+    def IncludeInLayout(self, value:bool):
+        GetDllLibXls().XlsChartLegend_set_IncludeInLayout.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartLegend_set_IncludeInLayout, self.Ptr, value)
+
+    @property
+    def InnerLayoutTarget(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartLegend_get_InnerLayoutTarget.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_InnerLayoutTarget.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartLegend_get_InnerLayoutTarget, self.Ptr)
+        return ret
+
+    @InnerLayoutTarget.setter
+    def InnerLayoutTarget(self, value:bool):
+        GetDllLibXls().XlsChartLegend_set_InnerLayoutTarget.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartLegend_set_InnerLayoutTarget, self.Ptr, value)
+
+    @property
+    def IsWMode(self)->bool:
+        """
+    <summary>
+        false value Specifies that the Width shall be interpreted
+            as the Right of the chart element..
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegend_get_IsWMode.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_IsWMode.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartLegend_get_IsWMode, self.Ptr)
+        return ret
+
+    @IsWMode.setter
+    def IsWMode(self, value:bool):
+        GetDllLibXls().XlsChartLegend_set_IsWMode.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartLegend_set_IsWMode, self.Ptr, value)
+
+    @property
+    def IsHMode(self)->bool:
+        """
+    <summary>
+        false value Specifies that the Height shall be interpreted
+            as the Bottom of the chart element..
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegend_get_IsHMode.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_IsHMode.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartLegend_get_IsHMode, self.Ptr)
+        return ret
+
+    @IsHMode.setter
+    def IsHMode(self, value:bool):
+        GetDllLibXls().XlsChartLegend_set_IsHMode.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartLegend_set_IsHMode, self.Ptr, value)
+
+    @property
+    def IsXMode(self)->bool:
+        """
+    <summary>
+        true value Specifies that the X shall be interpreted
+            as the Left of the chart element..
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegend_get_IsXMode.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_IsXMode.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartLegend_get_IsXMode, self.Ptr)
+        return ret
+
+    @IsXMode.setter
+    def IsXMode(self, value:bool):
+        GetDllLibXls().XlsChartLegend_set_IsXMode.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartLegend_set_IsXMode, self.Ptr, value)
+
+    @property
+    def IsYMode(self)->bool:
+        """
+    <summary>
+        true value Specifies that the Y shall be interpreted
+            as the Top of the chart element..
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegend_get_IsYMode.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_IsYMode.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartLegend_get_IsYMode, self.Ptr)
+        return ret
+
+    @IsYMode.setter
+    def IsYMode(self, value:bool):
+        GetDllLibXls().XlsChartLegend_set_IsYMode.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartLegend_set_IsYMode, self.Ptr, value)
+
+    @property
+
+    def LegendEntries(self)->'IChartLegendEntries':
+        """
+
+        """
+        GetDllLibXls().XlsChartLegend_get_LegendEntries.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_LegendEntries.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartLegend_get_LegendEntries, self.Ptr)
+        ret = None if intPtr==None else IChartLegendEntries(intPtr)
+        return ret
+
+
+    @property
+    def Width(self)->int:
+        """
+    <summary>
+        X-size. 1/4000 of chart plot. IsWMode Shall set to True
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegend_get_Width.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_Width.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartLegend_get_Width, self.Ptr)
+        return ret
+
+    @Width.setter
+    def Width(self, value:int):
+        GetDllLibXls().XlsChartLegend_set_Width.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartLegend_set_Width, self.Ptr, value)
+
+    @property
+    def Height(self)->int:
+        """
+    <summary>
+        Y-size. 1/4000 of chart plot. IsHMode Shall set to True
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegend_get_Height.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_Height.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartLegend_get_Height, self.Ptr)
+        return ret
+
+    @Height.setter
+    def Height(self, value:int):
+        GetDllLibXls().XlsChartLegend_set_Height.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartLegend_set_Height, self.Ptr, value)
+
+    @property
+    def AutoPositionX(self)->bool:
+        """
+    <summary>
+        X positioning is automatic.
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegend_get_AutoPositionX.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_AutoPositionX.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartLegend_get_AutoPositionX, self.Ptr)
+        return ret
+
+    @AutoPositionX.setter
+    def AutoPositionX(self, value:bool):
+        GetDllLibXls().XlsChartLegend_set_AutoPositionX.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartLegend_set_AutoPositionX, self.Ptr, value)
+
+    @property
+    def AutoPositionY(self)->bool:
+        """
+    <summary>
+        Y positioning is automatic.
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegend_get_AutoPositionY.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_AutoPositionY.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartLegend_get_AutoPositionY, self.Ptr)
+        return ret
+
+    @AutoPositionY.setter
+    def AutoPositionY(self, value:bool):
+        GetDllLibXls().XlsChartLegend_set_AutoPositionY.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartLegend_set_AutoPositionY, self.Ptr, value)
+
+    @property
+
+    def FrameFormat(self)->'IChartFrameFormat':
+        """
+
+        """
+        GetDllLibXls().XlsChartLegend_get_FrameFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_FrameFormat.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartLegend_get_FrameFormat, self.Ptr)
+        ret = None if intPtr==None else XlsChartFrameFormat(intPtr)
+        return ret
+
+
+    @property
+    def HasDataTable(self)->bool:
+        """
+    <summary>
+        True if chart contains data table.
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegend_get_HasDataTable.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegend_get_HasDataTable.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartLegend_get_HasDataTable, self.Ptr)
+        return ret
+
+    @HasDataTable.setter
+    def HasDataTable(self, value:bool):
+        GetDllLibXls().XlsChartLegend_set_HasDataTable.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartLegend_set_HasDataTable, self.Ptr, value)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().XlsChartLegend_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartLegend_Clear, self.Ptr)
+
+    def Delete(self):
+        """
+
+        """
+        GetDllLibXls().XlsChartLegend_Delete.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartLegend_Delete, self.Ptr)
+
+#
+#    def Clone(self ,parent:'SpireObject',dicFontIndexes:'Dictionary2',dicNewSheetNames:'Dictionary2')->'XlsChartLegend':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrdicFontIndexes:c_void_p = dicFontIndexes.Ptr
+#        intPtrdicNewSheetNames:c_void_p = dicNewSheetNames.Ptr
+#
+#        GetDllLibXls().XlsChartLegend_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+#        GetDllLibXls().XlsChartLegend_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsChartLegend_Clone, self.Ptr, intPtrparent,intPtrdicFontIndexes,intPtrdicNewSheetNames)
+#        ret = None if intPtr==None else XlsChartLegend(intPtr)
+#        return ret
+#
+
+

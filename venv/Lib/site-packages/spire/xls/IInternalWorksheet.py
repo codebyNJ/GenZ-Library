@@ -1,0 +1,132 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IInternalWorksheet (  IWorksheet, ITabSheet, IExcelApplication) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def DefaultPrintRowHeight(self)->int:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def FirstRow(self)->int:
+        """
+
+        """
+        pass
+
+
+    @FirstRow.setter
+    @abc.abstractmethod
+    def FirstRow(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def FirstColumn(self)->int:
+        """
+
+        """
+        pass
+
+
+    @FirstColumn.setter
+    @abc.abstractmethod
+    def FirstColumn(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def LastRow(self)->int:
+        """
+
+        """
+        pass
+
+
+    @LastRow.setter
+    @abc.abstractmethod
+    def LastRow(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def LastColumn(self)->int:
+        """
+
+        """
+        pass
+
+
+    @LastColumn.setter
+    @abc.abstractmethod
+    def LastColumn(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ParentWorkbook(self)->'XlsWorkbook':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Version(self)->'ExcelVersion':
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def IsArrayFormula(self ,index:int)->bool:
+        """
+
+        """
+        pass
+
+
+#
+#    @abc.abstractmethod
+#    def GetClonedObject(self ,hashNewNames:'Dictionary2',book:'XlsWorkbook')->'IInternalWorksheet':
+#        """
+#
+#        """
+#        pass
+#
+
+

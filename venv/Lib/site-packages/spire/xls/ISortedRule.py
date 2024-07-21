@@ -1,0 +1,112 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ISortedRule (abc.ABC) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def Range(self)->'IXLSRange':
+        """
+
+        """
+        pass
+
+
+    @Range.setter
+    @abc.abstractmethod
+    def Range(self, value:'IXLSRange'):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SortInt(self ,left:int,right:int,columnIndex:int):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SortFloat(self ,left:int,right:int,columnIndex:int):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SortDate(self ,left:int,right:int,columnIndex:int):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SortString(self ,left:int,right:int,columnIndex:int):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SortOnTypes(self ,left:int,right:int,columnIndex:int):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SortIntDesc(self ,left:int,right:int,columnIndex:int):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SortFloatDesc(self ,left:int,right:int,columnIndex:int):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SortDateDesc(self ,left:int,right:int,columnIndex:int):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SortStringDesc(self ,left:int,right:int,columnIndex:int):
+        """
+
+        """
+        pass
+
+

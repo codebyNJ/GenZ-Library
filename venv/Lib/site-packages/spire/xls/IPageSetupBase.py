@@ -1,0 +1,642 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IPageSetupBase (  IExcelApplication) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def AutoFirstPageNumber(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @AutoFirstPageNumber.setter
+    @abc.abstractmethod
+    def AutoFirstPageNumber(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def BlackAndWhite(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @BlackAndWhite.setter
+    @abc.abstractmethod
+    def BlackAndWhite(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def BottomMargin(self)->float:
+        """
+
+        """
+        pass
+
+
+    @BottomMargin.setter
+    @abc.abstractmethod
+    def BottomMargin(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def CenterFooter(self)->str:
+        """
+
+        """
+        pass
+
+
+    @CenterFooter.setter
+    @abc.abstractmethod
+    def CenterFooter(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def CenterFooterImage(self)->'Stream':
+        """
+
+        """
+        pass
+
+
+    @CenterFooterImage.setter
+    @abc.abstractmethod
+    def CenterFooterImage(self, value:'Stream'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def CenterHeader(self)->str:
+        """
+
+        """
+        pass
+
+
+    @CenterHeader.setter
+    @abc.abstractmethod
+    def CenterHeader(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def CenterHeaderImage(self)->'Stream':
+        """
+
+        """
+        pass
+
+
+    @CenterHeaderImage.setter
+    @abc.abstractmethod
+    def CenterHeaderImage(self, value:'Stream'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def CenterHorizontally(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @CenterHorizontally.setter
+    @abc.abstractmethod
+    def CenterHorizontally(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def CenterVertically(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @CenterVertically.setter
+    @abc.abstractmethod
+    def CenterVertically(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Copies(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Copies.setter
+    @abc.abstractmethod
+    def Copies(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Draft(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @Draft.setter
+    @abc.abstractmethod
+    def Draft(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def FirstPageNumber(self)->int:
+        """
+
+        """
+        pass
+
+
+    @FirstPageNumber.setter
+    @abc.abstractmethod
+    def FirstPageNumber(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def FooterMarginInch(self)->float:
+        """
+
+        """
+        pass
+
+
+    @FooterMarginInch.setter
+    @abc.abstractmethod
+    def FooterMarginInch(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HeaderMarginInch(self)->float:
+        """
+
+        """
+        pass
+
+
+    @HeaderMarginInch.setter
+    @abc.abstractmethod
+    def HeaderMarginInch(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LeftFooter(self)->str:
+        """
+
+        """
+        pass
+
+
+    @LeftFooter.setter
+    @abc.abstractmethod
+    def LeftFooter(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LeftFooterImage(self)->'Stream':
+        """
+
+        """
+        pass
+
+
+    @LeftFooterImage.setter
+    @abc.abstractmethod
+    def LeftFooterImage(self, value:'Stream'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LeftHeader(self)->str:
+        """
+
+        """
+        pass
+
+
+    @LeftHeader.setter
+    @abc.abstractmethod
+    def LeftHeader(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LeftHeaderImage(self)->'Stream':
+        """
+
+        """
+        pass
+
+
+    @LeftHeaderImage.setter
+    @abc.abstractmethod
+    def LeftHeaderImage(self, value:'Stream'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def LeftMargin(self)->float:
+        """
+
+        """
+        pass
+
+
+    @LeftMargin.setter
+    @abc.abstractmethod
+    def LeftMargin(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Order(self)->'OrderType':
+        """
+
+        """
+        pass
+
+
+    @Order.setter
+    @abc.abstractmethod
+    def Order(self, value:'OrderType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Orientation(self)->'PageOrientationType':
+        """
+
+        """
+        pass
+
+
+    @Orientation.setter
+    @abc.abstractmethod
+    def Orientation(self, value:'PageOrientationType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PaperSize(self)->'PaperSizeType':
+        """
+
+        """
+        pass
+
+
+    @PaperSize.setter
+    @abc.abstractmethod
+    def PaperSize(self, value:'PaperSizeType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PrintComments(self)->'PrintCommentType':
+        """
+
+        """
+        pass
+
+
+    @PrintComments.setter
+    @abc.abstractmethod
+    def PrintComments(self, value:'PrintCommentType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PrintErrors(self)->'PrintErrorsType':
+        """
+
+        """
+        pass
+
+
+    @PrintErrors.setter
+    @abc.abstractmethod
+    def PrintErrors(self, value:'PrintErrorsType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def PrintNotes(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @PrintNotes.setter
+    @abc.abstractmethod
+    def PrintNotes(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def PrintQuality(self)->int:
+        """
+
+        """
+        pass
+
+
+    @PrintQuality.setter
+    @abc.abstractmethod
+    def PrintQuality(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RightFooter(self)->str:
+        """
+
+        """
+        pass
+
+
+    @RightFooter.setter
+    @abc.abstractmethod
+    def RightFooter(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RightFooterImage(self)->'Stream':
+        """
+
+        """
+        pass
+
+
+    @RightFooterImage.setter
+    @abc.abstractmethod
+    def RightFooterImage(self, value:'Stream'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RightHeader(self)->str:
+        """
+
+        """
+        pass
+
+
+    @RightHeader.setter
+    @abc.abstractmethod
+    def RightHeader(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RightHeaderImage(self)->'Stream':
+        """
+
+        """
+        pass
+
+
+    @RightHeaderImage.setter
+    @abc.abstractmethod
+    def RightHeaderImage(self, value:'Stream'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def RightMargin(self)->float:
+        """
+
+        """
+        pass
+
+
+    @RightMargin.setter
+    @abc.abstractmethod
+    def RightMargin(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def TopMargin(self)->float:
+        """
+
+        """
+        pass
+
+
+    @TopMargin.setter
+    @abc.abstractmethod
+    def TopMargin(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Zoom(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Zoom.setter
+    @abc.abstractmethod
+    def Zoom(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BackgoundImage(self)->'Stream':
+        """
+
+        """
+        pass
+
+
+    @BackgoundImage.setter
+    @abc.abstractmethod
+    def BackgoundImage(self, value:'Stream'):
+        """
+
+        """
+        pass
+
+

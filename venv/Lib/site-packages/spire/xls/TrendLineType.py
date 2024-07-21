@@ -1,0 +1,21 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class TrendLineType(Enum):
+    """
+    <summary>
+        Represents trend line values.
+    </summary>
+    """
+    Exponential = 1
+    Linear = 5
+    Logarithmic = 2
+    Moving_Average = 4
+    Polynomial = 0
+    Power = 3
+

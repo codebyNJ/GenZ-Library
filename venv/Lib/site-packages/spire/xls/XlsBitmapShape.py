@@ -1,0 +1,287 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsBitmapShape (  XlsShape, IPictureShape) :
+    """
+
+    """
+
+    @dispatch
+    def Remove(self ,removeImage:bool):
+        """
+
+        """
+        
+        GetDllLibXls().XlsBitmapShape_Remove.argtypes=[c_void_p ,c_bool]
+        CallCFunction(GetDllLibXls().XlsBitmapShape_Remove, self.Ptr, removeImage)
+
+    @property
+
+    def BlipId(self)->'UInt32':
+        """
+
+        """
+        GetDllLibXls().XlsBitmapShape_get_BlipId.argtypes=[c_void_p]
+        GetDllLibXls().XlsBitmapShape_get_BlipId.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsBitmapShape_get_BlipId, self.Ptr)
+        ret = None if intPtr==None else UInt32(intPtr)
+        return ret
+
+
+    @property
+
+    def ColorTo(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().XlsBitmapShape_get_ColorTo.argtypes=[c_void_p]
+        GetDllLibXls().XlsBitmapShape_get_ColorTo.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsBitmapShape_get_ColorTo, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @ColorTo.setter
+    def ColorTo(self, value:'Color'):
+        GetDllLibXls().XlsBitmapShape_set_ColorTo.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsBitmapShape_set_ColorTo, self.Ptr, value.Ptr)
+
+    @property
+
+    def RefRange(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsBitmapShape_get_RefRange.argtypes=[c_void_p]
+        GetDllLibXls().XlsBitmapShape_get_RefRange.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBitmapShape_get_RefRange, self.Ptr))
+        return ret
+
+
+    @RefRange.setter
+    def RefRange(self, value:str):
+        GetDllLibXls().XlsBitmapShape_set_RefRange.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBitmapShape_set_RefRange, self.Ptr, value)
+
+    @property
+    def IsDDE(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsBitmapShape_get_IsDDE.argtypes=[c_void_p]
+        GetDllLibXls().XlsBitmapShape_get_IsDDE.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsBitmapShape_get_IsDDE, self.Ptr)
+        return ret
+
+    @IsDDE.setter
+    def IsDDE(self, value:bool):
+        GetDllLibXls().XlsBitmapShape_set_IsDDE.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsBitmapShape_set_IsDDE, self.Ptr, value)
+
+    @property
+    def IsCamera(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsBitmapShape_get_IsCamera.argtypes=[c_void_p]
+        GetDllLibXls().XlsBitmapShape_get_IsCamera.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsBitmapShape_get_IsCamera, self.Ptr)
+        return ret
+
+    @IsCamera.setter
+    def IsCamera(self, value:bool):
+        GetDllLibXls().XlsBitmapShape_set_IsCamera.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsBitmapShape_set_IsCamera, self.Ptr, value)
+
+    @property
+
+    def ColorFrom(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().XlsBitmapShape_get_ColorFrom.argtypes=[c_void_p]
+        GetDllLibXls().XlsBitmapShape_get_ColorFrom.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsBitmapShape_get_ColorFrom, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @ColorFrom.setter
+    def ColorFrom(self, value:'Color'):
+        GetDllLibXls().XlsBitmapShape_set_ColorFrom.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsBitmapShape_set_ColorFrom, self.Ptr, value.Ptr)
+
+    @property
+
+    def FileName(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsBitmapShape_get_FileName.argtypes=[c_void_p]
+        GetDllLibXls().XlsBitmapShape_get_FileName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBitmapShape_get_FileName, self.Ptr))
+        return ret
+
+
+    @FileName.setter
+    def FileName(self, value:str):
+        GetDllLibXls().XlsBitmapShape_set_FileName.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBitmapShape_set_FileName, self.Ptr, value)
+
+    @property
+
+    def Picture(self)->'Stream':
+        """
+
+        """
+        GetDllLibXls().XlsBitmapShape_get_Picture.argtypes=[c_void_p]
+        GetDllLibXls().XlsBitmapShape_get_Picture.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsBitmapShape_get_Picture, self.Ptr)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @Picture.setter
+    def Picture(self, value:'Stream'):
+        GetDllLibXls().XlsBitmapShape_set_Picture.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsBitmapShape_set_Picture, self.Ptr, value.Ptr)
+
+
+    def Compress(self ,quality:int):
+        """
+    <summary>
+        Compress the Picture quality for reduce file size
+    </summary>
+    <param name="quality">picture quality.Range is 0~100</param>
+        """
+        
+        GetDllLibXls().XlsBitmapShape_Compress.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsBitmapShape_Compress, self.Ptr, quality)
+
+    @property
+    def CropLeftOffset(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsBitmapShape_get_CropLeftOffset.argtypes=[c_void_p]
+        GetDllLibXls().XlsBitmapShape_get_CropLeftOffset.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBitmapShape_get_CropLeftOffset, self.Ptr)
+        return ret
+
+    @CropLeftOffset.setter
+    def CropLeftOffset(self, value:int):
+        GetDllLibXls().XlsBitmapShape_set_CropLeftOffset.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBitmapShape_set_CropLeftOffset, self.Ptr, value)
+
+    @property
+    def CropRightOffset(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsBitmapShape_get_CropRightOffset.argtypes=[c_void_p]
+        GetDllLibXls().XlsBitmapShape_get_CropRightOffset.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBitmapShape_get_CropRightOffset, self.Ptr)
+        return ret
+
+    @CropRightOffset.setter
+    def CropRightOffset(self, value:int):
+        GetDllLibXls().XlsBitmapShape_set_CropRightOffset.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBitmapShape_set_CropRightOffset, self.Ptr, value)
+
+    @property
+    def CropBottomOffset(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsBitmapShape_get_CropBottomOffset.argtypes=[c_void_p]
+        GetDllLibXls().XlsBitmapShape_get_CropBottomOffset.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBitmapShape_get_CropBottomOffset, self.Ptr)
+        return ret
+
+    @CropBottomOffset.setter
+    def CropBottomOffset(self, value:int):
+        GetDllLibXls().XlsBitmapShape_set_CropBottomOffset.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBitmapShape_set_CropBottomOffset, self.Ptr, value)
+
+    @property
+    def CropTopOffset(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsBitmapShape_get_CropTopOffset.argtypes=[c_void_p]
+        GetDllLibXls().XlsBitmapShape_get_CropTopOffset.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBitmapShape_get_CropTopOffset, self.Ptr)
+        return ret
+
+    @CropTopOffset.setter
+    def CropTopOffset(self, value:int):
+        GetDllLibXls().XlsBitmapShape_set_CropTopOffset.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBitmapShape_set_CropTopOffset, self.Ptr, value)
+
+    @property
+
+    def Macro(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsBitmapShape_get_Macro.argtypes=[c_void_p]
+        GetDllLibXls().XlsBitmapShape_get_Macro.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsBitmapShape_get_Macro, self.Ptr))
+        return ret
+
+
+    @Macro.setter
+    def Macro(self, value:str):
+        GetDllLibXls().XlsBitmapShape_set_Macro.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsBitmapShape_set_Macro, self.Ptr, value)
+
+    @property
+
+    def ShapeType(self)->'ExcelShapeType':
+        """
+
+        """
+        GetDllLibXls().XlsBitmapShape_get_ShapeType.argtypes=[c_void_p]
+        GetDllLibXls().XlsBitmapShape_get_ShapeType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBitmapShape_get_ShapeType, self.Ptr)
+        objwraped = ExcelShapeType(ret)
+        return objwraped
+
+    def Dispose(self):
+        """
+
+        """
+        GetDllLibXls().XlsBitmapShape_Dispose.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsBitmapShape_Dispose, self.Ptr)
+
+
+    def SetHyperLink(self ,linkString:str,isExternal:bool):
+        """
+
+        """
+        
+        GetDllLibXls().XlsBitmapShape_SetHyperLink.argtypes=[c_void_p ,c_void_p,c_bool]
+        CallCFunction(GetDllLibXls().XlsBitmapShape_SetHyperLink, self.Ptr, linkString,isExternal)
+
+#
+#    def Clone(self ,parent:'SpireObject',hashNewNames:'Dictionary2',dicFontIndexes:'Dictionary2',addToCollection:bool)->'IShape':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrhashNewNames:c_void_p = hashNewNames.Ptr
+#        intPtrdicFontIndexes:c_void_p = dicFontIndexes.Ptr
+#
+#        GetDllLibXls().XlsBitmapShape_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p,c_bool]
+#        GetDllLibXls().XlsBitmapShape_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsBitmapShape_Clone, self.Ptr, intPtrparent,intPtrhashNewNames,intPtrdicFontIndexes,addToCollection)
+#        ret = None if intPtr==None else IShape(intPtr)
+#        return ret
+#
+
+

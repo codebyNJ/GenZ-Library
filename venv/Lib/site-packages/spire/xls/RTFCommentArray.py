@@ -1,0 +1,112 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class RTFCommentArray (  XlsObject, IRichTextString, IOptimizedUpdate) :
+    """
+
+    """
+
+    def GetFont(self ,iPosition:int)->'IFont':
+        """
+
+        """
+        
+        GetDllLibXls().RTFCommentArray_GetFont.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().RTFCommentArray_GetFont.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().RTFCommentArray_GetFont, self.Ptr, iPosition)
+        ret = None if intPtr==None else XlsFont(intPtr)
+        return ret
+
+
+
+    def SetFont(self ,iStartPos:int,iEndPos:int,font:'IFont'):
+        """
+
+        """
+        intPtrfont:c_void_p = font.Ptr
+
+        GetDllLibXls().RTFCommentArray_SetFont.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().RTFCommentArray_SetFont, self.Ptr, iStartPos,iEndPos,intPtrfont)
+
+    def ClearFormatting(self):
+        """
+
+        """
+        GetDllLibXls().RTFCommentArray_ClearFormatting.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().RTFCommentArray_ClearFormatting, self.Ptr)
+
+
+    def Append(self ,text:str,font:'IFont'):
+        """
+
+        """
+        intPtrfont:c_void_p = font.Ptr
+
+        GetDllLibXls().RTFCommentArray_Append.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().RTFCommentArray_Append, self.Ptr, text,intPtrfont)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().RTFCommentArray_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().RTFCommentArray_Clear, self.Ptr)
+
+    @property
+
+    def Text(self)->str:
+        """
+
+        """
+        GetDllLibXls().RTFCommentArray_get_Text.argtypes=[c_void_p]
+        GetDllLibXls().RTFCommentArray_get_Text.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().RTFCommentArray_get_Text, self.Ptr))
+        return ret
+
+
+    @Text.setter
+    def Text(self, value:str):
+        GetDllLibXls().RTFCommentArray_set_Text.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().RTFCommentArray_set_Text, self.Ptr, value)
+
+    @property
+
+    def RtfText(self)->str:
+        """
+
+        """
+        GetDllLibXls().RTFCommentArray_get_RtfText.argtypes=[c_void_p]
+        GetDllLibXls().RTFCommentArray_get_RtfText.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().RTFCommentArray_get_RtfText, self.Ptr))
+        return ret
+
+
+    @property
+    def IsFormatted(self)->bool:
+        """
+
+        """
+        GetDllLibXls().RTFCommentArray_get_IsFormatted.argtypes=[c_void_p]
+        GetDllLibXls().RTFCommentArray_get_IsFormatted.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().RTFCommentArray_get_IsFormatted, self.Ptr)
+        return ret
+
+    def BeginUpdate(self):
+        """
+
+        """
+        GetDllLibXls().RTFCommentArray_BeginUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().RTFCommentArray_BeginUpdate, self.Ptr)
+
+    def EndUpdate(self):
+        """
+
+        """
+        GetDllLibXls().RTFCommentArray_EndUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().RTFCommentArray_EndUpdate, self.Ptr)
+

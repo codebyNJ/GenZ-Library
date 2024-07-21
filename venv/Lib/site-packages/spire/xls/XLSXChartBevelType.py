@@ -1,0 +1,26 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XLSXChartBevelType(Enum):
+    """
+
+    """
+    none = 0
+    Angle = 1
+    ArtDeco = 2
+    Circle = 3
+    Convex = 4
+    CoolSlant = 5
+    Cross = 6
+    Divot = 7
+    HardEdge = 8
+    RelaxedInset = 9
+    Riblet = 10
+    Slope = 11
+    SoftRound = 12
+

@@ -1,0 +1,185 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsGradient (  XlsObject, IGradient) :
+    """
+
+    """
+    @property
+
+    def BackColorObject(self)->'OColor':
+        """
+
+        """
+        GetDllLibXls().XlsGradient_get_BackColorObject.argtypes=[c_void_p]
+        GetDllLibXls().XlsGradient_get_BackColorObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsGradient_get_BackColorObject, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def ForeColorObject(self)->'OColor':
+        """
+
+        """
+        GetDllLibXls().XlsGradient_get_ForeColorObject.argtypes=[c_void_p]
+        GetDllLibXls().XlsGradient_get_ForeColorObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsGradient_get_ForeColorObject, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def BackColor(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().XlsGradient_get_BackColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsGradient_get_BackColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsGradient_get_BackColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @BackColor.setter
+    def BackColor(self, value:'Color'):
+        GetDllLibXls().XlsGradient_set_BackColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsGradient_set_BackColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def ForeColor(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().XlsGradient_get_ForeColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsGradient_get_ForeColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsGradient_get_ForeColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @ForeColor.setter
+    def ForeColor(self, value:'Color'):
+        GetDllLibXls().XlsGradient_set_ForeColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsGradient_set_ForeColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def BackKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        GetDllLibXls().XlsGradient_get_BackKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsGradient_get_BackKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsGradient_get_BackKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @BackKnownColor.setter
+    def BackKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsGradient_set_BackKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsGradient_set_BackKnownColor, self.Ptr, value.value)
+
+    @property
+
+    def ForeKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        GetDllLibXls().XlsGradient_get_ForeKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsGradient_get_ForeKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsGradient_get_ForeKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @ForeKnownColor.setter
+    def ForeKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsGradient_set_ForeKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsGradient_set_ForeKnownColor, self.Ptr, value.value)
+
+    @property
+
+    def GradientStyle(self)->'GradientStyleType':
+        """
+
+        """
+        GetDllLibXls().XlsGradient_get_GradientStyle.argtypes=[c_void_p]
+        GetDllLibXls().XlsGradient_get_GradientStyle.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsGradient_get_GradientStyle, self.Ptr)
+        objwraped = GradientStyleType(ret)
+        return objwraped
+
+    @GradientStyle.setter
+    def GradientStyle(self, value:'GradientStyleType'):
+        GetDllLibXls().XlsGradient_set_GradientStyle.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsGradient_set_GradientStyle, self.Ptr, value.value)
+
+    @property
+
+    def GradientVariant(self)->'GradientVariantsType':
+        """
+
+        """
+        GetDllLibXls().XlsGradient_get_GradientVariant.argtypes=[c_void_p]
+        GetDllLibXls().XlsGradient_get_GradientVariant.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsGradient_get_GradientVariant, self.Ptr)
+        objwraped = GradientVariantsType(ret)
+        return objwraped
+
+    @GradientVariant.setter
+    def GradientVariant(self, value:'GradientVariantsType'):
+        GetDllLibXls().XlsGradient_set_GradientVariant.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsGradient_set_GradientVariant, self.Ptr, value.value)
+
+
+    def CompareTo(self ,twin:'IGradient')->int:
+        """
+
+        """
+        intPtrtwin:c_void_p = twin.Ptr
+
+        GetDllLibXls().XlsGradient_CompareTo.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsGradient_CompareTo.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsGradient_CompareTo, self.Ptr, intPtrtwin)
+        return ret
+
+    @dispatch
+    def TwoColorGradient(self):
+        """
+
+        """
+        GetDllLibXls().XlsGradient_TwoColorGradient.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsGradient_TwoColorGradient, self.Ptr)
+
+    @dispatch
+
+    def TwoColorGradient(self ,style:GradientStyleType):
+        """
+
+        """
+        enumstyle:c_int = style.value
+
+        GetDllLibXls().XlsGradient_TwoColorGradientS.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsGradient_TwoColorGradientS, self.Ptr, enumstyle)
+
+    @dispatch
+
+    def TwoColorGradient(self ,style:GradientStyleType,variant:GradientVariantsType):
+        """
+
+        """
+        enumstyle:c_int = style.value
+        enumvariant:c_int = variant.value
+
+        GetDllLibXls().XlsGradient_TwoColorGradientSV.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsGradient_TwoColorGradientSV, self.Ptr, enumstyle,enumvariant)
+

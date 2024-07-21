@@ -1,0 +1,35 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IXLSRanges (  IXLSRange) :
+    """
+
+    """
+
+    @abc.abstractmethod
+    def Remove(self ,range:'IXLSRange'):
+        """
+    <summary>
+        Removes range from the collection.
+    </summary>
+    <param name="range">Range to remove.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def get_Item(self ,index:int)->'IXLSRange':
+        """
+    <summary>
+        Returns item by index from the collection.
+    </summary>
+        """
+        pass
+
+

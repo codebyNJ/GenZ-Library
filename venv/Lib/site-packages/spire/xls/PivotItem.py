@@ -1,0 +1,161 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class PivotItem (SpireObject) :
+    """
+
+    """
+    @property
+    def HasChildItems(self)->bool:
+        """
+
+        """
+        GetDllLibXls().PivotItem_get_HasChildItems.argtypes=[c_void_p]
+        GetDllLibXls().PivotItem_get_HasChildItems.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().PivotItem_get_HasChildItems, self.Ptr)
+        return ret
+
+    @HasChildItems.setter
+    def HasChildItems(self, value:bool):
+        GetDllLibXls().PivotItem_set_HasChildItems.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().PivotItem_set_HasChildItems, self.Ptr, value)
+
+    @property
+    def IsExpaned(self)->bool:
+        """
+
+        """
+        GetDllLibXls().PivotItem_get_IsExpaned.argtypes=[c_void_p]
+        GetDllLibXls().PivotItem_get_IsExpaned.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().PivotItem_get_IsExpaned, self.Ptr)
+        return ret
+
+    @IsExpaned.setter
+    def IsExpaned(self, value:bool):
+        GetDllLibXls().PivotItem_set_IsExpaned.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().PivotItem_set_IsExpaned, self.Ptr, value)
+
+    @property
+    def DrillAcross(self)->bool:
+        """
+
+        """
+        GetDllLibXls().PivotItem_get_DrillAcross.argtypes=[c_void_p]
+        GetDllLibXls().PivotItem_get_DrillAcross.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().PivotItem_get_DrillAcross, self.Ptr)
+        return ret
+
+    @DrillAcross.setter
+    def DrillAcross(self, value:bool):
+        GetDllLibXls().PivotItem_set_DrillAcross.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().PivotItem_set_DrillAcross, self.Ptr, value)
+
+    @property
+    def IsCalculatedItem(self)->bool:
+        """
+
+        """
+        GetDllLibXls().PivotItem_get_IsCalculatedItem.argtypes=[c_void_p]
+        GetDllLibXls().PivotItem_get_IsCalculatedItem.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().PivotItem_get_IsCalculatedItem, self.Ptr)
+        return ret
+
+    @IsCalculatedItem.setter
+    def IsCalculatedItem(self, value:bool):
+        GetDllLibXls().PivotItem_set_IsCalculatedItem.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().PivotItem_set_IsCalculatedItem, self.Ptr, value)
+
+    @property
+    def IsHidden(self)->bool:
+        """
+
+        """
+        GetDllLibXls().PivotItem_get_IsHidden.argtypes=[c_void_p]
+        GetDllLibXls().PivotItem_get_IsHidden.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().PivotItem_get_IsHidden, self.Ptr)
+        return ret
+
+    @IsHidden.setter
+    def IsHidden(self, value:bool):
+        GetDllLibXls().PivotItem_set_IsHidden.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().PivotItem_set_IsHidden, self.Ptr, value)
+
+    @property
+    def IsMissing(self)->bool:
+        """
+
+        """
+        GetDllLibXls().PivotItem_get_IsMissing.argtypes=[c_void_p]
+        GetDllLibXls().PivotItem_get_IsMissing.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().PivotItem_get_IsMissing, self.Ptr)
+        return ret
+
+    @IsMissing.setter
+    def IsMissing(self, value:bool):
+        GetDllLibXls().PivotItem_set_IsMissing.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().PivotItem_set_IsMissing, self.Ptr, value)
+
+    @property
+
+    def UserCaption(self)->str:
+        """
+
+        """
+        GetDllLibXls().PivotItem_get_UserCaption.argtypes=[c_void_p]
+        GetDllLibXls().PivotItem_get_UserCaption.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().PivotItem_get_UserCaption, self.Ptr))
+        return ret
+
+
+    @property
+    def IsChar(self)->bool:
+        """
+
+        """
+        GetDllLibXls().PivotItem_get_IsChar.argtypes=[c_void_p]
+        GetDllLibXls().PivotItem_get_IsChar.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().PivotItem_get_IsChar, self.Ptr)
+        return ret
+
+    @IsChar.setter
+    def IsChar(self, value:bool):
+        GetDllLibXls().PivotItem_set_IsChar.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().PivotItem_set_IsChar, self.Ptr, value)
+
+    @property
+    def IsHiddenDetails(self)->bool:
+        """
+
+        """
+        GetDllLibXls().PivotItem_get_IsHiddenDetails.argtypes=[c_void_p]
+        GetDllLibXls().PivotItem_get_IsHiddenDetails.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().PivotItem_get_IsHiddenDetails, self.Ptr)
+        return ret
+
+    @IsHiddenDetails.setter
+    def IsHiddenDetails(self, value:bool):
+        GetDllLibXls().PivotItem_set_IsHiddenDetails.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().PivotItem_set_IsHiddenDetails, self.Ptr, value)
+
+    @property
+
+    def ItemType(self)->'PivotItemType':
+        """
+
+        """
+        GetDllLibXls().PivotItem_get_ItemType.argtypes=[c_void_p]
+        GetDllLibXls().PivotItem_get_ItemType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().PivotItem_get_ItemType, self.Ptr)
+        objwraped = PivotItemType(ret)
+        return objwraped
+
+    @ItemType.setter
+    def ItemType(self, value:'PivotItemType'):
+        GetDllLibXls().PivotItem_set_ItemType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().PivotItem_set_ItemType, self.Ptr, value.value)
+

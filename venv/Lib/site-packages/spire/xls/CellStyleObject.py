@@ -1,0 +1,617 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CellStyleObject (  SpireObject, IStyle) :
+    """
+
+    """
+    @property
+    def JustifyLast(self)->bool:
+        """
+    <summary>
+        Represents justify text alignment
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_JustifyLast.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_JustifyLast.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_JustifyLast, self.Ptr)
+        return ret
+
+    @JustifyLast.setter
+    def JustifyLast(self, value:bool):
+        GetDllLibXls().CellStyleObject_set_JustifyLast.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_JustifyLast, self.Ptr, value)
+
+    @property
+
+    def NumberFormatLocal(self)->str:
+        """
+    <summary>
+        Returns or sets the format code for the object as a string in the
+            language of the user.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_NumberFormatLocal.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_NumberFormatLocal.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().CellStyleObject_get_NumberFormatLocal, self.Ptr))
+        return ret
+
+
+    @NumberFormatLocal.setter
+    def NumberFormatLocal(self, value:str):
+        GetDllLibXls().CellStyleObject_set_NumberFormatLocal.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_NumberFormatLocal, self.Ptr, value)
+
+    @property
+
+    def Interior(self)->'IInterior':
+        """
+
+        """
+        GetDllLibXls().CellStyleObject_get_Interior.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_Interior.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellStyleObject_get_Interior, self.Ptr)
+        ret = None if intPtr==None else ExcelInterior(intPtr)
+        return ret
+
+
+    @property
+    def IsModified(self)->bool:
+        """
+
+        """
+        GetDllLibXls().CellStyleObject_get_IsModified.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_IsModified.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_IsModified, self.Ptr)
+        return ret
+
+
+    def SetThemeColor(self ,type:'ThemeColorType',tint:float):
+        """
+    <summary>
+        Set the theme color.
+    </summary>
+    <param name="type">theme color type</param>
+    <param name="tint"></param>
+        """
+        enumtype:c_int = type.value
+
+        GetDllLibXls().CellStyleObject_SetThemeColor.argtypes=[c_void_p ,c_int,c_double]
+        CallCFunction(GetDllLibXls().CellStyleObject_SetThemeColor, self.Ptr, enumtype,tint)
+
+#
+#    def GetThemeColor(self ,type:'ThemeColorType&',tint:'Double&')->bool:
+#        """
+#
+#        """
+#        intPtrtype:c_void_p = type.Ptr
+#        intPtrtint:c_void_p = tint.Ptr
+#
+#        GetDllLibXls().CellStyleObject_GetThemeColor.argtypes=[c_void_p ,c_void_p,c_void_p]
+#        GetDllLibXls().CellStyleObject_GetThemeColor.restype=c_bool
+#        ret = CallCFunction(GetDllLibXls().CellStyleObject_GetThemeColor, self.Ptr, intPtrtype,intPtrtint)
+#        return ret
+
+
+    @property
+
+    def Borders(self)->'IBorders':
+        """
+
+        """
+        GetDllLibXls().CellStyleObject_get_Borders.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_Borders.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellStyleObject_get_Borders, self.Ptr)
+        ret = None if intPtr==None else XlsBordersCollection(intPtr)
+        return ret
+
+
+    @property
+    def BuiltIn(self)->bool:
+        """
+    <summary>
+        True if the style is a built-in style.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_BuiltIn.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_BuiltIn.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_BuiltIn, self.Ptr)
+        return ret
+
+    @property
+
+    def FillPattern(self)->'ExcelPatternType':
+        """
+    <summary>
+        Gets or Sets fill pattern type.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_FillPattern.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_FillPattern.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_FillPattern, self.Ptr)
+        objwraped = ExcelPatternType(ret)
+        return objwraped
+
+    @FillPattern.setter
+    def FillPattern(self, value:'ExcelPatternType'):
+        GetDllLibXls().CellStyleObject_set_FillPattern.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_FillPattern, self.Ptr, value.value)
+
+    @property
+
+    def Font(self)->'IFont':
+        """
+
+        """
+        GetDllLibXls().CellStyleObject_get_Font.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_Font.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellStyleObject_get_Font, self.Ptr)
+        ret = None if intPtr==None else XlsFont(intPtr)
+        return ret
+
+
+    @property
+    def FormulaHidden(self)->bool:
+        """
+    <summary>
+        True if the formula will be hidden when the worksheet is protected.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_FormulaHidden.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_FormulaHidden.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_FormulaHidden, self.Ptr)
+        return ret
+
+    @FormulaHidden.setter
+    def FormulaHidden(self, value:bool):
+        GetDllLibXls().CellStyleObject_set_FormulaHidden.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_FormulaHidden, self.Ptr, value)
+
+    @property
+
+    def HorizontalAlignment(self)->'HorizontalAlignType':
+        """
+    <summary>
+        Returns or sets the horizontal alignment for the specified object.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_HorizontalAlignment.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_HorizontalAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_HorizontalAlignment, self.Ptr)
+        objwraped = HorizontalAlignType(ret)
+        return objwraped
+
+    @HorizontalAlignment.setter
+    def HorizontalAlignment(self, value:'HorizontalAlignType'):
+        GetDllLibXls().CellStyleObject_set_HorizontalAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_HorizontalAlignment, self.Ptr, value.value)
+
+    @property
+    def IncludeAlignment(self)->bool:
+        """
+    <summary>
+        True if the style includes the AddIndent, HorizontalAlignment,
+            VerticalAlignment, WrapText, and Orientation properties.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_IncludeAlignment.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_IncludeAlignment.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_IncludeAlignment, self.Ptr)
+        return ret
+
+    @IncludeAlignment.setter
+    def IncludeAlignment(self, value:bool):
+        GetDllLibXls().CellStyleObject_set_IncludeAlignment.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_IncludeAlignment, self.Ptr, value)
+
+    @property
+    def IncludeBorder(self)->bool:
+        """
+    <summary>
+        True if the style includes the Color, KnownColor, LineStyle, and Weight border properties
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_IncludeBorder.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_IncludeBorder.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_IncludeBorder, self.Ptr)
+        return ret
+
+    @IncludeBorder.setter
+    def IncludeBorder(self, value:bool):
+        GetDllLibXls().CellStyleObject_set_IncludeBorder.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_IncludeBorder, self.Ptr, value)
+
+    @property
+    def IncludeFont(self)->bool:
+        """
+    <summary>
+        True if the style includes the Background, Bold, Color, KnownColor, FontStyle, Italic, Name, OutlineFont, Shadow, Size, Strikethrough, Subscript, Superscript, and Underline font properties.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_IncludeFont.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_IncludeFont.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_IncludeFont, self.Ptr)
+        return ret
+
+    @IncludeFont.setter
+    def IncludeFont(self, value:bool):
+        GetDllLibXls().CellStyleObject_set_IncludeFont.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_IncludeFont, self.Ptr, value)
+
+    @property
+    def IncludeNumberFormat(self)->bool:
+        """
+    <summary>
+        True if the style includes the NumberFormat property.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_IncludeNumberFormat.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_IncludeNumberFormat.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_IncludeNumberFormat, self.Ptr)
+        return ret
+
+    @IncludeNumberFormat.setter
+    def IncludeNumberFormat(self, value:bool):
+        GetDllLibXls().CellStyleObject_set_IncludeNumberFormat.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_IncludeNumberFormat, self.Ptr, value)
+
+    @property
+    def IncludePatterns(self)->bool:
+        """
+    <summary>
+        True if the style includes the Color, KnownColor,
+            InvertIfNegative, Pattern, PatternColor, and PatternKnownColor
+            interior properties.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_IncludePatterns.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_IncludePatterns.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_IncludePatterns, self.Ptr)
+        return ret
+
+    @IncludePatterns.setter
+    def IncludePatterns(self, value:bool):
+        GetDllLibXls().CellStyleObject_set_IncludePatterns.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_IncludePatterns, self.Ptr, value)
+
+    @property
+    def IncludeProtection(self)->bool:
+        """
+    <summary>
+        True if the style includes the FormulaHidden and Locked protection
+            properties.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_IncludeProtection.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_IncludeProtection.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_IncludeProtection, self.Ptr)
+        return ret
+
+    @IncludeProtection.setter
+    def IncludeProtection(self, value:bool):
+        GetDllLibXls().CellStyleObject_set_IncludeProtection.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_IncludeProtection, self.Ptr, value)
+
+    @property
+    def IndentLevel(self)->int:
+        """
+    <summary>
+        Returns or sets the indent level for the style.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_IndentLevel.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_IndentLevel.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_IndentLevel, self.Ptr)
+        return ret
+
+    @IndentLevel.setter
+    def IndentLevel(self, value:int):
+        GetDllLibXls().CellStyleObject_set_IndentLevel.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_IndentLevel, self.Ptr, value)
+
+    @property
+    def IsInitialized(self)->bool:
+        """
+
+        """
+        GetDllLibXls().CellStyleObject_get_IsInitialized.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_IsInitialized.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_IsInitialized, self.Ptr)
+        return ret
+
+    @property
+    def Locked(self)->bool:
+        """
+    <summary>
+        True if the object is locked; False if the object can be modified when the sheet is protected.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_Locked.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_Locked.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_Locked, self.Ptr)
+        return ret
+
+    @Locked.setter
+    def Locked(self, value:bool):
+        GetDllLibXls().CellStyleObject_set_Locked.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_Locked, self.Ptr, value)
+
+    @property
+
+    def Name(self)->str:
+        """
+    <summary>
+        Returns or sets the name of the object. Read-only String.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_Name.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_Name.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().CellStyleObject_get_Name, self.Ptr))
+        return ret
+
+
+    @property
+
+    def NumberFormat(self)->str:
+        """
+    <summary>
+        Returns or sets the format code for the object.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_NumberFormat.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_NumberFormat.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().CellStyleObject_get_NumberFormat, self.Ptr))
+        return ret
+
+
+    @NumberFormat.setter
+    def NumberFormat(self, value:str):
+        GetDllLibXls().CellStyleObject_set_NumberFormat.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_NumberFormat, self.Ptr, value)
+
+    @property
+    def NumberFormatIndex(self)->int:
+        """
+    <summary>
+        Gets or Sets format index.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_NumberFormatIndex.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_NumberFormatIndex.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_NumberFormatIndex, self.Ptr)
+        return ret
+
+    @NumberFormatIndex.setter
+    def NumberFormatIndex(self, value:int):
+        GetDllLibXls().CellStyleObject_set_NumberFormatIndex.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_NumberFormatIndex, self.Ptr, value)
+
+    @property
+
+    def NumberFormatSettings(self)->'INumberFormat':
+        """
+
+        """
+        GetDllLibXls().CellStyleObject_get_NumberFormatSettings.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_NumberFormatSettings.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellStyleObject_get_NumberFormatSettings, self.Ptr)
+        ret = None if intPtr==None else INumberFormat(intPtr)
+        return ret
+
+
+    @property
+    def Rotation(self)->int:
+        """
+    <summary>
+        The text orientation. Can be an integer value from 1 to 180 degrees
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_Rotation.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_Rotation.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_Rotation, self.Ptr)
+        return ret
+
+    @Rotation.setter
+    def Rotation(self, value:int):
+        GetDllLibXls().CellStyleObject_set_Rotation.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_Rotation, self.Ptr, value)
+
+    @property
+    def ShrinkToFit(self)->bool:
+        """
+    <summary>
+        True if text automatically shrinks to fit in the available column width.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_ShrinkToFit.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_ShrinkToFit.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_ShrinkToFit, self.Ptr)
+        return ret
+
+    @ShrinkToFit.setter
+    def ShrinkToFit(self, value:bool):
+        GetDllLibXls().CellStyleObject_set_ShrinkToFit.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_ShrinkToFit, self.Ptr, value)
+
+    @property
+
+    def VerticalAlignment(self)->'VerticalAlignType':
+        """
+    <summary>
+        Returns or sets the vertical alignment of the specified object.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_VerticalAlignment.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_VerticalAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_VerticalAlignment, self.Ptr)
+        objwraped = VerticalAlignType(ret)
+        return objwraped
+
+    @VerticalAlignment.setter
+    def VerticalAlignment(self, value:'VerticalAlignType'):
+        GetDllLibXls().CellStyleObject_set_VerticalAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_VerticalAlignment, self.Ptr, value.value)
+
+    @property
+    def WrapText(self)->bool:
+        """
+    <summary>
+        True if Microsoft Excel wraps the text in the object.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_WrapText.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_WrapText.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_WrapText, self.Ptr)
+        return ret
+
+    @WrapText.setter
+    def WrapText(self, value:bool):
+        GetDllLibXls().CellStyleObject_set_WrapText.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_WrapText, self.Ptr, value)
+
+    @property
+
+    def ReadingOrder(self)->'ReadingOrderType':
+        """
+    <summary>
+        Returns or sets the reading order for the specified object.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_ReadingOrder.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_ReadingOrder.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_ReadingOrder, self.Ptr)
+        objwraped = ReadingOrderType(ret)
+        return objwraped
+
+    @ReadingOrder.setter
+    def ReadingOrder(self, value:'ReadingOrderType'):
+        GetDllLibXls().CellStyleObject_set_ReadingOrder.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_ReadingOrder, self.Ptr, value.value)
+
+    @property
+    def IsFirstSymbolApostrophe(self)->bool:
+        """
+    <summary>
+        If true then first symbol in cell is apostrophe.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_IsFirstSymbolApostrophe.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_IsFirstSymbolApostrophe.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_IsFirstSymbolApostrophe, self.Ptr)
+        return ret
+
+    @IsFirstSymbolApostrophe.setter
+    def IsFirstSymbolApostrophe(self, value:bool):
+        GetDllLibXls().CellStyleObject_set_IsFirstSymbolApostrophe.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_IsFirstSymbolApostrophe, self.Ptr, value)
+
+    @property
+
+    def PatternKnownColor(self)->'ExcelColors':
+        """
+    <summary>
+        Returns or sets the excel color of the interior.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_PatternKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_PatternKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_PatternKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @PatternKnownColor.setter
+    def PatternKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().CellStyleObject_set_PatternKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_PatternKnownColor, self.Ptr, value.value)
+
+    @property
+
+    def PatternColor(self)->'Color':
+        """
+    <summary>
+        Returns or sets the color of the interior pattern.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_PatternColor.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_PatternColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellStyleObject_get_PatternColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @PatternColor.setter
+    def PatternColor(self, value:'Color'):
+        GetDllLibXls().CellStyleObject_set_PatternColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_PatternColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def KnownColor(self)->'ExcelColors':
+        """
+    <summary>
+        Gets or sets the cell shading excel color.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_KnownColor.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_KnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CellStyleObject_get_KnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @KnownColor.setter
+    def KnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().CellStyleObject_set_KnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_KnownColor, self.Ptr, value.value)
+
+    @property
+
+    def Color(self)->'Color':
+        """
+    <summary>
+        Gets or sets the cell shading color.
+    </summary>
+        """
+        GetDllLibXls().CellStyleObject_get_Color.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_Color.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellStyleObject_get_Color, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @Color.setter
+    def Color(self, value:'Color'):
+        GetDllLibXls().CellStyleObject_set_Color.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().CellStyleObject_set_Color, self.Ptr, value.Ptr)
+
+    @property
+
+    def Parent(self)->'SpireObject':
+        """
+
+        """
+        GetDllLibXls().CellStyleObject_get_Parent.argtypes=[c_void_p]
+        GetDllLibXls().CellStyleObject_get_Parent.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CellStyleObject_get_Parent, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    def BeginUpdate(self):
+        """
+
+        """
+        GetDllLibXls().CellStyleObject_BeginUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().CellStyleObject_BeginUpdate, self.Ptr)
+
+    def EndUpdate(self):
+        """
+
+        """
+        GetDllLibXls().CellStyleObject_EndUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().CellStyleObject_EndUpdate, self.Ptr)
+

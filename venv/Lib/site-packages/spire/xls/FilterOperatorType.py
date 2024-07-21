@@ -1,0 +1,20 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class FilterOperatorType(Enum):
+    """
+
+    """
+    LessOrEqual = 0
+    LessThan = 1
+    Equal = 2
+    GreaterThan = 3
+    NotEqual = 4
+    GreaterOrEqual = 5
+    none = 6
+

@@ -1,0 +1,1500 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsChart (  XlsWorksheetBase, ICloneParent, IChart) :
+    """
+
+    """
+    @property
+    def IsChartPyramid(self)->bool:
+        """
+    <summary>
+        Returns True if chart is a pyramid shape. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartPyramid.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartPyramid.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartPyramid, self.Ptr)
+        return ret
+
+    @property
+    def IsChartRadar(self)->bool:
+        """
+    <summary>
+        Returns True if chart is a radar chart. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartRadar.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartRadar.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartRadar, self.Ptr)
+        return ret
+
+    @property
+    def IsChartScatter(self)->bool:
+        """
+    <summary>
+        Returns True if chart is a scatter chart. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartScatter.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartScatter.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartScatter, self.Ptr)
+        return ret
+
+    @property
+    def IsChartSmoothedLine(self)->bool:
+        """
+    <summary>
+        Returns True if chart has smoothed lines. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartSmoothedLine.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartSmoothedLine.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartSmoothedLine, self.Ptr)
+        return ret
+
+    @property
+    def IsChartStock(self)->bool:
+        """
+    <summary>
+        Returns True if this is a stock chart. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartStock.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartStock.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartStock, self.Ptr)
+        return ret
+
+    @property
+    def IsChartVeryColor(self)->bool:
+        """
+    <summary>
+        Returns True if chart should have a different color for each series value. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartVeryColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartVeryColor.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartVeryColor, self.Ptr)
+        return ret
+
+    @property
+    def IsChartVolume(self)->bool:
+        """
+    <summary>
+        Returns True if chart is a stock chart with volume. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartVolume.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartVolume.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartVolume, self.Ptr)
+        return ret
+
+    @property
+    def IsChartWalls(self)->bool:
+        """
+    <summary>
+        Returns True if chart has walls. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartWalls.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartWalls.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartWalls, self.Ptr)
+        return ret
+
+    @property
+    def IsClustered(self)->bool:
+        """
+    <summary>
+        Returns True if chart is a clustered chart. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsClustered.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsClustered.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsClustered, self.Ptr)
+        return ret
+
+    @property
+    def IsEmbeded(self)->bool:
+        """
+    <summary>
+        Gets value indicating whether chart is embeded into worksheet.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsEmbeded.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsEmbeded.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsEmbeded, self.Ptr)
+        return ret
+
+    @property
+    def IsPerspective(self)->bool:
+        """
+    <summary>
+        Returns True if chart has perspective. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsPerspective.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsPerspective.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsPerspective, self.Ptr)
+        return ret
+
+    @property
+    def IsPivot3DChart(self)->bool:
+        """
+    <summary>
+        Gets a value indicating whether this instance is pivot 3D chart .
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsPivot3DChart.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsPivot3DChart.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsPivot3DChart, self.Ptr)
+        return ret
+
+    @property
+    def IsSecondaryAxes(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_IsSecondaryAxes.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsSecondaryAxes.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsSecondaryAxes, self.Ptr)
+        return ret
+
+    @IsSecondaryAxes.setter
+    def IsSecondaryAxes(self, value:bool):
+        GetDllLibXls().XlsChart_set_IsSecondaryAxes.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_IsSecondaryAxes, self.Ptr, value)
+
+    @property
+    def IsSecondaryCategoryAxisAvail(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_IsSecondaryCategoryAxisAvail.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsSecondaryCategoryAxisAvail.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsSecondaryCategoryAxisAvail, self.Ptr)
+        return ret
+
+    @property
+    def IsSecondaryValueAxisAvail(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_IsSecondaryValueAxisAvail.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsSecondaryValueAxisAvail.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsSecondaryValueAxisAvail, self.Ptr)
+        return ret
+
+    @property
+    def IsSeriesAxisAvail(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_IsSeriesAxisAvail.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsSeriesAxisAvail.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsSeriesAxisAvail, self.Ptr)
+        return ret
+
+    @property
+    def IsSeriesLines(self)->bool:
+        """
+    <summary>
+        Returns True if chart has series lines. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsSeriesLines.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsSeriesLines.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsSeriesLines, self.Ptr)
+        return ret
+
+    @property
+    def IsSpecialDataLabels(self)->bool:
+        """
+    <summary>
+        Returns True if chart needs special data labels serialization.
+            Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsSpecialDataLabels.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsSpecialDataLabels.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsSpecialDataLabels, self.Ptr)
+        return ret
+
+    @property
+    def IsStacked(self)->bool:
+        """
+    <summary>
+        Returns True if chart is stacked. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsStacked.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsStacked.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsStacked, self.Ptr)
+        return ret
+
+    @property
+    def IsValueAxisAvail(self)->bool:
+        """
+    <summary>
+        Indicates whehter chart has a value axis. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsValueAxisAvail.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsValueAxisAvail.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsValueAxisAvail, self.Ptr)
+        return ret
+
+    @property
+    def NeedDataFormat(self)->bool:
+        """
+    <summary>
+        Returns True if chart needs data format to be saved. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_NeedDataFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_NeedDataFormat.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_NeedDataFormat, self.Ptr)
+        return ret
+
+    @property
+    def NeedDropBar(self)->bool:
+        """
+    <summary>
+        Returns True if chart needs drop bars to be saved. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_NeedDropBar.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_NeedDropBar.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_NeedDropBar, self.Ptr)
+        return ret
+
+    @property
+    def NeedMarkerFormat(self)->bool:
+        """
+    <summary>
+        Returns True if chart needs marker format to be saved. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_NeedMarkerFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_NeedMarkerFormat.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_NeedMarkerFormat, self.Ptr)
+        return ret
+
+    @property
+    def NoPlotArea(self)->bool:
+        """
+    <summary>
+        Returns True if chart has no plot area. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_NoPlotArea.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_NoPlotArea.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_NoPlotArea, self.Ptr)
+        return ret
+
+    @property
+    def Style(self)->int:
+        """
+    <summary>
+        Style index for Excel 2007 chart.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_Style.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_Style.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_Style, self.Ptr)
+        return ret
+
+    @Style.setter
+    def Style(self, value:int):
+        GetDllLibXls().XlsChart_set_Style.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChart_set_Style, self.Ptr, value)
+
+    @property
+    def SupportWallsAndFloor(self)->bool:
+        """
+    <summary>
+        Indicates whether this chart supports walls and floor. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_SupportWallsAndFloor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_SupportWallsAndFloor.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_SupportWallsAndFloor, self.Ptr)
+        return ret
+
+    @property
+    def ZoomToFit(self)->bool:
+        """
+    <summary>
+        Gets or sets zoomToFit value.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_ZoomToFit.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_ZoomToFit.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_ZoomToFit, self.Ptr)
+        return ret
+
+    @ZoomToFit.setter
+    def ZoomToFit(self, value:bool):
+        GetDllLibXls().XlsChart_set_ZoomToFit.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_ZoomToFit, self.Ptr, value)
+
+    @property
+
+    def SecondaryCategoryAxisTitle(self)->str:
+        """
+    <summary>
+        Title of the secondary category axis.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_SecondaryCategoryAxisTitle.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_SecondaryCategoryAxisTitle.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsChart_get_SecondaryCategoryAxisTitle, self.Ptr))
+        return ret
+
+
+    @SecondaryCategoryAxisTitle.setter
+    def SecondaryCategoryAxisTitle(self, value:str):
+        GetDllLibXls().XlsChart_set_SecondaryCategoryAxisTitle.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsChart_set_SecondaryCategoryAxisTitle, self.Ptr, value)
+
+    @property
+
+    def SecondaryValueAxisTitle(self)->str:
+        """
+    <summary>
+        Title of the secondary value axis.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_SecondaryValueAxisTitle.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_SecondaryValueAxisTitle.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsChart_get_SecondaryValueAxisTitle, self.Ptr))
+        return ret
+
+
+    @SecondaryValueAxisTitle.setter
+    def SecondaryValueAxisTitle(self, value:str):
+        GetDllLibXls().XlsChart_set_SecondaryValueAxisTitle.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsChart_set_SecondaryValueAxisTitle, self.Ptr, value)
+
+    @property
+
+    def SeriesAxisTitle(self)->str:
+        """
+    <summary>
+        Title of the series axis.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_SeriesAxisTitle.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_SeriesAxisTitle.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsChart_get_SeriesAxisTitle, self.Ptr))
+        return ret
+
+
+    @SeriesAxisTitle.setter
+    def SeriesAxisTitle(self, value:str):
+        GetDllLibXls().XlsChart_set_SeriesAxisTitle.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsChart_set_SeriesAxisTitle, self.Ptr, value)
+
+    @property
+
+    def ValueAxisTitle(self)->str:
+        """
+    <summary>
+        Title of the value axis.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_ValueAxisTitle.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_ValueAxisTitle.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsChart_get_ValueAxisTitle, self.Ptr))
+        return ret
+
+
+    @ValueAxisTitle.setter
+    def ValueAxisTitle(self, value:str):
+        GetDllLibXls().XlsChart_set_ValueAxisTitle.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsChart_set_ValueAxisTitle, self.Ptr, value)
+
+    @property
+    def HasChartArea(self)->bool:
+        """
+    <summary>
+        Indicates whether chart has chart area.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_HasChartArea.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_HasChartArea.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_HasChartArea, self.Ptr)
+        return ret
+
+    @HasChartArea.setter
+    def HasChartArea(self, value:bool):
+        GetDllLibXls().XlsChart_set_HasChartArea.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_HasChartArea, self.Ptr, value)
+
+    @property
+    def HasChartTitle(self)->bool:
+        """
+    <summary>
+        Indicates wheather the chart has title
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_HasChartTitle.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_HasChartTitle.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_HasChartTitle, self.Ptr)
+        return ret
+
+    @property
+    def HasFloor(self)->bool:
+        """
+    <summary>
+        Gets value indicating whether floor object was created.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_HasFloor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_HasFloor.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_HasFloor, self.Ptr)
+        return ret
+
+    @property
+    def HasWalls(self)->bool:
+        """
+    <summary>
+        Gets value indicating whether floor object was created.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_HasWalls.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_HasWalls.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_HasWalls, self.Ptr)
+        return ret
+
+    @property
+    def HasPivotTable(self)->bool:
+        """
+    <summary>
+        Indicates whether contains pivot table.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_HasPivotTable.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_HasPivotTable.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_HasPivotTable, self.Ptr)
+        return ret
+
+    @staticmethod
+
+    def CheckDataTablePossibility(startType:str,bThrowException:bool)->bool:
+        """
+
+        """
+        
+        GetDllLibXls().XlsChart_CheckDataTablePossibility.argtypes=[ c_void_p,c_bool]
+        GetDllLibXls().XlsChart_CheckDataTablePossibility.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_CheckDataTablePossibility,  startType,bThrowException)
+        return ret
+
+    def CheckForSupportGridLine(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_CheckForSupportGridLine.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_CheckForSupportGridLine.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_CheckForSupportGridLine, self.Ptr)
+        return ret
+
+#    @dispatch
+#
+#    def Clone(self ,hashNewNames:'Dictionary2',parent:SpireObject,dicFontIndexes:'Dictionary2')->'XlsChart':
+#        """
+#
+#        """
+#        intPtrhashNewNames:c_void_p = hashNewNames.Ptr
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrdicFontIndexes:c_void_p = dicFontIndexes.Ptr
+#
+#        GetDllLibXls().XlsChart_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+#        GetDllLibXls().XlsChart_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsChart_Clone, self.Ptr, intPtrhashNewNames,intPtrparent,intPtrdicFontIndexes)
+#        ret = None if intPtr==None else XlsChart(intPtr)
+#        return ret
+#
+
+
+    @dispatch
+
+    def Clone(self ,parent:SpireObject)->SpireObject:
+        """
+    <summary>
+        Clones current instance.
+    </summary>
+    <param name="parent">Parent object.</param>
+    <returns>Returns clone of current object.</returns>
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsChart_CloneP.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsChart_CloneP.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_CloneP, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+
+    def SetToDefaultGridlines(self ,type:'ExcelChartType'):
+        """
+
+        """
+        enumtype:c_int = type.value
+
+        GetDllLibXls().XlsChart_SetToDefaultGridlines.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsChart_SetToDefaultGridlines, self.Ptr, enumtype)
+
+    @property
+
+    def ChartType(self)->'ExcelChartType':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_ChartType.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_ChartType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_ChartType, self.Ptr)
+        objwraped = ExcelChartType(ret)
+        return objwraped
+
+    @ChartType.setter
+    def ChartType(self, value:'ExcelChartType'):
+        GetDllLibXls().XlsChart_set_ChartType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChart_set_ChartType, self.Ptr, value.value)
+
+    @property
+
+    def DataRange(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_DataRange.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_DataRange.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_get_DataRange, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @DataRange.setter
+    def DataRange(self, value:'IXLSRange'):
+        GetDllLibXls().XlsChart_set_DataRange.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChart_set_DataRange, self.Ptr, value.Ptr)
+
+    @property
+    def SeriesDataFromRange(self)->bool:
+        """
+    <summary>
+        True if series are in rows in DataRange;
+            False otherwise.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_SeriesDataFromRange.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_SeriesDataFromRange.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_SeriesDataFromRange, self.Ptr)
+        return ret
+
+    @SeriesDataFromRange.setter
+    def SeriesDataFromRange(self, value:bool):
+        GetDllLibXls().XlsChart_set_SeriesDataFromRange.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_SeriesDataFromRange, self.Ptr, value)
+
+    @property
+
+    def PageSetup(self)->'IChartPageSetup':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_PageSetup.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_PageSetup.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_get_PageSetup, self.Ptr)
+        ret = None if intPtr==None else IChartPageSetup(intPtr)
+        return ret
+
+
+    @property
+    def XPos(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_XPos.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_XPos.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_XPos, self.Ptr)
+        return ret
+
+    @XPos.setter
+    def XPos(self, value:float):
+        GetDllLibXls().XlsChart_set_XPos.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChart_set_XPos, self.Ptr, value)
+
+    @property
+    def YPos(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_YPos.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_YPos.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_YPos, self.Ptr)
+        return ret
+
+    @YPos.setter
+    def YPos(self, value:float):
+        GetDllLibXls().XlsChart_set_YPos.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChart_set_YPos, self.Ptr, value)
+
+    @property
+    def Width(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_Width.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_Width.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_Width, self.Ptr)
+        return ret
+
+    @Width.setter
+    def Width(self, value:float):
+        GetDllLibXls().XlsChart_set_Width.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChart_set_Width, self.Ptr, value)
+
+    @property
+    def Height(self)->float:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_Height.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_Height.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_Height, self.Ptr)
+        return ret
+
+    @Height.setter
+    def Height(self, value:float):
+        GetDllLibXls().XlsChart_set_Height.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsChart_set_Height, self.Ptr, value)
+
+    @property
+
+    def PrimaryCategoryAxis(self)->'IChartCategoryAxis':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_PrimaryCategoryAxis.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_PrimaryCategoryAxis.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_get_PrimaryCategoryAxis, self.Ptr)
+        ret = None if intPtr==None else IChartCategoryAxis(intPtr)
+        return ret
+
+
+    @property
+
+    def PrimaryValueAxis(self)->'IChartValueAxis':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_PrimaryValueAxis.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_PrimaryValueAxis.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_get_PrimaryValueAxis, self.Ptr)
+        ret = None if intPtr==None else IChartValueAxis(intPtr)
+        return ret
+
+
+    @property
+
+    def PrimarySerieAxis(self)->'IChartSeriesAxis':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_PrimarySerieAxis.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_PrimarySerieAxis.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_get_PrimarySerieAxis, self.Ptr)
+        ret = None if intPtr==None else IChartSeriesAxis(intPtr)
+        return ret
+
+
+    @property
+
+    def SecondaryCategoryAxis(self)->'IChartCategoryAxis':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_SecondaryCategoryAxis.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_SecondaryCategoryAxis.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_get_SecondaryCategoryAxis, self.Ptr)
+        ret = None if intPtr==None else IChartCategoryAxis(intPtr)
+        return ret
+
+
+    @property
+
+    def SecondaryValueAxis(self)->'IChartValueAxis':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_SecondaryValueAxis.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_SecondaryValueAxis.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_get_SecondaryValueAxis, self.Ptr)
+        ret = None if intPtr==None else IChartValueAxis(intPtr)
+        return ret
+
+
+    @property
+
+    def ChartArea(self)->'IChartFrameFormat':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_ChartArea.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_ChartArea.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_get_ChartArea, self.Ptr)
+        ret = None if intPtr==None else XlsChartFrameFormat(intPtr)
+        return ret
+
+
+    @property
+
+    def PlotArea(self)->'IChartFrameFormat':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_PlotArea.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_PlotArea.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_get_PlotArea, self.Ptr)
+        ret = None if intPtr==None else XlsChartFrameFormat(intPtr)
+        return ret
+
+
+    @property
+
+    def Walls(self)->'IChartWallOrFloor':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_Walls.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_Walls.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_get_Walls, self.Ptr)
+        ret = None if intPtr==None else IChartWallOrFloor(intPtr)
+        return ret
+
+
+    @property
+
+    def Floor(self)->'IChartWallOrFloor':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_Floor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_Floor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_get_Floor, self.Ptr)
+        ret = None if intPtr==None else IChartWallOrFloor(intPtr)
+        return ret
+
+
+    @property
+
+    def DataTable(self)->'IChartDataTable':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_DataTable.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_DataTable.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_get_DataTable, self.Ptr)
+        ret = None if intPtr==None else IChartDataTable(intPtr)
+        return ret
+
+
+    @property
+    def HasDataTable(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_HasDataTable.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_HasDataTable.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_HasDataTable, self.Ptr)
+        return ret
+
+    @HasDataTable.setter
+    def HasDataTable(self, value:bool):
+        GetDllLibXls().XlsChart_set_HasDataTable.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_HasDataTable, self.Ptr, value)
+
+    @property
+
+    def Legend(self)->'IChartLegend':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_Legend.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_Legend.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_get_Legend, self.Ptr)
+        ret = None if intPtr==None else IChartLegend(intPtr)
+        return ret
+
+
+    @property
+    def HasLegend(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_HasLegend.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_HasLegend.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_HasLegend, self.Ptr)
+        return ret
+
+    @HasLegend.setter
+    def HasLegend(self, value:bool):
+        GetDllLibXls().XlsChart_set_HasLegend.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_HasLegend, self.Ptr, value)
+
+    @property
+    def Rotation(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_Rotation.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_Rotation.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_Rotation, self.Ptr)
+        return ret
+
+    @Rotation.setter
+    def Rotation(self, value:int):
+        GetDllLibXls().XlsChart_set_Rotation.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChart_set_Rotation, self.Ptr, value)
+
+    @property
+    def Elevation(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_Elevation.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_Elevation.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_Elevation, self.Ptr)
+        return ret
+
+    @Elevation.setter
+    def Elevation(self, value:int):
+        GetDllLibXls().XlsChart_set_Elevation.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChart_set_Elevation, self.Ptr, value)
+
+    @property
+    def Perspective(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_Perspective.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_Perspective.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_Perspective, self.Ptr)
+        return ret
+
+    @Perspective.setter
+    def Perspective(self, value:int):
+        GetDllLibXls().XlsChart_set_Perspective.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChart_set_Perspective, self.Ptr, value)
+
+    @property
+    def HeightPercent(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_HeightPercent.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_HeightPercent.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_HeightPercent, self.Ptr)
+        return ret
+
+    @HeightPercent.setter
+    def HeightPercent(self, value:int):
+        GetDllLibXls().XlsChart_set_HeightPercent.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChart_set_HeightPercent, self.Ptr, value)
+
+    @property
+    def DepthPercent(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_DepthPercent.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_DepthPercent.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_DepthPercent, self.Ptr)
+        return ret
+
+    @DepthPercent.setter
+    def DepthPercent(self, value:int):
+        GetDllLibXls().XlsChart_set_DepthPercent.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChart_set_DepthPercent, self.Ptr, value)
+
+    @property
+
+    def DestinationType(self)->'ExcelChartType':
+        """
+    <summary>
+        Gets chart type after type change.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_DestinationType.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_DestinationType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_DestinationType, self.Ptr)
+        objwraped = ExcelChartType(ret)
+        return objwraped
+
+    @DestinationType.setter
+    def DestinationType(self, value:'ExcelChartType'):
+        GetDllLibXls().XlsChart_set_DestinationType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChart_set_DestinationType, self.Ptr, value.value)
+
+    @property
+    def GapDepth(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_GapDepth.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_GapDepth.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_GapDepth, self.Ptr)
+        return ret
+
+    @GapDepth.setter
+    def GapDepth(self, value:int):
+        GetDllLibXls().XlsChart_set_GapDepth.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChart_set_GapDepth, self.Ptr, value)
+
+    @property
+    def RightAngleAxes(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_RightAngleAxes.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_RightAngleAxes.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_RightAngleAxes, self.Ptr)
+        return ret
+
+    @RightAngleAxes.setter
+    def RightAngleAxes(self, value:bool):
+        GetDllLibXls().XlsChart_set_RightAngleAxes.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_RightAngleAxes, self.Ptr, value)
+
+    @property
+    def AutoScaling(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_AutoScaling.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_AutoScaling.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_AutoScaling, self.Ptr)
+        return ret
+
+    @AutoScaling.setter
+    def AutoScaling(self, value:bool):
+        GetDllLibXls().XlsChart_set_AutoScaling.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_AutoScaling, self.Ptr, value)
+
+    @property
+    def WallsAndGridlines2D(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_WallsAndGridlines2D.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_WallsAndGridlines2D.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_WallsAndGridlines2D, self.Ptr)
+        return ret
+
+    @WallsAndGridlines2D.setter
+    def WallsAndGridlines2D(self, value:bool):
+        GetDllLibXls().XlsChart_set_WallsAndGridlines2D.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_WallsAndGridlines2D, self.Ptr, value)
+
+    @property
+    def HasPlotArea(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_HasPlotArea.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_HasPlotArea.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_HasPlotArea, self.Ptr)
+        return ret
+
+    @HasPlotArea.setter
+    def HasPlotArea(self, value:bool):
+        GetDllLibXls().XlsChart_set_HasPlotArea.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_HasPlotArea, self.Ptr, value)
+
+    @property
+
+    def DisplayBlanksAs(self)->'ChartPlotEmptyType':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_DisplayBlanksAs.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_DisplayBlanksAs.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_DisplayBlanksAs, self.Ptr)
+        objwraped = ChartPlotEmptyType(ret)
+        return objwraped
+
+    @DisplayBlanksAs.setter
+    def DisplayBlanksAs(self, value:'ChartPlotEmptyType'):
+        GetDllLibXls().XlsChart_set_DisplayBlanksAs.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChart_set_DisplayBlanksAs, self.Ptr, value.value)
+
+    @property
+    def PlotVisibleOnly(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_PlotVisibleOnly.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_PlotVisibleOnly.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_PlotVisibleOnly, self.Ptr)
+        return ret
+
+    @PlotVisibleOnly.setter
+    def PlotVisibleOnly(self, value:bool):
+        GetDllLibXls().XlsChart_set_PlotVisibleOnly.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_PlotVisibleOnly, self.Ptr, value)
+
+    @property
+    def SizeWithWindow(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_SizeWithWindow.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_SizeWithWindow.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_SizeWithWindow, self.Ptr)
+        return ret
+
+    @SizeWithWindow.setter
+    def SizeWithWindow(self, value:bool):
+        GetDllLibXls().XlsChart_set_SizeWithWindow.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_SizeWithWindow, self.Ptr, value)
+
+    @property
+
+    def PivotTable(self)->'PivotTable':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_PivotTable.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_PivotTable.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_get_PivotTable, self.Ptr)
+        ret = None if intPtr==None else PivotTable(intPtr)
+        return ret
+
+
+    @PivotTable.setter
+    def PivotTable(self, value:'PivotTable'):
+        GetDllLibXls().XlsChart_set_PivotTable.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChart_set_PivotTable, self.Ptr, value.Ptr)
+
+    @property
+
+    def PivotChartType(self)->'ExcelChartType':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_PivotChartType.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_PivotChartType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_PivotChartType, self.Ptr)
+        objwraped = ExcelChartType(ret)
+        return objwraped
+
+    @PivotChartType.setter
+    def PivotChartType(self, value:'ExcelChartType'):
+        GetDllLibXls().XlsChart_set_PivotChartType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChart_set_PivotChartType, self.Ptr, value.value)
+
+    @property
+    def DisplayEntireFieldButtons(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_DisplayEntireFieldButtons.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_DisplayEntireFieldButtons.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_DisplayEntireFieldButtons, self.Ptr)
+        return ret
+
+    @DisplayEntireFieldButtons.setter
+    def DisplayEntireFieldButtons(self, value:bool):
+        GetDllLibXls().XlsChart_set_DisplayEntireFieldButtons.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_DisplayEntireFieldButtons, self.Ptr, value)
+
+    @property
+    def DisplayValueFieldButtons(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_DisplayValueFieldButtons.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_DisplayValueFieldButtons.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_DisplayValueFieldButtons, self.Ptr)
+        return ret
+
+    @DisplayValueFieldButtons.setter
+    def DisplayValueFieldButtons(self, value:bool):
+        GetDllLibXls().XlsChart_set_DisplayValueFieldButtons.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_DisplayValueFieldButtons, self.Ptr, value)
+
+    @property
+    def DisplayAxisFieldButtons(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_DisplayAxisFieldButtons.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_DisplayAxisFieldButtons.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_DisplayAxisFieldButtons, self.Ptr)
+        return ret
+
+    @DisplayAxisFieldButtons.setter
+    def DisplayAxisFieldButtons(self, value:bool):
+        GetDllLibXls().XlsChart_set_DisplayAxisFieldButtons.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_DisplayAxisFieldButtons, self.Ptr, value)
+
+    @property
+    def DisplayLegendFieldButtons(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_DisplayLegendFieldButtons.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_DisplayLegendFieldButtons.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_DisplayLegendFieldButtons, self.Ptr)
+        return ret
+
+    @DisplayLegendFieldButtons.setter
+    def DisplayLegendFieldButtons(self, value:bool):
+        GetDllLibXls().XlsChart_set_DisplayLegendFieldButtons.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_DisplayLegendFieldButtons, self.Ptr, value)
+
+    @property
+    def ShowReportFilterFieldButtons(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_ShowReportFilterFieldButtons.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_ShowReportFilterFieldButtons.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_ShowReportFilterFieldButtons, self.Ptr)
+        return ret
+
+    @ShowReportFilterFieldButtons.setter
+    def ShowReportFilterFieldButtons(self, value:bool):
+        GetDllLibXls().XlsChart_set_ShowReportFilterFieldButtons.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChart_set_ShowReportFilterFieldButtons, self.Ptr, value)
+
+    @property
+    def CanChartBubbleLabel(self)->bool:
+        """
+    <summary>
+        Returns True if chart can have bubble data labels. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_CanChartBubbleLabel.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_CanChartBubbleLabel.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_CanChartBubbleLabel, self.Ptr)
+        return ret
+
+    @property
+    def CanChartHaveSeriesLines(self)->bool:
+        """
+    <summary>
+        Returns True if chart can have series lines. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_CanChartHaveSeriesLines.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_CanChartHaveSeriesLines.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_CanChartHaveSeriesLines, self.Ptr)
+        return ret
+
+    @property
+    def CanChartPercentageLabel(self)->bool:
+        """
+    <summary>
+        Returns True if chart can have percentage data labels. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_CanChartPercentageLabel.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_CanChartPercentageLabel.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_CanChartPercentageLabel, self.Ptr)
+        return ret
+
+    @property
+
+    def CategoryAxisTitle(self)->str:
+        """
+    <summary>
+        Title of the category axis.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_CategoryAxisTitle.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_CategoryAxisTitle.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsChart_get_CategoryAxisTitle, self.Ptr))
+        return ret
+
+
+    @CategoryAxisTitle.setter
+    def CategoryAxisTitle(self, value:str):
+        GetDllLibXls().XlsChart_set_CategoryAxisTitle.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsChart_set_CategoryAxisTitle, self.Ptr, value)
+
+    @property
+
+    def ChartStartType(self)->str:
+        """
+    <summary>
+        Returns start type of chart type. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_ChartStartType.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_ChartStartType.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsChart_get_ChartStartType, self.Ptr))
+        return ret
+
+
+    @property
+
+    def ChartTitle(self)->str:
+        """
+    <summary>
+        Title of the chart.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_ChartTitle.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_ChartTitle.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsChart_get_ChartTitle, self.Ptr))
+        return ret
+
+
+    @ChartTitle.setter
+    def ChartTitle(self, value:str):
+        GetDllLibXls().XlsChart_set_ChartTitle.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsChart_set_ChartTitle, self.Ptr, value)
+
+    @property
+
+    def ChartTitleFont(self)->'IFont':
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_ChartTitleFont.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_ChartTitleFont.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_get_ChartTitleFont, self.Ptr)
+        ret = None if intPtr==None else XlsFont(intPtr)
+        return ret
+
+
+    @property
+
+    def DefaultLinePattern(self)->'ChartLinePatternType':
+        """
+    <summary>
+        Returns default line pattern for the chart. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_DefaultLinePattern.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_DefaultLinePattern.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_DefaultLinePattern, self.Ptr)
+        objwraped = ChartLinePatternType(ret)
+        return objwraped
+
+    @property
+    def DefaultTextIndex(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsChart_get_DefaultTextIndex.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_DefaultTextIndex.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_DefaultTextIndex, self.Ptr)
+        return ret
+
+    @property
+
+    def Font(self)->'FontWrapper':
+        """
+    <summary>
+        Gets font which used for displaying axis text .
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_Font.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_Font.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChart_get_Font, self.Ptr)
+        ret = None if intPtr==None else FontWrapper(intPtr)
+        return ret
+
+
+    @property
+    def IsCategoryAxisAvail(self)->bool:
+        """
+    <summary>
+        Indicates whether chart has a category axis. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsCategoryAxisAvail.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsCategoryAxisAvail.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsCategoryAxisAvail, self.Ptr)
+        return ret
+
+    @property
+    def IsChart_100(self)->bool:
+        """
+    <summary>
+        Returns True if chart is 100%. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChart_100.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChart_100.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChart_100, self.Ptr)
+        return ret
+
+    @property
+    def IsChart3D(self)->bool:
+        """
+    <summary>
+        Returns True if chart is 3D. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChart3D.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChart3D.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChart3D, self.Ptr)
+        return ret
+
+    @property
+    def IsChartBar(self)->bool:
+        """
+    <summary>
+        Returns True if chart is a bar chart. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartBar.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartBar.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartBar, self.Ptr)
+        return ret
+
+    @property
+    def IsChartBubble(self)->bool:
+        """
+    <summary>
+        Returns True if chart is a bubble chart. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartBubble.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartBubble.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartBubble, self.Ptr)
+        return ret
+
+    @property
+    def IsChartCone(self)->bool:
+        """
+    <summary>
+        Returns True if chart is a conical shape. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartCone.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartCone.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartCone, self.Ptr)
+        return ret
+
+    @property
+    def IsChartCylinder(self)->bool:
+        """
+    <summary>
+        Returns True if chart is a cylinder shape. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartCylinder.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartCylinder.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartCylinder, self.Ptr)
+        return ret
+
+    @property
+    def IsChartDoughnut(self)->bool:
+        """
+    <summary>
+        Returns True if chart is a doughnut chart. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartDoughnut.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartDoughnut.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartDoughnut, self.Ptr)
+        return ret
+
+    @property
+    def IsChartExploded(self)->bool:
+        """
+    <summary>
+        Returns True if chart is exploded. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartExploded.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartExploded.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartExploded, self.Ptr)
+        return ret
+
+    @property
+    def IsChartFloor(self)->bool:
+        """
+    <summary>
+        Returns True if chart has floor. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartFloor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartFloor.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartFloor, self.Ptr)
+        return ret
+
+    @property
+    def IsChartLine(self)->bool:
+        """
+    <summary>
+        Returns True if chart is line. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartLine.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartLine.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartLine, self.Ptr)
+        return ret
+
+    @property
+    def IsChartPie(self)->bool:
+        """
+    <summary>
+        Returns True if chart is a pie chart. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChart_get_IsChartPie.argtypes=[c_void_p]
+        GetDllLibXls().XlsChart_get_IsChartPie.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChart_get_IsChartPie, self.Ptr)
+        return ret
+
+    @staticmethod
+
+    def DEF_SUPPORT_SERIES_AXIS()->List['ExcelChartType']:
+        """
+
+        """
+        #GetDllLibXls().XlsChart_DEF_SUPPORT_SERIES_AXIS.argtypes=[]
+        GetDllLibXls().XlsChart_DEF_SUPPORT_SERIES_AXIS.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().XlsChart_DEF_SUPPORT_SERIES_AXIS)
+        ret = GetVectorFromArray(intPtrArray, ExcelChartType)
+        return ret
+
+
+    @staticmethod
+
+    def DEF_SUPPORT_ERROR_BARS()->List[str]:
+        """
+
+        """
+        #GetDllLibXls().XlsChart_DEF_SUPPORT_ERROR_BARS.argtypes=[]
+        GetDllLibXls().XlsChart_DEF_SUPPORT_ERROR_BARS.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().XlsChart_DEF_SUPPORT_ERROR_BARS)
+        ret = GetVectorFromArray(intPtrArray, c_wchar_p)
+        return ret
+
+    @staticmethod
+
+    def DEF_SUPPORT_TREND_LINES()->List['ExcelChartType']:
+        """
+
+        """
+        #GetDllLibXls().XlsChart_DEF_SUPPORT_TREND_LINES.argtypes=[]
+        GetDllLibXls().XlsChart_DEF_SUPPORT_TREND_LINES.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().XlsChart_DEF_SUPPORT_TREND_LINES)
+        ret = GetVectorFromArray(intPtrArray, ExcelChartType)
+        return ret
+
+

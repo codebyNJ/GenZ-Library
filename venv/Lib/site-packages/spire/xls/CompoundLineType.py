@@ -1,0 +1,18 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CompoundLineType(Enum):
+    """
+
+    """
+    Single = 0
+    ThickBetweenThin = 1
+    ThinThick = 2
+    ThickThin = 3
+    ThinThin = 4
+

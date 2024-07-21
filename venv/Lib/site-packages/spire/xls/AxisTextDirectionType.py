@@ -1,0 +1,18 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class AxisTextDirectionType(Enum):
+    """
+    <summary>
+        Represents axis text direction.
+    </summary>
+    """
+    Context = 0
+    LeftToRight = 1
+    RightToLeft = 2
+

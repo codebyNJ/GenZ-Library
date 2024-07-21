@@ -1,0 +1,172 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ColorScale (SpireObject) :
+    """
+    <summary>
+        The color scale condition in the conditional format
+    </summary>
+    """
+#    @property
+#
+#    def Criteria(self)->'IList1':
+#        """
+#    <summary>
+#        Indicates the type, value, and the color
+#            of threshold criteria used in the color scale conditional format.
+#    </summary>
+#        """
+#        GetDllLibXls().ColorScale_get_Criteria.argtypes=[c_void_p]
+#        GetDllLibXls().ColorScale_get_Criteria.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().ColorScale_get_Criteria, self.Ptr)
+#        ret = None if intPtr==None else IList1(intPtr)
+#        return ret
+#
+
+
+    @property
+
+    def MaxColor(self)->'Color':
+        """
+    <summary>
+        Get or set the max value object's corresponding color.
+    </summary>
+        """
+        GetDllLibXls().ColorScale_get_MaxColor.argtypes=[c_void_p]
+        GetDllLibXls().ColorScale_get_MaxColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ColorScale_get_MaxColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @MaxColor.setter
+    def MaxColor(self, value:'Color'):
+        GetDllLibXls().ColorScale_set_MaxColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().ColorScale_set_MaxColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def MidColor(self)->'Color':
+        """
+    <summary>
+        Get or set the mid value object's corresponding color.
+    </summary>
+        """
+        GetDllLibXls().ColorScale_get_MidColor.argtypes=[c_void_p]
+        GetDllLibXls().ColorScale_get_MidColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ColorScale_get_MidColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @MidColor.setter
+    def MidColor(self, value:'Color'):
+        GetDllLibXls().ColorScale_set_MidColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().ColorScale_set_MidColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def MinColor(self)->'Color':
+        """
+    <summary>
+        Get or set the min value object's corresponding color.
+    </summary>
+        """
+        GetDllLibXls().ColorScale_get_MinColor.argtypes=[c_void_p]
+        GetDllLibXls().ColorScale_get_MinColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ColorScale_get_MinColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @MinColor.setter
+    def MinColor(self, value:'Color'):
+        GetDllLibXls().ColorScale_set_MinColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().ColorScale_set_MinColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def MaxValue(self)->'IConditionValue':
+        """
+    <summary>
+        Get or set this ColorScale's max value object.
+    </summary>
+        """
+        GetDllLibXls().ColorScale_get_MaxValue.argtypes=[c_void_p]
+        GetDllLibXls().ColorScale_get_MaxValue.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ColorScale_get_MaxValue, self.Ptr)
+        ret = None if intPtr==None else XlsConditionValue(intPtr)
+        return ret
+
+
+    @property
+
+    def MidValue(self)->'IConditionValue':
+        """
+    <summary>
+        Get or set this ColorScale's mid value object.
+    </summary>
+        """
+        GetDllLibXls().ColorScale_get_MidValue.argtypes=[c_void_p]
+        GetDllLibXls().ColorScale_get_MidValue.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ColorScale_get_MidValue, self.Ptr)
+        ret = None if intPtr==None else XlsConditionValue(intPtr)
+        return ret
+
+
+    @property
+
+    def MinValue(self)->'IConditionValue':
+        """
+    <summary>
+        Get or set this ColorScale's min value object.
+    </summary>
+        """
+        GetDllLibXls().ColorScale_get_MinValue.argtypes=[c_void_p]
+        GetDllLibXls().ColorScale_get_MinValue.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ColorScale_get_MinValue, self.Ptr)
+        ret = None if intPtr==None else XlsConditionValue(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddCriteria(self ,item:ColorConditionValue):
+        """
+
+        """
+        intPtritem:c_void_p = item.Ptr
+
+        GetDllLibXls().ColorScale_AddCriteria.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().ColorScale_AddCriteria, self.Ptr, intPtritem)
+
+    @dispatch
+
+    def AddCriteria(self ,type:ConditionValueType,value:SpireObject,color:Color):
+        """
+
+        """
+        enumtype:c_int = type.value
+        intPtrvalue:c_void_p = value.Ptr
+        intPtrcolor:c_void_p = color.Ptr
+
+        GetDllLibXls().ColorScale_AddCriteriaTVC.argtypes=[c_void_p ,c_int,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().ColorScale_AddCriteriaTVC, self.Ptr, enumtype,intPtrvalue,intPtrcolor)
+
+
+    def SetConditionCount(self ,count:int):
+        """
+    <summary>
+        Sets number of objects in the collection.
+    </summary>
+    <param name="count"></param>
+        """
+        
+        GetDllLibXls().ColorScale_SetConditionCount.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().ColorScale_SetConditionCount, self.Ptr, count)
+

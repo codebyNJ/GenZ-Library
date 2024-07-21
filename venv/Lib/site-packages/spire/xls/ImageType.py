@@ -1,0 +1,17 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ImageType(Enum):
+    """
+    <summary>
+        Possible image types for image conversion.
+    </summary>
+    """
+    Bitmap = 0
+    Metafile = 1
+

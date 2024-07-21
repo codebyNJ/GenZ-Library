@@ -1,0 +1,319 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsChartWallOrFloor (  XlsObject, IChartWallOrFloor, IChartFillBorder) :
+    """
+
+    """
+    @property
+
+    def Border(self)->'ChartBorder':
+        """
+
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_Border.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_Border.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_Border, self.Ptr)
+        ret = None if intPtr==None else ChartBorder(intPtr)
+        return ret
+
+
+    @property
+    def HasInterior(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_HasInterior.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_HasInterior.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_HasInterior, self.Ptr)
+        return ret
+
+    @property
+    def HasLineProperties(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_HasLineProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_HasLineProperties.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_HasLineProperties, self.Ptr)
+        return ret
+
+    @property
+    def HasFormat3D(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_HasFormat3D.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_HasFormat3D.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_HasFormat3D, self.Ptr)
+        return ret
+
+    @property
+    def HasShadow(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_HasShadow.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_HasShadow.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_HasShadow, self.Ptr)
+        return ret
+
+    @property
+
+    def LineProperties(self)->'ChartBorder':
+        """
+
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_LineProperties.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_LineProperties.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_LineProperties, self.Ptr)
+        ret = None if intPtr==None else ChartBorder(intPtr)
+        return ret
+
+
+    @property
+
+    def Interior(self)->'IChartInterior':
+        """
+
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_Interior.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_Interior.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_Interior, self.Ptr)
+        ret = None if intPtr==None else IChartInterior(intPtr)
+        return ret
+
+
+    @property
+
+    def Fill(self)->'IShapeFill':
+        """
+
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_Fill.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_Fill.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_Fill, self.Ptr)
+        ret = None if intPtr==None else XlsShapeFill(intPtr)
+        return ret
+
+
+    @property
+
+    def Format3D(self)->'Format3D':
+        """
+
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_Format3D.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_Format3D.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_Format3D, self.Ptr)
+        ret = None if intPtr==None else Format3D(intPtr)
+        return ret
+
+
+    @property
+
+    def Shadow(self)->'ChartShadow':
+        """
+
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_Shadow.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_Shadow.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_Shadow, self.Ptr)
+        ret = None if intPtr==None else ChartShadow(intPtr)
+        return ret
+
+
+    def Delete(self):
+        """
+
+        """
+        GetDllLibXls().XlsChartWallOrFloor_Delete.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartWallOrFloor_Delete, self.Ptr)
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsChartWallOrFloor_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    def SetToDefault(self):
+        """
+
+        """
+        GetDllLibXls().XlsChartWallOrFloor_SetToDefault.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartWallOrFloor_SetToDefault, self.Ptr)
+
+    @property
+
+    def ForeGroundColor(self)->'Color':
+        """
+    <summary>
+        Represents foreground color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_ForeGroundColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_ForeGroundColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_ForeGroundColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @ForeGroundColor.setter
+    def ForeGroundColor(self, value:'Color'):
+        GetDllLibXls().XlsChartWallOrFloor_set_ForeGroundColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartWallOrFloor_set_ForeGroundColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def ForeGroundKnownColor(self)->'ExcelColors':
+        """
+    <summary>
+        Represents foreground color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_ForeGroundKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_ForeGroundKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_ForeGroundKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @ForeGroundKnownColor.setter
+    def ForeGroundKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsChartWallOrFloor_set_ForeGroundKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartWallOrFloor_set_ForeGroundKnownColor, self.Ptr, value.value)
+
+    @property
+
+    def ForeGroundColorObject(self)->'OColor':
+        """
+    <summary>
+        Represents foreground color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_ForeGroundColorObject.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_ForeGroundColorObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_ForeGroundColorObject, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def BackGroundColor(self)->'Color':
+        """
+    <summary>
+        Represents background color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_BackGroundColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_BackGroundColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_BackGroundColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @BackGroundColor.setter
+    def BackGroundColor(self, value:'Color'):
+        GetDllLibXls().XlsChartWallOrFloor_set_BackGroundColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartWallOrFloor_set_BackGroundColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def BackGroundKnownColor(self)->'ExcelColors':
+        """
+    <summary>
+        Represents background color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_BackGroundKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_BackGroundKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_BackGroundKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @BackGroundKnownColor.setter
+    def BackGroundKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsChartWallOrFloor_set_BackGroundKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartWallOrFloor_set_BackGroundKnownColor, self.Ptr, value.value)
+
+    @property
+
+    def BackGroundColorObject(self)->'OColor':
+        """
+    <summary>
+        Represents background color.
+    </summary>
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_BackGroundColorObject.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_BackGroundColorObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_BackGroundColorObject, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def Pattern(self)->'ExcelPatternType':
+        """
+    <summary>
+        Represents pattern.
+    </summary>
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_Pattern.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_Pattern.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_Pattern, self.Ptr)
+        objwraped = ExcelPatternType(ret)
+        return objwraped
+
+    @Pattern.setter
+    def Pattern(self, value:'ExcelPatternType'):
+        GetDllLibXls().XlsChartWallOrFloor_set_Pattern.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartWallOrFloor_set_Pattern, self.Ptr, value.value)
+
+    @property
+    def IsAutomaticFormat(self)->bool:
+        """
+    <summary>
+        Represents if use automatic format.
+    </summary>
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_IsAutomaticFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_IsAutomaticFormat.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_IsAutomaticFormat, self.Ptr)
+        return ret
+
+    @IsAutomaticFormat.setter
+    def IsAutomaticFormat(self, value:bool):
+        GetDllLibXls().XlsChartWallOrFloor_set_IsAutomaticFormat.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartWallOrFloor_set_IsAutomaticFormat, self.Ptr, value)
+
+    @property
+    def Visible(self)->bool:
+        """
+    <summary>
+        Represents visible.
+    </summary>
+        """
+        GetDllLibXls().XlsChartWallOrFloor_get_Visible.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartWallOrFloor_get_Visible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartWallOrFloor_get_Visible, self.Ptr)
+        return ret
+
+    @Visible.setter
+    def Visible(self, value:bool):
+        GetDllLibXls().XlsChartWallOrFloor_set_Visible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartWallOrFloor_set_Visible, self.Ptr, value)
+

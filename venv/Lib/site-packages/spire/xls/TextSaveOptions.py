@@ -1,0 +1,85 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class TextSaveOptions (SpireObject) :
+    """
+
+    """
+    @property
+    def RetainHiddenData(self)->bool:
+        """
+    <summary>
+        Gets or sets whether retain hidden data. Default is true.
+    </summary>
+        """
+        GetDllLibXls().TextSaveOptions_get_RetainHiddenData.argtypes=[c_void_p]
+        GetDllLibXls().TextSaveOptions_get_RetainHiddenData.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().TextSaveOptions_get_RetainHiddenData, self.Ptr)
+        return ret
+
+    @RetainHiddenData.setter
+    def RetainHiddenData(self, value:bool):
+        GetDllLibXls().TextSaveOptions_set_RetainHiddenData.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().TextSaveOptions_set_RetainHiddenData, self.Ptr, value)
+
+    @property
+    def RetainBlankRowsAndCols(self)->bool:
+        """
+    <summary>
+        Gets or sets whether retain blank rows and columns. Default is false.
+    </summary>
+        """
+        GetDllLibXls().TextSaveOptions_get_RetainBlankRowsAndCols.argtypes=[c_void_p]
+        GetDllLibXls().TextSaveOptions_get_RetainBlankRowsAndCols.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().TextSaveOptions_get_RetainBlankRowsAndCols, self.Ptr)
+        return ret
+
+    @RetainBlankRowsAndCols.setter
+    def RetainBlankRowsAndCols(self, value:bool):
+        GetDllLibXls().TextSaveOptions_set_RetainBlankRowsAndCols.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().TextSaveOptions_set_RetainBlankRowsAndCols, self.Ptr, value)
+
+    @property
+
+    def Separator(self)->str:
+        """
+    <summary>
+        Gets or sets the separator. Default is ",".
+    </summary>
+        """
+        GetDllLibXls().TextSaveOptions_get_Separator.argtypes=[c_void_p]
+        GetDllLibXls().TextSaveOptions_get_Separator.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().TextSaveOptions_get_Separator, self.Ptr))
+        return ret
+
+
+    @Separator.setter
+    def Separator(self, value:str):
+        GetDllLibXls().TextSaveOptions_set_Separator.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().TextSaveOptions_set_Separator, self.Ptr, value)
+
+    @property
+
+    def Encoding(self)->'Encoding':
+        """
+    <summary>
+        Gets or sets the encoding. Default is UTF8.
+    </summary>
+        """
+        GetDllLibXls().TextSaveOptions_get_Encoding.argtypes=[c_void_p]
+        GetDllLibXls().TextSaveOptions_get_Encoding.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().TextSaveOptions_get_Encoding, self.Ptr)
+        ret = None if intPtr==None else Encoding(intPtr)
+        return ret
+
+
+    @Encoding.setter
+    def Encoding(self, value:'Encoding'):
+        GetDllLibXls().TextSaveOptions_set_Encoding.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().TextSaveOptions_set_Encoding, self.Ptr, value.Ptr)
+

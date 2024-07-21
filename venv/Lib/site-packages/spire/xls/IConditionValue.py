@@ -1,0 +1,68 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IConditionValue (abc.ABC) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def Type(self)->'ConditionValueType':
+        """
+
+        """
+        pass
+
+
+    @Type.setter
+    @abc.abstractmethod
+    def Type(self, value:'ConditionValueType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Value(self)->'SpireObject':
+        """
+
+        """
+        pass
+
+
+    @Value.setter
+    @abc.abstractmethod
+    def Value(self, value:'SpireObject'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsGTE(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsGTE.setter
+    @abc.abstractmethod
+    def IsGTE(self, value:bool):
+        """
+
+        """
+        pass
+
+

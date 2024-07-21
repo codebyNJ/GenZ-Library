@@ -1,0 +1,1806 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IWorkbook (  IExcelApplication) :
+    """
+
+    """
+    @dispatch
+
+    @abc.abstractmethod
+    def Replace(self ,oldValue:str,newValue:str):
+        """
+    <summary>
+         Replaces specified string by specified value.
+        <example>The following code snippet illustrates how to replace the string with another string:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Replace the oldValue by newValue
+        string oldValue = "Find";
+        string newValue = "NewValue";
+        workbook.Replace(oldValue, newValue);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValue">New value for the range with specified string.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Replace(self ,oldValue:str,newValue:float):
+        """
+    <summary>
+         Replaces specified string by specified value.
+        <example>The following code snippet illustrates how to replace the string with double:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Replace the oldValue by double
+        string oldValue = "Ten";
+        workbook.Replace(oldValue, 10.0);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValue">New value for the range with specified string.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Replace(self ,oldValue:str,newValue:DateTime):
+        """
+    <summary>
+         Replaces specified string by specified value.
+        <example>The following code illustrates how to replace the string value with datetime:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Replace the oldValue by dateTime
+        string oldValue = "Find";
+        DateTime dateTime = DateTime.Now;
+        workbook.Replace(oldValue, dateTime);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValue">New value for the range with specified string.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Replace(self ,oldValue:str,newValues:List[str],isVertical:bool):
+        """
+    <summary>
+         Replaces specified string by data from array.
+        <example>The following code snippet illustrates how to replace the string with array of string values:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Replace the oldValue by array of string values
+        string oldValue = "Find";
+        string[] newValues = { "X values", "Y values" };
+        workbook.Replace(oldValue, newValues , true);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValues">Array of new values.</param>
+    <param name="isVertical">Indicates whether array should be inserted vertically.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Replace(self ,oldValue:str,newValues:List[int],isVertical:bool):
+        """
+    <summary>
+         Replaces specified string by data from array.
+        <example>The following code snippet illustrates how to replace the string with array of int values:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Replace the oldValue by array of int values
+        string oldValue = "Find";
+        int[] newValues = { 1, 2 };
+        workbook.Replace(oldValue, newValues, true);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValues">Array of new values.</param>
+    <param name="isVertical">Indicates whether array should be inserted vertically.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Replace(self ,oldValue:str,newValues:List[float],isVertical:bool):
+        """
+    <summary>
+         Replaces specified string by data from array.
+        <example>The following code snippet illustrates how to replace the string with array of double values:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Replace the oldValue by array of double values
+        string oldValue = "Find";
+        double[] newValues = { 1.0, 2.0 };
+        workbook.Replace(oldValue, newValues, true);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValues">Array of new values.</param>
+    <param name="isVertical">Indicates whether array should be inserted vertically.</param>
+        """
+        pass
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def Replace(self ,oldValue:str,newValues:'DataTable',isFieldNamesShown:bool):
+#        """
+#    <summary>
+#         Replaces specified string by data table values.
+#        <example>The following code snippet illustrates how to replace the string value with data table:
+#        <code>
+#        //Create workbook
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        //Replace the oldValue by data table
+#        string oldValue = "Find";
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("Dosage", typeof(int));
+#        table.Rows.Add(1);
+#        workbook.Replace(oldValue, table, true);
+#        //Save to file
+#        workbook.SaveToFile("Replace.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="oldValue">String value to replace.</param>
+#    <param name="newValues">Data table with new data.</param>
+#    <param name="isFieldNamesShown">Indicates whether field name must be shown.</param>
+#        """
+#        pass
+#
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def Replace(self ,oldValue:str,newValues:'DataColumn',isFieldNamesShown:bool):
+#        """
+#    <summary>
+#         Replaces specified string by data column values.
+#        <example>The following code snippet illustrates how to replace the string value with data column:
+#        <code>
+#        //Create workbook
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        //Replace the oldValue by data column
+#        string oldValue = "Find";
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("Dosage", typeof(int));
+#        table.Rows.Add(1);
+#        System.Data.DataColumn dataColumn = table.Columns[0];
+#        workbook.Replace(oldValue, dataColumn, true);
+#        //Save to file
+#        workbook.SaveToFile("Replace.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="oldValue">String value to replace.</param>
+#    <param name="newValues">Data table with new data.</param>
+#    <param name="isFieldNamesShown">Indicates whether field name must be shown.</param>
+#        """
+#        pass
+#
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def FindOne(self ,findValue:str,flags:FindType)->IXLSRange:
+        """
+    <summary>
+         This method seraches for the first cell with specified string value.
+        <example>This sample shows how to find the first cell with specified string value:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Find cell with specified string value
+        string value = "value";
+        IXLSRange result = workbook.FindString(value, false, false);
+        </code>
+        </example>
+    </summary>
+    <param name="findValue">Value to search.</param>
+    <param name="flags">Type of value to search.</param>
+    <returns>First found cell, or Null if value was not found.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def FindOne(self ,findValue:float,flags:FindType)->IXLSRange:
+        """
+    <summary>
+         This method seraches for the first cell with specified double value.
+        <example>This sample shows how to find the first cell with specified double value:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Find cell with specified double value
+        double value = 9.00;
+        IXLSRange result = workbook.FindNumber(value, false);
+        </code>
+        </example>
+    </summary>
+    <param name="findValue">Value to search.</param>
+    <param name="flags">Type of value to search.</param>
+    <returns>First found cell, or Null if value was not found.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def FindOne(self ,findValue:bool)->IXLSRange:
+        """
+    <summary>
+         This method seraches for the first cell with specified bool value.
+        <example>This sample shows how to find the first cell with specified bool value:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Find cell with specified bool value
+        IXLSRange result = workbook.FindBool(true);
+        </code>
+        </example>
+    </summary>
+    <param name="findValue">Value to search.</param>
+    <returns>First found cell, or Null if value was not found.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def FindOne(self ,findValue:DateTime)->IXLSRange:
+        """
+    <summary>
+         This method seraches for the first cell with specified DateTime value.
+        <example>This sample shows how to find the first cell with specified DateTime value:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Find cell with specified DateTime value
+        DateTime dateTime = DateTime.Now;
+        IXLSRange result = workbook.FindDateTime(dateTime);
+        </code>
+        </example>
+    </summary>
+    <param name="findValue">Value to search.</param>
+    <returns>First found cell, or Null if value was not found.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def FindOne(self ,findValue:TimeSpan)->IXLSRange:
+        """
+    <summary>
+         This method seraches for the first cell with specified TimeSpan value.
+        <example>This sample shows how to find the first cell with specified TimeSpan value:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Find cell with specified TimeSpan value
+        TimeSpan timeSpan = new TimeSpan(2, 30, 30);
+        IXLSRange result = workbook.FindTimeSpan(timeSpan);
+        </code>
+        </example>
+    </summary>
+    <param name="findValue">Value to search.</param>
+    <returns>First found cell, or Null if value was not found.</returns>
+        """
+        pass
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def FindAll(self ,findValue:str,flags:FindType)->ListCellRanges:
+#        """
+#    <summary>
+#         This method seraches for the all cells with specified string value.
+#        <example>This sample shows how to find all cells with specified string value:
+#        <code>
+#        //Create workbook
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        //Find cells with specified string value
+#        string value = "value";
+#        CellRange[] result = workbook.FindAllString(value , false , false);
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="findValue">Value to search.</param>
+#    <param name="flags">Type of value to search.</param>
+#    <returns>All found cells, or Null if value was not found.</returns>
+#        """
+#        pass
+#
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def FindAll(self ,findValue:float,flags:FindType)->ListCellRanges:
+#        """
+#    <summary>
+#         This method seraches for the all cells with specified double value.
+#        <example>This sample shows how to find all cells with specified doulbe value:
+#        <code>
+#        //Create workbook
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        //Find cells with specified double value
+#        CellRange[] result = workbook.FindAllNumber(100.32 , false);
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="findValue">Value to search.</param>
+#    <param name="flags">Type of value to search.</param>
+#    <returns>All found cells, or Null if value was not found.</returns>
+#        """
+#        pass
+#
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def FindAll(self ,findValue:bool)->ListCellRanges:
+#        """
+#    <summary>
+#         This method seraches for the all cells with specified bool value.
+#        <example>This sample shows how to find all cells with specified bool value:
+#        <code>
+#        //Create workbook
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        //Find cells with specified bool value
+#        CellRange[] result = workbook.FindAllBool(true);
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="findValue">Value to search.</param>
+#    <returns>All found cells, or Null if value was not found</returns>
+#        """
+#        pass
+#
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def FindAll(self ,findValue:DateTime)->ListCellRanges:
+#        """
+#    <summary>
+#         This method seraches for the all cells with specified DateTime value.
+#        <example>This sample shows how to find all cells with specified DateTime value:
+#        <code>
+#        //Create workbook
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        //Find cells with specified DateTime value
+#        CellRange[] result = workbook.FindAllDateTime(DateTime.Now);
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="findValue">Value to search.</param>
+#    <returns>All found cells, or Null if value was not found.</returns>
+#        """
+#        pass
+#
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def FindAll(self ,findValue:TimeSpan)->ListCellRanges:
+#        """
+#    <summary>
+#         This method seraches for the all cells with specified TimeSpan value.
+#        <example>This sample shows how to find all cells with specified TimeSpan value:
+#        <code>
+#        //Create workbook
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        //Find cells with specified TimeSpan value
+#        TimeSpan value = new TimeSpan(2, 30, 30);
+#        CellRange[] result = workbook.FindAllTimeSpan(value);
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="findValue">Value to search.</param>
+#    <returns>All found cells, or Null if value was not found.</returns>
+#        """
+#        pass
+#
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SaveAs(self ,fileName:str,separator:str):
+        """
+    <summary>
+         Save active WorkSheet using separator.
+        <example>The following code illustrates how to save the active worksheet in a different file with separator:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Save to file
+        workbook.SaveToFile("Result.csv" , ",");
+        </code>
+        </example>
+    </summary>
+    <param name="fileName">Path to save.</param>
+    <param name="separator">Current separator.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SaveAs(self ,stream:Stream,separator:str):
+        """
+    <summary>
+         Save active WorkSheet using separator.
+        <example>The following code illustrates how to saves the active worksheet as stream with separator:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Save to stream
+        Stream stream = new MemoryStream();
+        workbook.SaveToFile(stream , ",");
+        </code>
+        </example>
+    </summary>
+    <param name="stream">Stream to save.</param>
+    <param name="separator">Current separator.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetSeparators(self ,argumentsSeparator:int,arrayRowsSeparator:int):
+        """
+    <summary>
+        Sets separators for formula parsing.
+    </summary>
+    <param name="argumentsSeparator">Arguments separator to set.</param>
+    <param name="arrayRowsSeparator">Array rows separator to set.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Protect(self ,bIsProtectWindow:bool,bIsProtectContent:bool):
+        """
+    <summary>
+        Sets protection for workbook.
+    </summary>
+    <param name="bIsProtectWindow">Indicates if protect workbook window.</param>
+    <param name="bIsProtectContent">Indicates if protect workbook content.</param>
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Unprotect(self):
+        """
+    <summary>
+        Unprotects workbook.
+    </summary>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def Clone(self)->'IWorkbook':
+        """
+    <summary>
+        Creates copy of the current instance.
+    </summary>
+    <returns>Copy of the current instance.</returns>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetWriteProtectionPassword(self ,password:str):
+        """
+    <summary>
+        This method sets write protection password.
+    </summary>
+    <param name="password">Password to set.</param>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ActiveSheet(self)->'IWorksheet':
+        """
+    <summary>
+        Returns an object that represents the active sheet (the sheet on top)
+            in the active workbook or in the specified window or workbook. Returns
+            Nothing if no sheet is active. Read-only.
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ActiveSheetIndex(self)->int:
+        """
+    <summary>
+        Gets / sets index of the active sheet.
+    </summary>
+        """
+        pass
+
+
+    @ActiveSheetIndex.setter
+    @abc.abstractmethod
+    def ActiveSheetIndex(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def AddInFunctions(self)->'IAddInFunctions':
+        """
+    <summary>
+        Returns collection of all workbook's add-in functions. Read-only.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Author(self)->str:
+        """
+    <summary>
+        Returns or sets the author of the comment. Read-only String.
+    </summary>
+        """
+        pass
+
+
+    @Author.setter
+    @abc.abstractmethod
+    def Author(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsHScrollBarVisible(self)->bool:
+        """
+    <summary>
+         Gets or sets a value indicating whether to display horizontal scroll bar. 
+        <example>This sample shows how to hide horizontal scroll bar:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        //Hide horizontal scroll bar
+        workbook.IsHScrollBarVisible = false;
+        //Save to file
+        workbook.SaveToFile("IsHScrollBarVisible.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @IsHScrollBarVisible.setter
+    @abc.abstractmethod
+    def IsHScrollBarVisible(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsVScrollBarVisible(self)->bool:
+        """
+    <summary>
+         Gets or sets a value indicating whether to display vertical scroll bar. 
+        <example>This sample shows how to hide vertical scroll bar:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        //Hide vertical scroll bar
+        workbook.IsVScrollBarVisible = false;
+        //Save to file
+        workbook.SaveToFile("IsVScrollBarVisible.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @IsVScrollBarVisible.setter
+    @abc.abstractmethod
+    def IsVScrollBarVisible(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BuiltInDocumentProperties(self)->'IBuiltInDocumentProperties':
+        """
+    <summary>
+         Returns collection that represents all the built-in document properties
+             for the specified workbook. Read-only.
+        <example>The following code snippet illustrates how to get the built in document properties:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Get the built in document properties
+        IBuiltInDocumentProperties builtInDocumentProperties = workbook.DocumentProperties;
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def CodeName(self)->str:
+        """
+    <summary>
+        Name which is used by macros to access the workbook items.
+    </summary>
+        """
+        pass
+
+
+    @CodeName.setter
+    @abc.abstractmethod
+    def CodeName(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def CustomDocumentProperties(self)->'ICustomDocumentProperties':
+        """
+    <summary>
+         Returns collection that represents all the custom document properties
+             for the specified workbook. Read-only.
+        <example>The following code snippet illustrates how to get the custom document properties:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Get the document properties
+        ICustomDocumentProperties documentProperties = workbook.CustomDocumentProperties;
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Date1904(self)->bool:
+        """
+    <summary>
+        True if the workbook uses the 1904 date system. Read / write Boolean.
+    </summary>
+        """
+        pass
+
+
+    @Date1904.setter
+    @abc.abstractmethod
+    def Date1904(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsDisplayPrecision(self)->bool:
+        """
+    <summary>
+        True if cell is protected.
+    </summary>
+        """
+        pass
+
+
+    @IsDisplayPrecision.setter
+    @abc.abstractmethod
+    def IsDisplayPrecision(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsCellProtection(self)->bool:
+        """
+    <summary>
+        True if cell is protected.
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsWindowProtection(self)->bool:
+        """
+    <summary>
+        True if window is protected.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Names(self)->'INameRanges':
+        """
+    <summary>
+         For an ReservedHandle object, returns a Names collection that represents
+             all the names in the active workbook. For a Workbook object, returns
+             a Names collection that represents all the names in the specified
+             workbook (including all worksheet-specific names).
+        <example>The following code snippet illustrates how to get names:
+        <code>
+        //Create workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Get names
+        INameRanges names = workbook.NameRanges;
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ReadOnly(self)->bool:
+        """
+    <summary>
+        True if the workbook has been opened as Read-only. Read-only Boolean.
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Saved(self)->bool:
+        """
+    <summary>
+        True if no changes have been made to the specified workbook since
+            it was last saved. Read/write Boolean.
+    </summary>
+        """
+        pass
+
+
+    @Saved.setter
+    @abc.abstractmethod
+    def Saved(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Styles(self)->'IStyles':
+        """
+    <summary>
+         Returns a Styles collection that represents all the styles
+             in the specified workbook. Read-only.
+        <example>The following code snippet illustrates how to get the Styles:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set styles
+        IStyles styles = workbook.Styles;
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Worksheets(self)->'IWorksheets':
+        """
+    <summary>
+        Returns a Sheets collection that represents all the worksheets
+            in the specified workbook. Read-only Sheets object.
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def HasMacros(self)->bool:
+        """
+    <summary>
+        True indicate that opened workbook contains VBA macros.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Palette(self)->List['Color']:
+        """
+    <summary>
+         Get Palette of colors which an Excel document can have. 
+             Here is a table of color indexes to places in the color tool box 
+             provided by Excel application:
+             --------------------------------------------
+             |  | 1  | 2  | 3  | 4  | 5  | 6  | 7  | 8  |
+             ---+----------------------------------------
+             |1 | 00 | 51 | 50 | 49 | 47 | 10 | 53 | 54 |
+             |2 | 08 | 45 | 11 | 09 | 13 | 04 | 46 | 15 |
+             |3 | 02 | 44 | 42 | 48 | 41 | 40 | 12 | 55 |
+             |4 | 06 | 43 | 05 | 03 | 07 | 32 | 52 | 14 |
+             |5 | 37 | 39 | 35 | 34 | 33 | 36 | 38 | 01 |
+             ---+----------------------------------------
+             |6 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 |
+             |7 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 |
+             --------------------------------------------
+        <example>The following code illustrates how to access the default colors of excel color palette:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Get colors
+        System.Drawing.Color[] colors = workbook.Colors;
+        //Get color
+        System.Drawing.Color color = colors[2];
+        //Set color
+        worksheet["B2"].Style.Color = color;
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+
+    @property
+    @abc.abstractmethod
+    def DisplayedTab(self)->int:
+        """
+    <summary>
+        Index of tab which will be displayed on document open.
+    </summary>
+        """
+        pass
+
+
+    @DisplayedTab.setter
+    @abc.abstractmethod
+    def DisplayedTab(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Charts(self)->'ICharts':
+        """
+    <summary>
+        Collection of the chart objects.
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ThrowOnUnknownNames(self)->bool:
+        """
+    <summary>
+        Indicates whether exception should be thrown when unknown
+            name was found in a formula.
+    </summary>
+        """
+        pass
+
+
+    @ThrowOnUnknownNames.setter
+    @abc.abstractmethod
+    def ThrowOnUnknownNames(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def DisableMacrosStart(self)->bool:
+        """
+    <summary>
+        This Property allows users to disable load of macros from 
+            document. Excel on file open will simply skip macros and will 
+            work as if document does not contain them. This options works
+            only when file contains macros (HasMacros property is True).
+    </summary>
+        """
+        pass
+
+
+    @DisableMacrosStart.setter
+    @abc.abstractmethod
+    def DisableMacrosStart(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def StandardFontSize(self)->float:
+        """
+    <summary>
+         Returns or sets the standard font size, in points. Read/write.
+        <example>The following code illustrates how to set the standard font size for the workbook:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet["B2"].Text = "Text";
+        //Set standard font
+        workbook.DefaultFontName = "Arial";
+        //Set standard font size
+        workbook.DefaultFontSize = 18;
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @StandardFontSize.setter
+    @abc.abstractmethod
+    def StandardFontSize(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def StandardFont(self)->str:
+        """
+    <summary>
+         Returns or sets the name of the standard font. Read/write String.
+        <example>The following code illustrates how to set the standard font for the workbook:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet["B2"].Text = "Text";
+        //Set standard font
+        workbook.DefaultFontName = "Arial";
+        //Set standard font size
+        workbook.DefaultFontSize = 18;
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @StandardFont.setter
+    @abc.abstractmethod
+    def StandardFont(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Allow3DRangesInDataValidation(self)->bool:
+        """
+    <summary>
+        Indicates whether to allow usage of 3D ranges in DataValidation
+            list property (MS Excel doesn't allow).
+    </summary>
+        """
+        pass
+
+
+    @Allow3DRangesInDataValidation.setter
+    @abc.abstractmethod
+    def Allow3DRangesInDataValidation(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RowSeparator(self)->str:
+        """
+    <summary>
+        Gets / sets row separator for array parsing.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ArgumentsSeparator(self)->str:
+        """
+    <summary>
+        Formula arguments separator.
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsRightToLeft(self)->bool:
+        """
+    <summary>
+        Indicates whether worksheet is displayed right to left.
+    </summary>
+        """
+        pass
+
+
+    @IsRightToLeft.setter
+    @abc.abstractmethod
+    def IsRightToLeft(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def DisplayWorkbookTabs(self)->bool:
+        """
+    <summary>
+        Indicates whether tabs are visible.
+    </summary>
+        """
+        pass
+
+
+    @DisplayWorkbookTabs.setter
+    @abc.abstractmethod
+    def DisplayWorkbookTabs(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def TabSheets(self)->'ITabSheets':
+        """
+    <summary>
+        Returns collection of tab sheets. Read-only.
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def DetectDateTimeInValue(self)->bool:
+        """
+    <summary>
+        Indicates whether library should try to detect string value passed to Value (and Value2)
+            property as DateTime. Setting this property to false can increase performance greatly for
+            such operations especially on Framework 1.0 and 1.1. Default value is true.
+    </summary>
+        """
+        pass
+
+
+    @DetectDateTimeInValue.setter
+    @abc.abstractmethod
+    def DetectDateTimeInValue(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ReadOnlyRecommended(self)->bool:
+        """
+    <summary>
+        True to display a message when the file is opened, recommending that the file be opened as read-only.
+    </summary>
+        """
+        pass
+
+
+    @ReadOnlyRecommended.setter
+    @abc.abstractmethod
+    def ReadOnlyRecommended(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PasswordToOpen(self)->str:
+        """
+    <summary>
+        Gets / sets password to encrypt document.
+    </summary>
+        """
+        pass
+
+
+    @PasswordToOpen.setter
+    @abc.abstractmethod
+    def PasswordToOpen(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def MaxRowCount(self)->int:
+        """
+    <summary>
+        Returns maximum row count for each worksheet in this workbook. Read-only.
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def MaxColumnCount(self)->int:
+        """
+    <summary>
+        Returns maximum column count for each worksheet in this workbook. Read-only.
+    </summary>
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Version(self)->'ExcelVersion':
+        """
+    <summary>
+        Gets / sets excel version.
+    </summary>
+        """
+        pass
+
+
+    @Version.setter
+    @abc.abstractmethod
+    def Version(self, value:'ExcelVersion'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def PivotCaches(self)->'XlsPivotCachesCollection':
+        """
+    <summary>
+        Returns pivot caches collection. Read-only.
+            <example>The following code snippet illustrates how to get pivot caches:
+            <code>
+        //Load workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Gets pivot caches collection
+        IPivotCaches pivotCaches = workbook.PivotCaches;
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Activate(self):
+        """
+    <summary>
+        Activates the first window associated with the workbook.
+    </summary>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def AddFont(self ,fontToAdd:'IFont')->'IFont':
+        """
+    <summary>
+        Adds font to the inner fonts collection and makes this font read-only.
+    </summary>
+    <param name="fontToAdd">Font to add.</param>
+    <returns>Added font.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Close(self ,SaveChanges:bool,Filename:str):
+        """
+    <summary>
+        Closes the object.
+    </summary>
+    <param name="SaveChanges">If True, all changes will be saved.</param>
+    <param name="Filename">Name of the file.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Close(self ,saveChanges:bool):
+        """
+    <summary>
+        Closes the object.
+    </summary>
+    <param name="saveChanges">If True, all changes will be saved.</param>
+        """
+        pass
+
+
+    @dispatch
+    @abc.abstractmethod
+    def Close(self):
+        """
+    <summary>
+        Closes the object without saving.
+    </summary>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def Close(self ,Filename:str):
+        """
+    <summary>
+        Closes the object and saves changes into specified file.
+    </summary>
+    <param name="Filename">
+            File name in which workbook will be saved if SaveChanges is true.
+    </param>
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def CopyToClipboard(self):
+        """
+    <summary>
+        Copies workbook to the clipboard.
+    </summary>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def CreateTemplateMarkersProcessor(self)->'IMarkersDesigner':
+        """
+    <summary>
+        Creates object that can be used for template markers processing.
+    </summary>
+    <returns>Object that can be used for template markers processing.</returns>
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Save(self):
+        """
+    <summary>
+        Saves changes to the specified workbook.
+            <example>This sample shows how to save changes to the specified workbook:
+            <code>
+        //Load workbook
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        //Save to file
+        workbook.Save();
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SaveAs(self ,Filename:str):
+        """
+    <summary>
+        Short variant of SaveAs method.
+    </summary>
+    <param name="Filename"></param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SaveAs(self ,Filename:str,saveType:ExcelSaveType):
+        """
+    <summary>
+        Short variant of SaveAs method.
+    </summary>
+    <param name="Filename">Name of the file.</param>
+    <param name="saveType">Excel save type.</param>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SaveAsHtml(self ,filename:str,saveOptions:'HTMLOptions'):
+        """
+    <summary>
+        Saves changes to the specified stream.
+    </summary>
+    <param name="filename">Name of the file.</param>
+    <param name="saveOptions">Save options in html.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SaveAs(self ,stream:Stream):
+        """
+    <summary>
+        Saves changes to the specified stream.
+    </summary>
+    <param name="stream">Stream that will receive workbook data.</param>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SaveAs(self ,stream:Stream,saveType:ExcelSaveType):
+        """
+    <summary>
+        Saves changes to the specified stream.
+    </summary>
+    <param name="stream">Stream that will receive workbook data.</param>
+    <param name="saveType">Type of the Excel file.</param>
+        """
+        pass
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def SaveAs(self ,fileName:str,saveType:ExcelSaveType,response:'HttpResponse'):
+#        """
+#    <summary>
+#        Saves changes to the specified HttpResponse.
+#    </summary>
+#    <param name="fileName">Name of the file in HttpResponse.</param>
+#    <param name="saveType">Type of the Excel file.</param>
+#    <param name="response">HttpResponse that will receive workbook's data.</param>
+#        """
+#        pass
+#
+
+
+#    @dispatch
+#
+#    @abc.abstractmethod
+#    def SaveAs(self ,fileName:str,response:'HttpResponse'):
+#        """
+#    <summary>
+#        Saves changes to the specified HttpResponse.
+#    </summary>
+#    <param name="fileName">Name of the file in HttpResponse.</param>
+#    <param name="response">HttpResponse to save in.</param>
+#        """
+#        pass
+#
+
+
+
+    @abc.abstractmethod
+    def SetPaletteColor(self ,index:int,color:'Color'):
+        """
+    <summary>
+         Set user color for specified element in Color table.
+        <example>The following code snippet illustrates how to set palette color:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set palette color
+        workbook.ChangePaletteColor(System.Drawing.Color.Red , 10);
+        //Set color
+        worksheet["B2"].Style.Color = workbook.Colors[10];
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="index">Index of Color in array.</param>
+    <param name="color">New color which must be set.</param>
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def ResetPalette(self):
+        """
+    <summary>
+         Recover palette to default values.
+        <example>The following code snippets illustrates how to reset the palette:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Get colors
+        System.Drawing.Color[] colors = workbook.Colors;
+        //Check color
+        Console.WriteLine(colors[2].Name);
+        //Set color
+        colors[2] = System.Drawing.Color.Yellow;
+        //Reset palette
+        workbook.ResetPalette();
+        //Check color
+        Console.WriteLine(workbook.Colors[2].Name);
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GetPaletteColor(self ,color:'ExcelColors')->'Color':
+        """
+    <summary>
+         Method return Color object from workbook palette by its index.
+        <example>The following code illustrates how to get the RGB color value for the specified color from ExcelColors enumeration:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Get color
+        System.Drawing.Color color = workbook.GetPaletteColor(ExcelColors.Red);
+        //Set color
+        worksheet["B2"].Style.Color = workbook.Colors[10];
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="color">Index from palette array.</param>
+    <returns>RGB Color.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def GetNearestColor(self ,color:Color)->ExcelColors:
+        """
+    <summary>
+         Gets the nearest color to the specified Color structure
+             from Workbook palette.
+        <example>The following code illustrates how to get the indexed color from ExcelColors for the given color from Color structure:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Get color
+        ExcelColors color = workbook.GetMatchingColor(System.Drawing.Color.Red);
+        //Set color
+        worksheet["B2"].Style.KnownColor = color;
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="color">System color.</param>
+    <returns>Color index from workbook palette.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def GetNearestColor(self ,r:int,g:int,b:int)->ExcelColors:
+        """
+    <summary>
+         Gets the nearest color to the specified by red, green, and blue 
+             values color from Workbook palette.
+        <example>The following code illustrates how to get the indexed color from ExcelColors for the given color from Color structure:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Get color
+        ExcelColors color = workbook.GetMatchingColor(255, 0, 0);
+        //Set color
+        worksheet["B2"].Style.KnownColor = color;
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="r">Red component of the color.</param>
+    <param name="g">Green component of the color.</param>
+    <param name="b">Blue component of the color.</param>
+    <returns>Color index from workbook palette.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SetColorOrGetNearest(self ,color:Color)->ExcelColors:
+        """
+    <summary>
+        If there is at least one free color, define a new color;
+            if not, search for the closest one.
+    </summary>
+    <param name="color"></param>
+    <returns>Color index from workbook palette.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def SetColorOrGetNearest(self ,r:int,g:int,b:int)->ExcelColors:
+        """
+    <summary>
+        If there is at least one free color, define a new color;
+            if not, search for the closest one.
+    </summary>
+    <param name="r">Red component of the color.</param>
+    <param name="g">Green component of the color.</param>
+    <param name="b">Blue component of the color.</param>
+    <returns>Color index from workbook palette.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def CreateFont(self)->IFont:
+        """
+    <summary>
+         Method to create a font object and register it in the workbook.
+        <example>The following code illustrates how to create IFont object:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        IRichTextString richText = worksheet["B2"].RichText;
+        //Create font
+        IFont font = workbook.CreateFont();
+        //Set color
+        font.Color = Color.Red;
+        //Set text
+        richText.Text = "Sample";
+        //Set font
+        richText.SetFont(0, 5, font);
+        //Save to file
+        workbook.SaveToFile("CellFormats.xlsx");
+        </code>
+        </example>
+    </summary>
+    <returns>Newly created font.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def CreateFont(self ,baseFont:IFont)->IFont:
+        """
+    <summary>
+        Method that creates font object based on another font object
+            and registers it in the workbook.
+    </summary>
+    <param name="baseFont">Base font for the new one.</param>
+    <returns>Newly created font.</returns>
+        """
+        pass
+
+
+    @dispatch
+
+    @abc.abstractmethod
+    def CreateFont(self ,nativeFont:Font)->IFont:
+        """
+    <summary>
+        Method creates a font object based on native font and register it in the workbook.
+    </summary>]
+                <param name="nativeFont">Native font to get settings from.</param>    <returns>Newly created font.</returns>
+        """
+        pass
+
+

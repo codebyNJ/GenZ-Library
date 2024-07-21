@@ -1,0 +1,74 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ExportTableOptions (SpireObject) :
+    """
+
+    """
+    @property
+    def KeepDataFormat(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ExportTableOptions_get_KeepDataFormat.argtypes=[c_void_p]
+        GetDllLibXls().ExportTableOptions_get_KeepDataFormat.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ExportTableOptions_get_KeepDataFormat, self.Ptr)
+        return ret
+
+    @KeepDataFormat.setter
+    def KeepDataFormat(self, value:bool):
+        GetDllLibXls().ExportTableOptions_set_KeepDataFormat.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ExportTableOptions_set_KeepDataFormat, self.Ptr, value)
+
+    @property
+    def ExportColumnNames(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ExportTableOptions_get_ExportColumnNames.argtypes=[c_void_p]
+        GetDllLibXls().ExportTableOptions_get_ExportColumnNames.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ExportTableOptions_get_ExportColumnNames, self.Ptr)
+        return ret
+
+    @ExportColumnNames.setter
+    def ExportColumnNames(self, value:bool):
+        GetDllLibXls().ExportTableOptions_set_ExportColumnNames.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ExportTableOptions_set_ExportColumnNames, self.Ptr, value)
+
+    @property
+
+    def RenameStrategy(self)->'RenameStrategy':
+        """
+
+        """
+        GetDllLibXls().ExportTableOptions_get_RenameStrategy.argtypes=[c_void_p]
+        GetDllLibXls().ExportTableOptions_get_RenameStrategy.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExportTableOptions_get_RenameStrategy, self.Ptr)
+        objwraped = RenameStrategy(ret)
+        return objwraped
+
+    @RenameStrategy.setter
+    def RenameStrategy(self, value:'RenameStrategy'):
+        GetDllLibXls().ExportTableOptions_set_RenameStrategy.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ExportTableOptions_set_RenameStrategy, self.Ptr, value.value)
+
+    @property
+    def ComputedFormulaValue(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ExportTableOptions_get_ComputedFormulaValue.argtypes=[c_void_p]
+        GetDllLibXls().ExportTableOptions_get_ComputedFormulaValue.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ExportTableOptions_get_ComputedFormulaValue, self.Ptr)
+        return ret
+
+    @ComputedFormulaValue.setter
+    def ComputedFormulaValue(self, value:bool):
+        GetDllLibXls().ExportTableOptions_set_ComputedFormulaValue.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ExportTableOptions_set_ComputedFormulaValue, self.Ptr, value)
+

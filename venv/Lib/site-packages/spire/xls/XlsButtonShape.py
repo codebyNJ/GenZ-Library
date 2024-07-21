@@ -1,0 +1,137 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsButtonShape (  XlsShape, IShape, ITextBox) :
+    """
+
+    """
+    @property
+
+    def Text(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsButtonShape_get_Text.argtypes=[c_void_p]
+        GetDllLibXls().XlsButtonShape_get_Text.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsButtonShape_get_Text, self.Ptr))
+        return ret
+
+
+    @Text.setter
+    def Text(self, value:str):
+        GetDllLibXls().XlsButtonShape_set_Text.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsButtonShape_set_Text, self.Ptr, value)
+
+    @property
+    def IsTextLocked(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsButtonShape_get_IsTextLocked.argtypes=[c_void_p]
+        GetDllLibXls().XlsButtonShape_get_IsTextLocked.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsButtonShape_get_IsTextLocked, self.Ptr)
+        return ret
+
+    @IsTextLocked.setter
+    def IsTextLocked(self, value:bool):
+        GetDllLibXls().XlsButtonShape_set_IsTextLocked.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsButtonShape_set_IsTextLocked, self.Ptr, value)
+
+    @property
+
+    def TextRotation(self)->'TextRotationType':
+        """
+
+        """
+        GetDllLibXls().XlsButtonShape_get_TextRotation.argtypes=[c_void_p]
+        GetDllLibXls().XlsButtonShape_get_TextRotation.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsButtonShape_get_TextRotation, self.Ptr)
+        objwraped = TextRotationType(ret)
+        return objwraped
+
+    @TextRotation.setter
+    def TextRotation(self, value:'TextRotationType'):
+        GetDllLibXls().XlsButtonShape_set_TextRotation.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsButtonShape_set_TextRotation, self.Ptr, value.value)
+
+    @property
+
+    def RichText(self)->'IRichTextString':
+        """
+
+        """
+        GetDllLibXls().XlsButtonShape_get_RichText.argtypes=[c_void_p]
+        GetDllLibXls().XlsButtonShape_get_RichText.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsButtonShape_get_RichText, self.Ptr)
+        ret = None if intPtr==None else RichTextObject(intPtr)
+        return ret
+
+
+    @property
+
+    def HAlignment(self)->'CommentHAlignType':
+        """
+
+        """
+        GetDllLibXls().XlsButtonShape_get_HAlignment.argtypes=[c_void_p]
+        GetDllLibXls().XlsButtonShape_get_HAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsButtonShape_get_HAlignment, self.Ptr)
+        objwraped = CommentHAlignType(ret)
+        return objwraped
+
+    @HAlignment.setter
+    def HAlignment(self, value:'CommentHAlignType'):
+        GetDllLibXls().XlsButtonShape_set_HAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsButtonShape_set_HAlignment, self.Ptr, value.value)
+
+    @property
+
+    def VAlignment(self)->'CommentVAlignType':
+        """
+
+        """
+        GetDllLibXls().XlsButtonShape_get_VAlignment.argtypes=[c_void_p]
+        GetDllLibXls().XlsButtonShape_get_VAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsButtonShape_get_VAlignment, self.Ptr)
+        objwraped = CommentVAlignType(ret)
+        return objwraped
+
+    @VAlignment.setter
+    def VAlignment(self, value:'CommentVAlignType'):
+        GetDllLibXls().XlsButtonShape_set_VAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsButtonShape_set_VAlignment, self.Ptr, value.value)
+
+    @property
+
+    def ShapeType(self)->'ExcelShapeType':
+        """
+
+        """
+        GetDllLibXls().XlsButtonShape_get_ShapeType.argtypes=[c_void_p]
+        GetDllLibXls().XlsButtonShape_get_ShapeType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsButtonShape_get_ShapeType, self.Ptr)
+        objwraped = ExcelShapeType(ret)
+        return objwraped
+
+#
+#    def Clone(self ,parent:'SpireObject',hashNewNames:'Dictionary2',dicFontIndexes:'Dictionary2',addToCollections:bool)->'IShape':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrhashNewNames:c_void_p = hashNewNames.Ptr
+#        intPtrdicFontIndexes:c_void_p = dicFontIndexes.Ptr
+#
+#        GetDllLibXls().XlsButtonShape_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p,c_bool]
+#        GetDllLibXls().XlsButtonShape_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsButtonShape_Clone, self.Ptr, intPtrparent,intPtrhashNewNames,intPtrdicFontIndexes,addToCollections)
+#        ret = None if intPtr==None else IShape(intPtr)
+#        return ret
+#
+
+

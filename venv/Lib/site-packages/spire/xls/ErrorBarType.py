@@ -1,0 +1,20 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ErrorBarType(Enum):
+    """
+    <summary>
+        Error-bar type.
+    </summary>
+    """
+    Percentage = 1
+    Fixed = 2
+    StandardDeviation = 3
+    Custom = 4
+    StandardError = 5
+

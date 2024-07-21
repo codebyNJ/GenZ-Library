@@ -1,0 +1,159 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsDataValidationCollection (  IDataValidationCollection) :
+    """
+
+    """
+    @property
+
+    def ParentTable(self)->'IDataValidationTable':
+        """
+
+        """
+        GetDllLibXls().XlsDataValidationCollection_get_ParentTable.argtypes=[c_void_p]
+        GetDllLibXls().XlsDataValidationCollection_get_ParentTable.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsDataValidationCollection_get_ParentTable, self.Ptr)
+        ret = None if intPtr==None else IDataValidationTable(intPtr)
+        return ret
+
+
+    @property
+
+    def Workbook(self)->'Workbook':
+        """
+
+        """
+        GetDllLibXls().XlsDataValidationCollection_get_Workbook.argtypes=[c_void_p]
+        GetDllLibXls().XlsDataValidationCollection_get_Workbook.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsDataValidationCollection_get_Workbook, self.Ptr)
+        ret = None if intPtr==None else Workbook(intPtr)
+        return ret
+
+
+    @property
+
+    def Worksheet(self)->'Worksheet':
+        """
+
+        """
+        GetDllLibXls().XlsDataValidationCollection_get_Worksheet.argtypes=[c_void_p]
+        GetDllLibXls().XlsDataValidationCollection_get_Worksheet.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsDataValidationCollection_get_Worksheet, self.Ptr)
+        ret = None if intPtr==None else Worksheet(intPtr)
+        return ret
+
+
+
+    def get_Item(self ,index:int)->'IDataValidation':
+        """
+
+        """
+        
+        GetDllLibXls().XlsDataValidationCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsDataValidationCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsDataValidationCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsValidation(intPtr)
+        return ret
+
+
+    @property
+    def ShapesCount(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsDataValidationCollection_get_ShapesCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsDataValidationCollection_get_ShapesCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsDataValidationCollection_get_ShapesCount, self.Ptr)
+        return ret
+
+    @property
+    def PromptBoxHPosition(self)->int:
+        """
+    <summary>
+        Vertical position of the prompt box.
+    </summary>
+        """
+        GetDllLibXls().XlsDataValidationCollection_get_PromptBoxHPosition.argtypes=[c_void_p]
+        GetDllLibXls().XlsDataValidationCollection_get_PromptBoxHPosition.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsDataValidationCollection_get_PromptBoxHPosition, self.Ptr)
+        return ret
+
+    @PromptBoxHPosition.setter
+    def PromptBoxHPosition(self, value:int):
+        GetDllLibXls().XlsDataValidationCollection_set_PromptBoxHPosition.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsDataValidationCollection_set_PromptBoxHPosition, self.Ptr, value)
+
+    @property
+    def PromptBoxVPosition(self)->int:
+        """
+    <summary>
+        Vertical position of the prompt box.
+    </summary>
+        """
+        GetDllLibXls().XlsDataValidationCollection_get_PromptBoxVPosition.argtypes=[c_void_p]
+        GetDllLibXls().XlsDataValidationCollection_get_PromptBoxVPosition.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsDataValidationCollection_get_PromptBoxVPosition, self.Ptr)
+        return ret
+
+    @PromptBoxVPosition.setter
+    def PromptBoxVPosition(self, value:int):
+        GetDllLibXls().XlsDataValidationCollection_set_PromptBoxVPosition.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsDataValidationCollection_set_PromptBoxVPosition, self.Ptr, value)
+
+    @property
+    def IsPromptBoxVisible(self)->bool:
+        """
+    <summary>
+        Indicates whehter prompt box is visible..
+    </summary>
+        """
+        GetDllLibXls().XlsDataValidationCollection_get_IsPromptBoxVisible.argtypes=[c_void_p]
+        GetDllLibXls().XlsDataValidationCollection_get_IsPromptBoxVisible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsDataValidationCollection_get_IsPromptBoxVisible, self.Ptr)
+        return ret
+
+    @IsPromptBoxVisible.setter
+    def IsPromptBoxVisible(self, value:bool):
+        GetDllLibXls().XlsDataValidationCollection_set_IsPromptBoxVisible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsDataValidationCollection_set_IsPromptBoxVisible, self.Ptr, value)
+
+    @property
+    def IsPromptBoxPositionFixed(self)->bool:
+        """
+    <summary>
+        Indicates whehter prompt box has fixed position..
+    </summary>
+        """
+        GetDllLibXls().XlsDataValidationCollection_get_IsPromptBoxPositionFixed.argtypes=[c_void_p]
+        GetDllLibXls().XlsDataValidationCollection_get_IsPromptBoxPositionFixed.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsDataValidationCollection_get_IsPromptBoxPositionFixed, self.Ptr)
+        return ret
+
+    @IsPromptBoxPositionFixed.setter
+    def IsPromptBoxPositionFixed(self, value:bool):
+        GetDllLibXls().XlsDataValidationCollection_set_IsPromptBoxPositionFixed.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsDataValidationCollection_set_IsPromptBoxPositionFixed, self.Ptr, value)
+
+#
+#    def Remove(self ,rectangles:'Rectangle[]'):
+#        """
+#
+#        """
+#        #arrayrectangles:ArrayTyperectangles = ""
+#        countrectangles = len(rectangles)
+#        ArrayTyperectangles = c_void_p * countrectangles
+#        arrayrectangles = ArrayTyperectangles()
+#        for i in range(0, countrectangles):
+#            arrayrectangles[i] = rectangles[i].Ptr
+#
+#
+#        GetDllLibXls().XlsDataValidationCollection_Remove.argtypes=[c_void_p ,ArrayTyperectangles]
+#        CallCFunction(GetDllLibXls().XlsDataValidationCollection_Remove, self.Ptr, arrayrectangles)
+
+

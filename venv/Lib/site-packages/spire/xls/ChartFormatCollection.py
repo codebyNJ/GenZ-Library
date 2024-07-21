@@ -1,0 +1,59 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartFormatCollection (  XlsChartFormatCollection) :
+    """
+
+    """
+
+    def Add(self ,format:'ChartFormat'):
+        """
+
+        """
+        intPtrformat:c_void_p = format.Ptr
+
+        GetDllLibXls().ChartFormatCollection_Add.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().ChartFormatCollection_Add, self.Ptr, intPtrformat)
+
+
+    def GetFormat(self ,index:int)->'ChartFormat':
+        """
+
+        """
+        
+        GetDllLibXls().ChartFormatCollection_GetFormat.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ChartFormatCollection_GetFormat.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartFormatCollection_GetFormat, self.Ptr, index)
+        ret = None if intPtr==None else ChartFormat(intPtr)
+        return ret
+
+
+
+    def Remove(self ,index:int):
+        """
+
+        """
+        
+        GetDllLibXls().ChartFormatCollection_Remove.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().ChartFormatCollection_Remove, self.Ptr, index)
+
+
+    def get_Item(self ,index:int)->'ChartFormat':
+        """
+    <summary>
+        Gets chart format.
+    </summary>
+        """
+        
+        GetDllLibXls().ChartFormatCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ChartFormatCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartFormatCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else ChartFormat(intPtr)
+        return ret
+
+

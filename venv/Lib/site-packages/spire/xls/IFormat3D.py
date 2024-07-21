@@ -1,0 +1,252 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IFormat3D (abc.ABC) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def BevelTopType(self)->'XLSXChartBevelType':
+        """
+
+        """
+        pass
+
+
+    @BevelTopType.setter
+    @abc.abstractmethod
+    def BevelTopType(self, value:'XLSXChartBevelType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BevelBottomType(self)->'XLSXChartBevelType':
+        """
+
+        """
+        pass
+
+
+    @BevelBottomType.setter
+    @abc.abstractmethod
+    def BevelBottomType(self, value:'XLSXChartBevelType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def MaterialType(self)->'XLSXChartMaterialType':
+        """
+
+        """
+        pass
+
+
+    @MaterialType.setter
+    @abc.abstractmethod
+    def MaterialType(self, value:'XLSXChartMaterialType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LightingType(self)->'XLSXChartLightingType':
+        """
+
+        """
+        pass
+
+
+    @LightingType.setter
+    @abc.abstractmethod
+    def LightingType(self, value:'XLSXChartLightingType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def BevelTopWidth(self)->float:
+        """
+
+        """
+        pass
+
+
+    @BevelTopWidth.setter
+    @abc.abstractmethod
+    def BevelTopWidth(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def BevelTopHeight(self)->float:
+        """
+
+        """
+        pass
+
+
+    @BevelTopHeight.setter
+    @abc.abstractmethod
+    def BevelTopHeight(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def BevelBottomWidth(self)->float:
+        """
+
+        """
+        pass
+
+
+    @BevelBottomWidth.setter
+    @abc.abstractmethod
+    def BevelBottomWidth(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def BevelBottomHeight(self)->float:
+        """
+
+        """
+        pass
+
+
+    @BevelBottomHeight.setter
+    @abc.abstractmethod
+    def BevelBottomHeight(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ContourWidth(self)->float:
+        """
+
+        """
+        pass
+
+
+    @ContourWidth.setter
+    @abc.abstractmethod
+    def ContourWidth(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ExtrusionHeight(self)->float:
+        """
+
+        """
+        pass
+
+
+    @ExtrusionHeight.setter
+    @abc.abstractmethod
+    def ExtrusionHeight(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ContourColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @ContourColor.setter
+    @abc.abstractmethod
+    def ContourColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ExtrusionColor(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @ExtrusionColor.setter
+    @abc.abstractmethod
+    def ExtrusionColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def LightingAngle(self)->float:
+        """
+
+        """
+        pass
+
+
+    @LightingAngle.setter
+    @abc.abstractmethod
+    def LightingAngle(self, value:float):
+        """
+
+        """
+        pass
+
+

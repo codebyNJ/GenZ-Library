@@ -1,0 +1,116 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsBorderArrayWrapper (  XlsObject, IBorder) :
+    """
+
+    """
+#
+#    def GetThemeColor(self ,type:'ThemeColorType&',tint:'Double&')->bool:
+#        """
+#
+#        """
+#        intPtrtype:c_void_p = type.Ptr
+#        intPtrtint:c_void_p = tint.Ptr
+#
+#        GetDllLibXls().XlsBorderArrayWrapper_GetThemeColor.argtypes=[c_void_p ,c_void_p,c_void_p]
+#        GetDllLibXls().XlsBorderArrayWrapper_GetThemeColor.restype=c_bool
+#        ret = CallCFunction(GetDllLibXls().XlsBorderArrayWrapper_GetThemeColor, self.Ptr, intPtrtype,intPtrtint)
+#        return ret
+
+
+
+    def SetThemeColor(self ,type:'ThemeColorType',tint:float):
+        """
+
+        """
+        enumtype:c_int = type.value
+
+        GetDllLibXls().XlsBorderArrayWrapper_SetThemeColor.argtypes=[c_void_p ,c_int,c_double]
+        CallCFunction(GetDllLibXls().XlsBorderArrayWrapper_SetThemeColor, self.Ptr, enumtype,tint)
+
+    @property
+
+    def KnownColor(self)->'ExcelColors':
+        """
+
+        """
+        GetDllLibXls().XlsBorderArrayWrapper_get_KnownColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsBorderArrayWrapper_get_KnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBorderArrayWrapper_get_KnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @KnownColor.setter
+    def KnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().XlsBorderArrayWrapper_set_KnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBorderArrayWrapper_set_KnownColor, self.Ptr, value.value)
+
+    @property
+
+    def OColor(self)->'OColor':
+        """
+
+        """
+        GetDllLibXls().XlsBorderArrayWrapper_get_OColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsBorderArrayWrapper_get_OColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsBorderArrayWrapper_get_OColor, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def Color(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().XlsBorderArrayWrapper_get_Color.argtypes=[c_void_p]
+        GetDllLibXls().XlsBorderArrayWrapper_get_Color.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsBorderArrayWrapper_get_Color, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @Color.setter
+    def Color(self, value:'Color'):
+        GetDllLibXls().XlsBorderArrayWrapper_set_Color.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsBorderArrayWrapper_set_Color, self.Ptr, value.Ptr)
+
+    @property
+
+    def LineStyle(self)->'LineStyleType':
+        """
+
+        """
+        GetDllLibXls().XlsBorderArrayWrapper_get_LineStyle.argtypes=[c_void_p]
+        GetDllLibXls().XlsBorderArrayWrapper_get_LineStyle.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsBorderArrayWrapper_get_LineStyle, self.Ptr)
+        objwraped = LineStyleType(ret)
+        return objwraped
+
+    @LineStyle.setter
+    def LineStyle(self, value:'LineStyleType'):
+        GetDllLibXls().XlsBorderArrayWrapper_set_LineStyle.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsBorderArrayWrapper_set_LineStyle, self.Ptr, value.value)
+
+    @property
+    def ShowDiagonalLine(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsBorderArrayWrapper_get_ShowDiagonalLine.argtypes=[c_void_p]
+        GetDllLibXls().XlsBorderArrayWrapper_get_ShowDiagonalLine.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsBorderArrayWrapper_get_ShowDiagonalLine, self.Ptr)
+        return ret
+
+    @ShowDiagonalLine.setter
+    def ShowDiagonalLine(self, value:bool):
+        GetDllLibXls().XlsBorderArrayWrapper_set_ShowDiagonalLine.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsBorderArrayWrapper_set_ShowDiagonalLine, self.Ptr, value)
+

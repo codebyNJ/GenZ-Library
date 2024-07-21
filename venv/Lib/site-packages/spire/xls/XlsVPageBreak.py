@@ -1,0 +1,98 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsVPageBreak (  XlsObject) :
+    """
+    <summary>
+        Represents a vertical page break.
+    </summary>
+    """
+    @property
+
+    def Type(self)->'PageBreakType':
+        """
+    <summary>
+        Type of the page break.
+    </summary>
+        """
+        GetDllLibXls().XlsVPageBreak_get_Type.argtypes=[c_void_p]
+        GetDllLibXls().XlsVPageBreak_get_Type.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsVPageBreak_get_Type, self.Ptr)
+        objwraped = PageBreakType(ret)
+        return objwraped
+
+    @Type.setter
+    def Type(self, value:'PageBreakType'):
+        GetDllLibXls().XlsVPageBreak_set_Type.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsVPageBreak_set_Type, self.Ptr, value.value)
+
+    @property
+    def Column(self)->int:
+        """
+    <summary>
+        Gets the column index of the vertical page break. 
+    </summary>
+        """
+        GetDllLibXls().XlsVPageBreak_get_Column.argtypes=[c_void_p]
+        GetDllLibXls().XlsVPageBreak_get_Column.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsVPageBreak_get_Column, self.Ptr)
+        return ret
+
+    @Column.setter
+    def Column(self, value:int):
+        GetDllLibXls().XlsVPageBreak_set_Column.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsVPageBreak_set_Column, self.Ptr, value)
+
+    @property
+    def StartRow(self)->int:
+        """
+    <summary>
+        Gets the start row index of the vertical page break. 
+    </summary>
+        """
+        GetDllLibXls().XlsVPageBreak_get_StartRow.argtypes=[c_void_p]
+        GetDllLibXls().XlsVPageBreak_get_StartRow.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsVPageBreak_get_StartRow, self.Ptr)
+        return ret
+
+    @StartRow.setter
+    def StartRow(self, value:int):
+        GetDllLibXls().XlsVPageBreak_set_StartRow.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsVPageBreak_set_StartRow, self.Ptr, value)
+
+    @property
+    def EndRow(self)->int:
+        """
+    <summary>
+        Gets the end row index of the vertical page break. 
+    </summary>
+        """
+        GetDllLibXls().XlsVPageBreak_get_EndRow.argtypes=[c_void_p]
+        GetDllLibXls().XlsVPageBreak_get_EndRow.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsVPageBreak_get_EndRow, self.Ptr)
+        return ret
+
+    @EndRow.setter
+    def EndRow(self, value:int):
+        GetDllLibXls().XlsVPageBreak_set_EndRow.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsVPageBreak_set_EndRow, self.Ptr, value)
+
+
+    def Clone(self ,parent:'SpireObject')->'XlsVPageBreak':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsVPageBreak_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsVPageBreak_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsVPageBreak_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else XlsVPageBreak(intPtr)
+        return ret
+
+

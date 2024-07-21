@@ -1,0 +1,21 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XLSXChartPrespectiveType(Enum):
+    """
+    <summary>
+        Indicates the Perspective shadow Values
+    </summary>
+    """
+    none = 0
+    DiagonalUpperRight = 1
+    DiagonalLowerRight = 2
+    DiagonalUpperLeft = 3
+    DiagonalLowerLeft = 4
+    Below = 5
+

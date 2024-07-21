@@ -1,0 +1,56 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IChartPageSetup (  IPageSetupBase, IExcelApplication) :
+    """
+    <summary>
+        Represent page setup options for the chart sheet.
+    </summary>
+    """
+    @property
+    @abc.abstractmethod
+    def FitToPagesTall(self)->bool:
+        """
+    <summary>
+        Returns or sets the number of pages tall the worksheet will be scaled
+            to when it is printed. Applies only to worksheets. Read / write Boolean.
+    </summary>
+        """
+        pass
+
+
+    @FitToPagesTall.setter
+    @abc.abstractmethod
+    def FitToPagesTall(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def FitToPagesWide(self)->bool:
+        """
+    <summary>
+        Returns or sets the number of pages wide the worksheet will be scaled
+            to when it is printed. Applies only to worksheets. Read / write Boolean.
+    </summary>
+        """
+        pass
+
+
+    @FitToPagesWide.setter
+    @abc.abstractmethod
+    def FitToPagesWide(self, value:bool):
+        """
+
+        """
+        pass
+
+

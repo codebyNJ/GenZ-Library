@@ -1,0 +1,88 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ReferRangeArea (SpireObject) :
+    """
+
+    """
+    @property
+    def IsExternalLink(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ReferRangeArea_get_IsExternalLink.argtypes=[c_void_p]
+        GetDllLibXls().ReferRangeArea_get_IsExternalLink.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ReferRangeArea_get_IsExternalLink, self.Ptr)
+        return ret
+
+    @property
+
+    def ExternalFileName(self)->str:
+        """
+
+        """
+        GetDllLibXls().ReferRangeArea_get_ExternalFileName.argtypes=[c_void_p]
+        GetDllLibXls().ReferRangeArea_get_ExternalFileName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ReferRangeArea_get_ExternalFileName, self.Ptr))
+        return ret
+
+
+    @property
+
+    def SheetName(self)->str:
+        """
+
+        """
+        GetDllLibXls().ReferRangeArea_get_SheetName.argtypes=[c_void_p]
+        GetDllLibXls().ReferRangeArea_get_SheetName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ReferRangeArea_get_SheetName, self.Ptr))
+        return ret
+
+
+    @property
+    def EndColumn(self)->int:
+        """
+
+        """
+        GetDllLibXls().ReferRangeArea_get_EndColumn.argtypes=[c_void_p]
+        GetDllLibXls().ReferRangeArea_get_EndColumn.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ReferRangeArea_get_EndColumn, self.Ptr)
+        return ret
+
+    @property
+    def StartColumn(self)->int:
+        """
+
+        """
+        GetDllLibXls().ReferRangeArea_get_StartColumn.argtypes=[c_void_p]
+        GetDllLibXls().ReferRangeArea_get_StartColumn.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ReferRangeArea_get_StartColumn, self.Ptr)
+        return ret
+
+    @property
+    def EndRow(self)->int:
+        """
+
+        """
+        GetDllLibXls().ReferRangeArea_get_EndRow.argtypes=[c_void_p]
+        GetDllLibXls().ReferRangeArea_get_EndRow.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ReferRangeArea_get_EndRow, self.Ptr)
+        return ret
+
+    @property
+    def StartRow(self)->int:
+        """
+
+        """
+        GetDllLibXls().ReferRangeArea_get_StartRow.argtypes=[c_void_p]
+        GetDllLibXls().ReferRangeArea_get_StartRow.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ReferRangeArea_get_StartRow, self.Ptr)
+        return ret
+
+class ListReferRangeAreas (IList[ReferRangeArea]):
+    pass

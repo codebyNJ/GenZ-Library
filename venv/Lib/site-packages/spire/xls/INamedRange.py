@@ -1,0 +1,162 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class INamedRange (  IExcelApplication) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Index(self)->int:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Name(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Name.setter
+    @abc.abstractmethod
+    def Name(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def NameLocal(self)->str:
+        """
+
+        """
+        pass
+
+
+    @NameLocal.setter
+    @abc.abstractmethod
+    def NameLocal(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RefersToRange(self)->'IXLSRange':
+        """
+
+        """
+        pass
+
+
+    @RefersToRange.setter
+    @abc.abstractmethod
+    def RefersToRange(self, value:'IXLSRange'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Value(self)->str:
+        """
+
+        """
+        pass
+
+
+    @Value.setter
+    @abc.abstractmethod
+    def Value(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Visible(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @Visible.setter
+    @abc.abstractmethod
+    def Visible(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsLocal(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ValueR1C1(self)->str:
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Worksheet(self)->'IWorksheet':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Scope(self)->str:
+        """
+
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Delete(self):
+        """
+
+        """
+        pass
+
+

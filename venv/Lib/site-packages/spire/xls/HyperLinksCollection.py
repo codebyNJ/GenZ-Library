@@ -1,0 +1,72 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from spire.xls.XlsHyperLinksCollection import *
+from ctypes import *
+import abc
+
+class HyperLinksCollection (  XlsHyperLinksCollection) :
+    """
+
+    """
+
+    def get_Item(self ,index:int)->'HyperLink':
+        """
+
+        """
+        
+        GetDllLibXls().HyperLinksCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().HyperLinksCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().HyperLinksCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else HyperLink(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,range:CellRange)->HyperLink:
+        """
+
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().HyperLinksCollection_Add.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().HyperLinksCollection_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().HyperLinksCollection_Add, self.Ptr, intPtrrange)
+        ret = None if intPtr==None else HyperLink(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,link:HyperLink)->int:
+        """
+
+        """
+        intPtrlink:c_void_p = link.Ptr
+
+        GetDllLibXls().HyperLinksCollection_AddL.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().HyperLinksCollection_AddL.restype=c_int
+        ret = CallCFunction(GetDllLibXls().HyperLinksCollection_AddL, self.Ptr, intPtrlink)
+        return ret
+
+
+    def GetRangeHyperlinks(self ,range:'CellRange')->'HyperLinksCollection':
+        """
+    <summary>
+        Gets hyperlinks for the specified range.
+    </summary>
+    <param name="range">range object.</param>
+    <returns></returns>
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().HyperLinksCollection_GetRangeHyperlinks.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().HyperLinksCollection_GetRangeHyperlinks.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().HyperLinksCollection_GetRangeHyperlinks, self.Ptr, intPtrrange)
+        ret = None if intPtr==None else HyperLinksCollection(intPtr)
+        return ret
+
+

@@ -1,0 +1,36 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsObject (  SpireObject, IExcelApplication) :
+    """
+
+    """
+    @property
+
+    def Parent(self)->'SpireObject':
+        """
+    <summary>
+        Reference to Parent object. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsObject_get_Parent.argtypes=[c_void_p]
+        GetDllLibXls().XlsObject_get_Parent.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsObject_get_Parent, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    def Dispose(self):
+        """
+    <summary>
+        Dispose object and free resources.
+    </summary>
+        """
+        GetDllLibXls().XlsObject_Dispose.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsObject_Dispose, self.Ptr)
+

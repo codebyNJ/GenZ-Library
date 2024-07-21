@@ -1,0 +1,156 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from spire.xls.XlsChartLegendArea import *
+from ctypes import *
+import abc
+
+class XlsChartLegendEntry (  XlsObject, IChartLegendEntry) :
+    """
+
+    """
+    @property
+    def Index(self)->int:
+        """
+    <summary>
+        Represents index in collection.
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegendEntry_get_Index.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegendEntry_get_Index.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartLegendEntry_get_Index, self.Ptr)
+        return ret
+
+    @Index.setter
+    def Index(self, value:int):
+        GetDllLibXls().XlsChartLegendEntry_set_Index.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartLegendEntry_set_Index, self.Ptr, value)
+
+    @property
+    def LegendEntityIndex(self)->int:
+        """
+    <summary>
+        Legend-entry index.
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegendEntry_get_LegendEntityIndex.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegendEntry_get_LegendEntityIndex.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartLegendEntry_get_LegendEntityIndex, self.Ptr)
+        return ret
+
+    @LegendEntityIndex.setter
+    def LegendEntityIndex(self, value:int):
+        GetDllLibXls().XlsChartLegendEntry_set_LegendEntityIndex.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartLegendEntry_set_LegendEntityIndex, self.Ptr, value)
+
+    @property
+
+    def TextArea(self)->'IChartTextArea':
+        """
+
+        """
+        GetDllLibXls().XlsChartLegendEntry_get_TextArea.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegendEntry_get_TextArea.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartLegendEntry_get_TextArea, self.Ptr)
+        ret = None if intPtr==None else XlsChartLegendArea(intPtr)
+        return ret
+
+
+    @property
+    def IsDeleted(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartLegendEntry_get_IsDeleted.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegendEntry_get_IsDeleted.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartLegendEntry_get_IsDeleted, self.Ptr)
+        return ret
+
+    @IsDeleted.setter
+    def IsDeleted(self, value:bool):
+        GetDllLibXls().XlsChartLegendEntry_set_IsDeleted.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartLegendEntry_set_IsDeleted, self.Ptr, value)
+
+    @property
+    def IsFormatted(self)->bool:
+        """
+    <summary>
+        Indicates whether the legend entry has been formatted.
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegendEntry_get_IsFormatted.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegendEntry_get_IsFormatted.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartLegendEntry_get_IsFormatted, self.Ptr)
+        return ret
+
+    @IsFormatted.setter
+    def IsFormatted(self, value:bool):
+        GetDllLibXls().XlsChartLegendEntry_set_IsFormatted.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartLegendEntry_set_IsFormatted, self.Ptr, value)
+
+    @property
+
+    def BackgroundMode(self)->'ChartBackgroundMode':
+        """
+    <summary>
+        Display mode of the background.
+    </summary>
+        """
+        GetDllLibXls().XlsChartLegendEntry_get_BackgroundMode.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartLegendEntry_get_BackgroundMode.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartLegendEntry_get_BackgroundMode, self.Ptr)
+        objwraped = ChartBackgroundMode(ret)
+        return objwraped
+
+    @BackgroundMode.setter
+    def BackgroundMode(self, value:'ChartBackgroundMode'):
+        GetDllLibXls().XlsChartLegendEntry_set_BackgroundMode.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartLegendEntry_set_BackgroundMode, self.Ptr, value.value)
+
+    def BeginUpdate(self):
+        """
+
+        """
+        GetDllLibXls().XlsChartLegendEntry_BeginUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartLegendEntry_BeginUpdate, self.Ptr)
+
+    def EndUpdate(self):
+        """
+
+        """
+        GetDllLibXls().XlsChartLegendEntry_EndUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartLegendEntry_EndUpdate, self.Ptr)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().XlsChartLegendEntry_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartLegendEntry_Clear, self.Ptr)
+
+    def Delete(self):
+        """
+
+        """
+        GetDllLibXls().XlsChartLegendEntry_Delete.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartLegendEntry_Delete, self.Ptr)
+
+#
+#    def Clone(self ,parent:'SpireObject',dicIndexes:'Dictionary2',dicNewSheetNames:'Dictionary2')->'XlsChartLegendEntry':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrdicIndexes:c_void_p = dicIndexes.Ptr
+#        intPtrdicNewSheetNames:c_void_p = dicNewSheetNames.Ptr
+#
+#        GetDllLibXls().XlsChartLegendEntry_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+#        GetDllLibXls().XlsChartLegendEntry_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsChartLegendEntry_Clone, self.Ptr, intPtrparent,intPtrdicIndexes,intPtrdicNewSheetNames)
+#        ret = None if intPtr==None else XlsChartLegendEntry(intPtr)
+#        return ret
+#
+
+

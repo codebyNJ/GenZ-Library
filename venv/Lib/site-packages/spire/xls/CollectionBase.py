@@ -1,0 +1,184 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+from spire.xls.common.IList import IList
+
+T = TypeVar("T", bound=SpireObject)
+class CollectionBase (  IList[T]) :
+    """
+
+    """
+    @property
+    def Capacity(self)->int:
+        """
+
+        """
+        GetDllLibXls().CollectionBase_get_Capacity.argtypes=[c_void_p]
+        GetDllLibXls().CollectionBase_get_Capacity.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CollectionBase_get_Capacity, self.Ptr)
+        return ret
+
+    @Capacity.setter
+    def Capacity(self, value:int):
+        GetDllLibXls().CollectionBase_set_Capacity.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().CollectionBase_set_Capacity, self.Ptr, value)
+
+    @property
+    def Count(self)->int:
+        """
+
+        """
+        GetDllLibXls().CollectionBase_get_Count.argtypes=[c_void_p]
+        GetDllLibXls().CollectionBase_get_Count.restype=c_int
+        ret = CallCFunction(GetDllLibXls().CollectionBase_get_Count, self.Ptr)
+        return ret
+
+
+    def get_Item(self ,i:int)->'T':
+        """
+
+        """
+        
+        if self._gtype == None:
+            self._gtype = self.__orig_bases__[0].__args__[0]
+        GetDllLibXls().CollectionBase_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().CollectionBase_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CollectionBase_get_Item, self.Ptr, i)
+        ret = None if intPtr==None else self._gtype(intPtr)
+        return ret
+
+
+
+#
+#    def set_Item(self ,i:int,value:'T'):
+#        """
+#
+#        """
+#        intPtrvalue:c_void_p = value.Ptr
+#
+#        GetDllLibXls().CollectionBase_set_Item.argtypes=[c_void_p ,c_int,c_void_p]
+#        CallCFunction(GetDllLibXls().CollectionBase_set_Item, self.Ptr, i,intPtrvalue)
+
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().CollectionBase_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().CollectionBase_Clear, self.Ptr)
+
+#
+#    def Insert(self ,index:int,item:'T'):
+#        """
+#
+#        """
+#        intPtritem:c_void_p = item.Ptr
+#
+#        GetDllLibXls().CollectionBase_Insert.argtypes=[c_void_p ,c_int,c_void_p]
+#        CallCFunction(GetDllLibXls().CollectionBase_Insert, self.Ptr, index,intPtritem)
+
+
+#
+#    def GetEnumerator(self)->'IEnumerator1':
+#        """
+#
+#        """
+#        GetDllLibXls().CollectionBase_GetEnumerator.argtypes=[c_void_p]
+#        GetDllLibXls().CollectionBase_GetEnumerator.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().CollectionBase_GetEnumerator, self.Ptr)
+#        ret = None if intPtr==None else IEnumerator1(intPtr)
+#        return ret
+#
+
+
+
+    def RemoveAt(self ,index:int):
+        """
+
+        """
+        
+        GetDllLibXls().CollectionBase_RemoveAt.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().CollectionBase_RemoveAt, self.Ptr, index)
+
+#
+#    def IndexOf(self ,item:'T')->int:
+#        """
+#
+#        """
+#        intPtritem:c_void_p = item.Ptr
+#
+#        GetDllLibXls().CollectionBase_IndexOf.argtypes=[c_void_p ,c_void_p]
+#        GetDllLibXls().CollectionBase_IndexOf.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().CollectionBase_IndexOf, self.Ptr, intPtritem)
+#        return ret
+
+
+#
+#    def Add(self ,item:'T'):
+#        """
+#
+#        """
+#        intPtritem:c_void_p = item.Ptr
+#
+#        GetDllLibXls().CollectionBase_Add.argtypes=[c_void_p ,c_void_p]
+#        CallCFunction(GetDllLibXls().CollectionBase_Add, self.Ptr, intPtritem)
+
+
+#
+#    def Contains(self ,item:'T')->bool:
+#        """
+#
+#        """
+#        intPtritem:c_void_p = item.Ptr
+#
+#        GetDllLibXls().CollectionBase_Contains.argtypes=[c_void_p ,c_void_p]
+#        GetDllLibXls().CollectionBase_Contains.restype=c_bool
+#        ret = CallCFunction(GetDllLibXls().CollectionBase_Contains, self.Ptr, intPtritem)
+#        return ret
+
+
+#
+#    def CopyTo(self ,array:'T[]',arrayIndex:int):
+#        """
+#
+#        """
+#        #arrayarray:ArrayTypearray = ""
+#        countarray = len(array)
+#        ArrayTypearray = c_void_p * countarray
+#        arrayarray = ArrayTypearray()
+#        for i in range(0, countarray):
+#            arrayarray[i] = array[i].Ptr
+#
+#
+#        GetDllLibXls().CollectionBase_CopyTo.argtypes=[c_void_p ,ArrayTypearray,c_int]
+#        CallCFunction(GetDllLibXls().CollectionBase_CopyTo, self.Ptr, arrayarray,arrayIndex)
+
+
+    @property
+    def IsReadOnly(self)->bool:
+        """
+
+        """
+        GetDllLibXls().CollectionBase_get_IsReadOnly.argtypes=[c_void_p]
+        GetDllLibXls().CollectionBase_get_IsReadOnly.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().CollectionBase_get_IsReadOnly, self.Ptr)
+        return ret
+
+#
+#    def Remove(self ,item:'T')->bool:
+#        """
+#
+#        """
+#        intPtritem:c_void_p = item.Ptr
+#
+#        GetDllLibXls().CollectionBase_Remove.argtypes=[c_void_p ,c_void_p]
+#        GetDllLibXls().CollectionBase_Remove.restype=c_bool
+#        ret = CallCFunction(GetDllLibXls().CollectionBase_Remove, self.Ptr, intPtritem)
+#        return ret
+
+

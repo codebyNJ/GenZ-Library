@@ -1,0 +1,410 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IChartCategoryAxis (  IChartValueAxis, IChartAxis) :
+    """
+    <summary>
+        Represents category axis of the chart.
+    </summary>
+    """
+    @property
+    @abc.abstractmethod
+    def CrossingPoint(self)->float:
+        """
+    <summary>
+        Value axis / category crossing point (2D charts only).
+    </summary>
+        """
+        pass
+
+
+    @CrossingPoint.setter
+    @abc.abstractmethod
+    def CrossingPoint(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def LabelFrequency(self)->int:
+        """
+    <summary>
+        Frequency of labels.
+    </summary>
+        """
+        pass
+
+
+    @LabelFrequency.setter
+    @abc.abstractmethod
+    def LabelFrequency(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def TickMarksFrequency(self)->int:
+        """
+    <summary>
+        Frequency of tick marks.
+    </summary>
+        """
+        pass
+
+
+    @TickMarksFrequency.setter
+    @abc.abstractmethod
+    def TickMarksFrequency(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def TickLabelSpacing(self)->int:
+        """
+    <summary>
+        Represents the number of categories or series between tick-mark labels.
+            <example>The following code illustrates how to set TickLabelSpacing for chart axis:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:F2"];
+        //Set chart category axis
+        IChartCategoryAxis categoryAxis = chart.PrimaryCategoryAxis;
+        //Set tick label spacing
+        categoryAxis.TickLabelSpacing = 2;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @TickLabelSpacing.setter
+    @abc.abstractmethod
+    def TickLabelSpacing(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def TickMarkSpacing(self)->int:
+        """
+    <summary>
+        Represents the number of categories or series between tick marks.
+            <example>The following code illustrates how to set TickMarkSpacing for chart axis:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:F2"];
+        //Set chart category axis
+        IChartCategoryAxis categoryAxis = chart.PrimaryCategoryAxis;
+        //Set tick mark spacing
+        categoryAxis.TickMarkSpacing = 2;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @TickMarkSpacing.setter
+    @abc.abstractmethod
+    def TickMarkSpacing(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def AxisBetweenCategories(self)->bool:
+        """
+    <summary>
+        If true - cuts unused plot area. Default for area, surface charts.
+            <example>The following code illustrates how to set AxisBetweenCategories to "false" so 
+            that chart serie would be plotted on the tick marks:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart category axis
+        IChartCategoryAxis categoryAxis = chart.PrimaryCategoryAxis;
+        //Set category axis IsBetween
+        categoryAxis.AxisBetweenCategories = false;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @AxisBetweenCategories.setter
+    @abc.abstractmethod
+    def AxisBetweenCategories(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def CategoryLabels(self)->'IXLSRange':
+        """
+    <summary>
+        Category labels for the chart.
+            <example>The following code illustrates how to access the category labels range:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart category axis
+        IChartCategoryAxis categoryAxis = chart.PrimaryCategoryAxis;
+        //Get category label range . Output will be A1:C1
+        Console.WriteLine(categoryAxis.CategoryLabels.RangeAddressLocal);
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @CategoryLabels.setter
+    @abc.abstractmethod
+    def CategoryLabels(self, value:'IXLSRange'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def EnteredDirectlyCategoryLabels(self)->List['SpireObject']:
+        """
+    <summary>
+        Entered directly category labels for the chart.
+    </summary>
+        """
+        pass
+
+
+    @EnteredDirectlyCategoryLabels.setter
+    @abc.abstractmethod
+    def EnteredDirectlyCategoryLabels(self, value:List['SpireObject']):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def CategoryType(self)->'CategoryType':
+        """
+    <summary>
+        Represents axis category type.
+            <example>The following code illustrates how to set CategoryType.Time to CategoryType:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart category axis
+        IChartCategoryAxis categoryAxis = chart.PrimaryCategoryAxis;
+        //Set category type
+        categoryAxis.CategoryType = CategoryType.Time;
+        //Set base unit
+        categoryAxis.BaseUnit = ChartBaseUnitType.Year;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @CategoryType.setter
+    @abc.abstractmethod
+    def CategoryType(self, value:'CategoryType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Offset(self)->int:
+        """
+    <summary>
+        Represents distance between the labels and axis line.
+            The value can be from 0 through 1000.
+    </summary>
+        """
+        pass
+
+
+    @Offset.setter
+    @abc.abstractmethod
+    def Offset(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BaseUnit(self)->'ChartBaseUnitType':
+        """
+    <summary>
+        Represents base unit for the specified category axis.
+            <example>The following code illustrates how to set BaseUnit for IChartCategoryAxis:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["A1:C2"];
+        //Set chart category axis
+        IChartCategoryAxis categoryAxis = chart.PrimaryCategoryAxis;
+        //Set category type
+        categoryAxis.CategoryType = CategoryType.Time;
+        //Set base unit
+        categoryAxis.BaseUnit = ChartBaseUnitType.Year;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @BaseUnit.setter
+    @abc.abstractmethod
+    def BaseUnit(self, value:'ChartBaseUnitType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def BaseUnitIsAuto(self)->bool:
+        """
+    <summary>
+        True if use automatic base units for the specified category axis.
+    </summary>
+        """
+        pass
+
+
+    @BaseUnitIsAuto.setter
+    @abc.abstractmethod
+    def BaseUnitIsAuto(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def MajorUnitScale(self)->'ChartBaseUnitType':
+        """
+    <summary>
+        Represens the major unit scale value for the category axis
+             when the CategoryType property is set to TimeScale.
+    </summary>
+        """
+        pass
+
+
+    @MajorUnitScale.setter
+    @abc.abstractmethod
+    def MajorUnitScale(self, value:'ChartBaseUnitType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def MinorUnitScale(self)->'ChartBaseUnitType':
+        """
+    <summary>
+        Represens the minor unit scale value for the category axis
+             when the CategoryType property is set to TimeScale.
+    </summary>
+        """
+        pass
+
+
+    @MinorUnitScale.setter
+    @abc.abstractmethod
+    def MinorUnitScale(self, value:'ChartBaseUnitType'):
+        """
+
+        """
+        pass
+
+

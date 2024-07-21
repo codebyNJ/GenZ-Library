@@ -1,0 +1,270 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IShapes (  SpireObject) :
+    """
+
+    """
+
+    def Add(self)->'IChartShape':
+        """
+
+        """
+        GetDllLibXls().IShapes_Add.argtypes=[c_void_p]
+        GetDllLibXls().IShapes_Add.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IShapes_Add, self.Ptr)
+        ret = None if intPtr==None else XlsChartShape(intPtr)
+        return ret
+
+
+
+    def AddLine(self ,startPoint:'Point',endPoint:'Point',lineShapeType:'LineShapeType')->'ILineShape':
+        """
+    <summary>
+        Adds new text line to the collection.
+    </summary>
+    <param name="startPoint">startPoint</param>
+    <param name="endPoint">endPoint</param>
+    <param name="lineShapeType">lineShapeType</param>
+    <returns>Newly created line.</returns>
+        """
+        intPtrstartPoint:c_void_p = startPoint.Ptr
+        intPtrendPoint:c_void_p = endPoint.Ptr
+        enumlineShapeType:c_int = lineShapeType.value
+
+        GetDllLibXls().IShapes_AddLine.argtypes=[c_void_p ,c_void_p,c_void_p,c_int]
+        GetDllLibXls().IShapes_AddLine.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IShapes_AddLine, self.Ptr, intPtrstartPoint,intPtrendPoint,enumlineShapeType)
+        ret = None if intPtr==None else XlsLineShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddPicture(self ,image:Stream,pictureName:str,imageFormat:ImageFormatType)->IPictureShape:
+        """
+
+        """
+        intPtrimage:c_void_p = image.Ptr
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().IShapes_AddPicture.argtypes=[c_void_p ,c_void_p,c_void_p,c_int]
+        GetDllLibXls().IShapes_AddPicture.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IShapes_AddPicture, self.Ptr, intPtrimage,pictureName,enumimageFormat)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddPicture(self ,fileName:str)->IPictureShape:
+        """
+
+        """
+        
+        GetDllLibXls().IShapes_AddPictureF.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().IShapes_AddPictureF.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IShapes_AddPictureF, self.Ptr, fileName)
+        ret = None if intPtr==None else XlsBitmapShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddComment(self ,commentText:str,bIsParseOptions:bool)->ICommentShape:
+        """
+
+        """
+        
+        GetDllLibXls().IShapes_AddComment.argtypes=[c_void_p ,c_void_p,c_bool]
+        GetDllLibXls().IShapes_AddComment.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IShapes_AddComment, self.Ptr, commentText,bIsParseOptions)
+        ret = None if intPtr==None else XlsComment(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddComment(self ,commentText:str)->ICommentShape:
+        """
+
+        """
+        
+        GetDllLibXls().IShapes_AddCommentC.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().IShapes_AddCommentC.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IShapes_AddCommentC, self.Ptr, commentText)
+        ret = None if intPtr==None else XlsComment(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddComment(self)->ICommentShape:
+        """
+
+        """
+        GetDllLibXls().IShapes_AddComment1.argtypes=[c_void_p]
+        GetDllLibXls().IShapes_AddComment1.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IShapes_AddComment1, self.Ptr)
+        ret = None if intPtr==None else XlsComment(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddCopy(self ,sourceShape:IShape)->IShape:
+        """
+
+        """
+        intPtrsourceShape:c_void_p = sourceShape.Ptr
+
+        GetDllLibXls().IShapes_AddCopy.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().IShapes_AddCopy.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IShapes_AddCopy, self.Ptr, intPtrsourceShape)
+        ret = None if intPtr==None else IShape(intPtr)
+        return ret
+
+
+#    @dispatch
+#
+#    def AddCopy(self ,sourceShape:IShape,hashNewNames:'Dictionary2',arrFontIndexes:'List1')->IShape:
+#        """
+#
+#        """
+#        intPtrsourceShape:c_void_p = sourceShape.Ptr
+#        intPtrhashNewNames:c_void_p = hashNewNames.Ptr
+#        intPtrarrFontIndexes:c_void_p = arrFontIndexes.Ptr
+#
+#        GetDllLibXls().IShapes_AddCopySHA.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+#        GetDllLibXls().IShapes_AddCopySHA.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().IShapes_AddCopySHA, self.Ptr, intPtrsourceShape,intPtrhashNewNames,intPtrarrFontIndexes)
+#        ret = None if intPtr==None else IShape(intPtr)
+#        return ret
+#
+
+
+
+    def AddTextBox(self)->'ITextBoxLinkShape':
+        """
+
+        """
+        GetDllLibXls().IShapes_AddTextBox.argtypes=[c_void_p]
+        GetDllLibXls().IShapes_AddTextBox.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IShapes_AddTextBox, self.Ptr)
+        ret = None if intPtr==None else XlsTextBoxShape(intPtr)
+        return ret
+
+
+
+    def AddOval(self ,row:int,column:int,height:int,width:int)->'IOvalShape':
+        """
+    <summary>
+        Add new oval shape in the collection.
+    </summary>
+    <param name="leftcolumn">0-1000</param>
+    <param name="toprow">0-1000</param>
+    <param name="rightcolumn">0-1000</param>
+    <param name="bottowrow">0-1000</param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().IShapes_AddOval.argtypes=[c_void_p ,c_int,c_int,c_int,c_int]
+        GetDllLibXls().IShapes_AddOval.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IShapes_AddOval, self.Ptr, row,column,height,width)
+        ret = None if intPtr==None else XlsOvalShape(intPtr)
+        return ret
+
+
+
+    def AddPrstGeomShape(self ,shapeType:'PrstGeomShapeType')->'IPrstGeomShape':
+        """
+
+        """
+        enumshapeType:c_int = shapeType.value
+
+        GetDllLibXls().IShapes_AddPrstGeomShape.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().IShapes_AddPrstGeomShape.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IShapes_AddPrstGeomShape, self.Ptr, enumshapeType)
+        ret = None if intPtr==None else XlsPrstGeomShape(intPtr)
+        return ret
+
+
+
+    def AddCheckBox(self)->'ICheckBox':
+        """
+
+        """
+        GetDllLibXls().IShapes_AddCheckBox.argtypes=[c_void_p]
+        GetDllLibXls().IShapes_AddCheckBox.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IShapes_AddCheckBox, self.Ptr)
+        ret = None if intPtr==None else XlsCheckBoxShape(intPtr)
+        return ret
+
+
+
+    def AddComboBox(self)->'IComboBoxShape':
+        """
+
+        """
+        GetDllLibXls().IShapes_AddComboBox.argtypes=[c_void_p]
+        GetDllLibXls().IShapes_AddComboBox.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IShapes_AddComboBox, self.Ptr)
+        ret = None if intPtr==None else XlsComboBoxShape(intPtr)
+        return ret
+
+
+
+    def AddRadioButton(self)->'IRadioButton':
+        """
+
+        """
+        GetDllLibXls().IShapes_AddRadioButton.argtypes=[c_void_p]
+        GetDllLibXls().IShapes_AddRadioButton.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IShapes_AddRadioButton, self.Ptr)
+        ret = None if intPtr==None else XlsRadioButtonShape(intPtr)
+        return ret
+
+
+    @property
+    def Count(self)->int:
+        """
+
+        """
+        GetDllLibXls().IShapes_get_Count.argtypes=[c_void_p]
+        GetDllLibXls().IShapes_get_Count.restype=c_int
+        ret = CallCFunction(GetDllLibXls().IShapes_get_Count, self.Ptr)
+        return ret
+
+    @dispatch
+
+    def get_Item(self ,index:int)->IShape:
+        """
+
+        """
+        
+        GetDllLibXls().IShapes_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().IShapes_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IShapes_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else IShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,strShapeName:str)->IShape:
+        """
+
+        """
+        
+        GetDllLibXls().IShapes_get_ItemS.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().IShapes_get_ItemS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IShapes_get_ItemS, self.Ptr, strShapeName)
+        ret = None if intPtr==None else IShape(intPtr)
+        return ret
+
+

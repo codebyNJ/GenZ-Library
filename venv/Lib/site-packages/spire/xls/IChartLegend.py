@@ -1,0 +1,499 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IChartLegend (abc.ABC) :
+    """
+    <summary>
+        Represents the legend of the chart.
+    </summary>
+    """
+    @property
+
+    @abc.abstractmethod
+    def TextArea(self)->'IChartTextArea':
+        """
+    <summary>
+        Return text area of legend.
+            <example>The following code illustrates use of TextArea property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //Set text area for the legend
+        chart.Legend.TextArea.Color = Color.Gray;
+        chart.Legend.TextArea.Size = 10;
+        chart.Legend.TextArea.FontName = "Bernard MT Condensed";
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def X(self)->int:
+        """
+    <summary>
+        X-position of upper-left corner. 1/4000 of chart plot.
+            <example>The following code illustrates use of X co-ordinate of upper-left corner of the legend:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //X co-ordinate of upper-left corner of the legend
+        chart.Legend.X = -80;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @X.setter
+    @abc.abstractmethod
+    def X(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Y(self)->int:
+        """
+    <summary>
+        Y-position of upper-left corner. 1/4000 of chart plot.
+            <example>The following code illustrates use of Y co-ordinate of upper-left corner of the legend:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //Y co-ordinate of upper-left corner of the legend
+        chart.Legend.Y = 30;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @Y.setter
+    @abc.abstractmethod
+    def Y(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Position(self)->'LegendPositionType':
+        """
+    <summary>
+        Type:
+            0 = bottom
+            1 = corner
+            2 = top
+            3 = right
+            4 = left
+            7 = not docked or inside the plot area.
+            <example>The following code illustrates use of Position property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //Set the position of legend on the chart
+        chart.Legend.Position = LegendPositionType.Top;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @Position.setter
+    @abc.abstractmethod
+    def Position(self, value:'LegendPositionType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsVerticalLegend(self)->bool:
+        """
+    <summary>
+        True if vertical legend (a single column of entries);
+            False if horizontal legend (multiple columns of entries).
+            Manual-sized legends always have this bit set to False.
+            <example>The following code illustrates use of IsVerticalLegend property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //True if the legend is vertical
+        if(chart.Legend.IsVerticalLegend){ //Your code here }
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @IsVerticalLegend.setter
+    @abc.abstractmethod
+    def IsVerticalLegend(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LegendEntries(self)->'IChartLegendEntries':
+        """
+    <summary>
+        Represents legend entries collection. Read only.
+            <example>The following code illustrates use of LegendEntries property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //Get the count of legend entries
+        int legendEntriesCount = chart.Legend.LegendEntries.Count;
+        if(legendEntriesCount != 0){ //Your code here }
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IncludeInLayout(self)->bool:
+        """
+    <summary>
+        Show legend without overlapping. Default is True.
+            <example>The following code illustrates use of IncludeInLayout property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //True to show legend without overlapping the chart
+        IChartLegend chartLegend = chart.Legend;
+        chartLegend.IncludeInLayout = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @IncludeInLayout.setter
+    @abc.abstractmethod
+    def IncludeInLayout(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def InnerLayoutTarget(self)->bool:
+        """
+<summary></summary>
+        """
+        pass
+
+
+    @InnerLayoutTarget.setter
+    @abc.abstractmethod
+    def InnerLayoutTarget(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsWMode(self)->bool:
+        """
+    <summary>
+        false value Specifies that the Width shall be interpreted
+            as the Right of the chart element.
+    </summary>
+        """
+        pass
+
+
+    @IsWMode.setter
+    @abc.abstractmethod
+    def IsWMode(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsHMode(self)->bool:
+        """
+    <summary>
+        false value Specifies that the Height shall be interpreted
+            as the Bottom of the chart element.
+    </summary>
+        """
+        pass
+
+
+    @IsHMode.setter
+    @abc.abstractmethod
+    def IsHMode(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsXMode(self)->bool:
+        """
+    <summary>
+        true value Specifies that the X shall be interpreted
+            as the Left of the chart element.
+    </summary>
+        """
+        pass
+
+
+    @IsXMode.setter
+    @abc.abstractmethod
+    def IsXMode(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsYMode(self)->bool:
+        """
+    <summary>
+        true value Specifies that the Y shall be interpreted
+            as the Top of the chart element.
+    </summary>
+        """
+        pass
+
+
+    @IsYMode.setter
+    @abc.abstractmethod
+    def IsYMode(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Width(self)->int:
+        """
+    <summary>
+        X-size. 1/4000 of chart plot. IsWMode Shall set to True
+    </summary>
+        """
+        pass
+
+
+    @Width.setter
+    @abc.abstractmethod
+    def Width(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Height(self)->int:
+        """
+    <summary>
+        Y-size. 1/4000 of chart plot. IsHMode Shall set to True
+    </summary>
+        """
+        pass
+
+
+    @Height.setter
+    @abc.abstractmethod
+    def Height(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def AutoPositionX(self)->bool:
+        """
+    <summary>
+        X positioning is automatic.
+    </summary>
+        """
+        pass
+
+
+    @AutoPositionX.setter
+    @abc.abstractmethod
+    def AutoPositionX(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def AutoPositionY(self)->bool:
+        """
+    <summary>
+        Y positioning is automatic.
+    </summary>
+        """
+        pass
+
+
+    @AutoPositionY.setter
+    @abc.abstractmethod
+    def AutoPositionY(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Clear(self):
+        """
+    <summary>
+        Clears chart legend.
+            <example>The following code illustrates how to use the Clear method for legend of chart:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Clears the legend of chart
+        worksheet.Charts[0].Legend.Clear();
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def Delete(self):
+        """
+    <summary>
+        Deletes chart legend.
+            <example>The following code illustrates how to use the Delete method for legend of chart:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Clears the legend of chart
+        worksheet.Charts[0].Legend.Delete();
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+

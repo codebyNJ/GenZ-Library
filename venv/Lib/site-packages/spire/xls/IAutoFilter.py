@@ -1,0 +1,167 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IAutoFilter (abc.ABC) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def FirstCondition(self)->'IAutoFilterCondition':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def SecondCondition(self)->'IAutoFilterCondition':
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsFiltered(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsAnd(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsAnd.setter
+    @abc.abstractmethod
+    def IsAnd(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsTop10Percent(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsTop10Percent.setter
+    @abc.abstractmethod
+    def IsTop10Percent(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsSimple1(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsSimple1.setter
+    @abc.abstractmethod
+    def IsSimple1(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsSimple2(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsSimple2.setter
+    @abc.abstractmethod
+    def IsSimple2(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def ShowTopItem(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @ShowTopItem.setter
+    @abc.abstractmethod
+    def ShowTopItem(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsTop10Items(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsTop10Items.setter
+    @abc.abstractmethod
+    def IsTop10Items(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Top10Items(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Top10Items.setter
+    @abc.abstractmethod
+    def Top10Items(self, value:int):
+        """
+
+        """
+        pass
+
+

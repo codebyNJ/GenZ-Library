@@ -1,0 +1,26 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartDisplayUnitType(Enum):
+    """
+    <summary>
+        Represents excel chart uint to display.
+    </summary>
+    """
+    none = 0
+    Hundreds = 1
+    Thousands = 2
+    TenThousands = 3
+    HundredThousands = 4
+    Millions = 5
+    TenMillions = 6
+    HundredMillions = 7
+    ThousandMillions = 8
+    MillionMillions = 9
+    Custom = 65535
+

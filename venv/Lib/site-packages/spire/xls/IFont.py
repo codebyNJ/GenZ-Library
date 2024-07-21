@@ -1,0 +1,271 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IFont (  IExcelApplication, IOptimizedUpdate) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def IsBold(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsBold.setter
+    @abc.abstractmethod
+    def IsBold(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def KnownColor(self)->'ExcelColors':
+        """
+
+        """
+        pass
+
+
+    @KnownColor.setter
+    @abc.abstractmethod
+    def KnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Color(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @Color.setter
+    @abc.abstractmethod
+    def Color(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetThemeColor(self ,type:'ThemeColorType',tint:float):
+        """
+
+        """
+        pass
+
+
+#
+#    @abc.abstractmethod
+#    def GetThemeColor(self ,type:'ThemeColorType&',tint:'Double&')->bool:
+#        """
+#
+#        """
+#        pass
+#
+
+
+    @property
+    @abc.abstractmethod
+    def IsItalic(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsItalic.setter
+    @abc.abstractmethod
+    def IsItalic(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Size(self)->float:
+        """
+
+        """
+        pass
+
+
+    @Size.setter
+    @abc.abstractmethod
+    def Size(self, value:float):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsStrikethrough(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsStrikethrough.setter
+    @abc.abstractmethod
+    def IsStrikethrough(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsSubscript(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsSubscript.setter
+    @abc.abstractmethod
+    def IsSubscript(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def StrikethroughType(self)->str:
+        """
+
+        """
+        pass
+
+
+    @StrikethroughType.setter
+    @abc.abstractmethod
+    def StrikethroughType(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsSuperscript(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @IsSuperscript.setter
+    @abc.abstractmethod
+    def IsSuperscript(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Underline(self)->'FontUnderlineType':
+        """
+
+        """
+        pass
+
+
+    @Underline.setter
+    @abc.abstractmethod
+    def Underline(self, value:'FontUnderlineType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def FontName(self)->str:
+        """
+
+        """
+        pass
+
+
+    @FontName.setter
+    @abc.abstractmethod
+    def FontName(self, value:str):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def VerticalAlignment(self)->'FontVertialAlignmentType':
+        """
+
+        """
+        pass
+
+
+    @VerticalAlignment.setter
+    @abc.abstractmethod
+    def VerticalAlignment(self, value:'FontVertialAlignmentType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def IsAutoColor(self)->bool:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def GenerateNativeFont(self)->'Font':
+        """
+
+        """
+        pass
+
+

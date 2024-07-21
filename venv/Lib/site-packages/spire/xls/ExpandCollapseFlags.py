@@ -1,0 +1,18 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ExpandCollapseFlags(Enum):
+    """
+    <summary>
+        Flags for expand/collapse settings.
+    </summary>
+    """
+    Default = 0
+    IncludeSubgroups = 1
+    ExpandParent = 2
+

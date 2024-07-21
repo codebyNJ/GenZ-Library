@@ -1,0 +1,71 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+from spire.xls.XlsScrollBarShape import *
+
+class ScrollBarCollection (  CollectionBase[XlsScrollBarShape],IScrollBarShapes) :
+    """
+
+    """
+    @dispatch
+
+    def get_Item(self ,index:int)->IScrollBarShape:
+        """
+
+        """
+        
+        GetDllLibXls().ScrollBarCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ScrollBarCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ScrollBarCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else XlsScrollBarShape(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->IScrollBarShape:
+        """
+
+        """
+        
+        GetDllLibXls().ScrollBarCollection_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ScrollBarCollection_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ScrollBarCollection_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else XlsScrollBarShape(intPtr)
+        return ret
+
+
+
+    def AddScrollBar(self ,row:int,column:int,height:int,width:int)->'IScrollBarShape':
+        """
+
+        """
+        
+        GetDllLibXls().ScrollBarCollection_AddScrollBar.argtypes=[c_void_p ,c_int,c_int,c_int,c_int]
+        GetDllLibXls().ScrollBarCollection_AddScrollBar.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ScrollBarCollection_AddScrollBar, self.Ptr, row,column,height,width)
+        ret = None if intPtr==None else XlsScrollBarShape(intPtr)
+        return ret
+
+
+
+    def AddCopy(self ,source:'IScrollBarShape'):
+        """
+
+        """
+        intPtrsource:c_void_p = source.Ptr
+
+        GetDllLibXls().ScrollBarCollection_AddCopy.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().ScrollBarCollection_AddCopy, self.Ptr, intPtrsource)
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().ScrollBarCollection_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().ScrollBarCollection_Clear, self.Ptr)
+

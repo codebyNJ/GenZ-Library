@@ -1,0 +1,18 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartParagraphType(Enum):
+    """
+    <summary>
+        MS Chart Font Type
+    </summary>
+    """
+    none = 0
+    Default = 1
+    RichText = 2
+

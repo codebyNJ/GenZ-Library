@@ -1,0 +1,4328 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsWorksheet (  XlsWorksheetBase, IInternalWorksheet) :
+    """
+
+    """
+    def GroupByColumns(self ,firstColumn:int,lastColumn:int,isCollapsed:bool)->'CellRange':
+        """
+    <summary>
+        Groups columns. 
+    </summary>
+    <param name="firstColumn">The first column index to be grouped.</param>
+    <param name="lastColumn">The last column index to be grouped.</param>
+    <param name="isCollapsed">Indicates whether group should be collapsed.</param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GroupByColumns.argtypes=[c_void_p ,c_int,c_int,c_bool]
+        GetDllLibXls().XlsWorksheet_GroupByColumns.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_GroupByColumns, self.Ptr, firstColumn,lastColumn,isCollapsed)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+
+    def GroupByRows(self ,firstRow:int,lastRow:int,isCollapsed:bool)->'CellRange':
+        """
+    <summary>
+        Groups rows. 
+    </summary>
+    <param name="firstRow">The first row index to be grouped.</param>
+    <param name="lastRow">The last row index to be grouped.</param>
+    <param name="isCollapsed">Indicates whether group should be collapsed.</param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GroupByRows.argtypes=[c_void_p ,c_int,c_int,c_bool]
+        GetDllLibXls().XlsWorksheet_GroupByRows.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_GroupByRows, self.Ptr, firstRow,lastRow,isCollapsed)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+
+    def UngroupByColumns(self ,firstColumn:int,lastColumn:int)->'CellRange':
+        """
+    <summary>
+        Ungroups columns. 
+    </summary>
+    <param name="firstColumn">The first column index to be grouped.</param>
+    <param name="lastColumn">The last column index to be grouped.</param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_UngroupByColumns.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_UngroupByColumns.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_UngroupByColumns, self.Ptr, firstColumn,lastColumn)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+
+    def UngroupByRows(self ,firstRow:int,lastRow:int)->'CellRange':
+        """
+    <summary>
+        Ungroups rows. 
+    </summary>
+    <param name="firstRow">The first row index to be grouped.</param>
+    <param name="lastRow">The last row index to be grouped.</param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_UngroupByRows.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_UngroupByRows.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_UngroupByRows, self.Ptr, firstRow,lastRow)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+#
+#    def SaveShapesToImage(self ,option:'SaveShapeTypeOption')->'List1':
+#        """
+#
+#        """
+#        intPtroption:c_void_p = option.Ptr
+#
+#        GetDllLibXls().XlsWorksheet_SaveShapesToImage.argtypes=[c_void_p ,c_void_p]
+#        GetDllLibXls().XlsWorksheet_SaveShapesToImage.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_SaveShapesToImage, self.Ptr, intPtroption)
+#        ret = None if intPtr==None else List1(intPtr)
+#        return ret
+#
+
+
+    @dispatch
+
+    def ApplyStyle(self ,style:CellStyle):
+        """
+
+        """
+        intPtrstyle:c_void_p = style.Ptr
+
+        GetDllLibXls().XlsWorksheet_ApplyStyle.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_ApplyStyle, self.Ptr, intPtrstyle)
+
+    @dispatch
+
+    def ApplyStyle(self ,style:CellStyle,applyRowStyle:bool,applyColumnStyle:bool):
+        """
+    <summary>
+        Apply style to whole sheet.
+    </summary>
+    <param name="style">style to apply</param>
+    <param name="applyRowStyle">true means apply style to all rows</param>
+    <param name="applyColumnStyle">true means apply style to all columns</param>
+        """
+        intPtrstyle:c_void_p = style.Ptr
+
+        GetDllLibXls().XlsWorksheet_ApplyStyleSAA.argtypes=[c_void_p ,c_void_p,c_bool,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_ApplyStyleSAA, self.Ptr, intPtrstyle,applyRowStyle,applyColumnStyle)
+
+    @dispatch
+
+    def Subtotal(self ,range:IXLSRange,groupByIndex:int,totalFields:List[int],subtotalType:SubtotalTypes):
+        """
+    <summary>
+        Creates subtotals for the range.
+    </summary>
+    <param name="range">The range</param>
+    <param name="groupByIndex">The field index to group by, offset from zero</param>
+    <param name="totalFields">An array of zero-based field index offsets, indicating the fields to which the subtotals are added.</param>
+    <param name="subtotalType">The subtotal type.</param>
+        """
+        intPtrrange:c_void_p = range.Ptr
+        #arraytotalFields:ArrayTypetotalFields = ""
+        counttotalFields = len(totalFields)
+        ArrayTypetotalFields = c_int * counttotalFields
+        arraytotalFields = ArrayTypetotalFields()
+        for i in range(0, counttotalFields):
+            arraytotalFields[i] = totalFields[i]
+
+        enumsubtotalType:c_int = subtotalType.value
+
+        GetDllLibXls().XlsWorksheet_Subtotal.argtypes=[c_void_p ,c_void_p,c_int,ArrayTypetotalFields,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_Subtotal, self.Ptr, intPtrrange,groupByIndex,arraytotalFields,counttotalFields,enumsubtotalType)
+
+    @dispatch
+
+    def Subtotal(self ,r:IXLSRange,groupByIndex:int,totalFields:List[int],subtotalType:SubtotalTypes,replace:bool,addPageBreak:bool,addsummaryBelowData:bool):
+        """
+    <summary>
+        Creates subtotals for the range.
+    </summary>
+    <param name="range">The range</param>
+    <param name="groupByIndex">The field index to group by, offset from zero</param>
+    <param name="totalFields">An array of zero-based field index offsets, indicating the fields to which the subtotals are added.</param>
+    <param name="subtotalType">The subtotal type.</param>
+    <param name="replace">Indicates whether replace the current subtotals</param>
+    <param name="addPageBreak">Indicates whether add page break between groups</param>
+    <param name="addsummaryBelowData">Indicates whether add summarry below data.</param>
+        """
+        intPtrrange:c_void_p = r.Ptr
+        #arraytotalFields:ArrayTypetotalFields = ""
+        counttotalFields = len(totalFields)
+        ArrayTypetotalFields = c_int * counttotalFields
+        arraytotalFields = ArrayTypetotalFields()
+        for i in range(0, counttotalFields):
+            arraytotalFields[i] = totalFields[i]
+
+        enumsubtotalType:c_int = subtotalType.value
+
+        GetDllLibXls().XlsWorksheet_SubtotalRGTSRAA.argtypes=[c_void_p ,c_void_p,c_int,ArrayTypetotalFields,c_int,c_int,c_bool,c_bool,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SubtotalRGTSRAA, self.Ptr, intPtrrange,groupByIndex,arraytotalFields,counttotalFields,enumsubtotalType,replace,addPageBreak,addsummaryBelowData)
+
+
+    def GetRowIsAutoFit(self ,rowIndex:int)->bool:
+        """
+    <summary>
+        Get GetRowIsAutoFit By rowIndex
+    </summary>
+    <param name="rowIndex"></param>
+    <returns>If the row is null Return false,else if the row height is Autofit Return true, the row height is CustomHeight Return false</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetRowIsAutoFit.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorksheet_GetRowIsAutoFit.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_GetRowIsAutoFit, self.Ptr, rowIndex)
+        return ret
+
+
+    def GetColumnIsAutoFit(self ,columnIndex:int)->bool:
+        """
+    <summary>
+        Get ColumnIsAutofit By columnIndex
+    </summary>
+    <param name="columnIndex"></param>
+    <returns>If the column is null Return false,else if the column width is Autofit Return true, the column width is CustomWidth Return false</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetColumnIsAutoFit.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorksheet_GetColumnIsAutoFit.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_GetColumnIsAutoFit, self.Ptr, columnIndex)
+        return ret
+
+
+    def GetDefaultRowStyle(self ,rowIndex:int)->'IStyle':
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetDefaultRowStyle.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorksheet_GetDefaultRowStyle.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_GetDefaultRowStyle, self.Ptr, rowIndex)
+        ret = None if intPtr==None else CellStyle(intPtr)
+        return ret
+
+
+
+    def GetError(self ,row:int,column:int)->str:
+        """
+    <summary>
+        Gets error value from cell.
+    </summary>
+    <param name="row">Row index.</param>
+    <param name="column">Column index.</param>
+    <returns>Returns error value or null.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetError.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_GetError.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorksheet_GetError, self.Ptr, row,column))
+        return ret
+
+
+
+    def GetFormulaErrorValue(self ,row:int,column:int)->str:
+        """
+    <summary>
+        Gets formula error value from cell.
+    </summary>
+    <param name="row">Row index.</param>
+    <param name="column">Column index.</param>
+    <returns>Returns error value or null.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetFormulaErrorValue.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_GetFormulaErrorValue.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorksheet_GetFormulaErrorValue, self.Ptr, row,column))
+        return ret
+
+
+
+    def GetFormulaNumberValue(self ,row:int,column:int)->float:
+        """
+    <summary>
+        Returns formula number value corresponding to the cell.
+    </summary>
+    <param name="row">One-based row index of the cell to get value from.</param>
+    <param name="column">One-based column index of the cell to get value from.</param>
+    <returns>Number contained by the cell.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetFormulaNumberValue.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_GetFormulaNumberValue.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_GetFormulaNumberValue, self.Ptr, row,column)
+        return ret
+
+
+    def GetFormulaStringValue(self ,row:int,column:int)->str:
+        """
+    <summary>
+        Returns formula string value corresponding to the cell.
+    </summary>
+    <param name="row">One-based row index of the cell to get value from.</param>
+    <param name="column">One-based column index of the cell to get value from.</param>
+    <returns>String contained by the cell.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetFormulaStringValue.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_GetFormulaStringValue.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorksheet_GetFormulaStringValue, self.Ptr, row,column))
+        return ret
+
+
+    @dispatch
+
+    def GetFormula(self ,row:int,column:int,bR1C1:bool)->str:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetFormula.argtypes=[c_void_p ,c_int,c_int,c_bool]
+        GetDllLibXls().XlsWorksheet_GetFormula.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorksheet_GetFormula, self.Ptr, row,column,bR1C1))
+        return ret
+
+
+    @dispatch
+
+    def GetFormula(self ,row:int,column:int,bR1C1:bool,isForSerialization:bool)->str:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetFormulaRCBI.argtypes=[c_void_p ,c_int,c_int,c_bool,c_bool]
+        GetDllLibXls().XlsWorksheet_GetFormulaRCBI.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorksheet_GetFormulaRCBI, self.Ptr, row,column,bR1C1,isForSerialization))
+        return ret
+
+
+
+    def GetFormulaBoolValue(self ,row:int,column:int)->bool:
+        """
+    <summary>
+        Gets formula bool value from cell.
+    </summary>
+    <param name="row">Represents row index.</param>
+    <param name="column">Represents column index.</param>
+    <returns>Returns found bool value. If cannot found returns false.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetFormulaBoolValue.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_GetFormulaBoolValue.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_GetFormulaBoolValue, self.Ptr, row,column)
+        return ret
+
+
+    def GetNumber(self ,row:int,column:int)->float:
+        """
+    <summary>
+        Returns number value corresponding to the cell.
+    </summary>
+    <param name="row">One-based row index of the cell to get value from.</param>
+    <param name="column">One-based column index of the cell to get value from.</param>
+    <returns>Number contained by the cell.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetNumber.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_GetNumber.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_GetNumber, self.Ptr, row,column)
+        return ret
+
+
+    def GetRowHeight(self ,row:int)->float:
+        """
+    <summary>
+        Gets the height of a specified row. 
+    </summary>
+    <param name="row">Row index.</param>
+    <returns>Height of row</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetRowHeight.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorksheet_GetRowHeight.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_GetRowHeight, self.Ptr, row)
+        return ret
+
+
+    def GetColumnIsHide(self ,columnIndex:int)->bool:
+        """
+    <summary>
+        Indicates whether the column is hidden.
+    </summary>
+    <param name="columnIndex">Column index.</param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetColumnIsHide.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorksheet_GetColumnIsHide.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_GetColumnIsHide, self.Ptr, columnIndex)
+        return ret
+
+
+    def GetRowIsHide(self ,rowIndex:int)->bool:
+        """
+    <summary>
+        Indicates whether the row is hidden.
+    </summary>
+    <param name="rowIndex">Row index.</param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetRowIsHide.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorksheet_GetRowIsHide.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_GetRowIsHide, self.Ptr, rowIndex)
+        return ret
+
+
+    def HideColumn(self ,columnIndex:int):
+        """
+    <summary>
+        Hides a column.
+    </summary>
+    <param name="columnIndex">Column index.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_HideColumn.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_HideColumn, self.Ptr, columnIndex)
+
+
+    def HideColumns(self ,columnIndex:int,columnCount:int):
+        """
+    <summary>
+        Hides columns.
+    </summary>
+    <param name="columnIndex">Column index.</param>
+    <param name="columnCount">Column count.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_HideColumns.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_HideColumns, self.Ptr, columnIndex,columnCount)
+
+
+    def HideRow(self ,rowIndex:int):
+        """
+    <summary>
+        Hides a row.
+    </summary>
+    <param name="rowIndex">Row index.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_HideRow.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_HideRow, self.Ptr, rowIndex)
+
+
+    def HideRows(self ,rowIndex:int,rowCount:int):
+        """
+    <summary>
+        Hides a row.
+    </summary>
+    <param name="rowIndex">Row index.</param>
+    <param name="rowCount">Row count.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_HideRows.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_HideRows, self.Ptr, rowIndex,rowCount)
+
+
+    def GetRowHeightPixels(self ,rowIndex:int)->int:
+        """
+    <summary>
+         Gets the height of a specified row in unit of pixel. 
+        <example>The following code illustrates how to get the row height for a particular row:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet["C2"].Text = "Sample text";
+        worksheet["C2"].Style.Font.Size = 18;
+        //Set auto fit
+        worksheet.AutoFitRow(2);
+        //Get row height
+        Console.WriteLine(worksheet.GetRowHeightPixels(2));
+        //Save to file
+        workbook.SaveToFile("UsedRange.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="rowIndex">Row index.</param>
+    <returns>Height of row</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetRowHeightPixels.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorksheet_GetRowHeightPixels.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_GetRowHeightPixels, self.Ptr, rowIndex)
+        return ret
+
+
+    def GetText(self ,row:int,column:int)->str:
+        """
+    <summary>
+        Returns string value corresponding to the cell.
+    </summary>
+    <param name="row">One-based row index of the cell to get value from.</param>
+    <param name="column">One-based column index of the cell to get value from.</param>
+    <returns>String contained by the cell.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetText.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_GetText.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorksheet_GetText, self.Ptr, row,column))
+        return ret
+
+
+
+    def DeleteRange(self ,range:'CellRange',deleteOption:'DeleteOption'):
+        """
+    <summary>
+        delete a range in worksheet
+    </summary>
+    <param name="range">the range to be deleted</param>
+    <param name="deleteOption">Choose to move the right range to left or move the below range to above</param>
+        """
+        intPtrrange:c_void_p = range.Ptr
+        enumdeleteOption:c_int = deleteOption.value
+
+        GetDllLibXls().XlsWorksheet_DeleteRange.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_DeleteRange, self.Ptr, intPtrrange,enumdeleteOption)
+
+
+    def MoveWorksheet(self ,destIndex:int):
+        """
+    <summary>
+        Moves worksheet into new position.
+    </summary>
+    <param name="destIndex">Destination index.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_MoveWorksheet.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_MoveWorksheet, self.Ptr, destIndex)
+
+
+    def PixelsToColumnWidth(self ,pixels:float)->float:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_PixelsToColumnWidth.argtypes=[c_void_p ,c_double]
+        GetDllLibXls().XlsWorksheet_PixelsToColumnWidth.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_PixelsToColumnWidth, self.Ptr, pixels)
+        return ret
+
+    def Remove(self):
+        """
+    <summary>
+        Removes worksheet from parernt worksheets collection.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_Remove.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_Remove, self.Ptr)
+
+
+    def RemoveMergedCells(self ,range:'IXLSRange'):
+        """
+
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().XlsWorksheet_RemoveMergedCells.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_RemoveMergedCells, self.Ptr, intPtrrange)
+
+    def RemovePanes(self):
+        """
+    <summary>
+        Removes panes from a worksheet.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_RemovePanes.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_RemovePanes, self.Ptr)
+
+#    @dispatch
+#
+#    def Replace(self ,oldValue:str,column:'DataColumn',columnHeaders:bool):
+#        """
+#    <summary>
+#          Replaces cells' values with new data.
+#        <example>The following code snippet illustrates how to replace the string value with data column:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Replace the oldValue by data column
+#        string oldValue = "Find";
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("Dosage", typeof(int));
+#        table.Rows.Add(1);
+#        System.Data.DataColumn dataColumn = table.Columns[0];
+#        worksheet.Replace(oldValue, dataColumn, true);
+#        //Save to file
+#        workbook.SaveToFile("Replace.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="oldValue">String value to replace.</param>
+#    <param name="column">Data table with new data.</param>
+#    <param name="columnHeaders">Indicates whether to import field names.</param>
+#<remarks>
+#             This can be long operation (needs iteration through all cells
+#             in the worksheet). Better use named ranges instead and call
+#             Import function instead of placeholders.
+#             </remarks>
+#        """
+#        intPtrcolumn:c_void_p = column.Ptr
+#
+#        GetDllLibXls().XlsWorksheet_Replace.argtypes=[c_void_p ,c_void_p,c_void_p,c_bool]
+#        CallCFunction(GetDllLibXls().XlsWorksheet_Replace, self.Ptr, oldValue,intPtrcolumn,columnHeaders)
+
+
+#    @dispatch
+#
+#    def Replace(self ,oldValue:str,newValues:'DataTable',columnHeaders:bool):
+#        """
+#    <summary>
+#         Replaces cells' values with new data.
+#        <example>The following code snippet illustrates how to replace the string value with data table:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        workbook.LoadFromFile("Sample.xlsx");
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Replace the oldValue by data table
+#        string oldValue = "Find";
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("Dosage", typeof(int));
+#        table.Rows.Add(1);
+#        worksheet.Replace(oldValue, table, true);
+#        //Save to file
+#        workbook.SaveToFile("Replace.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="oldValue">String value to replace.</param>
+#    <param name="newValues">Data table with new data.</param>
+#    <param name="columnHeaders">Indicates whether to import field names.</param>
+#<remarks>
+#             This can be long operation (needs iteration through all cells
+#             in the worksheet). Better use named ranges instead and call
+#             Import function instead of placeholders.
+#             </remarks>
+#        """
+#        intPtrnewValues:c_void_p = newValues.Ptr
+#
+#        GetDllLibXls().XlsWorksheet_ReplaceONC.argtypes=[c_void_p ,c_void_p,c_void_p,c_bool]
+#        CallCFunction(GetDllLibXls().XlsWorksheet_ReplaceONC, self.Ptr, oldValue,intPtrnewValues,columnHeaders)
+
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValue:DateTime):
+        """
+    <summary>
+         Replaces cells' values with new data.
+        <example>The following code illustrates how to replace the string value with datetime:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Replace the oldValue by dateTime
+        string oldValue = "Find";
+        DateTime dateTime = DateTime.Now;
+        worksheet.Replace(oldValue, dateTime);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValue">New value for the range with specified string.</param>
+<remarks>
+             This can be long operation (needs iteration through all cells
+             in the worksheet). Better use named ranges instead and call
+             Import function instead of placeholders.
+             </remarks>
+        """
+        intPtrnewValue:c_void_p = newValue.Ptr
+
+        GetDllLibXls().XlsWorksheet_ReplaceON.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_ReplaceON, self.Ptr, oldValue,intPtrnewValue)
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValue:float):
+        """
+    <summary>
+         Replaces cells' values with new data.
+        <example>The following code snippet illustrates how to replace the string with double:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Replace the oldValue by double
+        string oldValue = "Ten";
+        worksheet.Replace(oldValue, 10.0);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValue">New value for the range with specified string.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_ReplaceON1.argtypes=[c_void_p ,c_void_p,c_double]
+        CallCFunction(GetDllLibXls().XlsWorksheet_ReplaceON1, self.Ptr, oldValue,newValue)
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValues:List[float],isVertical:bool):
+        """
+    <summary>
+         Replaces cells' values with new data.
+        <example>The following code snippet illustrates how to replace the string with array of double values:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Replace the oldValue by array of double values
+        string oldValue = "Find";
+        double[] newValues = { 1.0, 2.0 };
+        worksheet.Replace(oldValue, newValues, true);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValues">Array of new values.</param>
+    <param name="isVertical">Indicates whether array should be inserted vertically.</param>
+<remarks>
+             This can be long operation (needs iteration through all cells
+             in the worksheet). Better use named ranges instead and call
+             Import function instead of placeholders.
+             </remarks>
+        """
+        #arraynewValues:ArrayTypenewValues = ""
+        countnewValues = len(newValues)
+        ArrayTypenewValues = c_double * countnewValues
+        arraynewValues = ArrayTypenewValues()
+        for i in range(0, countnewValues):
+            arraynewValues[i] = newValues[i]
+
+
+        GetDllLibXls().XlsWorksheet_ReplaceONI.argtypes=[c_void_p ,c_void_p,ArrayTypenewValues,c_int,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_ReplaceONI, self.Ptr, oldValue,arraynewValues,countnewValues,isVertical)
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValues:List[int],isVertical:bool):
+        """
+    <summary>
+         Replaces cells' values with new data.
+        <example>The following code snippet illustrates how to replace the string with array of int values:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Replace the oldValue by array of int values
+        string oldValue = "Find";
+        int[] newValues = { 1, 2 };
+        worksheet.Replace(oldValue, newValues, true);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValues">Array of new values.</param>
+    <param name="isVertical">Indicates whether array should be inserted vertically.</param>
+<remarks>
+             This can be long operation (needs iteration through all cells
+             in the worksheet). Better use named ranges instead and call
+             Import function instead of placeholders.
+             </remarks>
+        """
+        #arraynewValues:ArrayTypenewValues = ""
+        countnewValues = len(newValues)
+        ArrayTypenewValues = c_int * countnewValues
+        arraynewValues = ArrayTypenewValues()
+        for i in range(0, countnewValues):
+            arraynewValues[i] = newValues[i]
+
+
+        GetDllLibXls().XlsWorksheet_ReplaceONI1.argtypes=[c_void_p ,c_void_p,ArrayTypenewValues,c_int,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_ReplaceONI1, self.Ptr, oldValue,arraynewValues,countnewValues,isVertical)
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValue:str):
+        """
+    <summary>
+         Replaces cells' values with new data.
+        <example>The following code snippet illustrates how to replace the string with another string:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Replace the oldValue by newValue
+        string oldValue = "Find";
+        string newValue = "NewValue";
+        worksheet.Replace(oldValue, newValue);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValue">New value for the range with specified string.</param>
+<remarks>
+             This can be long operation (needs iteration through all cells
+             in the worksheet). Better use named ranges instead and call
+             Import function instead of placeholders.
+             </remarks>
+        """
+        
+        GetDllLibXls().XlsWorksheet_ReplaceON11.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_ReplaceON11, self.Ptr, oldValue,newValue)
+
+
+    def ReplaceAll(self ,oldValue:str,newValue:str,matchCase:bool)->int:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_ReplaceAll.argtypes=[c_void_p ,c_void_p,c_void_p,c_bool]
+        GetDllLibXls().XlsWorksheet_ReplaceAll.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_ReplaceAll, self.Ptr, oldValue,newValue,matchCase)
+        return ret
+
+    @dispatch
+
+    def Replace(self ,oldValue:str,newValues:List[str],isVertical:bool):
+        """
+    <summary>
+         Replaces cells' values with new data.
+        <example>The following code snippet illustrates how to replace the string with array of string values:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Replace the oldValue by array of string values
+        string oldValue = "Find";
+        string[] newValues = { "X values", "Y values" };
+        worksheet.Replace(oldValue, newValues , true);
+        //Save to file
+        workbook.SaveToFile("Replace.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="oldValue">String value to replace.</param>
+    <param name="newValues">Array of new values.</param>
+    <param name="isVertical">Indicates whether array should be inserted vertically.</param>
+<remarks>
+             This can be long operation (needs iteration through all cells
+             in the worksheet). Better use named ranges instead and call
+             Import function instead of placeholders.
+             </remarks>
+        """
+        #arraynewValues:ArrayTypenewValues = ""
+        countnewValues = len(newValues)
+        ArrayTypenewValues = c_wchar_p * countnewValues
+        arraynewValues = ArrayTypenewValues()
+        for i in range(0, countnewValues):
+            arraynewValues[i] = newValues[i]
+
+
+        GetDllLibXls().XlsWorksheet_ReplaceONI11.argtypes=[c_void_p ,c_void_p,ArrayTypenewValues,c_int,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_ReplaceONI11, self.Ptr, oldValue,arraynewValues,countnewValues,isVertical)
+
+    @dispatch
+
+    def SaveToImage(self ,firstRow:int,firstColumn:int,lastRow:int,lastColumn:int)->Stream:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_SaveToImage.argtypes=[c_void_p ,c_int,c_int,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_SaveToImage.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_SaveToImage, self.Ptr, firstRow,firstColumn,lastRow,lastColumn)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def SaveToImage(self ,fileName:str,firstRow:int,firstColumn:int,lastRow:int,lastColumn:int):
+        """
+    <summary>
+        Save worksheet to image.
+    </summary>
+    <param name="fileName">file Name</param>
+    <param name="firstRow"></param>
+    <param name="firstColumn"></param>
+    <param name="lastRow"></param>
+    <param name="lastColumn"></param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SaveToImageFFFLL.argtypes=[c_void_p ,c_void_p,c_int,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToImageFFFLL, self.Ptr, fileName,firstRow,firstColumn,lastRow,lastColumn)
+
+    @dispatch
+
+    def SaveToImage(self ,fileName:str):
+        """
+    <summary>
+        Save worksheet to image.
+    </summary>
+    <param name="fileName">file Name</param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SaveToImageF.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToImageF, self.Ptr, fileName)
+
+#    @dispatch
+
+#    def SaveToImage(self ,fileName:str,format:ImageFormat):
+#        """
+#<summary></summary>
+#    <param name="fileName">file name</param>
+#    <param name="format">file format</param>
+#        """
+#        intPtrformat:c_void_p = format.Ptr
+
+#        GetDllLibXls().XlsWorksheet_SaveToImageFF.argtypes=[c_void_p ,c_void_p,c_void_p]
+#        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToImageFF, self.Ptr, fileName,intPtrformat)
+
+
+    def ToImage(self ,firstRow:int,firstColumn:int,lastRow:int,lastColumn:int)->'Stream':
+        """
+<summary></summary>
+    <param name="firstRow">One-based index of the first row to convert.</param>
+    <param name="firstColumn">One-based index of the first column to convert.</param>
+    <param name="lastRow">One-based index of the last row to convert.</param>
+    <param name="lastColumn">One-based index of the last column to convert.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_ToImage.argtypes=[c_void_p ,c_int,c_int,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_ToImage.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_ToImage, self.Ptr, firstRow,firstColumn,lastRow,lastColumn)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def SaveToImage(self ,stream:Stream,firstRow:int,firstColumn:int,lastRow:int,lastColumn:int,imageType:ImageType)->Stream:
+        """
+    <summary>
+         Save worksheet into image.
+        <example>The following code illustrates how to convert the specified range into image with the specified type:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Creat stream
+        Stream stream = new MemoryStream();
+        //Save to image
+        System.Drawing.Image image = worksheet.SaveToImage(stream,1, 1, 10, 20, Spire.Xls.ImageType.Bitmap);
+        image.Save("Sample.png", System.Drawing.Imaging.ImageFormat.Png);
+        </code>
+        </example>
+    </summary>
+    <param name="stream">Output stream. It is ignored if null.</param>
+    <param name="firstRow">One-based index of the first row to convert.</param>
+    <param name="firstColumn">One-based index of the first column to convert.</param>
+    <param name="lastRow">One-based index of the last row to convert.</param>
+    <param name="lastColumn">One-based index of the last column to convert.</param>
+    <param name="imageType">Type of the image to create.</param>
+    <returns>Created image.</returns>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        enumimageType:c_int = imageType.value
+
+        GetDllLibXls().XlsWorksheet_SaveToImageSFFLLI.argtypes=[c_void_p ,c_void_p,c_int,c_int,c_int,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_SaveToImageSFFLLI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_SaveToImageSFFLLI, self.Ptr, intPtrstream,firstRow,firstColumn,lastRow,lastColumn,enumimageType)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def SaveToImage(self ,stream:Stream,firstRow:int,firstColumn:int,lastRow:int,lastColumn:int,emfType:EmfType)->Stream:
+        """
+    <summary>
+        Converts range into image.
+    </summary>
+    <param name="outputStream">Output stream. It is ignored if null.</param>
+    <param name="firstRow">One-based index of the first row to convert.</param>
+    <param name="firstColumn">One-based index of the first column to convert.</param>
+    <param name="lastRow">One-based index of the last row to convert.</param>
+    <param name="lastColumn">One-based index of the last column to convert.</param>
+    <param name="emfType">Metafile EmfType.</param>
+    <returns>Created image.</returns>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        enumemfType:c_int = emfType.value
+
+        GetDllLibXls().XlsWorksheet_SaveToImageSFFLLE.argtypes=[c_void_p ,c_void_p,c_int,c_int,c_int,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_SaveToImageSFFLLE.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_SaveToImageSFFLLE, self.Ptr, intPtrstream,firstRow,firstColumn,lastRow,lastColumn,enumemfType)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def SaveToImage(self ,stream:Stream,firstRow:int,firstColumn:int,lastRow:int,lastColumn:int,imageType:ImageType,emfType:EmfType)->Stream:
+        """
+    <summary>
+        Converts range into image.
+    </summary>
+    <param name="firstRow">One-based index of the first row to convert.</param>
+    <param name="firstColumn">One-based index of the first column to convert.</param>
+    <param name="lastRow">One-based index of the last row to convert.</param>
+    <param name="lastColumn">One-based index of the last column to convert.</param>
+    <param name="imageType">Type of the image to create.</param>
+    <param name="outputStream">Output stream. It is ignored if null.</param>
+    <param name="emfType">Metafile EmfType.</param>
+    <returns>Created image.</returns>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        enumimageType:c_int = imageType.value
+        enumemfType:c_int = emfType.value
+
+        GetDllLibXls().XlsWorksheet_SaveToImageSFFLLIE.argtypes=[c_void_p ,c_void_p,c_int,c_int,c_int,c_int,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_SaveToImageSFFLLIE.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_SaveToImageSFFLLIE, self.Ptr, intPtrstream,firstRow,firstColumn,lastRow,lastColumn,enumimageType,enumemfType)
+        ret = None if intPtr==None else Stream(intPtr)
+        return ret
+
+
+
+    def SaveToEMFImage(self ,FilePath:str,firstRow:int,firstColumn:int,lastRow:int,lastColumn:int,emfType:'EmfType'):
+        """
+
+        """
+        enumemfType:c_int = emfType.value
+
+        GetDllLibXls().XlsWorksheet_SaveToEMFImage.argtypes=[c_void_p ,c_void_p,c_int,c_int,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToEMFImage, self.Ptr, FilePath,firstRow,firstColumn,lastRow,lastColumn,enumemfType)
+
+    @dispatch
+
+    def SaveToHtml(self ,stream:Stream):
+        """
+    <summary>
+        Save to HTML stream.
+            <example>The following code snippets illustrates how to save as html as stream:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Creat stream
+        Stream stream = new MemoryStream();
+        //Save to HTML stream
+        worksheet.SaveToHtml(stream);
+        </code>
+        </example>
+    </summary>
+    <param name="stream">Stream object</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().XlsWorksheet_SaveToHtml.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToHtml, self.Ptr, intPtrstream)
+
+    @dispatch
+
+    def SaveToHtml(self ,stream:Stream,saveOption:HTMLOptions):
+        """
+    <summary>
+        Saves work sheet to HTML.
+            <example>The following code snippets illustrates how to save as html as stream with Save option:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Creat stream
+        Stream stream = new MemoryStream();
+        //Save to HTML stream
+        worksheet.SaveToHtml(stream, Spire.Xls.Core.Spreadsheet.HTMLOptions.Default);
+        </code>
+        </example>
+    </summary>
+    <param name="stream">The stream</param>
+    <param name="saveOption">The option</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        intPtrsaveOption:c_void_p = saveOption.Ptr
+
+        GetDllLibXls().XlsWorksheet_SaveToHtmlSS.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToHtmlSS, self.Ptr, intPtrstream,intPtrsaveOption)
+
+    @dispatch
+
+    def SaveToHtml(self ,filename:str):
+        """
+    <summary>
+        Save to HTML file.
+            <example>The following code snippets illustrates how to save as html to the specified file name:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Save to HTML file
+        worksheet.SaveToHtml("Output.html");
+        </code>
+        </example>
+    </summary>
+    <param name="filename">File name</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SaveToHtmlF.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToHtmlF, self.Ptr, filename)
+
+    @dispatch
+
+    def SaveToHtml(self ,fileName:str,saveOption:HTMLOptions):
+        """
+    <summary>
+        Saves as HTML.
+            <example>The following code snippets illustrates how to save as html to the specified file name and save option:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Save to HTML file
+        worksheet.SaveToHtml("Sample.html" , Spire.Xls.Core.Spreadsheet.HTMLOptions.Default);
+        </code>
+        </example>
+    </summary>
+    <param name="fileName">The filename</param>
+    <param name="saveOption">The option</param>
+        """
+        intPtrsaveOption:c_void_p = saveOption.Ptr
+
+        GetDllLibXls().XlsWorksheet_SaveToHtmlFS.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToHtmlFS, self.Ptr, fileName,intPtrsaveOption)
+
+    @dispatch
+
+    def SaveToFile(self ,fileName:str,separator:str):
+        """
+    <summary>
+        Save worksheet to file.
+            <example>The following code illustrates how to saves the worksheet in a different file with separator:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Save to file
+        worksheet.SaveToFile("SaveToFile.csv" , ",");
+        </code>
+        </example>
+    </summary>
+    <param name="fileName">File name.</param>
+    <param name="separator">Seperator.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SaveToFile.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToFile, self.Ptr, fileName,separator)
+
+    @dispatch
+
+    def SaveToFile(self ,fileName:str,separator:str,retainHiddenData:bool):
+        """
+    <summary>
+        Save worksheet to file.
+    </summary>
+    <param name="fileName">File name.</param>
+    <param name="separator">Seperator.</param>
+    <param name="retainHiddenData">retain hidden data</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SaveToFileFSR.argtypes=[c_void_p ,c_void_p,c_void_p,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToFileFSR, self.Ptr, fileName,separator,retainHiddenData)
+
+    @dispatch
+
+    def SaveToFile(self ,fileName:str,separator:str,encoding:Encoding):
+        """
+    <summary>
+        Save worksheet to file..
+    </summary>
+    <param name="fileName">File name.</param>
+    <param name="separator">Seperator.</param>
+    <param name="encoding">Encoding to use.</param>
+        """
+        intPtrencoding:c_void_p = encoding.Ptr
+
+        GetDllLibXls().XlsWorksheet_SaveToFileFSE.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToFileFSE, self.Ptr, fileName,separator,intPtrencoding)
+
+    @dispatch
+
+    def SaveToStream(self ,stream:Stream,separator:str):
+        """
+    <summary>
+        Save worksheet to stream.
+            <example>The following code illustrates how to saves the worksheet as stream with separator:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create stream
+        Stream stream = new MemoryStream();
+        //Save to stream
+        worksheet.SaveToStream(stream , ",");
+        </code>
+        </example>
+    </summary>
+    <param name="stream">Stream object.</param>
+    <param name="separator">Seperator.</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().XlsWorksheet_SaveToStream.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToStream, self.Ptr, intPtrstream,separator)
+
+    @dispatch
+
+    def SaveToStream(self ,stream:Stream,separator:str,retainHiddenData:bool):
+        """
+    <summary>
+        Save worksheet to stream.
+    </summary>
+    <param name="stream">Stream object.</param>
+    <param name="separator">Seperator.</param>
+    <param name="retainHiddenData">retain hidden data</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().XlsWorksheet_SaveToStreamSSR.argtypes=[c_void_p ,c_void_p,c_void_p,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToStreamSSR, self.Ptr, intPtrstream,separator,retainHiddenData)
+
+    @dispatch
+
+    def SaveToStream(self ,stream:Stream,separator:str,encoding:Encoding):
+        """
+    <summary>
+        Save worksheet to stream.
+    </summary>
+    <param name="stream">Stream to save.</param>
+    <param name="separator">Current seperator.</param>
+    <param name="encoding">Encoding to use.</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        intPtrencoding:c_void_p = encoding.Ptr
+
+        GetDllLibXls().XlsWorksheet_SaveToStreamSSE.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToStreamSSE, self.Ptr, intPtrstream,separator,intPtrencoding)
+
+
+    def SaveToXps(self ,fileName:str):
+        """
+    <summary>
+         Saves specific worksheet to xps.
+    </summary>
+    <param name="fileName">File name.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SaveToXps.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToXps, self.Ptr, fileName)
+
+    @dispatch
+
+    def SaveToPdf(self ,fileName:str,fileFormat:FileFormat):
+        """
+    <summary>
+        Save worksheet to pdf.
+    </summary>
+    <param name="fileName">File name.</param>
+        """
+        enumfileFormat:c_int = fileFormat.value
+
+        GetDllLibXls().XlsWorksheet_SaveToPdf.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToPdf, self.Ptr, fileName,enumfileFormat)
+
+    @dispatch
+
+    def SaveToPdf(self ,fileName:str):
+        """
+    <summary>
+        Save worksheet to pdf.
+    </summary>
+    <param name="fileName">File name.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SaveToPdfF.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToPdfF, self.Ptr, fileName)
+
+    @dispatch
+
+    def SaveToPdfStream(self ,stream:Stream,fileFormat:FileFormat):
+        """
+
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        enumfileFormat:c_int = fileFormat.value
+
+        GetDllLibXls().XlsWorksheet_SaveToPdfStream.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToPdfStream, self.Ptr, intPtrstream,enumfileFormat)
+
+    @dispatch
+
+    def SaveToPdfStream(self ,stream:Stream):
+        """
+    <summary>
+        Save worksheet to pdf Stream.
+    </summary>
+    <param name="stream">Stream.</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().XlsWorksheet_SaveToPdfStreamS.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SaveToPdfStreamS, self.Ptr, intPtrstream)
+
+
+    def ToSVGStream(self ,stream:'Stream',firstRow:int,firstColumn:int,lastRow:int,lastColumn:int):
+        """
+    <summary>
+        Convert CellRange to Svg stream
+    </summary>
+    <param name="stream">stream.</param>
+    <param name="firstRow">One-based index of the first row to convert.</param>
+    <param name="firstColumn">One-based index of the first column to convert.</param>
+    <param name="lastRow">One-based index of the last row to convert.</param>
+    <param name="lastColumn">One-based index of the last column to convert.</param>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().XlsWorksheet_ToSVGStream.argtypes=[c_void_p ,c_void_p,c_int,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_ToSVGStream, self.Ptr, intPtrstream,firstRow,firstColumn,lastRow,lastColumn)
+
+
+    def SetBlank(self ,iRow:int,iColumn:int):
+        """
+    <summary>
+        Sets blank in specified cell.
+    </summary>
+    <param name="iRow">One-based row index  of the cell to set value.</param>
+    <param name="iColumn">One-based column index of the cell to set value.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetBlank.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetBlank, self.Ptr, iRow,iColumn)
+
+
+    def SetBoolean(self ,iRow:int,iColumn:int,value:bool):
+        """
+    <summary>
+        Sets value in the specified cell.
+    </summary>
+    <param name="iRow">One-based row index  of the cell to set value.</param>
+    <param name="iColumn">One-based column index of the cell to set value.</param>
+    <param name="value">Value to set.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetBoolean.argtypes=[c_void_p ,c_int,c_int,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetBoolean, self.Ptr, iRow,iColumn,value)
+
+    @dispatch
+
+    def SetColumnWidthInPixels(self ,iColumn:int,value:int):
+        """
+    <summary>
+         Sets column width in pixels.
+        <example>The following code illustrates how to set width for a column:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set column width
+        worksheet.SetColumnWidthInPixels(2, 160);
+        //Save to file
+        workbook.SaveToFile("SetColumnWidthInPixels.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="iColumn">One-based column index.</param>
+    <param name="value">Width in pixels to set.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetColumnWidthInPixels.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetColumnWidthInPixels, self.Ptr, iColumn,value)
+
+
+    def SetColumnWidth(self ,columnIndex:int,width:float):
+        """
+    <summary>
+        Set solumn width
+    </summary>
+    <param name="columnIndex">Column index.</param>
+    <param name="width">Width to set.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetColumnWidth.argtypes=[c_void_p ,c_int,c_double]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetColumnWidth, self.Ptr, columnIndex,width)
+
+    @dispatch
+
+    def SetColumnWidthInPixels(self ,columnIndex:int,count:int,value:int):
+        """
+    <summary>
+        Sets the width of the specified columns. 
+    </summary>
+    <param name="columnIndex">Column index</param>
+    <param name="count">count</param>
+    <param name="value">Value</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetColumnWidthInPixelsCCV.argtypes=[c_void_p ,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetColumnWidthInPixelsCCV, self.Ptr, columnIndex,count,value)
+
+    @dispatch
+
+    def SetDefaultColumnStyle(self ,columnIndex:int,defaultStyle:IStyle):
+        """
+    <summary>
+        Sets default style for column.
+    </summary>
+    <param name="columnIndex">Column index.</param>
+    <param name="defaultStyle">Default style.</param>
+        """
+        intPtrdefaultStyle:c_void_p = defaultStyle.Ptr
+
+        GetDllLibXls().XlsWorksheet_SetDefaultColumnStyle.argtypes=[c_void_p ,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetDefaultColumnStyle, self.Ptr, columnIndex,intPtrdefaultStyle)
+
+    @dispatch
+
+    def SetDefaultColumnStyle(self ,firstColumnIndex:int,lastColumnIndex:int,defaultStyle:IStyle):
+        """
+
+        """
+        intPtrdefaultStyle:c_void_p = defaultStyle.Ptr
+
+        GetDllLibXls().XlsWorksheet_SetDefaultColumnStyleFLD.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetDefaultColumnStyleFLD, self.Ptr, firstColumnIndex,lastColumnIndex,intPtrdefaultStyle)
+
+    @dispatch
+
+    def SetDefaultRowStyle(self ,rowIndex:int,defaultStyle:IStyle):
+        """
+
+        """
+        intPtrdefaultStyle:c_void_p = defaultStyle.Ptr
+
+        GetDllLibXls().XlsWorksheet_SetDefaultRowStyle.argtypes=[c_void_p ,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetDefaultRowStyle, self.Ptr, rowIndex,intPtrdefaultStyle)
+
+    @dispatch
+
+    def SetDefaultRowStyle(self ,firstRowIndex:int,lastRowIndex:int,defaultStyle:IStyle):
+        """
+
+        """
+        intPtrdefaultStyle:c_void_p = defaultStyle.Ptr
+
+        GetDllLibXls().XlsWorksheet_SetDefaultRowStyleFLD.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetDefaultRowStyleFLD, self.Ptr, firstRowIndex,lastRowIndex,intPtrdefaultStyle)
+
+    @dispatch
+
+    def SetError(self ,iRow:int,iColumn:int,value:str):
+        """
+    <summary>
+        Sets error in the specified cell.
+    </summary>
+    <param name="iRow">One-based row index  of the cell to set value.</param>
+    <param name="iColumn">One-based column index of the cell to set value.</param>
+    <param name="value">Error to set.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetError.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetError, self.Ptr, iRow,iColumn,value)
+
+    @dispatch
+
+    def SetError(self ,iRow:int,iColumn:int,value:str,isSetText:bool):
+        """
+<summary></summary>
+    <param name="iRow"></param>
+    <param name="iColumn"></param>
+    <param name="value"></param>
+    <param name="isSetText"></param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetErrorIIVI.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetErrorIIVI, self.Ptr, iRow,iColumn,value,isSetText)
+
+    @dispatch
+
+    def SetFormula(self ,iRow:int,iColumn:int,value:str):
+        """
+    <summary>
+        Sets formula in the specified cell.
+    </summary>
+    <param name="iRow">One-based row index  of the cell to set value.</param>
+    <param name="iColumn">One-based column index of the cell to set value.</param>
+    <param name="value">Formula to set.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetFormula.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetFormula, self.Ptr, iRow,iColumn,value)
+
+    @dispatch
+
+    def SetFormula(self ,iRow:int,iColumn:int,value:str,bIsR1C1:bool):
+        """
+    <summary>
+        Sets formula in the specified cell.
+    </summary>
+    <param name="iRow">One-based row index  of the cell to set value.</param>
+    <param name="iColumn">One-based column index of the cell to set value.</param>
+    <param name="value">Formula to set.</param>
+    <param name="bIsR1C1">Indicates is formula in R1C1 notation.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetFormulaIIVB.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetFormulaIIVB, self.Ptr, iRow,iColumn,value,bIsR1C1)
+
+
+    def SetFormulaBoolValue(self ,iRow:int,iColumn:int,value:bool):
+        """
+    <summary>
+        Sets formula bool value.
+    </summary>
+    <param name="iRow">One based row index.</param>
+    <param name="iColumn">One based column index.</param>
+    <param name="value">Represents formula bool value for set.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetFormulaBoolValue.argtypes=[c_void_p ,c_int,c_int,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetFormulaBoolValue, self.Ptr, iRow,iColumn,value)
+
+
+    def SetFormulaErrorValue(self ,iRow:int,iColumn:int,value:str):
+        """
+    <summary>
+        Sets formula error value.
+    </summary>
+    <param name="iRow">One based row index.</param>
+    <param name="iColumn">One based column index.</param>
+    <param name="value">Represents formula error value for set.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetFormulaErrorValue.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetFormulaErrorValue, self.Ptr, iRow,iColumn,value)
+
+
+    def SetFormulaNumberValue(self ,iRow:int,iColumn:int,value:float):
+        """
+    <summary>
+        Sets formula number value.
+    </summary>
+    <param name="iRow">One based row index.</param>
+    <param name="iColumn">One based column index.</param>
+    <param name="value">Represents formula number value for set.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetFormulaNumberValue.argtypes=[c_void_p ,c_int,c_int,c_double]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetFormulaNumberValue, self.Ptr, iRow,iColumn,value)
+
+
+    def SetFormulaStringValue(self ,iRow:int,iColumn:int,value:str):
+        """
+    <summary>
+        Sets formula string value.
+    </summary>
+    <param name="iRow">One based row index.</param>
+    <param name="iColumn">One based column index.</param>
+    <param name="value">Represents formula string value for set.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetFormulaStringValue.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetFormulaStringValue, self.Ptr, iRow,iColumn,value)
+
+
+    def SetNumber(self ,iRow:int,iColumn:int,value:float):
+        """
+    <summary>
+        Sets value in the specified cell.
+    </summary>
+    <param name="iRow">One-based row index  of the cell to set value.</param>
+    <param name="iColumn">One-based column index of the cell to set value.</param>
+    <param name="value">Value to set.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetNumber.argtypes=[c_void_p ,c_int,c_int,c_double]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetNumber, self.Ptr, iRow,iColumn,value)
+
+
+    def SetRowHeightInPixels(self ,rowIndex:int,count:int,value:float):
+        """
+    <summary>
+        Set Row height from Start Row index
+    </summary>
+    <param name="rowIndex">Row index</param>
+    <param name="Count">count</param>
+    <param name="value">Value</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetRowHeightInPixels.argtypes=[c_void_p ,c_int,c_int,c_double]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetRowHeightInPixels, self.Ptr, rowIndex,count,value)
+
+
+    def SetRowHeight(self ,rowIndex:int,height:float):
+        """
+    <summary>
+        Sets the height of the specified row. 
+    </summary>
+    <param name="rowIndex">Row index.</param>
+    <param name="height">Height.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetRowHeight.argtypes=[c_void_p ,c_int,c_double]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetRowHeight, self.Ptr, rowIndex,height)
+
+
+    def SetRowHeightPixels(self ,rowIndex:int,height:float):
+        """
+    <summary>
+         Sets the height of the specified row. 
+        <example>The following code illustrates how to set height for a row:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set row height
+        worksheet.SetRowHeightPixels(3, 150);
+        //Save to file
+        workbook.SaveToFile("SetRowHeightPixels.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="rowIndex">Row index.</param>
+    <param name="height">Height.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetRowHeightPixels.argtypes=[c_void_p ,c_int,c_double]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetRowHeightPixels, self.Ptr, rowIndex,height)
+
+
+    def SetText(self ,iRow:int,iColumn:int,value:str):
+        """
+    <summary>
+        Sets text in the specified cell.
+    </summary>
+    <param name="iRow">One-based row index  of the cell to set value.</param>
+    <param name="iColumn">One-based column index of the cell to set value.</param>
+    <param name="value">Text to set.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetText.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetText, self.Ptr, iRow,iColumn,value)
+
+
+    def SetValue(self ,rowIndex:int,columnIndex:int,stringValue:str):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetValue.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetValue, self.Ptr, rowIndex,columnIndex,stringValue)
+
+    @dispatch
+
+    def SetCellValue(self ,rowIndex:int,columnIndex:int,boolValue:bool):
+        """
+    <summary>
+        Sets value in the specified cell.
+    </summary>
+    <param name="rowIndex">Row index.</param>
+    <param name="columnIndex">Column index.</param>
+    <param name="boolValue">Value to set.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetCellValue.argtypes=[c_void_p ,c_int,c_int,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetCellValue, self.Ptr, rowIndex,columnIndex,boolValue)
+
+    @dispatch
+
+    def SetCellValue(self ,rowIndex:int,columnIndex:int,stringValue:str):
+        """
+    <summary>
+        Sets value in the specified cell.
+    </summary>
+    <param name="rowIndex">Row index</param>
+    <param name="columnIndex">Column index.</param>
+    <param name="stringValue">Value to set.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetCellValueRCS.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetCellValueRCS, self.Ptr, rowIndex,columnIndex,stringValue)
+
+    @property
+    def HasMergedCells(self)->bool:
+        """
+    <summary>
+        Indicates whether worksheet has merged cells.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_HasMergedCells.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_HasMergedCells.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_HasMergedCells, self.Ptr)
+        return ret
+
+    @property
+    def HasOleObjects(self)->bool:
+        """
+    <summary>
+         Indicats whether there is OLE object.
+        <example>The following code illustrates how to access the IListObjects collection in the worksheet to add a new IOleObject and check Ole Object:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create image stream
+        System.Drawing.Image image = System.Drawing.Image.FromFile("image.png");
+        //Add ole object
+        IOleObject oleObject = worksheet.OleObjects.Add("Shapes.xlsx", image, OleLinkType.Embed);
+        //Check HasOleObject.Output will be true.</para>
+                 Console.Write(worksheet.HasOleObjects);
+                 
+                 <para>//Save to file
+        workbook.SaveToFile("HasOleObjects.xlsx");
+        </code>
+        </example>
+    </summary>
+<value>
+  <c>true</c> if this instance is OLE object; otherwise, <c>false</c>.
+             </value>
+        """
+        GetDllLibXls().XlsWorksheet_get_HasOleObjects.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_HasOleObjects.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_HasOleObjects, self.Ptr)
+        return ret
+
+    @property
+    def HorizontalSplit(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_HorizontalSplit.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_HorizontalSplit.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_HorizontalSplit, self.Ptr)
+        return ret
+
+    @HorizontalSplit.setter
+    def HorizontalSplit(self, value:int):
+        GetDllLibXls().XlsWorksheet_set_HorizontalSplit.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_HorizontalSplit, self.Ptr, value)
+
+    @property
+
+    def HPageBreaks(self)->'IHPageBreaks':
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_HPageBreaks.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_HPageBreaks.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_HPageBreaks, self.Ptr)
+        ret = None if intPtr==None else IHPageBreaks(intPtr)
+        return ret
+
+
+    @property
+
+    def HyperLinks(self)->'IHyperLinks':
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_HyperLinks.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_HyperLinks.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_HyperLinks, self.Ptr)
+        ret = None if intPtr==None else IHyperLinks(intPtr)
+        return ret
+
+
+    @property
+    def IsDisplayZeros(self)->bool:
+        """
+    <summary>
+        Indicates whether zero values to be displayed
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_IsDisplayZeros.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_IsDisplayZeros.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_IsDisplayZeros, self.Ptr)
+        return ret
+
+    @IsDisplayZeros.setter
+    def IsDisplayZeros(self, value:bool):
+        GetDllLibXls().XlsWorksheet_set_IsDisplayZeros.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_IsDisplayZeros, self.Ptr, value)
+
+    @property
+    def IsEmpty(self)->bool:
+        """
+    <summary>
+        Indicates whether worksheet is empty. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_IsEmpty.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_IsEmpty.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_IsEmpty, self.Ptr)
+        return ret
+
+    @property
+    def IsFreezePanes(self)->bool:
+        """
+    <summary>
+        Indicates whether freezed panes are applied.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_IsFreezePanes.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_IsFreezePanes.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_IsFreezePanes, self.Ptr)
+        return ret
+
+    @property
+    def IsStringsPreserved(self)->bool:
+        """
+    <summary>
+        Indicates if all values in the workbook are preserved as strings.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_IsStringsPreserved.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_IsStringsPreserved.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_IsStringsPreserved, self.Ptr)
+        return ret
+
+    @IsStringsPreserved.setter
+    def IsStringsPreserved(self, value:bool):
+        GetDllLibXls().XlsWorksheet_set_IsStringsPreserved.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_IsStringsPreserved, self.Ptr, value)
+
+    @dispatch
+
+    def AddAllowEditRange(self ,title:str,range:CellRange,password:str)->bool:
+        """
+    <summary>
+        AddAllowEditRange : add a range of cells that allow editing
+    </summary>
+    <param name="title">title</param>
+    <param name="range">range</param>
+    <param name="password">password</param>
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().XlsWorksheet_AddAllowEditRange.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+        GetDllLibXls().XlsWorksheet_AddAllowEditRange.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_AddAllowEditRange, self.Ptr, title,intPtrrange,password)
+        return ret
+
+    @dispatch
+
+    def AddAllowEditRange(self ,title:str,range:CellRange)->bool:
+        """
+    <summary>
+        AddAllowEditRange : add a range of cells that allow editing
+    </summary>
+    <param name="title">title</param>
+    <param name="range">range</param>
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().XlsWorksheet_AddAllowEditRangeTR.argtypes=[c_void_p ,c_void_p,c_void_p]
+        GetDllLibXls().XlsWorksheet_AddAllowEditRangeTR.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_AddAllowEditRangeTR, self.Ptr, title,intPtrrange)
+        return ret
+
+    @property
+
+    def ListObjects(self)->'IListObjects':
+        """
+    <summary>
+        Returns all list objects in the worksheet.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_ListObjects.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_ListObjects.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_ListObjects, self.Ptr)
+        ret = None if intPtr==None else ListObjectCollection(intPtr)
+        return ret
+
+
+    @property
+    def FormulasVisible(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_FormulasVisible.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_FormulasVisible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_FormulasVisible, self.Ptr)
+        return ret
+
+    @FormulasVisible.setter
+    def FormulasVisible(self, value:bool):
+        GetDllLibXls().XlsWorksheet_set_FormulasVisible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_FormulasVisible, self.Ptr, value)
+
+    @property
+    def RowColumnHeadersVisible(self)->bool:
+        """
+    <summary>
+        True if row and column headers are visible.
+            False otherwise.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_RowColumnHeadersVisible.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_RowColumnHeadersVisible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_RowColumnHeadersVisible, self.Ptr)
+        return ret
+
+    @RowColumnHeadersVisible.setter
+    def RowColumnHeadersVisible(self, value:bool):
+        GetDllLibXls().XlsWorksheet_set_RowColumnHeadersVisible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_RowColumnHeadersVisible, self.Ptr, value)
+
+    @property
+    def ProtectContents(self)->bool:
+        """
+    <summary>
+        Indicates whether current sheet is protected.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_ProtectContents.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_ProtectContents.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_ProtectContents, self.Ptr)
+        return ret
+
+    @property
+
+    def PivotTables(self)->'PivotTablesCollection':
+        """
+    <summary>
+        Returns charts collection. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_PivotTables.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_PivotTables.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_PivotTables, self.Ptr)
+        ret = None if intPtr==None else PivotTablesCollection(intPtr)
+        return ret
+
+
+    @property
+
+    def QuotedName(self)->str:
+        """
+    <summary>
+        Returns quoted name of the worksheet.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_QuotedName.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_QuotedName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorksheet_get_QuotedName, self.Ptr))
+        return ret
+
+
+    @property
+
+    def DVTable(self)->'IDataValidationTable':
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_DVTable.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_DVTable.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_DVTable, self.Ptr)
+        ret = None if intPtr==None else XlsDataValidationTable(intPtr)
+        return ret
+
+
+    def CalculateAllValue(self):
+        """
+    <summary>
+        Caculate all formula for the specified worksheet
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_CalculateAllValue.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_CalculateAllValue, self.Ptr)
+
+
+    def GetCaculateValue(self ,row:int,col:int)->'str':
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetCaculateValue.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_GetCaculateValue.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_GetCaculateValue, self.Ptr, row,col)
+        ret = None if intPtr==None else PtrToStr(intPtr)
+        return ret
+
+
+
+    def SetCaculateValue(self ,value:'SpireObject',row:int,col:int):
+        """
+
+        """
+        intPtrvalue:c_void_p = value.Ptr
+
+        GetDllLibXls().XlsWorksheet_SetCaculateValue.argtypes=[c_void_p ,c_void_p,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetCaculateValue, self.Ptr, intPtrvalue,row,col)
+
+#    @dispatch
+#
+#    def InsertArray(self ,dateTimeArray:'DateTime[]',firstRow:int,firstColumn:int,isVertical:bool)->int:
+#        """
+#    <summary>
+#         Imports an array of datetimes into worksheet.
+#        <example>The following code illustrates how to Imports an array of DateTime values into a worksheet with the specified row and colum:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Initialize the DateTime Array
+#        DateTime[] arrayDate = new DateTime[4] { DateTime.Parse("06:45"), DateTime.Parse("08:30"), DateTime.Parse("09:40"), DateTime.Parse("10:30") };
+#        //Insert the DateTime Array to Sheet
+#        worksheet.InsertArray(arrayDate, 1, 1, true);
+#        //Save to file
+#        workbook.SaveToFile(InsertArray.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dateTimeArray">Datetime array.</param>
+#    <param name="firstRow">The row number of the first cell to import in.</param>
+#    <param name="firstColumn">The column number of the first cell to import in.</param>
+#    <param name="isVertical">Specifies to import data vertically or horizontally.</param>
+#    <returns></returns>
+#        """
+#        #arraydateTimeArray:ArrayTypedateTimeArray = ""
+#        countdateTimeArray = len(dateTimeArray)
+#        ArrayTypedateTimeArray = c_void_p * countdateTimeArray
+#        arraydateTimeArray = ArrayTypedateTimeArray()
+#        for i in range(0, countdateTimeArray):
+#            arraydateTimeArray[i] = dateTimeArray[i].Ptr
+#
+#
+#        GetDllLibXls().XlsWorksheet_InsertArray.argtypes=[c_void_p ,ArrayTypedateTimeArray,c_int,c_int,c_bool]
+#        GetDllLibXls().XlsWorksheet_InsertArray.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertArray, self.Ptr, arraydateTimeArray,firstRow,firstColumn,isVertical)
+#        return ret
+
+
+    @dispatch
+
+    def InsertArray(self ,doubleArray:List[float],firstRow:int,firstColumn:int,isVertical:bool)->int:
+        """
+    <summary>
+         Imports an array of doubles into a worksheet. 
+        <example>The following code illustrates how to Imports an array of Double values into a worksheet with the specified row and column:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Initialize the double Array
+        double[] arrayDouble = new double[4] { 344.0045, 345.0045, 346.0045, 347.0045 };
+        //Insert the double Array to Sheet
+        worksheet.InsertArray(arrayDouble, 1, 1, true);
+        //Save to file
+        workbook.SaveToFile(InsertArray.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="doubleArray">Double array</param>
+    <param name="firstRow">The row number of the first cell to import in.</param>
+    <param name="firstColumn">The column number of the first cell to import in.</param>
+    <param name="isVertical">Specifies to import data vertically or horizontally.</param>
+    <returns></returns>
+        """
+        #arraydoubleArray:ArrayTypedoubleArray = ""
+        countdoubleArray = len(doubleArray)
+        ArrayTypedoubleArray = c_double * countdoubleArray
+        arraydoubleArray = ArrayTypedoubleArray()
+        for i in range(0, countdoubleArray):
+            arraydoubleArray[i] = doubleArray[i]
+
+
+        GetDllLibXls().XlsWorksheet_InsertArrayDFFI.argtypes=[c_void_p ,ArrayTypedoubleArray,c_int,c_int,c_int,c_bool]
+        GetDllLibXls().XlsWorksheet_InsertArrayDFFI.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertArrayDFFI, self.Ptr, arraydoubleArray,countdoubleArray,firstRow,firstColumn,isVertical)
+        return ret
+
+#    @dispatch
+#
+#    def InsertArray(self ,objects:'T',firstRow:int,firstColumn:int,isVertical:bool)->int:
+#        """
+#
+#        """
+#        intPtrobjects:c_void_p = objects.Ptr
+#
+#        GetDllLibXls().XlsWorksheet_InsertArrayOFFI.argtypes=[c_void_p ,c_void_p,c_int,c_int,c_bool]
+#        GetDllLibXls().XlsWorksheet_InsertArrayOFFI.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertArrayOFFI, self.Ptr, intPtrobjects,firstRow,firstColumn,isVertical)
+#        return ret
+
+
+    @dispatch
+
+    def InsertArray(self ,intArray:List[int],firstRow:int,firstColumn:int,isVertical:bool)->int:
+        """
+    <summary>
+         Imports an array of integer into a worksheet. 
+        <example>The following code illustrates how to Imports an array of integer values into a worksheet with the specified row and column:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Initialize the integer Array
+        int[] arrayInt = new int[4] {1000, 2000, 3000, 4000};
+        //Insert the integer Array to Sheet
+        worksheet.InsertArray(arrayInt, 1, 1, true);
+        //Save to file
+        workbook.SaveToFile(InsertArray.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="intArray">Integer array.</param>
+    <param name="firstRow">The row number of the first cell to import in.</param>
+    <param name="firstColumn">The column number of the first cell to import in.</param>
+    <param name="isVertical">Specifies to import data vertically or horizontally.</param>
+    <returns></returns>
+        """
+        #arrayintArray:ArrayTypeintArray = ""
+        countintArray = len(intArray)
+        ArrayTypeintArray = c_int * countintArray
+        arrayintArray = ArrayTypeintArray()
+        for i in range(0, countintArray):
+            arrayintArray[i] = intArray[i]
+
+
+        GetDllLibXls().XlsWorksheet_InsertArrayIFFI.argtypes=[c_void_p ,ArrayTypeintArray,c_int,c_int,c_int,c_bool]
+        GetDllLibXls().XlsWorksheet_InsertArrayIFFI.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertArrayIFFI, self.Ptr, arrayintArray,countintArray,firstRow,firstColumn,isVertical)
+        return ret
+
+#    @dispatch
+#
+#    def InsertArray(self ,objectArray:'Object[,]',firstRow:int,firstColumn:int)->int:
+#        """
+#
+#        """
+#        #arrayobjectArray:ArrayTypeobjectArray = ""
+#        countobjectArray = len(objectArray)
+#        ArrayTypeobjectArray = c_void_p * countobjectArray
+#        arrayobjectArray = ArrayTypeobjectArray()
+#        for i in range(0, countobjectArray):
+#            arrayobjectArray[i] = objectArray[i].Ptr
+#
+#
+#        GetDllLibXls().XlsWorksheet_InsertArrayOFF.argtypes=[c_void_p ,ArrayTypeobjectArray,c_int,c_int]
+#        GetDllLibXls().XlsWorksheet_InsertArrayOFF.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertArrayOFF, self.Ptr, arrayobjectArray,firstRow,firstColumn)
+#        return ret
+
+
+#    @dispatch
+#
+#    def InsertArray(self ,objectArray:'Object[,]',firstRow:int,firstColumn:int,needConvert:bool)->int:
+#        """
+#    <summary>
+#         Imports an array of objects into a worksheet.
+#        <example>The following code illustrates how to Imports an array of Object into a worksheet with specified alignment:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Initialize the Object Array
+#        object[] array = new object[4] { "Total Income", "Actual Expense", "Expected Expenses", "Profit" };
+#        //Insert the Object Array to Sheet
+#        worksheet.InsertArray(array, 1, 1, true);
+#        //Save to file
+#        workbook.SaveToFile(InsertArray.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="arrObject">Array to import.</param>
+#    <param name="firstRow">The row number of the first cell to import in.</param>
+#    <param name="firstColumn">The column number of the first cell to import in.</param>
+#    <param name="isVertical">TRUE if array should be imported vertically; FALSE - horizontally.</param>
+#    <returns>Number of imported elements.</returns>
+#        """
+#        #arrayobjectArray:ArrayTypeobjectArray = ""
+#        countobjectArray = len(objectArray)
+#        ArrayTypeobjectArray = c_void_p * countobjectArray
+#        arrayobjectArray = ArrayTypeobjectArray()
+#        for i in range(0, countobjectArray):
+#            arrayobjectArray[i] = objectArray[i].Ptr
+#
+#
+#        GetDllLibXls().XlsWorksheet_InsertArrayOFFN.argtypes=[c_void_p ,ArrayTypeobjectArray,c_int,c_int,c_bool]
+#        GetDllLibXls().XlsWorksheet_InsertArrayOFFN.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertArrayOFFN, self.Ptr, arrayobjectArray,firstRow,firstColumn,needConvert)
+#        return ret
+
+
+    @dispatch
+
+    def InsertArray(self ,stringArray:List[str],firstRow:int,firstColumn:int,isVertical:bool)->int:
+        """
+    <summary>
+         Imports an array of strings into a worksheet. 
+        <example>The following code illustrates how to Imports an array of String into a worksheet with specified row and column:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Initialize the string Array
+        string[] arrayString = new string[4] { "Total Income", "Actual Expense", "Expected Expenses", "Profit" };
+        //Insert the string Array to Sheet
+        worksheet.InsertArray(arrayString, 1, 1, true);
+        //Save to file
+        workbook.SaveToFile(InsertArray.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="stringArray">String array.</param>
+    <param name="firstRow">The row number of the first cell to import in.</param>
+    <param name="firstColumn">The column number of the first cell to import in.</param>
+    <param name="isVertical">Specifies to import data vertically or horizontally.</param>
+    <returns></returns>
+        """
+        #arraystringArray:ArrayTypestringArray = ""
+        countstringArray = len(stringArray)
+        ArrayTypestringArray = c_wchar_p * countstringArray
+        arraystringArray = ArrayTypestringArray()
+        for i in range(0, countstringArray):
+            arraystringArray[i] = stringArray[i]
+
+
+        GetDllLibXls().XlsWorksheet_InsertArraySFFI.argtypes=[c_void_p ,ArrayTypestringArray,c_int,c_int,c_int,c_bool]
+        GetDllLibXls().XlsWorksheet_InsertArraySFFI.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertArraySFFI, self.Ptr, arraystringArray,countstringArray,firstRow,firstColumn,isVertical)
+        return ret
+
+    @dispatch
+
+    def InsertArray(self ,arrObject:List[SpireObject],firstRow:int,firstColumn:int,isVertical:bool)->int:
+        """
+    <summary>
+         Imports an array of objects into a worksheet.
+        <example>The following code illustrates how to Imports an array of Object into a worksheet with specified alignment:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Initialize the Object Array
+        object[] array = new object[4] { "Total Income", "Actual Expense", "Expected Expenses", "Profit" };
+        //Insert the Object Array to Sheet
+        worksheet.InsertArray(array, 1, 1, true);
+        //Save to file
+        workbook.SaveToFile(InsertArray.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="arrObject">Array to import.</param>
+    <param name="firstRow">The row number of the first cell to import in.</param>
+    <param name="firstColumn">The column number of the first cell to import in.</param>
+    <param name="isVertical">TRUE if array should be imported vertically; FALSE - horizontally.</param>
+    <returns>Number of imported elements.</returns>
+        """
+        #arrayarrObject:ArrayTypearrObject = ""
+        countarrObject = len(arrObject)
+        ArrayTypearrObject = c_void_p * countarrObject
+        arrayarrObject = ArrayTypearrObject()
+        for i in range(0, countarrObject):
+            arrayarrObject[i] = arrObject[i].Ptr
+
+
+        GetDllLibXls().XlsWorksheet_InsertArrayAFFI.argtypes=[c_void_p ,ArrayTypearrObject,c_int,c_int,c_int,c_bool]
+        GetDllLibXls().XlsWorksheet_InsertArrayAFFI.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertArrayAFFI, self.Ptr, arrayarrObject,countarrObject,firstRow,firstColumn,isVertical)
+        return ret
+
+#
+#    def InsertArrayList(self ,arrayList:'ArrayList',firstRow:int,firstColumn:int,isVertical:bool)->int:
+#        """
+#    <summary>
+#        Imports an arraylist of data into a worksheet. 
+#    </summary>
+#    <param name="arrayList">Data arraylist.</param>
+#    <param name="firstRow">The row number of the first cell to import in.</param>
+#    <param name="firstColumn">The column number of the first cell to import in.</param>
+#    <param name="isVertical">Specifies to import data vertically or horizontally.</param>
+#    <returns></returns>
+#        """
+#        intPtrarrayList:c_void_p = arrayList.Ptr
+#
+#        GetDllLibXls().XlsWorksheet_InsertArrayList.argtypes=[c_void_p ,c_void_p,c_int,c_int,c_bool]
+#        GetDllLibXls().XlsWorksheet_InsertArrayList.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertArrayList, self.Ptr, intPtrarrayList,firstRow,firstColumn,isVertical)
+#        return ret
+
+
+#
+#    def InsertDataColumn(self ,dataColumn:'DataColumn',columnHeaders:bool,firstRow:int,firstColumn:int)->int:
+#        """
+#    <summary>
+#         Imports data column.
+#        <example>The following code illustrates how to Imports data from a DataColumn into a worksheet with the specified row and column:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Insert the DataColumn to worksheet
+#        System.Data.DataColumn column = table.Columns[2];
+#        worksheet.InsertDataColumn(column, true, 1, 1);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataColumn.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataColumn">Data column to import.</param>
+#    <param name="columnHeaders">Indicates whether to import field names.</param>
+#    <param name="firstRow">Index of the first row.</param>
+#    <param name="firstColumn">Index of the first column</param>
+#    <returns></returns>
+#        """
+#        intPtrdataColumn:c_void_p = dataColumn.Ptr
+#
+#        GetDllLibXls().XlsWorksheet_InsertDataColumn.argtypes=[c_void_p ,c_void_p,c_bool,c_int,c_int]
+#        GetDllLibXls().XlsWorksheet_InsertDataColumn.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertDataColumn, self.Ptr, intPtrdataColumn,columnHeaders,firstRow,firstColumn)
+#        return ret
+
+
+#
+#    def InsertDataColumns(self ,dataColumns:'DataColumn[]',columnHeaders:bool,firstRow:int,firstColumn:int)->int:
+#        """
+#    <summary>
+#        Imports array of data columns.
+#    </summary>
+#    <param name="dataColumns">Data columns to import.</param>
+#    <param name="columnHeaders">Indicates whether to import field names.</param>
+#    <param name="firstRow">Index to the first row.</param>
+#    <param name="firstColumn">Index to the first column.</param>
+#    <returns></returns>
+#        """
+#        #arraydataColumns:ArrayTypedataColumns = ""
+#        countdataColumns = len(dataColumns)
+#        ArrayTypedataColumns = c_void_p * countdataColumns
+#        arraydataColumns = ArrayTypedataColumns()
+#        for i in range(0, countdataColumns):
+#            arraydataColumns[i] = dataColumns[i].Ptr
+#
+#
+#        GetDllLibXls().XlsWorksheet_InsertDataColumns.argtypes=[c_void_p ,ArrayTypedataColumns,c_bool,c_int,c_int]
+#        GetDllLibXls().XlsWorksheet_InsertDataColumns.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertDataColumns, self.Ptr, arraydataColumns,columnHeaders,firstRow,firstColumn)
+#        return ret
+
+
+#    @dispatch
+#
+#    def InsertDataTable(self ,dataTable:'DataTable',columnHeaders:bool,firstRow:int,firstColumn:int)->int:
+#        """
+#    <summary>
+#         Imports data from a DataTable into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataTable into a worksheet with the specified row and column:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Insert the DataTable to worksheet
+#        worksheet.InsertDataTable(table, true, 1, 1);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataTable.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataTable">DataTable</param>
+#    <param name="columnHeaders">Indicates whether to import field names.</param>
+#    <param name="firstRow">The row number of the first cell to import in.</param>
+#    <param name="firstColumn">The column number of the first cell to import in.</param>
+#    <returns></returns>
+#        """
+#        intPtrdataTable:c_void_p = dataTable.Ptr
+#
+#        GetDllLibXls().XlsWorksheet_InsertDataTable.argtypes=[c_void_p ,c_void_p,c_bool,c_int,c_int]
+#        GetDllLibXls().XlsWorksheet_InsertDataTable.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertDataTable, self.Ptr, intPtrdataTable,columnHeaders,firstRow,firstColumn)
+#        return ret
+
+
+#    @dispatch
+#
+#    def InsertDataTable(self ,dataTable:'DataTable',columnHeaders:bool,firstRow:int,firstColumn:int,transTypes:bool)->int:
+#        """
+#    <summary>
+#         Imports data from a DataTable into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataTable into a worksheet with the specified row and column along with the preserve type:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Insert the DataTable to worksheet
+#        worksheet.InsertDataTable(table, true, 1, 1 , true);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataTable.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataTable">DataTable</param>
+#    <param name="columnHeaders">Indicates whether to import field names.</param>
+#    <param name="firstRow">The row number of the first cell to import in.</param>
+#    <param name="firstColumn">The column number of the first cell to import in.</param>
+#    <param name="transTypes">Indicates if preserve types when insert data into worksheet </param>
+#    <returns></returns>
+#        """
+#        intPtrdataTable:c_void_p = dataTable.Ptr
+#
+#        GetDllLibXls().XlsWorksheet_InsertDataTableDCFFT.argtypes=[c_void_p ,c_void_p,c_bool,c_int,c_int,c_bool]
+#        GetDllLibXls().XlsWorksheet_InsertDataTableDCFFT.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertDataTableDCFFT, self.Ptr, intPtrdataTable,columnHeaders,firstRow,firstColumn,transTypes)
+#        return ret
+
+
+#    @dispatch
+#
+#    def InsertDataTable(self ,dataTable:'DataTable',columnHeaders:bool,firstRow:int,firstColumn:int,maxRows:int,maxColumns:int)->int:
+#        """
+#    <summary>
+#         Imports data from a DataTable into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataTable into a worksheet with the specified range:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Insert the DataTable to worksheet
+#        worksheet.InsertDataTable(table, true, 1 , 1 , 2 , 2);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataTable.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataTable">DataTable</param>
+#    <param name="columnHeaders">Indicates whether to import field names.</param>
+#    <param name="firstRow">The row number of the first cell to import in.</param>
+#    <param name="firstColumn">The column number of the first cell to import in.</param>
+#    <param name="maxRows">Maximum number of rows to import</param>
+#    <param name="maxColumns">Maximum number of columns to import</param>
+#    <returns></returns>
+#        """
+#        intPtrdataTable:c_void_p = dataTable.Ptr
+#
+#        GetDllLibXls().XlsWorksheet_InsertDataTableDCFFMM.argtypes=[c_void_p ,c_void_p,c_bool,c_int,c_int,c_int,c_int]
+#        GetDllLibXls().XlsWorksheet_InsertDataTableDCFFMM.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertDataTableDCFFMM, self.Ptr, intPtrdataTable,columnHeaders,firstRow,firstColumn,maxRows,maxColumns)
+#        return ret
+
+
+#    @dispatch
+#
+#    def InsertDataTable(self ,dataTable:'DataTable',columnHeaders:bool,firstRow:int,firstColumn:int,maxRows:int,maxColumns:int,transTypes:bool)->int:
+#        """
+#    <summary>
+#         Imports data from a DataTable into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataTable into a worksheet with specified range along with preserve type:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Insert the DataTable to worksheet
+#        worksheet.InsertDataTable(table, true, 1 , 1 , 2 , 2 , true);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataTable.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataTable">Datatable</param>
+#    <param name="columnHeaders">Indicates whether to import field names.</param>
+#    <param name="firstRow">The row number of the first cell to import in.</param>
+#    <param name="firstColumn">The column number of the first cell to import in.</param>
+#    <param name="maxRows">Maximum number of rows to import</param>
+#    <param name="maxColumns">Maximum number of columns to import</param>
+#    <param name="transTypes">Indicates if preserve types when insert data into worksheet </param>
+#    <returns></returns>
+#        """
+#        intPtrdataTable:c_void_p = dataTable.Ptr
+#
+#        GetDllLibXls().XlsWorksheet_InsertDataTableDCFFMMT.argtypes=[c_void_p ,c_void_p,c_bool,c_int,c_int,c_int,c_int,c_bool]
+#        GetDllLibXls().XlsWorksheet_InsertDataTableDCFFMMT.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertDataTableDCFFMMT, self.Ptr, intPtrdataTable,columnHeaders,firstRow,firstColumn,maxRows,maxColumns,transTypes)
+#        return ret
+
+
+#    @dispatch
+#
+#    def InsertDataTable(self ,dataTable:'DataTable',columnHeaders:bool,firstRow:int,firstColumn:int,maxRows:int,maxColumns:int,columnsArray:'DataColumn[]',transTypes:bool)->int:
+#        """
+#    <summary>
+#        Imports data from a DataTable into worksheet
+#    </summary>
+#    <param name="dataTable">DataTable</param>
+#    <param name="columnHeaders">Indicates whether to import field names.</param>
+#    <param name="firstRow">The row number of the first cell to import in.</param>
+#    <param name="firstColumn">The column number of the first cell to import in.</param>
+#    <param name="maxRows">Maximum number of rows to import</param>
+#    <param name="maxColumns">Maximum number of columns to import</param>
+#    <param name="columnsArray">Array of columns to import.</param>
+#    <param name="transTypes">Indicates if preserve types when insert data into worksheet.true is default</param>
+#    <returns></returns>
+#        """
+#        intPtrdataTable:c_void_p = dataTable.Ptr
+#        #arraycolumnsArray:ArrayTypecolumnsArray = ""
+#        countcolumnsArray = len(columnsArray)
+#        ArrayTypecolumnsArray = c_void_p * countcolumnsArray
+#        arraycolumnsArray = ArrayTypecolumnsArray()
+#        for i in range(0, countcolumnsArray):
+#            arraycolumnsArray[i] = columnsArray[i].Ptr
+#
+#
+#        GetDllLibXls().XlsWorksheet_InsertDataTableDCFFMMCT.argtypes=[c_void_p ,c_void_p,c_bool,c_int,c_int,c_int,c_int,ArrayTypecolumnsArray,c_bool]
+#        GetDllLibXls().XlsWorksheet_InsertDataTableDCFFMMCT.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertDataTableDCFFMMCT, self.Ptr, intPtrdataTable,columnHeaders,firstRow,firstColumn,maxRows,maxColumns,arraycolumnsArray,transTypes)
+#        return ret
+
+
+#    @dispatch
+#
+#    def InsertDataView(self ,dataView:'DataView',columnHeaders:bool,firstRow:int,firstColumn:int)->int:
+#        """
+#    <summary>
+#         Imports data from a DataView into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataView into a worksheet with the specified row and column:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Initialize dataview of datatable
+#        System.Data.DataView view = table.DefaultView;
+#        //Import data from DataView
+#        worksheet.InsertDataView(view, true, 1, 1);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataView.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataView">Data view object</param>
+#    <param name="columnHeaders">Indicates whether to import field names.</param>
+#    <param name="firstRow">The row number of the first cell to import in.</param>
+#    <param name="firstColumn">The column number of the first cell to import in.</param>
+#    <returns></returns>
+#        """
+#        intPtrdataView:c_void_p = dataView.Ptr
+#
+#        GetDllLibXls().XlsWorksheet_InsertDataView.argtypes=[c_void_p ,c_void_p,c_bool,c_int,c_int]
+#        GetDllLibXls().XlsWorksheet_InsertDataView.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertDataView, self.Ptr, intPtrdataView,columnHeaders,firstRow,firstColumn)
+#        return ret
+
+
+#    @dispatch
+#
+#    def InsertDataView(self ,dataView:'DataView',columnHeaders:bool,firstRow:int,firstColumn:int,transTypes:bool)->int:
+#        """
+#    <summary>
+#         Imports data from a DataView into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataView into a worksheet with the specified row and column along with preserve type:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Initialize dataview of datatable
+#        System.Data.DataView view = table.DefaultView;
+#        //Import data from DataView
+#        worksheet.InsertDataView(view, true, 1, 1 , true);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataView.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataView">Dataview object.</param>
+#    <param name="columnHeaders">Indicates whether to import field names.</param>
+#    <param name="firstRow">The row number of the first cell to import in.</param>
+#    <param name="firstColumn">The column number of the first cell to import in.</param>
+#    <param name="transTypes">Indicates if preserve types when insert data into worksheet.</param>
+#    <returns></returns>
+#        """
+#        intPtrdataView:c_void_p = dataView.Ptr
+#
+#        GetDllLibXls().XlsWorksheet_InsertDataViewDCFFT.argtypes=[c_void_p ,c_void_p,c_bool,c_int,c_int,c_bool]
+#        GetDllLibXls().XlsWorksheet_InsertDataViewDCFFT.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertDataViewDCFFT, self.Ptr, intPtrdataView,columnHeaders,firstRow,firstColumn,transTypes)
+#        return ret
+
+
+#    @dispatch
+#
+#    def InsertDataView(self ,dataView:'DataView',columnHeaders:bool,firstRow:int,firstColumn:int,maxRows:int,maxColumns:int)->int:
+#        """
+#    <summary>
+#         Imports data from a DataView into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataView into a worksheet with the specified range:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Initialize dataview of datatable
+#        System.Data.DataView view = table.DefaultView;
+#        //Import data from DataView
+#        worksheet.InsertDataView(view, true, 1, 1 , 2 , 2);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataView.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataView">Dataview object.</param>
+#    <param name="columnHeaders">Indicates whether to import field names.</param>
+#    <param name="firstRow">The row number of the first cell to import in.</param>
+#    <param name="firstColumn">The column number of the first cell to import in.</param>
+#    <param name="maxRows">Maximum number of rows to import.</param>
+#    <param name="maxColumns">Maximum number of columns to import.</param>
+#    <returns></returns>
+#        """
+#        intPtrdataView:c_void_p = dataView.Ptr
+#
+#        GetDllLibXls().XlsWorksheet_InsertDataViewDCFFMM.argtypes=[c_void_p ,c_void_p,c_bool,c_int,c_int,c_int,c_int]
+#        GetDllLibXls().XlsWorksheet_InsertDataViewDCFFMM.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertDataViewDCFFMM, self.Ptr, intPtrdataView,columnHeaders,firstRow,firstColumn,maxRows,maxColumns)
+#        return ret
+
+
+#    @dispatch
+#
+#    def InsertDataView(self ,dataView:'DataView',columnHeaders:bool,firstRow:int,firstColumn:int,maxRows:int,maxColumns:int,transTypes:bool)->int:
+#        """
+#    <summary>
+#         Imports data from a DataView into worksheet.
+#        <example>The following code illustrates how to Imports data from a DataView into a worksheet with the specified range along with preserve type:
+#        <code>
+#        //Create worksheet
+#        Workbook workbook = new Workbook();
+#        Worksheet worksheet = workbook.Worksheets[0];
+#        //Create a DataTable
+#        System.Data.DataTable table = new System.Data.DataTable();
+#        table.Columns.Add("ID", typeof(int));
+#                 table.Columns.Add("Item", typeof(string));
+#                 table.Columns.Add("Name", typeof(string));
+#        table.Rows.Add(1, "Soap", "David");
+#                 table.Rows.Add(2, "Paste", "Sam");
+#                 table.Rows.Add(3, "Cream", "Christoff");
+#        //Initialize dataview of datatable
+#        System.Data.DataView view = table.DefaultView;
+#        //Import data from DataView
+#        worksheet.InsertDataView(view, true, 1, 1 , 2 , 2 , true);
+#        //Save to file
+#        workbook.SaveToFile(InsertDataView.xlsx");
+#        </code>
+#        </example>
+#    </summary>
+#    <param name="dataView">Dataview object.</param>
+#    <param name="columnHeaders">Indicates whether to import field names.</param>
+#    <param name="firstRow">The row number of the first cell to import in.</param>
+#    <param name="firstColumn">The column number of the first cell to import in.</param>
+#    <param name="maxRows">Maximum number of rows to import.</param>
+#    <param name="maxColumns">Maximum number of columns to import.</param>
+#    <param name="transTypes">Indicates if preserve types when insert data into worksheet.</param>
+#    <returns></returns>
+#        """
+#        intPtrdataView:c_void_p = dataView.Ptr
+#
+#        GetDllLibXls().XlsWorksheet_InsertDataViewDCFFMMT.argtypes=[c_void_p ,c_void_p,c_bool,c_int,c_int,c_int,c_int,c_bool]
+#        GetDllLibXls().XlsWorksheet_InsertDataViewDCFFMMT.restype=c_int
+#        ret = CallCFunction(GetDllLibXls().XlsWorksheet_InsertDataViewDCFFMMT, self.Ptr, intPtrdataView,columnHeaders,firstRow,firstColumn,maxRows,maxColumns,transTypes)
+#        return ret
+
+
+    @dispatch
+
+    def ImportCustomObjects(self ,list:ICollection,firstRow:int,firstColumn:int,options:ImportObjectOptions)->int:
+        """
+
+        """
+        intPtrlist:c_void_p = list.Ptr
+        intPtroptions:c_void_p = options.Ptr
+
+        GetDllLibXls().XlsWorksheet_ImportCustomObjects.argtypes=[c_void_p ,c_void_p,c_int,c_int,c_void_p]
+        GetDllLibXls().XlsWorksheet_ImportCustomObjects.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_ImportCustomObjects, self.Ptr, intPtrlist,firstRow,firstColumn,intPtroptions)
+        return ret
+
+    @dispatch
+
+    def ImportCustomObjects(self ,list:ICollection,propertyNames:List[str],isPropertyNameShown:bool,firstRow:int,firstColumn:int,rowNumber:int,insertRows:bool,dateFormatString:str,convertStringToNumber:bool)->int:
+        """
+
+        """
+        intPtrlist:c_void_p = list.Ptr
+        #arraypropertyNames:ArrayTypepropertyNames = ""
+        countpropertyNames = len(propertyNames)
+        ArrayTypepropertyNames = c_wchar_p * countpropertyNames
+        arraypropertyNames = ArrayTypepropertyNames()
+        for i in range(0, countpropertyNames):
+            arraypropertyNames[i] = propertyNames[i]
+
+
+        GetDllLibXls().XlsWorksheet_ImportCustomObjectsLPIFFRIDC.argtypes=[c_void_p ,c_void_p,ArrayTypepropertyNames,c_int,c_bool,c_int,c_int,c_int,c_bool,c_void_p,c_bool]
+        GetDllLibXls().XlsWorksheet_ImportCustomObjectsLPIFFRIDC.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_ImportCustomObjectsLPIFFRIDC, self.Ptr, intPtrlist,arraypropertyNames,countpropertyNames,isPropertyNameShown,firstRow,firstColumn,rowNumber,insertRows,dateFormatString,convertStringToNumber)
+        return ret
+
+
+    def IsColumnVisible(self ,columnIndex:int)->bool:
+        """
+    <summary>
+        Indicates whether column is visible.
+    </summary>
+    <param name="columnIndex">Column index.</param>
+    <returns>true - visible, otherwise false.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_IsColumnVisible.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorksheet_IsColumnVisible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_IsColumnVisible, self.Ptr, columnIndex)
+        return ret
+
+
+    def IsExternalFormula(self ,row:int,column:int)->bool:
+        """
+    <summary>
+        Indicates is formula in cell is formula to external workbook.
+    </summary>
+    <param name="row">Represents row index.</param>
+    <param name="column">Represents column index.</param>
+    <returns>If contain extern formula returns true; otherwise false.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_IsExternalFormula.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_IsExternalFormula.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_IsExternalFormula, self.Ptr, row,column)
+        return ret
+
+
+    def IsRowVisible(self ,rowIndex:int)->bool:
+        """
+    <summary>
+        Indicates whether row is visible.
+    </summary>
+    <param name="rowIndex">Row index.</param>
+    <returns>true - visible, otherwise false.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_IsRowVisible.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorksheet_IsRowVisible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_IsRowVisible, self.Ptr, rowIndex)
+        return ret
+
+    @dispatch
+
+    def AutoFitColumn(self ,columnIndex:int):
+        """
+    <summary>
+         Autofit the column width.
+        <example>The following code illustrates how to Auto-fit the column:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet["A1"].Text = "Sample text in cell";
+        //Set auto fit
+        worksheet.AutoFitColumn(1);
+        //Save to file
+        workbook.SaveToFile("AutoFitColumn.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="columnIndex">Column index.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_AutoFitColumn.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_AutoFitColumn, self.Ptr, columnIndex)
+
+    @dispatch
+
+    def AutoFitColumn(self ,columnIndex:int,options:AutoFitterOptions):
+        """
+    <summary>
+        Autofit the column width.
+    </summary>
+    <param name="columnIndex">Column index.</param>
+    <param name="options">auto fit options</param>
+        """
+        intPtroptions:c_void_p = options.Ptr
+
+        GetDllLibXls().XlsWorksheet_AutoFitColumnCO.argtypes=[c_void_p ,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_AutoFitColumnCO, self.Ptr, columnIndex,intPtroptions)
+
+    @dispatch
+
+    def AutoFitColumn(self ,columnIndex:int,firstRow:int,lastRow:int):
+        """
+    <summary>
+        Autofit the column width.
+    </summary>
+    <param name="columnIndex">Column index.</param>
+    <param name="firstRow">One-based index of the first row to be used for autofit operation.</param>
+    <param name="lastRow">One-based index of the last row to be used for autofit operation.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_AutoFitColumnCFL.argtypes=[c_void_p ,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_AutoFitColumnCFL, self.Ptr, columnIndex,firstRow,lastRow)
+
+    @dispatch
+
+    def AutoFitColumn(self ,columnIndex:int,firstRow:int,lastRow:int,options:AutoFitterOptions):
+        """
+    <summary>
+        Autofit the column width.
+    </summary>
+    <param name="columnIndex">Column index.</param>
+    <param name="firstRow">One-based index of the first row to be used for autofit operation.</param>
+    <param name="lastRow">One-based index of the last row to be used for autofit operation.</param>
+    <param name="options">auto fit options</param>
+        """
+        intPtroptions:c_void_p = options.Ptr
+
+        GetDllLibXls().XlsWorksheet_AutoFitColumnCFLO.argtypes=[c_void_p ,c_int,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_AutoFitColumnCFLO, self.Ptr, columnIndex,firstRow,lastRow,intPtroptions)
+
+    @dispatch
+
+    def AutoFitRow(self ,rowIndex:int):
+        """
+    <summary>
+         Autofit the row height.
+        <example>The following code illustrates how to Auto-fit the row:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet["C2"].Value = "Sample text";
+        //Set Style
+        CellStyle style = workbook.Styles.Add("CustomStyle");
+        IFont font = style.Font;
+        font.Size = 18;
+        worksheet["C2"].Style = style;
+        //Set auto fit
+        worksheet.AutoFitRow(2);
+        //Save to file
+        workbook.SaveToFile("AutoFitRow.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="rowIndex">Row index</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_AutoFitRow.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_AutoFitRow, self.Ptr, rowIndex)
+
+    @dispatch
+
+    def AutoFitRow(self ,rowIndex:int,firstColumn:int,lastColumn:int,options:AutoFitterOptions):
+        """
+    <summary>
+        Autofit the row height.
+    </summary>
+    <param name="rowIndex">Row index</param>
+    <param name="firstColumn">One-based index of the first column to be used for autofit operation.</param>
+    <param name="lastColumn">One-based index of the last column to be used for autofit operation.</param>
+    <param name="options">auto fit options</param>
+        """
+        intPtroptions:c_void_p = options.Ptr
+
+        GetDllLibXls().XlsWorksheet_AutoFitRowRFLO.argtypes=[c_void_p ,c_int,c_int,c_int,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_AutoFitRowRFLO, self.Ptr, rowIndex,firstColumn,lastColumn,intPtroptions)
+
+    @dispatch
+
+    def AutoFitRow(self ,rowIndex:int,firstColumn:int,lastColumn:int,bRaiseEvents:bool):
+        """
+    <summary>
+        Autofit the row height.
+    </summary>
+    <param name="rowIndex">Row index</param>
+    <param name="firstColumn">One-based index of the first column to be used for autofit operation.</param>
+    <param name="lastColumn">One-based index of the last column to be used for autofit operation.</param>
+    <param name="bRaiseEvents">If true then raise events.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_AutoFitRowRFLB.argtypes=[c_void_p ,c_int,c_int,c_int,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_AutoFitRowRFLB, self.Ptr, rowIndex,firstColumn,lastColumn,bRaiseEvents)
+
+    @dispatch
+
+    def AutoFitRow(self ,rowIndex:int,firstColumn:int,lastColumn:int,bRaiseEvents:bool,options:AutoFitterOptions):
+        """
+    <summary>
+        Autofit the row height.
+    </summary>
+    <param name="rowIndex">Row index</param>
+    <param name="firstColumn">One-based index of the first column to be used for autofit operation.</param>
+    <param name="lastColumn">One-based index of the last column to be used for autofit operation.</param>
+    <param name="bRaiseEvents">If true then raise events.</param>
+    <param name="options">auto fit options</param>
+        """
+        intPtroptions:c_void_p = options.Ptr
+
+        GetDllLibXls().XlsWorksheet_AutoFitRowRFLBO.argtypes=[c_void_p ,c_int,c_int,c_int,c_bool,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_AutoFitRowRFLBO, self.Ptr, rowIndex,firstColumn,lastColumn,bRaiseEvents,intPtroptions)
+
+
+    def CheckExistence(self ,row:int,column:int)->bool:
+        """
+    <summary>
+         Indicates whether cell has been initialized.
+        <example>The following code illustrates if the cells was initialized or accessed by the user:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet.Range["A1"].Text = "Hello";
+        //Check the cell.Output will be true.
+        Console.Write(worksheet.CheckExistence(1, 1));
+        //Save to file
+        workbook.SaveToFile("CheckExistence.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="row">Row index.</param>
+    <param name="column">Column index.</param>
+    <returns>Value indicating whether the cell was initialized or accessed by the user.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_CheckExistence.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_CheckExistence.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_CheckExistence, self.Ptr, row,column)
+        return ret
+
+    def Clear(self):
+        """
+    <summary>
+        Clears data the worksheet.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_Clear, self.Ptr)
+
+    def ClearData(self):
+        """
+    <summary>
+        Clears contents of a range. 
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_ClearData.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_ClearData, self.Ptr)
+
+
+    def ColumnWidthToPixels(self ,widthInChars:float)->int:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_ColumnWidthToPixels.argtypes=[c_void_p ,c_double]
+        GetDllLibXls().XlsWorksheet_ColumnWidthToPixels.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_ColumnWidthToPixels, self.Ptr, widthInChars)
+        return ret
+
+#
+#    def CopyFrom(self ,worksheet:'XlsWorksheet',hashStyleNames:'Dictionary2',hashWorksheetNames:'Dictionary2',dicFontIndexes:'Dictionary2',flags:'WorksheetCopyType',hashExtFormatIndexes:'Dictionary2',hashNameIndexes:'Dictionary2',hashExternSheets:'Dictionary2'):
+#        """
+#
+#        """
+#        intPtrworksheet:c_void_p = worksheet.Ptr
+#        intPtrhashStyleNames:c_void_p = hashStyleNames.Ptr
+#        intPtrhashWorksheetNames:c_void_p = hashWorksheetNames.Ptr
+#        intPtrdicFontIndexes:c_void_p = dicFontIndexes.Ptr
+#        enumflags:c_int = flags.value
+#        intPtrhashExtFormatIndexes:c_void_p = hashExtFormatIndexes.Ptr
+#        intPtrhashNameIndexes:c_void_p = hashNameIndexes.Ptr
+#        intPtrhashExternSheets:c_void_p = hashExternSheets.Ptr
+#
+#        GetDllLibXls().XlsWorksheet_CopyFrom.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p,c_void_p,c_int,c_void_p,c_void_p,c_void_p]
+#        CallCFunction(GetDllLibXls().XlsWorksheet_CopyFrom, self.Ptr, intPtrworksheet,intPtrhashStyleNames,intPtrhashWorksheetNames,intPtrdicFontIndexes,enumflags,intPtrhashExtFormatIndexes,intPtrhashNameIndexes,intPtrhashExternSheets)
+
+
+
+    def GetCellType(self ,row:int,column:int,bNeedFormulaSubType:bool)->'TRangeValueType':
+        """
+    <summary>
+        Gets cell type from current column.
+    </summary>
+    <param name="row">Indicates row.</param>
+    <param name="column">Indicates column.</param>
+    <param name="bNeedFormulaSubType">Indicates is need to indified formula sub type.</param>
+    <returns>Returns cell type.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetCellType.argtypes=[c_void_p ,c_int,c_int,c_bool]
+        GetDllLibXls().XlsWorksheet_GetCellType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_GetCellType, self.Ptr, row,column,bNeedFormulaSubType)
+        objwraped = TRangeValueType(ret)
+        return objwraped
+
+#
+#    def GetClonedObject(self ,hashNewNames:'Dictionary2',book:'XlsWorkbook')->'IInternalWorksheet':
+#        """
+#
+#        """
+#        intPtrhashNewNames:c_void_p = hashNewNames.Ptr
+#        intPtrbook:c_void_p = book.Ptr
+#
+#        GetDllLibXls().XlsWorksheet_GetClonedObject.argtypes=[c_void_p ,c_void_p,c_void_p]
+#        GetDllLibXls().XlsWorksheet_GetClonedObject.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_GetClonedObject, self.Ptr, intPtrhashNewNames,intPtrbook)
+#        ret = None if intPtr==None else IInternalWorksheet(intPtr)
+#        return ret
+#
+
+
+    @dispatch
+
+    def GetStringValue(self ,cellIndex:int)->str:
+        """
+    <summary>
+        Returns string value corresponding to the cell.
+    </summary>
+    <param name="iCellIndex">Cell index to get value from.</param>
+    <returns>String contained by the cell.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetStringValue.argtypes=[c_void_p ,c_long]
+        GetDllLibXls().XlsWorksheet_GetStringValue.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorksheet_GetStringValue, self.Ptr, cellIndex))
+        return ret
+
+
+    @dispatch
+
+    def GetStringValue(self ,row:int,column:int)->str:
+        """
+    <summary>
+        Returns string value corresponding to the cell.
+    </summary>
+    <param name="row">Represents row index.</param>
+    <param name="column">Represents column index.</param>
+    <returns>String contained by the cell.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetStringValueRC.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_GetStringValueRC.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsWorksheet_GetStringValueRC, self.Ptr, row,column))
+        return ret
+
+
+    @dispatch
+
+    def GetTextObject(self ,cellIndex:int)->SpireObject:
+        """
+    <summary>
+        Returns TextWithFormat object corresponding to the specified cell.
+    </summary>
+    <param name="cellIndex">Cell index.</param>
+    <returns>Object corresponding to the specified cell.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetTextObject.argtypes=[c_void_p ,c_long]
+        GetDllLibXls().XlsWorksheet_GetTextObject.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_GetTextObject, self.Ptr, cellIndex)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def GetTextObject(self ,row:int,column:int)->SpireObject:
+        """
+    <summary>
+        Returns TextWithFormat object corresponding to the specified cell.
+    </summary>
+    <param name="row">Represents row index.</param>
+    <param name="column">Represents column index.</param>
+    <returns>Object corresponding to the specified cell.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetTextObjectRC.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_GetTextObjectRC.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_GetTextObjectRC, self.Ptr, row,column)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+
+    def HasArrayFormula(self ,cellIndex:int)->bool:
+        """
+    <summary>
+        Indicates whether cell contains array-entered formula.
+    </summary>
+    <param name="cellIndex">cell index.</param>
+    <returns></returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_HasArrayFormula.argtypes=[c_void_p ,c_long]
+        GetDllLibXls().XlsWorksheet_HasArrayFormula.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_HasArrayFormula, self.Ptr, cellIndex)
+        return ret
+
+
+    def HasArrayFormulaRecord(self ,row:int,column:int)->bool:
+        """
+    <summary>
+        Indicates is has array formula.
+    </summary>
+    <param name="row">Represents row index.</param>
+    <param name="column">Represents column index.</param>
+    <returns>Indicates is contain array formula record.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_HasArrayFormulaRecord.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_HasArrayFormulaRecord.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_HasArrayFormulaRecord, self.Ptr, row,column)
+        return ret
+
+
+    def InsertRange(self ,rowIndex:int,columnIndex:int,rowCount:int,columnCount:int,moveOptions:'InsertMoveOption',insertOptions:'InsertOptionsType')->'IXLSRange':
+        """
+    <summary>
+        Insert a cell range into worksheet
+    </summary>
+    <param name="rowIndex">the cell range first row index</param>
+    <param name="columnIndex">the cell range first column index</param>
+    <param name="rowCount">the number of rows</param>
+    <param name="columnCount">the number of columns</param>
+    <param name="moveOptions">Insert options.</param>
+    <param name="insertOptions">Move the cell on the right to right or Move the cell below down</param>
+    <returns>return the range that insert into worksheet</returns>
+        """
+        enummoveOptions:c_int = moveOptions.value
+        enuminsertOptions:c_int = insertOptions.value
+
+        GetDllLibXls().XlsWorksheet_InsertRange.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_InsertRange.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_InsertRange, self.Ptr, rowIndex,columnIndex,rowCount,columnCount,enummoveOptions,enuminsertOptions)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+
+    def InsertCutRange(self ,cutRange:'IXLSRange',rowIndex:int,colIndex:int,moveOptions:'InsertMoveOption'):
+        """
+    <summary>
+        Insert cut range into worksheet at specified position.
+    </summary>
+    <param name="cutRange">the cut range</param>
+    <param name="rowIndex">the dest range first row index</param>
+    <param name="colIndex">the dest range first column index</param>
+    <param name="moveOptions">insert options.</param>
+        """
+        intPtrcutRange:c_void_p = cutRange.Ptr
+        enummoveOptions:c_int = moveOptions.value
+
+        GetDllLibXls().XlsWorksheet_InsertCutRange.argtypes=[c_void_p ,c_void_p,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_InsertCutRange, self.Ptr, intPtrcutRange,rowIndex,colIndex,enummoveOptions)
+
+    @dispatch
+
+    def IsArrayFormula(self ,cellIndex:int)->bool:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_IsArrayFormula.argtypes=[c_void_p ,c_long]
+        GetDllLibXls().XlsWorksheet_IsArrayFormula.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_IsArrayFormula, self.Ptr, cellIndex)
+        return ret
+
+    @dispatch
+
+    def IsArrayFormula(self ,row:int,column:int)->bool:
+        """
+    <summary>
+        Indicates whether cell contains array-entered formula.
+    </summary>
+    <param name="row">Represents row index.</param>
+    <param name="column">Represents column index.</param>
+    <returns>True if cell contains array-entered formula.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_IsArrayFormulaRC.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_IsArrayFormulaRC.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_IsArrayFormulaRC, self.Ptr, row,column)
+        return ret
+
+    def ReparseFormula(self):
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_ReparseFormula.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_ReparseFormula, self.Ptr)
+
+    def CopyToClipboard(self):
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_CopyToClipboard.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_CopyToClipboard, self.Ptr)
+
+
+    def CreateRanges(self ,ranges:'ListCellRanges')->'XlsRangesCollection':
+        """
+
+        """
+        #arrayranges:ArrayTyperanges = ""
+        countranges = len(ranges)
+        ArrayTyperanges = c_void_p * countranges
+        arrayranges = ArrayTyperanges()
+        for i in range(0, countranges):
+            arrayranges[i] = ranges[i].Ptr
+
+
+        GetDllLibXls().XlsWorksheet_CreateRanges.argtypes=[c_void_p ,ArrayTyperanges, c_int]
+        GetDllLibXls().XlsWorksheet_CreateRanges.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_CreateRanges, self.Ptr, arrayranges, countranges)
+        ret = None if intPtr==None else XlsRangesCollection(intPtr)
+        return ret
+
+
+
+
+    def CreateNamedRanges(self ,namedRange:str,referRange:str,vertical:bool):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_CreateNamedRanges.argtypes=[c_void_p ,c_void_p,c_void_p,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_CreateNamedRanges, self.Ptr, namedRange,referRange,vertical)
+
+    @dispatch
+
+    def DeleteColumn(self ,index:int):
+        """
+    <summary>
+        Deletes a column.
+    </summary>
+    <param name="columnIndex">Column index to remove..</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_DeleteColumn.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_DeleteColumn, self.Ptr, index)
+
+    @dispatch
+
+    def DeleteColumn(self ,index:int,count:int):
+        """
+    <summary>
+        Removes specified column.
+    </summary>
+    <param name="index">One-based column index to remove.</param>
+    <param name="count">Number of columns to remove.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_DeleteColumnIC.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_DeleteColumnIC, self.Ptr, index,count)
+
+    @dispatch
+
+    def DeleteRow(self ,index:int):
+        """
+    <summary>
+        Delete a row.
+    </summary>
+    <param name="index">Row index to remove</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_DeleteRow.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_DeleteRow, self.Ptr, index)
+
+    @dispatch
+
+    def DeleteRow(self ,index:int,count:int):
+        """
+    <summary>
+        Removes specified row.
+    </summary>
+    <param name="index">One-based row index to remove</param>
+    <param name="count">Number of rows to delete.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_DeleteRowIC.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_DeleteRowIC, self.Ptr, index,count)
+
+    @dispatch
+
+    def InsertColumn(self ,columnIndex:int):
+        """
+    <summary>
+        Inserts a new column into the worksheet. 
+    </summary>
+    <param name="columnIndex">Column index</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_InsertColumn.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_InsertColumn, self.Ptr, columnIndex)
+
+    @dispatch
+
+    def InsertColumn(self ,columnIndex:int,columnCount:int,insertOptions:InsertOptionsType):
+        """
+
+        """
+        enuminsertOptions:c_int = insertOptions.value
+
+        GetDllLibXls().XlsWorksheet_InsertColumnCCI.argtypes=[c_void_p ,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_InsertColumnCCI, self.Ptr, columnIndex,columnCount,enuminsertOptions)
+
+    @dispatch
+
+    def InsertColumn(self ,columnIndex:int,columnCount:int):
+        """
+    <summary>
+         Inserts specified number column into the worksheet. 
+    </summary>
+    <param name="columnIndex">Column index</param>
+    <param name="columnCount">Number of columns to insert.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_InsertColumnCC.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_InsertColumnCC, self.Ptr, columnIndex,columnCount)
+
+    @dispatch
+
+    def InsertRow(self ,rowIndex:int):
+        """
+    <summary>
+        Inserts a new row into the worksheet. 
+    </summary>
+    <param name="rowIndex">Index at which new row should be inserted</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_InsertRow.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_InsertRow, self.Ptr, rowIndex)
+
+#
+#    def ExportDataTable(self)->'DataTable':
+#        """
+#
+#        """
+#        GetDllLibXls().XlsWorksheet_ExportDataTable.argtypes=[c_void_p]
+#        GetDllLibXls().XlsWorksheet_ExportDataTable.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_ExportDataTable, self.Ptr)
+#        ret = None if intPtr==None else DataTable(intPtr)
+#        return ret
+#
+
+
+    @dispatch
+
+    def InsertRow(self ,rowIndex:int,rowCount:int,insertOptions:InsertOptionsType):
+        """
+
+        """
+        enuminsertOptions:c_int = insertOptions.value
+
+        GetDllLibXls().XlsWorksheet_InsertRowRRI.argtypes=[c_void_p ,c_int,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_InsertRowRRI, self.Ptr, rowIndex,rowCount,enuminsertOptions)
+
+    @dispatch
+
+    def InsertRow(self ,rowIndex:int,rowCount:int):
+        """
+    <summary>
+        Inserts multiple rows into the worksheet. 
+    </summary>
+    <param name="rowIndex">Index at which new row should be inserted</param>
+    <param name="rowCount">Number of rows to be inserted. </param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_InsertRowRR.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_InsertRowRR, self.Ptr, rowIndex,rowCount)
+
+
+    def GetBoolean(self ,row:int,column:int)->bool:
+        """
+    <summary>
+        Gets bool value from cell.
+    </summary>
+    <param name="row">Represents row index.</param>
+    <param name="column">Represents column index.</param>
+    <returns>Returns found bool value. If cannot found returns false.</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetBoolean.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_GetBoolean.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_GetBoolean, self.Ptr, row,column)
+        return ret
+
+
+    def GetColumnWidth(self ,columnIndex:int)->float:
+        """
+    <summary>
+        Gets the width of the specified column 
+    </summary>
+    <param name="columnIndex">Column index</param>
+    <returns>Width of column</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetColumnWidth.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorksheet_GetColumnWidth.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_GetColumnWidth, self.Ptr, columnIndex)
+        return ret
+
+
+    def GetColumnWidthPixels(self ,columnIndex:int)->int:
+        """
+    <summary>
+         Gets the width of the specified column, in units of pixel. 
+        <example>The following code illustrates how to get the column width for a particular column:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set text
+        worksheet["A1"].Text = "Sample text in cell";
+        //Set auto fit
+        worksheet.AutoFitColumn(1);
+        //Get column width
+        Console.WriteLine(worksheet.GetColumnWidthPixels(1));
+        //Save to file
+        workbook.SaveToFile("UsedRange.xlsx");
+        </code>
+        </example>
+    </summary>
+    <param name="columnIndex">Column index.</param>
+    <returns>Width of column</returns>
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetColumnWidthPixels.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorksheet_GetColumnWidthPixels.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_GetColumnWidthPixels, self.Ptr, columnIndex)
+        return ret
+
+
+    def GetDefaultColumnStyle(self ,columnIndex:int)->'IStyle':
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_GetDefaultColumnStyle.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().XlsWorksheet_GetDefaultColumnStyle.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_GetDefaultColumnStyle, self.Ptr, columnIndex)
+        ret = None if intPtr==None else CellStyle(intPtr)
+        return ret
+
+
+
+    def add_CellValueChanged(self ,value:'CellValueChangedEventHandler'):
+        """
+
+        """
+        intPtrvalue:c_void_p = value.Ptr
+
+        GetDllLibXls().XlsWorksheet_add_CellValueChanged.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_add_CellValueChanged, self.Ptr, intPtrvalue)
+
+
+    def remove_CellValueChanged(self ,value:'CellValueChangedEventHandler'):
+        """
+
+        """
+        intPtrvalue:c_void_p = value.Ptr
+
+        GetDllLibXls().XlsWorksheet_remove_CellValueChanged.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_remove_CellValueChanged, self.Ptr, intPtrvalue)
+
+    @property
+    def Copying(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_Copying.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_Copying.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_Copying, self.Ptr)
+        return ret
+
+    @Copying.setter
+    def Copying(self, value:bool):
+        GetDllLibXls().XlsWorksheet_set_Copying.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_Copying, self.Ptr, value)
+
+    @property
+
+    def OleObjects(self)->'IOleObjects':
+        """
+    <summary>
+         Gets the OLE objects.
+        <example>The following code illustrates how to access the IListObjects collection in the worksheet to add a new IOleObject:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create image stream
+        System.Drawing.Image image = System.Drawing.Image.FromFile("image.png");
+        //Add ole object
+        IOleObject oleObject = worksheet.OleObjects.Add("Shapes.xlsx", image, OleLinkType.Embed);
+        //Save to file
+        workbook.SaveToFile("OLEObjects.xlsx");
+        </code>
+        </example>
+    </summary>
+<value>The OLE objects.</value>
+        """
+        GetDllLibXls().XlsWorksheet_get_OleObjects.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_OleObjects.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_OleObjects, self.Ptr)
+        ret = None if intPtr==None else IOleObjects(intPtr)
+        return ret
+
+
+    @property
+
+    def AutoFilters(self)->'IAutoFilters':
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_AutoFilters.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_AutoFilters.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_AutoFilters, self.Ptr)
+        ret = None if intPtr==None else IAutoFilters(intPtr)
+        return ret
+
+
+    @property
+
+    def Cells(self)->ListXlsRanges:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_Cells.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_Cells.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_Cells, self.Ptr)
+        ret = None if intPtr==None else ListXlsRanges(intPtr)
+        return ret
+
+
+#    @property
+#
+#    def CellList(self)->'List1':
+#        """
+#
+#        """
+#        GetDllLibXls().XlsWorksheet_get_CellList.argtypes=[c_void_p]
+#        GetDllLibXls().XlsWorksheet_get_CellList.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_CellList, self.Ptr)
+#        ret = None if intPtr==None else List1(intPtr)
+#        return ret
+#
+
+
+    @property
+    def DisplayPageBreaks(self)->bool:
+        """
+    <summary>
+        True if page breaks (both automatic and manual) on the specified
+            worksheet are displayed.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_DisplayPageBreaks.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_DisplayPageBreaks.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_DisplayPageBreaks, self.Ptr)
+        return ret
+
+    @DisplayPageBreaks.setter
+    def DisplayPageBreaks(self, value:bool):
+        GetDllLibXls().XlsWorksheet_set_DisplayPageBreaks.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_DisplayPageBreaks, self.Ptr, value)
+
+    @property
+
+    def MergedCells(self)->ListXlsRanges:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_MergedCells.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_MergedCells.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_MergedCells, self.Ptr)
+        ret = None if intPtr==None else ListXlsRanges(intPtr)
+        return ret
+
+
+    @property
+
+    def Names(self)->'INameRanges':
+        """
+    <summary>
+        Name range used by macros to access to workbook items.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_Names.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_Names.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_Names, self.Ptr)
+        ret = None if intPtr==None else INameRanges(intPtr)
+        return ret
+
+
+    @property
+
+    def PageSetup(self)->'IPageSetup':
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_PageSetup.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_PageSetup.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_PageSetup, self.Ptr)
+        ret = None if intPtr==None else XlsPageSetup(intPtr)
+        return ret
+
+
+    @property
+
+    def MaxDisplayRange(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_MaxDisplayRange.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_MaxDisplayRange.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_MaxDisplayRange, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @property
+
+    def AllocatedRange(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_AllocatedRange.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_AllocatedRange.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_AllocatedRange, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @property
+    def AllocatedRangeIncludesFormatting(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_AllocatedRangeIncludesFormatting.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_AllocatedRangeIncludesFormatting.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_AllocatedRangeIncludesFormatting, self.Ptr)
+        return ret
+
+    @AllocatedRangeIncludesFormatting.setter
+    def AllocatedRangeIncludesFormatting(self, value:bool):
+        GetDllLibXls().XlsWorksheet_set_AllocatedRangeIncludesFormatting.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_AllocatedRangeIncludesFormatting, self.Ptr, value)
+
+    @property
+
+    def Rows(self)->ListXlsRanges:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_Rows.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_Rows.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_Rows, self.Ptr)
+        ret = None if intPtr==None else ListXlsRanges(intPtr)
+        return ret
+
+
+    @property
+
+    def Columns(self)->ListXlsRanges:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_Columns.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_Columns.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_Columns, self.Ptr)
+        ret = None if intPtr==None else ListXlsRanges(intPtr)
+        return ret
+
+
+    @property
+
+    def ConditionalFormats(self)->'IConditionalFormatsCollection':
+        """
+    <summary>
+        Returns collection with all conditional formats in the worksheet. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_ConditionalFormats.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_ConditionalFormats.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_ConditionalFormats, self.Ptr)
+        ret = None if intPtr==None else XlsWorksheetConditionalFormats(intPtr)
+        return ret
+
+
+    @property
+    def DefaultRowHeight(self)->float:
+        """
+    <summary>
+         Gets or sets default height of all the rows in the worksheet,
+             in points.Read/write Double.
+        <example>The following code illustrates how to get the default row height:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Get row height
+        Console.Write(worksheet.DefaultRowHeight);
+        //Set default height
+        worksheet.DefaultRowHeight = 40;
+        //Save to file
+        workbook.SaveToFile("DefaultRowHeight.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_DefaultRowHeight.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_DefaultRowHeight.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_DefaultRowHeight, self.Ptr)
+        return ret
+
+    @DefaultRowHeight.setter
+    def DefaultRowHeight(self, value:float):
+        GetDllLibXls().XlsWorksheet_set_DefaultRowHeight.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_DefaultRowHeight, self.Ptr, value)
+
+    @property
+    def DefaultPrintRowHeight(self)->int:
+        """
+    <summary>
+        Return default row height.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_DefaultPrintRowHeight.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_DefaultPrintRowHeight.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_DefaultPrintRowHeight, self.Ptr)
+        return ret
+
+    @DefaultPrintRowHeight.setter
+    def DefaultPrintRowHeight(self, value:int):
+        GetDllLibXls().XlsWorksheet_set_DefaultPrintRowHeight.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_DefaultPrintRowHeight, self.Ptr, value)
+
+    @property
+
+    def ViewMode(self)->'ViewMode':
+        """
+    <summary>
+        Gets or sets the view mode of the sheet.
+    </summary>
+<value></value>
+        """
+        GetDllLibXls().XlsWorksheet_get_ViewMode.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_ViewMode.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_ViewMode, self.Ptr)
+        objwraped = ViewMode(ret)
+        return objwraped
+
+    @ViewMode.setter
+    def ViewMode(self, value:'ViewMode'):
+        GetDllLibXls().XlsWorksheet_set_ViewMode.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_ViewMode, self.Ptr, value.value)
+
+    @property
+    def DefaultColumnWidth(self)->float:
+        """
+    <summary>
+         Returns or sets the default  width of all the columns in the worksheet. Read/write Double.
+        <example>The following code illustrates how to get the default column width:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Get column width
+        Console.Write(worksheet.DefaultColumnWidth);
+        //Set default width
+        worksheet.DefaultColumnWidth = 40;
+        //Save to file
+        workbook.SaveToFile("DefaultColumnWidth.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_DefaultColumnWidth.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_DefaultColumnWidth.restype=c_double
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_DefaultColumnWidth, self.Ptr)
+        return ret
+
+    @DefaultColumnWidth.setter
+    def DefaultColumnWidth(self, value:float):
+        GetDllLibXls().XlsWorksheet_set_DefaultColumnWidth.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_DefaultColumnWidth, self.Ptr, value)
+
+    @property
+    def Zoom(self)->int:
+        """
+    <summary>
+         Zoom factor of document.
+        <example>The following code illustrates how to set zoom level of the sheet:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set zoom
+        worksheet.Zoom = 200;
+        //Save to file
+        workbook.SaveToFile("Zoom.xlsx");
+        </code>
+        </example>
+    </summary>
+<remarks> Value of zoom should be between 10 and 400.</remarks>
+        """
+        GetDllLibXls().XlsWorksheet_get_Zoom.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_Zoom.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_Zoom, self.Ptr)
+        return ret
+
+    @Zoom.setter
+    def Zoom(self, value:int):
+        GetDllLibXls().XlsWorksheet_set_Zoom.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_Zoom, self.Ptr, value)
+
+    @property
+    def ZoomScaleNormal(self)->int:
+        """
+    <summary>
+        Gets or sets the zoom scale of normal view of the sheet.
+    </summary>
+<value></value>
+        """
+        GetDllLibXls().XlsWorksheet_get_ZoomScaleNormal.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_ZoomScaleNormal.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_ZoomScaleNormal, self.Ptr)
+        return ret
+
+    @ZoomScaleNormal.setter
+    def ZoomScaleNormal(self, value:int):
+        GetDllLibXls().XlsWorksheet_set_ZoomScaleNormal.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_ZoomScaleNormal, self.Ptr, value)
+
+    @property
+    def ZoomScalePageBreakView(self)->int:
+        """
+    <summary>
+        Gets or sets the zoom scale of page break preview of the sheet.
+    </summary>
+<value></value>
+        """
+        GetDllLibXls().XlsWorksheet_get_ZoomScalePageBreakView.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_ZoomScalePageBreakView.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_ZoomScalePageBreakView, self.Ptr)
+        return ret
+
+    @ZoomScalePageBreakView.setter
+    def ZoomScalePageBreakView(self, value:int):
+        GetDllLibXls().XlsWorksheet_set_ZoomScalePageBreakView.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_ZoomScalePageBreakView, self.Ptr, value)
+
+    @property
+    def ZoomScalePageLayoutView(self)->int:
+        """
+    <summary>
+        Gets or sets the zoom scale of page layout view of the sheet.
+    </summary>
+<value></value>
+        """
+        GetDllLibXls().XlsWorksheet_get_ZoomScalePageLayoutView.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_ZoomScalePageLayoutView.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_ZoomScalePageLayoutView, self.Ptr)
+        return ret
+
+    @ZoomScalePageLayoutView.setter
+    def ZoomScalePageLayoutView(self, value:int):
+        GetDllLibXls().XlsWorksheet_set_ZoomScalePageLayoutView.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_ZoomScalePageLayoutView, self.Ptr, value)
+
+    @property
+    def SelectionCount(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_SelectionCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_SelectionCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_SelectionCount, self.Ptr)
+        return ret
+
+    @property
+
+    def Version(self)->'ExcelVersion':
+        """
+    <summary>
+        Gets or sets excel file version.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_Version.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_Version.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_Version, self.Ptr)
+        objwraped = ExcelVersion(ret)
+        return objwraped
+
+    @Version.setter
+    def Version(self, value:'ExcelVersion'):
+        GetDllLibXls().XlsWorksheet_set_Version.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_Version, self.Ptr, value.value)
+
+    @property
+
+    def SparklineGroups(self)->'SparklineGroupCollection':
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_SparklineGroups.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_SparklineGroups.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_SparklineGroups, self.Ptr)
+        ret = None if intPtr==None else SparklineGroupCollection(intPtr)
+        return ret
+
+
+    @property
+    def StandardHeightFlag(self)->bool:
+        """
+    <summary>
+        Gets or sets the standard (default) height option flag, which defines that
+            standard (default) row height and book default font height do not match. Bool.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_StandardHeightFlag.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_StandardHeightFlag.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_StandardHeightFlag, self.Ptr)
+        return ret
+
+    @StandardHeightFlag.setter
+    def StandardHeightFlag(self, value:bool):
+        GetDllLibXls().XlsWorksheet_set_StandardHeightFlag.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_StandardHeightFlag, self.Ptr, value)
+
+    @property
+
+    def Type(self)->'ExcelSheetType':
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_Type.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_Type.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_Type, self.Ptr)
+        objwraped = ExcelSheetType(ret)
+        return objwraped
+
+    @property
+
+    def Range(self)->'XlsRange':
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_Range.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_Range.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_Range, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,row:int,column:int)->IXLSRange:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_get_Item.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_Item, self.Ptr, row,column)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,row:int,column:int,lastRow:int,lastColumn:int)->IXLSRange:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_get_ItemRCLL.argtypes=[c_void_p ,c_int,c_int,c_int,c_int]
+        GetDllLibXls().XlsWorksheet_get_ItemRCLL.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_ItemRCLL, self.Ptr, row,column,lastRow,lastColumn)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->IXLSRange:
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsWorksheet_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @property
+
+    def TopLeftCell(self)->'CellRange':
+        """
+    <summary>
+        Gets top left cell of the worksheet.
+    </summary>
+    <returns></returns>
+        """
+        GetDllLibXls().XlsWorksheet_get_TopLeftCell.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_TopLeftCell.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_TopLeftCell, self.Ptr)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @TopLeftCell.setter
+    def TopLeftCell(self, value:'CellRange'):
+        GetDllLibXls().XlsWorksheet_set_TopLeftCell.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_TopLeftCell, self.Ptr, value.Ptr)
+
+    @property
+    def UseRangesCache(self)->bool:
+        """
+    <summary>
+        Indicates whether all created range objects should be cached. Default value is true.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_UseRangesCache.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_UseRangesCache.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_UseRangesCache, self.Ptr)
+        return ret
+
+    @UseRangesCache.setter
+    def UseRangesCache(self, value:bool):
+        GetDllLibXls().XlsWorksheet_set_UseRangesCache.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_UseRangesCache, self.Ptr, value)
+
+    @property
+    def VerticalSplit(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_VerticalSplit.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_VerticalSplit.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_VerticalSplit, self.Ptr)
+        return ret
+
+    @VerticalSplit.setter
+    def VerticalSplit(self, value:int):
+        GetDllLibXls().XlsWorksheet_set_VerticalSplit.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_VerticalSplit, self.Ptr, value)
+
+    @property
+
+    def VPageBreaks(self)->'IVPageBreaks':
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_VPageBreaks.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_VPageBreaks.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsWorksheet_get_VPageBreaks, self.Ptr)
+        ret = None if intPtr==None else IVPageBreaks(intPtr)
+        return ret
+
+
+    @property
+    def ActivePane(self)->int:
+        """
+    <summary>
+        Gets or sets index of the active pane.
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_ActivePane.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_ActivePane.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_ActivePane, self.Ptr)
+        return ret
+
+    @ActivePane.setter
+    def ActivePane(self, value:int):
+        GetDllLibXls().XlsWorksheet_set_ActivePane.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_ActivePane, self.Ptr, value)
+
+
+    def SetFirstColumn(self ,columnIndex:int):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetFirstColumn.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetFirstColumn, self.Ptr, columnIndex)
+
+
+    def SetLastColumn(self ,columnIndex:int):
+        """
+    <summary>
+        Updates last column index.
+    </summary>
+    <param name="columnIndex">Column index.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetLastColumn.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetLastColumn, self.Ptr, columnIndex)
+
+
+    def SetFirstRow(self ,rowIndex:int):
+        """
+    <summary>
+        Updates first row index.
+    </summary>
+    <param name="rowIndex">Row index.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetFirstRow.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetFirstRow, self.Ptr, rowIndex)
+
+
+    def SetLastRow(self ,rowIndex:int):
+        """
+    <summary>
+        Updates last row index.
+    </summary>
+    <param name="rowIndex">Row index.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_SetLastRow.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetLastRow, self.Ptr, rowIndex)
+
+
+    def ShowColumn(self ,columnIndex:int):
+        """
+    <summary>
+        Shows a column.
+    </summary>
+    <param name="columnIndex">Column index.</param>
+        """
+        
+        GetDllLibXls().XlsWorksheet_ShowColumn.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_ShowColumn, self.Ptr, columnIndex)
+
+
+    def ShowRow(self ,rowIndex:int):
+        """
+
+        """
+        
+        GetDllLibXls().XlsWorksheet_ShowRow.argtypes=[c_void_p ,c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_ShowRow, self.Ptr, rowIndex)
+
+#    @dispatch
+
+#    def ToEMFStream(self ,stream:Stream,firstRow:int,firstColumn:int,lastRow:int,lastColumn:int,emfType:EmfType):
+#        """
+
+#        """
+#        intPtrstream:c_void_p = stream.Ptr
+#        enumemfType:c_int = emfType.value
+
+#        GetDllLibXls().XlsWorksheet_ToEMFStream.argtypes=[c_void_p ,c_void_p,c_int,c_int,c_int,c_int,c_int]
+#        CallCFunction(GetDllLibXls().XlsWorksheet_ToEMFStream, self.Ptr, intPtrstream,firstRow,firstColumn,lastRow,lastColumn,enumemfType)
+
+#    @dispatch
+
+#    def ToEMFStream(self ,stream:Stream,firstRow:int,firstColumn:int,lastRow:int,lastColumn:int):
+#        """
+#<summary></summary>
+#    <param name="stream">stream.</param>
+#    <param name="firstRow">One-based index of the first row to convert.</param>
+#    <param name="firstColumn">One-based index of the first column to convert.</param>
+#    <param name="lastRow">One-based index of the last row to convert.</param>
+#    <param name="lastColumn">One-based index of the last column to convert.</param>
+#        """
+#        intPtrstream:c_void_p = stream.Ptr
+
+#        GetDllLibXls().XlsWorksheet_ToEMFStreamSFFLL.argtypes=[c_void_p ,c_void_p,c_int,c_int,c_int,c_int]
+#        CallCFunction(GetDllLibXls().XlsWorksheet_ToEMFStreamSFFLL, self.Ptr, intPtrstream,firstRow,firstColumn,lastRow,lastColumn)
+
+    @dispatch
+
+    def SetActiveCell(self ,range:IXLSRange):
+        """
+
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().XlsWorksheet_SetActiveCell.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetActiveCell, self.Ptr, intPtrrange)
+
+    @dispatch
+
+    def SetActiveCell(self ,range:IXLSRange,updateApplication:bool):
+        """
+
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().XlsWorksheet_SetActiveCellRU.argtypes=[c_void_p ,c_void_p,c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_SetActiveCellRU, self.Ptr, intPtrrange,updateApplication)
+
+    @property
+    def FirstVisibleColumn(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_FirstVisibleColumn.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_FirstVisibleColumn.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_FirstVisibleColumn, self.Ptr)
+        return ret
+
+    @FirstVisibleColumn.setter
+    def FirstVisibleColumn(self, value:int):
+        GetDllLibXls().XlsWorksheet_set_FirstVisibleColumn.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_FirstVisibleColumn, self.Ptr, value)
+
+    @property
+    def FirstVisibleRow(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsWorksheet_get_FirstVisibleRow.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_FirstVisibleRow.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_FirstVisibleRow, self.Ptr)
+        return ret
+
+    @FirstVisibleRow.setter
+    def FirstVisibleRow(self, value:int):
+        GetDllLibXls().XlsWorksheet_set_FirstVisibleRow.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_FirstVisibleRow, self.Ptr, value)
+
+    @property
+    def GridLinesVisible(self)->bool:
+        """
+    <summary>
+         True if gridlines are visible;
+             False otherwise.
+        <example>The following code illustrates how to set visibility for grid lines:
+        <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Set grid line visibility
+        worksheet.GridLinesVisible = false;
+        //Save to file
+        workbook.SaveToFile("GridLinesVisible.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        GetDllLibXls().XlsWorksheet_get_GridLinesVisible.argtypes=[c_void_p]
+        GetDllLibXls().XlsWorksheet_get_GridLinesVisible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsWorksheet_get_GridLinesVisible, self.Ptr)
+        return ret
+
+    @GridLinesVisible.setter
+    def GridLinesVisible(self, value:bool):
+        GetDllLibXls().XlsWorksheet_set_GridLinesVisible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsWorksheet_set_GridLinesVisible, self.Ptr, value)
+

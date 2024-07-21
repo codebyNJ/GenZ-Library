@@ -1,0 +1,87 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class FontsCollection (  XlsFontsCollection) :
+    """
+
+    """
+    @dispatch
+
+    def Add(self ,font:XlsFontStyle):
+        """
+
+        """
+        intPtrfont:c_void_p = font.Ptr
+
+        GetDllLibXls().FontsCollection_Add.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().FontsCollection_Add, self.Ptr, intPtrfont)
+
+    @dispatch
+
+    def Add(self ,font:ExcelFont):
+        """
+
+        """
+        intPtrfont:c_void_p = font.Ptr
+
+        GetDllLibXls().FontsCollection_AddF.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().FontsCollection_AddF, self.Ptr, intPtrfont)
+
+
+    def AddFonts(self ,fonts:'FontsCollection')->'IDictionary':
+        """
+
+        """
+        intPtrfonts:c_void_p = fonts.Ptr
+
+        GetDllLibXls().FontsCollection_AddFonts.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().FontsCollection_AddFonts.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().FontsCollection_AddFonts, self.Ptr, intPtrfonts)
+        ret = None if intPtr==None else IDictionary(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Contains(self ,font:XlsFontStyle)->bool:
+        """
+
+        """
+        intPtrfont:c_void_p = font.Ptr
+
+        GetDllLibXls().FontsCollection_Contains.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().FontsCollection_Contains.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().FontsCollection_Contains, self.Ptr, intPtrfont)
+        return ret
+
+    @dispatch
+
+    def Contains(self ,font:ExcelFont)->bool:
+        """
+
+        """
+        intPtrfont:c_void_p = font.Ptr
+
+        GetDllLibXls().FontsCollection_ContainsF.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().FontsCollection_ContainsF.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().FontsCollection_ContainsF, self.Ptr, intPtrfont)
+        return ret
+
+
+    def get_Item(self ,index:int)->'ExcelFont':
+        """
+
+        """
+        
+        GetDllLibXls().FontsCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().FontsCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().FontsCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else ExcelFont(intPtr)
+        return ret
+
+

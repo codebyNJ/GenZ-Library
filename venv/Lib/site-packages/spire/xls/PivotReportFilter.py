@@ -1,0 +1,92 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class PivotReportFilter (SpireObject) :
+    """
+    <summary>
+        Represent the report filter of PivotTable
+    </summary>
+    """
+    @property
+    def IsMultipleSelect(self)->bool:
+        """
+    <summary>
+        Indicated whether multiple select the filter field
+    </summary>
+        """
+        GetDllLibXls().PivotReportFilter_get_IsMultipleSelect.argtypes=[c_void_p]
+        GetDllLibXls().PivotReportFilter_get_IsMultipleSelect.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().PivotReportFilter_get_IsMultipleSelect, self.Ptr)
+        return ret
+
+    @IsMultipleSelect.setter
+    def IsMultipleSelect(self, value:bool):
+        GetDllLibXls().PivotReportFilter_set_IsMultipleSelect.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().PivotReportFilter_set_IsMultipleSelect, self.Ptr, value)
+
+#    @property
+#
+#    def FilterItemStrings(self)->'List1':
+#        """
+#    <summary>
+#        Represent the filter field string collection.When IsMultipleSelect is false,Only the first value of string array will be used.
+#            The possible value must be from field values
+#    </summary>
+#        """
+#        GetDllLibXls().PivotReportFilter_get_FilterItemStrings.argtypes=[c_void_p]
+#        GetDllLibXls().PivotReportFilter_get_FilterItemStrings.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().PivotReportFilter_get_FilterItemStrings, self.Ptr)
+#        ret = None if intPtr==None else List1(intPtr)
+#        return ret
+#
+
+
+#    @FilterItemStrings.setter
+#    def FilterItemStrings(self, value:'List1'):
+#        GetDllLibXls().PivotReportFilter_set_FilterItemStrings.argtypes=[c_void_p, c_void_p]
+#        CallCFunction(GetDllLibXls().PivotReportFilter_set_FilterItemStrings, self.Ptr, value.Ptr)
+
+
+    @property
+
+    def FieldString(self)->str:
+        """
+    <summary>
+        Represent the page field string of pivottable
+    </summary>
+        """
+        GetDllLibXls().PivotReportFilter_get_FieldString.argtypes=[c_void_p]
+        GetDllLibXls().PivotReportFilter_get_FieldString.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().PivotReportFilter_get_FieldString, self.Ptr))
+        return ret
+
+
+    @FieldString.setter
+    def FieldString(self, value:str):
+        GetDllLibXls().PivotReportFilter_set_FieldString.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().PivotReportFilter_set_FieldString, self.Ptr, value)
+
+    @property
+
+    def FieldName(self)->str:
+        """
+    <summary>
+        Represents the name of filter field
+    </summary>
+        """
+        GetDllLibXls().PivotReportFilter_get_FieldName.argtypes=[c_void_p]
+        GetDllLibXls().PivotReportFilter_get_FieldName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().PivotReportFilter_get_FieldName, self.Ptr))
+        return ret
+
+
+    @FieldName.setter
+    def FieldName(self, value:str):
+        GetDllLibXls().PivotReportFilter_set_FieldName.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().PivotReportFilter_set_FieldName, self.Ptr, value)
+

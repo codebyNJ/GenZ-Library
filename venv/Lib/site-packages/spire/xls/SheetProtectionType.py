@@ -1,0 +1,33 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class SheetProtectionType(Enum):
+    """
+    <summary>
+        Represents sheet protection flags enums.
+    </summary>
+    """
+    none = 0
+    Objects = 1
+    Scenarios = 2
+    FormattingCells = 4
+    FormattingColumns = 8
+    FormattingRows = 16
+    InsertingColumns = 32
+    InsertingRows = 64
+    InsertingHyperlinks = 128
+    DeletingColumns = 256
+    DeletingRows = 512
+    LockedCells = 1024
+    Sorting = 2048
+    Filtering = 4096
+    UsingPivotTables = 8192
+    UnLockedCells = 16384
+    Content = 32768
+    All = 65535
+

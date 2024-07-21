@@ -1,0 +1,618 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ExcelCommentObject (  SpireObject, IComment) :
+    """
+
+    """
+
+    def SetCommentLocation(self ,isMoveWithCell:bool,isSizeWithCell:bool):
+        """
+
+        """
+        
+        GetDllLibXls().ExcelCommentObject_SetCommentLocation.argtypes=[c_void_p ,c_bool,c_bool]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_SetCommentLocation, self.Ptr, isMoveWithCell,isSizeWithCell)
+
+    @property
+
+    def Author(self)->str:
+        """
+    <summary>
+        Gets or sets the author of the comment. 
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_get_Author.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Author.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ExcelCommentObject_get_Author, self.Ptr))
+        return ret
+
+
+    @Author.setter
+    def Author(self, value:str):
+        GetDllLibXls().ExcelCommentObject_set_Author.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_Author, self.Ptr, value)
+
+    @property
+    def IsVisible(self)->bool:
+        """
+    <summary>
+        Indicates whether the comment is visible. 
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_get_IsVisible.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_IsVisible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_IsVisible, self.Ptr)
+        return ret
+
+    @IsVisible.setter
+    def IsVisible(self, value:bool):
+        GetDllLibXls().ExcelCommentObject_set_IsVisible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_IsVisible, self.Ptr, value)
+
+    @property
+
+    def HtmlString(self)->str:
+        """
+    <summary>
+        Gets and sets the html string which contains data and some formattings in this shape.
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_get_HtmlString.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_HtmlString.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ExcelCommentObject_get_HtmlString, self.Ptr))
+        return ret
+
+
+    @HtmlString.setter
+    def HtmlString(self, value:str):
+        GetDllLibXls().ExcelCommentObject_set_HtmlString.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_HtmlString, self.Ptr, value)
+
+    @property
+    def Row(self)->int:
+        """
+    <summary>
+        Row of the commented range.
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_get_Row.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Row.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_Row, self.Ptr)
+        return ret
+
+    @property
+    def Column(self)->int:
+        """
+    <summary>
+        Column of the commented range.
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_get_Column.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Column.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_Column, self.Ptr)
+        return ret
+
+    @property
+
+    def RichText(self)->'IRichTextString':
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_RichText.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_RichText.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ExcelCommentObject_get_RichText, self.Ptr)
+        ret = None if intPtr==None else RichTextObject(intPtr)
+        return ret
+
+
+    @property
+
+    def Line(self)->'IShapeLineFormat':
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_Line.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Line.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ExcelCommentObject_get_Line, self.Ptr)
+        ret = None if intPtr==None else XlsShapeLineFormat(intPtr)
+        return ret
+
+
+    @property
+
+    def Fill(self)->'IShapeFill':
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_Fill.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Fill.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ExcelCommentObject_get_Fill, self.Ptr)
+        ret = None if intPtr==None else XlsShapeFill(intPtr)
+        return ret
+
+
+    @property
+
+    def Text(self)->str:
+        """
+    <summary>
+        Comment text
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_get_Text.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Text.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ExcelCommentObject_get_Text, self.Ptr))
+        return ret
+
+
+    @Text.setter
+    def Text(self, value:str):
+        GetDllLibXls().ExcelCommentObject_set_Text.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_Text, self.Ptr, value)
+
+    @property
+    def AutoSize(self)->bool:
+        """
+    <summary>
+        Indicates whether the size of the specified object is changed automatically
+            to fit text within its boundaries. Read/write Boolean.
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_get_AutoSize.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_AutoSize.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_AutoSize, self.Ptr)
+        return ret
+
+    @AutoSize.setter
+    def AutoSize(self, value:bool):
+        GetDllLibXls().ExcelCommentObject_set_AutoSize.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_AutoSize, self.Ptr, value)
+
+    @property
+
+    def TextFrame(self)->'ITextFrame':
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_TextFrame.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_TextFrame.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ExcelCommentObject_get_TextFrame, self.Ptr)
+        ret = None if intPtr==None else ITextFrame(intPtr)
+        return ret
+
+
+    @property
+
+    def ResizeBehave(self)->'ResizeBehaveType':
+        """
+    <summary>
+        Specifies all possible settings for how drawing object shall be resized when the rows and columns between its start and ending anchor are resized or inserted.
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_get_ResizeBehave.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_ResizeBehave.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_ResizeBehave, self.Ptr)
+        objwraped = ResizeBehaveType(ret)
+        return objwraped
+
+    @ResizeBehave.setter
+    def ResizeBehave(self, value:'ResizeBehaveType'):
+        GetDllLibXls().ExcelCommentObject_set_ResizeBehave.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_ResizeBehave, self.Ptr, value.value)
+
+    @property
+    def Visible(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_Visible.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Visible.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_Visible, self.Ptr)
+        return ret
+
+    @Visible.setter
+    def Visible(self, value:bool):
+        GetDllLibXls().ExcelCommentObject_set_Visible.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_Visible, self.Ptr, value)
+
+    @property
+    def Height(self)->int:
+        """
+    <summary>
+        Height of comment.
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_get_Height.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Height.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_Height, self.Ptr)
+        return ret
+
+    @Height.setter
+    def Height(self, value:int):
+        GetDllLibXls().ExcelCommentObject_set_Height.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_Height, self.Ptr, value)
+
+    @property
+
+    def HAlignment(self)->'CommentHAlignType':
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_HAlignment.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_HAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_HAlignment, self.Ptr)
+        objwraped = CommentHAlignType(ret)
+        return objwraped
+
+    @HAlignment.setter
+    def HAlignment(self, value:'CommentHAlignType'):
+        GetDllLibXls().ExcelCommentObject_set_HAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_HAlignment, self.Ptr, value.value)
+
+    @property
+
+    def VAlignment(self)->'CommentVAlignType':
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_VAlignment.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_VAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_VAlignment, self.Ptr)
+        objwraped = CommentVAlignType(ret)
+        return objwraped
+
+    @VAlignment.setter
+    def VAlignment(self, value:'CommentVAlignType'):
+        GetDllLibXls().ExcelCommentObject_set_VAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_VAlignment, self.Ptr, value.value)
+
+    @property
+
+    def TextRotation(self)->'TextRotationType':
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_TextRotation.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_TextRotation.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_TextRotation, self.Ptr)
+        objwraped = TextRotationType(ret)
+        return objwraped
+
+    @TextRotation.setter
+    def TextRotation(self, value:'TextRotationType'):
+        GetDllLibXls().ExcelCommentObject_set_TextRotation.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_TextRotation, self.Ptr, value.value)
+
+    @property
+    def ID(self)->int:
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_ID.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_ID.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_ID, self.Ptr)
+        return ret
+
+    @property
+    def Left(self)->int:
+        """
+    <summary>
+        Position of left
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_get_Left.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Left.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_Left, self.Ptr)
+        return ret
+
+    @Left.setter
+    def Left(self, value:int):
+        GetDllLibXls().ExcelCommentObject_set_Left.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_Left, self.Ptr, value)
+
+    @property
+
+    def Name(self)->str:
+        """
+    <summary>
+        Name of object.
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_get_Name.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Name.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ExcelCommentObject_get_Name, self.Ptr))
+        return ret
+
+
+    @Name.setter
+    def Name(self, value:str):
+        GetDllLibXls().ExcelCommentObject_set_Name.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_Name, self.Ptr, value)
+
+    @property
+    def Top(self)->int:
+        """
+    <summary>
+        Top of object.
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_get_Top.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Top.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_Top, self.Ptr)
+        return ret
+
+    @Top.setter
+    def Top(self, value:int):
+        GetDllLibXls().ExcelCommentObject_set_Top.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_Top, self.Ptr, value)
+
+    @property
+    def Width(self)->int:
+        """
+    <summary>
+        Width of object.
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_get_Width.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Width.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_Width, self.Ptr)
+        return ret
+
+    @Width.setter
+    def Width(self, value:int):
+        GetDllLibXls().ExcelCommentObject_set_Width.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_Width, self.Ptr, value)
+
+    @property
+
+    def ShapeType(self)->'ExcelShapeType':
+        """
+    <summary>
+        Shape type of object.
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_get_ShapeType.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_ShapeType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_ShapeType, self.Ptr)
+        objwraped = ExcelShapeType(ret)
+        return objwraped
+
+    @ShapeType.setter
+    def ShapeType(self, value:'ExcelShapeType'):
+        GetDllLibXls().ExcelCommentObject_set_ShapeType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_ShapeType, self.Ptr, value.value)
+
+    @property
+    def IsLocked(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_IsLocked.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_IsLocked.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_IsLocked, self.Ptr)
+        return ret
+
+    @IsLocked.setter
+    def IsLocked(self, value:bool):
+        GetDllLibXls().ExcelCommentObject_set_IsLocked.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_IsLocked, self.Ptr, value)
+
+    @property
+    def IsPrintable(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_IsPrintable.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_IsPrintable.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_IsPrintable, self.Ptr)
+        return ret
+
+    @IsPrintable.setter
+    def IsPrintable(self, value:bool):
+        GetDllLibXls().ExcelCommentObject_set_IsPrintable.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_IsPrintable, self.Ptr, value)
+
+    @property
+
+    def AlternativeText(self)->str:
+        """
+    <summary>
+        Alternative text.
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_get_AlternativeText.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_AlternativeText.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ExcelCommentObject_get_AlternativeText, self.Ptr))
+        return ret
+
+
+    @AlternativeText.setter
+    def AlternativeText(self, value:str):
+        GetDllLibXls().ExcelCommentObject_set_AlternativeText.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_AlternativeText, self.Ptr, value)
+
+    @property
+
+    def Parent(self)->'SpireObject':
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_Parent.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Parent.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ExcelCommentObject_get_Parent, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @property
+    def IsTextLocked(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_IsTextLocked.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_IsTextLocked.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_IsTextLocked, self.Ptr)
+        return ret
+
+    @IsTextLocked.setter
+    def IsTextLocked(self, value:bool):
+        GetDllLibXls().ExcelCommentObject_set_IsTextLocked.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_IsTextLocked, self.Ptr, value)
+
+    @property
+    def IsSmartArt(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_IsSmartArt.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_IsSmartArt.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_IsSmartArt, self.Ptr)
+        return ret
+
+    @property
+
+    def OnAction(self)->str:
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_OnAction.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_OnAction.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ExcelCommentObject_get_OnAction, self.Ptr))
+        return ret
+
+
+    @OnAction.setter
+    def OnAction(self, value:str):
+        GetDllLibXls().ExcelCommentObject_set_OnAction.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_OnAction, self.Ptr, value)
+
+    @property
+    def IsLockAspectRatio(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_IsLockAspectRatio.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_IsLockAspectRatio.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_IsLockAspectRatio, self.Ptr)
+        return ret
+
+    @IsLockAspectRatio.setter
+    def IsLockAspectRatio(self, value:bool):
+        GetDllLibXls().ExcelCommentObject_set_IsLockAspectRatio.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_IsLockAspectRatio, self.Ptr, value)
+
+    @property
+
+    def Shadow(self)->'IShadow':
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_Shadow.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Shadow.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ExcelCommentObject_get_Shadow, self.Ptr)
+        ret = None if intPtr==None else ChartShadow(intPtr)
+        return ret
+
+
+    @property
+
+    def Glow(self)->'IGlow':
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_Glow.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Glow.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ExcelCommentObject_get_Glow, self.Ptr)
+        ret = None if intPtr==None else ShapeGlow(intPtr)
+        return ret
+
+
+    @property
+
+    def Reflection(self)->'IReflectionEffect':
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_Reflection.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Reflection.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ExcelCommentObject_get_Reflection, self.Ptr)
+        ret = None if intPtr==None else ShapeReflection(intPtr)
+        return ret
+
+
+    @property
+
+    def ThreeD(self)->'IFormat3D':
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_ThreeD.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_ThreeD.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ExcelCommentObject_get_ThreeD, self.Ptr)
+        ret = None if intPtr==None else Format3D(intPtr)
+        return ret
+
+
+    @property
+    def Rotation(self)->int:
+        """
+    <summary>
+        Returns or sets the rotation of the shape, in degrees.
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_get_Rotation.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_Rotation.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExcelCommentObject_get_Rotation, self.Ptr)
+        return ret
+
+    @Rotation.setter
+    def Rotation(self, value:int):
+        GetDllLibXls().ExcelCommentObject_set_Rotation.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_Rotation, self.Ptr, value)
+
+    @property
+
+    def LinkedCell(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().ExcelCommentObject_get_LinkedCell.argtypes=[c_void_p]
+        GetDllLibXls().ExcelCommentObject_get_LinkedCell.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ExcelCommentObject_get_LinkedCell, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @LinkedCell.setter
+    def LinkedCell(self, value:'IXLSRange'):
+        GetDllLibXls().ExcelCommentObject_set_LinkedCell.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_set_LinkedCell, self.Ptr, value.Ptr)
+
+    def Remove(self):
+        """
+    <summary>
+        Removes comment.
+    </summary>
+        """
+        GetDllLibXls().ExcelCommentObject_Remove.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_Remove, self.Ptr)
+
+
+    def Scale(self ,scaleWidth:int,scaleHeight:int):
+        """
+    <summary>
+        Scales all comments.
+    </summary>
+    <param name="scaleWidth">Width scale in percents.</param>
+    <param name="scaleHeight">Height scale in percents.</param>
+        """
+        
+        GetDllLibXls().ExcelCommentObject_Scale.argtypes=[c_void_p ,c_int,c_int]
+        CallCFunction(GetDllLibXls().ExcelCommentObject_Scale, self.Ptr, scaleWidth,scaleHeight)
+

@@ -1,0 +1,85 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsGradientStop (SpireObject) :
+    """
+
+    """
+    @property
+
+    def OColor(self)->'OColor':
+        """
+
+        """
+        GetDllLibXls().XlsGradientStop_get_OColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsGradientStop_get_OColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsGradientStop_get_OColor, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+    def Position(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsGradientStop_get_Position.argtypes=[c_void_p]
+        GetDllLibXls().XlsGradientStop_get_Position.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsGradientStop_get_Position, self.Ptr)
+        return ret
+
+    @Position.setter
+    def Position(self, value:int):
+        GetDllLibXls().XlsGradientStop_set_Position.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsGradientStop_set_Position, self.Ptr, value)
+
+    @property
+    def Transparency(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsGradientStop_get_Transparency.argtypes=[c_void_p]
+        GetDllLibXls().XlsGradientStop_get_Transparency.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsGradientStop_get_Transparency, self.Ptr)
+        return ret
+
+    @Transparency.setter
+    def Transparency(self, value:int):
+        GetDllLibXls().XlsGradientStop_set_Transparency.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsGradientStop_set_Transparency, self.Ptr, value)
+
+    @property
+    def Tint(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsGradientStop_get_Tint.argtypes=[c_void_p]
+        GetDllLibXls().XlsGradientStop_get_Tint.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsGradientStop_get_Tint, self.Ptr)
+        return ret
+
+    @Tint.setter
+    def Tint(self, value:int):
+        GetDllLibXls().XlsGradientStop_set_Tint.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsGradientStop_set_Tint, self.Ptr, value)
+
+    @property
+    def Shade(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsGradientStop_get_Shade.argtypes=[c_void_p]
+        GetDllLibXls().XlsGradientStop_get_Shade.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsGradientStop_get_Shade, self.Ptr)
+        return ret
+
+    @Shade.setter
+    def Shade(self, value:int):
+        GetDllLibXls().XlsGradientStop_set_Shade.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsGradientStop_set_Shade, self.Ptr, value)
+

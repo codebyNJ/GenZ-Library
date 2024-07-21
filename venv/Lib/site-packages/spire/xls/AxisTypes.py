@@ -1,0 +1,18 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class AxisTypes(Enum):
+    """
+
+    """
+    none = 0
+    Row = 1
+    Column = 2
+    Page = 4
+    Data = 8
+

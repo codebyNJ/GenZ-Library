@@ -1,0 +1,96 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ISortColumn (abc.ABC) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def Key(self)->int:
+        """
+
+        """
+        pass
+
+
+    @Key.setter
+    @abc.abstractmethod
+    def Key(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ComparsionType(self)->'SortComparsionType':
+        """
+
+        """
+        pass
+
+
+    @ComparsionType.setter
+    @abc.abstractmethod
+    def ComparsionType(self, value:'SortComparsionType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Order(self)->'OrderBy':
+        """
+
+        """
+        pass
+
+
+    @Order.setter
+    @abc.abstractmethod
+    def Order(self, value:'OrderBy'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Color(self)->'Color':
+        """
+
+        """
+        pass
+
+
+    @Color.setter
+    @abc.abstractmethod
+    def Color(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def SetLevel(self ,priority:int):
+        """
+
+        """
+        pass
+
+

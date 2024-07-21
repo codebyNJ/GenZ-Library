@@ -1,0 +1,128 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ExcelInterior (  SpireObject, IInterior) :
+    """
+    <summary>
+        Used to get or set interior settings.
+    </summary>
+    """
+    @property
+
+    def PatternKnownColor(self)->'ExcelColors':
+        """
+
+        """
+        GetDllLibXls().ExcelInterior_get_PatternKnownColor.argtypes=[c_void_p]
+        GetDllLibXls().ExcelInterior_get_PatternKnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExcelInterior_get_PatternKnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @PatternKnownColor.setter
+    def PatternKnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().ExcelInterior_set_PatternKnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ExcelInterior_set_PatternKnownColor, self.Ptr, value.value)
+
+    @property
+
+    def PatternColor(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().ExcelInterior_get_PatternColor.argtypes=[c_void_p]
+        GetDllLibXls().ExcelInterior_get_PatternColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ExcelInterior_get_PatternColor, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @PatternColor.setter
+    def PatternColor(self, value:'Color'):
+        GetDllLibXls().ExcelInterior_set_PatternColor.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().ExcelInterior_set_PatternColor, self.Ptr, value.Ptr)
+
+    @property
+
+    def KnownColor(self)->'ExcelColors':
+        """
+
+        """
+        GetDllLibXls().ExcelInterior_get_KnownColor.argtypes=[c_void_p]
+        GetDllLibXls().ExcelInterior_get_KnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExcelInterior_get_KnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @KnownColor.setter
+    def KnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().ExcelInterior_set_KnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ExcelInterior_set_KnownColor, self.Ptr, value.value)
+
+    @property
+
+    def Color(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().ExcelInterior_get_Color.argtypes=[c_void_p]
+        GetDllLibXls().ExcelInterior_get_Color.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ExcelInterior_get_Color, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @Color.setter
+    def Color(self, value:'Color'):
+        GetDllLibXls().ExcelInterior_set_Color.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().ExcelInterior_set_Color, self.Ptr, value.Ptr)
+
+    @property
+
+    def Gradient(self)->'ExcelGradient':
+        """
+    <summary>
+        Returns gradient object for this extended format.
+    </summary>
+        """
+        GetDllLibXls().ExcelInterior_get_Gradient.argtypes=[c_void_p]
+        GetDllLibXls().ExcelInterior_get_Gradient.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ExcelInterior_get_Gradient, self.Ptr)
+        ret = None if intPtr==None else ExcelGradient(intPtr)
+        return ret
+
+
+    @property
+
+    def FillPattern(self)->'ExcelPatternType':
+        """
+
+        """
+        GetDllLibXls().ExcelInterior_get_FillPattern.argtypes=[c_void_p]
+        GetDllLibXls().ExcelInterior_get_FillPattern.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ExcelInterior_get_FillPattern, self.Ptr)
+        objwraped = ExcelPatternType(ret)
+        return objwraped
+
+    @FillPattern.setter
+    def FillPattern(self, value:'ExcelPatternType'):
+        GetDllLibXls().ExcelInterior_set_FillPattern.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ExcelInterior_set_FillPattern, self.Ptr, value.value)
+
+
+    def m_interior(self)->'IInterior':
+        """
+
+        """
+        GetDllLibXls().ExcelInterior_m_interior.argtypes=[c_void_p]
+        GetDllLibXls().ExcelInterior_m_interior.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ExcelInterior_m_interior, self.Ptr)
+        ret = None if intPtr==None else ExcelInterior(intPtr)
+        return ret
+
+

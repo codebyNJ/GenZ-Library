@@ -1,0 +1,18 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class LegendSpacingType(Enum):
+    """
+    <summary>
+        Legend spacing for charts.
+    </summary>
+    """
+    Close = 0
+    Medium = 1
+    Open = 2
+

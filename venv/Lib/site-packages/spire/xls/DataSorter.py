@@ -1,0 +1,154 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class DataSorter (  SpireObject, IDataSort) :
+    """
+
+    """
+    @property
+    def IsCaseSensitive(self)->bool:
+        """
+    <summary>
+        Indicates whether to perform case sensitive sort.
+    </summary>
+        """
+        GetDllLibXls().DataSorter_get_IsCaseSensitive.argtypes=[c_void_p]
+        GetDllLibXls().DataSorter_get_IsCaseSensitive.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().DataSorter_get_IsCaseSensitive, self.Ptr)
+        return ret
+
+    @IsCaseSensitive.setter
+    def IsCaseSensitive(self, value:bool):
+        GetDllLibXls().DataSorter_set_IsCaseSensitive.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().DataSorter_set_IsCaseSensitive, self.Ptr, value)
+
+    @property
+    def IsIncludeTitle(self)->bool:
+        """
+    <summary>
+        Indicates whether the cell range has title.
+    </summary>
+        """
+        GetDllLibXls().DataSorter_get_IsIncludeTitle.argtypes=[c_void_p]
+        GetDllLibXls().DataSorter_get_IsIncludeTitle.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().DataSorter_get_IsIncludeTitle, self.Ptr)
+        return ret
+
+    @IsIncludeTitle.setter
+    def IsIncludeTitle(self, value:bool):
+        GetDllLibXls().DataSorter_set_IsIncludeTitle.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().DataSorter_set_IsIncludeTitle, self.Ptr, value)
+
+    @property
+
+    def Orientation(self)->'SortOrientationType':
+        """
+
+        """
+        GetDllLibXls().DataSorter_get_Orientation.argtypes=[c_void_p]
+        GetDllLibXls().DataSorter_get_Orientation.restype=c_int
+        ret = CallCFunction(GetDllLibXls().DataSorter_get_Orientation, self.Ptr)
+        objwraped = SortOrientationType(ret)
+        return objwraped
+
+    @Orientation.setter
+    def Orientation(self, value:'SortOrientationType'):
+        GetDllLibXls().DataSorter_set_Orientation.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().DataSorter_set_Orientation, self.Ptr, value.value)
+
+    @property
+
+    def SortColumns(self)->'SortColumns':
+        """
+
+        """
+        GetDllLibXls().DataSorter_get_SortColumns.argtypes=[c_void_p]
+        GetDllLibXls().DataSorter_get_SortColumns.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().DataSorter_get_SortColumns, self.Ptr)
+        ret = None if intPtr==None else SortColumns(intPtr)
+        return ret
+
+
+    @SortColumns.setter
+    def SortColumns(self, value:'SortColumns'):
+        GetDllLibXls().DataSorter_set_SortColumns.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().DataSorter_set_SortColumns, self.Ptr, value.Ptr)
+
+    @property
+
+    def SortedWay(self)->'SortedWayType':
+        """
+
+        """
+        GetDllLibXls().DataSorter_get_SortedWay.argtypes=[c_void_p]
+        GetDllLibXls().DataSorter_get_SortedWay.restype=c_int
+        ret = CallCFunction(GetDllLibXls().DataSorter_get_SortedWay, self.Ptr)
+        objwraped = SortedWayType(ret)
+        return objwraped
+
+    @SortedWay.setter
+    def SortedWay(self, value:'SortedWayType'):
+        GetDllLibXls().DataSorter_set_SortedWay.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().DataSorter_set_SortedWay, self.Ptr, value.value)
+
+    @property
+    def SortLeftToRight(self)->bool:
+        """
+
+        """
+        GetDllLibXls().DataSorter_get_SortLeftToRight.argtypes=[c_void_p]
+        GetDllLibXls().DataSorter_get_SortLeftToRight.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().DataSorter_get_SortLeftToRight, self.Ptr)
+        return ret
+
+    @SortLeftToRight.setter
+    def SortLeftToRight(self, value:bool):
+        GetDllLibXls().DataSorter_set_SortLeftToRight.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().DataSorter_set_SortLeftToRight, self.Ptr, value)
+
+
+    def Sort(self ,range:'CellRange'):
+        """
+
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().DataSorter_Sort.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().DataSorter_Sort, self.Ptr, intPtrrange)
+
+#
+#    def SortBy(self ,iColumns:List[int],orderBy:'OrderBy[]',colors:'Color[]'):
+#        """
+#
+#        """
+#        #arrayiColumns:ArrayTypeiColumns = ""
+#        countiColumns = len(iColumns)
+#        ArrayTypeiColumns = c_int * countiColumns
+#        arrayiColumns = ArrayTypeiColumns()
+#        for i in range(0, countiColumns):
+#            arrayiColumns[i] = iColumns[i]
+#
+#        #arrayorderBy:ArrayTypeorderBy = ""
+#        countorderBy = len(orderBy)
+#        ArrayTypeorderBy = c_void_p * countorderBy
+#        arrayorderBy = ArrayTypeorderBy()
+#        for i in range(0, countorderBy):
+#            arrayorderBy[i] = orderBy[i].Ptr
+#
+#        #arraycolors:ArrayTypecolors = ""
+#        countcolors = len(colors)
+#        ArrayTypecolors = c_void_p * countcolors
+#        arraycolors = ArrayTypecolors()
+#        for i in range(0, countcolors):
+#            arraycolors[i] = colors[i].Ptr
+#
+#
+#        GetDllLibXls().DataSorter_SortBy.argtypes=[c_void_p ,ArrayTypeiColumns,ArrayTypeorderBy,ArrayTypecolors]
+#        CallCFunction(GetDllLibXls().DataSorter_SortBy, self.Ptr, arrayiColumns,arrayorderBy,arraycolors)
+
+

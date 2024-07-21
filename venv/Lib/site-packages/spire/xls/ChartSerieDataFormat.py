@@ -1,0 +1,56 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from spire.xls.ChartInterior import *
+from ctypes import *
+import abc
+
+class ChartSerieDataFormat (  XlsChartSerieDataFormat) :
+    """
+
+    """
+    @property
+
+    def AreaProperties(self)->'ChartInterior':
+        """
+    <summary>
+        Returns object, that represents aera properties. Read only.
+    </summary>
+        """
+        GetDllLibXls().ChartSerieDataFormat_get_AreaProperties.argtypes=[c_void_p]
+        GetDllLibXls().ChartSerieDataFormat_get_AreaProperties.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSerieDataFormat_get_AreaProperties, self.Ptr)
+        ret = None if intPtr==None else ChartInterior(intPtr)
+        return ret
+
+
+    @property
+
+    def LineProperties(self)->'ChartBorder':
+        """
+    <summary>
+        Returns object, that represents line properties. Read only.
+    </summary>
+        """
+        GetDllLibXls().ChartSerieDataFormat_get_LineProperties.argtypes=[c_void_p]
+        GetDllLibXls().ChartSerieDataFormat_get_LineProperties.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSerieDataFormat_get_LineProperties, self.Ptr)
+        ret = None if intPtr==None else ChartBorder(intPtr)
+        return ret
+
+
+    @property
+
+    def ParentSerie(self)->'ChartSerie':
+        """
+
+        """
+        GetDllLibXls().ChartSerieDataFormat_get_ParentSerie.argtypes=[c_void_p]
+        GetDllLibXls().ChartSerieDataFormat_get_ParentSerie.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSerieDataFormat_get_ParentSerie, self.Ptr)
+        ret = None if intPtr==None else ChartSerie(intPtr)
+        return ret
+
+

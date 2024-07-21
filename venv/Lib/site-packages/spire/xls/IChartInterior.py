@@ -1,0 +1,278 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IChartInterior (abc.ABC) :
+    """
+    <summary>
+        Represents the chart interior. Interior of chart is supported in Chart area and Plot area only.
+    </summary>
+    """
+    @property
+
+    @abc.abstractmethod
+    def ForegroundColor(self)->'Color':
+        """
+    <summary>
+        Foreground color (RGB).
+            <example>The following code illustrates the use of ForegroundColor property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //Set the foreground color of the chart
+        chart.ChartArea.Interior.ForegroundColor = Color.Blue;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @ForegroundColor.setter
+    @abc.abstractmethod
+    def ForegroundColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BackgroundColor(self)->'Color':
+        """
+    <summary>
+        Background color (RGB).
+            <example>The following code illustrates the use of BackgroundColor property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //Set the backgroundColor color of the chart
+        chart.ChartArea.Interior.BackgroundColor = Color.Pink;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @BackgroundColor.setter
+    @abc.abstractmethod
+    def BackgroundColor(self, value:'Color'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Pattern(self)->'ExcelPatternType':
+        """
+    <summary>
+        Area pattern.
+            <example>The following code illustrates the use of Pattern property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //Set the pattern of the chart
+        chart.ChartArea.Interior.Pattern = ExcelPatternType.Angle;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @Pattern.setter
+    @abc.abstractmethod
+    def Pattern(self, value:'ExcelPatternType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def ForegroundKnownColor(self)->'ExcelColors':
+        """
+    <summary>
+        Index of foreground color.
+            <example>The following code illustrates the use of ForegroundKnownColor property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //Set the index of foreground color
+        chart.ChartArea.Interior.ForegroundKnownColor = ExcelColors.Red;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @ForegroundKnownColor.setter
+    @abc.abstractmethod
+    def ForegroundKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BackgroundKnownColor(self)->'ExcelColors':
+        """
+    <summary>
+        Background color index.
+            <example>The following code illustrates the use of BackgroundKnownColor property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //Set the index of background color
+        chart.ChartArea.Interior.BackgroundKnownColor = ExcelColors.Red;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @BackgroundKnownColor.setter
+    @abc.abstractmethod
+    def BackgroundKnownColor(self, value:'ExcelColors'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def UseDefaultFormat(self)->bool:
+        """
+    <summary>
+        If true - use automatic format; otherwise custom.
+            <example>The following code illustrates the use of UseDefaultFormat property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //True to use default format for interior
+        chart.ChartArea.Interior.UseDefaultFormat = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @UseDefaultFormat.setter
+    @abc.abstractmethod
+    def UseDefaultFormat(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def SwapColorsOnNegative(self)->bool:
+        """
+    <summary>
+        Foreground and background are swapped when the data value is negative.
+            <example>The following code illustrates the use of SwapColorsOnNegative property:
+            <code>
+        //Create worksheet
+        Workbook workbook = new Workbook();
+        workbook.LoadFromFile("Sample.xlsx");
+        Worksheet worksheet = workbook.Worksheets[0];
+        //Create chart and set range
+        IChart chart = worksheet.Charts.Add();
+        chart.DataRange = worksheet.Range["B2:C6"];
+        //Set chart type
+        chart.ChartType = ExcelChartType.Cone3DClustered;
+        //True if foreground and background colors are swapped when the data value is negative
+        chart.Series[0].Format.Interior.SwapColorsOnNegative = true;
+        //Save to file
+        workbook.SaveToFile("Chart.xlsx");
+        </code>
+        </example>
+    </summary>
+        """
+        pass
+
+
+    @SwapColorsOnNegative.setter
+    @abc.abstractmethod
+    def SwapColorsOnNegative(self, value:bool):
+        """
+
+        """
+        pass
+
+

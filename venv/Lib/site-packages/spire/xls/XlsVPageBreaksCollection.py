@@ -1,0 +1,84 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsVPageBreaksCollection (  CollectionBase[VPageBreak], IVPageBreaks) :
+    """
+
+    """
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().XlsVPageBreaksCollection_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().XlsVPageBreaksCollection_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsVPageBreaksCollection_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @property
+    def ManualBreakCount(self)->int:
+        """
+    <summary>
+        Gets manual breaks count. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsVPageBreaksCollection_get_ManualBreakCount.argtypes=[c_void_p]
+        GetDllLibXls().XlsVPageBreaksCollection_get_ManualBreakCount.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsVPageBreaksCollection_get_ManualBreakCount, self.Ptr)
+        return ret
+
+    @property
+    def RecordCode(self)->int:
+        """
+    <summary>
+        Returns code of the biff storage. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsVPageBreaksCollection_get_RecordCode.argtypes=[c_void_p]
+        GetDllLibXls().XlsVPageBreaksCollection_get_RecordCode.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsVPageBreaksCollection_get_RecordCode, self.Ptr)
+        return ret
+
+    @property
+    def NeedDataArray(self)->bool:
+        """
+    <summary>
+        Indicates whether data array is required by this record.
+    </summary>
+        """
+        GetDllLibXls().XlsVPageBreaksCollection_get_NeedDataArray.argtypes=[c_void_p]
+        GetDllLibXls().XlsVPageBreaksCollection_get_NeedDataArray.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsVPageBreaksCollection_get_NeedDataArray, self.Ptr)
+        return ret
+
+    @property
+    def StreamPos(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsVPageBreaksCollection_get_StreamPos.argtypes=[c_void_p]
+        GetDllLibXls().XlsVPageBreaksCollection_get_StreamPos.restype=c_long
+        ret = CallCFunction(GetDllLibXls().XlsVPageBreaksCollection_get_StreamPos, self.Ptr)
+        return ret
+
+    @StreamPos.setter
+    def StreamPos(self, value:int):
+        GetDllLibXls().XlsVPageBreaksCollection_set_StreamPos.argtypes=[c_void_p, c_long]
+        CallCFunction(GetDllLibXls().XlsVPageBreaksCollection_set_StreamPos, self.Ptr, value)
+
+    def GetEnumerator(self)->'IEnumerator':
+        """
+
+        """
+        ret = super(XlsVPageBreaksCollection, self).GetEnumerator()
+        ret._gtype = VPageBreak
+        return ret

@@ -1,0 +1,589 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class XlsChartSerie (  XlsObject, IChartSerie, INamedObject) :
+    """
+
+    """
+    @property
+    def ChartGroup(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_ChartGroup.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_ChartGroup.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerie_get_ChartGroup, self.Ptr)
+        return ret
+
+    @property
+
+    def Values(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_Values.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_Values.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_get_Values, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @Values.setter
+    def Values(self, value:'IXLSRange'):
+        GetDllLibXls().XlsChartSerie_set_Values.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartSerie_set_Values, self.Ptr, value.Ptr)
+
+    @property
+
+    def CategoryLabels(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_CategoryLabels.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_CategoryLabels.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_get_CategoryLabels, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @CategoryLabels.setter
+    def CategoryLabels(self, value:'IXLSRange'):
+        GetDllLibXls().XlsChartSerie_set_CategoryLabels.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartSerie_set_CategoryLabels, self.Ptr, value.Ptr)
+
+    @property
+
+    def Bubbles(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_Bubbles.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_Bubbles.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_get_Bubbles, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @Bubbles.setter
+    def Bubbles(self, value:'IXLSRange'):
+        GetDllLibXls().XlsChartSerie_set_Bubbles.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartSerie_set_Bubbles, self.Ptr, value.Ptr)
+
+    @property
+
+    def Name(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_Name.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_Name.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsChartSerie_get_Name, self.Ptr))
+        return ret
+
+
+    @Name.setter
+    def Name(self, value:str):
+        GetDllLibXls().XlsChartSerie_set_Name.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().XlsChartSerie_set_Name, self.Ptr, value)
+
+    @property
+
+    def NamedRange(self)->'CellRange':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_NamedRange.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_NamedRange.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_get_NamedRange, self.Ptr)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @property
+
+    def NameOrFormula(self)->str:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_NameOrFormula.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_NameOrFormula.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsChartSerie_get_NameOrFormula, self.Ptr))
+        return ret
+
+
+    @property
+    def Number(self)->int:
+        """
+    <summary>
+        Number of the series.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerie_get_Number.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_Number.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerie_get_Number, self.Ptr)
+        return ret
+
+    @property
+
+    def ParentSeries(self)->'XlsChartSeries':
+        """
+    <summary>
+        Gets parent serie collection. Read - only.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerie_get_ParentSeries.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_ParentSeries.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_get_ParentSeries, self.Ptr)
+        ret = None if intPtr==None else XlsChartSeries(intPtr)
+        return ret
+
+
+    @property
+    def UsePrimaryAxis(self)->bool:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_UsePrimaryAxis.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_UsePrimaryAxis.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerie_get_UsePrimaryAxis, self.Ptr)
+        return ret
+
+    @UsePrimaryAxis.setter
+    def UsePrimaryAxis(self, value:bool):
+        GetDllLibXls().XlsChartSerie_set_UsePrimaryAxis.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerie_set_UsePrimaryAxis, self.Ptr, value)
+
+    @property
+    def HasDroplines(self)->bool:
+        """
+        not support
+
+        """
+
+    @HasDroplines.setter
+    def HasDroplines(self, value:bool):
+        GetDllLibXls().XlsChartSerie_set_HasDroplines.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerie_set_HasDroplines, self.Ptr, value)
+
+    @property
+
+    def DataPoints(self)->'IChartDataPoints':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_DataPoints.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_DataPoints.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_get_DataPoints, self.Ptr)
+        ret = None if intPtr==None else XlsChartDataPointsCollection(intPtr)
+        return ret
+
+
+    @property
+    def PointNumber(self)->int:
+        """
+    <summary>
+        Returns number of points in the series. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerie_get_PointNumber.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_PointNumber.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerie_get_PointNumber, self.Ptr)
+        return ret
+
+    @property
+    def RealIndex(self)->int:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_RealIndex.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_RealIndex.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerie_get_RealIndex, self.Ptr)
+        return ret
+
+    @RealIndex.setter
+    def RealIndex(self, value:int):
+        GetDllLibXls().XlsChartSerie_set_RealIndex.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerie_set_RealIndex, self.Ptr, value)
+
+    @property
+
+    def Format(self)->'IChartSerieDataFormat':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_Format.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_Format.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_get_Format, self.Ptr)
+        ret = None if intPtr==None else XlsChartSerieDataFormat(intPtr)
+        return ret
+
+
+    @property
+
+    def SerieType(self)->'ExcelChartType':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_SerieType.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_SerieType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerie_get_SerieType, self.Ptr)
+        objwraped = ExcelChartType(ret)
+        return objwraped
+
+    @SerieType.setter
+    def SerieType(self, value:'ExcelChartType'):
+        GetDllLibXls().XlsChartSerie_set_SerieType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerie_set_SerieType, self.Ptr, value.value)
+
+    @property
+
+    def StartType(self)->str:
+        """
+    <summary>
+        Returns serie start type. Read-only.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerie_get_StartType.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_StartType.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().XlsChartSerie_get_StartType, self.Ptr))
+        return ret
+
+
+    @property
+
+    def EnteredDirectlyValues(self)->List['SpireObject']:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_EnteredDirectlyValues.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_EnteredDirectlyValues.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().XlsChartSerie_get_EnteredDirectlyValues, self.Ptr)
+        ret = GetObjVectorFromArray(intPtrArray, SpireObject)
+        return ret
+
+    @EnteredDirectlyValues.setter
+    def EnteredDirectlyValues(self, value:List['SpireObject']):
+        vCount = len(value)
+        ArrayType = c_void_p * vCount
+        vArray = ArrayType()
+        for i in range(0, vCount):
+            vArray[i] = value[i].Ptr
+        GetDllLibXls().XlsChartSerie_set_EnteredDirectlyValues.argtypes=[c_void_p, ArrayType, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerie_set_EnteredDirectlyValues, self.Ptr, vArray, vCount)
+
+    @property
+
+    def EnteredDirectlyCategoryLabels(self)->List['SpireObject']:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_EnteredDirectlyCategoryLabels.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_EnteredDirectlyCategoryLabels.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().XlsChartSerie_get_EnteredDirectlyCategoryLabels, self.Ptr)
+        ret = GetObjVectorFromArray(intPtrArray, SpireObject)
+        return ret
+
+    @EnteredDirectlyCategoryLabels.setter
+    def EnteredDirectlyCategoryLabels(self, value:List['SpireObject']):
+        vCount = len(value)
+        ArrayType = c_void_p * vCount
+        vArray = ArrayType()
+        for i in range(0, vCount):
+            vArray[i] = value[i].Ptr
+        GetDllLibXls().XlsChartSerie_set_EnteredDirectlyCategoryLabels.argtypes=[c_void_p, ArrayType, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerie_set_EnteredDirectlyCategoryLabels, self.Ptr, vArray, vCount)
+
+    @property
+
+    def EnteredDirectlyBubbles(self)->List['SpireObject']:
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_EnteredDirectlyBubbles.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_EnteredDirectlyBubbles.restype=IntPtrArray
+        intPtrArray = CallCFunction(GetDllLibXls().XlsChartSerie_get_EnteredDirectlyBubbles, self.Ptr)
+        ret = GetVectorFromArray(intPtrArray, SpireObject)
+        return ret
+
+    @EnteredDirectlyBubbles.setter
+    def EnteredDirectlyBubbles(self, value:List['SpireObject']):
+        vCount = len(value)
+        ArrayType = c_void_p * vCount
+        vArray = ArrayType()
+        for i in range(0, vCount):
+            vArray[i] = value[i].Ptr
+        GetDllLibXls().XlsChartSerie_set_EnteredDirectlyBubbles.argtypes=[c_void_p, ArrayType, c_int]
+        CallCFunction(GetDllLibXls().XlsChartSerie_set_EnteredDirectlyBubbles, self.Ptr, vArray, vCount)
+
+    @property
+
+    def ErrorBarsY(self)->'IChartErrorBars':
+        """
+    <summary>
+        Represents Y error bars. Read only.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerie_get_ErrorBarsY.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_ErrorBarsY.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_get_ErrorBarsY, self.Ptr)
+        ret = None if intPtr==None else IChartErrorBars(intPtr)
+        return ret
+
+
+    @property
+    def HasErrorBarsY(self)->bool:
+        """
+    <summary>
+        Indicates if serie contains Y error bars.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerie_get_HasErrorBarsY.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_HasErrorBarsY.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerie_get_HasErrorBarsY, self.Ptr)
+        return ret
+
+    @HasErrorBarsY.setter
+    def HasErrorBarsY(self, value:bool):
+        GetDllLibXls().XlsChartSerie_set_HasErrorBarsY.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerie_set_HasErrorBarsY, self.Ptr, value)
+
+    @property
+
+    def ErrorBarsX(self)->'IChartErrorBars':
+        """
+    <summary>
+        Represents X error bars. Read only.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerie_get_ErrorBarsX.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_ErrorBarsX.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_get_ErrorBarsX, self.Ptr)
+        ret = None if intPtr==None else IChartErrorBars(intPtr)
+        return ret
+
+
+    @property
+    def HasErrorBarsX(self)->bool:
+        """
+    <summary>
+        Indicates if serie contains X error bars.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerie_get_HasErrorBarsX.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_HasErrorBarsX.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().XlsChartSerie_get_HasErrorBarsX, self.Ptr)
+        return ret
+
+    @HasErrorBarsX.setter
+    def HasErrorBarsX(self, value:bool):
+        GetDllLibXls().XlsChartSerie_set_HasErrorBarsX.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerie_set_HasErrorBarsX, self.Ptr, value)
+
+    @property
+
+    def TrendLines(self)->'IChartTrendLines':
+        """
+    <summary>
+        Represents serie trend lines collection. Read only.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerie_get_TrendLines.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_TrendLines.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_get_TrendLines, self.Ptr)
+        ret = None if intPtr==None else IChartTrendLines(intPtr)
+        return ret
+
+
+    @property
+
+    def InvertNegaColor(self)->bool:
+        """
+    <summary>
+        Indicates wheter to invert its colors if the value is negative.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerie_get_InvertNegaColor.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_InvertNegaColor.restype=c_bool
+        return CallCFunction(GetDllLibXls().XlsChartSerie_get_InvertNegaColor, self.Ptr)
+
+
+
+    @InvertNegaColor.setter
+    def InvertNegaColor(self, value:bool):
+        GetDllLibXls().XlsChartSerie_set_InvertNegaColor.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().XlsChartSerie_set_InvertNegaColor, self.Ptr, value)
+
+
+    @property
+    def Index(self)->int:
+        """
+    <summary>
+        Represents index of the series.
+    </summary>
+        """
+        GetDllLibXls().XlsChartSerie_get_Index.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_Index.restype=c_int
+        ret = CallCFunction(GetDllLibXls().XlsChartSerie_get_Index, self.Ptr)
+        return ret
+
+    @property
+
+    def DataLabels(self)->'IChartDataLabels':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_DataLabels.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_DataLabels.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_get_DataLabels, self.Ptr)
+        ret = None if intPtr==None else XlsChartDataLabels(intPtr)
+        return ret
+
+
+    @property
+
+    def ParetoLineFormat(self)->'IChartFrameFormat':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_get_ParetoLineFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_get_ParetoLineFormat.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_get_ParetoLineFormat, self.Ptr)
+        ret = None if intPtr==None else XlsChartFrameFormat(intPtr)
+        return ret
+
+
+#
+#    def Clone(self ,parent:'SpireObject',newNames:'Dictionary2',fontIndexes:'Dictionary2')->'XlsChartSerie':
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrnewNames:c_void_p = newNames.Ptr
+#        intPtrfontIndexes:c_void_p = fontIndexes.Ptr
+#
+#        GetDllLibXls().XlsChartSerie_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+#        GetDllLibXls().XlsChartSerie_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_Clone, self.Ptr, intPtrparent,intPtrnewNames,intPtrfontIndexes)
+#        ret = None if intPtr==None else XlsChartSerie(intPtr)
+#        return ret
+#
+
+
+    @dispatch
+
+    def ErrorBar(self ,bIsY:bool)->IChartErrorBars:
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartSerie_ErrorBar.argtypes=[c_void_p ,c_bool]
+        GetDllLibXls().XlsChartSerie_ErrorBar.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_ErrorBar, self.Ptr, bIsY)
+        ret = None if intPtr==None else IChartErrorBars(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def ErrorBar(self ,bIsY:bool,include:ErrorBarIncludeType)->IChartErrorBars:
+        """
+
+        """
+        enuminclude:c_int = include.value
+
+        GetDllLibXls().XlsChartSerie_ErrorBarBI.argtypes=[c_void_p ,c_bool,c_int]
+        GetDllLibXls().XlsChartSerie_ErrorBarBI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_ErrorBarBI, self.Ptr, bIsY,enuminclude)
+        ret = None if intPtr==None else IChartErrorBars(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def ErrorBar(self ,bIsY:bool,include:ErrorBarIncludeType,type:ErrorBarType)->IChartErrorBars:
+        """
+
+        """
+        enuminclude:c_int = include.value
+        enumtype:c_int = type.value
+
+        GetDllLibXls().XlsChartSerie_ErrorBarBIT.argtypes=[c_void_p ,c_bool,c_int,c_int]
+        GetDllLibXls().XlsChartSerie_ErrorBarBIT.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_ErrorBarBIT, self.Ptr, bIsY,enuminclude,enumtype)
+        ret = None if intPtr==None else IChartErrorBars(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def ErrorBar(self ,bIsY:bool,include:ErrorBarIncludeType,type:ErrorBarType,numberValue:float)->IChartErrorBars:
+        """
+
+        """
+        enuminclude:c_int = include.value
+        enumtype:c_int = type.value
+
+        GetDllLibXls().XlsChartSerie_ErrorBarBITN.argtypes=[c_void_p ,c_bool,c_int,c_int,c_double]
+        GetDllLibXls().XlsChartSerie_ErrorBarBITN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_ErrorBarBITN, self.Ptr, bIsY,enuminclude,enumtype,numberValue)
+        ret = None if intPtr==None else IChartErrorBars(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def ErrorBar(self ,bIsY:bool,plusRange:IXLSRange,minusRange:IXLSRange)->IChartErrorBars:
+        """
+
+        """
+        intPtrplusRange:c_void_p = plusRange.Ptr
+        intPtrminusRange:c_void_p = minusRange.Ptr
+
+        GetDllLibXls().XlsChartSerie_ErrorBarBPM.argtypes=[c_void_p ,c_bool,c_void_p,c_void_p]
+        GetDllLibXls().XlsChartSerie_ErrorBarBPM.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_ErrorBarBPM, self.Ptr, bIsY,intPtrplusRange,intPtrminusRange)
+        ret = None if intPtr==None else IChartErrorBars(intPtr)
+        return ret
+
+
+
+    def GetCommonSerieFormat(self)->'XlsChartFormat':
+        """
+    <summary>
+        Gets common serie format.
+    </summary>
+    <returns>Returns common serie format.</returns>
+        """
+        GetDllLibXls().XlsChartSerie_GetCommonSerieFormat.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_GetCommonSerieFormat.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_GetCommonSerieFormat, self.Ptr)
+        ret = None if intPtr==None else XlsChartFormat(intPtr)
+        return ret
+
+
+
+    def GetSerieNameRange(self)->'IXLSRange':
+        """
+
+        """
+        GetDllLibXls().XlsChartSerie_GetSerieNameRange.argtypes=[c_void_p]
+        GetDllLibXls().XlsChartSerie_GetSerieNameRange.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().XlsChartSerie_GetSerieNameRange, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+
+    def SetDefaultName(self ,defaultName:str):
+        """
+
+        """
+        
+        GetDllLibXls().XlsChartSerie_SetDefaultName.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().XlsChartSerie_SetDefaultName, self.Ptr, defaultName)
+

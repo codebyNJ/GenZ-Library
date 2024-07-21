@@ -1,0 +1,109 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class CommentsCollection (  XlsCommentsCollection) :
+    """
+
+    """
+    @dispatch
+
+    def AddComment(self ,range:CellRange)->ExcelComment:
+        """
+    <summary>
+        Adds comment to the specified range.
+    </summary>
+    <param name="range">Range that adds comment.</param>
+    <returns>Created comment object..</returns>
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().CommentsCollection_AddComment.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().CommentsCollection_AddComment.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CommentsCollection_AddComment, self.Ptr, intPtrrange)
+        ret = None if intPtr==None else ExcelComment(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def AddComment(self ,rowIndex:int,columnIndex:int)->ExcelComment:
+        """
+    <summary>
+        Adds comment to the specified row and column.
+    </summary>
+    <param name="rowIndex">Row index..</param>
+    <param name="columnIndex">Column index.</param>
+    <returns>Created comment object.</returns>
+        """
+        
+        GetDllLibXls().CommentsCollection_AddCommentRC.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().CommentsCollection_AddCommentRC.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CommentsCollection_AddCommentRC, self.Ptr, rowIndex,columnIndex)
+        ret = None if intPtr==None else ExcelComment(intPtr)
+        return ret
+
+
+
+    def Remove(self ,comment:'ExcelComment'):
+        """
+    <summary>
+        Removes comment object from the collection.
+    </summary>
+    <param name="comment">Comment to remove.</param>
+        """
+        intPtrcomment:c_void_p = comment.Ptr
+
+        GetDllLibXls().CommentsCollection_Remove.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().CommentsCollection_Remove, self.Ptr, intPtrcomment)
+
+    @dispatch
+
+    def get_Item(self ,index:int)->ExcelComment:
+        """
+    <summary>
+        Gets a comment object.
+    </summary>
+        """
+        
+        GetDllLibXls().CommentsCollection_get_Item.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().CommentsCollection_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CommentsCollection_get_Item, self.Ptr, index)
+        ret = None if intPtr==None else ExcelComment(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,name:str)->ExcelComment:
+        """
+
+        """
+        
+        GetDllLibXls().CommentsCollection_get_ItemN.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().CommentsCollection_get_ItemN.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CommentsCollection_get_ItemN, self.Ptr, name)
+        ret = None if intPtr==None else ExcelComment(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,Row:int,Column:int)->ExcelComment:
+        """
+    <summary>
+        Gets a comment object.
+    </summary>
+        """
+        
+        GetDllLibXls().CommentsCollection_get_ItemRC.argtypes=[c_void_p ,c_int,c_int]
+        GetDllLibXls().CommentsCollection_get_ItemRC.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().CommentsCollection_get_ItemRC, self.Ptr, Row,Column)
+        ret = None if intPtr==None else ExcelComment(intPtr)
+        return ret
+
+

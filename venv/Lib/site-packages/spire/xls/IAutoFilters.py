@@ -1,0 +1,49 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IAutoFilters (  IExcelApplication) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def Range(self)->'IXLSRange':
+        """
+
+        """
+        pass
+
+
+    @Range.setter
+    @abc.abstractmethod
+    def Range(self, value:'IXLSRange'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def Count(self)->int:
+        """
+
+        """
+        pass
+
+
+
+    @abc.abstractmethod
+    def get_Item(self ,columnIndex:int)->'FilterColumn':
+        """
+
+        """
+        pass
+
+

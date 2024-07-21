@@ -1,0 +1,238 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IInternalAddtionalFormat (  IExtendedFormat, IExcelApplication) :
+    """
+
+    """
+    @property
+
+    @abc.abstractmethod
+    def BottomBorderColor(self)->'OColor':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def TopBorderColor(self)->'OColor':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LeftBorderColor(self)->'OColor':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RightBorderColor(self)->'OColor':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def DiagonalBorderColor(self)->'OColor':
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def LeftBorderLineStyle(self)->'LineStyleType':
+        """
+
+        """
+        pass
+
+
+    @LeftBorderLineStyle.setter
+    @abc.abstractmethod
+    def LeftBorderLineStyle(self, value:'LineStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def RightBorderLineStyle(self)->'LineStyleType':
+        """
+
+        """
+        pass
+
+
+    @RightBorderLineStyle.setter
+    @abc.abstractmethod
+    def RightBorderLineStyle(self, value:'LineStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def TopBorderLineStyle(self)->'LineStyleType':
+        """
+
+        """
+        pass
+
+
+    @TopBorderLineStyle.setter
+    @abc.abstractmethod
+    def TopBorderLineStyle(self, value:'LineStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def BottomBorderLineStyle(self)->'LineStyleType':
+        """
+
+        """
+        pass
+
+
+    @BottomBorderLineStyle.setter
+    @abc.abstractmethod
+    def BottomBorderLineStyle(self, value:'LineStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def DiagonalUpBorderLineStyle(self)->'LineStyleType':
+        """
+
+        """
+        pass
+
+
+    @DiagonalUpBorderLineStyle.setter
+    @abc.abstractmethod
+    def DiagonalUpBorderLineStyle(self, value:'LineStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def DiagonalDownBorderLineStyle(self)->'LineStyleType':
+        """
+
+        """
+        pass
+
+
+    @DiagonalDownBorderLineStyle.setter
+    @abc.abstractmethod
+    def DiagonalDownBorderLineStyle(self, value:'LineStyleType'):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def DiagonalUpVisible(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @DiagonalUpVisible.setter
+    @abc.abstractmethod
+    def DiagonalUpVisible(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def DiagonalDownVisible(self)->bool:
+        """
+
+        """
+        pass
+
+
+    @DiagonalDownVisible.setter
+    @abc.abstractmethod
+    def DiagonalDownVisible(self, value:bool):
+        """
+
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def BeginUpdate(self):
+        """
+
+        """
+        pass
+
+
+    @abc.abstractmethod
+    def EndUpdate(self):
+        """
+
+        """
+        pass
+
+
+    @property
+
+    @abc.abstractmethod
+    def Workbook(self)->'XlsWorkbook':
+        """
+
+        """
+        pass
+
+

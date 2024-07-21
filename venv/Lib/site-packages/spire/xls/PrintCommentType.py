@@ -1,0 +1,18 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class PrintCommentType(Enum):
+    """
+    <summary>
+        Print comments types.
+    </summary>
+    """
+    InPlace = 0
+    NoComments = 1
+    SheetEnd = 2
+

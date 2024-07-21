@@ -1,0 +1,19 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class PrintErrorsType(Enum):
+    """
+    <summary>
+        Print error values.
+    </summary>
+    """
+    Blank = 1
+    Dash = 2
+    Displayed = 0
+    NA = 3
+

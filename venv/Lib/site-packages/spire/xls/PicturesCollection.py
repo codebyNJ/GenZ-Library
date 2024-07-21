@@ -1,0 +1,532 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class PicturesCollection (  XlsPicturesCollection) :
+    """
+
+    """
+
+    #def get_Item(self ,Index:int)->'ExcelPicture':
+    #    """
+
+    #    """
+        
+    #    GetDllLibXls().PicturesCollection_get_Item.argtypes=[c_void_p ,c_int]
+    #    GetDllLibXls().PicturesCollection_get_Item.restype=c_void_p
+    #    intPtr = CallCFunction(GetDllLibXls().PicturesCollection_get_Item, self.Ptr, Index)
+    #    ret = None if intPtr==None else ExcelPicture(intPtr)
+    #    return ret
+
+
+    #@dispatch
+
+    #def Add(self ,image:Image,pictureName:str)->ExcelPicture:
+    #    """
+    #<summary>
+    #    Adds picture to the collection.
+    #</summary>
+    #<param name="image">Picture to add.</param>
+    #<param name="pictureName">Picture name.</param>
+    #<returns>Added picture.</returns>
+    #    """
+    #    intPtrimage:c_void_p = image.Ptr
+
+    #    GetDllLibXls().PicturesCollection_Add.argtypes=[c_void_p ,c_void_p,c_void_p]
+    #    GetDllLibXls().PicturesCollection_Add.restype=c_void_p
+    #    intPtr = CallCFunction(GetDllLibXls().PicturesCollection_Add, self.Ptr, intPtrimage,pictureName)
+    #    ret = None if intPtr==None else ExcelPicture(intPtr)
+    #    return ret
+
+
+    #@dispatch
+
+    #def Add(self ,image:Image,pictureName:str,imageFormat:ImageFormatType)->ExcelPicture:
+    #    """
+    #<summary>
+    #    Adds picture to the collection.
+    #</summary>
+    #<param name="image">Picture to add.</param>
+    #<param name="pictureName">Picture name.</param>
+    #<param name="imageFormat">Image format.</param>
+    #<returns>Added picture.</returns>
+    #    """
+    #    intPtrimage:c_void_p = image.Ptr
+    #    enumimageFormat:c_int = imageFormat.value
+
+    #    GetDllLibXls().PicturesCollection_AddIPI.argtypes=[c_void_p ,c_void_p,c_void_p,c_int]
+    #    GetDllLibXls().PicturesCollection_AddIPI.restype=c_void_p
+    #    intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddIPI, self.Ptr, intPtrimage,pictureName,enumimageFormat)
+    #    ret = None if intPtr==None else ExcelPicture(intPtr)
+    #    return ret
+
+
+    @dispatch
+
+    def Add(self ,fileName:str)->ExcelPicture:
+        """
+    <summary>
+        Adds picture from the specified file.
+    </summary>
+    <param name="fileName">File name.</param>
+    <returns>Added picture.</returns>
+        """
+        
+        GetDllLibXls().PicturesCollection_AddF.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().PicturesCollection_AddF.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddF, self.Ptr, fileName)
+        ret = None if intPtr==None else ExcelPicture(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,fileName:str,imageFormat:ImageFormatType)->ExcelPicture:
+        """
+    <summary>
+        Adds picture from the specified file.
+    </summary>
+    <param name="strFileName">File name.</param>
+    <param name="imageFormat">Image format.</param>
+    <returns>Added picture.</returns>
+        """
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().PicturesCollection_AddFI.argtypes=[c_void_p ,c_void_p,c_int]
+        GetDllLibXls().PicturesCollection_AddFI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddFI, self.Ptr, fileName,enumimageFormat)
+        ret = None if intPtr==None else ExcelPicture(intPtr)
+        return ret
+
+
+    #@dispatch
+
+    #def Add(self ,topRow:int,leftColumn:int,image:Image)->ExcelPicture:
+    #    """
+    #<summary>
+    #    Adds image to the collection.
+    #</summary>
+    #<param name="topRow">Top row of a new picture.</param>
+    #<param name="leftColumn">Left column.</param>
+    #<param name="image">Image.</param>
+    #<returns>Added picture.</returns>
+    #    """
+    #    intPtrimage:c_void_p = image.Ptr
+
+    #    GetDllLibXls().PicturesCollection_AddTLI.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+    #    GetDllLibXls().PicturesCollection_AddTLI.restype=c_void_p
+    #    intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLI, self.Ptr, topRow,leftColumn,intPtrimage)
+    #    ret = None if intPtr==None else ExcelPicture(intPtr)
+    #    return ret
+
+
+    #@dispatch
+
+    #def Add(self ,topRow:int,leftColumn:int,image:Image,imageFormat:ImageFormatType)->ExcelPicture:
+    #    """
+    #<summary>
+    #    Adds image to the collection.
+    #</summary>
+    #<param name="topRow">Top row of a new picture.</param>
+    #<param name="leftColumn">Left column.</param>
+    #<param name="image">Image to add.</param>
+    #<param name="imageFormat">Image format.</param>
+    #<returns>Added picture.</returns>
+    #    """
+    #    intPtrimage:c_void_p = image.Ptr
+    #    enumimageFormat:c_int = imageFormat.value
+
+    #    GetDllLibXls().PicturesCollection_AddTLII.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int]
+    #    GetDllLibXls().PicturesCollection_AddTLII.restype=c_void_p
+    #    intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLII, self.Ptr, topRow,leftColumn,intPtrimage,enumimageFormat)
+    #    ret = None if intPtr==None else ExcelPicture(intPtr)
+    #    return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,stream:Stream)->ExcelPicture:
+        """
+    <summary>
+        Adds image to the collection.
+    </summary>
+    <param name="topRow">Top row of a new picture.</param>
+    <param name="leftColumn">Left column.</param>
+    <param name="stream">Stream object.</param>
+    <returns>Added picture.</returns>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().PicturesCollection_AddTLS.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        GetDllLibXls().PicturesCollection_AddTLS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLS, self.Ptr, topRow,leftColumn,intPtrstream)
+        ret = None if intPtr==None else ExcelPicture(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,stream:Stream,imageFormat:ImageFormatType)->ExcelPicture:
+        """
+    <summary>
+        Adds image to the collection.
+    </summary>
+    <param name="topRow">Top row of a new picture.</param>
+    <param name="leftColumn">Left column.</param>
+    <param name="stream">Stream with the picture.</param>
+    <param name="imageFormat">Image format.</param>
+    <returns>Added picture.</returns>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().PicturesCollection_AddTLSI.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int]
+        GetDllLibXls().PicturesCollection_AddTLSI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLSI, self.Ptr, topRow,leftColumn,intPtrstream,enumimageFormat)
+        ret = None if intPtr==None else ExcelPicture(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,fileName:str)->ExcelPicture:
+        """
+    <summary>
+        Adds image to the collection.
+    </summary>
+    <param name="topRow">Top row of a new picture.</param>
+    <param name="leftColumn">Left column.</param>
+    <param name="fileName">File name.</param>
+    <returns>Added picture.</returns>
+        """
+        
+        GetDllLibXls().PicturesCollection_AddTLF.argtypes=[c_void_p ,c_int,c_int,c_void_p]
+        GetDllLibXls().PicturesCollection_AddTLF.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLF, self.Ptr, topRow,leftColumn,fileName)
+        ret = None if intPtr==None else ExcelPicture(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,fileName:str,imageFormat:ImageFormatType)->ExcelPicture:
+        """
+    <summary>
+        Adds image to the collection.
+    </summary>
+    <param name="topRow">Top row of a new picture.</param>
+    <param name="leftColumn">Left column.</param>
+    <param name="fileName">File name.</param>
+    <param name="imageFormat">Image format.</param>
+    <returns>Added picture.</returns>
+        """
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().PicturesCollection_AddTLFI.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int]
+        GetDllLibXls().PicturesCollection_AddTLFI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLFI, self.Ptr, topRow,leftColumn,fileName,enumimageFormat)
+        ret = None if intPtr==None else ExcelPicture(intPtr)
+        return ret
+
+
+    #@dispatch
+
+    #def Add(self ,topRow:int,leftColumn:int,bottomRow:int,rightColumn:int,image:Image)->ExcelPicture:
+    #    """
+    #<summary>
+    #    Adds image to the collection.
+    #</summary>
+    #<param name="topRow">Top row of a new picture.</param>
+    #<param name="leftColumn">Left column.</param>
+    #<param name="bottomRow">Bottom row.</param>
+    #<param name="rightColumn">Right column.</param>
+    #<param name="image">Image object.</param>
+    #<returns>Added picture.</returns>
+    #    """
+    #    intPtrimage:c_void_p = image.Ptr
+
+    #    GetDllLibXls().PicturesCollection_AddTLBRI.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_void_p]
+    #    GetDllLibXls().PicturesCollection_AddTLBRI.restype=c_void_p
+    #    intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLBRI, self.Ptr, topRow,leftColumn,bottomRow,rightColumn,intPtrimage)
+    #    ret = None if intPtr==None else ExcelPicture(intPtr)
+    #    return ret
+
+
+
+    def AddLinkPic(self ,topRow:int,leftColumn:int,height:int,width:int,linktarget:str)->'ExcelPicture':
+        """
+
+        """
+        
+        GetDllLibXls().PicturesCollection_AddLinkPic.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_void_p]
+        GetDllLibXls().PicturesCollection_AddLinkPic.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddLinkPic, self.Ptr, topRow,leftColumn,height,width,linktarget)
+        ret = None if intPtr==None else ExcelPicture(intPtr)
+        return ret
+
+
+    #@dispatch
+
+    #def Add(self ,topRow:int,leftColumn:int,bottomRow:int,rightColumn:int,image:Image,imageFormat:ImageFormatType)->ExcelPicture:
+    #    """
+    #<summary>
+    #    Adds image to the collection.
+    #</summary>
+    #<param name="topRow">Top row of a new picture.</param>
+    #<param name="leftColumn">Left column.</param>
+    #<param name="bottomRow">Bottom row.</param>
+    #<param name="rightColumn">Right column.</param>
+    #<param name="image">Image to add.</param>
+    #<param name="imageFormat">Image format.</param>
+    #<returns>Added picture.</returns>
+    #    """
+    #    intPtrimage:c_void_p = image.Ptr
+    #    enumimageFormat:c_int = imageFormat.value
+
+    #    GetDllLibXls().PicturesCollection_AddTLBRII.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_void_p,c_int]
+    #    GetDllLibXls().PicturesCollection_AddTLBRII.restype=c_void_p
+    #    intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLBRII, self.Ptr, topRow,leftColumn,bottomRow,rightColumn,intPtrimage,enumimageFormat)
+    #    ret = None if intPtr==None else ExcelPicture(intPtr)
+    #    return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,bottomRow:int,rightColumn:int,stream:Stream)->ExcelPicture:
+        """
+    <summary>
+        Adds image to the collection.
+    </summary>
+    <param name="topRow">Top row of a new picture.</param>
+    <param name="leftColumn">Left column.</param>
+    <param name="bottomRow">Bottom row.</param>
+    <param name="rightColumn">Right column.</param>
+    <param name="stream">Stream.</param>
+    <returns>Added picture.</returns>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().PicturesCollection_AddTLBRS.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_void_p]
+        GetDllLibXls().PicturesCollection_AddTLBRS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLBRS, self.Ptr, topRow,leftColumn,bottomRow,rightColumn,intPtrstream)
+        ret = None if intPtr==None else ExcelPicture(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,bottomRow:int,rightColumn:int,stream:Stream,imageFormat:ImageFormatType)->ExcelPicture:
+        """
+    <summary>
+        Adds image to the collection.
+    </summary>
+    <param name="topRow">Top row of a new picture.</param>
+    <param name="leftColumn">Left column.</param>
+    <param name="bottomRow">Bottom row.</param>
+    <param name="rightColumn">Right column.</param>
+    <param name="stream">Stream with the picture.</param>
+    <param name="imageFormat">Image format.</param>
+    <returns>Added picture.</returns>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().PicturesCollection_AddTLBRSI.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_void_p,c_int]
+        GetDllLibXls().PicturesCollection_AddTLBRSI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLBRSI, self.Ptr, topRow,leftColumn,bottomRow,rightColumn,intPtrstream,enumimageFormat)
+        ret = None if intPtr==None else ExcelPicture(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,bottomRow:int,rightColumn:int,fileName:str)->ExcelPicture:
+        """
+    <summary>
+        Adds image to the collection.
+    </summary>
+    <param name="topRow">Top row of a new picture.</param>
+    <param name="leftColumn">Left column.</param>
+    <param name="bottomRow">Bottom row.</param>
+    <param name="rightColumn">Right column.</param>
+    <param name="fileName">File name.</param>
+    <returns>Added picture.</returns>
+        """
+        
+        GetDllLibXls().PicturesCollection_AddTLBRF.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_void_p]
+        GetDllLibXls().PicturesCollection_AddTLBRF.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLBRF, self.Ptr, topRow,leftColumn,bottomRow,rightColumn,fileName)
+        ret = None if intPtr==None else ExcelPicture(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,bottomRow:int,rightColumn:int,fileName:str,imageFormat:ImageFormatType)->ExcelPicture:
+        """
+    <summary>
+        Adds image to the collection.
+    </summary>
+    <param name="topRow">Top row of a new picture.</param>
+    <param name="leftColumn">Left column.</param>
+    <param name="bottomRow">Bottom row.</param>
+    <param name="rightColumn">Right column.</param>
+    <param name="fileName">File name.</param>
+    <param name="imageFormat">Image format.</param>
+    <returns>Added picture.</returns>
+        """
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().PicturesCollection_AddTLBRFI.argtypes=[c_void_p ,c_int,c_int,c_int,c_int,c_void_p,c_int]
+        GetDllLibXls().PicturesCollection_AddTLBRFI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLBRFI, self.Ptr, topRow,leftColumn,bottomRow,rightColumn,fileName,enumimageFormat)
+        ret = None if intPtr==None else ExcelPicture(intPtr)
+        return ret
+
+
+    #@dispatch
+
+    #def Add(self ,topRow:int,leftColumn:int,image:Image,scaleWidth:int,scaleHeight:int)->ExcelPicture:
+    #    """
+    #<summary>
+    #    Adds image to the collection.
+    #</summary>
+    #<param name="topRow">Top row of a new picture.</param>
+    #<param name="leftColumn">Left column.</param>
+    #<param name="image">Image.</param>
+    #<param name="scaleWidth">Width scale in percents.</param>
+    #<param name="scaleHeight">Height scale in percents.</param>
+    #<returns>Added picture.</returns>
+    #    """
+    #    intPtrimage:c_void_p = image.Ptr
+
+    #    GetDllLibXls().PicturesCollection_AddTLISS.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int,c_int]
+    #    GetDllLibXls().PicturesCollection_AddTLISS.restype=c_void_p
+    #    intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLISS, self.Ptr, topRow,leftColumn,intPtrimage,scaleWidth,scaleHeight)
+    #    ret = None if intPtr==None else ExcelPicture(intPtr)
+    #    return ret
+
+
+    #@dispatch
+
+    #def Add(self ,topRow:int,leftColumn:int,image:Image,scaleWidth:int,scaleHeight:int,imageFormat:ImageFormatType)->ExcelPicture:
+    #    """
+    #<summary>
+    #    Adds image to the collection.
+    #</summary>
+    #<param name="topRow">Top row of a new picture.</param>
+    #<param name="leftColumn">Left column.</param>
+    #<param name="image">Image.</param>
+    #<param name="scaleWidth">Width scale in percents.</param>
+    #<param name="scaleHeight">Height scale in percents.</param>
+    #<param name="imageFormat">Image format.</param>
+    #<returns>Added picture.</returns>
+    #    """
+    #    intPtrimage:c_void_p = image.Ptr
+    #    enumimageFormat:c_int = imageFormat.value
+
+    #    GetDllLibXls().PicturesCollection_AddTLISSI.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int,c_int,c_int]
+    #    GetDllLibXls().PicturesCollection_AddTLISSI.restype=c_void_p
+    #    intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLISSI, self.Ptr, topRow,leftColumn,intPtrimage,scaleWidth,scaleHeight,enumimageFormat)
+    #    ret = None if intPtr==None else ExcelPicture(intPtr)
+    #    return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,stream:Stream,scaleWidth:int,scaleHeight:int)->ExcelPicture:
+        """
+    <summary>
+        Adds image to the collection.
+    </summary>
+    <param name="topRow">Top row of a new picture.</param>
+    <param name="leftColumn">Left column.</param>
+    <param name="stream">Stream with the picture.</param>
+    <param name="scaleWidth">Width scale in percents.</param>
+    <param name="scaleHeight">Height scale in percents.</param>
+    <returns>Added picture.</returns>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+
+        GetDllLibXls().PicturesCollection_AddTLSSS.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int,c_int]
+        GetDllLibXls().PicturesCollection_AddTLSSS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLSSS, self.Ptr, topRow,leftColumn,intPtrstream,scaleWidth,scaleHeight)
+        ret = None if intPtr==None else ExcelPicture(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,stream:Stream,scaleWidth:int,scaleHeight:int,imageFormat:ImageFormatType)->ExcelPicture:
+        """
+    <summary>
+        Adds image to the collection.
+    </summary>
+    <param name="topRow">Top row of a new picture.</param>
+    <param name="leftColumn">Left column.</param>
+    <param name="stream">Stream with the picture.</param>
+    <param name="scaleWidth">Width scale in percents.</param>
+    <param name="scaleHeight">Height scale in percents.</param>
+    <param name="imageFormat">Image format.</param>
+    <returns>Added picture.</returns>
+        """
+        intPtrstream:c_void_p = stream.Ptr
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().PicturesCollection_AddTLSSSI.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int,c_int,c_int]
+        GetDllLibXls().PicturesCollection_AddTLSSSI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLSSSI, self.Ptr, topRow,leftColumn,intPtrstream,scaleWidth,scaleHeight,enumimageFormat)
+        ret = None if intPtr==None else ExcelPicture(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,fileName:str,scaleWidth:int,scaleHeight:int)->ExcelPicture:
+        """
+    <summary>
+        Adds image to the collection.
+    </summary>
+    <param name="topRow">Top row of a new picture.</param>
+    <param name="leftColumn">Left column.</param>
+    <param name="fileName">File name.</param>
+    <param name="scaleWidth">Width scale in percents.</param>
+    <param name="scaleHeight">Height scale in percents.</param>
+    <returns>Added picture.</returns>
+        """
+        
+        GetDllLibXls().PicturesCollection_AddTLFSS.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int,c_int]
+        GetDllLibXls().PicturesCollection_AddTLFSS.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLFSS, self.Ptr, topRow,leftColumn,fileName,scaleWidth,scaleHeight)
+        ret = None if intPtr==None else ExcelPicture(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def Add(self ,topRow:int,leftColumn:int,fileName:str,scaleWidth:int,scaleHeight:int,imageFormat:ImageFormatType)->ExcelPicture:
+        """
+    <summary>
+        Adds image to the collection.
+    </summary>
+    <param name="topRow">Top row of a new picture.</param>
+    <param name="leftColumn">Left column.</param>
+    <param name="fileName">Name of the shape.</param>
+    <param name="scaleWidth">Width scale in percents.</param>
+    <param name="scaleHeight">Height scale in percents.</param>
+    <param name="imageFormat">Image format to use for picture storing.</param>
+    <returns>Added picture.</returns>
+        """
+        enumimageFormat:c_int = imageFormat.value
+
+        GetDllLibXls().PicturesCollection_AddTLFSSI.argtypes=[c_void_p ,c_int,c_int,c_void_p,c_int,c_int,c_int]
+        GetDllLibXls().PicturesCollection_AddTLFSSI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().PicturesCollection_AddTLFSSI, self.Ptr, topRow,leftColumn,fileName,scaleWidth,scaleHeight,enumimageFormat)
+        ret = None if intPtr==None else ExcelPicture(intPtr)
+        return ret
+
+

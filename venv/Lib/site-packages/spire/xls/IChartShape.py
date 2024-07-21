@@ -1,0 +1,92 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IChartShape (  IShape, IExcelApplication, IChart) :
+    """
+
+    """
+    @property
+    @abc.abstractmethod
+    def TopRow(self)->int:
+        """
+    <summary>
+        Top row of the chart in the worksheet.
+    </summary>
+        """
+        pass
+
+
+    @TopRow.setter
+    @abc.abstractmethod
+    def TopRow(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def BottomRow(self)->int:
+        """
+    <summary>
+        Bottom row of the chart in the worksheet.
+    </summary>
+        """
+        pass
+
+
+    @BottomRow.setter
+    @abc.abstractmethod
+    def BottomRow(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def LeftColumn(self)->int:
+        """
+    <summary>
+        Left column of the chart in the worksheet.
+    </summary>
+        """
+        pass
+
+
+    @LeftColumn.setter
+    @abc.abstractmethod
+    def LeftColumn(self, value:int):
+        """
+
+        """
+        pass
+
+
+    @property
+    @abc.abstractmethod
+    def RightColumn(self)->int:
+        """
+    <summary>
+        Right column of the chart in the worksheet.
+    </summary>
+        """
+        pass
+
+
+    @RightColumn.setter
+    @abc.abstractmethod
+    def RightColumn(self, value:int):
+        """
+
+        """
+        pass
+
+

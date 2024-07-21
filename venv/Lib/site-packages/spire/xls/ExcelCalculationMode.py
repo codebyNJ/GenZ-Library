@@ -1,0 +1,18 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ExcelCalculationMode(Enum):
+    """
+    <summary>
+        Enum that defines different types of the formula calculations.
+    </summary>
+    """
+    Manual = 0
+    Auto = 1
+    AutoNoTable = 2
+

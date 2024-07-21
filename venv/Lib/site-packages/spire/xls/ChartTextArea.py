@@ -1,0 +1,782 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartTextArea (  XlsObject, IChartDataLabels) :
+    """
+
+    """
+    @property
+
+    def Text(self)->str:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_Text.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_Text.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ChartTextArea_get_Text, self.Ptr))
+        return ret
+
+
+    @Text.setter
+    def Text(self, value:str):
+        GetDllLibXls().ChartTextArea_set_Text.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_Text, self.Ptr, value)
+
+    @property
+    def TextRotationAngle(self)->int:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_TextRotationAngle.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_TextRotationAngle.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_TextRotationAngle, self.Ptr)
+        return ret
+
+    @TextRotationAngle.setter
+    def TextRotationAngle(self, value:int):
+        GetDllLibXls().ChartTextArea_set_TextRotationAngle.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_TextRotationAngle, self.Ptr, value)
+
+    @property
+
+    def FrameFormat(self)->'IChartFrameFormat':
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_FrameFormat.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_FrameFormat.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartTextArea_get_FrameFormat, self.Ptr)
+        ret = None if intPtr==None else XlsChartFrameFormat(intPtr)
+        return ret
+
+
+    @property
+
+    def BackgroundMode(self)->'ChartBackgroundMode':
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_BackgroundMode.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_BackgroundMode.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_BackgroundMode, self.Ptr)
+        objwraped = ChartBackgroundMode(ret)
+        return objwraped
+
+    @BackgroundMode.setter
+    def BackgroundMode(self, value:'ChartBackgroundMode'):
+        GetDllLibXls().ChartTextArea_set_BackgroundMode.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_BackgroundMode, self.Ptr, value.value)
+
+    @property
+    def IsAutoMode(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_IsAutoMode.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_IsAutoMode.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_IsAutoMode, self.Ptr)
+        return ret
+
+    @property
+
+    def Parent(self)->'SpireObject':
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_Parent.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_Parent.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartTextArea_get_Parent, self.Ptr)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+
+    @property
+    def IsBold(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_IsBold.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_IsBold.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_IsBold, self.Ptr)
+        return ret
+
+    @IsBold.setter
+    def IsBold(self, value:bool):
+        GetDllLibXls().ChartTextArea_set_IsBold.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_IsBold, self.Ptr, value)
+
+    @property
+
+    def KnownColor(self)->'ExcelColors':
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_KnownColor.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_KnownColor.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_KnownColor, self.Ptr)
+        objwraped = ExcelColors(ret)
+        return objwraped
+
+    @KnownColor.setter
+    def KnownColor(self, value:'ExcelColors'):
+        GetDllLibXls().ChartTextArea_set_KnownColor.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_KnownColor, self.Ptr, value.value)
+
+    @property
+
+    def Color(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_Color.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_Color.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartTextArea_get_Color, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @Color.setter
+    def Color(self, value:'Color'):
+        GetDllLibXls().ChartTextArea_set_Color.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_Color, self.Ptr, value.Ptr)
+
+
+    def SetThemeColor(self ,type:'ThemeColorType',tint:float):
+        """
+
+        """
+        enumtype:c_int = type.value
+
+        GetDllLibXls().ChartTextArea_SetThemeColor.argtypes=[c_void_p ,c_int,c_double]
+        CallCFunction(GetDllLibXls().ChartTextArea_SetThemeColor, self.Ptr, enumtype,tint)
+
+#
+#    def GetThemeColor(self ,type:'ThemeColorType&',tint:'Double&')->bool:
+#        """
+#
+#        """
+#        intPtrtype:c_void_p = type.Ptr
+#        intPtrtint:c_void_p = tint.Ptr
+#
+#        GetDllLibXls().ChartTextArea_GetThemeColor.argtypes=[c_void_p ,c_void_p,c_void_p]
+#        GetDllLibXls().ChartTextArea_GetThemeColor.restype=c_bool
+#        ret = CallCFunction(GetDllLibXls().ChartTextArea_GetThemeColor, self.Ptr, intPtrtype,intPtrtint)
+#        return ret
+
+
+    @property
+    def IsItalic(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_IsItalic.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_IsItalic.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_IsItalic, self.Ptr)
+        return ret
+
+    @IsItalic.setter
+    def IsItalic(self, value:bool):
+        GetDllLibXls().ChartTextArea_set_IsItalic.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_IsItalic, self.Ptr, value)
+
+    @property
+    def Size(self)->float:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_Size.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_Size.restype=c_double
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_Size, self.Ptr)
+        return ret
+
+    @Size.setter
+    def Size(self, value:float):
+        GetDllLibXls().ChartTextArea_set_Size.argtypes=[c_void_p, c_double]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_Size, self.Ptr, value)
+
+    @property
+    def IsStrikethrough(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_IsStrikethrough.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_IsStrikethrough.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_IsStrikethrough, self.Ptr)
+        return ret
+
+    @IsStrikethrough.setter
+    def IsStrikethrough(self, value:bool):
+        GetDllLibXls().ChartTextArea_set_IsStrikethrough.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_IsStrikethrough, self.Ptr, value)
+
+    @property
+    def IsSubscript(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_IsSubscript.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_IsSubscript.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_IsSubscript, self.Ptr)
+        return ret
+
+    @IsSubscript.setter
+    def IsSubscript(self, value:bool):
+        GetDllLibXls().ChartTextArea_set_IsSubscript.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_IsSubscript, self.Ptr, value)
+
+    @property
+
+    def StrikethroughType(self)->str:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_StrikethroughType.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_StrikethroughType.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ChartTextArea_get_StrikethroughType, self.Ptr))
+        return ret
+
+
+    @StrikethroughType.setter
+    def StrikethroughType(self, value:str):
+        GetDllLibXls().ChartTextArea_set_StrikethroughType.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_StrikethroughType, self.Ptr, value)
+
+    @property
+    def IsSuperscript(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_IsSuperscript.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_IsSuperscript.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_IsSuperscript, self.Ptr)
+        return ret
+
+    @IsSuperscript.setter
+    def IsSuperscript(self, value:bool):
+        GetDllLibXls().ChartTextArea_set_IsSuperscript.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_IsSuperscript, self.Ptr, value)
+
+    @property
+
+    def Underline(self)->'FontUnderlineType':
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_Underline.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_Underline.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_Underline, self.Ptr)
+        objwraped = FontUnderlineType(ret)
+        return objwraped
+
+    @Underline.setter
+    def Underline(self, value:'FontUnderlineType'):
+        GetDllLibXls().ChartTextArea_set_Underline.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_Underline, self.Ptr, value.value)
+
+    @property
+
+    def FontName(self)->str:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_FontName.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_FontName.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ChartTextArea_get_FontName, self.Ptr))
+        return ret
+
+
+    @FontName.setter
+    def FontName(self, value:str):
+        GetDllLibXls().ChartTextArea_set_FontName.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_FontName, self.Ptr, value)
+
+    @property
+
+    def VerticalAlignment(self)->'FontVertialAlignmentType':
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_VerticalAlignment.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_VerticalAlignment.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_VerticalAlignment, self.Ptr)
+        objwraped = FontVertialAlignmentType(ret)
+        return objwraped
+
+    @VerticalAlignment.setter
+    def VerticalAlignment(self, value:'FontVertialAlignmentType'):
+        GetDllLibXls().ChartTextArea_set_VerticalAlignment.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_VerticalAlignment, self.Ptr, value.value)
+
+    @property
+    def IsAutoColor(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_IsAutoColor.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_IsAutoColor.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_IsAutoColor, self.Ptr)
+        return ret
+
+
+    def GenerateNativeFont(self)->'Font':
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_GenerateNativeFont.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_GenerateNativeFont.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartTextArea_GenerateNativeFont, self.Ptr)
+        ret = None if intPtr==None else Font(intPtr)
+        return ret
+
+
+    def BeginUpdate(self):
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_BeginUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().ChartTextArea_BeginUpdate, self.Ptr)
+
+    def EndUpdate(self):
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_EndUpdate.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().ChartTextArea_EndUpdate, self.Ptr)
+
+    @property
+
+    def OColor(self)->'OColor':
+        """
+    <summary>
+        Returns textarea's color object. Read-only.
+    </summary>
+        """
+        GetDllLibXls().ChartTextArea_get_OColor.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_OColor.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartTextArea_get_OColor, self.Ptr)
+        ret = None if intPtr==None else OColor(intPtr)
+        return ret
+
+
+    @property
+
+    def ParagraphType(self)->'ChartParagraphType':
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_ParagraphType.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_ParagraphType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_ParagraphType, self.Ptr)
+        objwraped = ChartParagraphType(ret)
+        return objwraped
+
+    @ParagraphType.setter
+    def ParagraphType(self, value:'ChartParagraphType'):
+        GetDllLibXls().ChartTextArea_set_ParagraphType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_ParagraphType, self.Ptr, value.value)
+
+    @property
+    def HasTextRotation(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_HasTextRotation.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_HasTextRotation.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_HasTextRotation, self.Ptr)
+        return ret
+
+    @property
+    def IsResizeShapeToFitText(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_IsResizeShapeToFitText.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_IsResizeShapeToFitText.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_IsResizeShapeToFitText, self.Ptr)
+        return ret
+
+    @IsResizeShapeToFitText.setter
+    def IsResizeShapeToFitText(self, value:bool):
+        GetDllLibXls().ChartTextArea_set_IsResizeShapeToFitText.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_IsResizeShapeToFitText, self.Ptr, value)
+
+    @property
+    def IsTextWrapped(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_IsTextWrapped.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_IsTextWrapped.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_IsTextWrapped, self.Ptr)
+        return ret
+
+    @IsTextWrapped.setter
+    def IsTextWrapped(self, value:bool):
+        GetDllLibXls().ChartTextArea_set_IsTextWrapped.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_IsTextWrapped, self.Ptr, value)
+
+    @property
+
+    def Delimiter(self)->str:
+        """
+    <summary>
+        Delimeter.
+    </summary>
+        """
+        GetDllLibXls().ChartTextArea_get_Delimiter.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_Delimiter.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ChartTextArea_get_Delimiter, self.Ptr))
+        return ret
+
+
+    @Delimiter.setter
+    def Delimiter(self, value:str):
+        GetDllLibXls().ChartTextArea_set_Delimiter.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_Delimiter, self.Ptr, value)
+
+    @property
+    def HasBubbleSize(self)->bool:
+        """
+    <summary>
+        Indicates whether buble size is in data labels.
+    </summary>
+        """
+        GetDllLibXls().ChartTextArea_get_HasBubbleSize.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_HasBubbleSize.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_HasBubbleSize, self.Ptr)
+        return ret
+
+    @HasBubbleSize.setter
+    def HasBubbleSize(self, value:bool):
+        GetDllLibXls().ChartTextArea_set_HasBubbleSize.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_HasBubbleSize, self.Ptr, value)
+
+    @property
+    def HasCategoryName(self)->bool:
+        """
+    <summary>
+        Indicates whether category name is in data labels.
+    </summary>
+        """
+        GetDllLibXls().ChartTextArea_get_HasCategoryName.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_HasCategoryName.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_HasCategoryName, self.Ptr)
+        return ret
+
+    @HasCategoryName.setter
+    def HasCategoryName(self, value:bool):
+        GetDllLibXls().ChartTextArea_set_HasCategoryName.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_HasCategoryName, self.Ptr, value)
+
+    @property
+    def HasLegendKey(self)->bool:
+        """
+    <summary>
+        Indicates whether legend key is in data labels.
+    </summary>
+        """
+        GetDllLibXls().ChartTextArea_get_HasLegendKey.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_HasLegendKey.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_HasLegendKey, self.Ptr)
+        return ret
+
+    @HasLegendKey.setter
+    def HasLegendKey(self, value:bool):
+        GetDllLibXls().ChartTextArea_set_HasLegendKey.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_HasLegendKey, self.Ptr, value)
+
+    @property
+    def HasPercentage(self)->bool:
+        """
+    <summary>
+        Indicates whether percentage is in data labels.
+    </summary>
+        """
+        GetDllLibXls().ChartTextArea_get_HasPercentage.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_HasPercentage.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_HasPercentage, self.Ptr)
+        return ret
+
+    @HasPercentage.setter
+    def HasPercentage(self, value:bool):
+        GetDllLibXls().ChartTextArea_set_HasPercentage.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_HasPercentage, self.Ptr, value)
+
+    @property
+    def HasSeriesName(self)->bool:
+        """
+    <summary>
+        Indicates whether series name is in data labels.
+    </summary>
+        """
+        GetDllLibXls().ChartTextArea_get_HasSeriesName.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_HasSeriesName.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_HasSeriesName, self.Ptr)
+        return ret
+
+    @HasSeriesName.setter
+    def HasSeriesName(self, value:bool):
+        GetDllLibXls().ChartTextArea_set_HasSeriesName.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_HasSeriesName, self.Ptr, value)
+
+    @property
+    def HasValue(self)->bool:
+        """
+    <summary>
+        Indicates whether value is in data labels.
+    </summary>
+        """
+        GetDllLibXls().ChartTextArea_get_HasValue.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_HasValue.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_HasValue, self.Ptr)
+        return ret
+
+    @HasValue.setter
+    def HasValue(self, value:bool):
+        GetDllLibXls().ChartTextArea_set_HasValue.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_HasValue, self.Ptr, value)
+
+    @property
+
+    def Position(self)->'DataLabelPositionType':
+        """
+    <summary>
+        Represents data labels position.
+    </summary>
+        """
+        GetDllLibXls().ChartTextArea_get_Position.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_Position.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_Position, self.Ptr)
+        objwraped = DataLabelPositionType(ret)
+        return objwraped
+
+    @Position.setter
+    def Position(self, value:'DataLabelPositionType'):
+        GetDllLibXls().ChartTextArea_set_Position.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_Position, self.Ptr, value.value)
+
+    @property
+    def ShowLeaderLines(self)->bool:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_ShowLeaderLines.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_ShowLeaderLines.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_ShowLeaderLines, self.Ptr)
+        return ret
+
+    @ShowLeaderLines.setter
+    def ShowLeaderLines(self, value:bool):
+        GetDllLibXls().ChartTextArea_set_ShowLeaderLines.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_ShowLeaderLines, self.Ptr, value)
+
+    @property
+
+    def NumberFormat(self)->str:
+        """
+    <summary>
+        Gets or sets number format for the text area.
+    </summary>
+        """
+        GetDllLibXls().ChartTextArea_get_NumberFormat.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_NumberFormat.restype=c_void_p
+        ret = PtrToStr(CallCFunction(GetDllLibXls().ChartTextArea_get_NumberFormat, self.Ptr))
+        return ret
+
+
+    @NumberFormat.setter
+    def NumberFormat(self, value:str):
+        GetDllLibXls().ChartTextArea_set_NumberFormat.argtypes=[c_void_p, c_wchar_p]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_NumberFormat, self.Ptr, value)
+
+    @property
+    def HasDataLabels(self)->bool:
+        """
+    <summary>
+        Indicates whether contain dataLabels .
+    </summary>
+        """
+        GetDllLibXls().ChartTextArea_get_HasDataLabels.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_HasDataLabels.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_HasDataLabels, self.Ptr)
+        return ret
+
+    @property
+
+    def HorizontalAlignType(self)->'HorizontalAlignType':
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_HorizontalAlignType.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_HorizontalAlignType.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_HorizontalAlignType, self.Ptr)
+        objwraped = HorizontalAlignType(ret)
+        return objwraped
+
+    @HorizontalAlignType.setter
+    def HorizontalAlignType(self, value:'HorizontalAlignType'):
+        GetDllLibXls().ChartTextArea_set_HorizontalAlignType.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_HorizontalAlignType, self.Ptr, value.value)
+
+    @property
+    def Index(self)->int:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_Index.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_Index.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_Index, self.Ptr)
+        return ret
+
+    @property
+    def IsShowLabelPercent(self)->bool:
+        """
+    <summary>
+        Indicates whether to show category label and value as percentage.
+    </summary>
+        """
+        GetDllLibXls().ChartTextArea_get_IsShowLabelPercent.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_IsShowLabelPercent.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_IsShowLabelPercent, self.Ptr)
+        return ret
+
+    @IsShowLabelPercent.setter
+    def IsShowLabelPercent(self, value:bool):
+        GetDllLibXls().ChartTextArea_set_IsShowLabelPercent.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_IsShowLabelPercent, self.Ptr, value)
+
+    @property
+    def IsTrend(self)->bool:
+        """
+    <summary>
+        Indicates if current text assign to trend object.
+    </summary>
+        """
+        GetDllLibXls().ChartTextArea_get_IsTrend.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_IsTrend.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_IsTrend, self.Ptr)
+        return ret
+
+    @IsTrend.setter
+    def IsTrend(self, value:bool):
+        GetDllLibXls().ChartTextArea_set_IsTrend.argtypes=[c_void_p, c_bool]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_IsTrend, self.Ptr, value)
+
+    @property
+    def NumberFormatIndex(self)->int:
+        """
+    <summary>
+        Gets index to the number format. Read-only.
+    </summary>
+        """
+        GetDllLibXls().ChartTextArea_get_NumberFormatIndex.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_NumberFormatIndex.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_NumberFormatIndex, self.Ptr)
+        return ret
+
+    @property
+
+    def ParentWorkbook(self)->'XlsWorkbook':
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_ParentWorkbook.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_ParentWorkbook.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartTextArea_get_ParentWorkbook, self.Ptr)
+        ret = None if intPtr==None else XlsWorkbook(intPtr)
+        return ret
+
+
+    @property
+    def X(self)->float:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_X.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_X.restype=c_float
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_X, self.Ptr)
+        return ret
+
+    @X.setter
+    def X(self, value:float):
+        GetDllLibXls().ChartTextArea_set_X.argtypes=[c_void_p, c_float]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_X, self.Ptr, value)
+
+    @property
+    def Y(self)->float:
+        """
+
+        """
+        GetDllLibXls().ChartTextArea_get_Y.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_Y.restype=c_float
+        ret = CallCFunction(GetDllLibXls().ChartTextArea_get_Y, self.Ptr)
+        return ret
+
+    @Y.setter
+    def Y(self, value:float):
+        GetDllLibXls().ChartTextArea_set_Y.argtypes=[c_void_p, c_float]
+        CallCFunction(GetDllLibXls().ChartTextArea_set_Y, self.Ptr, value)
+
+
+    def SetFont(self ,font:'ExcelFont'):
+        """
+
+        """
+        intPtrfont:c_void_p = font.Ptr
+
+        GetDllLibXls().ChartTextArea_SetFont.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().ChartTextArea_SetFont, self.Ptr, intPtrfont)
+
+    @property
+
+    def Font(self)->'FontWrapper':
+        """
+    <summary>
+        Returns FontImpl for current font. Read-only.
+    </summary>
+        """
+        GetDllLibXls().ChartTextArea_get_Font.argtypes=[c_void_p]
+        GetDllLibXls().ChartTextArea_get_Font.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartTextArea_get_Font, self.Ptr)
+        ret = None if intPtr==None else FontWrapper(intPtr)
+        return ret
+
+
+#    @dispatch
+#
+#    def Clone(self ,parent:SpireObject,fontIndexes:'Dictionary2',dicNewSheetNames:'Dictionary2')->SpireObject:
+#        """
+#
+#        """
+#        intPtrparent:c_void_p = parent.Ptr
+#        intPtrfontIndexes:c_void_p = fontIndexes.Ptr
+#        intPtrdicNewSheetNames:c_void_p = dicNewSheetNames.Ptr
+#
+#        GetDllLibXls().ChartTextArea_Clone.argtypes=[c_void_p ,c_void_p,c_void_p,c_void_p]
+#        GetDllLibXls().ChartTextArea_Clone.restype=c_void_p
+#        intPtr = CallCFunction(GetDllLibXls().ChartTextArea_Clone, self.Ptr, intPtrparent,intPtrfontIndexes,intPtrdicNewSheetNames)
+#        ret = None if intPtr==None else SpireObject(intPtr)
+#        return ret
+#
+
+
+    @dispatch
+
+    def Clone(self ,parent:SpireObject)->SpireObject:
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().ChartTextArea_CloneP.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ChartTextArea_CloneP.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartTextArea_CloneP, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+

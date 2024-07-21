@@ -1,0 +1,128 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ICustomDocumentProperties (CollectionBase[DocumentProperty]) :
+    """
+
+    """
+    @dispatch
+
+    def get_Item(self ,strName:str)->IDocumentProperty:
+        """
+
+        """
+        
+        GetDllLibXls().ICustomDocumentProperties_get_Item.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ICustomDocumentProperties_get_Item.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ICustomDocumentProperties_get_Item, self.Ptr, strName)
+        ret = None if intPtr==None else DocumentProperty(intPtr)
+        return ret
+
+
+    @dispatch
+
+    def get_Item(self ,iIndex:int)->IDocumentProperty:
+        """
+
+        """
+        
+        GetDllLibXls().ICustomDocumentProperties_get_ItemI.argtypes=[c_void_p ,c_int]
+        GetDllLibXls().ICustomDocumentProperties_get_ItemI.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ICustomDocumentProperties_get_ItemI, self.Ptr, iIndex)
+        ret = None if intPtr==None else DocumentProperty(intPtr)
+        return ret
+
+
+    @property
+    def Count(self)->int:
+        """
+
+        """
+        GetDllLibXls().ICustomDocumentProperties_get_Count.argtypes=[c_void_p]
+        GetDllLibXls().ICustomDocumentProperties_get_Count.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ICustomDocumentProperties_get_Count, self.Ptr)
+        return ret
+
+
+    def Remove(self ,strName:str):
+        """
+
+        """
+        
+        GetDllLibXls().ICustomDocumentProperties_Remove.argtypes=[c_void_p ,c_void_p]
+        CallCFunction(GetDllLibXls().ICustomDocumentProperties_Remove, self.Ptr, strName)
+
+
+    def Contains(self ,strName:str)->bool:
+        """
+
+        """
+        
+        GetDllLibXls().ICustomDocumentProperties_Contains.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ICustomDocumentProperties_Contains.restype=c_bool
+        ret = CallCFunction(GetDllLibXls().ICustomDocumentProperties_Contains, self.Ptr, strName)
+        return ret
+
+    def Clear(self):
+        """
+
+        """
+        GetDllLibXls().ICustomDocumentProperties_Clear.argtypes=[c_void_p]
+        CallCFunction(GetDllLibXls().ICustomDocumentProperties_Clear, self.Ptr)
+
+    @dispatch
+
+    def Add(self ,strName:str,value:str):
+        """
+
+        """
+        
+        GetDllLibXls().ICustomDocumentProperties_Add.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().ICustomDocumentProperties_Add, self.Ptr, strName,value)
+
+    @dispatch
+
+    def Add(self ,strName:str,value:bool):
+        """
+
+        """
+        
+        GetDllLibXls().ICustomDocumentProperties_AddSV.argtypes=[c_void_p ,c_void_p,c_bool]
+        CallCFunction(GetDllLibXls().ICustomDocumentProperties_AddSV, self.Ptr, strName,value)
+
+    @dispatch
+
+    def Add(self ,strName:str,value:DateTime):
+        """
+
+        """
+        intPtrvalue:c_void_p = value.Ptr
+
+        GetDllLibXls().ICustomDocumentProperties_AddSV1.argtypes=[c_void_p ,c_void_p,c_void_p]
+        CallCFunction(GetDllLibXls().ICustomDocumentProperties_AddSV1, self.Ptr, strName,intPtrvalue)
+
+    @dispatch
+
+    def Add(self ,strName:str,value:int):
+        """
+
+        """
+        
+        GetDllLibXls().ICustomDocumentProperties_AddSV11.argtypes=[c_void_p ,c_void_p,c_int]
+        CallCFunction(GetDllLibXls().ICustomDocumentProperties_AddSV11, self.Ptr, strName,value)
+
+    @dispatch
+
+    def Add(self ,strName:str,value:float):
+        """
+
+        """
+        
+        GetDllLibXls().ICustomDocumentProperties_AddSV111.argtypes=[c_void_p ,c_void_p,c_double]
+        CallCFunction(GetDllLibXls().ICustomDocumentProperties_AddSV111, self.Ptr, strName,value)
+

@@ -1,0 +1,91 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ShapeGlow (  XlsObject, IGlow, ICloneParent) :
+    """
+
+    """
+    @property
+    def SoftEdge(self)->int:
+        """
+    <summary>
+        Gets or sets the radio of soft edge.
+    </summary>
+        """
+        GetDllLibXls().ShapeGlow_get_SoftEdge.argtypes=[c_void_p]
+        GetDllLibXls().ShapeGlow_get_SoftEdge.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ShapeGlow_get_SoftEdge, self.Ptr)
+        return ret
+
+    @SoftEdge.setter
+    def SoftEdge(self, value:int):
+        GetDllLibXls().ShapeGlow_set_SoftEdge.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ShapeGlow_set_SoftEdge, self.Ptr, value)
+
+    @property
+    def Transparency(self)->int:
+        """
+
+        """
+        GetDllLibXls().ShapeGlow_get_Transparency.argtypes=[c_void_p]
+        GetDllLibXls().ShapeGlow_get_Transparency.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ShapeGlow_get_Transparency, self.Ptr)
+        return ret
+
+    @Transparency.setter
+    def Transparency(self, value:int):
+        GetDllLibXls().ShapeGlow_set_Transparency.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ShapeGlow_set_Transparency, self.Ptr, value)
+
+    @property
+    def Radius(self)->int:
+        """
+
+        """
+        GetDllLibXls().ShapeGlow_get_Radius.argtypes=[c_void_p]
+        GetDllLibXls().ShapeGlow_get_Radius.restype=c_int
+        ret = CallCFunction(GetDllLibXls().ShapeGlow_get_Radius, self.Ptr)
+        return ret
+
+    @Radius.setter
+    def Radius(self, value:int):
+        GetDllLibXls().ShapeGlow_set_Radius.argtypes=[c_void_p, c_int]
+        CallCFunction(GetDllLibXls().ShapeGlow_set_Radius, self.Ptr, value)
+
+    @property
+
+    def Color(self)->'Color':
+        """
+
+        """
+        GetDllLibXls().ShapeGlow_get_Color.argtypes=[c_void_p]
+        GetDllLibXls().ShapeGlow_get_Color.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ShapeGlow_get_Color, self.Ptr)
+        ret = None if intPtr==None else Color(intPtr)
+        return ret
+
+
+    @Color.setter
+    def Color(self, value:'Color'):
+        GetDllLibXls().ShapeGlow_set_Color.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().ShapeGlow_set_Color, self.Ptr, value.Ptr)
+
+
+    def Clone(self ,parent:'SpireObject')->'SpireObject':
+        """
+
+        """
+        intPtrparent:c_void_p = parent.Ptr
+
+        GetDllLibXls().ShapeGlow_Clone.argtypes=[c_void_p ,c_void_p]
+        GetDllLibXls().ShapeGlow_Clone.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ShapeGlow_Clone, self.Ptr, intPtrparent)
+        ret = None if intPtr==None else SpireObject(intPtr)
+        return ret
+
+

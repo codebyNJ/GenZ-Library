@@ -1,0 +1,142 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class ChartSerie (  XlsChartSerie) :
+    """
+
+    """
+    @property
+
+    def DataPoints(self)->'ChartDataPointsCollection':
+        """
+    <summary>
+        Returns data points collection for the chart series. Read-only.
+    </summary>
+        """
+        GetDllLibXls().ChartSerie_get_DataPoints.argtypes=[c_void_p]
+        GetDllLibXls().ChartSerie_get_DataPoints.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSerie_get_DataPoints, self.Ptr)
+        ret = None if intPtr==None else ChartDataPointsCollection(intPtr)
+        return ret
+
+
+    @property
+
+    def CategoryLabels(self)->'CellRange':
+        """
+    <summary>
+        Category labels for the series.
+    </summary>
+        """
+        GetDllLibXls().ChartSerie_get_CategoryLabels.argtypes=[c_void_p]
+        GetDllLibXls().ChartSerie_get_CategoryLabels.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSerie_get_CategoryLabels, self.Ptr)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @CategoryLabels.setter
+    def CategoryLabels(self, value:'CellRange'):
+        GetDllLibXls().ChartSerie_set_CategoryLabels.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().ChartSerie_set_CategoryLabels, self.Ptr, value.Ptr)
+
+    @property
+
+    def Bubbles(self)->'CellRange':
+        """
+    <summary>
+        Bubble sizes for the series.
+    </summary>
+        """
+        GetDllLibXls().ChartSerie_get_Bubbles.argtypes=[c_void_p]
+        GetDllLibXls().ChartSerie_get_Bubbles.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSerie_get_Bubbles, self.Ptr)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @Bubbles.setter
+    def Bubbles(self, value:'CellRange'):
+        GetDllLibXls().ChartSerie_set_Bubbles.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().ChartSerie_set_Bubbles, self.Ptr, value.Ptr)
+
+    @property
+
+    def Values(self)->'IXLSRange':
+        """
+    <summary>
+        Values range for the series.
+    </summary>
+        """
+        GetDllLibXls().ChartSerie_get_Values.argtypes=[c_void_p]
+        GetDllLibXls().ChartSerie_get_Values.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSerie_get_Values, self.Ptr)
+        ret = None if intPtr==None else XlsRange(intPtr)
+        return ret
+
+
+    @Values.setter
+    def Values(self, value:'IXLSRange'):
+        GetDllLibXls().ChartSerie_set_Values.argtypes=[c_void_p, c_void_p]
+        CallCFunction(GetDllLibXls().ChartSerie_set_Values, self.Ptr, value.Ptr)
+
+    @property
+
+    def Format(self)->'ChartSerieDataFormat':
+        """
+    <summary>
+        Returns serie format.
+    </summary>
+        """
+        GetDllLibXls().ChartSerie_get_Format.argtypes=[c_void_p]
+        GetDllLibXls().ChartSerie_get_Format.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSerie_get_Format, self.Ptr)
+        ret = None if intPtr==None else ChartSerieDataFormat(intPtr)
+        return ret
+
+
+    @property
+
+    def DataFormat(self)->'ChartSerieDataFormat':
+        """
+    <summary>
+        Returns data format. Read-only.
+    </summary>
+        """
+        GetDllLibXls().ChartSerie_get_DataFormat.argtypes=[c_void_p]
+        GetDllLibXls().ChartSerie_get_DataFormat.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSerie_get_DataFormat, self.Ptr)
+        ret = None if intPtr==None else ChartSerieDataFormat(intPtr)
+        return ret
+
+
+
+    def GetSerieNameRange(self)->'CellRange':
+        """
+
+        """
+        GetDllLibXls().ChartSerie_GetSerieNameRange.argtypes=[c_void_p]
+        GetDllLibXls().ChartSerie_GetSerieNameRange.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSerie_GetSerieNameRange, self.Ptr)
+        ret = None if intPtr==None else CellRange(intPtr)
+        return ret
+
+
+    @property
+
+    def DataLabels(self)->'ChartDataLabels':
+        """
+
+        """
+        GetDllLibXls().ChartSerie_get_DataLabels.argtypes=[c_void_p]
+        GetDllLibXls().ChartSerie_get_DataLabels.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().ChartSerie_get_DataLabels, self.Ptr)
+        ret = None if intPtr==None else ChartDataLabels(intPtr)
+        return ret
+
+

@@ -1,0 +1,31 @@
+from enum import Enum
+from plum import dispatch
+from typing import TypeVar,Union,Generic,List,Tuple
+from spire.xls.common import *
+from spire.xls import *
+from ctypes import *
+import abc
+
+class IListObjects (  IList[IListObject]) :
+    """
+
+    """
+
+    def Create(self ,name:str,range:'IXLSRange')->'IListObject':
+        """
+    <summary>
+        Creates new list object and adds it to the collection.
+    </summary>
+    <param name="name">Name of the new list object.</param>
+    <param name="range">Destination range.</param>
+    <returns>Newly created object.</returns>
+        """
+        intPtrrange:c_void_p = range.Ptr
+
+        GetDllLibXls().IListObjects_Create.argtypes=[c_void_p ,c_void_p,c_void_p]
+        GetDllLibXls().IListObjects_Create.restype=c_void_p
+        intPtr = CallCFunction(GetDllLibXls().IListObjects_Create, self.Ptr, name,intPtrrange)
+        ret = None if intPtr==None else IListObject(intPtr)
+        return ret
+
+
