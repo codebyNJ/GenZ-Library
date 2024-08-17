@@ -19,7 +19,10 @@ A simple dictionary of GenZ terms and their meanings.
 
 1. Click on the Google form and fill in the details. (https://forms.gle/hyZoVBzzjhwroJoy6)
 2. Once the details are submitted a confirmation mail will be sent to you with your response if anything is wrong please fix it.
-3. To check whether your term entered is updated to the software or not. Re-run the software, you will find it updated.
+3. To check whether your term entered is updated to the software. Re-run the software, you will find it updated.
+
+### Images:
+![genz_library_image](https://github.com/user-attachments/assets/87549ff1-f9f1-4830-8376-d073a97355a3)
 
 ### Technologies:
 ![Static Badge](https://img.shields.io/badge/FullStackDev-green) ![Static Badge](https://img.shields.io/badge/Python-blue)
